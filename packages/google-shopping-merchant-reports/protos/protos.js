@@ -66,6 +66,12837 @@
                      */
                     var reports = {};
     
+                    reports.v1alpha = (function() {
+    
+                        /**
+                         * Namespace v1alpha.
+                         * @memberof google.shopping.merchant.reports
+                         * @namespace
+                         */
+                        var v1alpha = {};
+    
+                        v1alpha.ReportService = (function() {
+    
+                            /**
+                             * Constructs a new ReportService service.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a ReportService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function ReportService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (ReportService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ReportService;
+    
+                            /**
+                             * Creates new ReportService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {ReportService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            ReportService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.reports.v1alpha.ReportService|search}.
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportService
+                             * @typedef SearchCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.reports.v1alpha.SearchResponse} [response] SearchResponse
+                             */
+    
+                            /**
+                             * Calls Search.
+                             * @function search
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportService
+                             * @instance
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest} request SearchRequest message or plain object
+                             * @param {google.shopping.merchant.reports.v1alpha.ReportService.SearchCallback} callback Node-style callback called with the error, if any, and SearchResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReportService.prototype.search = function search(request, callback) {
+                                return this.rpcCall(search, $root.google.shopping.merchant.reports.v1alpha.SearchRequest, $root.google.shopping.merchant.reports.v1alpha.SearchResponse, request, callback);
+                            }, "name", { value: "Search" });
+    
+                            /**
+                             * Calls Search.
+                             * @function search
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportService
+                             * @instance
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest} request SearchRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.reports.v1alpha.SearchResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return ReportService;
+                        })();
+    
+                        v1alpha.SearchRequest = (function() {
+    
+                            /**
+                             * Properties of a SearchRequest.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ISearchRequest
+                             * @property {string|null} [parent] SearchRequest parent
+                             * @property {string|null} [query] SearchRequest query
+                             * @property {number|null} [pageSize] SearchRequest pageSize
+                             * @property {string|null} [pageToken] SearchRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new SearchRequest.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a SearchRequest.
+                             * @implements ISearchRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest=} [properties] Properties to set
+                             */
+                            function SearchRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @instance
+                             */
+                            SearchRequest.prototype.parent = "";
+    
+                            /**
+                             * SearchRequest query.
+                             * @member {string} query
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @instance
+                             */
+                            SearchRequest.prototype.query = "";
+    
+                            /**
+                             * SearchRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @instance
+                             */
+                            SearchRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * SearchRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @instance
+                             */
+                            SearchRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new SearchRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchRequest} SearchRequest instance
+                             */
+                            SearchRequest.create = function create(properties) {
+                                return new SearchRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchRequest message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest} message SearchRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchRequest} message SearchRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchRequest} SearchRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.SearchRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchRequest} SearchRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchRequest} SearchRequest
+                             */
+                            SearchRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.SearchRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.SearchRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.SearchRequest} message SearchRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.query = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.SearchRequest";
+                            };
+    
+                            return SearchRequest;
+                        })();
+    
+                        v1alpha.SearchResponse = (function() {
+    
+                            /**
+                             * Properties of a SearchResponse.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ISearchResponse
+                             * @property {Array.<google.shopping.merchant.reports.v1alpha.IReportRow>|null} [results] SearchResponse results
+                             * @property {string|null} [nextPageToken] SearchResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new SearchResponse.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a SearchResponse.
+                             * @implements ISearchResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchResponse=} [properties] Properties to set
+                             */
+                            function SearchResponse(properties) {
+                                this.results = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchResponse results.
+                             * @member {Array.<google.shopping.merchant.reports.v1alpha.IReportRow>} results
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @instance
+                             */
+                            SearchResponse.prototype.results = $util.emptyArray;
+    
+                            /**
+                             * SearchResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @instance
+                             */
+                            SearchResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new SearchResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchResponse} SearchResponse instance
+                             */
+                            SearchResponse.create = function create(properties) {
+                                return new SearchResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchResponse message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchResponse} message SearchResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.results != null && message.results.length)
+                                    for (var i = 0; i < message.results.length; ++i)
+                                        $root.google.shopping.merchant.reports.v1alpha.ReportRow.encode(message.results[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.SearchResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ISearchResponse} message SearchResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchResponse} SearchResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.SearchResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.results && message.results.length))
+                                                message.results = [];
+                                            message.results.push($root.google.shopping.merchant.reports.v1alpha.ReportRow.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchResponse} SearchResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.results != null && message.hasOwnProperty("results")) {
+                                    if (!Array.isArray(message.results))
+                                        return "results: array expected";
+                                    for (var i = 0; i < message.results.length; ++i) {
+                                        var error = $root.google.shopping.merchant.reports.v1alpha.ReportRow.verify(message.results[i]);
+                                        if (error)
+                                            return "results." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.SearchResponse} SearchResponse
+                             */
+                            SearchResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.SearchResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.SearchResponse();
+                                if (object.results) {
+                                    if (!Array.isArray(object.results))
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.SearchResponse.results: array expected");
+                                    message.results = [];
+                                    for (var i = 0; i < object.results.length; ++i) {
+                                        if (typeof object.results[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.reports.v1alpha.SearchResponse.results: object expected");
+                                        message.results[i] = $root.google.shopping.merchant.reports.v1alpha.ReportRow.fromObject(object.results[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.SearchResponse} message SearchResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.results = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.results && message.results.length) {
+                                    object.results = [];
+                                    for (var j = 0; j < message.results.length; ++j)
+                                        object.results[j] = $root.google.shopping.merchant.reports.v1alpha.ReportRow.toObject(message.results[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.SearchResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.SearchResponse";
+                            };
+    
+                            return SearchResponse;
+                        })();
+    
+                        v1alpha.ReportRow = (function() {
+    
+                            /**
+                             * Properties of a ReportRow.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IReportRow
+                             * @property {google.shopping.merchant.reports.v1alpha.IProductPerformanceView|null} [productPerformanceView] ReportRow productPerformanceView
+                             * @property {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView|null} [nonProductPerformanceView] ReportRow nonProductPerformanceView
+                             * @property {google.shopping.merchant.reports.v1alpha.IProductView|null} [productView] ReportRow productView
+                             * @property {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView|null} [priceCompetitivenessProductView] ReportRow priceCompetitivenessProductView
+                             * @property {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView|null} [priceInsightsProductView] ReportRow priceInsightsProductView
+                             * @property {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView|null} [bestSellersProductClusterView] ReportRow bestSellersProductClusterView
+                             * @property {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView|null} [bestSellersBrandView] ReportRow bestSellersBrandView
+                             * @property {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView|null} [competitiveVisibilityCompetitorView] ReportRow competitiveVisibilityCompetitorView
+                             * @property {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView|null} [competitiveVisibilityTopMerchantView] ReportRow competitiveVisibilityTopMerchantView
+                             * @property {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView|null} [competitiveVisibilityBenchmarkView] ReportRow competitiveVisibilityBenchmarkView
+                             * @property {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView|null} [youtubeCreatorPerformanceView] ReportRow youtubeCreatorPerformanceView
+                             * @property {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView|null} [youtubeContentPerformanceView] ReportRow youtubeContentPerformanceView
+                             * @property {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView|null} [youtubeProductPerformanceView] ReportRow youtubeProductPerformanceView
+                             */
+    
+                            /**
+                             * Constructs a new ReportRow.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a ReportRow.
+                             * @implements IReportRow
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportRow=} [properties] Properties to set
+                             */
+                            function ReportRow(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReportRow productPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IProductPerformanceView|null|undefined} productPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.productPerformanceView = null;
+    
+                            /**
+                             * ReportRow nonProductPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView|null|undefined} nonProductPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.nonProductPerformanceView = null;
+    
+                            /**
+                             * ReportRow productView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IProductView|null|undefined} productView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.productView = null;
+    
+                            /**
+                             * ReportRow priceCompetitivenessProductView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView|null|undefined} priceCompetitivenessProductView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.priceCompetitivenessProductView = null;
+    
+                            /**
+                             * ReportRow priceInsightsProductView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView|null|undefined} priceInsightsProductView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.priceInsightsProductView = null;
+    
+                            /**
+                             * ReportRow bestSellersProductClusterView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView|null|undefined} bestSellersProductClusterView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.bestSellersProductClusterView = null;
+    
+                            /**
+                             * ReportRow bestSellersBrandView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView|null|undefined} bestSellersBrandView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.bestSellersBrandView = null;
+    
+                            /**
+                             * ReportRow competitiveVisibilityCompetitorView.
+                             * @member {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView|null|undefined} competitiveVisibilityCompetitorView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.competitiveVisibilityCompetitorView = null;
+    
+                            /**
+                             * ReportRow competitiveVisibilityTopMerchantView.
+                             * @member {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView|null|undefined} competitiveVisibilityTopMerchantView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.competitiveVisibilityTopMerchantView = null;
+    
+                            /**
+                             * ReportRow competitiveVisibilityBenchmarkView.
+                             * @member {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView|null|undefined} competitiveVisibilityBenchmarkView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.competitiveVisibilityBenchmarkView = null;
+    
+                            /**
+                             * ReportRow youtubeCreatorPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView|null|undefined} youtubeCreatorPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.youtubeCreatorPerformanceView = null;
+    
+                            /**
+                             * ReportRow youtubeContentPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView|null|undefined} youtubeContentPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.youtubeContentPerformanceView = null;
+    
+                            /**
+                             * ReportRow youtubeProductPerformanceView.
+                             * @member {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView|null|undefined} youtubeProductPerformanceView
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             */
+                            ReportRow.prototype.youtubeProductPerformanceView = null;
+    
+                            /**
+                             * Creates a new ReportRow instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportRow=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportRow} ReportRow instance
+                             */
+                            ReportRow.create = function create(properties) {
+                                return new ReportRow(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReportRow message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportRow.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportRow} message ReportRow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReportRow.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.productPerformanceView != null && Object.hasOwnProperty.call(message, "productPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView.encode(message.productPerformanceView, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.productView != null && Object.hasOwnProperty.call(message, "productView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.ProductView.encode(message.productView, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.priceCompetitivenessProductView != null && Object.hasOwnProperty.call(message, "priceCompetitivenessProductView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.encode(message.priceCompetitivenessProductView, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.priceInsightsProductView != null && Object.hasOwnProperty.call(message, "priceInsightsProductView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.encode(message.priceInsightsProductView, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.bestSellersProductClusterView != null && Object.hasOwnProperty.call(message, "bestSellersProductClusterView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.encode(message.bestSellersProductClusterView, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.bestSellersBrandView != null && Object.hasOwnProperty.call(message, "bestSellersBrandView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView.encode(message.bestSellersBrandView, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.nonProductPerformanceView != null && Object.hasOwnProperty.call(message, "nonProductPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.encode(message.nonProductPerformanceView, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.competitiveVisibilityCompetitorView != null && Object.hasOwnProperty.call(message, "competitiveVisibilityCompetitorView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.encode(message.competitiveVisibilityCompetitorView, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.competitiveVisibilityTopMerchantView != null && Object.hasOwnProperty.call(message, "competitiveVisibilityTopMerchantView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.encode(message.competitiveVisibilityTopMerchantView, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.competitiveVisibilityBenchmarkView != null && Object.hasOwnProperty.call(message, "competitiveVisibilityBenchmarkView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.encode(message.competitiveVisibilityBenchmarkView, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.youtubeCreatorPerformanceView != null && Object.hasOwnProperty.call(message, "youtubeCreatorPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.encode(message.youtubeCreatorPerformanceView, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.youtubeContentPerformanceView != null && Object.hasOwnProperty.call(message, "youtubeContentPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.encode(message.youtubeContentPerformanceView, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.youtubeProductPerformanceView != null && Object.hasOwnProperty.call(message, "youtubeProductPerformanceView"))
+                                    $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.encode(message.youtubeProductPerformanceView, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReportRow message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportRow.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportRow} message ReportRow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReportRow.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReportRow message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportRow} ReportRow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReportRow.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ReportRow();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.productPerformanceView = $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.productView = $root.google.shopping.merchant.reports.v1alpha.ProductView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.priceCompetitivenessProductView = $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.priceInsightsProductView = $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.bestSellersProductClusterView = $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.bestSellersBrandView = $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.competitiveVisibilityCompetitorView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.competitiveVisibilityTopMerchantView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.competitiveVisibilityBenchmarkView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.youtubeCreatorPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.youtubeContentPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.youtubeProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReportRow message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportRow} ReportRow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReportRow.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReportRow message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReportRow.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.productPerformanceView != null && message.hasOwnProperty("productPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView.verify(message.productPerformanceView);
+                                    if (error)
+                                        return "productPerformanceView." + error;
+                                }
+                                if (message.nonProductPerformanceView != null && message.hasOwnProperty("nonProductPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.verify(message.nonProductPerformanceView);
+                                    if (error)
+                                        return "nonProductPerformanceView." + error;
+                                }
+                                if (message.productView != null && message.hasOwnProperty("productView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.ProductView.verify(message.productView);
+                                    if (error)
+                                        return "productView." + error;
+                                }
+                                if (message.priceCompetitivenessProductView != null && message.hasOwnProperty("priceCompetitivenessProductView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.verify(message.priceCompetitivenessProductView);
+                                    if (error)
+                                        return "priceCompetitivenessProductView." + error;
+                                }
+                                if (message.priceInsightsProductView != null && message.hasOwnProperty("priceInsightsProductView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.verify(message.priceInsightsProductView);
+                                    if (error)
+                                        return "priceInsightsProductView." + error;
+                                }
+                                if (message.bestSellersProductClusterView != null && message.hasOwnProperty("bestSellersProductClusterView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.verify(message.bestSellersProductClusterView);
+                                    if (error)
+                                        return "bestSellersProductClusterView." + error;
+                                }
+                                if (message.bestSellersBrandView != null && message.hasOwnProperty("bestSellersBrandView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView.verify(message.bestSellersBrandView);
+                                    if (error)
+                                        return "bestSellersBrandView." + error;
+                                }
+                                if (message.competitiveVisibilityCompetitorView != null && message.hasOwnProperty("competitiveVisibilityCompetitorView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.verify(message.competitiveVisibilityCompetitorView);
+                                    if (error)
+                                        return "competitiveVisibilityCompetitorView." + error;
+                                }
+                                if (message.competitiveVisibilityTopMerchantView != null && message.hasOwnProperty("competitiveVisibilityTopMerchantView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.verify(message.competitiveVisibilityTopMerchantView);
+                                    if (error)
+                                        return "competitiveVisibilityTopMerchantView." + error;
+                                }
+                                if (message.competitiveVisibilityBenchmarkView != null && message.hasOwnProperty("competitiveVisibilityBenchmarkView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.verify(message.competitiveVisibilityBenchmarkView);
+                                    if (error)
+                                        return "competitiveVisibilityBenchmarkView." + error;
+                                }
+                                if (message.youtubeCreatorPerformanceView != null && message.hasOwnProperty("youtubeCreatorPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.verify(message.youtubeCreatorPerformanceView);
+                                    if (error)
+                                        return "youtubeCreatorPerformanceView." + error;
+                                }
+                                if (message.youtubeContentPerformanceView != null && message.hasOwnProperty("youtubeContentPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.verify(message.youtubeContentPerformanceView);
+                                    if (error)
+                                        return "youtubeContentPerformanceView." + error;
+                                }
+                                if (message.youtubeProductPerformanceView != null && message.hasOwnProperty("youtubeProductPerformanceView")) {
+                                    var error = $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.verify(message.youtubeProductPerformanceView);
+                                    if (error)
+                                        return "youtubeProductPerformanceView." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReportRow message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportRow} ReportRow
+                             */
+                            ReportRow.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ReportRow)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.ReportRow();
+                                if (object.productPerformanceView != null) {
+                                    if (typeof object.productPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.productPerformanceView: object expected");
+                                    message.productPerformanceView = $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView.fromObject(object.productPerformanceView);
+                                }
+                                if (object.nonProductPerformanceView != null) {
+                                    if (typeof object.nonProductPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.nonProductPerformanceView: object expected");
+                                    message.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.fromObject(object.nonProductPerformanceView);
+                                }
+                                if (object.productView != null) {
+                                    if (typeof object.productView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.productView: object expected");
+                                    message.productView = $root.google.shopping.merchant.reports.v1alpha.ProductView.fromObject(object.productView);
+                                }
+                                if (object.priceCompetitivenessProductView != null) {
+                                    if (typeof object.priceCompetitivenessProductView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.priceCompetitivenessProductView: object expected");
+                                    message.priceCompetitivenessProductView = $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.fromObject(object.priceCompetitivenessProductView);
+                                }
+                                if (object.priceInsightsProductView != null) {
+                                    if (typeof object.priceInsightsProductView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.priceInsightsProductView: object expected");
+                                    message.priceInsightsProductView = $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.fromObject(object.priceInsightsProductView);
+                                }
+                                if (object.bestSellersProductClusterView != null) {
+                                    if (typeof object.bestSellersProductClusterView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.bestSellersProductClusterView: object expected");
+                                    message.bestSellersProductClusterView = $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.fromObject(object.bestSellersProductClusterView);
+                                }
+                                if (object.bestSellersBrandView != null) {
+                                    if (typeof object.bestSellersBrandView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.bestSellersBrandView: object expected");
+                                    message.bestSellersBrandView = $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView.fromObject(object.bestSellersBrandView);
+                                }
+                                if (object.competitiveVisibilityCompetitorView != null) {
+                                    if (typeof object.competitiveVisibilityCompetitorView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.competitiveVisibilityCompetitorView: object expected");
+                                    message.competitiveVisibilityCompetitorView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.fromObject(object.competitiveVisibilityCompetitorView);
+                                }
+                                if (object.competitiveVisibilityTopMerchantView != null) {
+                                    if (typeof object.competitiveVisibilityTopMerchantView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.competitiveVisibilityTopMerchantView: object expected");
+                                    message.competitiveVisibilityTopMerchantView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.fromObject(object.competitiveVisibilityTopMerchantView);
+                                }
+                                if (object.competitiveVisibilityBenchmarkView != null) {
+                                    if (typeof object.competitiveVisibilityBenchmarkView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.competitiveVisibilityBenchmarkView: object expected");
+                                    message.competitiveVisibilityBenchmarkView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.fromObject(object.competitiveVisibilityBenchmarkView);
+                                }
+                                if (object.youtubeCreatorPerformanceView != null) {
+                                    if (typeof object.youtubeCreatorPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.youtubeCreatorPerformanceView: object expected");
+                                    message.youtubeCreatorPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.fromObject(object.youtubeCreatorPerformanceView);
+                                }
+                                if (object.youtubeContentPerformanceView != null) {
+                                    if (typeof object.youtubeContentPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.youtubeContentPerformanceView: object expected");
+                                    message.youtubeContentPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.fromObject(object.youtubeContentPerformanceView);
+                                }
+                                if (object.youtubeProductPerformanceView != null) {
+                                    if (typeof object.youtubeProductPerformanceView !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ReportRow.youtubeProductPerformanceView: object expected");
+                                    message.youtubeProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.fromObject(object.youtubeProductPerformanceView);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReportRow message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ReportRow} message ReportRow
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReportRow.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.productPerformanceView = null;
+                                    object.productView = null;
+                                    object.priceCompetitivenessProductView = null;
+                                    object.priceInsightsProductView = null;
+                                    object.bestSellersProductClusterView = null;
+                                    object.bestSellersBrandView = null;
+                                    object.nonProductPerformanceView = null;
+                                    object.competitiveVisibilityCompetitorView = null;
+                                    object.competitiveVisibilityTopMerchantView = null;
+                                    object.competitiveVisibilityBenchmarkView = null;
+                                    object.youtubeCreatorPerformanceView = null;
+                                    object.youtubeContentPerformanceView = null;
+                                    object.youtubeProductPerformanceView = null;
+                                }
+                                if (message.productPerformanceView != null && message.hasOwnProperty("productPerformanceView"))
+                                    object.productPerformanceView = $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView.toObject(message.productPerformanceView, options);
+                                if (message.productView != null && message.hasOwnProperty("productView"))
+                                    object.productView = $root.google.shopping.merchant.reports.v1alpha.ProductView.toObject(message.productView, options);
+                                if (message.priceCompetitivenessProductView != null && message.hasOwnProperty("priceCompetitivenessProductView"))
+                                    object.priceCompetitivenessProductView = $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.toObject(message.priceCompetitivenessProductView, options);
+                                if (message.priceInsightsProductView != null && message.hasOwnProperty("priceInsightsProductView"))
+                                    object.priceInsightsProductView = $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.toObject(message.priceInsightsProductView, options);
+                                if (message.bestSellersProductClusterView != null && message.hasOwnProperty("bestSellersProductClusterView"))
+                                    object.bestSellersProductClusterView = $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.toObject(message.bestSellersProductClusterView, options);
+                                if (message.bestSellersBrandView != null && message.hasOwnProperty("bestSellersBrandView"))
+                                    object.bestSellersBrandView = $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView.toObject(message.bestSellersBrandView, options);
+                                if (message.nonProductPerformanceView != null && message.hasOwnProperty("nonProductPerformanceView"))
+                                    object.nonProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.toObject(message.nonProductPerformanceView, options);
+                                if (message.competitiveVisibilityCompetitorView != null && message.hasOwnProperty("competitiveVisibilityCompetitorView"))
+                                    object.competitiveVisibilityCompetitorView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.toObject(message.competitiveVisibilityCompetitorView, options);
+                                if (message.competitiveVisibilityTopMerchantView != null && message.hasOwnProperty("competitiveVisibilityTopMerchantView"))
+                                    object.competitiveVisibilityTopMerchantView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.toObject(message.competitiveVisibilityTopMerchantView, options);
+                                if (message.competitiveVisibilityBenchmarkView != null && message.hasOwnProperty("competitiveVisibilityBenchmarkView"))
+                                    object.competitiveVisibilityBenchmarkView = $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.toObject(message.competitiveVisibilityBenchmarkView, options);
+                                if (message.youtubeCreatorPerformanceView != null && message.hasOwnProperty("youtubeCreatorPerformanceView"))
+                                    object.youtubeCreatorPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.toObject(message.youtubeCreatorPerformanceView, options);
+                                if (message.youtubeContentPerformanceView != null && message.hasOwnProperty("youtubeContentPerformanceView"))
+                                    object.youtubeContentPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.toObject(message.youtubeContentPerformanceView, options);
+                                if (message.youtubeProductPerformanceView != null && message.hasOwnProperty("youtubeProductPerformanceView"))
+                                    object.youtubeProductPerformanceView = $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.toObject(message.youtubeProductPerformanceView, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReportRow to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReportRow.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReportRow
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportRow
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReportRow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ReportRow";
+                            };
+    
+                            return ReportRow;
+                        })();
+    
+                        v1alpha.ProductPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a ProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IProductPerformanceView
+                             * @property {google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|null} [marketingMethod] ProductPerformanceView marketingMethod
+                             * @property {google.type.IDate|null} [date] ProductPerformanceView date
+                             * @property {google.type.IDate|null} [week] ProductPerformanceView week
+                             * @property {string|null} [customerCountryCode] ProductPerformanceView customerCountryCode
+                             * @property {string|null} [offerId] ProductPerformanceView offerId
+                             * @property {string|null} [title] ProductPerformanceView title
+                             * @property {string|null} [brand] ProductPerformanceView brand
+                             * @property {string|null} [categoryL1] ProductPerformanceView categoryL1
+                             * @property {string|null} [categoryL2] ProductPerformanceView categoryL2
+                             * @property {string|null} [categoryL3] ProductPerformanceView categoryL3
+                             * @property {string|null} [categoryL4] ProductPerformanceView categoryL4
+                             * @property {string|null} [categoryL5] ProductPerformanceView categoryL5
+                             * @property {string|null} [productTypeL1] ProductPerformanceView productTypeL1
+                             * @property {string|null} [productTypeL2] ProductPerformanceView productTypeL2
+                             * @property {string|null} [productTypeL3] ProductPerformanceView productTypeL3
+                             * @property {string|null} [productTypeL4] ProductPerformanceView productTypeL4
+                             * @property {string|null} [productTypeL5] ProductPerformanceView productTypeL5
+                             * @property {string|null} [customLabel0] ProductPerformanceView customLabel0
+                             * @property {string|null} [customLabel1] ProductPerformanceView customLabel1
+                             * @property {string|null} [customLabel2] ProductPerformanceView customLabel2
+                             * @property {string|null} [customLabel3] ProductPerformanceView customLabel3
+                             * @property {string|null} [customLabel4] ProductPerformanceView customLabel4
+                             * @property {number|Long|null} [clicks] ProductPerformanceView clicks
+                             * @property {number|Long|null} [impressions] ProductPerformanceView impressions
+                             * @property {number|null} [clickThroughRate] ProductPerformanceView clickThroughRate
+                             * @property {number|null} [conversions] ProductPerformanceView conversions
+                             * @property {google.shopping.type.IPrice|null} [conversionValue] ProductPerformanceView conversionValue
+                             * @property {number|null} [conversionRate] ProductPerformanceView conversionRate
+                             */
+    
+                            /**
+                             * Constructs a new ProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a ProductPerformanceView.
+                             * @implements IProductPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductPerformanceView=} [properties] Properties to set
+                             */
+                            function ProductPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProductPerformanceView marketingMethod.
+                             * @member {google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum|null|undefined} marketingMethod
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.marketingMethod = null;
+    
+                            /**
+                             * ProductPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.date = null;
+    
+                            /**
+                             * ProductPerformanceView week.
+                             * @member {google.type.IDate|null|undefined} week
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.week = null;
+    
+                            /**
+                             * ProductPerformanceView customerCountryCode.
+                             * @member {string|null|undefined} customerCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customerCountryCode = null;
+    
+                            /**
+                             * ProductPerformanceView offerId.
+                             * @member {string|null|undefined} offerId
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.offerId = null;
+    
+                            /**
+                             * ProductPerformanceView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.title = null;
+    
+                            /**
+                             * ProductPerformanceView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.brand = null;
+    
+                            /**
+                             * ProductPerformanceView categoryL1.
+                             * @member {string|null|undefined} categoryL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.categoryL1 = null;
+    
+                            /**
+                             * ProductPerformanceView categoryL2.
+                             * @member {string|null|undefined} categoryL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.categoryL2 = null;
+    
+                            /**
+                             * ProductPerformanceView categoryL3.
+                             * @member {string|null|undefined} categoryL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.categoryL3 = null;
+    
+                            /**
+                             * ProductPerformanceView categoryL4.
+                             * @member {string|null|undefined} categoryL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.categoryL4 = null;
+    
+                            /**
+                             * ProductPerformanceView categoryL5.
+                             * @member {string|null|undefined} categoryL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.categoryL5 = null;
+    
+                            /**
+                             * ProductPerformanceView productTypeL1.
+                             * @member {string|null|undefined} productTypeL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.productTypeL1 = null;
+    
+                            /**
+                             * ProductPerformanceView productTypeL2.
+                             * @member {string|null|undefined} productTypeL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.productTypeL2 = null;
+    
+                            /**
+                             * ProductPerformanceView productTypeL3.
+                             * @member {string|null|undefined} productTypeL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.productTypeL3 = null;
+    
+                            /**
+                             * ProductPerformanceView productTypeL4.
+                             * @member {string|null|undefined} productTypeL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.productTypeL4 = null;
+    
+                            /**
+                             * ProductPerformanceView productTypeL5.
+                             * @member {string|null|undefined} productTypeL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.productTypeL5 = null;
+    
+                            /**
+                             * ProductPerformanceView customLabel0.
+                             * @member {string|null|undefined} customLabel0
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customLabel0 = null;
+    
+                            /**
+                             * ProductPerformanceView customLabel1.
+                             * @member {string|null|undefined} customLabel1
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customLabel1 = null;
+    
+                            /**
+                             * ProductPerformanceView customLabel2.
+                             * @member {string|null|undefined} customLabel2
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customLabel2 = null;
+    
+                            /**
+                             * ProductPerformanceView customLabel3.
+                             * @member {string|null|undefined} customLabel3
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customLabel3 = null;
+    
+                            /**
+                             * ProductPerformanceView customLabel4.
+                             * @member {string|null|undefined} customLabel4
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.customLabel4 = null;
+    
+                            /**
+                             * ProductPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * ProductPerformanceView impressions.
+                             * @member {number|Long|null|undefined} impressions
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.impressions = null;
+    
+                            /**
+                             * ProductPerformanceView clickThroughRate.
+                             * @member {number|null|undefined} clickThroughRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.clickThroughRate = null;
+    
+                            /**
+                             * ProductPerformanceView conversions.
+                             * @member {number|null|undefined} conversions
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.conversions = null;
+    
+                            /**
+                             * ProductPerformanceView conversionValue.
+                             * @member {google.shopping.type.IPrice|null|undefined} conversionValue
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.conversionValue = null;
+    
+                            /**
+                             * ProductPerformanceView conversionRate.
+                             * @member {number|null|undefined} conversionRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             */
+                            ProductPerformanceView.prototype.conversionRate = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_marketingMethod", {
+                                get: $util.oneOfGetter($oneOfFields = ["marketingMethod"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customerCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["customerCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_offerId", {
+                                get: $util.oneOfGetter($oneOfFields = ["offerId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_categoryL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_categoryL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_categoryL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_categoryL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_categoryL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_productTypeL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customLabel0", {
+                                get: $util.oneOfGetter($oneOfFields = ["customLabel0"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customLabel1", {
+                                get: $util.oneOfGetter($oneOfFields = ["customLabel1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customLabel2", {
+                                get: $util.oneOfGetter($oneOfFields = ["customLabel2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customLabel3", {
+                                get: $util.oneOfGetter($oneOfFields = ["customLabel3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_customLabel4", {
+                                get: $util.oneOfGetter($oneOfFields = ["customLabel4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_impressions", {
+                                get: $util.oneOfGetter($oneOfFields = ["impressions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_clickThroughRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["clickThroughRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_conversions", {
+                                get: $util.oneOfGetter($oneOfFields = ["conversions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductPerformanceView.prototype, "_conversionRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["conversionRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ProductPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductPerformanceView} ProductPerformanceView instance
+                             */
+                            ProductPerformanceView.create = function create(properties) {
+                                return new ProductPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductPerformanceView} message ProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.marketingMethod != null && Object.hasOwnProperty.call(message, "marketingMethod"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.marketingMethod);
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.week != null && Object.hasOwnProperty.call(message, "week"))
+                                    $root.google.type.Date.encode(message.week, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.customerCountryCode != null && Object.hasOwnProperty.call(message, "customerCountryCode"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.customerCountryCode);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.offerId);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.title);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.brand);
+                                if (message.categoryL1 != null && Object.hasOwnProperty.call(message, "categoryL1"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.categoryL1);
+                                if (message.categoryL2 != null && Object.hasOwnProperty.call(message, "categoryL2"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.categoryL2);
+                                if (message.categoryL3 != null && Object.hasOwnProperty.call(message, "categoryL3"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.categoryL3);
+                                if (message.categoryL4 != null && Object.hasOwnProperty.call(message, "categoryL4"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.categoryL4);
+                                if (message.categoryL5 != null && Object.hasOwnProperty.call(message, "categoryL5"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.categoryL5);
+                                if (message.productTypeL1 != null && Object.hasOwnProperty.call(message, "productTypeL1"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.productTypeL1);
+                                if (message.productTypeL2 != null && Object.hasOwnProperty.call(message, "productTypeL2"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.productTypeL2);
+                                if (message.productTypeL3 != null && Object.hasOwnProperty.call(message, "productTypeL3"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.productTypeL3);
+                                if (message.productTypeL4 != null && Object.hasOwnProperty.call(message, "productTypeL4"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.productTypeL4);
+                                if (message.productTypeL5 != null && Object.hasOwnProperty.call(message, "productTypeL5"))
+                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.productTypeL5);
+                                if (message.customLabel0 != null && Object.hasOwnProperty.call(message, "customLabel0"))
+                                    writer.uint32(/* id 18, wireType 2 =*/146).string(message.customLabel0);
+                                if (message.customLabel1 != null && Object.hasOwnProperty.call(message, "customLabel1"))
+                                    writer.uint32(/* id 19, wireType 2 =*/154).string(message.customLabel1);
+                                if (message.customLabel2 != null && Object.hasOwnProperty.call(message, "customLabel2"))
+                                    writer.uint32(/* id 20, wireType 2 =*/162).string(message.customLabel2);
+                                if (message.customLabel3 != null && Object.hasOwnProperty.call(message, "customLabel3"))
+                                    writer.uint32(/* id 21, wireType 2 =*/170).string(message.customLabel3);
+                                if (message.customLabel4 != null && Object.hasOwnProperty.call(message, "customLabel4"))
+                                    writer.uint32(/* id 22, wireType 2 =*/178).string(message.customLabel4);
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 23, wireType 0 =*/184).int64(message.clicks);
+                                if (message.impressions != null && Object.hasOwnProperty.call(message, "impressions"))
+                                    writer.uint32(/* id 24, wireType 0 =*/192).int64(message.impressions);
+                                if (message.clickThroughRate != null && Object.hasOwnProperty.call(message, "clickThroughRate"))
+                                    writer.uint32(/* id 25, wireType 1 =*/201).double(message.clickThroughRate);
+                                if (message.conversions != null && Object.hasOwnProperty.call(message, "conversions"))
+                                    writer.uint32(/* id 26, wireType 1 =*/209).double(message.conversions);
+                                if (message.conversionValue != null && Object.hasOwnProperty.call(message, "conversionValue"))
+                                    $root.google.shopping.type.Price.encode(message.conversionValue, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                                if (message.conversionRate != null && Object.hasOwnProperty.call(message, "conversionRate"))
+                                    writer.uint32(/* id 28, wireType 1 =*/225).double(message.conversionRate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductPerformanceView} message ProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductPerformanceView} ProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductPerformanceView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.marketingMethod = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.week = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.customerCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.categoryL1 = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.categoryL2 = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.categoryL3 = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.categoryL4 = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.categoryL5 = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.productTypeL1 = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.productTypeL2 = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.productTypeL3 = reader.string();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.productTypeL4 = reader.string();
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.productTypeL5 = reader.string();
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.customLabel0 = reader.string();
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.customLabel1 = reader.string();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.customLabel2 = reader.string();
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.customLabel3 = reader.string();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.customLabel4 = reader.string();
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 24: {
+                                            message.impressions = reader.int64();
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.clickThroughRate = reader.double();
+                                            break;
+                                        }
+                                    case 26: {
+                                            message.conversions = reader.double();
+                                            break;
+                                        }
+                                    case 27: {
+                                            message.conversionValue = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 28: {
+                                            message.conversionRate = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductPerformanceView} ProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.marketingMethod != null && message.hasOwnProperty("marketingMethod")) {
+                                    properties._marketingMethod = 1;
+                                    switch (message.marketingMethod) {
+                                    default:
+                                        return "marketingMethod: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.week != null && message.hasOwnProperty("week")) {
+                                    var error = $root.google.type.Date.verify(message.week);
+                                    if (error)
+                                        return "week." + error;
+                                }
+                                if (message.customerCountryCode != null && message.hasOwnProperty("customerCountryCode")) {
+                                    properties._customerCountryCode = 1;
+                                    if (!$util.isString(message.customerCountryCode))
+                                        return "customerCountryCode: string expected";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    properties._offerId = 1;
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    properties._categoryL1 = 1;
+                                    if (!$util.isString(message.categoryL1))
+                                        return "categoryL1: string expected";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    properties._categoryL2 = 1;
+                                    if (!$util.isString(message.categoryL2))
+                                        return "categoryL2: string expected";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    properties._categoryL3 = 1;
+                                    if (!$util.isString(message.categoryL3))
+                                        return "categoryL3: string expected";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    properties._categoryL4 = 1;
+                                    if (!$util.isString(message.categoryL4))
+                                        return "categoryL4: string expected";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    properties._categoryL5 = 1;
+                                    if (!$util.isString(message.categoryL5))
+                                        return "categoryL5: string expected";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    properties._productTypeL1 = 1;
+                                    if (!$util.isString(message.productTypeL1))
+                                        return "productTypeL1: string expected";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    properties._productTypeL2 = 1;
+                                    if (!$util.isString(message.productTypeL2))
+                                        return "productTypeL2: string expected";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    properties._productTypeL3 = 1;
+                                    if (!$util.isString(message.productTypeL3))
+                                        return "productTypeL3: string expected";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    properties._productTypeL4 = 1;
+                                    if (!$util.isString(message.productTypeL4))
+                                        return "productTypeL4: string expected";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    properties._productTypeL5 = 1;
+                                    if (!$util.isString(message.productTypeL5))
+                                        return "productTypeL5: string expected";
+                                }
+                                if (message.customLabel0 != null && message.hasOwnProperty("customLabel0")) {
+                                    properties._customLabel0 = 1;
+                                    if (!$util.isString(message.customLabel0))
+                                        return "customLabel0: string expected";
+                                }
+                                if (message.customLabel1 != null && message.hasOwnProperty("customLabel1")) {
+                                    properties._customLabel1 = 1;
+                                    if (!$util.isString(message.customLabel1))
+                                        return "customLabel1: string expected";
+                                }
+                                if (message.customLabel2 != null && message.hasOwnProperty("customLabel2")) {
+                                    properties._customLabel2 = 1;
+                                    if (!$util.isString(message.customLabel2))
+                                        return "customLabel2: string expected";
+                                }
+                                if (message.customLabel3 != null && message.hasOwnProperty("customLabel3")) {
+                                    properties._customLabel3 = 1;
+                                    if (!$util.isString(message.customLabel3))
+                                        return "customLabel3: string expected";
+                                }
+                                if (message.customLabel4 != null && message.hasOwnProperty("customLabel4")) {
+                                    properties._customLabel4 = 1;
+                                    if (!$util.isString(message.customLabel4))
+                                        return "customLabel4: string expected";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    properties._impressions = 1;
+                                    if (!$util.isInteger(message.impressions) && !(message.impressions && $util.isInteger(message.impressions.low) && $util.isInteger(message.impressions.high)))
+                                        return "impressions: integer|Long expected";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    properties._clickThroughRate = 1;
+                                    if (typeof message.clickThroughRate !== "number")
+                                        return "clickThroughRate: number expected";
+                                }
+                                if (message.conversions != null && message.hasOwnProperty("conversions")) {
+                                    properties._conversions = 1;
+                                    if (typeof message.conversions !== "number")
+                                        return "conversions: number expected";
+                                }
+                                if (message.conversionValue != null && message.hasOwnProperty("conversionValue")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.conversionValue);
+                                    if (error)
+                                        return "conversionValue." + error;
+                                }
+                                if (message.conversionRate != null && message.hasOwnProperty("conversionRate")) {
+                                    properties._conversionRate = 1;
+                                    if (typeof message.conversionRate !== "number")
+                                        return "conversionRate: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductPerformanceView} ProductPerformanceView
+                             */
+                            ProductPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.ProductPerformanceView();
+                                switch (object.marketingMethod) {
+                                default:
+                                    if (typeof object.marketingMethod === "number") {
+                                        message.marketingMethod = object.marketingMethod;
+                                        break;
+                                    }
+                                    break;
+                                case "MARKETING_METHOD_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.marketingMethod = 0;
+                                    break;
+                                case "ORGANIC":
+                                case 1:
+                                    message.marketingMethod = 1;
+                                    break;
+                                case "ADS":
+                                case 2:
+                                    message.marketingMethod = 2;
+                                    break;
+                                }
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.week != null) {
+                                    if (typeof object.week !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductPerformanceView.week: object expected");
+                                    message.week = $root.google.type.Date.fromObject(object.week);
+                                }
+                                if (object.customerCountryCode != null)
+                                    message.customerCountryCode = String(object.customerCountryCode);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.categoryL1 != null)
+                                    message.categoryL1 = String(object.categoryL1);
+                                if (object.categoryL2 != null)
+                                    message.categoryL2 = String(object.categoryL2);
+                                if (object.categoryL3 != null)
+                                    message.categoryL3 = String(object.categoryL3);
+                                if (object.categoryL4 != null)
+                                    message.categoryL4 = String(object.categoryL4);
+                                if (object.categoryL5 != null)
+                                    message.categoryL5 = String(object.categoryL5);
+                                if (object.productTypeL1 != null)
+                                    message.productTypeL1 = String(object.productTypeL1);
+                                if (object.productTypeL2 != null)
+                                    message.productTypeL2 = String(object.productTypeL2);
+                                if (object.productTypeL3 != null)
+                                    message.productTypeL3 = String(object.productTypeL3);
+                                if (object.productTypeL4 != null)
+                                    message.productTypeL4 = String(object.productTypeL4);
+                                if (object.productTypeL5 != null)
+                                    message.productTypeL5 = String(object.productTypeL5);
+                                if (object.customLabel0 != null)
+                                    message.customLabel0 = String(object.customLabel0);
+                                if (object.customLabel1 != null)
+                                    message.customLabel1 = String(object.customLabel1);
+                                if (object.customLabel2 != null)
+                                    message.customLabel2 = String(object.customLabel2);
+                                if (object.customLabel3 != null)
+                                    message.customLabel3 = String(object.customLabel3);
+                                if (object.customLabel4 != null)
+                                    message.customLabel4 = String(object.customLabel4);
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.impressions != null)
+                                    if ($util.Long)
+                                        (message.impressions = $util.Long.fromValue(object.impressions)).unsigned = false;
+                                    else if (typeof object.impressions === "string")
+                                        message.impressions = parseInt(object.impressions, 10);
+                                    else if (typeof object.impressions === "number")
+                                        message.impressions = object.impressions;
+                                    else if (typeof object.impressions === "object")
+                                        message.impressions = new $util.LongBits(object.impressions.low >>> 0, object.impressions.high >>> 0).toNumber();
+                                if (object.clickThroughRate != null)
+                                    message.clickThroughRate = Number(object.clickThroughRate);
+                                if (object.conversions != null)
+                                    message.conversions = Number(object.conversions);
+                                if (object.conversionValue != null) {
+                                    if (typeof object.conversionValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductPerformanceView.conversionValue: object expected");
+                                    message.conversionValue = $root.google.shopping.type.Price.fromObject(object.conversionValue);
+                                }
+                                if (object.conversionRate != null)
+                                    message.conversionRate = Number(object.conversionRate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ProductPerformanceView} message ProductPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.date = null;
+                                    object.week = null;
+                                    object.conversionValue = null;
+                                }
+                                if (message.marketingMethod != null && message.hasOwnProperty("marketingMethod")) {
+                                    object.marketingMethod = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum[message.marketingMethod] === undefined ? message.marketingMethod : $root.google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum[message.marketingMethod] : message.marketingMethod;
+                                    if (options.oneofs)
+                                        object._marketingMethod = "marketingMethod";
+                                }
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.week != null && message.hasOwnProperty("week"))
+                                    object.week = $root.google.type.Date.toObject(message.week, options);
+                                if (message.customerCountryCode != null && message.hasOwnProperty("customerCountryCode")) {
+                                    object.customerCountryCode = message.customerCountryCode;
+                                    if (options.oneofs)
+                                        object._customerCountryCode = "customerCountryCode";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    object.offerId = message.offerId;
+                                    if (options.oneofs)
+                                        object._offerId = "offerId";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    object.categoryL1 = message.categoryL1;
+                                    if (options.oneofs)
+                                        object._categoryL1 = "categoryL1";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    object.categoryL2 = message.categoryL2;
+                                    if (options.oneofs)
+                                        object._categoryL2 = "categoryL2";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    object.categoryL3 = message.categoryL3;
+                                    if (options.oneofs)
+                                        object._categoryL3 = "categoryL3";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    object.categoryL4 = message.categoryL4;
+                                    if (options.oneofs)
+                                        object._categoryL4 = "categoryL4";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    object.categoryL5 = message.categoryL5;
+                                    if (options.oneofs)
+                                        object._categoryL5 = "categoryL5";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    object.productTypeL1 = message.productTypeL1;
+                                    if (options.oneofs)
+                                        object._productTypeL1 = "productTypeL1";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    object.productTypeL2 = message.productTypeL2;
+                                    if (options.oneofs)
+                                        object._productTypeL2 = "productTypeL2";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    object.productTypeL3 = message.productTypeL3;
+                                    if (options.oneofs)
+                                        object._productTypeL3 = "productTypeL3";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    object.productTypeL4 = message.productTypeL4;
+                                    if (options.oneofs)
+                                        object._productTypeL4 = "productTypeL4";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    object.productTypeL5 = message.productTypeL5;
+                                    if (options.oneofs)
+                                        object._productTypeL5 = "productTypeL5";
+                                }
+                                if (message.customLabel0 != null && message.hasOwnProperty("customLabel0")) {
+                                    object.customLabel0 = message.customLabel0;
+                                    if (options.oneofs)
+                                        object._customLabel0 = "customLabel0";
+                                }
+                                if (message.customLabel1 != null && message.hasOwnProperty("customLabel1")) {
+                                    object.customLabel1 = message.customLabel1;
+                                    if (options.oneofs)
+                                        object._customLabel1 = "customLabel1";
+                                }
+                                if (message.customLabel2 != null && message.hasOwnProperty("customLabel2")) {
+                                    object.customLabel2 = message.customLabel2;
+                                    if (options.oneofs)
+                                        object._customLabel2 = "customLabel2";
+                                }
+                                if (message.customLabel3 != null && message.hasOwnProperty("customLabel3")) {
+                                    object.customLabel3 = message.customLabel3;
+                                    if (options.oneofs)
+                                        object._customLabel3 = "customLabel3";
+                                }
+                                if (message.customLabel4 != null && message.hasOwnProperty("customLabel4")) {
+                                    object.customLabel4 = message.customLabel4;
+                                    if (options.oneofs)
+                                        object._customLabel4 = "customLabel4";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    if (typeof message.impressions === "number")
+                                        object.impressions = options.longs === String ? String(message.impressions) : message.impressions;
+                                    else
+                                        object.impressions = options.longs === String ? $util.Long.prototype.toString.call(message.impressions) : options.longs === Number ? new $util.LongBits(message.impressions.low >>> 0, message.impressions.high >>> 0).toNumber() : message.impressions;
+                                    if (options.oneofs)
+                                        object._impressions = "impressions";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    object.clickThroughRate = options.json && !isFinite(message.clickThroughRate) ? String(message.clickThroughRate) : message.clickThroughRate;
+                                    if (options.oneofs)
+                                        object._clickThroughRate = "clickThroughRate";
+                                }
+                                if (message.conversions != null && message.hasOwnProperty("conversions")) {
+                                    object.conversions = options.json && !isFinite(message.conversions) ? String(message.conversions) : message.conversions;
+                                    if (options.oneofs)
+                                        object._conversions = "conversions";
+                                }
+                                if (message.conversionValue != null && message.hasOwnProperty("conversionValue"))
+                                    object.conversionValue = $root.google.shopping.type.Price.toObject(message.conversionValue, options);
+                                if (message.conversionRate != null && message.hasOwnProperty("conversionRate")) {
+                                    object.conversionRate = options.json && !isFinite(message.conversionRate) ? String(message.conversionRate) : message.conversionRate;
+                                    if (options.oneofs)
+                                        object._conversionRate = "conversionRate";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProductPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductPerformanceView";
+                            };
+    
+                            return ProductPerformanceView;
+                        })();
+    
+                        v1alpha.ProductView = (function() {
+    
+                            /**
+                             * Properties of a ProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IProductView
+                             * @property {string|null} [id] ProductView id
+                             * @property {google.shopping.type.Channel.ChannelEnum|null} [channel] ProductView channel
+                             * @property {string|null} [languageCode] ProductView languageCode
+                             * @property {string|null} [feedLabel] ProductView feedLabel
+                             * @property {string|null} [offerId] ProductView offerId
+                             * @property {string|null} [title] ProductView title
+                             * @property {string|null} [brand] ProductView brand
+                             * @property {string|null} [categoryL1] ProductView categoryL1
+                             * @property {string|null} [categoryL2] ProductView categoryL2
+                             * @property {string|null} [categoryL3] ProductView categoryL3
+                             * @property {string|null} [categoryL4] ProductView categoryL4
+                             * @property {string|null} [categoryL5] ProductView categoryL5
+                             * @property {string|null} [productTypeL1] ProductView productTypeL1
+                             * @property {string|null} [productTypeL2] ProductView productTypeL2
+                             * @property {string|null} [productTypeL3] ProductView productTypeL3
+                             * @property {string|null} [productTypeL4] ProductView productTypeL4
+                             * @property {string|null} [productTypeL5] ProductView productTypeL5
+                             * @property {google.shopping.type.IPrice|null} [price] ProductView price
+                             * @property {string|null} [condition] ProductView condition
+                             * @property {string|null} [availability] ProductView availability
+                             * @property {string|null} [shippingLabel] ProductView shippingLabel
+                             * @property {Array.<string>|null} [gtin] ProductView gtin
+                             * @property {string|null} [itemGroupId] ProductView itemGroupId
+                             * @property {string|null} [thumbnailLink] ProductView thumbnailLink
+                             * @property {google.protobuf.ITimestamp|null} [creationTime] ProductView creationTime
+                             * @property {google.type.IDate|null} [expirationDate] ProductView expirationDate
+                             * @property {google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|null} [aggregatedReportingContextStatus] ProductView aggregatedReportingContextStatus
+                             * @property {Array.<google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue>|null} [itemIssues] ProductView itemIssues
+                             * @property {google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential|null} [clickPotential] ProductView clickPotential
+                             * @property {number|Long|null} [clickPotentialRank] ProductView clickPotentialRank
+                             */
+    
+                            /**
+                             * Constructs a new ProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a ProductView.
+                             * @implements IProductView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductView=} [properties] Properties to set
+                             */
+                            function ProductView(properties) {
+                                this.gtin = [];
+                                this.itemIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProductView id.
+                             * @member {string|null|undefined} id
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.id = null;
+    
+                            /**
+                             * ProductView channel.
+                             * @member {google.shopping.type.Channel.ChannelEnum|null|undefined} channel
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.channel = null;
+    
+                            /**
+                             * ProductView languageCode.
+                             * @member {string|null|undefined} languageCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.languageCode = null;
+    
+                            /**
+                             * ProductView feedLabel.
+                             * @member {string|null|undefined} feedLabel
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.feedLabel = null;
+    
+                            /**
+                             * ProductView offerId.
+                             * @member {string|null|undefined} offerId
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.offerId = null;
+    
+                            /**
+                             * ProductView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.title = null;
+    
+                            /**
+                             * ProductView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.brand = null;
+    
+                            /**
+                             * ProductView categoryL1.
+                             * @member {string|null|undefined} categoryL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.categoryL1 = null;
+    
+                            /**
+                             * ProductView categoryL2.
+                             * @member {string|null|undefined} categoryL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.categoryL2 = null;
+    
+                            /**
+                             * ProductView categoryL3.
+                             * @member {string|null|undefined} categoryL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.categoryL3 = null;
+    
+                            /**
+                             * ProductView categoryL4.
+                             * @member {string|null|undefined} categoryL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.categoryL4 = null;
+    
+                            /**
+                             * ProductView categoryL5.
+                             * @member {string|null|undefined} categoryL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.categoryL5 = null;
+    
+                            /**
+                             * ProductView productTypeL1.
+                             * @member {string|null|undefined} productTypeL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.productTypeL1 = null;
+    
+                            /**
+                             * ProductView productTypeL2.
+                             * @member {string|null|undefined} productTypeL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.productTypeL2 = null;
+    
+                            /**
+                             * ProductView productTypeL3.
+                             * @member {string|null|undefined} productTypeL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.productTypeL3 = null;
+    
+                            /**
+                             * ProductView productTypeL4.
+                             * @member {string|null|undefined} productTypeL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.productTypeL4 = null;
+    
+                            /**
+                             * ProductView productTypeL5.
+                             * @member {string|null|undefined} productTypeL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.productTypeL5 = null;
+    
+                            /**
+                             * ProductView price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.price = null;
+    
+                            /**
+                             * ProductView condition.
+                             * @member {string|null|undefined} condition
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.condition = null;
+    
+                            /**
+                             * ProductView availability.
+                             * @member {string|null|undefined} availability
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.availability = null;
+    
+                            /**
+                             * ProductView shippingLabel.
+                             * @member {string|null|undefined} shippingLabel
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.shippingLabel = null;
+    
+                            /**
+                             * ProductView gtin.
+                             * @member {Array.<string>} gtin
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.gtin = $util.emptyArray;
+    
+                            /**
+                             * ProductView itemGroupId.
+                             * @member {string|null|undefined} itemGroupId
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.itemGroupId = null;
+    
+                            /**
+                             * ProductView thumbnailLink.
+                             * @member {string|null|undefined} thumbnailLink
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.thumbnailLink = null;
+    
+                            /**
+                             * ProductView creationTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} creationTime
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.creationTime = null;
+    
+                            /**
+                             * ProductView expirationDate.
+                             * @member {google.type.IDate|null|undefined} expirationDate
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.expirationDate = null;
+    
+                            /**
+                             * ProductView aggregatedReportingContextStatus.
+                             * @member {google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus|null|undefined} aggregatedReportingContextStatus
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.aggregatedReportingContextStatus = null;
+    
+                            /**
+                             * ProductView itemIssues.
+                             * @member {Array.<google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue>} itemIssues
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.itemIssues = $util.emptyArray;
+    
+                            /**
+                             * ProductView clickPotential.
+                             * @member {google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential} clickPotential
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.clickPotential = 0;
+    
+                            /**
+                             * ProductView clickPotentialRank.
+                             * @member {number|Long|null|undefined} clickPotentialRank
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             */
+                            ProductView.prototype.clickPotentialRank = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_id", {
+                                get: $util.oneOfGetter($oneOfFields = ["id"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_channel", {
+                                get: $util.oneOfGetter($oneOfFields = ["channel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_languageCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_feedLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_offerId", {
+                                get: $util.oneOfGetter($oneOfFields = ["offerId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_categoryL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_categoryL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_categoryL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_categoryL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_categoryL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_productTypeL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_productTypeL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_productTypeL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_productTypeL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_productTypeL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_condition", {
+                                get: $util.oneOfGetter($oneOfFields = ["condition"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_availability", {
+                                get: $util.oneOfGetter($oneOfFields = ["availability"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_shippingLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["shippingLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_itemGroupId", {
+                                get: $util.oneOfGetter($oneOfFields = ["itemGroupId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_thumbnailLink", {
+                                get: $util.oneOfGetter($oneOfFields = ["thumbnailLink"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_aggregatedReportingContextStatus", {
+                                get: $util.oneOfGetter($oneOfFields = ["aggregatedReportingContextStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductView.prototype, "_clickPotentialRank", {
+                                get: $util.oneOfGetter($oneOfFields = ["clickPotentialRank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ProductView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductView} ProductView instance
+                             */
+                            ProductView.create = function create(properties) {
+                                return new ProductView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductView} message ProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.feedLabel);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.offerId);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.title);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.brand);
+                                if (message.categoryL1 != null && Object.hasOwnProperty.call(message, "categoryL1"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.categoryL1);
+                                if (message.categoryL2 != null && Object.hasOwnProperty.call(message, "categoryL2"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.categoryL2);
+                                if (message.categoryL3 != null && Object.hasOwnProperty.call(message, "categoryL3"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.categoryL3);
+                                if (message.categoryL4 != null && Object.hasOwnProperty.call(message, "categoryL4"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.categoryL4);
+                                if (message.categoryL5 != null && Object.hasOwnProperty.call(message, "categoryL5"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.categoryL5);
+                                if (message.productTypeL1 != null && Object.hasOwnProperty.call(message, "productTypeL1"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.productTypeL1);
+                                if (message.productTypeL2 != null && Object.hasOwnProperty.call(message, "productTypeL2"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.productTypeL2);
+                                if (message.productTypeL3 != null && Object.hasOwnProperty.call(message, "productTypeL3"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.productTypeL3);
+                                if (message.productTypeL4 != null && Object.hasOwnProperty.call(message, "productTypeL4"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.productTypeL4);
+                                if (message.productTypeL5 != null && Object.hasOwnProperty.call(message, "productTypeL5"))
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.productTypeL5);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                    writer.uint32(/* id 18, wireType 2 =*/146).string(message.condition);
+                                if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
+                                    writer.uint32(/* id 19, wireType 2 =*/154).string(message.availability);
+                                if (message.shippingLabel != null && Object.hasOwnProperty.call(message, "shippingLabel"))
+                                    writer.uint32(/* id 20, wireType 2 =*/162).string(message.shippingLabel);
+                                if (message.gtin != null && message.gtin.length)
+                                    for (var i = 0; i < message.gtin.length; ++i)
+                                        writer.uint32(/* id 21, wireType 2 =*/170).string(message.gtin[i]);
+                                if (message.itemGroupId != null && Object.hasOwnProperty.call(message, "itemGroupId"))
+                                    writer.uint32(/* id 22, wireType 2 =*/178).string(message.itemGroupId);
+                                if (message.thumbnailLink != null && Object.hasOwnProperty.call(message, "thumbnailLink"))
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.thumbnailLink);
+                                if (message.creationTime != null && Object.hasOwnProperty.call(message, "creationTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.creationTime, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                                if (message.expirationDate != null && Object.hasOwnProperty.call(message, "expirationDate"))
+                                    $root.google.type.Date.encode(message.expirationDate, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                if (message.aggregatedReportingContextStatus != null && Object.hasOwnProperty.call(message, "aggregatedReportingContextStatus"))
+                                    writer.uint32(/* id 26, wireType 0 =*/208).int32(message.aggregatedReportingContextStatus);
+                                if (message.itemIssues != null && message.itemIssues.length)
+                                    for (var i = 0; i < message.itemIssues.length; ++i)
+                                        $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.encode(message.itemIssues[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                                if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
+                                    writer.uint32(/* id 28, wireType 0 =*/224).int32(message.channel);
+                                if (message.clickPotential != null && Object.hasOwnProperty.call(message, "clickPotential"))
+                                    writer.uint32(/* id 29, wireType 0 =*/232).int32(message.clickPotential);
+                                if (message.clickPotentialRank != null && Object.hasOwnProperty.call(message, "clickPotentialRank"))
+                                    writer.uint32(/* id 30, wireType 0 =*/240).int64(message.clickPotentialRank);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IProductView} message ProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductView} ProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 28: {
+                                            message.channel = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.categoryL1 = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.categoryL2 = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.categoryL3 = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.categoryL4 = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.categoryL5 = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.productTypeL1 = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.productTypeL2 = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.productTypeL3 = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.productTypeL4 = reader.string();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.productTypeL5 = reader.string();
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.condition = reader.string();
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.availability = reader.string();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.shippingLabel = reader.string();
+                                            break;
+                                        }
+                                    case 21: {
+                                            if (!(message.gtin && message.gtin.length))
+                                                message.gtin = [];
+                                            message.gtin.push(reader.string());
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.itemGroupId = reader.string();
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.thumbnailLink = reader.string();
+                                            break;
+                                        }
+                                    case 24: {
+                                            message.creationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.expirationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 26: {
+                                            message.aggregatedReportingContextStatus = reader.int32();
+                                            break;
+                                        }
+                                    case 27: {
+                                            if (!(message.itemIssues && message.itemIssues.length))
+                                                message.itemIssues = [];
+                                            message.itemIssues.push($root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 29: {
+                                            message.clickPotential = reader.int32();
+                                            break;
+                                        }
+                                    case 30: {
+                                            message.clickPotentialRank = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductView} ProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    properties._id = 1;
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                }
+                                if (message.channel != null && message.hasOwnProperty("channel")) {
+                                    properties._channel = 1;
+                                    switch (message.channel) {
+                                    default:
+                                        return "channel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode")) {
+                                    properties._languageCode = 1;
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    properties._feedLabel = 1;
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    properties._offerId = 1;
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    properties._categoryL1 = 1;
+                                    if (!$util.isString(message.categoryL1))
+                                        return "categoryL1: string expected";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    properties._categoryL2 = 1;
+                                    if (!$util.isString(message.categoryL2))
+                                        return "categoryL2: string expected";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    properties._categoryL3 = 1;
+                                    if (!$util.isString(message.categoryL3))
+                                        return "categoryL3: string expected";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    properties._categoryL4 = 1;
+                                    if (!$util.isString(message.categoryL4))
+                                        return "categoryL4: string expected";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    properties._categoryL5 = 1;
+                                    if (!$util.isString(message.categoryL5))
+                                        return "categoryL5: string expected";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    properties._productTypeL1 = 1;
+                                    if (!$util.isString(message.productTypeL1))
+                                        return "productTypeL1: string expected";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    properties._productTypeL2 = 1;
+                                    if (!$util.isString(message.productTypeL2))
+                                        return "productTypeL2: string expected";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    properties._productTypeL3 = 1;
+                                    if (!$util.isString(message.productTypeL3))
+                                        return "productTypeL3: string expected";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    properties._productTypeL4 = 1;
+                                    if (!$util.isString(message.productTypeL4))
+                                        return "productTypeL4: string expected";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    properties._productTypeL5 = 1;
+                                    if (!$util.isString(message.productTypeL5))
+                                        return "productTypeL5: string expected";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.condition != null && message.hasOwnProperty("condition")) {
+                                    properties._condition = 1;
+                                    if (!$util.isString(message.condition))
+                                        return "condition: string expected";
+                                }
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    properties._availability = 1;
+                                    if (!$util.isString(message.availability))
+                                        return "availability: string expected";
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    properties._shippingLabel = 1;
+                                    if (!$util.isString(message.shippingLabel))
+                                        return "shippingLabel: string expected";
+                                }
+                                if (message.gtin != null && message.hasOwnProperty("gtin")) {
+                                    if (!Array.isArray(message.gtin))
+                                        return "gtin: array expected";
+                                    for (var i = 0; i < message.gtin.length; ++i)
+                                        if (!$util.isString(message.gtin[i]))
+                                            return "gtin: string[] expected";
+                                }
+                                if (message.itemGroupId != null && message.hasOwnProperty("itemGroupId")) {
+                                    properties._itemGroupId = 1;
+                                    if (!$util.isString(message.itemGroupId))
+                                        return "itemGroupId: string expected";
+                                }
+                                if (message.thumbnailLink != null && message.hasOwnProperty("thumbnailLink")) {
+                                    properties._thumbnailLink = 1;
+                                    if (!$util.isString(message.thumbnailLink))
+                                        return "thumbnailLink: string expected";
+                                }
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.creationTime);
+                                    if (error)
+                                        return "creationTime." + error;
+                                }
+                                if (message.expirationDate != null && message.hasOwnProperty("expirationDate")) {
+                                    var error = $root.google.type.Date.verify(message.expirationDate);
+                                    if (error)
+                                        return "expirationDate." + error;
+                                }
+                                if (message.aggregatedReportingContextStatus != null && message.hasOwnProperty("aggregatedReportingContextStatus")) {
+                                    properties._aggregatedReportingContextStatus = 1;
+                                    switch (message.aggregatedReportingContextStatus) {
+                                    default:
+                                        return "aggregatedReportingContextStatus: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                }
+                                if (message.itemIssues != null && message.hasOwnProperty("itemIssues")) {
+                                    if (!Array.isArray(message.itemIssues))
+                                        return "itemIssues: array expected";
+                                    for (var i = 0; i < message.itemIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.verify(message.itemIssues[i]);
+                                        if (error)
+                                            return "itemIssues." + error;
+                                    }
+                                }
+                                if (message.clickPotential != null && message.hasOwnProperty("clickPotential"))
+                                    switch (message.clickPotential) {
+                                    default:
+                                        return "clickPotential: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.clickPotentialRank != null && message.hasOwnProperty("clickPotentialRank")) {
+                                    properties._clickPotentialRank = 1;
+                                    if (!$util.isInteger(message.clickPotentialRank) && !(message.clickPotentialRank && $util.isInteger(message.clickPotentialRank.low) && $util.isInteger(message.clickPotentialRank.high)))
+                                        return "clickPotentialRank: integer|Long expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.ProductView} ProductView
+                             */
+                            ProductView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.ProductView();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                switch (object.channel) {
+                                default:
+                                    if (typeof object.channel === "number") {
+                                        message.channel = object.channel;
+                                        break;
+                                    }
+                                    break;
+                                case "CHANNEL_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.channel = 0;
+                                    break;
+                                case "ONLINE":
+                                case 1:
+                                    message.channel = 1;
+                                    break;
+                                case "LOCAL":
+                                case 2:
+                                    message.channel = 2;
+                                    break;
+                                }
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.categoryL1 != null)
+                                    message.categoryL1 = String(object.categoryL1);
+                                if (object.categoryL2 != null)
+                                    message.categoryL2 = String(object.categoryL2);
+                                if (object.categoryL3 != null)
+                                    message.categoryL3 = String(object.categoryL3);
+                                if (object.categoryL4 != null)
+                                    message.categoryL4 = String(object.categoryL4);
+                                if (object.categoryL5 != null)
+                                    message.categoryL5 = String(object.categoryL5);
+                                if (object.productTypeL1 != null)
+                                    message.productTypeL1 = String(object.productTypeL1);
+                                if (object.productTypeL2 != null)
+                                    message.productTypeL2 = String(object.productTypeL2);
+                                if (object.productTypeL3 != null)
+                                    message.productTypeL3 = String(object.productTypeL3);
+                                if (object.productTypeL4 != null)
+                                    message.productTypeL4 = String(object.productTypeL4);
+                                if (object.productTypeL5 != null)
+                                    message.productTypeL5 = String(object.productTypeL5);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.condition != null)
+                                    message.condition = String(object.condition);
+                                if (object.availability != null)
+                                    message.availability = String(object.availability);
+                                if (object.shippingLabel != null)
+                                    message.shippingLabel = String(object.shippingLabel);
+                                if (object.gtin) {
+                                    if (!Array.isArray(object.gtin))
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.gtin: array expected");
+                                    message.gtin = [];
+                                    for (var i = 0; i < object.gtin.length; ++i)
+                                        message.gtin[i] = String(object.gtin[i]);
+                                }
+                                if (object.itemGroupId != null)
+                                    message.itemGroupId = String(object.itemGroupId);
+                                if (object.thumbnailLink != null)
+                                    message.thumbnailLink = String(object.thumbnailLink);
+                                if (object.creationTime != null) {
+                                    if (typeof object.creationTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.creationTime: object expected");
+                                    message.creationTime = $root.google.protobuf.Timestamp.fromObject(object.creationTime);
+                                }
+                                if (object.expirationDate != null) {
+                                    if (typeof object.expirationDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.expirationDate: object expected");
+                                    message.expirationDate = $root.google.type.Date.fromObject(object.expirationDate);
+                                }
+                                switch (object.aggregatedReportingContextStatus) {
+                                default:
+                                    if (typeof object.aggregatedReportingContextStatus === "number") {
+                                        message.aggregatedReportingContextStatus = object.aggregatedReportingContextStatus;
+                                        break;
+                                    }
+                                    break;
+                                case "AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED":
+                                case 0:
+                                    message.aggregatedReportingContextStatus = 0;
+                                    break;
+                                case "NOT_ELIGIBLE_OR_DISAPPROVED":
+                                case 1:
+                                    message.aggregatedReportingContextStatus = 1;
+                                    break;
+                                case "PENDING":
+                                case 2:
+                                    message.aggregatedReportingContextStatus = 2;
+                                    break;
+                                case "ELIGIBLE_LIMITED":
+                                case 3:
+                                    message.aggregatedReportingContextStatus = 3;
+                                    break;
+                                case "ELIGIBLE":
+                                case 4:
+                                    message.aggregatedReportingContextStatus = 4;
+                                    break;
+                                }
+                                if (object.itemIssues) {
+                                    if (!Array.isArray(object.itemIssues))
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.itemIssues: array expected");
+                                    message.itemIssues = [];
+                                    for (var i = 0; i < object.itemIssues.length; ++i) {
+                                        if (typeof object.itemIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.itemIssues: object expected");
+                                        message.itemIssues[i] = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.fromObject(object.itemIssues[i]);
+                                    }
+                                }
+                                switch (object.clickPotential) {
+                                default:
+                                    if (typeof object.clickPotential === "number") {
+                                        message.clickPotential = object.clickPotential;
+                                        break;
+                                    }
+                                    break;
+                                case "CLICK_POTENTIAL_UNSPECIFIED":
+                                case 0:
+                                    message.clickPotential = 0;
+                                    break;
+                                case "LOW":
+                                case 1:
+                                    message.clickPotential = 1;
+                                    break;
+                                case "MEDIUM":
+                                case 2:
+                                    message.clickPotential = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.clickPotential = 3;
+                                    break;
+                                }
+                                if (object.clickPotentialRank != null)
+                                    if ($util.Long)
+                                        (message.clickPotentialRank = $util.Long.fromValue(object.clickPotentialRank)).unsigned = false;
+                                    else if (typeof object.clickPotentialRank === "string")
+                                        message.clickPotentialRank = parseInt(object.clickPotentialRank, 10);
+                                    else if (typeof object.clickPotentialRank === "number")
+                                        message.clickPotentialRank = object.clickPotentialRank;
+                                    else if (typeof object.clickPotentialRank === "object")
+                                        message.clickPotentialRank = new $util.LongBits(object.clickPotentialRank.low >>> 0, object.clickPotentialRank.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ProductView} message ProductView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.gtin = [];
+                                    object.itemIssues = [];
+                                }
+                                if (options.defaults) {
+                                    object.price = null;
+                                    object.creationTime = null;
+                                    object.expirationDate = null;
+                                    object.clickPotential = options.enums === String ? "CLICK_POTENTIAL_UNSPECIFIED" : 0;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    object.id = message.id;
+                                    if (options.oneofs)
+                                        object._id = "id";
+                                }
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode")) {
+                                    object.languageCode = message.languageCode;
+                                    if (options.oneofs)
+                                        object._languageCode = "languageCode";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    object.feedLabel = message.feedLabel;
+                                    if (options.oneofs)
+                                        object._feedLabel = "feedLabel";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    object.offerId = message.offerId;
+                                    if (options.oneofs)
+                                        object._offerId = "offerId";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    object.categoryL1 = message.categoryL1;
+                                    if (options.oneofs)
+                                        object._categoryL1 = "categoryL1";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    object.categoryL2 = message.categoryL2;
+                                    if (options.oneofs)
+                                        object._categoryL2 = "categoryL2";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    object.categoryL3 = message.categoryL3;
+                                    if (options.oneofs)
+                                        object._categoryL3 = "categoryL3";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    object.categoryL4 = message.categoryL4;
+                                    if (options.oneofs)
+                                        object._categoryL4 = "categoryL4";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    object.categoryL5 = message.categoryL5;
+                                    if (options.oneofs)
+                                        object._categoryL5 = "categoryL5";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    object.productTypeL1 = message.productTypeL1;
+                                    if (options.oneofs)
+                                        object._productTypeL1 = "productTypeL1";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    object.productTypeL2 = message.productTypeL2;
+                                    if (options.oneofs)
+                                        object._productTypeL2 = "productTypeL2";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    object.productTypeL3 = message.productTypeL3;
+                                    if (options.oneofs)
+                                        object._productTypeL3 = "productTypeL3";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    object.productTypeL4 = message.productTypeL4;
+                                    if (options.oneofs)
+                                        object._productTypeL4 = "productTypeL4";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    object.productTypeL5 = message.productTypeL5;
+                                    if (options.oneofs)
+                                        object._productTypeL5 = "productTypeL5";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.condition != null && message.hasOwnProperty("condition")) {
+                                    object.condition = message.condition;
+                                    if (options.oneofs)
+                                        object._condition = "condition";
+                                }
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    object.availability = message.availability;
+                                    if (options.oneofs)
+                                        object._availability = "availability";
+                                }
+                                if (message.shippingLabel != null && message.hasOwnProperty("shippingLabel")) {
+                                    object.shippingLabel = message.shippingLabel;
+                                    if (options.oneofs)
+                                        object._shippingLabel = "shippingLabel";
+                                }
+                                if (message.gtin && message.gtin.length) {
+                                    object.gtin = [];
+                                    for (var j = 0; j < message.gtin.length; ++j)
+                                        object.gtin[j] = message.gtin[j];
+                                }
+                                if (message.itemGroupId != null && message.hasOwnProperty("itemGroupId")) {
+                                    object.itemGroupId = message.itemGroupId;
+                                    if (options.oneofs)
+                                        object._itemGroupId = "itemGroupId";
+                                }
+                                if (message.thumbnailLink != null && message.hasOwnProperty("thumbnailLink")) {
+                                    object.thumbnailLink = message.thumbnailLink;
+                                    if (options.oneofs)
+                                        object._thumbnailLink = "thumbnailLink";
+                                }
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime"))
+                                    object.creationTime = $root.google.protobuf.Timestamp.toObject(message.creationTime, options);
+                                if (message.expirationDate != null && message.hasOwnProperty("expirationDate"))
+                                    object.expirationDate = $root.google.type.Date.toObject(message.expirationDate, options);
+                                if (message.aggregatedReportingContextStatus != null && message.hasOwnProperty("aggregatedReportingContextStatus")) {
+                                    object.aggregatedReportingContextStatus = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus[message.aggregatedReportingContextStatus] === undefined ? message.aggregatedReportingContextStatus : $root.google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus[message.aggregatedReportingContextStatus] : message.aggregatedReportingContextStatus;
+                                    if (options.oneofs)
+                                        object._aggregatedReportingContextStatus = "aggregatedReportingContextStatus";
+                                }
+                                if (message.itemIssues && message.itemIssues.length) {
+                                    object.itemIssues = [];
+                                    for (var j = 0; j < message.itemIssues.length; ++j)
+                                        object.itemIssues[j] = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.toObject(message.itemIssues[j], options);
+                                }
+                                if (message.channel != null && message.hasOwnProperty("channel")) {
+                                    object.channel = options.enums === String ? $root.google.shopping.type.Channel.ChannelEnum[message.channel] === undefined ? message.channel : $root.google.shopping.type.Channel.ChannelEnum[message.channel] : message.channel;
+                                    if (options.oneofs)
+                                        object._channel = "channel";
+                                }
+                                if (message.clickPotential != null && message.hasOwnProperty("clickPotential"))
+                                    object.clickPotential = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential[message.clickPotential] === undefined ? message.clickPotential : $root.google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential[message.clickPotential] : message.clickPotential;
+                                if (message.clickPotentialRank != null && message.hasOwnProperty("clickPotentialRank")) {
+                                    if (typeof message.clickPotentialRank === "number")
+                                        object.clickPotentialRank = options.longs === String ? String(message.clickPotentialRank) : message.clickPotentialRank;
+                                    else
+                                        object.clickPotentialRank = options.longs === String ? $util.Long.prototype.toString.call(message.clickPotentialRank) : options.longs === Number ? new $util.LongBits(message.clickPotentialRank.low >>> 0, message.clickPotentialRank.high >>> 0).toNumber() : message.clickPotentialRank;
+                                    if (options.oneofs)
+                                        object._clickPotentialRank = "clickPotentialRank";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProductView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductView";
+                            };
+    
+                            ProductView.ItemIssue = (function() {
+    
+                                /**
+                                 * Properties of an ItemIssue.
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                                 * @interface IItemIssue
+                                 * @property {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType|null} [type] ItemIssue type
+                                 * @property {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity|null} [severity] ItemIssue severity
+                                 * @property {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|null} [resolution] ItemIssue resolution
+                                 */
+    
+                                /**
+                                 * Constructs a new ItemIssue.
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView
+                                 * @classdesc Represents an ItemIssue.
+                                 * @implements IItemIssue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue=} [properties] Properties to set
+                                 */
+                                function ItemIssue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ItemIssue type.
+                                 * @member {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType|null|undefined} type
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @instance
+                                 */
+                                ItemIssue.prototype.type = null;
+    
+                                /**
+                                 * ItemIssue severity.
+                                 * @member {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity|null|undefined} severity
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @instance
+                                 */
+                                ItemIssue.prototype.severity = null;
+    
+                                /**
+                                 * ItemIssue resolution.
+                                 * @member {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution|null|undefined} resolution
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @instance
+                                 */
+                                ItemIssue.prototype.resolution = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(ItemIssue.prototype, "_resolution", {
+                                    get: $util.oneOfGetter($oneOfFields = ["resolution"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ItemIssue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue} ItemIssue instance
+                                 */
+                                ItemIssue.create = function create(properties) {
+                                    return new ItemIssue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemIssue message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue} message ItemIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemIssue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.encode(message.type, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                        $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.encode(message.severity, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.resolution != null && Object.hasOwnProperty.call(message, "resolution"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.resolution);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1alpha.ProductView.IItemIssue} message ItemIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ItemIssue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue} ItemIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemIssue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.type = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.severity = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.resolution = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ItemIssue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue} ItemIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemIssue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ItemIssue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ItemIssue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.type != null && message.hasOwnProperty("type")) {
+                                        var error = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.verify(message.type);
+                                        if (error)
+                                            return "type." + error;
+                                    }
+                                    if (message.severity != null && message.hasOwnProperty("severity")) {
+                                        var error = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.verify(message.severity);
+                                        if (error)
+                                            return "severity." + error;
+                                    }
+                                    if (message.resolution != null && message.hasOwnProperty("resolution")) {
+                                        properties._resolution = 1;
+                                        switch (message.resolution) {
+                                        default:
+                                            return "resolution: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ItemIssue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue} ItemIssue
+                                 */
+                                ItemIssue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue();
+                                    if (object.type != null) {
+                                        if (typeof object.type !== "object")
+                                            throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.type: object expected");
+                                        message.type = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.fromObject(object.type);
+                                    }
+                                    if (object.severity != null) {
+                                        if (typeof object.severity !== "object")
+                                            throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.severity: object expected");
+                                        message.severity = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.fromObject(object.severity);
+                                    }
+                                    switch (object.resolution) {
+                                    default:
+                                        if (typeof object.resolution === "number") {
+                                            message.resolution = object.resolution;
+                                            break;
+                                        }
+                                        break;
+                                    case "ITEM_ISSUE_RESOLUTION_UNSPECIFIED":
+                                    case 0:
+                                        message.resolution = 0;
+                                        break;
+                                    case "MERCHANT_ACTION":
+                                    case 1:
+                                        message.resolution = 1;
+                                        break;
+                                    case "PENDING_PROCESSING":
+                                    case 2:
+                                        message.resolution = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ItemIssue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue} message ItemIssue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ItemIssue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.type = null;
+                                        object.severity = null;
+                                    }
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.toObject(message.type, options);
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        object.severity = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.toObject(message.severity, options);
+                                    if (message.resolution != null && message.hasOwnProperty("resolution")) {
+                                        object.resolution = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution[message.resolution] === undefined ? message.resolution : $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution[message.resolution] : message.resolution;
+                                        if (options.oneofs)
+                                            object._resolution = "resolution";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ItemIssue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ItemIssue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ItemIssue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ItemIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue";
+                                };
+    
+                                ItemIssue.ItemIssueType = (function() {
+    
+                                    /**
+                                     * Properties of an ItemIssueType.
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                     * @interface IItemIssueType
+                                     * @property {string|null} [code] ItemIssueType code
+                                     * @property {string|null} [canonicalAttribute] ItemIssueType canonicalAttribute
+                                     */
+    
+                                    /**
+                                     * Constructs a new ItemIssueType.
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                     * @classdesc Represents an ItemIssueType.
+                                     * @implements IItemIssueType
+                                     * @constructor
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType=} [properties] Properties to set
+                                     */
+                                    function ItemIssueType(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ItemIssueType code.
+                                     * @member {string|null|undefined} code
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @instance
+                                     */
+                                    ItemIssueType.prototype.code = null;
+    
+                                    /**
+                                     * ItemIssueType canonicalAttribute.
+                                     * @member {string|null|undefined} canonicalAttribute
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @instance
+                                     */
+                                    ItemIssueType.prototype.canonicalAttribute = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ItemIssueType.prototype, "_code", {
+                                        get: $util.oneOfGetter($oneOfFields = ["code"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ItemIssueType.prototype, "_canonicalAttribute", {
+                                        get: $util.oneOfGetter($oneOfFields = ["canonicalAttribute"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ItemIssueType instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType=} [properties] Properties to set
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType} ItemIssueType instance
+                                     */
+                                    ItemIssueType.create = function create(properties) {
+                                        return new ItemIssueType(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ItemIssueType message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType} message ItemIssueType message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ItemIssueType.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                        if (message.canonicalAttribute != null && Object.hasOwnProperty.call(message, "canonicalAttribute"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.canonicalAttribute);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ItemIssueType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueType} message ItemIssueType message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ItemIssueType.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an ItemIssueType message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType} ItemIssueType
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ItemIssueType.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.code = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.canonicalAttribute = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an ItemIssueType message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType} ItemIssueType
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ItemIssueType.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an ItemIssueType message.
+                                     * @function verify
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ItemIssueType.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.code != null && message.hasOwnProperty("code")) {
+                                            properties._code = 1;
+                                            if (!$util.isString(message.code))
+                                                return "code: string expected";
+                                        }
+                                        if (message.canonicalAttribute != null && message.hasOwnProperty("canonicalAttribute")) {
+                                            properties._canonicalAttribute = 1;
+                                            if (!$util.isString(message.canonicalAttribute))
+                                                return "canonicalAttribute: string expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an ItemIssueType message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType} ItemIssueType
+                                     */
+                                    ItemIssueType.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType)
+                                            return object;
+                                        var message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType();
+                                        if (object.code != null)
+                                            message.code = String(object.code);
+                                        if (object.canonicalAttribute != null)
+                                            message.canonicalAttribute = String(object.canonicalAttribute);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an ItemIssueType message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType} message ItemIssueType
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ItemIssueType.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (message.code != null && message.hasOwnProperty("code")) {
+                                            object.code = message.code;
+                                            if (options.oneofs)
+                                                object._code = "code";
+                                        }
+                                        if (message.canonicalAttribute != null && message.hasOwnProperty("canonicalAttribute")) {
+                                            object.canonicalAttribute = message.canonicalAttribute;
+                                            if (options.oneofs)
+                                                object._canonicalAttribute = "canonicalAttribute";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ItemIssueType to JSON.
+                                     * @function toJSON
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ItemIssueType.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ItemIssueType
+                                     * @function getTypeUrl
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ItemIssueType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueType";
+                                    };
+    
+                                    return ItemIssueType;
+                                })();
+    
+                                ItemIssue.ItemIssueSeverity = (function() {
+    
+                                    /**
+                                     * Properties of an ItemIssueSeverity.
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                     * @interface IItemIssueSeverity
+                                     * @property {Array.<google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext>|null} [severityPerReportingContext] ItemIssueSeverity severityPerReportingContext
+                                     * @property {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|null} [aggregatedSeverity] ItemIssueSeverity aggregatedSeverity
+                                     */
+    
+                                    /**
+                                     * Constructs a new ItemIssueSeverity.
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue
+                                     * @classdesc Represents an ItemIssueSeverity.
+                                     * @implements IItemIssueSeverity
+                                     * @constructor
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity=} [properties] Properties to set
+                                     */
+                                    function ItemIssueSeverity(properties) {
+                                        this.severityPerReportingContext = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ItemIssueSeverity severityPerReportingContext.
+                                     * @member {Array.<google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext>} severityPerReportingContext
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @instance
+                                     */
+                                    ItemIssueSeverity.prototype.severityPerReportingContext = $util.emptyArray;
+    
+                                    /**
+                                     * ItemIssueSeverity aggregatedSeverity.
+                                     * @member {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity|null|undefined} aggregatedSeverity
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @instance
+                                     */
+                                    ItemIssueSeverity.prototype.aggregatedSeverity = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ItemIssueSeverity.prototype, "_aggregatedSeverity", {
+                                        get: $util.oneOfGetter($oneOfFields = ["aggregatedSeverity"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ItemIssueSeverity instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity=} [properties] Properties to set
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity} ItemIssueSeverity instance
+                                     */
+                                    ItemIssueSeverity.create = function create(properties) {
+                                        return new ItemIssueSeverity(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ItemIssueSeverity message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity} message ItemIssueSeverity message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ItemIssueSeverity.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.severityPerReportingContext != null && message.severityPerReportingContext.length)
+                                            for (var i = 0; i < message.severityPerReportingContext.length; ++i)
+                                                $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.encode(message.severityPerReportingContext[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.aggregatedSeverity != null && Object.hasOwnProperty.call(message, "aggregatedSeverity"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.aggregatedSeverity);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ItemIssueSeverity message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.IItemIssueSeverity} message ItemIssueSeverity message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ItemIssueSeverity.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes an ItemIssueSeverity message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity} ItemIssueSeverity
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ItemIssueSeverity.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.severityPerReportingContext && message.severityPerReportingContext.length))
+                                                        message.severityPerReportingContext = [];
+                                                    message.severityPerReportingContext.push($root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.decode(reader, reader.uint32()));
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.aggregatedSeverity = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes an ItemIssueSeverity message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity} ItemIssueSeverity
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ItemIssueSeverity.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies an ItemIssueSeverity message.
+                                     * @function verify
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ItemIssueSeverity.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.severityPerReportingContext != null && message.hasOwnProperty("severityPerReportingContext")) {
+                                            if (!Array.isArray(message.severityPerReportingContext))
+                                                return "severityPerReportingContext: array expected";
+                                            for (var i = 0; i < message.severityPerReportingContext.length; ++i) {
+                                                var error = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.verify(message.severityPerReportingContext[i]);
+                                                if (error)
+                                                    return "severityPerReportingContext." + error;
+                                            }
+                                        }
+                                        if (message.aggregatedSeverity != null && message.hasOwnProperty("aggregatedSeverity")) {
+                                            properties._aggregatedSeverity = 1;
+                                            switch (message.aggregatedSeverity) {
+                                            default:
+                                                return "aggregatedSeverity: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                            case 3:
+                                                break;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates an ItemIssueSeverity message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity} ItemIssueSeverity
+                                     */
+                                    ItemIssueSeverity.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity)
+                                            return object;
+                                        var message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity();
+                                        if (object.severityPerReportingContext) {
+                                            if (!Array.isArray(object.severityPerReportingContext))
+                                                throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.severityPerReportingContext: array expected");
+                                            message.severityPerReportingContext = [];
+                                            for (var i = 0; i < object.severityPerReportingContext.length; ++i) {
+                                                if (typeof object.severityPerReportingContext[i] !== "object")
+                                                    throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.severityPerReportingContext: object expected");
+                                                message.severityPerReportingContext[i] = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.fromObject(object.severityPerReportingContext[i]);
+                                            }
+                                        }
+                                        switch (object.aggregatedSeverity) {
+                                        default:
+                                            if (typeof object.aggregatedSeverity === "number") {
+                                                message.aggregatedSeverity = object.aggregatedSeverity;
+                                                break;
+                                            }
+                                            break;
+                                        case "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED":
+                                        case 0:
+                                            message.aggregatedSeverity = 0;
+                                            break;
+                                        case "DISAPPROVED":
+                                        case 1:
+                                            message.aggregatedSeverity = 1;
+                                            break;
+                                        case "DEMOTED":
+                                        case 2:
+                                            message.aggregatedSeverity = 2;
+                                            break;
+                                        case "PENDING":
+                                        case 3:
+                                            message.aggregatedSeverity = 3;
+                                            break;
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from an ItemIssueSeverity message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity} message ItemIssueSeverity
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ItemIssueSeverity.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.severityPerReportingContext = [];
+                                        if (message.severityPerReportingContext && message.severityPerReportingContext.length) {
+                                            object.severityPerReportingContext = [];
+                                            for (var j = 0; j < message.severityPerReportingContext.length; ++j)
+                                                object.severityPerReportingContext[j] = $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.toObject(message.severityPerReportingContext[j], options);
+                                        }
+                                        if (message.aggregatedSeverity != null && message.hasOwnProperty("aggregatedSeverity")) {
+                                            object.aggregatedSeverity = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity[message.aggregatedSeverity] === undefined ? message.aggregatedSeverity : $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity[message.aggregatedSeverity] : message.aggregatedSeverity;
+                                            if (options.oneofs)
+                                                object._aggregatedSeverity = "aggregatedSeverity";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ItemIssueSeverity to JSON.
+                                     * @function toJSON
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ItemIssueSeverity.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ItemIssueSeverity
+                                     * @function getTypeUrl
+                                     * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ItemIssueSeverity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity";
+                                    };
+    
+                                    ItemIssueSeverity.IssueSeverityPerReportingContext = (function() {
+    
+                                        /**
+                                         * Properties of an IssueSeverityPerReportingContext.
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                         * @interface IIssueSeverityPerReportingContext
+                                         * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] IssueSeverityPerReportingContext reportingContext
+                                         * @property {Array.<string>|null} [disapprovedCountries] IssueSeverityPerReportingContext disapprovedCountries
+                                         * @property {Array.<string>|null} [demotedCountries] IssueSeverityPerReportingContext demotedCountries
+                                         */
+    
+                                        /**
+                                         * Constructs a new IssueSeverityPerReportingContext.
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity
+                                         * @classdesc Represents an IssueSeverityPerReportingContext.
+                                         * @implements IIssueSeverityPerReportingContext
+                                         * @constructor
+                                         * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext=} [properties] Properties to set
+                                         */
+                                        function IssueSeverityPerReportingContext(properties) {
+                                            this.disapprovedCountries = [];
+                                            this.demotedCountries = [];
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null)
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * IssueSeverityPerReportingContext reportingContext.
+                                         * @member {google.shopping.type.ReportingContext.ReportingContextEnum|null|undefined} reportingContext
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @instance
+                                         */
+                                        IssueSeverityPerReportingContext.prototype.reportingContext = null;
+    
+                                        /**
+                                         * IssueSeverityPerReportingContext disapprovedCountries.
+                                         * @member {Array.<string>} disapprovedCountries
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @instance
+                                         */
+                                        IssueSeverityPerReportingContext.prototype.disapprovedCountries = $util.emptyArray;
+    
+                                        /**
+                                         * IssueSeverityPerReportingContext demotedCountries.
+                                         * @member {Array.<string>} demotedCountries
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @instance
+                                         */
+                                        IssueSeverityPerReportingContext.prototype.demotedCountries = $util.emptyArray;
+    
+                                        // OneOf field names bound to virtual getters and setters
+                                        var $oneOfFields;
+    
+                                        // Virtual OneOf for proto3 optional field
+                                        Object.defineProperty(IssueSeverityPerReportingContext.prototype, "_reportingContext", {
+                                            get: $util.oneOfGetter($oneOfFields = ["reportingContext"]),
+                                            set: $util.oneOfSetter($oneOfFields)
+                                        });
+    
+                                        /**
+                                         * Creates a new IssueSeverityPerReportingContext instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext=} [properties] Properties to set
+                                         * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext} IssueSeverityPerReportingContext instance
+                                         */
+                                        IssueSeverityPerReportingContext.create = function create(properties) {
+                                            return new IssueSeverityPerReportingContext(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified IssueSeverityPerReportingContext message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext} message IssueSeverityPerReportingContext message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        IssueSeverityPerReportingContext.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reportingContext);
+                                            if (message.disapprovedCountries != null && message.disapprovedCountries.length)
+                                                for (var i = 0; i < message.disapprovedCountries.length; ++i)
+                                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.disapprovedCountries[i]);
+                                            if (message.demotedCountries != null && message.demotedCountries.length)
+                                                for (var i = 0; i < message.demotedCountries.length; ++i)
+                                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.demotedCountries[i]);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified IssueSeverityPerReportingContext message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IIssueSeverityPerReportingContext} message IssueSeverityPerReportingContext message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        IssueSeverityPerReportingContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes an IssueSeverityPerReportingContext message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext} IssueSeverityPerReportingContext
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        IssueSeverityPerReportingContext.decode = function decode(reader, length, error) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.reportingContext = reader.int32();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        if (!(message.disapprovedCountries && message.disapprovedCountries.length))
+                                                            message.disapprovedCountries = [];
+                                                        message.disapprovedCountries.push(reader.string());
+                                                        break;
+                                                    }
+                                                case 3: {
+                                                        if (!(message.demotedCountries && message.demotedCountries.length))
+                                                            message.demotedCountries = [];
+                                                        message.demotedCountries.push(reader.string());
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes an IssueSeverityPerReportingContext message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext} IssueSeverityPerReportingContext
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        IssueSeverityPerReportingContext.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies an IssueSeverityPerReportingContext message.
+                                         * @function verify
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        IssueSeverityPerReportingContext.verify = function verify(message) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            var properties = {};
+                                            if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                                properties._reportingContext = 1;
+                                                switch (message.reportingContext) {
+                                                default:
+                                                    return "reportingContext: enum value expected";
+                                                case 0:
+                                                case 1:
+                                                case 2:
+                                                case 13:
+                                                case 14:
+                                                case 3:
+                                                case 4:
+                                                case 5:
+                                                case 6:
+                                                case 7:
+                                                case 8:
+                                                case 9:
+                                                case 10:
+                                                case 11:
+                                                case 12:
+                                                    break;
+                                                }
+                                            }
+                                            if (message.disapprovedCountries != null && message.hasOwnProperty("disapprovedCountries")) {
+                                                if (!Array.isArray(message.disapprovedCountries))
+                                                    return "disapprovedCountries: array expected";
+                                                for (var i = 0; i < message.disapprovedCountries.length; ++i)
+                                                    if (!$util.isString(message.disapprovedCountries[i]))
+                                                        return "disapprovedCountries: string[] expected";
+                                            }
+                                            if (message.demotedCountries != null && message.hasOwnProperty("demotedCountries")) {
+                                                if (!Array.isArray(message.demotedCountries))
+                                                    return "demotedCountries: array expected";
+                                                for (var i = 0; i < message.demotedCountries.length; ++i)
+                                                    if (!$util.isString(message.demotedCountries[i]))
+                                                        return "demotedCountries: string[] expected";
+                                            }
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates an IssueSeverityPerReportingContext message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext} IssueSeverityPerReportingContext
+                                         */
+                                        IssueSeverityPerReportingContext.fromObject = function fromObject(object) {
+                                            if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext)
+                                                return object;
+                                            var message = new $root.google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext();
+                                            switch (object.reportingContext) {
+                                            default:
+                                                if (typeof object.reportingContext === "number") {
+                                                    message.reportingContext = object.reportingContext;
+                                                    break;
+                                                }
+                                                break;
+                                            case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                            case 0:
+                                                message.reportingContext = 0;
+                                                break;
+                                            case "SHOPPING_ADS":
+                                            case 1:
+                                                message.reportingContext = 1;
+                                                break;
+                                            case "DISCOVERY_ADS":
+                                            case 2:
+                                                message.reportingContext = 2;
+                                                break;
+                                            case "DEMAND_GEN_ADS":
+                                            case 13:
+                                                message.reportingContext = 13;
+                                                break;
+                                            case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                            case 14:
+                                                message.reportingContext = 14;
+                                                break;
+                                            case "VIDEO_ADS":
+                                            case 3:
+                                                message.reportingContext = 3;
+                                                break;
+                                            case "DISPLAY_ADS":
+                                            case 4:
+                                                message.reportingContext = 4;
+                                                break;
+                                            case "LOCAL_INVENTORY_ADS":
+                                            case 5:
+                                                message.reportingContext = 5;
+                                                break;
+                                            case "VEHICLE_INVENTORY_ADS":
+                                            case 6:
+                                                message.reportingContext = 6;
+                                                break;
+                                            case "FREE_LISTINGS":
+                                            case 7:
+                                                message.reportingContext = 7;
+                                                break;
+                                            case "FREE_LOCAL_LISTINGS":
+                                            case 8:
+                                                message.reportingContext = 8;
+                                                break;
+                                            case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                            case 9:
+                                                message.reportingContext = 9;
+                                                break;
+                                            case "YOUTUBE_SHOPPING":
+                                            case 10:
+                                                message.reportingContext = 10;
+                                                break;
+                                            case "CLOUD_RETAIL":
+                                            case 11:
+                                                message.reportingContext = 11;
+                                                break;
+                                            case "LOCAL_CLOUD_RETAIL":
+                                            case 12:
+                                                message.reportingContext = 12;
+                                                break;
+                                            }
+                                            if (object.disapprovedCountries) {
+                                                if (!Array.isArray(object.disapprovedCountries))
+                                                    throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.disapprovedCountries: array expected");
+                                                message.disapprovedCountries = [];
+                                                for (var i = 0; i < object.disapprovedCountries.length; ++i)
+                                                    message.disapprovedCountries[i] = String(object.disapprovedCountries[i]);
+                                            }
+                                            if (object.demotedCountries) {
+                                                if (!Array.isArray(object.demotedCountries))
+                                                    throw TypeError(".google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext.demotedCountries: array expected");
+                                                message.demotedCountries = [];
+                                                for (var i = 0; i < object.demotedCountries.length; ++i)
+                                                    message.demotedCountries[i] = String(object.demotedCountries[i]);
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from an IssueSeverityPerReportingContext message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext} message IssueSeverityPerReportingContext
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        IssueSeverityPerReportingContext.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (options.arrays || options.defaults) {
+                                                object.disapprovedCountries = [];
+                                                object.demotedCountries = [];
+                                            }
+                                            if (message.reportingContext != null && message.hasOwnProperty("reportingContext")) {
+                                                object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                                if (options.oneofs)
+                                                    object._reportingContext = "reportingContext";
+                                            }
+                                            if (message.disapprovedCountries && message.disapprovedCountries.length) {
+                                                object.disapprovedCountries = [];
+                                                for (var j = 0; j < message.disapprovedCountries.length; ++j)
+                                                    object.disapprovedCountries[j] = message.disapprovedCountries[j];
+                                            }
+                                            if (message.demotedCountries && message.demotedCountries.length) {
+                                                object.demotedCountries = [];
+                                                for (var j = 0; j < message.demotedCountries.length; ++j)
+                                                    object.demotedCountries[j] = message.demotedCountries[j];
+                                            }
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this IssueSeverityPerReportingContext to JSON.
+                                         * @function toJSON
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        IssueSeverityPerReportingContext.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for IssueSeverityPerReportingContext
+                                         * @function getTypeUrl
+                                         * @memberof google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        IssueSeverityPerReportingContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.IssueSeverityPerReportingContext";
+                                        };
+    
+                                        return IssueSeverityPerReportingContext;
+                                    })();
+    
+                                    /**
+                                     * AggregatedIssueSeverity enum.
+                                     * @name google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueSeverity.AggregatedIssueSeverity
+                                     * @enum {number}
+                                     * @property {number} AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED=0 AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED value
+                                     * @property {number} DISAPPROVED=1 DISAPPROVED value
+                                     * @property {number} DEMOTED=2 DEMOTED value
+                                     * @property {number} PENDING=3 PENDING value
+                                     */
+                                    ItemIssueSeverity.AggregatedIssueSeverity = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "DISAPPROVED"] = 1;
+                                        values[valuesById[2] = "DEMOTED"] = 2;
+                                        values[valuesById[3] = "PENDING"] = 3;
+                                        return values;
+                                    })();
+    
+                                    return ItemIssueSeverity;
+                                })();
+    
+                                /**
+                                 * ItemIssueResolution enum.
+                                 * @name google.shopping.merchant.reports.v1alpha.ProductView.ItemIssue.ItemIssueResolution
+                                 * @enum {number}
+                                 * @property {number} ITEM_ISSUE_RESOLUTION_UNSPECIFIED=0 ITEM_ISSUE_RESOLUTION_UNSPECIFIED value
+                                 * @property {number} MERCHANT_ACTION=1 MERCHANT_ACTION value
+                                 * @property {number} PENDING_PROCESSING=2 PENDING_PROCESSING value
+                                 */
+                                ItemIssue.ItemIssueResolution = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "ITEM_ISSUE_RESOLUTION_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "MERCHANT_ACTION"] = 1;
+                                    values[valuesById[2] = "PENDING_PROCESSING"] = 2;
+                                    return values;
+                                })();
+    
+                                return ItemIssue;
+                            })();
+    
+                            /**
+                             * AggregatedReportingContextStatus enum.
+                             * @name google.shopping.merchant.reports.v1alpha.ProductView.AggregatedReportingContextStatus
+                             * @enum {number}
+                             * @property {number} AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED=0 AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED value
+                             * @property {number} NOT_ELIGIBLE_OR_DISAPPROVED=1 NOT_ELIGIBLE_OR_DISAPPROVED value
+                             * @property {number} PENDING=2 PENDING value
+                             * @property {number} ELIGIBLE_LIMITED=3 ELIGIBLE_LIMITED value
+                             * @property {number} ELIGIBLE=4 ELIGIBLE value
+                             */
+                            ProductView.AggregatedReportingContextStatus = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "NOT_ELIGIBLE_OR_DISAPPROVED"] = 1;
+                                values[valuesById[2] = "PENDING"] = 2;
+                                values[valuesById[3] = "ELIGIBLE_LIMITED"] = 3;
+                                values[valuesById[4] = "ELIGIBLE"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * ClickPotential enum.
+                             * @name google.shopping.merchant.reports.v1alpha.ProductView.ClickPotential
+                             * @enum {number}
+                             * @property {number} CLICK_POTENTIAL_UNSPECIFIED=0 CLICK_POTENTIAL_UNSPECIFIED value
+                             * @property {number} LOW=1 LOW value
+                             * @property {number} MEDIUM=2 MEDIUM value
+                             * @property {number} HIGH=3 HIGH value
+                             */
+                            ProductView.ClickPotential = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CLICK_POTENTIAL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOW"] = 1;
+                                values[valuesById[2] = "MEDIUM"] = 2;
+                                values[valuesById[3] = "HIGH"] = 3;
+                                return values;
+                            })();
+    
+                            return ProductView;
+                        })();
+    
+                        v1alpha.PriceCompetitivenessProductView = (function() {
+    
+                            /**
+                             * Properties of a PriceCompetitivenessProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IPriceCompetitivenessProductView
+                             * @property {string|null} [reportCountryCode] PriceCompetitivenessProductView reportCountryCode
+                             * @property {string|null} [id] PriceCompetitivenessProductView id
+                             * @property {string|null} [offerId] PriceCompetitivenessProductView offerId
+                             * @property {string|null} [title] PriceCompetitivenessProductView title
+                             * @property {string|null} [brand] PriceCompetitivenessProductView brand
+                             * @property {string|null} [categoryL1] PriceCompetitivenessProductView categoryL1
+                             * @property {string|null} [categoryL2] PriceCompetitivenessProductView categoryL2
+                             * @property {string|null} [categoryL3] PriceCompetitivenessProductView categoryL3
+                             * @property {string|null} [categoryL4] PriceCompetitivenessProductView categoryL4
+                             * @property {string|null} [categoryL5] PriceCompetitivenessProductView categoryL5
+                             * @property {string|null} [productTypeL1] PriceCompetitivenessProductView productTypeL1
+                             * @property {string|null} [productTypeL2] PriceCompetitivenessProductView productTypeL2
+                             * @property {string|null} [productTypeL3] PriceCompetitivenessProductView productTypeL3
+                             * @property {string|null} [productTypeL4] PriceCompetitivenessProductView productTypeL4
+                             * @property {string|null} [productTypeL5] PriceCompetitivenessProductView productTypeL5
+                             * @property {google.shopping.type.IPrice|null} [price] PriceCompetitivenessProductView price
+                             * @property {google.shopping.type.IPrice|null} [benchmarkPrice] PriceCompetitivenessProductView benchmarkPrice
+                             */
+    
+                            /**
+                             * Constructs a new PriceCompetitivenessProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a PriceCompetitivenessProductView.
+                             * @implements IPriceCompetitivenessProductView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView=} [properties] Properties to set
+                             */
+                            function PriceCompetitivenessProductView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PriceCompetitivenessProductView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView id.
+                             * @member {string|null|undefined} id
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.id = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView offerId.
+                             * @member {string|null|undefined} offerId
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.offerId = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.title = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.brand = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView categoryL1.
+                             * @member {string|null|undefined} categoryL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.categoryL1 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView categoryL2.
+                             * @member {string|null|undefined} categoryL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.categoryL2 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView categoryL3.
+                             * @member {string|null|undefined} categoryL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.categoryL3 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView categoryL4.
+                             * @member {string|null|undefined} categoryL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.categoryL4 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView categoryL5.
+                             * @member {string|null|undefined} categoryL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.categoryL5 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView productTypeL1.
+                             * @member {string|null|undefined} productTypeL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.productTypeL1 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView productTypeL2.
+                             * @member {string|null|undefined} productTypeL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.productTypeL2 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView productTypeL3.
+                             * @member {string|null|undefined} productTypeL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.productTypeL3 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView productTypeL4.
+                             * @member {string|null|undefined} productTypeL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.productTypeL4 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView productTypeL5.
+                             * @member {string|null|undefined} productTypeL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.productTypeL5 = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.price = null;
+    
+                            /**
+                             * PriceCompetitivenessProductView benchmarkPrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} benchmarkPrice
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             */
+                            PriceCompetitivenessProductView.prototype.benchmarkPrice = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_id", {
+                                get: $util.oneOfGetter($oneOfFields = ["id"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_offerId", {
+                                get: $util.oneOfGetter($oneOfFields = ["offerId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_categoryL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceCompetitivenessProductView.prototype, "_productTypeL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PriceCompetitivenessProductView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView} PriceCompetitivenessProductView instance
+                             */
+                            PriceCompetitivenessProductView.create = function create(properties) {
+                                return new PriceCompetitivenessProductView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PriceCompetitivenessProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView} message PriceCompetitivenessProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PriceCompetitivenessProductView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.reportCountryCode);
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.id);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.offerId);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.title);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.brand);
+                                if (message.categoryL1 != null && Object.hasOwnProperty.call(message, "categoryL1"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.categoryL1);
+                                if (message.categoryL2 != null && Object.hasOwnProperty.call(message, "categoryL2"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.categoryL2);
+                                if (message.categoryL3 != null && Object.hasOwnProperty.call(message, "categoryL3"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.categoryL3);
+                                if (message.categoryL4 != null && Object.hasOwnProperty.call(message, "categoryL4"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.categoryL4);
+                                if (message.categoryL5 != null && Object.hasOwnProperty.call(message, "categoryL5"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.categoryL5);
+                                if (message.productTypeL1 != null && Object.hasOwnProperty.call(message, "productTypeL1"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.productTypeL1);
+                                if (message.productTypeL2 != null && Object.hasOwnProperty.call(message, "productTypeL2"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.productTypeL2);
+                                if (message.productTypeL3 != null && Object.hasOwnProperty.call(message, "productTypeL3"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.productTypeL3);
+                                if (message.productTypeL4 != null && Object.hasOwnProperty.call(message, "productTypeL4"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.productTypeL4);
+                                if (message.productTypeL5 != null && Object.hasOwnProperty.call(message, "productTypeL5"))
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.productTypeL5);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.benchmarkPrice != null && Object.hasOwnProperty.call(message, "benchmarkPrice"))
+                                    $root.google.shopping.type.Price.encode(message.benchmarkPrice, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PriceCompetitivenessProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceCompetitivenessProductView} message PriceCompetitivenessProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PriceCompetitivenessProductView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PriceCompetitivenessProductView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView} PriceCompetitivenessProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PriceCompetitivenessProductView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.categoryL1 = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.categoryL2 = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.categoryL3 = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.categoryL4 = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.categoryL5 = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.productTypeL1 = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.productTypeL2 = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.productTypeL3 = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.productTypeL4 = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.productTypeL5 = reader.string();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.benchmarkPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PriceCompetitivenessProductView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView} PriceCompetitivenessProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PriceCompetitivenessProductView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PriceCompetitivenessProductView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PriceCompetitivenessProductView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    properties._id = 1;
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    properties._offerId = 1;
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    properties._categoryL1 = 1;
+                                    if (!$util.isString(message.categoryL1))
+                                        return "categoryL1: string expected";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    properties._categoryL2 = 1;
+                                    if (!$util.isString(message.categoryL2))
+                                        return "categoryL2: string expected";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    properties._categoryL3 = 1;
+                                    if (!$util.isString(message.categoryL3))
+                                        return "categoryL3: string expected";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    properties._categoryL4 = 1;
+                                    if (!$util.isString(message.categoryL4))
+                                        return "categoryL4: string expected";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    properties._categoryL5 = 1;
+                                    if (!$util.isString(message.categoryL5))
+                                        return "categoryL5: string expected";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    properties._productTypeL1 = 1;
+                                    if (!$util.isString(message.productTypeL1))
+                                        return "productTypeL1: string expected";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    properties._productTypeL2 = 1;
+                                    if (!$util.isString(message.productTypeL2))
+                                        return "productTypeL2: string expected";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    properties._productTypeL3 = 1;
+                                    if (!$util.isString(message.productTypeL3))
+                                        return "productTypeL3: string expected";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    properties._productTypeL4 = 1;
+                                    if (!$util.isString(message.productTypeL4))
+                                        return "productTypeL4: string expected";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    properties._productTypeL5 = 1;
+                                    if (!$util.isString(message.productTypeL5))
+                                        return "productTypeL5: string expected";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.benchmarkPrice != null && message.hasOwnProperty("benchmarkPrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.benchmarkPrice);
+                                    if (error)
+                                        return "benchmarkPrice." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PriceCompetitivenessProductView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView} PriceCompetitivenessProductView
+                             */
+                            PriceCompetitivenessProductView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView();
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.categoryL1 != null)
+                                    message.categoryL1 = String(object.categoryL1);
+                                if (object.categoryL2 != null)
+                                    message.categoryL2 = String(object.categoryL2);
+                                if (object.categoryL3 != null)
+                                    message.categoryL3 = String(object.categoryL3);
+                                if (object.categoryL4 != null)
+                                    message.categoryL4 = String(object.categoryL4);
+                                if (object.categoryL5 != null)
+                                    message.categoryL5 = String(object.categoryL5);
+                                if (object.productTypeL1 != null)
+                                    message.productTypeL1 = String(object.productTypeL1);
+                                if (object.productTypeL2 != null)
+                                    message.productTypeL2 = String(object.productTypeL2);
+                                if (object.productTypeL3 != null)
+                                    message.productTypeL3 = String(object.productTypeL3);
+                                if (object.productTypeL4 != null)
+                                    message.productTypeL4 = String(object.productTypeL4);
+                                if (object.productTypeL5 != null)
+                                    message.productTypeL5 = String(object.productTypeL5);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.benchmarkPrice != null) {
+                                    if (typeof object.benchmarkPrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView.benchmarkPrice: object expected");
+                                    message.benchmarkPrice = $root.google.shopping.type.Price.fromObject(object.benchmarkPrice);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PriceCompetitivenessProductView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView} message PriceCompetitivenessProductView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PriceCompetitivenessProductView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.price = null;
+                                    object.benchmarkPrice = null;
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    object.id = message.id;
+                                    if (options.oneofs)
+                                        object._id = "id";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    object.offerId = message.offerId;
+                                    if (options.oneofs)
+                                        object._offerId = "offerId";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    object.categoryL1 = message.categoryL1;
+                                    if (options.oneofs)
+                                        object._categoryL1 = "categoryL1";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    object.categoryL2 = message.categoryL2;
+                                    if (options.oneofs)
+                                        object._categoryL2 = "categoryL2";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    object.categoryL3 = message.categoryL3;
+                                    if (options.oneofs)
+                                        object._categoryL3 = "categoryL3";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    object.categoryL4 = message.categoryL4;
+                                    if (options.oneofs)
+                                        object._categoryL4 = "categoryL4";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    object.categoryL5 = message.categoryL5;
+                                    if (options.oneofs)
+                                        object._categoryL5 = "categoryL5";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    object.productTypeL1 = message.productTypeL1;
+                                    if (options.oneofs)
+                                        object._productTypeL1 = "productTypeL1";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    object.productTypeL2 = message.productTypeL2;
+                                    if (options.oneofs)
+                                        object._productTypeL2 = "productTypeL2";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    object.productTypeL3 = message.productTypeL3;
+                                    if (options.oneofs)
+                                        object._productTypeL3 = "productTypeL3";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    object.productTypeL4 = message.productTypeL4;
+                                    if (options.oneofs)
+                                        object._productTypeL4 = "productTypeL4";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    object.productTypeL5 = message.productTypeL5;
+                                    if (options.oneofs)
+                                        object._productTypeL5 = "productTypeL5";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.benchmarkPrice != null && message.hasOwnProperty("benchmarkPrice"))
+                                    object.benchmarkPrice = $root.google.shopping.type.Price.toObject(message.benchmarkPrice, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PriceCompetitivenessProductView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PriceCompetitivenessProductView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PriceCompetitivenessProductView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PriceCompetitivenessProductView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.PriceCompetitivenessProductView";
+                            };
+    
+                            return PriceCompetitivenessProductView;
+                        })();
+    
+                        v1alpha.PriceInsightsProductView = (function() {
+    
+                            /**
+                             * Properties of a PriceInsightsProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IPriceInsightsProductView
+                             * @property {string|null} [id] PriceInsightsProductView id
+                             * @property {string|null} [offerId] PriceInsightsProductView offerId
+                             * @property {string|null} [title] PriceInsightsProductView title
+                             * @property {string|null} [brand] PriceInsightsProductView brand
+                             * @property {string|null} [categoryL1] PriceInsightsProductView categoryL1
+                             * @property {string|null} [categoryL2] PriceInsightsProductView categoryL2
+                             * @property {string|null} [categoryL3] PriceInsightsProductView categoryL3
+                             * @property {string|null} [categoryL4] PriceInsightsProductView categoryL4
+                             * @property {string|null} [categoryL5] PriceInsightsProductView categoryL5
+                             * @property {string|null} [productTypeL1] PriceInsightsProductView productTypeL1
+                             * @property {string|null} [productTypeL2] PriceInsightsProductView productTypeL2
+                             * @property {string|null} [productTypeL3] PriceInsightsProductView productTypeL3
+                             * @property {string|null} [productTypeL4] PriceInsightsProductView productTypeL4
+                             * @property {string|null} [productTypeL5] PriceInsightsProductView productTypeL5
+                             * @property {google.shopping.type.IPrice|null} [price] PriceInsightsProductView price
+                             * @property {google.shopping.type.IPrice|null} [suggestedPrice] PriceInsightsProductView suggestedPrice
+                             * @property {number|null} [predictedImpressionsChangeFraction] PriceInsightsProductView predictedImpressionsChangeFraction
+                             * @property {number|null} [predictedClicksChangeFraction] PriceInsightsProductView predictedClicksChangeFraction
+                             * @property {number|null} [predictedConversionsChangeFraction] PriceInsightsProductView predictedConversionsChangeFraction
+                             * @property {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness|null} [effectiveness] PriceInsightsProductView effectiveness
+                             */
+    
+                            /**
+                             * Constructs a new PriceInsightsProductView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a PriceInsightsProductView.
+                             * @implements IPriceInsightsProductView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView=} [properties] Properties to set
+                             */
+                            function PriceInsightsProductView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PriceInsightsProductView id.
+                             * @member {string|null|undefined} id
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.id = null;
+    
+                            /**
+                             * PriceInsightsProductView offerId.
+                             * @member {string|null|undefined} offerId
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.offerId = null;
+    
+                            /**
+                             * PriceInsightsProductView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.title = null;
+    
+                            /**
+                             * PriceInsightsProductView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.brand = null;
+    
+                            /**
+                             * PriceInsightsProductView categoryL1.
+                             * @member {string|null|undefined} categoryL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.categoryL1 = null;
+    
+                            /**
+                             * PriceInsightsProductView categoryL2.
+                             * @member {string|null|undefined} categoryL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.categoryL2 = null;
+    
+                            /**
+                             * PriceInsightsProductView categoryL3.
+                             * @member {string|null|undefined} categoryL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.categoryL3 = null;
+    
+                            /**
+                             * PriceInsightsProductView categoryL4.
+                             * @member {string|null|undefined} categoryL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.categoryL4 = null;
+    
+                            /**
+                             * PriceInsightsProductView categoryL5.
+                             * @member {string|null|undefined} categoryL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.categoryL5 = null;
+    
+                            /**
+                             * PriceInsightsProductView productTypeL1.
+                             * @member {string|null|undefined} productTypeL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.productTypeL1 = null;
+    
+                            /**
+                             * PriceInsightsProductView productTypeL2.
+                             * @member {string|null|undefined} productTypeL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.productTypeL2 = null;
+    
+                            /**
+                             * PriceInsightsProductView productTypeL3.
+                             * @member {string|null|undefined} productTypeL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.productTypeL3 = null;
+    
+                            /**
+                             * PriceInsightsProductView productTypeL4.
+                             * @member {string|null|undefined} productTypeL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.productTypeL4 = null;
+    
+                            /**
+                             * PriceInsightsProductView productTypeL5.
+                             * @member {string|null|undefined} productTypeL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.productTypeL5 = null;
+    
+                            /**
+                             * PriceInsightsProductView price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.price = null;
+    
+                            /**
+                             * PriceInsightsProductView suggestedPrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} suggestedPrice
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.suggestedPrice = null;
+    
+                            /**
+                             * PriceInsightsProductView predictedImpressionsChangeFraction.
+                             * @member {number|null|undefined} predictedImpressionsChangeFraction
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.predictedImpressionsChangeFraction = null;
+    
+                            /**
+                             * PriceInsightsProductView predictedClicksChangeFraction.
+                             * @member {number|null|undefined} predictedClicksChangeFraction
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.predictedClicksChangeFraction = null;
+    
+                            /**
+                             * PriceInsightsProductView predictedConversionsChangeFraction.
+                             * @member {number|null|undefined} predictedConversionsChangeFraction
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.predictedConversionsChangeFraction = null;
+    
+                            /**
+                             * PriceInsightsProductView effectiveness.
+                             * @member {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness} effectiveness
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             */
+                            PriceInsightsProductView.prototype.effectiveness = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_id", {
+                                get: $util.oneOfGetter($oneOfFields = ["id"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_offerId", {
+                                get: $util.oneOfGetter($oneOfFields = ["offerId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_categoryL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_productTypeL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["productTypeL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_predictedImpressionsChangeFraction", {
+                                get: $util.oneOfGetter($oneOfFields = ["predictedImpressionsChangeFraction"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_predictedClicksChangeFraction", {
+                                get: $util.oneOfGetter($oneOfFields = ["predictedClicksChangeFraction"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PriceInsightsProductView.prototype, "_predictedConversionsChangeFraction", {
+                                get: $util.oneOfGetter($oneOfFields = ["predictedConversionsChangeFraction"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PriceInsightsProductView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView} PriceInsightsProductView instance
+                             */
+                            PriceInsightsProductView.create = function create(properties) {
+                                return new PriceInsightsProductView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PriceInsightsProductView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView} message PriceInsightsProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PriceInsightsProductView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.offerId);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.brand);
+                                if (message.categoryL1 != null && Object.hasOwnProperty.call(message, "categoryL1"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.categoryL1);
+                                if (message.categoryL2 != null && Object.hasOwnProperty.call(message, "categoryL2"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.categoryL2);
+                                if (message.categoryL3 != null && Object.hasOwnProperty.call(message, "categoryL3"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.categoryL3);
+                                if (message.categoryL4 != null && Object.hasOwnProperty.call(message, "categoryL4"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.categoryL4);
+                                if (message.categoryL5 != null && Object.hasOwnProperty.call(message, "categoryL5"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.categoryL5);
+                                if (message.productTypeL1 != null && Object.hasOwnProperty.call(message, "productTypeL1"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.productTypeL1);
+                                if (message.productTypeL2 != null && Object.hasOwnProperty.call(message, "productTypeL2"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.productTypeL2);
+                                if (message.productTypeL3 != null && Object.hasOwnProperty.call(message, "productTypeL3"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.productTypeL3);
+                                if (message.productTypeL4 != null && Object.hasOwnProperty.call(message, "productTypeL4"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.productTypeL4);
+                                if (message.productTypeL5 != null && Object.hasOwnProperty.call(message, "productTypeL5"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.productTypeL5);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                                if (message.suggestedPrice != null && Object.hasOwnProperty.call(message, "suggestedPrice"))
+                                    $root.google.shopping.type.Price.encode(message.suggestedPrice, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.predictedImpressionsChangeFraction != null && Object.hasOwnProperty.call(message, "predictedImpressionsChangeFraction"))
+                                    writer.uint32(/* id 17, wireType 1 =*/137).double(message.predictedImpressionsChangeFraction);
+                                if (message.predictedClicksChangeFraction != null && Object.hasOwnProperty.call(message, "predictedClicksChangeFraction"))
+                                    writer.uint32(/* id 18, wireType 1 =*/145).double(message.predictedClicksChangeFraction);
+                                if (message.predictedConversionsChangeFraction != null && Object.hasOwnProperty.call(message, "predictedConversionsChangeFraction"))
+                                    writer.uint32(/* id 19, wireType 1 =*/153).double(message.predictedConversionsChangeFraction);
+                                if (message.effectiveness != null && Object.hasOwnProperty.call(message, "effectiveness"))
+                                    writer.uint32(/* id 22, wireType 0 =*/176).int32(message.effectiveness);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PriceInsightsProductView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IPriceInsightsProductView} message PriceInsightsProductView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PriceInsightsProductView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PriceInsightsProductView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView} PriceInsightsProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PriceInsightsProductView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.categoryL1 = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.categoryL2 = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.categoryL3 = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.categoryL4 = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.categoryL5 = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.productTypeL1 = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.productTypeL2 = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.productTypeL3 = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.productTypeL4 = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.productTypeL5 = reader.string();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.suggestedPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.predictedImpressionsChangeFraction = reader.double();
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.predictedClicksChangeFraction = reader.double();
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.predictedConversionsChangeFraction = reader.double();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.effectiveness = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PriceInsightsProductView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView} PriceInsightsProductView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PriceInsightsProductView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PriceInsightsProductView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PriceInsightsProductView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    properties._id = 1;
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    properties._offerId = 1;
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    properties._categoryL1 = 1;
+                                    if (!$util.isString(message.categoryL1))
+                                        return "categoryL1: string expected";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    properties._categoryL2 = 1;
+                                    if (!$util.isString(message.categoryL2))
+                                        return "categoryL2: string expected";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    properties._categoryL3 = 1;
+                                    if (!$util.isString(message.categoryL3))
+                                        return "categoryL3: string expected";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    properties._categoryL4 = 1;
+                                    if (!$util.isString(message.categoryL4))
+                                        return "categoryL4: string expected";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    properties._categoryL5 = 1;
+                                    if (!$util.isString(message.categoryL5))
+                                        return "categoryL5: string expected";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    properties._productTypeL1 = 1;
+                                    if (!$util.isString(message.productTypeL1))
+                                        return "productTypeL1: string expected";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    properties._productTypeL2 = 1;
+                                    if (!$util.isString(message.productTypeL2))
+                                        return "productTypeL2: string expected";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    properties._productTypeL3 = 1;
+                                    if (!$util.isString(message.productTypeL3))
+                                        return "productTypeL3: string expected";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    properties._productTypeL4 = 1;
+                                    if (!$util.isString(message.productTypeL4))
+                                        return "productTypeL4: string expected";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    properties._productTypeL5 = 1;
+                                    if (!$util.isString(message.productTypeL5))
+                                        return "productTypeL5: string expected";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.suggestedPrice != null && message.hasOwnProperty("suggestedPrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.suggestedPrice);
+                                    if (error)
+                                        return "suggestedPrice." + error;
+                                }
+                                if (message.predictedImpressionsChangeFraction != null && message.hasOwnProperty("predictedImpressionsChangeFraction")) {
+                                    properties._predictedImpressionsChangeFraction = 1;
+                                    if (typeof message.predictedImpressionsChangeFraction !== "number")
+                                        return "predictedImpressionsChangeFraction: number expected";
+                                }
+                                if (message.predictedClicksChangeFraction != null && message.hasOwnProperty("predictedClicksChangeFraction")) {
+                                    properties._predictedClicksChangeFraction = 1;
+                                    if (typeof message.predictedClicksChangeFraction !== "number")
+                                        return "predictedClicksChangeFraction: number expected";
+                                }
+                                if (message.predictedConversionsChangeFraction != null && message.hasOwnProperty("predictedConversionsChangeFraction")) {
+                                    properties._predictedConversionsChangeFraction = 1;
+                                    if (typeof message.predictedConversionsChangeFraction !== "number")
+                                        return "predictedConversionsChangeFraction: number expected";
+                                }
+                                if (message.effectiveness != null && message.hasOwnProperty("effectiveness"))
+                                    switch (message.effectiveness) {
+                                    default:
+                                        return "effectiveness: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PriceInsightsProductView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView} PriceInsightsProductView
+                             */
+                            PriceInsightsProductView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.categoryL1 != null)
+                                    message.categoryL1 = String(object.categoryL1);
+                                if (object.categoryL2 != null)
+                                    message.categoryL2 = String(object.categoryL2);
+                                if (object.categoryL3 != null)
+                                    message.categoryL3 = String(object.categoryL3);
+                                if (object.categoryL4 != null)
+                                    message.categoryL4 = String(object.categoryL4);
+                                if (object.categoryL5 != null)
+                                    message.categoryL5 = String(object.categoryL5);
+                                if (object.productTypeL1 != null)
+                                    message.productTypeL1 = String(object.productTypeL1);
+                                if (object.productTypeL2 != null)
+                                    message.productTypeL2 = String(object.productTypeL2);
+                                if (object.productTypeL3 != null)
+                                    message.productTypeL3 = String(object.productTypeL3);
+                                if (object.productTypeL4 != null)
+                                    message.productTypeL4 = String(object.productTypeL4);
+                                if (object.productTypeL5 != null)
+                                    message.productTypeL5 = String(object.productTypeL5);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.suggestedPrice != null) {
+                                    if (typeof object.suggestedPrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.suggestedPrice: object expected");
+                                    message.suggestedPrice = $root.google.shopping.type.Price.fromObject(object.suggestedPrice);
+                                }
+                                if (object.predictedImpressionsChangeFraction != null)
+                                    message.predictedImpressionsChangeFraction = Number(object.predictedImpressionsChangeFraction);
+                                if (object.predictedClicksChangeFraction != null)
+                                    message.predictedClicksChangeFraction = Number(object.predictedClicksChangeFraction);
+                                if (object.predictedConversionsChangeFraction != null)
+                                    message.predictedConversionsChangeFraction = Number(object.predictedConversionsChangeFraction);
+                                switch (object.effectiveness) {
+                                default:
+                                    if (typeof object.effectiveness === "number") {
+                                        message.effectiveness = object.effectiveness;
+                                        break;
+                                    }
+                                    break;
+                                case "EFFECTIVENESS_UNSPECIFIED":
+                                case 0:
+                                    message.effectiveness = 0;
+                                    break;
+                                case "LOW":
+                                case 1:
+                                    message.effectiveness = 1;
+                                    break;
+                                case "MEDIUM":
+                                case 2:
+                                    message.effectiveness = 2;
+                                    break;
+                                case "HIGH":
+                                case 3:
+                                    message.effectiveness = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PriceInsightsProductView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.PriceInsightsProductView} message PriceInsightsProductView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PriceInsightsProductView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.price = null;
+                                    object.suggestedPrice = null;
+                                    object.effectiveness = options.enums === String ? "EFFECTIVENESS_UNSPECIFIED" : 0;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id")) {
+                                    object.id = message.id;
+                                    if (options.oneofs)
+                                        object._id = "id";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    object.offerId = message.offerId;
+                                    if (options.oneofs)
+                                        object._offerId = "offerId";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    object.categoryL1 = message.categoryL1;
+                                    if (options.oneofs)
+                                        object._categoryL1 = "categoryL1";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    object.categoryL2 = message.categoryL2;
+                                    if (options.oneofs)
+                                        object._categoryL2 = "categoryL2";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    object.categoryL3 = message.categoryL3;
+                                    if (options.oneofs)
+                                        object._categoryL3 = "categoryL3";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    object.categoryL4 = message.categoryL4;
+                                    if (options.oneofs)
+                                        object._categoryL4 = "categoryL4";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    object.categoryL5 = message.categoryL5;
+                                    if (options.oneofs)
+                                        object._categoryL5 = "categoryL5";
+                                }
+                                if (message.productTypeL1 != null && message.hasOwnProperty("productTypeL1")) {
+                                    object.productTypeL1 = message.productTypeL1;
+                                    if (options.oneofs)
+                                        object._productTypeL1 = "productTypeL1";
+                                }
+                                if (message.productTypeL2 != null && message.hasOwnProperty("productTypeL2")) {
+                                    object.productTypeL2 = message.productTypeL2;
+                                    if (options.oneofs)
+                                        object._productTypeL2 = "productTypeL2";
+                                }
+                                if (message.productTypeL3 != null && message.hasOwnProperty("productTypeL3")) {
+                                    object.productTypeL3 = message.productTypeL3;
+                                    if (options.oneofs)
+                                        object._productTypeL3 = "productTypeL3";
+                                }
+                                if (message.productTypeL4 != null && message.hasOwnProperty("productTypeL4")) {
+                                    object.productTypeL4 = message.productTypeL4;
+                                    if (options.oneofs)
+                                        object._productTypeL4 = "productTypeL4";
+                                }
+                                if (message.productTypeL5 != null && message.hasOwnProperty("productTypeL5")) {
+                                    object.productTypeL5 = message.productTypeL5;
+                                    if (options.oneofs)
+                                        object._productTypeL5 = "productTypeL5";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.suggestedPrice != null && message.hasOwnProperty("suggestedPrice"))
+                                    object.suggestedPrice = $root.google.shopping.type.Price.toObject(message.suggestedPrice, options);
+                                if (message.predictedImpressionsChangeFraction != null && message.hasOwnProperty("predictedImpressionsChangeFraction")) {
+                                    object.predictedImpressionsChangeFraction = options.json && !isFinite(message.predictedImpressionsChangeFraction) ? String(message.predictedImpressionsChangeFraction) : message.predictedImpressionsChangeFraction;
+                                    if (options.oneofs)
+                                        object._predictedImpressionsChangeFraction = "predictedImpressionsChangeFraction";
+                                }
+                                if (message.predictedClicksChangeFraction != null && message.hasOwnProperty("predictedClicksChangeFraction")) {
+                                    object.predictedClicksChangeFraction = options.json && !isFinite(message.predictedClicksChangeFraction) ? String(message.predictedClicksChangeFraction) : message.predictedClicksChangeFraction;
+                                    if (options.oneofs)
+                                        object._predictedClicksChangeFraction = "predictedClicksChangeFraction";
+                                }
+                                if (message.predictedConversionsChangeFraction != null && message.hasOwnProperty("predictedConversionsChangeFraction")) {
+                                    object.predictedConversionsChangeFraction = options.json && !isFinite(message.predictedConversionsChangeFraction) ? String(message.predictedConversionsChangeFraction) : message.predictedConversionsChangeFraction;
+                                    if (options.oneofs)
+                                        object._predictedConversionsChangeFraction = "predictedConversionsChangeFraction";
+                                }
+                                if (message.effectiveness != null && message.hasOwnProperty("effectiveness"))
+                                    object.effectiveness = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness[message.effectiveness] === undefined ? message.effectiveness : $root.google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness[message.effectiveness] : message.effectiveness;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PriceInsightsProductView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PriceInsightsProductView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PriceInsightsProductView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.PriceInsightsProductView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PriceInsightsProductView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.PriceInsightsProductView";
+                            };
+    
+                            /**
+                             * Effectiveness enum.
+                             * @name google.shopping.merchant.reports.v1alpha.PriceInsightsProductView.Effectiveness
+                             * @enum {number}
+                             * @property {number} EFFECTIVENESS_UNSPECIFIED=0 EFFECTIVENESS_UNSPECIFIED value
+                             * @property {number} LOW=1 LOW value
+                             * @property {number} MEDIUM=2 MEDIUM value
+                             * @property {number} HIGH=3 HIGH value
+                             */
+                            PriceInsightsProductView.Effectiveness = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "EFFECTIVENESS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "LOW"] = 1;
+                                values[valuesById[2] = "MEDIUM"] = 2;
+                                values[valuesById[3] = "HIGH"] = 3;
+                                return values;
+                            })();
+    
+                            return PriceInsightsProductView;
+                        })();
+    
+                        v1alpha.BestSellersProductClusterView = (function() {
+    
+                            /**
+                             * Properties of a BestSellersProductClusterView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IBestSellersProductClusterView
+                             * @property {google.type.IDate|null} [reportDate] BestSellersProductClusterView reportDate
+                             * @property {google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null} [reportGranularity] BestSellersProductClusterView reportGranularity
+                             * @property {string|null} [reportCountryCode] BestSellersProductClusterView reportCountryCode
+                             * @property {number|Long|null} [reportCategoryId] BestSellersProductClusterView reportCategoryId
+                             * @property {string|null} [title] BestSellersProductClusterView title
+                             * @property {string|null} [brand] BestSellersProductClusterView brand
+                             * @property {string|null} [categoryL1] BestSellersProductClusterView categoryL1
+                             * @property {string|null} [categoryL2] BestSellersProductClusterView categoryL2
+                             * @property {string|null} [categoryL3] BestSellersProductClusterView categoryL3
+                             * @property {string|null} [categoryL4] BestSellersProductClusterView categoryL4
+                             * @property {string|null} [categoryL5] BestSellersProductClusterView categoryL5
+                             * @property {Array.<string>|null} [variantGtins] BestSellersProductClusterView variantGtins
+                             * @property {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null} [inventoryStatus] BestSellersProductClusterView inventoryStatus
+                             * @property {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null} [brandInventoryStatus] BestSellersProductClusterView brandInventoryStatus
+                             * @property {number|Long|null} [rank] BestSellersProductClusterView rank
+                             * @property {number|Long|null} [previousRank] BestSellersProductClusterView previousRank
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null} [relativeDemand] BestSellersProductClusterView relativeDemand
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null} [previousRelativeDemand] BestSellersProductClusterView previousRelativeDemand
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null} [relativeDemandChange] BestSellersProductClusterView relativeDemandChange
+                             */
+    
+                            /**
+                             * Constructs a new BestSellersProductClusterView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a BestSellersProductClusterView.
+                             * @implements IBestSellersProductClusterView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView=} [properties] Properties to set
+                             */
+                            function BestSellersProductClusterView(properties) {
+                                this.variantGtins = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BestSellersProductClusterView reportDate.
+                             * @member {google.type.IDate|null|undefined} reportDate
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.reportDate = null;
+    
+                            /**
+                             * BestSellersProductClusterView reportGranularity.
+                             * @member {google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null|undefined} reportGranularity
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.reportGranularity = null;
+    
+                            /**
+                             * BestSellersProductClusterView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * BestSellersProductClusterView reportCategoryId.
+                             * @member {number|Long|null|undefined} reportCategoryId
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.reportCategoryId = null;
+    
+                            /**
+                             * BestSellersProductClusterView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.title = null;
+    
+                            /**
+                             * BestSellersProductClusterView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.brand = null;
+    
+                            /**
+                             * BestSellersProductClusterView categoryL1.
+                             * @member {string|null|undefined} categoryL1
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.categoryL1 = null;
+    
+                            /**
+                             * BestSellersProductClusterView categoryL2.
+                             * @member {string|null|undefined} categoryL2
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.categoryL2 = null;
+    
+                            /**
+                             * BestSellersProductClusterView categoryL3.
+                             * @member {string|null|undefined} categoryL3
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.categoryL3 = null;
+    
+                            /**
+                             * BestSellersProductClusterView categoryL4.
+                             * @member {string|null|undefined} categoryL4
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.categoryL4 = null;
+    
+                            /**
+                             * BestSellersProductClusterView categoryL5.
+                             * @member {string|null|undefined} categoryL5
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.categoryL5 = null;
+    
+                            /**
+                             * BestSellersProductClusterView variantGtins.
+                             * @member {Array.<string>} variantGtins
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.variantGtins = $util.emptyArray;
+    
+                            /**
+                             * BestSellersProductClusterView inventoryStatus.
+                             * @member {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null|undefined} inventoryStatus
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.inventoryStatus = null;
+    
+                            /**
+                             * BestSellersProductClusterView brandInventoryStatus.
+                             * @member {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus|null|undefined} brandInventoryStatus
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.brandInventoryStatus = null;
+    
+                            /**
+                             * BestSellersProductClusterView rank.
+                             * @member {number|Long|null|undefined} rank
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.rank = null;
+    
+                            /**
+                             * BestSellersProductClusterView previousRank.
+                             * @member {number|Long|null|undefined} previousRank
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.previousRank = null;
+    
+                            /**
+                             * BestSellersProductClusterView relativeDemand.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null|undefined} relativeDemand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.relativeDemand = null;
+    
+                            /**
+                             * BestSellersProductClusterView previousRelativeDemand.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null|undefined} previousRelativeDemand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.previousRelativeDemand = null;
+    
+                            /**
+                             * BestSellersProductClusterView relativeDemandChange.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null|undefined} relativeDemandChange
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             */
+                            BestSellersProductClusterView.prototype.relativeDemandChange = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_reportGranularity", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportGranularity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_reportCategoryId", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL1", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL1"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL2", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL2"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL3", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL3"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL4", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_categoryL5", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryL5"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_inventoryStatus", {
+                                get: $util.oneOfGetter($oneOfFields = ["inventoryStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_brandInventoryStatus", {
+                                get: $util.oneOfGetter($oneOfFields = ["brandInventoryStatus"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_rank", {
+                                get: $util.oneOfGetter($oneOfFields = ["rank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_previousRank", {
+                                get: $util.oneOfGetter($oneOfFields = ["previousRank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_relativeDemand", {
+                                get: $util.oneOfGetter($oneOfFields = ["relativeDemand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_previousRelativeDemand", {
+                                get: $util.oneOfGetter($oneOfFields = ["previousRelativeDemand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersProductClusterView.prototype, "_relativeDemandChange", {
+                                get: $util.oneOfGetter($oneOfFields = ["relativeDemandChange"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BestSellersProductClusterView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView} BestSellersProductClusterView instance
+                             */
+                            BestSellersProductClusterView.create = function create(properties) {
+                                return new BestSellersProductClusterView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BestSellersProductClusterView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView} message BestSellersProductClusterView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestSellersProductClusterView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.reportDate != null && Object.hasOwnProperty.call(message, "reportDate"))
+                                    $root.google.type.Date.encode(message.reportDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.reportGranularity != null && Object.hasOwnProperty.call(message, "reportGranularity"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.reportGranularity);
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.reportCountryCode);
+                                if (message.reportCategoryId != null && Object.hasOwnProperty.call(message, "reportCategoryId"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.reportCategoryId);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.title);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.brand);
+                                if (message.categoryL1 != null && Object.hasOwnProperty.call(message, "categoryL1"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.categoryL1);
+                                if (message.categoryL2 != null && Object.hasOwnProperty.call(message, "categoryL2"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.categoryL2);
+                                if (message.categoryL3 != null && Object.hasOwnProperty.call(message, "categoryL3"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.categoryL3);
+                                if (message.categoryL4 != null && Object.hasOwnProperty.call(message, "categoryL4"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.categoryL4);
+                                if (message.categoryL5 != null && Object.hasOwnProperty.call(message, "categoryL5"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.categoryL5);
+                                if (message.variantGtins != null && message.variantGtins.length)
+                                    for (var i = 0; i < message.variantGtins.length; ++i)
+                                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.variantGtins[i]);
+                                if (message.inventoryStatus != null && Object.hasOwnProperty.call(message, "inventoryStatus"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.inventoryStatus);
+                                if (message.brandInventoryStatus != null && Object.hasOwnProperty.call(message, "brandInventoryStatus"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.brandInventoryStatus);
+                                if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
+                                    writer.uint32(/* id 16, wireType 0 =*/128).int64(message.rank);
+                                if (message.previousRank != null && Object.hasOwnProperty.call(message, "previousRank"))
+                                    writer.uint32(/* id 17, wireType 0 =*/136).int64(message.previousRank);
+                                if (message.relativeDemand != null && Object.hasOwnProperty.call(message, "relativeDemand"))
+                                    writer.uint32(/* id 18, wireType 0 =*/144).int32(message.relativeDemand);
+                                if (message.previousRelativeDemand != null && Object.hasOwnProperty.call(message, "previousRelativeDemand"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).int32(message.previousRelativeDemand);
+                                if (message.relativeDemandChange != null && Object.hasOwnProperty.call(message, "relativeDemandChange"))
+                                    writer.uint32(/* id 20, wireType 0 =*/160).int32(message.relativeDemandChange);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BestSellersProductClusterView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersProductClusterView} message BestSellersProductClusterView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestSellersProductClusterView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BestSellersProductClusterView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView} BestSellersProductClusterView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestSellersProductClusterView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.reportDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.reportGranularity = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reportCategoryId = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.categoryL1 = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.categoryL2 = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.categoryL3 = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.categoryL4 = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.categoryL5 = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (!(message.variantGtins && message.variantGtins.length))
+                                                message.variantGtins = [];
+                                            message.variantGtins.push(reader.string());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.inventoryStatus = reader.int32();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.brandInventoryStatus = reader.int32();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.rank = reader.int64();
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.previousRank = reader.int64();
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.relativeDemand = reader.int32();
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.previousRelativeDemand = reader.int32();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.relativeDemandChange = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BestSellersProductClusterView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView} BestSellersProductClusterView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestSellersProductClusterView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BestSellersProductClusterView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BestSellersProductClusterView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.reportDate != null && message.hasOwnProperty("reportDate")) {
+                                    var error = $root.google.type.Date.verify(message.reportDate);
+                                    if (error)
+                                        return "reportDate." + error;
+                                }
+                                if (message.reportGranularity != null && message.hasOwnProperty("reportGranularity")) {
+                                    properties._reportGranularity = 1;
+                                    switch (message.reportGranularity) {
+                                    default:
+                                        return "reportGranularity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    properties._reportCategoryId = 1;
+                                    if (!$util.isInteger(message.reportCategoryId) && !(message.reportCategoryId && $util.isInteger(message.reportCategoryId.low) && $util.isInteger(message.reportCategoryId.high)))
+                                        return "reportCategoryId: integer|Long expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    properties._categoryL1 = 1;
+                                    if (!$util.isString(message.categoryL1))
+                                        return "categoryL1: string expected";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    properties._categoryL2 = 1;
+                                    if (!$util.isString(message.categoryL2))
+                                        return "categoryL2: string expected";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    properties._categoryL3 = 1;
+                                    if (!$util.isString(message.categoryL3))
+                                        return "categoryL3: string expected";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    properties._categoryL4 = 1;
+                                    if (!$util.isString(message.categoryL4))
+                                        return "categoryL4: string expected";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    properties._categoryL5 = 1;
+                                    if (!$util.isString(message.categoryL5))
+                                        return "categoryL5: string expected";
+                                }
+                                if (message.variantGtins != null && message.hasOwnProperty("variantGtins")) {
+                                    if (!Array.isArray(message.variantGtins))
+                                        return "variantGtins: array expected";
+                                    for (var i = 0; i < message.variantGtins.length; ++i)
+                                        if (!$util.isString(message.variantGtins[i]))
+                                            return "variantGtins: string[] expected";
+                                }
+                                if (message.inventoryStatus != null && message.hasOwnProperty("inventoryStatus")) {
+                                    properties._inventoryStatus = 1;
+                                    switch (message.inventoryStatus) {
+                                    default:
+                                        return "inventoryStatus: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.brandInventoryStatus != null && message.hasOwnProperty("brandInventoryStatus")) {
+                                    properties._brandInventoryStatus = 1;
+                                    switch (message.brandInventoryStatus) {
+                                    default:
+                                        return "brandInventoryStatus: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    properties._rank = 1;
+                                    if (!$util.isInteger(message.rank) && !(message.rank && $util.isInteger(message.rank.low) && $util.isInteger(message.rank.high)))
+                                        return "rank: integer|Long expected";
+                                }
+                                if (message.previousRank != null && message.hasOwnProperty("previousRank")) {
+                                    properties._previousRank = 1;
+                                    if (!$util.isInteger(message.previousRank) && !(message.previousRank && $util.isInteger(message.previousRank.low) && $util.isInteger(message.previousRank.high)))
+                                        return "previousRank: integer|Long expected";
+                                }
+                                if (message.relativeDemand != null && message.hasOwnProperty("relativeDemand")) {
+                                    properties._relativeDemand = 1;
+                                    switch (message.relativeDemand) {
+                                    default:
+                                        return "relativeDemand: enum value expected";
+                                    case 0:
+                                    case 10:
+                                    case 20:
+                                    case 30:
+                                    case 40:
+                                    case 50:
+                                        break;
+                                    }
+                                }
+                                if (message.previousRelativeDemand != null && message.hasOwnProperty("previousRelativeDemand")) {
+                                    properties._previousRelativeDemand = 1;
+                                    switch (message.previousRelativeDemand) {
+                                    default:
+                                        return "previousRelativeDemand: enum value expected";
+                                    case 0:
+                                    case 10:
+                                    case 20:
+                                    case 30:
+                                    case 40:
+                                    case 50:
+                                        break;
+                                    }
+                                }
+                                if (message.relativeDemandChange != null && message.hasOwnProperty("relativeDemandChange")) {
+                                    properties._relativeDemandChange = 1;
+                                    switch (message.relativeDemandChange) {
+                                    default:
+                                        return "relativeDemandChange: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BestSellersProductClusterView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView} BestSellersProductClusterView
+                             */
+                            BestSellersProductClusterView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView();
+                                if (object.reportDate != null) {
+                                    if (typeof object.reportDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.reportDate: object expected");
+                                    message.reportDate = $root.google.type.Date.fromObject(object.reportDate);
+                                }
+                                switch (object.reportGranularity) {
+                                default:
+                                    if (typeof object.reportGranularity === "number") {
+                                        message.reportGranularity = object.reportGranularity;
+                                        break;
+                                    }
+                                    break;
+                                case "REPORT_GRANULARITY_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.reportGranularity = 0;
+                                    break;
+                                case "WEEKLY":
+                                case 1:
+                                    message.reportGranularity = 1;
+                                    break;
+                                case "MONTHLY":
+                                case 2:
+                                    message.reportGranularity = 2;
+                                    break;
+                                }
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.reportCategoryId != null)
+                                    if ($util.Long)
+                                        (message.reportCategoryId = $util.Long.fromValue(object.reportCategoryId)).unsigned = false;
+                                    else if (typeof object.reportCategoryId === "string")
+                                        message.reportCategoryId = parseInt(object.reportCategoryId, 10);
+                                    else if (typeof object.reportCategoryId === "number")
+                                        message.reportCategoryId = object.reportCategoryId;
+                                    else if (typeof object.reportCategoryId === "object")
+                                        message.reportCategoryId = new $util.LongBits(object.reportCategoryId.low >>> 0, object.reportCategoryId.high >>> 0).toNumber();
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.categoryL1 != null)
+                                    message.categoryL1 = String(object.categoryL1);
+                                if (object.categoryL2 != null)
+                                    message.categoryL2 = String(object.categoryL2);
+                                if (object.categoryL3 != null)
+                                    message.categoryL3 = String(object.categoryL3);
+                                if (object.categoryL4 != null)
+                                    message.categoryL4 = String(object.categoryL4);
+                                if (object.categoryL5 != null)
+                                    message.categoryL5 = String(object.categoryL5);
+                                if (object.variantGtins) {
+                                    if (!Array.isArray(object.variantGtins))
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.variantGtins: array expected");
+                                    message.variantGtins = [];
+                                    for (var i = 0; i < object.variantGtins.length; ++i)
+                                        message.variantGtins[i] = String(object.variantGtins[i]);
+                                }
+                                switch (object.inventoryStatus) {
+                                default:
+                                    if (typeof object.inventoryStatus === "number") {
+                                        message.inventoryStatus = object.inventoryStatus;
+                                        break;
+                                    }
+                                    break;
+                                case "INVENTORY_STATUS_UNSPECIFIED":
+                                case 0:
+                                    message.inventoryStatus = 0;
+                                    break;
+                                case "IN_STOCK":
+                                case 1:
+                                    message.inventoryStatus = 1;
+                                    break;
+                                case "OUT_OF_STOCK":
+                                case 2:
+                                    message.inventoryStatus = 2;
+                                    break;
+                                case "NOT_IN_INVENTORY":
+                                case 3:
+                                    message.inventoryStatus = 3;
+                                    break;
+                                }
+                                switch (object.brandInventoryStatus) {
+                                default:
+                                    if (typeof object.brandInventoryStatus === "number") {
+                                        message.brandInventoryStatus = object.brandInventoryStatus;
+                                        break;
+                                    }
+                                    break;
+                                case "INVENTORY_STATUS_UNSPECIFIED":
+                                case 0:
+                                    message.brandInventoryStatus = 0;
+                                    break;
+                                case "IN_STOCK":
+                                case 1:
+                                    message.brandInventoryStatus = 1;
+                                    break;
+                                case "OUT_OF_STOCK":
+                                case 2:
+                                    message.brandInventoryStatus = 2;
+                                    break;
+                                case "NOT_IN_INVENTORY":
+                                case 3:
+                                    message.brandInventoryStatus = 3;
+                                    break;
+                                }
+                                if (object.rank != null)
+                                    if ($util.Long)
+                                        (message.rank = $util.Long.fromValue(object.rank)).unsigned = false;
+                                    else if (typeof object.rank === "string")
+                                        message.rank = parseInt(object.rank, 10);
+                                    else if (typeof object.rank === "number")
+                                        message.rank = object.rank;
+                                    else if (typeof object.rank === "object")
+                                        message.rank = new $util.LongBits(object.rank.low >>> 0, object.rank.high >>> 0).toNumber();
+                                if (object.previousRank != null)
+                                    if ($util.Long)
+                                        (message.previousRank = $util.Long.fromValue(object.previousRank)).unsigned = false;
+                                    else if (typeof object.previousRank === "string")
+                                        message.previousRank = parseInt(object.previousRank, 10);
+                                    else if (typeof object.previousRank === "number")
+                                        message.previousRank = object.previousRank;
+                                    else if (typeof object.previousRank === "object")
+                                        message.previousRank = new $util.LongBits(object.previousRank.low >>> 0, object.previousRank.high >>> 0).toNumber();
+                                switch (object.relativeDemand) {
+                                default:
+                                    if (typeof object.relativeDemand === "number") {
+                                        message.relativeDemand = object.relativeDemand;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.relativeDemand = 0;
+                                    break;
+                                case "VERY_LOW":
+                                case 10:
+                                    message.relativeDemand = 10;
+                                    break;
+                                case "LOW":
+                                case 20:
+                                    message.relativeDemand = 20;
+                                    break;
+                                case "MEDIUM":
+                                case 30:
+                                    message.relativeDemand = 30;
+                                    break;
+                                case "HIGH":
+                                case 40:
+                                    message.relativeDemand = 40;
+                                    break;
+                                case "VERY_HIGH":
+                                case 50:
+                                    message.relativeDemand = 50;
+                                    break;
+                                }
+                                switch (object.previousRelativeDemand) {
+                                default:
+                                    if (typeof object.previousRelativeDemand === "number") {
+                                        message.previousRelativeDemand = object.previousRelativeDemand;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.previousRelativeDemand = 0;
+                                    break;
+                                case "VERY_LOW":
+                                case 10:
+                                    message.previousRelativeDemand = 10;
+                                    break;
+                                case "LOW":
+                                case 20:
+                                    message.previousRelativeDemand = 20;
+                                    break;
+                                case "MEDIUM":
+                                case 30:
+                                    message.previousRelativeDemand = 30;
+                                    break;
+                                case "HIGH":
+                                case 40:
+                                    message.previousRelativeDemand = 40;
+                                    break;
+                                case "VERY_HIGH":
+                                case 50:
+                                    message.previousRelativeDemand = 50;
+                                    break;
+                                }
+                                switch (object.relativeDemandChange) {
+                                default:
+                                    if (typeof object.relativeDemandChange === "number") {
+                                        message.relativeDemandChange = object.relativeDemandChange;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.relativeDemandChange = 0;
+                                    break;
+                                case "SINKER":
+                                case 1:
+                                    message.relativeDemandChange = 1;
+                                    break;
+                                case "FLAT":
+                                case 2:
+                                    message.relativeDemandChange = 2;
+                                    break;
+                                case "RISER":
+                                case 3:
+                                    message.relativeDemandChange = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BestSellersProductClusterView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView} message BestSellersProductClusterView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BestSellersProductClusterView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.variantGtins = [];
+                                if (options.defaults)
+                                    object.reportDate = null;
+                                if (message.reportDate != null && message.hasOwnProperty("reportDate"))
+                                    object.reportDate = $root.google.type.Date.toObject(message.reportDate, options);
+                                if (message.reportGranularity != null && message.hasOwnProperty("reportGranularity")) {
+                                    object.reportGranularity = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum[message.reportGranularity] === undefined ? message.reportGranularity : $root.google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum[message.reportGranularity] : message.reportGranularity;
+                                    if (options.oneofs)
+                                        object._reportGranularity = "reportGranularity";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    if (typeof message.reportCategoryId === "number")
+                                        object.reportCategoryId = options.longs === String ? String(message.reportCategoryId) : message.reportCategoryId;
+                                    else
+                                        object.reportCategoryId = options.longs === String ? $util.Long.prototype.toString.call(message.reportCategoryId) : options.longs === Number ? new $util.LongBits(message.reportCategoryId.low >>> 0, message.reportCategoryId.high >>> 0).toNumber() : message.reportCategoryId;
+                                    if (options.oneofs)
+                                        object._reportCategoryId = "reportCategoryId";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.categoryL1 != null && message.hasOwnProperty("categoryL1")) {
+                                    object.categoryL1 = message.categoryL1;
+                                    if (options.oneofs)
+                                        object._categoryL1 = "categoryL1";
+                                }
+                                if (message.categoryL2 != null && message.hasOwnProperty("categoryL2")) {
+                                    object.categoryL2 = message.categoryL2;
+                                    if (options.oneofs)
+                                        object._categoryL2 = "categoryL2";
+                                }
+                                if (message.categoryL3 != null && message.hasOwnProperty("categoryL3")) {
+                                    object.categoryL3 = message.categoryL3;
+                                    if (options.oneofs)
+                                        object._categoryL3 = "categoryL3";
+                                }
+                                if (message.categoryL4 != null && message.hasOwnProperty("categoryL4")) {
+                                    object.categoryL4 = message.categoryL4;
+                                    if (options.oneofs)
+                                        object._categoryL4 = "categoryL4";
+                                }
+                                if (message.categoryL5 != null && message.hasOwnProperty("categoryL5")) {
+                                    object.categoryL5 = message.categoryL5;
+                                    if (options.oneofs)
+                                        object._categoryL5 = "categoryL5";
+                                }
+                                if (message.variantGtins && message.variantGtins.length) {
+                                    object.variantGtins = [];
+                                    for (var j = 0; j < message.variantGtins.length; ++j)
+                                        object.variantGtins[j] = message.variantGtins[j];
+                                }
+                                if (message.inventoryStatus != null && message.hasOwnProperty("inventoryStatus")) {
+                                    object.inventoryStatus = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus[message.inventoryStatus] === undefined ? message.inventoryStatus : $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus[message.inventoryStatus] : message.inventoryStatus;
+                                    if (options.oneofs)
+                                        object._inventoryStatus = "inventoryStatus";
+                                }
+                                if (message.brandInventoryStatus != null && message.hasOwnProperty("brandInventoryStatus")) {
+                                    object.brandInventoryStatus = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus[message.brandInventoryStatus] === undefined ? message.brandInventoryStatus : $root.google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus[message.brandInventoryStatus] : message.brandInventoryStatus;
+                                    if (options.oneofs)
+                                        object._brandInventoryStatus = "brandInventoryStatus";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    if (typeof message.rank === "number")
+                                        object.rank = options.longs === String ? String(message.rank) : message.rank;
+                                    else
+                                        object.rank = options.longs === String ? $util.Long.prototype.toString.call(message.rank) : options.longs === Number ? new $util.LongBits(message.rank.low >>> 0, message.rank.high >>> 0).toNumber() : message.rank;
+                                    if (options.oneofs)
+                                        object._rank = "rank";
+                                }
+                                if (message.previousRank != null && message.hasOwnProperty("previousRank")) {
+                                    if (typeof message.previousRank === "number")
+                                        object.previousRank = options.longs === String ? String(message.previousRank) : message.previousRank;
+                                    else
+                                        object.previousRank = options.longs === String ? $util.Long.prototype.toString.call(message.previousRank) : options.longs === Number ? new $util.LongBits(message.previousRank.low >>> 0, message.previousRank.high >>> 0).toNumber() : message.previousRank;
+                                    if (options.oneofs)
+                                        object._previousRank = "previousRank";
+                                }
+                                if (message.relativeDemand != null && message.hasOwnProperty("relativeDemand")) {
+                                    object.relativeDemand = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.relativeDemand] === undefined ? message.relativeDemand : $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.relativeDemand] : message.relativeDemand;
+                                    if (options.oneofs)
+                                        object._relativeDemand = "relativeDemand";
+                                }
+                                if (message.previousRelativeDemand != null && message.hasOwnProperty("previousRelativeDemand")) {
+                                    object.previousRelativeDemand = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.previousRelativeDemand] === undefined ? message.previousRelativeDemand : $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.previousRelativeDemand] : message.previousRelativeDemand;
+                                    if (options.oneofs)
+                                        object._previousRelativeDemand = "previousRelativeDemand";
+                                }
+                                if (message.relativeDemandChange != null && message.hasOwnProperty("relativeDemandChange")) {
+                                    object.relativeDemandChange = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum[message.relativeDemandChange] === undefined ? message.relativeDemandChange : $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum[message.relativeDemandChange] : message.relativeDemandChange;
+                                    if (options.oneofs)
+                                        object._relativeDemandChange = "relativeDemandChange";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BestSellersProductClusterView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BestSellersProductClusterView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BestSellersProductClusterView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BestSellersProductClusterView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView";
+                            };
+    
+                            /**
+                             * InventoryStatus enum.
+                             * @name google.shopping.merchant.reports.v1alpha.BestSellersProductClusterView.InventoryStatus
+                             * @enum {number}
+                             * @property {number} INVENTORY_STATUS_UNSPECIFIED=0 INVENTORY_STATUS_UNSPECIFIED value
+                             * @property {number} IN_STOCK=1 IN_STOCK value
+                             * @property {number} OUT_OF_STOCK=2 OUT_OF_STOCK value
+                             * @property {number} NOT_IN_INVENTORY=3 NOT_IN_INVENTORY value
+                             */
+                            BestSellersProductClusterView.InventoryStatus = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "INVENTORY_STATUS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "IN_STOCK"] = 1;
+                                values[valuesById[2] = "OUT_OF_STOCK"] = 2;
+                                values[valuesById[3] = "NOT_IN_INVENTORY"] = 3;
+                                return values;
+                            })();
+    
+                            return BestSellersProductClusterView;
+                        })();
+    
+                        v1alpha.BestSellersBrandView = (function() {
+    
+                            /**
+                             * Properties of a BestSellersBrandView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IBestSellersBrandView
+                             * @property {google.type.IDate|null} [reportDate] BestSellersBrandView reportDate
+                             * @property {google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null} [reportGranularity] BestSellersBrandView reportGranularity
+                             * @property {string|null} [reportCountryCode] BestSellersBrandView reportCountryCode
+                             * @property {number|Long|null} [reportCategoryId] BestSellersBrandView reportCategoryId
+                             * @property {string|null} [brand] BestSellersBrandView brand
+                             * @property {number|Long|null} [rank] BestSellersBrandView rank
+                             * @property {number|Long|null} [previousRank] BestSellersBrandView previousRank
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null} [relativeDemand] BestSellersBrandView relativeDemand
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null} [previousRelativeDemand] BestSellersBrandView previousRelativeDemand
+                             * @property {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null} [relativeDemandChange] BestSellersBrandView relativeDemandChange
+                             */
+    
+                            /**
+                             * Constructs a new BestSellersBrandView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a BestSellersBrandView.
+                             * @implements IBestSellersBrandView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView=} [properties] Properties to set
+                             */
+                            function BestSellersBrandView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BestSellersBrandView reportDate.
+                             * @member {google.type.IDate|null|undefined} reportDate
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.reportDate = null;
+    
+                            /**
+                             * BestSellersBrandView reportGranularity.
+                             * @member {google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum|null|undefined} reportGranularity
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.reportGranularity = null;
+    
+                            /**
+                             * BestSellersBrandView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * BestSellersBrandView reportCategoryId.
+                             * @member {number|Long|null|undefined} reportCategoryId
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.reportCategoryId = null;
+    
+                            /**
+                             * BestSellersBrandView brand.
+                             * @member {string|null|undefined} brand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.brand = null;
+    
+                            /**
+                             * BestSellersBrandView rank.
+                             * @member {number|Long|null|undefined} rank
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.rank = null;
+    
+                            /**
+                             * BestSellersBrandView previousRank.
+                             * @member {number|Long|null|undefined} previousRank
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.previousRank = null;
+    
+                            /**
+                             * BestSellersBrandView relativeDemand.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null|undefined} relativeDemand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.relativeDemand = null;
+    
+                            /**
+                             * BestSellersBrandView previousRelativeDemand.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum|null|undefined} previousRelativeDemand
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.previousRelativeDemand = null;
+    
+                            /**
+                             * BestSellersBrandView relativeDemandChange.
+                             * @member {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum|null|undefined} relativeDemandChange
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             */
+                            BestSellersBrandView.prototype.relativeDemandChange = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_reportGranularity", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportGranularity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_reportCategoryId", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_brand", {
+                                get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_rank", {
+                                get: $util.oneOfGetter($oneOfFields = ["rank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_previousRank", {
+                                get: $util.oneOfGetter($oneOfFields = ["previousRank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_relativeDemand", {
+                                get: $util.oneOfGetter($oneOfFields = ["relativeDemand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_previousRelativeDemand", {
+                                get: $util.oneOfGetter($oneOfFields = ["previousRelativeDemand"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BestSellersBrandView.prototype, "_relativeDemandChange", {
+                                get: $util.oneOfGetter($oneOfFields = ["relativeDemandChange"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BestSellersBrandView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersBrandView} BestSellersBrandView instance
+                             */
+                            BestSellersBrandView.create = function create(properties) {
+                                return new BestSellersBrandView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BestSellersBrandView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersBrandView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView} message BestSellersBrandView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestSellersBrandView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.reportDate != null && Object.hasOwnProperty.call(message, "reportDate"))
+                                    $root.google.type.Date.encode(message.reportDate, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.reportGranularity != null && Object.hasOwnProperty.call(message, "reportGranularity"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.reportGranularity);
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.reportCountryCode);
+                                if (message.reportCategoryId != null && Object.hasOwnProperty.call(message, "reportCategoryId"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.reportCategoryId);
+                                if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.brand);
+                                if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.rank);
+                                if (message.previousRank != null && Object.hasOwnProperty.call(message, "previousRank"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int64(message.previousRank);
+                                if (message.relativeDemand != null && Object.hasOwnProperty.call(message, "relativeDemand"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.relativeDemand);
+                                if (message.previousRelativeDemand != null && Object.hasOwnProperty.call(message, "previousRelativeDemand"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.previousRelativeDemand);
+                                if (message.relativeDemandChange != null && Object.hasOwnProperty.call(message, "relativeDemandChange"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).int32(message.relativeDemandChange);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BestSellersBrandView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.BestSellersBrandView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IBestSellersBrandView} message BestSellersBrandView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BestSellersBrandView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BestSellersBrandView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersBrandView} BestSellersBrandView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestSellersBrandView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.reportDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.reportGranularity = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reportCategoryId = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.brand = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.rank = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.previousRank = reader.int64();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.relativeDemand = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.previousRelativeDemand = reader.int32();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.relativeDemandChange = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BestSellersBrandView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersBrandView} BestSellersBrandView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BestSellersBrandView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BestSellersBrandView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BestSellersBrandView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.reportDate != null && message.hasOwnProperty("reportDate")) {
+                                    var error = $root.google.type.Date.verify(message.reportDate);
+                                    if (error)
+                                        return "reportDate." + error;
+                                }
+                                if (message.reportGranularity != null && message.hasOwnProperty("reportGranularity")) {
+                                    properties._reportGranularity = 1;
+                                    switch (message.reportGranularity) {
+                                    default:
+                                        return "reportGranularity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    properties._reportCategoryId = 1;
+                                    if (!$util.isInteger(message.reportCategoryId) && !(message.reportCategoryId && $util.isInteger(message.reportCategoryId.low) && $util.isInteger(message.reportCategoryId.high)))
+                                        return "reportCategoryId: integer|Long expected";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    properties._brand = 1;
+                                    if (!$util.isString(message.brand))
+                                        return "brand: string expected";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    properties._rank = 1;
+                                    if (!$util.isInteger(message.rank) && !(message.rank && $util.isInteger(message.rank.low) && $util.isInteger(message.rank.high)))
+                                        return "rank: integer|Long expected";
+                                }
+                                if (message.previousRank != null && message.hasOwnProperty("previousRank")) {
+                                    properties._previousRank = 1;
+                                    if (!$util.isInteger(message.previousRank) && !(message.previousRank && $util.isInteger(message.previousRank.low) && $util.isInteger(message.previousRank.high)))
+                                        return "previousRank: integer|Long expected";
+                                }
+                                if (message.relativeDemand != null && message.hasOwnProperty("relativeDemand")) {
+                                    properties._relativeDemand = 1;
+                                    switch (message.relativeDemand) {
+                                    default:
+                                        return "relativeDemand: enum value expected";
+                                    case 0:
+                                    case 10:
+                                    case 20:
+                                    case 30:
+                                    case 40:
+                                    case 50:
+                                        break;
+                                    }
+                                }
+                                if (message.previousRelativeDemand != null && message.hasOwnProperty("previousRelativeDemand")) {
+                                    properties._previousRelativeDemand = 1;
+                                    switch (message.previousRelativeDemand) {
+                                    default:
+                                        return "previousRelativeDemand: enum value expected";
+                                    case 0:
+                                    case 10:
+                                    case 20:
+                                    case 30:
+                                    case 40:
+                                    case 50:
+                                        break;
+                                    }
+                                }
+                                if (message.relativeDemandChange != null && message.hasOwnProperty("relativeDemandChange")) {
+                                    properties._relativeDemandChange = 1;
+                                    switch (message.relativeDemandChange) {
+                                    default:
+                                        return "relativeDemandChange: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BestSellersBrandView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.BestSellersBrandView} BestSellersBrandView
+                             */
+                            BestSellersBrandView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.BestSellersBrandView();
+                                if (object.reportDate != null) {
+                                    if (typeof object.reportDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.BestSellersBrandView.reportDate: object expected");
+                                    message.reportDate = $root.google.type.Date.fromObject(object.reportDate);
+                                }
+                                switch (object.reportGranularity) {
+                                default:
+                                    if (typeof object.reportGranularity === "number") {
+                                        message.reportGranularity = object.reportGranularity;
+                                        break;
+                                    }
+                                    break;
+                                case "REPORT_GRANULARITY_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.reportGranularity = 0;
+                                    break;
+                                case "WEEKLY":
+                                case 1:
+                                    message.reportGranularity = 1;
+                                    break;
+                                case "MONTHLY":
+                                case 2:
+                                    message.reportGranularity = 2;
+                                    break;
+                                }
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.reportCategoryId != null)
+                                    if ($util.Long)
+                                        (message.reportCategoryId = $util.Long.fromValue(object.reportCategoryId)).unsigned = false;
+                                    else if (typeof object.reportCategoryId === "string")
+                                        message.reportCategoryId = parseInt(object.reportCategoryId, 10);
+                                    else if (typeof object.reportCategoryId === "number")
+                                        message.reportCategoryId = object.reportCategoryId;
+                                    else if (typeof object.reportCategoryId === "object")
+                                        message.reportCategoryId = new $util.LongBits(object.reportCategoryId.low >>> 0, object.reportCategoryId.high >>> 0).toNumber();
+                                if (object.brand != null)
+                                    message.brand = String(object.brand);
+                                if (object.rank != null)
+                                    if ($util.Long)
+                                        (message.rank = $util.Long.fromValue(object.rank)).unsigned = false;
+                                    else if (typeof object.rank === "string")
+                                        message.rank = parseInt(object.rank, 10);
+                                    else if (typeof object.rank === "number")
+                                        message.rank = object.rank;
+                                    else if (typeof object.rank === "object")
+                                        message.rank = new $util.LongBits(object.rank.low >>> 0, object.rank.high >>> 0).toNumber();
+                                if (object.previousRank != null)
+                                    if ($util.Long)
+                                        (message.previousRank = $util.Long.fromValue(object.previousRank)).unsigned = false;
+                                    else if (typeof object.previousRank === "string")
+                                        message.previousRank = parseInt(object.previousRank, 10);
+                                    else if (typeof object.previousRank === "number")
+                                        message.previousRank = object.previousRank;
+                                    else if (typeof object.previousRank === "object")
+                                        message.previousRank = new $util.LongBits(object.previousRank.low >>> 0, object.previousRank.high >>> 0).toNumber();
+                                switch (object.relativeDemand) {
+                                default:
+                                    if (typeof object.relativeDemand === "number") {
+                                        message.relativeDemand = object.relativeDemand;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.relativeDemand = 0;
+                                    break;
+                                case "VERY_LOW":
+                                case 10:
+                                    message.relativeDemand = 10;
+                                    break;
+                                case "LOW":
+                                case 20:
+                                    message.relativeDemand = 20;
+                                    break;
+                                case "MEDIUM":
+                                case 30:
+                                    message.relativeDemand = 30;
+                                    break;
+                                case "HIGH":
+                                case 40:
+                                    message.relativeDemand = 40;
+                                    break;
+                                case "VERY_HIGH":
+                                case 50:
+                                    message.relativeDemand = 50;
+                                    break;
+                                }
+                                switch (object.previousRelativeDemand) {
+                                default:
+                                    if (typeof object.previousRelativeDemand === "number") {
+                                        message.previousRelativeDemand = object.previousRelativeDemand;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.previousRelativeDemand = 0;
+                                    break;
+                                case "VERY_LOW":
+                                case 10:
+                                    message.previousRelativeDemand = 10;
+                                    break;
+                                case "LOW":
+                                case 20:
+                                    message.previousRelativeDemand = 20;
+                                    break;
+                                case "MEDIUM":
+                                case 30:
+                                    message.previousRelativeDemand = 30;
+                                    break;
+                                case "HIGH":
+                                case 40:
+                                    message.previousRelativeDemand = 40;
+                                    break;
+                                case "VERY_HIGH":
+                                case 50:
+                                    message.previousRelativeDemand = 50;
+                                    break;
+                                }
+                                switch (object.relativeDemandChange) {
+                                default:
+                                    if (typeof object.relativeDemandChange === "number") {
+                                        message.relativeDemandChange = object.relativeDemandChange;
+                                        break;
+                                    }
+                                    break;
+                                case "RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.relativeDemandChange = 0;
+                                    break;
+                                case "SINKER":
+                                case 1:
+                                    message.relativeDemandChange = 1;
+                                    break;
+                                case "FLAT":
+                                case 2:
+                                    message.relativeDemandChange = 2;
+                                    break;
+                                case "RISER":
+                                case 3:
+                                    message.relativeDemandChange = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BestSellersBrandView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.BestSellersBrandView} message BestSellersBrandView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BestSellersBrandView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.reportDate = null;
+                                if (message.reportDate != null && message.hasOwnProperty("reportDate"))
+                                    object.reportDate = $root.google.type.Date.toObject(message.reportDate, options);
+                                if (message.reportGranularity != null && message.hasOwnProperty("reportGranularity")) {
+                                    object.reportGranularity = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum[message.reportGranularity] === undefined ? message.reportGranularity : $root.google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum[message.reportGranularity] : message.reportGranularity;
+                                    if (options.oneofs)
+                                        object._reportGranularity = "reportGranularity";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    if (typeof message.reportCategoryId === "number")
+                                        object.reportCategoryId = options.longs === String ? String(message.reportCategoryId) : message.reportCategoryId;
+                                    else
+                                        object.reportCategoryId = options.longs === String ? $util.Long.prototype.toString.call(message.reportCategoryId) : options.longs === Number ? new $util.LongBits(message.reportCategoryId.low >>> 0, message.reportCategoryId.high >>> 0).toNumber() : message.reportCategoryId;
+                                    if (options.oneofs)
+                                        object._reportCategoryId = "reportCategoryId";
+                                }
+                                if (message.brand != null && message.hasOwnProperty("brand")) {
+                                    object.brand = message.brand;
+                                    if (options.oneofs)
+                                        object._brand = "brand";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    if (typeof message.rank === "number")
+                                        object.rank = options.longs === String ? String(message.rank) : message.rank;
+                                    else
+                                        object.rank = options.longs === String ? $util.Long.prototype.toString.call(message.rank) : options.longs === Number ? new $util.LongBits(message.rank.low >>> 0, message.rank.high >>> 0).toNumber() : message.rank;
+                                    if (options.oneofs)
+                                        object._rank = "rank";
+                                }
+                                if (message.previousRank != null && message.hasOwnProperty("previousRank")) {
+                                    if (typeof message.previousRank === "number")
+                                        object.previousRank = options.longs === String ? String(message.previousRank) : message.previousRank;
+                                    else
+                                        object.previousRank = options.longs === String ? $util.Long.prototype.toString.call(message.previousRank) : options.longs === Number ? new $util.LongBits(message.previousRank.low >>> 0, message.previousRank.high >>> 0).toNumber() : message.previousRank;
+                                    if (options.oneofs)
+                                        object._previousRank = "previousRank";
+                                }
+                                if (message.relativeDemand != null && message.hasOwnProperty("relativeDemand")) {
+                                    object.relativeDemand = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.relativeDemand] === undefined ? message.relativeDemand : $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.relativeDemand] : message.relativeDemand;
+                                    if (options.oneofs)
+                                        object._relativeDemand = "relativeDemand";
+                                }
+                                if (message.previousRelativeDemand != null && message.hasOwnProperty("previousRelativeDemand")) {
+                                    object.previousRelativeDemand = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.previousRelativeDemand] === undefined ? message.previousRelativeDemand : $root.google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum[message.previousRelativeDemand] : message.previousRelativeDemand;
+                                    if (options.oneofs)
+                                        object._previousRelativeDemand = "previousRelativeDemand";
+                                }
+                                if (message.relativeDemandChange != null && message.hasOwnProperty("relativeDemandChange")) {
+                                    object.relativeDemandChange = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum[message.relativeDemandChange] === undefined ? message.relativeDemandChange : $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum[message.relativeDemandChange] : message.relativeDemandChange;
+                                    if (options.oneofs)
+                                        object._relativeDemandChange = "relativeDemandChange";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BestSellersBrandView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BestSellersBrandView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BestSellersBrandView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.BestSellersBrandView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BestSellersBrandView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.BestSellersBrandView";
+                            };
+    
+                            return BestSellersBrandView;
+                        })();
+    
+                        v1alpha.NonProductPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a NonProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface INonProductPerformanceView
+                             * @property {google.type.IDate|null} [date] NonProductPerformanceView date
+                             * @property {google.type.IDate|null} [week] NonProductPerformanceView week
+                             * @property {number|Long|null} [clicks] NonProductPerformanceView clicks
+                             * @property {number|Long|null} [impressions] NonProductPerformanceView impressions
+                             * @property {number|null} [clickThroughRate] NonProductPerformanceView clickThroughRate
+                             */
+    
+                            /**
+                             * Constructs a new NonProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a NonProductPerformanceView.
+                             * @implements INonProductPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView=} [properties] Properties to set
+                             */
+                            function NonProductPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NonProductPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.date = null;
+    
+                            /**
+                             * NonProductPerformanceView week.
+                             * @member {google.type.IDate|null|undefined} week
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.week = null;
+    
+                            /**
+                             * NonProductPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * NonProductPerformanceView impressions.
+                             * @member {number|Long|null|undefined} impressions
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.impressions = null;
+    
+                            /**
+                             * NonProductPerformanceView clickThroughRate.
+                             * @member {number|null|undefined} clickThroughRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             */
+                            NonProductPerformanceView.prototype.clickThroughRate = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_impressions", {
+                                get: $util.oneOfGetter($oneOfFields = ["impressions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(NonProductPerformanceView.prototype, "_clickThroughRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["clickThroughRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new NonProductPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.NonProductPerformanceView} NonProductPerformanceView instance
+                             */
+                            NonProductPerformanceView.create = function create(properties) {
+                                return new NonProductPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NonProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView} message NonProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NonProductPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.week != null && Object.hasOwnProperty.call(message, "week"))
+                                    $root.google.type.Date.encode(message.week, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.clicks);
+                                if (message.impressions != null && Object.hasOwnProperty.call(message, "impressions"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.impressions);
+                                if (message.clickThroughRate != null && Object.hasOwnProperty.call(message, "clickThroughRate"))
+                                    writer.uint32(/* id 5, wireType 1 =*/41).double(message.clickThroughRate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NonProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.INonProductPerformanceView} message NonProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NonProductPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NonProductPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.NonProductPerformanceView} NonProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NonProductPerformanceView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.week = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.impressions = reader.int64();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.clickThroughRate = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NonProductPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.NonProductPerformanceView} NonProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NonProductPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NonProductPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NonProductPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.week != null && message.hasOwnProperty("week")) {
+                                    var error = $root.google.type.Date.verify(message.week);
+                                    if (error)
+                                        return "week." + error;
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    properties._impressions = 1;
+                                    if (!$util.isInteger(message.impressions) && !(message.impressions && $util.isInteger(message.impressions.low) && $util.isInteger(message.impressions.high)))
+                                        return "impressions: integer|Long expected";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    properties._clickThroughRate = 1;
+                                    if (typeof message.clickThroughRate !== "number")
+                                        return "clickThroughRate: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NonProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.NonProductPerformanceView} NonProductPerformanceView
+                             */
+                            NonProductPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.NonProductPerformanceView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.week != null) {
+                                    if (typeof object.week !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.NonProductPerformanceView.week: object expected");
+                                    message.week = $root.google.type.Date.fromObject(object.week);
+                                }
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.impressions != null)
+                                    if ($util.Long)
+                                        (message.impressions = $util.Long.fromValue(object.impressions)).unsigned = false;
+                                    else if (typeof object.impressions === "string")
+                                        message.impressions = parseInt(object.impressions, 10);
+                                    else if (typeof object.impressions === "number")
+                                        message.impressions = object.impressions;
+                                    else if (typeof object.impressions === "object")
+                                        message.impressions = new $util.LongBits(object.impressions.low >>> 0, object.impressions.high >>> 0).toNumber();
+                                if (object.clickThroughRate != null)
+                                    message.clickThroughRate = Number(object.clickThroughRate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NonProductPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.NonProductPerformanceView} message NonProductPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NonProductPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.date = null;
+                                    object.week = null;
+                                }
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.week != null && message.hasOwnProperty("week"))
+                                    object.week = $root.google.type.Date.toObject(message.week, options);
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.impressions != null && message.hasOwnProperty("impressions")) {
+                                    if (typeof message.impressions === "number")
+                                        object.impressions = options.longs === String ? String(message.impressions) : message.impressions;
+                                    else
+                                        object.impressions = options.longs === String ? $util.Long.prototype.toString.call(message.impressions) : options.longs === Number ? new $util.LongBits(message.impressions.low >>> 0, message.impressions.high >>> 0).toNumber() : message.impressions;
+                                    if (options.oneofs)
+                                        object._impressions = "impressions";
+                                }
+                                if (message.clickThroughRate != null && message.hasOwnProperty("clickThroughRate")) {
+                                    object.clickThroughRate = options.json && !isFinite(message.clickThroughRate) ? String(message.clickThroughRate) : message.clickThroughRate;
+                                    if (options.oneofs)
+                                        object._clickThroughRate = "clickThroughRate";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NonProductPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NonProductPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NonProductPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.NonProductPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NonProductPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.NonProductPerformanceView";
+                            };
+    
+                            return NonProductPerformanceView;
+                        })();
+    
+                        v1alpha.CompetitiveVisibilityCompetitorView = (function() {
+    
+                            /**
+                             * Properties of a CompetitiveVisibilityCompetitorView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ICompetitiveVisibilityCompetitorView
+                             * @property {google.type.IDate|null} [date] CompetitiveVisibilityCompetitorView date
+                             * @property {string|null} [domain] CompetitiveVisibilityCompetitorView domain
+                             * @property {boolean|null} [isYourDomain] CompetitiveVisibilityCompetitorView isYourDomain
+                             * @property {string|null} [reportCountryCode] CompetitiveVisibilityCompetitorView reportCountryCode
+                             * @property {number|Long|null} [reportCategoryId] CompetitiveVisibilityCompetitorView reportCategoryId
+                             * @property {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null} [trafficSource] CompetitiveVisibilityCompetitorView trafficSource
+                             * @property {number|Long|null} [rank] CompetitiveVisibilityCompetitorView rank
+                             * @property {number|null} [adsOrganicRatio] CompetitiveVisibilityCompetitorView adsOrganicRatio
+                             * @property {number|null} [pageOverlapRate] CompetitiveVisibilityCompetitorView pageOverlapRate
+                             * @property {number|null} [higherPositionRate] CompetitiveVisibilityCompetitorView higherPositionRate
+                             * @property {number|null} [relativeVisibility] CompetitiveVisibilityCompetitorView relativeVisibility
+                             */
+    
+                            /**
+                             * Constructs a new CompetitiveVisibilityCompetitorView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a CompetitiveVisibilityCompetitorView.
+                             * @implements ICompetitiveVisibilityCompetitorView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView=} [properties] Properties to set
+                             */
+                            function CompetitiveVisibilityCompetitorView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.date = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView domain.
+                             * @member {string|null|undefined} domain
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.domain = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView isYourDomain.
+                             * @member {boolean|null|undefined} isYourDomain
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.isYourDomain = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView reportCategoryId.
+                             * @member {number|Long|null|undefined} reportCategoryId
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.reportCategoryId = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView trafficSource.
+                             * @member {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null|undefined} trafficSource
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.trafficSource = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView rank.
+                             * @member {number|Long|null|undefined} rank
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.rank = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView adsOrganicRatio.
+                             * @member {number|null|undefined} adsOrganicRatio
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.adsOrganicRatio = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView pageOverlapRate.
+                             * @member {number|null|undefined} pageOverlapRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.pageOverlapRate = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView higherPositionRate.
+                             * @member {number|null|undefined} higherPositionRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.higherPositionRate = null;
+    
+                            /**
+                             * CompetitiveVisibilityCompetitorView relativeVisibility.
+                             * @member {number|null|undefined} relativeVisibility
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.relativeVisibility = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_domain", {
+                                get: $util.oneOfGetter($oneOfFields = ["domain"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_isYourDomain", {
+                                get: $util.oneOfGetter($oneOfFields = ["isYourDomain"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_reportCategoryId", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_trafficSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_rank", {
+                                get: $util.oneOfGetter($oneOfFields = ["rank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_adsOrganicRatio", {
+                                get: $util.oneOfGetter($oneOfFields = ["adsOrganicRatio"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_pageOverlapRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["pageOverlapRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_higherPositionRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["higherPositionRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityCompetitorView.prototype, "_relativeVisibility", {
+                                get: $util.oneOfGetter($oneOfFields = ["relativeVisibility"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CompetitiveVisibilityCompetitorView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView} CompetitiveVisibilityCompetitorView instance
+                             */
+                            CompetitiveVisibilityCompetitorView.create = function create(properties) {
+                                return new CompetitiveVisibilityCompetitorView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityCompetitorView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView} message CompetitiveVisibilityCompetitorView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityCompetitorView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+                                if (message.isYourDomain != null && Object.hasOwnProperty.call(message, "isYourDomain"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isYourDomain);
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.reportCountryCode);
+                                if (message.reportCategoryId != null && Object.hasOwnProperty.call(message, "reportCategoryId"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.reportCategoryId);
+                                if (message.trafficSource != null && Object.hasOwnProperty.call(message, "trafficSource"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.trafficSource);
+                                if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.rank);
+                                if (message.adsOrganicRatio != null && Object.hasOwnProperty.call(message, "adsOrganicRatio"))
+                                    writer.uint32(/* id 8, wireType 1 =*/65).double(message.adsOrganicRatio);
+                                if (message.pageOverlapRate != null && Object.hasOwnProperty.call(message, "pageOverlapRate"))
+                                    writer.uint32(/* id 9, wireType 1 =*/73).double(message.pageOverlapRate);
+                                if (message.higherPositionRate != null && Object.hasOwnProperty.call(message, "higherPositionRate"))
+                                    writer.uint32(/* id 10, wireType 1 =*/81).double(message.higherPositionRate);
+                                if (message.relativeVisibility != null && Object.hasOwnProperty.call(message, "relativeVisibility"))
+                                    writer.uint32(/* id 11, wireType 1 =*/89).double(message.relativeVisibility);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityCompetitorView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityCompetitorView} message CompetitiveVisibilityCompetitorView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityCompetitorView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityCompetitorView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView} CompetitiveVisibilityCompetitorView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityCompetitorView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.domain = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.isYourDomain = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.reportCategoryId = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.trafficSource = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.rank = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.adsOrganicRatio = reader.double();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.pageOverlapRate = reader.double();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.higherPositionRate = reader.double();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.relativeVisibility = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityCompetitorView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView} CompetitiveVisibilityCompetitorView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityCompetitorView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CompetitiveVisibilityCompetitorView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CompetitiveVisibilityCompetitorView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.domain != null && message.hasOwnProperty("domain")) {
+                                    properties._domain = 1;
+                                    if (!$util.isString(message.domain))
+                                        return "domain: string expected";
+                                }
+                                if (message.isYourDomain != null && message.hasOwnProperty("isYourDomain")) {
+                                    properties._isYourDomain = 1;
+                                    if (typeof message.isYourDomain !== "boolean")
+                                        return "isYourDomain: boolean expected";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    properties._reportCategoryId = 1;
+                                    if (!$util.isInteger(message.reportCategoryId) && !(message.reportCategoryId && $util.isInteger(message.reportCategoryId.low) && $util.isInteger(message.reportCategoryId.high)))
+                                        return "reportCategoryId: integer|Long expected";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    properties._trafficSource = 1;
+                                    switch (message.trafficSource) {
+                                    default:
+                                        return "trafficSource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    properties._rank = 1;
+                                    if (!$util.isInteger(message.rank) && !(message.rank && $util.isInteger(message.rank.low) && $util.isInteger(message.rank.high)))
+                                        return "rank: integer|Long expected";
+                                }
+                                if (message.adsOrganicRatio != null && message.hasOwnProperty("adsOrganicRatio")) {
+                                    properties._adsOrganicRatio = 1;
+                                    if (typeof message.adsOrganicRatio !== "number")
+                                        return "adsOrganicRatio: number expected";
+                                }
+                                if (message.pageOverlapRate != null && message.hasOwnProperty("pageOverlapRate")) {
+                                    properties._pageOverlapRate = 1;
+                                    if (typeof message.pageOverlapRate !== "number")
+                                        return "pageOverlapRate: number expected";
+                                }
+                                if (message.higherPositionRate != null && message.hasOwnProperty("higherPositionRate")) {
+                                    properties._higherPositionRate = 1;
+                                    if (typeof message.higherPositionRate !== "number")
+                                        return "higherPositionRate: number expected";
+                                }
+                                if (message.relativeVisibility != null && message.hasOwnProperty("relativeVisibility")) {
+                                    properties._relativeVisibility = 1;
+                                    if (typeof message.relativeVisibility !== "number")
+                                        return "relativeVisibility: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CompetitiveVisibilityCompetitorView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView} CompetitiveVisibilityCompetitorView
+                             */
+                            CompetitiveVisibilityCompetitorView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.domain != null)
+                                    message.domain = String(object.domain);
+                                if (object.isYourDomain != null)
+                                    message.isYourDomain = Boolean(object.isYourDomain);
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.reportCategoryId != null)
+                                    if ($util.Long)
+                                        (message.reportCategoryId = $util.Long.fromValue(object.reportCategoryId)).unsigned = false;
+                                    else if (typeof object.reportCategoryId === "string")
+                                        message.reportCategoryId = parseInt(object.reportCategoryId, 10);
+                                    else if (typeof object.reportCategoryId === "number")
+                                        message.reportCategoryId = object.reportCategoryId;
+                                    else if (typeof object.reportCategoryId === "object")
+                                        message.reportCategoryId = new $util.LongBits(object.reportCategoryId.low >>> 0, object.reportCategoryId.high >>> 0).toNumber();
+                                switch (object.trafficSource) {
+                                default:
+                                    if (typeof object.trafficSource === "number") {
+                                        message.trafficSource = object.trafficSource;
+                                        break;
+                                    }
+                                    break;
+                                case "TRAFFIC_SOURCE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.trafficSource = 0;
+                                    break;
+                                case "ORGANIC":
+                                case 1:
+                                    message.trafficSource = 1;
+                                    break;
+                                case "ADS":
+                                case 2:
+                                    message.trafficSource = 2;
+                                    break;
+                                case "ALL":
+                                case 3:
+                                    message.trafficSource = 3;
+                                    break;
+                                }
+                                if (object.rank != null)
+                                    if ($util.Long)
+                                        (message.rank = $util.Long.fromValue(object.rank)).unsigned = false;
+                                    else if (typeof object.rank === "string")
+                                        message.rank = parseInt(object.rank, 10);
+                                    else if (typeof object.rank === "number")
+                                        message.rank = object.rank;
+                                    else if (typeof object.rank === "object")
+                                        message.rank = new $util.LongBits(object.rank.low >>> 0, object.rank.high >>> 0).toNumber();
+                                if (object.adsOrganicRatio != null)
+                                    message.adsOrganicRatio = Number(object.adsOrganicRatio);
+                                if (object.pageOverlapRate != null)
+                                    message.pageOverlapRate = Number(object.pageOverlapRate);
+                                if (object.higherPositionRate != null)
+                                    message.higherPositionRate = Number(object.higherPositionRate);
+                                if (object.relativeVisibility != null)
+                                    message.relativeVisibility = Number(object.relativeVisibility);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CompetitiveVisibilityCompetitorView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView} message CompetitiveVisibilityCompetitorView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CompetitiveVisibilityCompetitorView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.domain != null && message.hasOwnProperty("domain")) {
+                                    object.domain = message.domain;
+                                    if (options.oneofs)
+                                        object._domain = "domain";
+                                }
+                                if (message.isYourDomain != null && message.hasOwnProperty("isYourDomain")) {
+                                    object.isYourDomain = message.isYourDomain;
+                                    if (options.oneofs)
+                                        object._isYourDomain = "isYourDomain";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    if (typeof message.reportCategoryId === "number")
+                                        object.reportCategoryId = options.longs === String ? String(message.reportCategoryId) : message.reportCategoryId;
+                                    else
+                                        object.reportCategoryId = options.longs === String ? $util.Long.prototype.toString.call(message.reportCategoryId) : options.longs === Number ? new $util.LongBits(message.reportCategoryId.low >>> 0, message.reportCategoryId.high >>> 0).toNumber() : message.reportCategoryId;
+                                    if (options.oneofs)
+                                        object._reportCategoryId = "reportCategoryId";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    object.trafficSource = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] === undefined ? message.trafficSource : $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] : message.trafficSource;
+                                    if (options.oneofs)
+                                        object._trafficSource = "trafficSource";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    if (typeof message.rank === "number")
+                                        object.rank = options.longs === String ? String(message.rank) : message.rank;
+                                    else
+                                        object.rank = options.longs === String ? $util.Long.prototype.toString.call(message.rank) : options.longs === Number ? new $util.LongBits(message.rank.low >>> 0, message.rank.high >>> 0).toNumber() : message.rank;
+                                    if (options.oneofs)
+                                        object._rank = "rank";
+                                }
+                                if (message.adsOrganicRatio != null && message.hasOwnProperty("adsOrganicRatio")) {
+                                    object.adsOrganicRatio = options.json && !isFinite(message.adsOrganicRatio) ? String(message.adsOrganicRatio) : message.adsOrganicRatio;
+                                    if (options.oneofs)
+                                        object._adsOrganicRatio = "adsOrganicRatio";
+                                }
+                                if (message.pageOverlapRate != null && message.hasOwnProperty("pageOverlapRate")) {
+                                    object.pageOverlapRate = options.json && !isFinite(message.pageOverlapRate) ? String(message.pageOverlapRate) : message.pageOverlapRate;
+                                    if (options.oneofs)
+                                        object._pageOverlapRate = "pageOverlapRate";
+                                }
+                                if (message.higherPositionRate != null && message.hasOwnProperty("higherPositionRate")) {
+                                    object.higherPositionRate = options.json && !isFinite(message.higherPositionRate) ? String(message.higherPositionRate) : message.higherPositionRate;
+                                    if (options.oneofs)
+                                        object._higherPositionRate = "higherPositionRate";
+                                }
+                                if (message.relativeVisibility != null && message.hasOwnProperty("relativeVisibility")) {
+                                    object.relativeVisibility = options.json && !isFinite(message.relativeVisibility) ? String(message.relativeVisibility) : message.relativeVisibility;
+                                    if (options.oneofs)
+                                        object._relativeVisibility = "relativeVisibility";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CompetitiveVisibilityCompetitorView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CompetitiveVisibilityCompetitorView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CompetitiveVisibilityCompetitorView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CompetitiveVisibilityCompetitorView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityCompetitorView";
+                            };
+    
+                            return CompetitiveVisibilityCompetitorView;
+                        })();
+    
+                        v1alpha.CompetitiveVisibilityTopMerchantView = (function() {
+    
+                            /**
+                             * Properties of a CompetitiveVisibilityTopMerchantView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ICompetitiveVisibilityTopMerchantView
+                             * @property {google.type.IDate|null} [date] CompetitiveVisibilityTopMerchantView date
+                             * @property {string|null} [domain] CompetitiveVisibilityTopMerchantView domain
+                             * @property {boolean|null} [isYourDomain] CompetitiveVisibilityTopMerchantView isYourDomain
+                             * @property {string|null} [reportCountryCode] CompetitiveVisibilityTopMerchantView reportCountryCode
+                             * @property {number|Long|null} [reportCategoryId] CompetitiveVisibilityTopMerchantView reportCategoryId
+                             * @property {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null} [trafficSource] CompetitiveVisibilityTopMerchantView trafficSource
+                             * @property {number|Long|null} [rank] CompetitiveVisibilityTopMerchantView rank
+                             * @property {number|null} [adsOrganicRatio] CompetitiveVisibilityTopMerchantView adsOrganicRatio
+                             * @property {number|null} [pageOverlapRate] CompetitiveVisibilityTopMerchantView pageOverlapRate
+                             * @property {number|null} [higherPositionRate] CompetitiveVisibilityTopMerchantView higherPositionRate
+                             */
+    
+                            /**
+                             * Constructs a new CompetitiveVisibilityTopMerchantView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a CompetitiveVisibilityTopMerchantView.
+                             * @implements ICompetitiveVisibilityTopMerchantView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView=} [properties] Properties to set
+                             */
+                            function CompetitiveVisibilityTopMerchantView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.date = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView domain.
+                             * @member {string|null|undefined} domain
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.domain = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView isYourDomain.
+                             * @member {boolean|null|undefined} isYourDomain
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.isYourDomain = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView reportCategoryId.
+                             * @member {number|Long|null|undefined} reportCategoryId
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.reportCategoryId = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView trafficSource.
+                             * @member {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null|undefined} trafficSource
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.trafficSource = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView rank.
+                             * @member {number|Long|null|undefined} rank
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.rank = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView adsOrganicRatio.
+                             * @member {number|null|undefined} adsOrganicRatio
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.adsOrganicRatio = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView pageOverlapRate.
+                             * @member {number|null|undefined} pageOverlapRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.pageOverlapRate = null;
+    
+                            /**
+                             * CompetitiveVisibilityTopMerchantView higherPositionRate.
+                             * @member {number|null|undefined} higherPositionRate
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.higherPositionRate = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_domain", {
+                                get: $util.oneOfGetter($oneOfFields = ["domain"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_isYourDomain", {
+                                get: $util.oneOfGetter($oneOfFields = ["isYourDomain"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_reportCategoryId", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_trafficSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_rank", {
+                                get: $util.oneOfGetter($oneOfFields = ["rank"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_adsOrganicRatio", {
+                                get: $util.oneOfGetter($oneOfFields = ["adsOrganicRatio"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_pageOverlapRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["pageOverlapRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityTopMerchantView.prototype, "_higherPositionRate", {
+                                get: $util.oneOfGetter($oneOfFields = ["higherPositionRate"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CompetitiveVisibilityTopMerchantView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView} CompetitiveVisibilityTopMerchantView instance
+                             */
+                            CompetitiveVisibilityTopMerchantView.create = function create(properties) {
+                                return new CompetitiveVisibilityTopMerchantView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityTopMerchantView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView} message CompetitiveVisibilityTopMerchantView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityTopMerchantView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+                                if (message.isYourDomain != null && Object.hasOwnProperty.call(message, "isYourDomain"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isYourDomain);
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.reportCountryCode);
+                                if (message.reportCategoryId != null && Object.hasOwnProperty.call(message, "reportCategoryId"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.reportCategoryId);
+                                if (message.trafficSource != null && Object.hasOwnProperty.call(message, "trafficSource"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.trafficSource);
+                                if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.rank);
+                                if (message.adsOrganicRatio != null && Object.hasOwnProperty.call(message, "adsOrganicRatio"))
+                                    writer.uint32(/* id 8, wireType 1 =*/65).double(message.adsOrganicRatio);
+                                if (message.pageOverlapRate != null && Object.hasOwnProperty.call(message, "pageOverlapRate"))
+                                    writer.uint32(/* id 9, wireType 1 =*/73).double(message.pageOverlapRate);
+                                if (message.higherPositionRate != null && Object.hasOwnProperty.call(message, "higherPositionRate"))
+                                    writer.uint32(/* id 10, wireType 1 =*/81).double(message.higherPositionRate);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityTopMerchantView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityTopMerchantView} message CompetitiveVisibilityTopMerchantView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityTopMerchantView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityTopMerchantView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView} CompetitiveVisibilityTopMerchantView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityTopMerchantView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.domain = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.isYourDomain = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.reportCategoryId = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.trafficSource = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.rank = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.adsOrganicRatio = reader.double();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.pageOverlapRate = reader.double();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.higherPositionRate = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityTopMerchantView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView} CompetitiveVisibilityTopMerchantView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityTopMerchantView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CompetitiveVisibilityTopMerchantView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CompetitiveVisibilityTopMerchantView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.domain != null && message.hasOwnProperty("domain")) {
+                                    properties._domain = 1;
+                                    if (!$util.isString(message.domain))
+                                        return "domain: string expected";
+                                }
+                                if (message.isYourDomain != null && message.hasOwnProperty("isYourDomain")) {
+                                    properties._isYourDomain = 1;
+                                    if (typeof message.isYourDomain !== "boolean")
+                                        return "isYourDomain: boolean expected";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    properties._reportCategoryId = 1;
+                                    if (!$util.isInteger(message.reportCategoryId) && !(message.reportCategoryId && $util.isInteger(message.reportCategoryId.low) && $util.isInteger(message.reportCategoryId.high)))
+                                        return "reportCategoryId: integer|Long expected";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    properties._trafficSource = 1;
+                                    switch (message.trafficSource) {
+                                    default:
+                                        return "trafficSource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    properties._rank = 1;
+                                    if (!$util.isInteger(message.rank) && !(message.rank && $util.isInteger(message.rank.low) && $util.isInteger(message.rank.high)))
+                                        return "rank: integer|Long expected";
+                                }
+                                if (message.adsOrganicRatio != null && message.hasOwnProperty("adsOrganicRatio")) {
+                                    properties._adsOrganicRatio = 1;
+                                    if (typeof message.adsOrganicRatio !== "number")
+                                        return "adsOrganicRatio: number expected";
+                                }
+                                if (message.pageOverlapRate != null && message.hasOwnProperty("pageOverlapRate")) {
+                                    properties._pageOverlapRate = 1;
+                                    if (typeof message.pageOverlapRate !== "number")
+                                        return "pageOverlapRate: number expected";
+                                }
+                                if (message.higherPositionRate != null && message.hasOwnProperty("higherPositionRate")) {
+                                    properties._higherPositionRate = 1;
+                                    if (typeof message.higherPositionRate !== "number")
+                                        return "higherPositionRate: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CompetitiveVisibilityTopMerchantView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView} CompetitiveVisibilityTopMerchantView
+                             */
+                            CompetitiveVisibilityTopMerchantView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.domain != null)
+                                    message.domain = String(object.domain);
+                                if (object.isYourDomain != null)
+                                    message.isYourDomain = Boolean(object.isYourDomain);
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.reportCategoryId != null)
+                                    if ($util.Long)
+                                        (message.reportCategoryId = $util.Long.fromValue(object.reportCategoryId)).unsigned = false;
+                                    else if (typeof object.reportCategoryId === "string")
+                                        message.reportCategoryId = parseInt(object.reportCategoryId, 10);
+                                    else if (typeof object.reportCategoryId === "number")
+                                        message.reportCategoryId = object.reportCategoryId;
+                                    else if (typeof object.reportCategoryId === "object")
+                                        message.reportCategoryId = new $util.LongBits(object.reportCategoryId.low >>> 0, object.reportCategoryId.high >>> 0).toNumber();
+                                switch (object.trafficSource) {
+                                default:
+                                    if (typeof object.trafficSource === "number") {
+                                        message.trafficSource = object.trafficSource;
+                                        break;
+                                    }
+                                    break;
+                                case "TRAFFIC_SOURCE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.trafficSource = 0;
+                                    break;
+                                case "ORGANIC":
+                                case 1:
+                                    message.trafficSource = 1;
+                                    break;
+                                case "ADS":
+                                case 2:
+                                    message.trafficSource = 2;
+                                    break;
+                                case "ALL":
+                                case 3:
+                                    message.trafficSource = 3;
+                                    break;
+                                }
+                                if (object.rank != null)
+                                    if ($util.Long)
+                                        (message.rank = $util.Long.fromValue(object.rank)).unsigned = false;
+                                    else if (typeof object.rank === "string")
+                                        message.rank = parseInt(object.rank, 10);
+                                    else if (typeof object.rank === "number")
+                                        message.rank = object.rank;
+                                    else if (typeof object.rank === "object")
+                                        message.rank = new $util.LongBits(object.rank.low >>> 0, object.rank.high >>> 0).toNumber();
+                                if (object.adsOrganicRatio != null)
+                                    message.adsOrganicRatio = Number(object.adsOrganicRatio);
+                                if (object.pageOverlapRate != null)
+                                    message.pageOverlapRate = Number(object.pageOverlapRate);
+                                if (object.higherPositionRate != null)
+                                    message.higherPositionRate = Number(object.higherPositionRate);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CompetitiveVisibilityTopMerchantView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView} message CompetitiveVisibilityTopMerchantView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CompetitiveVisibilityTopMerchantView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.domain != null && message.hasOwnProperty("domain")) {
+                                    object.domain = message.domain;
+                                    if (options.oneofs)
+                                        object._domain = "domain";
+                                }
+                                if (message.isYourDomain != null && message.hasOwnProperty("isYourDomain")) {
+                                    object.isYourDomain = message.isYourDomain;
+                                    if (options.oneofs)
+                                        object._isYourDomain = "isYourDomain";
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    if (typeof message.reportCategoryId === "number")
+                                        object.reportCategoryId = options.longs === String ? String(message.reportCategoryId) : message.reportCategoryId;
+                                    else
+                                        object.reportCategoryId = options.longs === String ? $util.Long.prototype.toString.call(message.reportCategoryId) : options.longs === Number ? new $util.LongBits(message.reportCategoryId.low >>> 0, message.reportCategoryId.high >>> 0).toNumber() : message.reportCategoryId;
+                                    if (options.oneofs)
+                                        object._reportCategoryId = "reportCategoryId";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    object.trafficSource = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] === undefined ? message.trafficSource : $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] : message.trafficSource;
+                                    if (options.oneofs)
+                                        object._trafficSource = "trafficSource";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank")) {
+                                    if (typeof message.rank === "number")
+                                        object.rank = options.longs === String ? String(message.rank) : message.rank;
+                                    else
+                                        object.rank = options.longs === String ? $util.Long.prototype.toString.call(message.rank) : options.longs === Number ? new $util.LongBits(message.rank.low >>> 0, message.rank.high >>> 0).toNumber() : message.rank;
+                                    if (options.oneofs)
+                                        object._rank = "rank";
+                                }
+                                if (message.adsOrganicRatio != null && message.hasOwnProperty("adsOrganicRatio")) {
+                                    object.adsOrganicRatio = options.json && !isFinite(message.adsOrganicRatio) ? String(message.adsOrganicRatio) : message.adsOrganicRatio;
+                                    if (options.oneofs)
+                                        object._adsOrganicRatio = "adsOrganicRatio";
+                                }
+                                if (message.pageOverlapRate != null && message.hasOwnProperty("pageOverlapRate")) {
+                                    object.pageOverlapRate = options.json && !isFinite(message.pageOverlapRate) ? String(message.pageOverlapRate) : message.pageOverlapRate;
+                                    if (options.oneofs)
+                                        object._pageOverlapRate = "pageOverlapRate";
+                                }
+                                if (message.higherPositionRate != null && message.hasOwnProperty("higherPositionRate")) {
+                                    object.higherPositionRate = options.json && !isFinite(message.higherPositionRate) ? String(message.higherPositionRate) : message.higherPositionRate;
+                                    if (options.oneofs)
+                                        object._higherPositionRate = "higherPositionRate";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CompetitiveVisibilityTopMerchantView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CompetitiveVisibilityTopMerchantView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CompetitiveVisibilityTopMerchantView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CompetitiveVisibilityTopMerchantView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityTopMerchantView";
+                            };
+    
+                            return CompetitiveVisibilityTopMerchantView;
+                        })();
+    
+                        v1alpha.CompetitiveVisibilityBenchmarkView = (function() {
+    
+                            /**
+                             * Properties of a CompetitiveVisibilityBenchmarkView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ICompetitiveVisibilityBenchmarkView
+                             * @property {google.type.IDate|null} [date] CompetitiveVisibilityBenchmarkView date
+                             * @property {string|null} [reportCountryCode] CompetitiveVisibilityBenchmarkView reportCountryCode
+                             * @property {number|Long|null} [reportCategoryId] CompetitiveVisibilityBenchmarkView reportCategoryId
+                             * @property {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null} [trafficSource] CompetitiveVisibilityBenchmarkView trafficSource
+                             * @property {number|null} [yourDomainVisibilityTrend] CompetitiveVisibilityBenchmarkView yourDomainVisibilityTrend
+                             * @property {number|null} [categoryBenchmarkVisibilityTrend] CompetitiveVisibilityBenchmarkView categoryBenchmarkVisibilityTrend
+                             */
+    
+                            /**
+                             * Constructs a new CompetitiveVisibilityBenchmarkView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a CompetitiveVisibilityBenchmarkView.
+                             * @implements ICompetitiveVisibilityBenchmarkView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView=} [properties] Properties to set
+                             */
+                            function CompetitiveVisibilityBenchmarkView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.date = null;
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView reportCountryCode.
+                             * @member {string|null|undefined} reportCountryCode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.reportCountryCode = null;
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView reportCategoryId.
+                             * @member {number|Long|null|undefined} reportCategoryId
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.reportCategoryId = null;
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView trafficSource.
+                             * @member {google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum|null|undefined} trafficSource
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.trafficSource = null;
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView yourDomainVisibilityTrend.
+                             * @member {number|null|undefined} yourDomainVisibilityTrend
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.yourDomainVisibilityTrend = null;
+    
+                            /**
+                             * CompetitiveVisibilityBenchmarkView categoryBenchmarkVisibilityTrend.
+                             * @member {number|null|undefined} categoryBenchmarkVisibilityTrend
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.categoryBenchmarkVisibilityTrend = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_reportCountryCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCountryCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_reportCategoryId", {
+                                get: $util.oneOfGetter($oneOfFields = ["reportCategoryId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_trafficSource", {
+                                get: $util.oneOfGetter($oneOfFields = ["trafficSource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_yourDomainVisibilityTrend", {
+                                get: $util.oneOfGetter($oneOfFields = ["yourDomainVisibilityTrend"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CompetitiveVisibilityBenchmarkView.prototype, "_categoryBenchmarkVisibilityTrend", {
+                                get: $util.oneOfGetter($oneOfFields = ["categoryBenchmarkVisibilityTrend"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CompetitiveVisibilityBenchmarkView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView} CompetitiveVisibilityBenchmarkView instance
+                             */
+                            CompetitiveVisibilityBenchmarkView.create = function create(properties) {
+                                return new CompetitiveVisibilityBenchmarkView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityBenchmarkView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView} message CompetitiveVisibilityBenchmarkView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityBenchmarkView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.reportCountryCode != null && Object.hasOwnProperty.call(message, "reportCountryCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.reportCountryCode);
+                                if (message.reportCategoryId != null && Object.hasOwnProperty.call(message, "reportCategoryId"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.reportCategoryId);
+                                if (message.trafficSource != null && Object.hasOwnProperty.call(message, "trafficSource"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.trafficSource);
+                                if (message.yourDomainVisibilityTrend != null && Object.hasOwnProperty.call(message, "yourDomainVisibilityTrend"))
+                                    writer.uint32(/* id 5, wireType 1 =*/41).double(message.yourDomainVisibilityTrend);
+                                if (message.categoryBenchmarkVisibilityTrend != null && Object.hasOwnProperty.call(message, "categoryBenchmarkVisibilityTrend"))
+                                    writer.uint32(/* id 6, wireType 1 =*/49).double(message.categoryBenchmarkVisibilityTrend);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CompetitiveVisibilityBenchmarkView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ICompetitiveVisibilityBenchmarkView} message CompetitiveVisibilityBenchmarkView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CompetitiveVisibilityBenchmarkView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityBenchmarkView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView} CompetitiveVisibilityBenchmarkView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityBenchmarkView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.reportCountryCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reportCategoryId = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.trafficSource = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.yourDomainVisibilityTrend = reader.double();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.categoryBenchmarkVisibilityTrend = reader.double();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CompetitiveVisibilityBenchmarkView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView} CompetitiveVisibilityBenchmarkView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CompetitiveVisibilityBenchmarkView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CompetitiveVisibilityBenchmarkView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CompetitiveVisibilityBenchmarkView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    properties._reportCountryCode = 1;
+                                    if (!$util.isString(message.reportCountryCode))
+                                        return "reportCountryCode: string expected";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    properties._reportCategoryId = 1;
+                                    if (!$util.isInteger(message.reportCategoryId) && !(message.reportCategoryId && $util.isInteger(message.reportCategoryId.low) && $util.isInteger(message.reportCategoryId.high)))
+                                        return "reportCategoryId: integer|Long expected";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    properties._trafficSource = 1;
+                                    switch (message.trafficSource) {
+                                    default:
+                                        return "trafficSource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.yourDomainVisibilityTrend != null && message.hasOwnProperty("yourDomainVisibilityTrend")) {
+                                    properties._yourDomainVisibilityTrend = 1;
+                                    if (typeof message.yourDomainVisibilityTrend !== "number")
+                                        return "yourDomainVisibilityTrend: number expected";
+                                }
+                                if (message.categoryBenchmarkVisibilityTrend != null && message.hasOwnProperty("categoryBenchmarkVisibilityTrend")) {
+                                    properties._categoryBenchmarkVisibilityTrend = 1;
+                                    if (typeof message.categoryBenchmarkVisibilityTrend !== "number")
+                                        return "categoryBenchmarkVisibilityTrend: number expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CompetitiveVisibilityBenchmarkView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView} CompetitiveVisibilityBenchmarkView
+                             */
+                            CompetitiveVisibilityBenchmarkView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.reportCountryCode != null)
+                                    message.reportCountryCode = String(object.reportCountryCode);
+                                if (object.reportCategoryId != null)
+                                    if ($util.Long)
+                                        (message.reportCategoryId = $util.Long.fromValue(object.reportCategoryId)).unsigned = false;
+                                    else if (typeof object.reportCategoryId === "string")
+                                        message.reportCategoryId = parseInt(object.reportCategoryId, 10);
+                                    else if (typeof object.reportCategoryId === "number")
+                                        message.reportCategoryId = object.reportCategoryId;
+                                    else if (typeof object.reportCategoryId === "object")
+                                        message.reportCategoryId = new $util.LongBits(object.reportCategoryId.low >>> 0, object.reportCategoryId.high >>> 0).toNumber();
+                                switch (object.trafficSource) {
+                                default:
+                                    if (typeof object.trafficSource === "number") {
+                                        message.trafficSource = object.trafficSource;
+                                        break;
+                                    }
+                                    break;
+                                case "TRAFFIC_SOURCE_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.trafficSource = 0;
+                                    break;
+                                case "ORGANIC":
+                                case 1:
+                                    message.trafficSource = 1;
+                                    break;
+                                case "ADS":
+                                case 2:
+                                    message.trafficSource = 2;
+                                    break;
+                                case "ALL":
+                                case 3:
+                                    message.trafficSource = 3;
+                                    break;
+                                }
+                                if (object.yourDomainVisibilityTrend != null)
+                                    message.yourDomainVisibilityTrend = Number(object.yourDomainVisibilityTrend);
+                                if (object.categoryBenchmarkVisibilityTrend != null)
+                                    message.categoryBenchmarkVisibilityTrend = Number(object.categoryBenchmarkVisibilityTrend);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CompetitiveVisibilityBenchmarkView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView} message CompetitiveVisibilityBenchmarkView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CompetitiveVisibilityBenchmarkView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.reportCountryCode != null && message.hasOwnProperty("reportCountryCode")) {
+                                    object.reportCountryCode = message.reportCountryCode;
+                                    if (options.oneofs)
+                                        object._reportCountryCode = "reportCountryCode";
+                                }
+                                if (message.reportCategoryId != null && message.hasOwnProperty("reportCategoryId")) {
+                                    if (typeof message.reportCategoryId === "number")
+                                        object.reportCategoryId = options.longs === String ? String(message.reportCategoryId) : message.reportCategoryId;
+                                    else
+                                        object.reportCategoryId = options.longs === String ? $util.Long.prototype.toString.call(message.reportCategoryId) : options.longs === Number ? new $util.LongBits(message.reportCategoryId.low >>> 0, message.reportCategoryId.high >>> 0).toNumber() : message.reportCategoryId;
+                                    if (options.oneofs)
+                                        object._reportCategoryId = "reportCategoryId";
+                                }
+                                if (message.trafficSource != null && message.hasOwnProperty("trafficSource")) {
+                                    object.trafficSource = options.enums === String ? $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] === undefined ? message.trafficSource : $root.google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum[message.trafficSource] : message.trafficSource;
+                                    if (options.oneofs)
+                                        object._trafficSource = "trafficSource";
+                                }
+                                if (message.yourDomainVisibilityTrend != null && message.hasOwnProperty("yourDomainVisibilityTrend")) {
+                                    object.yourDomainVisibilityTrend = options.json && !isFinite(message.yourDomainVisibilityTrend) ? String(message.yourDomainVisibilityTrend) : message.yourDomainVisibilityTrend;
+                                    if (options.oneofs)
+                                        object._yourDomainVisibilityTrend = "yourDomainVisibilityTrend";
+                                }
+                                if (message.categoryBenchmarkVisibilityTrend != null && message.hasOwnProperty("categoryBenchmarkVisibilityTrend")) {
+                                    object.categoryBenchmarkVisibilityTrend = options.json && !isFinite(message.categoryBenchmarkVisibilityTrend) ? String(message.categoryBenchmarkVisibilityTrend) : message.categoryBenchmarkVisibilityTrend;
+                                    if (options.oneofs)
+                                        object._categoryBenchmarkVisibilityTrend = "categoryBenchmarkVisibilityTrend";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CompetitiveVisibilityBenchmarkView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CompetitiveVisibilityBenchmarkView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CompetitiveVisibilityBenchmarkView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CompetitiveVisibilityBenchmarkView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.CompetitiveVisibilityBenchmarkView";
+                            };
+    
+                            return CompetitiveVisibilityBenchmarkView;
+                        })();
+    
+                        v1alpha.MarketingMethod = (function() {
+    
+                            /**
+                             * Properties of a MarketingMethod.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IMarketingMethod
+                             */
+    
+                            /**
+                             * Constructs a new MarketingMethod.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a MarketingMethod.
+                             * @implements IMarketingMethod
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IMarketingMethod=} [properties] Properties to set
+                             */
+                            function MarketingMethod(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new MarketingMethod instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IMarketingMethod=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.MarketingMethod} MarketingMethod instance
+                             */
+                            MarketingMethod.create = function create(properties) {
+                                return new MarketingMethod(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MarketingMethod message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.MarketingMethod.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IMarketingMethod} message MarketingMethod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MarketingMethod.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MarketingMethod message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.MarketingMethod.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IMarketingMethod} message MarketingMethod message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MarketingMethod.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MarketingMethod message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.MarketingMethod} MarketingMethod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MarketingMethod.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.MarketingMethod();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MarketingMethod message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.MarketingMethod} MarketingMethod
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MarketingMethod.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MarketingMethod message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MarketingMethod.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MarketingMethod message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.MarketingMethod} MarketingMethod
+                             */
+                            MarketingMethod.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.MarketingMethod)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1alpha.MarketingMethod();
+                            };
+    
+                            /**
+                             * Creates a plain object from a MarketingMethod message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.MarketingMethod} message MarketingMethod
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MarketingMethod.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this MarketingMethod to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MarketingMethod.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MarketingMethod
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.MarketingMethod
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MarketingMethod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.MarketingMethod";
+                            };
+    
+                            /**
+                             * MarketingMethodEnum enum.
+                             * @name google.shopping.merchant.reports.v1alpha.MarketingMethod.MarketingMethodEnum
+                             * @enum {number}
+                             * @property {number} MARKETING_METHOD_ENUM_UNSPECIFIED=0 MARKETING_METHOD_ENUM_UNSPECIFIED value
+                             * @property {number} ORGANIC=1 ORGANIC value
+                             * @property {number} ADS=2 ADS value
+                             */
+                            MarketingMethod.MarketingMethodEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MARKETING_METHOD_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ORGANIC"] = 1;
+                                values[valuesById[2] = "ADS"] = 2;
+                                return values;
+                            })();
+    
+                            return MarketingMethod;
+                        })();
+    
+                        v1alpha.ReportGranularity = (function() {
+    
+                            /**
+                             * Properties of a ReportGranularity.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IReportGranularity
+                             */
+    
+                            /**
+                             * Constructs a new ReportGranularity.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a ReportGranularity.
+                             * @implements IReportGranularity
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportGranularity=} [properties] Properties to set
+                             */
+                            function ReportGranularity(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ReportGranularity instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportGranularity=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportGranularity} ReportGranularity instance
+                             */
+                            ReportGranularity.create = function create(properties) {
+                                return new ReportGranularity(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReportGranularity message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportGranularity.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportGranularity} message ReportGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReportGranularity.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReportGranularity message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.ReportGranularity.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IReportGranularity} message ReportGranularity message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReportGranularity.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReportGranularity message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportGranularity} ReportGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReportGranularity.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.ReportGranularity();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReportGranularity message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportGranularity} ReportGranularity
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReportGranularity.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReportGranularity message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReportGranularity.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReportGranularity message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.ReportGranularity} ReportGranularity
+                             */
+                            ReportGranularity.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.ReportGranularity)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1alpha.ReportGranularity();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReportGranularity message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ReportGranularity} message ReportGranularity
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReportGranularity.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ReportGranularity to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReportGranularity.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReportGranularity
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.ReportGranularity
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReportGranularity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.ReportGranularity";
+                            };
+    
+                            /**
+                             * ReportGranularityEnum enum.
+                             * @name google.shopping.merchant.reports.v1alpha.ReportGranularity.ReportGranularityEnum
+                             * @enum {number}
+                             * @property {number} REPORT_GRANULARITY_ENUM_UNSPECIFIED=0 REPORT_GRANULARITY_ENUM_UNSPECIFIED value
+                             * @property {number} WEEKLY=1 WEEKLY value
+                             * @property {number} MONTHLY=2 MONTHLY value
+                             */
+                            ReportGranularity.ReportGranularityEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "REPORT_GRANULARITY_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "WEEKLY"] = 1;
+                                values[valuesById[2] = "MONTHLY"] = 2;
+                                return values;
+                            })();
+    
+                            return ReportGranularity;
+                        })();
+    
+                        v1alpha.RelativeDemand = (function() {
+    
+                            /**
+                             * Properties of a RelativeDemand.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IRelativeDemand
+                             */
+    
+                            /**
+                             * Constructs a new RelativeDemand.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a RelativeDemand.
+                             * @implements IRelativeDemand
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemand=} [properties] Properties to set
+                             */
+                            function RelativeDemand(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new RelativeDemand instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemand=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemand} RelativeDemand instance
+                             */
+                            RelativeDemand.create = function create(properties) {
+                                return new RelativeDemand(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDemand message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemand.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemand} message RelativeDemand message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDemand.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDemand message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemand.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemand} message RelativeDemand message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDemand.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RelativeDemand message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemand} RelativeDemand
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDemand.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.RelativeDemand();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RelativeDemand message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemand} RelativeDemand
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDemand.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RelativeDemand message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RelativeDemand.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RelativeDemand message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemand} RelativeDemand
+                             */
+                            RelativeDemand.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.RelativeDemand)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1alpha.RelativeDemand();
+                            };
+    
+                            /**
+                             * Creates a plain object from a RelativeDemand message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.RelativeDemand} message RelativeDemand
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RelativeDemand.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this RelativeDemand to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RelativeDemand.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RelativeDemand
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemand
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RelativeDemand.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.RelativeDemand";
+                            };
+    
+                            /**
+                             * RelativeDemandEnum enum.
+                             * @name google.shopping.merchant.reports.v1alpha.RelativeDemand.RelativeDemandEnum
+                             * @enum {number}
+                             * @property {number} RELATIVE_DEMAND_ENUM_UNSPECIFIED=0 RELATIVE_DEMAND_ENUM_UNSPECIFIED value
+                             * @property {number} VERY_LOW=10 VERY_LOW value
+                             * @property {number} LOW=20 LOW value
+                             * @property {number} MEDIUM=30 MEDIUM value
+                             * @property {number} HIGH=40 HIGH value
+                             * @property {number} VERY_HIGH=50 VERY_HIGH value
+                             */
+                            RelativeDemand.RelativeDemandEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "RELATIVE_DEMAND_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[10] = "VERY_LOW"] = 10;
+                                values[valuesById[20] = "LOW"] = 20;
+                                values[valuesById[30] = "MEDIUM"] = 30;
+                                values[valuesById[40] = "HIGH"] = 40;
+                                values[valuesById[50] = "VERY_HIGH"] = 50;
+                                return values;
+                            })();
+    
+                            return RelativeDemand;
+                        })();
+    
+                        v1alpha.RelativeDemandChangeType = (function() {
+    
+                            /**
+                             * Properties of a RelativeDemandChangeType.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IRelativeDemandChangeType
+                             */
+    
+                            /**
+                             * Constructs a new RelativeDemandChangeType.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a RelativeDemandChangeType.
+                             * @implements IRelativeDemandChangeType
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType=} [properties] Properties to set
+                             */
+                            function RelativeDemandChangeType(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new RelativeDemandChangeType instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType} RelativeDemandChangeType instance
+                             */
+                            RelativeDemandChangeType.create = function create(properties) {
+                                return new RelativeDemandChangeType(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDemandChangeType message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType} message RelativeDemandChangeType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDemandChangeType.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDemandChangeType message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IRelativeDemandChangeType} message RelativeDemandChangeType message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDemandChangeType.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RelativeDemandChangeType message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType} RelativeDemandChangeType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDemandChangeType.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RelativeDemandChangeType message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType} RelativeDemandChangeType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDemandChangeType.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RelativeDemandChangeType message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RelativeDemandChangeType.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RelativeDemandChangeType message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType} RelativeDemandChangeType
+                             */
+                            RelativeDemandChangeType.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType();
+                            };
+    
+                            /**
+                             * Creates a plain object from a RelativeDemandChangeType message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType} message RelativeDemandChangeType
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RelativeDemandChangeType.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this RelativeDemandChangeType to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RelativeDemandChangeType.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RelativeDemandChangeType
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RelativeDemandChangeType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType";
+                            };
+    
+                            /**
+                             * RelativeDemandChangeTypeEnum enum.
+                             * @name google.shopping.merchant.reports.v1alpha.RelativeDemandChangeType.RelativeDemandChangeTypeEnum
+                             * @enum {number}
+                             * @property {number} RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED=0 RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED value
+                             * @property {number} SINKER=1 SINKER value
+                             * @property {number} FLAT=2 FLAT value
+                             * @property {number} RISER=3 RISER value
+                             */
+                            RelativeDemandChangeType.RelativeDemandChangeTypeEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SINKER"] = 1;
+                                values[valuesById[2] = "FLAT"] = 2;
+                                values[valuesById[3] = "RISER"] = 3;
+                                return values;
+                            })();
+    
+                            return RelativeDemandChangeType;
+                        })();
+    
+                        v1alpha.TrafficSource = (function() {
+    
+                            /**
+                             * Properties of a TrafficSource.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface ITrafficSource
+                             */
+    
+                            /**
+                             * Constructs a new TrafficSource.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a TrafficSource.
+                             * @implements ITrafficSource
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.ITrafficSource=} [properties] Properties to set
+                             */
+                            function TrafficSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new TrafficSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ITrafficSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.TrafficSource} TrafficSource instance
+                             */
+                            TrafficSource.create = function create(properties) {
+                                return new TrafficSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TrafficSource message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.TrafficSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ITrafficSource} message TrafficSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrafficSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TrafficSource message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.TrafficSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.ITrafficSource} message TrafficSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrafficSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TrafficSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.TrafficSource} TrafficSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrafficSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.TrafficSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TrafficSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.TrafficSource} TrafficSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrafficSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TrafficSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TrafficSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TrafficSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.TrafficSource} TrafficSource
+                             */
+                            TrafficSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.TrafficSource)
+                                    return object;
+                                return new $root.google.shopping.merchant.reports.v1alpha.TrafficSource();
+                            };
+    
+                            /**
+                             * Creates a plain object from a TrafficSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.TrafficSource} message TrafficSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TrafficSource.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this TrafficSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TrafficSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TrafficSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.TrafficSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TrafficSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.TrafficSource";
+                            };
+    
+                            /**
+                             * TrafficSourceEnum enum.
+                             * @name google.shopping.merchant.reports.v1alpha.TrafficSource.TrafficSourceEnum
+                             * @enum {number}
+                             * @property {number} TRAFFIC_SOURCE_ENUM_UNSPECIFIED=0 TRAFFIC_SOURCE_ENUM_UNSPECIFIED value
+                             * @property {number} ORGANIC=1 ORGANIC value
+                             * @property {number} ADS=2 ADS value
+                             * @property {number} ALL=3 ALL value
+                             */
+                            TrafficSource.TrafficSourceEnum = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TRAFFIC_SOURCE_ENUM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ORGANIC"] = 1;
+                                values[valuesById[2] = "ADS"] = 2;
+                                values[valuesById[3] = "ALL"] = 3;
+                                return values;
+                            })();
+    
+                            return TrafficSource;
+                        })();
+    
+                        v1alpha.YoutubeCreatorPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a YoutubeCreatorPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IYoutubeCreatorPerformanceView
+                             * @property {google.type.IDate|null} [date] YoutubeCreatorPerformanceView date
+                             * @property {string|null} [title] YoutubeCreatorPerformanceView title
+                             * @property {string|null} [channelId] YoutubeCreatorPerformanceView channelId
+                             * @property {google.shopping.type.IPrice|null} [grossSales] YoutubeCreatorPerformanceView grossSales
+                             * @property {google.shopping.type.IPrice|null} [commissions] YoutubeCreatorPerformanceView commissions
+                             * @property {number|Long|null} [orders] YoutubeCreatorPerformanceView orders
+                             * @property {number|Long|null} [views] YoutubeCreatorPerformanceView views
+                             * @property {number|Long|null} [clicks] YoutubeCreatorPerformanceView clicks
+                             * @property {google.shopping.type.IPrice|null} [netSales] YoutubeCreatorPerformanceView netSales
+                             */
+    
+                            /**
+                             * Constructs a new YoutubeCreatorPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a YoutubeCreatorPerformanceView.
+                             * @implements IYoutubeCreatorPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView=} [properties] Properties to set
+                             */
+                            function YoutubeCreatorPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * YoutubeCreatorPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.date = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.title = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView channelId.
+                             * @member {string|null|undefined} channelId
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.channelId = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView grossSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} grossSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.grossSales = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView commissions.
+                             * @member {google.shopping.type.IPrice|null|undefined} commissions
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.commissions = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView orders.
+                             * @member {number|Long|null|undefined} orders
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.orders = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView views.
+                             * @member {number|Long|null|undefined} views
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.views = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * YoutubeCreatorPerformanceView netSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} netSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             */
+                            YoutubeCreatorPerformanceView.prototype.netSales = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_channelId", {
+                                get: $util.oneOfGetter($oneOfFields = ["channelId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_grossSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["grossSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_commissions", {
+                                get: $util.oneOfGetter($oneOfFields = ["commissions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_orders", {
+                                get: $util.oneOfGetter($oneOfFields = ["orders"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_views", {
+                                get: $util.oneOfGetter($oneOfFields = ["views"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeCreatorPerformanceView.prototype, "_netSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["netSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new YoutubeCreatorPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView} YoutubeCreatorPerformanceView instance
+                             */
+                            YoutubeCreatorPerformanceView.create = function create(properties) {
+                                return new YoutubeCreatorPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeCreatorPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView} message YoutubeCreatorPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeCreatorPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.channelId != null && Object.hasOwnProperty.call(message, "channelId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.channelId);
+                                if (message.grossSales != null && Object.hasOwnProperty.call(message, "grossSales"))
+                                    $root.google.shopping.type.Price.encode(message.grossSales, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.commissions != null && Object.hasOwnProperty.call(message, "commissions"))
+                                    $root.google.shopping.type.Price.encode(message.commissions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.orders != null && Object.hasOwnProperty.call(message, "orders"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.orders);
+                                if (message.views != null && Object.hasOwnProperty.call(message, "views"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.views);
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int64(message.clicks);
+                                if (message.netSales != null && Object.hasOwnProperty.call(message, "netSales"))
+                                    $root.google.shopping.type.Price.encode(message.netSales, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeCreatorPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeCreatorPerformanceView} message YoutubeCreatorPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeCreatorPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a YoutubeCreatorPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView} YoutubeCreatorPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeCreatorPerformanceView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.channelId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.grossSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.commissions = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.orders = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.views = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.netSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a YoutubeCreatorPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView} YoutubeCreatorPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeCreatorPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a YoutubeCreatorPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            YoutubeCreatorPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.channelId != null && message.hasOwnProperty("channelId")) {
+                                    properties._channelId = 1;
+                                    if (!$util.isString(message.channelId))
+                                        return "channelId: string expected";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    properties._grossSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.grossSales);
+                                        if (error)
+                                            return "grossSales." + error;
+                                    }
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    properties._commissions = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.commissions);
+                                        if (error)
+                                            return "commissions." + error;
+                                    }
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    properties._orders = 1;
+                                    if (!$util.isInteger(message.orders) && !(message.orders && $util.isInteger(message.orders.low) && $util.isInteger(message.orders.high)))
+                                        return "orders: integer|Long expected";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    properties._views = 1;
+                                    if (!$util.isInteger(message.views) && !(message.views && $util.isInteger(message.views.low) && $util.isInteger(message.views.high)))
+                                        return "views: integer|Long expected";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    properties._netSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.netSales);
+                                        if (error)
+                                            return "netSales." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a YoutubeCreatorPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView} YoutubeCreatorPerformanceView
+                             */
+                            YoutubeCreatorPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.channelId != null)
+                                    message.channelId = String(object.channelId);
+                                if (object.grossSales != null) {
+                                    if (typeof object.grossSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.grossSales: object expected");
+                                    message.grossSales = $root.google.shopping.type.Price.fromObject(object.grossSales);
+                                }
+                                if (object.commissions != null) {
+                                    if (typeof object.commissions !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.commissions: object expected");
+                                    message.commissions = $root.google.shopping.type.Price.fromObject(object.commissions);
+                                }
+                                if (object.orders != null)
+                                    if ($util.Long)
+                                        (message.orders = $util.Long.fromValue(object.orders)).unsigned = false;
+                                    else if (typeof object.orders === "string")
+                                        message.orders = parseInt(object.orders, 10);
+                                    else if (typeof object.orders === "number")
+                                        message.orders = object.orders;
+                                    else if (typeof object.orders === "object")
+                                        message.orders = new $util.LongBits(object.orders.low >>> 0, object.orders.high >>> 0).toNumber();
+                                if (object.views != null)
+                                    if ($util.Long)
+                                        (message.views = $util.Long.fromValue(object.views)).unsigned = false;
+                                    else if (typeof object.views === "string")
+                                        message.views = parseInt(object.views, 10);
+                                    else if (typeof object.views === "number")
+                                        message.views = object.views;
+                                    else if (typeof object.views === "object")
+                                        message.views = new $util.LongBits(object.views.low >>> 0, object.views.high >>> 0).toNumber();
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.netSales != null) {
+                                    if (typeof object.netSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView.netSales: object expected");
+                                    message.netSales = $root.google.shopping.type.Price.fromObject(object.netSales);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a YoutubeCreatorPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView} message YoutubeCreatorPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            YoutubeCreatorPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.channelId != null && message.hasOwnProperty("channelId")) {
+                                    object.channelId = message.channelId;
+                                    if (options.oneofs)
+                                        object._channelId = "channelId";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    object.grossSales = $root.google.shopping.type.Price.toObject(message.grossSales, options);
+                                    if (options.oneofs)
+                                        object._grossSales = "grossSales";
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    object.commissions = $root.google.shopping.type.Price.toObject(message.commissions, options);
+                                    if (options.oneofs)
+                                        object._commissions = "commissions";
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    if (typeof message.orders === "number")
+                                        object.orders = options.longs === String ? String(message.orders) : message.orders;
+                                    else
+                                        object.orders = options.longs === String ? $util.Long.prototype.toString.call(message.orders) : options.longs === Number ? new $util.LongBits(message.orders.low >>> 0, message.orders.high >>> 0).toNumber() : message.orders;
+                                    if (options.oneofs)
+                                        object._orders = "orders";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    if (typeof message.views === "number")
+                                        object.views = options.longs === String ? String(message.views) : message.views;
+                                    else
+                                        object.views = options.longs === String ? $util.Long.prototype.toString.call(message.views) : options.longs === Number ? new $util.LongBits(message.views.low >>> 0, message.views.high >>> 0).toNumber() : message.views;
+                                    if (options.oneofs)
+                                        object._views = "views";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    object.netSales = $root.google.shopping.type.Price.toObject(message.netSales, options);
+                                    if (options.oneofs)
+                                        object._netSales = "netSales";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this YoutubeCreatorPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            YoutubeCreatorPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for YoutubeCreatorPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            YoutubeCreatorPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.YoutubeCreatorPerformanceView";
+                            };
+    
+                            return YoutubeCreatorPerformanceView;
+                        })();
+    
+                        v1alpha.YoutubeContentPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a YoutubeContentPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IYoutubeContentPerformanceView
+                             * @property {google.type.IDate|null} [date] YoutubeContentPerformanceView date
+                             * @property {string|null} [title] YoutubeContentPerformanceView title
+                             * @property {string|null} [videoId] YoutubeContentPerformanceView videoId
+                             * @property {string|null} [channelTitle] YoutubeContentPerformanceView channelTitle
+                             * @property {string|null} [channelId] YoutubeContentPerformanceView channelId
+                             * @property {google.shopping.type.IPrice|null} [grossSales] YoutubeContentPerformanceView grossSales
+                             * @property {google.shopping.type.IPrice|null} [commissions] YoutubeContentPerformanceView commissions
+                             * @property {number|Long|null} [orders] YoutubeContentPerformanceView orders
+                             * @property {number|Long|null} [views] YoutubeContentPerformanceView views
+                             * @property {number|Long|null} [clicks] YoutubeContentPerformanceView clicks
+                             * @property {google.shopping.type.IPrice|null} [netSales] YoutubeContentPerformanceView netSales
+                             */
+    
+                            /**
+                             * Constructs a new YoutubeContentPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a YoutubeContentPerformanceView.
+                             * @implements IYoutubeContentPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView=} [properties] Properties to set
+                             */
+                            function YoutubeContentPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * YoutubeContentPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.date = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.title = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView videoId.
+                             * @member {string|null|undefined} videoId
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.videoId = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView channelTitle.
+                             * @member {string|null|undefined} channelTitle
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.channelTitle = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView channelId.
+                             * @member {string|null|undefined} channelId
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.channelId = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView grossSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} grossSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.grossSales = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView commissions.
+                             * @member {google.shopping.type.IPrice|null|undefined} commissions
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.commissions = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView orders.
+                             * @member {number|Long|null|undefined} orders
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.orders = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView views.
+                             * @member {number|Long|null|undefined} views
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.views = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * YoutubeContentPerformanceView netSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} netSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             */
+                            YoutubeContentPerformanceView.prototype.netSales = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_videoId", {
+                                get: $util.oneOfGetter($oneOfFields = ["videoId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_channelTitle", {
+                                get: $util.oneOfGetter($oneOfFields = ["channelTitle"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_channelId", {
+                                get: $util.oneOfGetter($oneOfFields = ["channelId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_grossSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["grossSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_commissions", {
+                                get: $util.oneOfGetter($oneOfFields = ["commissions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_orders", {
+                                get: $util.oneOfGetter($oneOfFields = ["orders"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_views", {
+                                get: $util.oneOfGetter($oneOfFields = ["views"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeContentPerformanceView.prototype, "_netSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["netSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new YoutubeContentPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView} YoutubeContentPerformanceView instance
+                             */
+                            YoutubeContentPerformanceView.create = function create(properties) {
+                                return new YoutubeContentPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeContentPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView} message YoutubeContentPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeContentPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.videoId != null && Object.hasOwnProperty.call(message, "videoId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.videoId);
+                                if (message.channelTitle != null && Object.hasOwnProperty.call(message, "channelTitle"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.channelTitle);
+                                if (message.channelId != null && Object.hasOwnProperty.call(message, "channelId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.channelId);
+                                if (message.grossSales != null && Object.hasOwnProperty.call(message, "grossSales"))
+                                    $root.google.shopping.type.Price.encode(message.grossSales, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.commissions != null && Object.hasOwnProperty.call(message, "commissions"))
+                                    $root.google.shopping.type.Price.encode(message.commissions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.orders != null && Object.hasOwnProperty.call(message, "orders"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int64(message.orders);
+                                if (message.views != null && Object.hasOwnProperty.call(message, "views"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int64(message.views);
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int64(message.clicks);
+                                if (message.netSales != null && Object.hasOwnProperty.call(message, "netSales"))
+                                    $root.google.shopping.type.Price.encode(message.netSales, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeContentPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeContentPerformanceView} message YoutubeContentPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeContentPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a YoutubeContentPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView} YoutubeContentPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeContentPerformanceView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.videoId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.channelTitle = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.channelId = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.grossSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.commissions = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.orders = reader.int64();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.views = reader.int64();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.netSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a YoutubeContentPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView} YoutubeContentPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeContentPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a YoutubeContentPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            YoutubeContentPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.videoId != null && message.hasOwnProperty("videoId")) {
+                                    properties._videoId = 1;
+                                    if (!$util.isString(message.videoId))
+                                        return "videoId: string expected";
+                                }
+                                if (message.channelTitle != null && message.hasOwnProperty("channelTitle")) {
+                                    properties._channelTitle = 1;
+                                    if (!$util.isString(message.channelTitle))
+                                        return "channelTitle: string expected";
+                                }
+                                if (message.channelId != null && message.hasOwnProperty("channelId")) {
+                                    properties._channelId = 1;
+                                    if (!$util.isString(message.channelId))
+                                        return "channelId: string expected";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    properties._grossSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.grossSales);
+                                        if (error)
+                                            return "grossSales." + error;
+                                    }
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    properties._commissions = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.commissions);
+                                        if (error)
+                                            return "commissions." + error;
+                                    }
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    properties._orders = 1;
+                                    if (!$util.isInteger(message.orders) && !(message.orders && $util.isInteger(message.orders.low) && $util.isInteger(message.orders.high)))
+                                        return "orders: integer|Long expected";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    properties._views = 1;
+                                    if (!$util.isInteger(message.views) && !(message.views && $util.isInteger(message.views.low) && $util.isInteger(message.views.high)))
+                                        return "views: integer|Long expected";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    properties._netSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.netSales);
+                                        if (error)
+                                            return "netSales." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a YoutubeContentPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView} YoutubeContentPerformanceView
+                             */
+                            YoutubeContentPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.videoId != null)
+                                    message.videoId = String(object.videoId);
+                                if (object.channelTitle != null)
+                                    message.channelTitle = String(object.channelTitle);
+                                if (object.channelId != null)
+                                    message.channelId = String(object.channelId);
+                                if (object.grossSales != null) {
+                                    if (typeof object.grossSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.grossSales: object expected");
+                                    message.grossSales = $root.google.shopping.type.Price.fromObject(object.grossSales);
+                                }
+                                if (object.commissions != null) {
+                                    if (typeof object.commissions !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.commissions: object expected");
+                                    message.commissions = $root.google.shopping.type.Price.fromObject(object.commissions);
+                                }
+                                if (object.orders != null)
+                                    if ($util.Long)
+                                        (message.orders = $util.Long.fromValue(object.orders)).unsigned = false;
+                                    else if (typeof object.orders === "string")
+                                        message.orders = parseInt(object.orders, 10);
+                                    else if (typeof object.orders === "number")
+                                        message.orders = object.orders;
+                                    else if (typeof object.orders === "object")
+                                        message.orders = new $util.LongBits(object.orders.low >>> 0, object.orders.high >>> 0).toNumber();
+                                if (object.views != null)
+                                    if ($util.Long)
+                                        (message.views = $util.Long.fromValue(object.views)).unsigned = false;
+                                    else if (typeof object.views === "string")
+                                        message.views = parseInt(object.views, 10);
+                                    else if (typeof object.views === "number")
+                                        message.views = object.views;
+                                    else if (typeof object.views === "object")
+                                        message.views = new $util.LongBits(object.views.low >>> 0, object.views.high >>> 0).toNumber();
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.netSales != null) {
+                                    if (typeof object.netSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView.netSales: object expected");
+                                    message.netSales = $root.google.shopping.type.Price.fromObject(object.netSales);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a YoutubeContentPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView} message YoutubeContentPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            YoutubeContentPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.videoId != null && message.hasOwnProperty("videoId")) {
+                                    object.videoId = message.videoId;
+                                    if (options.oneofs)
+                                        object._videoId = "videoId";
+                                }
+                                if (message.channelTitle != null && message.hasOwnProperty("channelTitle")) {
+                                    object.channelTitle = message.channelTitle;
+                                    if (options.oneofs)
+                                        object._channelTitle = "channelTitle";
+                                }
+                                if (message.channelId != null && message.hasOwnProperty("channelId")) {
+                                    object.channelId = message.channelId;
+                                    if (options.oneofs)
+                                        object._channelId = "channelId";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    object.grossSales = $root.google.shopping.type.Price.toObject(message.grossSales, options);
+                                    if (options.oneofs)
+                                        object._grossSales = "grossSales";
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    object.commissions = $root.google.shopping.type.Price.toObject(message.commissions, options);
+                                    if (options.oneofs)
+                                        object._commissions = "commissions";
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    if (typeof message.orders === "number")
+                                        object.orders = options.longs === String ? String(message.orders) : message.orders;
+                                    else
+                                        object.orders = options.longs === String ? $util.Long.prototype.toString.call(message.orders) : options.longs === Number ? new $util.LongBits(message.orders.low >>> 0, message.orders.high >>> 0).toNumber() : message.orders;
+                                    if (options.oneofs)
+                                        object._orders = "orders";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    if (typeof message.views === "number")
+                                        object.views = options.longs === String ? String(message.views) : message.views;
+                                    else
+                                        object.views = options.longs === String ? $util.Long.prototype.toString.call(message.views) : options.longs === Number ? new $util.LongBits(message.views.low >>> 0, message.views.high >>> 0).toNumber() : message.views;
+                                    if (options.oneofs)
+                                        object._views = "views";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    object.netSales = $root.google.shopping.type.Price.toObject(message.netSales, options);
+                                    if (options.oneofs)
+                                        object._netSales = "netSales";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this YoutubeContentPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            YoutubeContentPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for YoutubeContentPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            YoutubeContentPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.YoutubeContentPerformanceView";
+                            };
+    
+                            return YoutubeContentPerformanceView;
+                        })();
+    
+                        v1alpha.YoutubeProductPerformanceView = (function() {
+    
+                            /**
+                             * Properties of a YoutubeProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @interface IYoutubeProductPerformanceView
+                             * @property {google.type.IDate|null} [date] YoutubeProductPerformanceView date
+                             * @property {string|null} [title] YoutubeProductPerformanceView title
+                             * @property {string|null} [offerId] YoutubeProductPerformanceView offerId
+                             * @property {number|Long|null} [distinctVideoCount] YoutubeProductPerformanceView distinctVideoCount
+                             * @property {number|Long|null} [distinctCreatorCount] YoutubeProductPerformanceView distinctCreatorCount
+                             * @property {google.shopping.type.IPrice|null} [grossSales] YoutubeProductPerformanceView grossSales
+                             * @property {google.shopping.type.IPrice|null} [commissions] YoutubeProductPerformanceView commissions
+                             * @property {number|Long|null} [orders] YoutubeProductPerformanceView orders
+                             * @property {number|Long|null} [views] YoutubeProductPerformanceView views
+                             * @property {number|Long|null} [clicks] YoutubeProductPerformanceView clicks
+                             * @property {google.shopping.type.IPrice|null} [netSales] YoutubeProductPerformanceView netSales
+                             */
+    
+                            /**
+                             * Constructs a new YoutubeProductPerformanceView.
+                             * @memberof google.shopping.merchant.reports.v1alpha
+                             * @classdesc Represents a YoutubeProductPerformanceView.
+                             * @implements IYoutubeProductPerformanceView
+                             * @constructor
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView=} [properties] Properties to set
+                             */
+                            function YoutubeProductPerformanceView(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * YoutubeProductPerformanceView date.
+                             * @member {google.type.IDate|null|undefined} date
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.date = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.title = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView offerId.
+                             * @member {string|null|undefined} offerId
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.offerId = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView distinctVideoCount.
+                             * @member {number|Long|null|undefined} distinctVideoCount
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.distinctVideoCount = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView distinctCreatorCount.
+                             * @member {number|Long|null|undefined} distinctCreatorCount
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.distinctCreatorCount = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView grossSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} grossSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.grossSales = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView commissions.
+                             * @member {google.shopping.type.IPrice|null|undefined} commissions
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.commissions = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView orders.
+                             * @member {number|Long|null|undefined} orders
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.orders = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView views.
+                             * @member {number|Long|null|undefined} views
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.views = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView clicks.
+                             * @member {number|Long|null|undefined} clicks
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.clicks = null;
+    
+                            /**
+                             * YoutubeProductPerformanceView netSales.
+                             * @member {google.shopping.type.IPrice|null|undefined} netSales
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             */
+                            YoutubeProductPerformanceView.prototype.netSales = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_offerId", {
+                                get: $util.oneOfGetter($oneOfFields = ["offerId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_distinctVideoCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["distinctVideoCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_distinctCreatorCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["distinctCreatorCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_grossSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["grossSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_commissions", {
+                                get: $util.oneOfGetter($oneOfFields = ["commissions"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_orders", {
+                                get: $util.oneOfGetter($oneOfFields = ["orders"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_views", {
+                                get: $util.oneOfGetter($oneOfFields = ["views"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_clicks", {
+                                get: $util.oneOfGetter($oneOfFields = ["clicks"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(YoutubeProductPerformanceView.prototype, "_netSales", {
+                                get: $util.oneOfGetter($oneOfFields = ["netSales"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new YoutubeProductPerformanceView instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView} YoutubeProductPerformanceView instance
+                             */
+                            YoutubeProductPerformanceView.create = function create(properties) {
+                                return new YoutubeProductPerformanceView(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeProductPerformanceView message. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView} message YoutubeProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeProductPerformanceView.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.date != null && Object.hasOwnProperty.call(message, "date"))
+                                    $root.google.type.Date.encode(message.date, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.offerId);
+                                if (message.distinctVideoCount != null && Object.hasOwnProperty.call(message, "distinctVideoCount"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.distinctVideoCount);
+                                if (message.distinctCreatorCount != null && Object.hasOwnProperty.call(message, "distinctCreatorCount"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.distinctCreatorCount);
+                                if (message.grossSales != null && Object.hasOwnProperty.call(message, "grossSales"))
+                                    $root.google.shopping.type.Price.encode(message.grossSales, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.commissions != null && Object.hasOwnProperty.call(message, "commissions"))
+                                    $root.google.shopping.type.Price.encode(message.commissions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.orders != null && Object.hasOwnProperty.call(message, "orders"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int64(message.orders);
+                                if (message.views != null && Object.hasOwnProperty.call(message, "views"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int64(message.views);
+                                if (message.clicks != null && Object.hasOwnProperty.call(message, "clicks"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int64(message.clicks);
+                                if (message.netSales != null && Object.hasOwnProperty.call(message, "netSales"))
+                                    $root.google.shopping.type.Price.encode(message.netSales, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified YoutubeProductPerformanceView message, length delimited. Does not implicitly {@link google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.IYoutubeProductPerformanceView} message YoutubeProductPerformanceView message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            YoutubeProductPerformanceView.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a YoutubeProductPerformanceView message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView} YoutubeProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeProductPerformanceView.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.date = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.distinctVideoCount = reader.int64();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.distinctCreatorCount = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.grossSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.commissions = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.orders = reader.int64();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.views = reader.int64();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.clicks = reader.int64();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.netSales = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a YoutubeProductPerformanceView message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView} YoutubeProductPerformanceView
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            YoutubeProductPerformanceView.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a YoutubeProductPerformanceView message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            YoutubeProductPerformanceView.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.date != null && message.hasOwnProperty("date")) {
+                                    var error = $root.google.type.Date.verify(message.date);
+                                    if (error)
+                                        return "date." + error;
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    properties._offerId = 1;
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                }
+                                if (message.distinctVideoCount != null && message.hasOwnProperty("distinctVideoCount")) {
+                                    properties._distinctVideoCount = 1;
+                                    if (!$util.isInteger(message.distinctVideoCount) && !(message.distinctVideoCount && $util.isInteger(message.distinctVideoCount.low) && $util.isInteger(message.distinctVideoCount.high)))
+                                        return "distinctVideoCount: integer|Long expected";
+                                }
+                                if (message.distinctCreatorCount != null && message.hasOwnProperty("distinctCreatorCount")) {
+                                    properties._distinctCreatorCount = 1;
+                                    if (!$util.isInteger(message.distinctCreatorCount) && !(message.distinctCreatorCount && $util.isInteger(message.distinctCreatorCount.low) && $util.isInteger(message.distinctCreatorCount.high)))
+                                        return "distinctCreatorCount: integer|Long expected";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    properties._grossSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.grossSales);
+                                        if (error)
+                                            return "grossSales." + error;
+                                    }
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    properties._commissions = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.commissions);
+                                        if (error)
+                                            return "commissions." + error;
+                                    }
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    properties._orders = 1;
+                                    if (!$util.isInteger(message.orders) && !(message.orders && $util.isInteger(message.orders.low) && $util.isInteger(message.orders.high)))
+                                        return "orders: integer|Long expected";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    properties._views = 1;
+                                    if (!$util.isInteger(message.views) && !(message.views && $util.isInteger(message.views.low) && $util.isInteger(message.views.high)))
+                                        return "views: integer|Long expected";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    properties._clicks = 1;
+                                    if (!$util.isInteger(message.clicks) && !(message.clicks && $util.isInteger(message.clicks.low) && $util.isInteger(message.clicks.high)))
+                                        return "clicks: integer|Long expected";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    properties._netSales = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.netSales);
+                                        if (error)
+                                            return "netSales." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a YoutubeProductPerformanceView message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView} YoutubeProductPerformanceView
+                             */
+                            YoutubeProductPerformanceView.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView();
+                                if (object.date != null) {
+                                    if (typeof object.date !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.date: object expected");
+                                    message.date = $root.google.type.Date.fromObject(object.date);
+                                }
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.distinctVideoCount != null)
+                                    if ($util.Long)
+                                        (message.distinctVideoCount = $util.Long.fromValue(object.distinctVideoCount)).unsigned = false;
+                                    else if (typeof object.distinctVideoCount === "string")
+                                        message.distinctVideoCount = parseInt(object.distinctVideoCount, 10);
+                                    else if (typeof object.distinctVideoCount === "number")
+                                        message.distinctVideoCount = object.distinctVideoCount;
+                                    else if (typeof object.distinctVideoCount === "object")
+                                        message.distinctVideoCount = new $util.LongBits(object.distinctVideoCount.low >>> 0, object.distinctVideoCount.high >>> 0).toNumber();
+                                if (object.distinctCreatorCount != null)
+                                    if ($util.Long)
+                                        (message.distinctCreatorCount = $util.Long.fromValue(object.distinctCreatorCount)).unsigned = false;
+                                    else if (typeof object.distinctCreatorCount === "string")
+                                        message.distinctCreatorCount = parseInt(object.distinctCreatorCount, 10);
+                                    else if (typeof object.distinctCreatorCount === "number")
+                                        message.distinctCreatorCount = object.distinctCreatorCount;
+                                    else if (typeof object.distinctCreatorCount === "object")
+                                        message.distinctCreatorCount = new $util.LongBits(object.distinctCreatorCount.low >>> 0, object.distinctCreatorCount.high >>> 0).toNumber();
+                                if (object.grossSales != null) {
+                                    if (typeof object.grossSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.grossSales: object expected");
+                                    message.grossSales = $root.google.shopping.type.Price.fromObject(object.grossSales);
+                                }
+                                if (object.commissions != null) {
+                                    if (typeof object.commissions !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.commissions: object expected");
+                                    message.commissions = $root.google.shopping.type.Price.fromObject(object.commissions);
+                                }
+                                if (object.orders != null)
+                                    if ($util.Long)
+                                        (message.orders = $util.Long.fromValue(object.orders)).unsigned = false;
+                                    else if (typeof object.orders === "string")
+                                        message.orders = parseInt(object.orders, 10);
+                                    else if (typeof object.orders === "number")
+                                        message.orders = object.orders;
+                                    else if (typeof object.orders === "object")
+                                        message.orders = new $util.LongBits(object.orders.low >>> 0, object.orders.high >>> 0).toNumber();
+                                if (object.views != null)
+                                    if ($util.Long)
+                                        (message.views = $util.Long.fromValue(object.views)).unsigned = false;
+                                    else if (typeof object.views === "string")
+                                        message.views = parseInt(object.views, 10);
+                                    else if (typeof object.views === "number")
+                                        message.views = object.views;
+                                    else if (typeof object.views === "object")
+                                        message.views = new $util.LongBits(object.views.low >>> 0, object.views.high >>> 0).toNumber();
+                                if (object.clicks != null)
+                                    if ($util.Long)
+                                        (message.clicks = $util.Long.fromValue(object.clicks)).unsigned = false;
+                                    else if (typeof object.clicks === "string")
+                                        message.clicks = parseInt(object.clicks, 10);
+                                    else if (typeof object.clicks === "number")
+                                        message.clicks = object.clicks;
+                                    else if (typeof object.clicks === "object")
+                                        message.clicks = new $util.LongBits(object.clicks.low >>> 0, object.clicks.high >>> 0).toNumber();
+                                if (object.netSales != null) {
+                                    if (typeof object.netSales !== "object")
+                                        throw TypeError(".google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView.netSales: object expected");
+                                    message.netSales = $root.google.shopping.type.Price.fromObject(object.netSales);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a YoutubeProductPerformanceView message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView} message YoutubeProductPerformanceView
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            YoutubeProductPerformanceView.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.date = null;
+                                if (message.date != null && message.hasOwnProperty("date"))
+                                    object.date = $root.google.type.Date.toObject(message.date, options);
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.offerId != null && message.hasOwnProperty("offerId")) {
+                                    object.offerId = message.offerId;
+                                    if (options.oneofs)
+                                        object._offerId = "offerId";
+                                }
+                                if (message.distinctVideoCount != null && message.hasOwnProperty("distinctVideoCount")) {
+                                    if (typeof message.distinctVideoCount === "number")
+                                        object.distinctVideoCount = options.longs === String ? String(message.distinctVideoCount) : message.distinctVideoCount;
+                                    else
+                                        object.distinctVideoCount = options.longs === String ? $util.Long.prototype.toString.call(message.distinctVideoCount) : options.longs === Number ? new $util.LongBits(message.distinctVideoCount.low >>> 0, message.distinctVideoCount.high >>> 0).toNumber() : message.distinctVideoCount;
+                                    if (options.oneofs)
+                                        object._distinctVideoCount = "distinctVideoCount";
+                                }
+                                if (message.distinctCreatorCount != null && message.hasOwnProperty("distinctCreatorCount")) {
+                                    if (typeof message.distinctCreatorCount === "number")
+                                        object.distinctCreatorCount = options.longs === String ? String(message.distinctCreatorCount) : message.distinctCreatorCount;
+                                    else
+                                        object.distinctCreatorCount = options.longs === String ? $util.Long.prototype.toString.call(message.distinctCreatorCount) : options.longs === Number ? new $util.LongBits(message.distinctCreatorCount.low >>> 0, message.distinctCreatorCount.high >>> 0).toNumber() : message.distinctCreatorCount;
+                                    if (options.oneofs)
+                                        object._distinctCreatorCount = "distinctCreatorCount";
+                                }
+                                if (message.grossSales != null && message.hasOwnProperty("grossSales")) {
+                                    object.grossSales = $root.google.shopping.type.Price.toObject(message.grossSales, options);
+                                    if (options.oneofs)
+                                        object._grossSales = "grossSales";
+                                }
+                                if (message.commissions != null && message.hasOwnProperty("commissions")) {
+                                    object.commissions = $root.google.shopping.type.Price.toObject(message.commissions, options);
+                                    if (options.oneofs)
+                                        object._commissions = "commissions";
+                                }
+                                if (message.orders != null && message.hasOwnProperty("orders")) {
+                                    if (typeof message.orders === "number")
+                                        object.orders = options.longs === String ? String(message.orders) : message.orders;
+                                    else
+                                        object.orders = options.longs === String ? $util.Long.prototype.toString.call(message.orders) : options.longs === Number ? new $util.LongBits(message.orders.low >>> 0, message.orders.high >>> 0).toNumber() : message.orders;
+                                    if (options.oneofs)
+                                        object._orders = "orders";
+                                }
+                                if (message.views != null && message.hasOwnProperty("views")) {
+                                    if (typeof message.views === "number")
+                                        object.views = options.longs === String ? String(message.views) : message.views;
+                                    else
+                                        object.views = options.longs === String ? $util.Long.prototype.toString.call(message.views) : options.longs === Number ? new $util.LongBits(message.views.low >>> 0, message.views.high >>> 0).toNumber() : message.views;
+                                    if (options.oneofs)
+                                        object._views = "views";
+                                }
+                                if (message.clicks != null && message.hasOwnProperty("clicks")) {
+                                    if (typeof message.clicks === "number")
+                                        object.clicks = options.longs === String ? String(message.clicks) : message.clicks;
+                                    else
+                                        object.clicks = options.longs === String ? $util.Long.prototype.toString.call(message.clicks) : options.longs === Number ? new $util.LongBits(message.clicks.low >>> 0, message.clicks.high >>> 0).toNumber() : message.clicks;
+                                    if (options.oneofs)
+                                        object._clicks = "clicks";
+                                }
+                                if (message.netSales != null && message.hasOwnProperty("netSales")) {
+                                    object.netSales = $root.google.shopping.type.Price.toObject(message.netSales, options);
+                                    if (options.oneofs)
+                                        object._netSales = "netSales";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this YoutubeProductPerformanceView to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            YoutubeProductPerformanceView.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for YoutubeProductPerformanceView
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            YoutubeProductPerformanceView.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.reports.v1alpha.YoutubeProductPerformanceView";
+                            };
+    
+                            return YoutubeProductPerformanceView;
+                        })();
+    
+                        return v1alpha;
+                    })();
+    
                     reports.v1beta = (function() {
     
                         /**
