@@ -111102,6 +111102,9 @@ export namespace google {
 
                     /** PipelineTaskDetail outputs */
                     outputs?: ({ [k: string]: google.cloud.aiplatform.v1.PipelineTaskDetail.IArtifactList }|null);
+
+                    /** PipelineTaskDetail taskUniqueName */
+                    taskUniqueName?: (string|null);
                 }
 
                 /** Represents a PipelineTaskDetail. */
@@ -111151,6 +111154,9 @@ export namespace google {
 
                     /** PipelineTaskDetail outputs. */
                     public outputs: { [k: string]: google.cloud.aiplatform.v1.PipelineTaskDetail.IArtifactList };
+
+                    /** PipelineTaskDetail taskUniqueName. */
+                    public taskUniqueName: string;
 
                     /**
                      * Creates a new PipelineTaskDetail instance using the specified properties.
