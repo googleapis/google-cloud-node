@@ -45,12 +45,12 @@
     "gapic-tools": "^1.0.2",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^4.0.0",
+    "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
     "typescript": "5.8.3",
-    "sinon": "^21.0.0"
+    "sinon": "^20.0.0"
   },
   "engines": {
     "node": ">=v18"
