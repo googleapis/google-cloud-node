@@ -146000,6 +146000,9 @@ export namespace google {
 
                     /** DedicatedResources spot */
                     spot?: (boolean|null);
+
+                    /** DedicatedResources flexStart */
+                    flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
                 }
 
                 /** Represents a DedicatedResources. */
@@ -146028,6 +146031,9 @@ export namespace google {
 
                     /** DedicatedResources spot. */
                     public spot: boolean;
+
+                    /** DedicatedResources flexStart. */
+                    public flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
 
                     /**
                      * Creates a new DedicatedResources instance using the specified properties.
@@ -146925,6 +146931,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ShieldedVmConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FlexStart. */
+                interface IFlexStart {
+
+                    /** FlexStart maxRuntimeDuration */
+                    maxRuntimeDuration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a FlexStart. */
+                class FlexStart implements IFlexStart {
+
+                    /**
+                     * Constructs a new FlexStart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IFlexStart);
+
+                    /** FlexStart maxRuntimeDuration. */
+                    public maxRuntimeDuration?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new FlexStart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FlexStart instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IFlexStart): google.cloud.aiplatform.v1beta1.FlexStart;
+
+                    /**
+                     * Encodes the specified FlexStart message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FlexStart.verify|verify} messages.
+                     * @param message FlexStart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IFlexStart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FlexStart message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FlexStart.verify|verify} messages.
+                     * @param message FlexStart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IFlexStart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FlexStart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FlexStart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.FlexStart;
+
+                    /**
+                     * Decodes a FlexStart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FlexStart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.FlexStart;
+
+                    /**
+                     * Verifies a FlexStart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FlexStart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FlexStart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.FlexStart;
+
+                    /**
+                     * Creates a plain object from a FlexStart message. Also converts values to other types if specified.
+                     * @param message FlexStart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.FlexStart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FlexStart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FlexStart
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

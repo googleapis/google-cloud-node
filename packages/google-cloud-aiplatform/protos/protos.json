@@ -38947,6 +38947,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "flexStart": {
+                          "type": "FlexStart",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -39072,6 +39079,14 @@
                       "fields": {
                         "enableSecureBoot": {
                           "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FlexStart": {
+                      "fields": {
+                        "maxRuntimeDuration": {
+                          "type": "google.protobuf.Duration",
                           "id": 1
                         }
                       }
