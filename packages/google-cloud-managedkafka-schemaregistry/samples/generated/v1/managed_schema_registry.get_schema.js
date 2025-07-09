@@ -41,7 +41,7 @@ function main(name) {
   // const subject = 'abc123'
 
   // Imports the Schemaregistry library
-  const {ManagedSchemaRegistryClient} = require('@google-cloud/schemaregistry').v1;
+  const {ManagedSchemaRegistryClient} = require('@google-cloud/managedkafka-schemaregistry').v1;
 
   // Instantiates a client
   const schemaregistryClient = new ManagedSchemaRegistryClient();

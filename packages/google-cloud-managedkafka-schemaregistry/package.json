@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/schemaregistry",
+  "name": "@google-cloud/managedkafka-schemaregistry",
   "version": "0.0.0",
   "description": "Managed Service for Apache Kafka API client for Node.js",
   "repository": {

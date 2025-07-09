@@ -5,7 +5,7 @@
 # [Managed Service for Apache Kafka API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/schemaregistry.svg)](https://www.npmjs.org/package/@google-cloud/schemaregistry)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/managedkafka-schemaregistry.svg)](https://www.npmjs.org/package/@google-cloud/managedkafka-schemaregistry)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/schemaregistry
+npm install @google-cloud/managedkafka-schemaregistry
 ```
 
 
@@ -82,7 +82,7 @@ npm install @google-cloud/schemaregistry
 // const deleted = true
 
 // Imports the Schemaregistry library
-const {ManagedSchemaRegistryClient} = require('@google-cloud/schemaregistry').v1;
+const {ManagedSchemaRegistryClient} = require('@google-cloud/managedkafka-schemaregistry').v1;
 
 // Instantiates a client
 const schemaregistryClient = new ManagedSchemaRegistryClient();
@@ -162,7 +162,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/schemaregistry@legacy-8` installs client libraries
+For example, `npm install @google-cloud/managedkafka-schemaregistry@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning
