@@ -51,13 +51,6 @@ function main(name) {
    */
   // const currentRouteSegmentVersion = {}
   /**
-   *  Indicates the minimum timestamp (exclusive) for which
-   *  `Trip.remaining_waypoints` are retrieved. If they are unchanged since this
-   *  timestamp, the `remaining_waypoints` are not set in the response. If this
-   *  field is unspecified, `remaining_waypoints` is always retrieved.
-   */
-  // const remainingWaypointsVersion = {}
-  /**
    *  The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
    *  or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
    *  is `LAT_LNG_LIST_TYPE`.
