@@ -30351,6 +30351,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "taskUniqueName": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -38940,6 +38947,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "flexStart": {
+                          "type": "FlexStart",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -39065,6 +39079,14 @@
                       "fields": {
                         "enableSecureBoot": {
                           "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FlexStart": {
+                      "fields": {
+                        "maxRuntimeDuration": {
+                          "type": "google.protobuf.Duration",
                           "id": 1
                         }
                       }
@@ -48321,6 +48343,13 @@
                     },
                     "EvaluateDatasetResponse": {
                       "fields": {
+                        "aggregationOutput": {
+                          "type": "AggregationOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "outputInfo": {
                           "type": "OutputInfo",
                           "id": 3,
@@ -48345,6 +48374,58 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "AggregationOutput": {
+                      "fields": {
+                        "dataset": {
+                          "type": "EvaluationDataset",
+                          "id": 1
+                        },
+                        "aggregationResults": {
+                          "rule": "repeated",
+                          "type": "AggregationResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AggregationResult": {
+                      "oneofs": {
+                        "aggregationResult": {
+                          "oneof": [
+                            "pointwiseMetricResult",
+                            "pairwiseMetricResult",
+                            "exactMatchMetricValue",
+                            "bleuMetricValue",
+                            "rougeMetricValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pointwiseMetricResult": {
+                          "type": "PointwiseMetricResult",
+                          "id": 5
+                        },
+                        "pairwiseMetricResult": {
+                          "type": "PairwiseMetricResult",
+                          "id": 6
+                        },
+                        "exactMatchMetricValue": {
+                          "type": "ExactMatchMetricValue",
+                          "id": 7
+                        },
+                        "bleuMetricValue": {
+                          "type": "BleuMetricValue",
+                          "id": 8
+                        },
+                        "rougeMetricValue": {
+                          "type": "RougeMetricValue",
+                          "id": 9
+                        },
+                        "aggregationMetric": {
+                          "type": "Metric.AggregationMetric",
+                          "id": 4
                         }
                       }
                     },
