@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dns",
   "description": "Cloud DNS Client Library for Node.js",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.6.0...managedkafka-v0.7.0) (2025-07-09)
+
+
+### Features
+
+* [managedkafka] Add Managed Kafka Schema Registry API ([#6453](https://github.com/googleapis/google-cloud-node/issues/6453)) ([824b286](https://github.com/googleapis/google-cloud-node/commit/824b286c3c1bd4e051e1e1bf796d2b3d3714b99c))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.5.0...managedkafka-v0.6.0) (2025-06-03)
 
 
