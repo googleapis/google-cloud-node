@@ -71,7 +71,7 @@ const client = new ContactCenterInsightsClient();
 //TODO(library generator): write the actual function you will be testing
 async function listConversations() {
   const conversations = await client.listConversations({
-    parent: `projects/${projectId}/locations/${location}`,
+      parent: `projects/${projectId}/locations/${location}`,
       pageSize: PAGE_SIZE,
     },
     {

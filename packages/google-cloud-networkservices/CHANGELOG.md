@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.9.0...networkservices-v0.10.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [networkservices] Add support for WasmPlugin resource in NetworkServices API ([#6445](https://github.com/googleapis/google-cloud-node/issues/6445)) ([01b415a](https://github.com/googleapis/google-cloud-node/commit/01b415aa8a3673d8655c1b062c72e7ef727b59ec))
+* [networkservices] update NetworkServices protos ([#6407](https://github.com/googleapis/google-cloud-node/issues/6407)) ([7063c0f](https://github.com/googleapis/google-cloud-node/commit/7063c0fb7d79ed0a45f7ed413cba334d034a3df6))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.8.1...networkservices-v0.9.0) (2025-06-03)
 
 

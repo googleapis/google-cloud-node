@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v4.0.1...contact-center-insights-v4.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/bigquery to v8 ([#6317](https://github.com/googleapis/google-cloud-node/issues/6317)) ([f5763b2](https://github.com/googleapis/google-cloud-node/commit/f5763b2e5febc387fe4157052d5c9f17b235addf))
+* **deps:** Update dependency @google-cloud/pubsub to v5 ([#6311](https://github.com/googleapis/google-cloud-node/issues/6311)) ([1f69d9a](https://github.com/googleapis/google-cloud-node/commit/1f69d9a5e789b4c76c1fbd7700a5da12ce0b956e))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v4.0.0...contact-center-insights-v4.0.1) (2025-03-19)
 
 

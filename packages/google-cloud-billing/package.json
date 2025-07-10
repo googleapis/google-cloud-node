@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/billing",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Billing client for Node.js",
   "repository": {
     "type": "git",
