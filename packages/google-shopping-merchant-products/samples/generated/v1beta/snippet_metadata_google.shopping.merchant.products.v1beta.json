@@ -15,14 +15,14 @@
             "regionTag": "merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_async",
             "title": "ProductInputsService insertProductInput Sample",
             "origin": "API_DEFINITION",
-            "description": " Uploads a product input to your Merchant Center account. If an input with the same contentLanguage, offerId, and dataSource already exists, this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
+            "description": " [Uploads a product input to your Merchant Center account](/merchant/api/guides/products/overview#upload-product-input). You must have a products data source to be able to insert a product. The unique identifier of the data source is passed as a query parameter in the request URL. If an input with the same contentLanguage, offerId, and dataSource already exists, this method replaces that entry. After inserting, updating, or deleting a product input, it may take several minutes before the processed product can be retrieved.",
             "canonical": true,
             "file": "product_inputs_service.insert_product_input.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],

@@ -655,6 +655,9 @@ export namespace google {
                         /** Attributes gtin */
                         gtin?: (string[]|null);
 
+                        /** Attributes gtins */
+                        gtins?: (string[]|null);
+
                         /** Attributes itemGroupId */
                         itemGroupId?: (string|null);
 
@@ -669,6 +672,9 @@ export namespace google {
 
                         /** Attributes price */
                         price?: (google.shopping.type.IPrice|null);
+
+                        /** Attributes maximumRetailPrice */
+                        maximumRetailPrice?: (google.shopping.type.IPrice|null);
 
                         /** Attributes installment */
                         installment?: (google.shopping.merchant.products.v1beta.IInstallment|null);
@@ -944,6 +950,9 @@ export namespace google {
                         /** Attributes gtin. */
                         public gtin: string[];
 
+                        /** Attributes gtins. */
+                        public gtins: string[];
+
                         /** Attributes itemGroupId. */
                         public itemGroupId?: (string|null);
 
@@ -958,6 +967,9 @@ export namespace google {
 
                         /** Attributes price. */
                         public price?: (google.shopping.type.IPrice|null);
+
+                        /** Attributes maximumRetailPrice. */
+                        public maximumRetailPrice?: (google.shopping.type.IPrice|null);
 
                         /** Attributes installment. */
                         public installment?: (google.shopping.merchant.products.v1beta.IInstallment|null);
