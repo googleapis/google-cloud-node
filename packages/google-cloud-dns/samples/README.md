@@ -33,7 +33,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Fetches a list of all available zones.
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dns/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dns/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dns/samples/quickstart.js,samples/README.md)
 
