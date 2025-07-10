@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START config_v1_generated_Config_ListTerraformVersions_async]
+  // [START config_v1_generated_Config_ListResourceChanges_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,37 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent in whose context the TerraformVersions are listed. The
+   *  Required. The parent in whose context the ResourceChanges are listed. The
    *  parent value is in the format:
-   *  'projects/{project_id}/locations/{location}'.
+   *  'projects/{project_id}/locations/{location}/previews/{preview}'.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. When requesting a page of terraform versions, 'page_size'
-   *  specifies number of terraform versions to return. If unspecified, at most
-   *  500 will be returned. The maximum value is 1000.
+   *  Optional. When requesting a page of resource changes, 'page_size' specifies
+   *  number of resource changes to return. If unspecified, at most 500 will be
+   *  returned. The maximum value is 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Token returned by previous call to 'ListTerraformVersions' which
+   *  Optional. Token returned by previous call to 'ListResourceChanges' which
    *  specifies the position in the list from where to continue listing the
-   *  terraform versions.
+   *  resource changes.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Lists the TerraformVersions that match the filter expression. A
-   *  filter expression filters the resources listed in the response. The
+   *  Optional. Lists the resource changes that match the filter expression. A
+   *  filter expression filters the resource changes listed in the response. The
    *  expression must be of the form '{field} {operator} {value}' where
    *  operators: '<', '>',
-   *  '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
-   *  operator which is roughly synonymous with equality). {field} can refer to a
-   *  proto or JSON field, or a synthetic field. Field names can be camelCase or
-   *  snake_case.
+   *  '<=',
+   *  '>=',
+   *  '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+   *  roughly synonymous with equality). {field} can refer to a proto or JSON
+   *  field, or a synthetic field. Field names can be camelCase or snake_case.
+   *  Examples:
+   *  - Filter by name:
+   *    name =
+   *    "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
    */
   // const filter = 'abc123'
   /**
@@ -68,21 +73,21 @@ function main(parent) {
   // Instantiates a client
   const configClient = new ConfigClient();
 
-  async function callListTerraformVersions() {
+  async function callListResourceChanges() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = configClient.listTerraformVersionsAsync(request);
+    const iterable = configClient.listResourceChangesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListTerraformVersions();
-  // [END config_v1_generated_Config_ListTerraformVersions_async]
+  callListResourceChanges();
+  // [END config_v1_generated_Config_ListResourceChanges_async]
 }
 
 process.on('unhandledRejection', err => {

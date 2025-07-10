@@ -200,6 +200,12 @@ export class ConfigClient {
       resourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}/revisions/{revision}/resources/{resource}'
       ),
+      resourceChangePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/previews/{preview}/resourceChanges/{resource_change}'
+      ),
+      resourceDriftPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/previews/{preview}/resourceDrifts/{resource_drift}'
+      ),
       revisionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}/revisions/{revision}'
       ),
@@ -227,7 +233,11 @@ export class ConfigClient {
       listPreviews:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'previews'),
       listTerraformVersions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'terraformVersions')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'terraformVersions'),
+      listResourceChanges:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceChanges'),
+      listResourceDrifts:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resourceDrifts')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -346,7 +356,7 @@ export class ConfigClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const configStubMethods =
-        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion'];
+        ['listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listRevisions', 'getRevision', 'getResource', 'listResources', 'exportDeploymentStatefile', 'exportRevisionStatefile', 'importStatefile', 'deleteStatefile', 'lockDeployment', 'unlockDeployment', 'exportLockInfo', 'createPreview', 'getPreview', 'listPreviews', 'deletePreview', 'exportPreviewResult', 'listTerraformVersions', 'getTerraformVersion', 'listResourceChanges', 'getResourceChange', 'listResourceDrifts', 'getResourceDrift'];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
         stub => (...args: Array<{}>) => {
@@ -1505,6 +1515,198 @@ export class ConfigClient {
         {}|undefined
       ]) => {
         this._log.info('getTerraformVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Get a ResourceChange for a given preview.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the resource change to retrieve.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}/resourceChanges/{resource_change}'.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.ResourceChange|ResourceChange}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.get_resource_change.js</caption>
+ * region_tag:config_v1_generated_Config_GetResourceChange_async
+ */
+  getResourceChange(
+      request?: protos.google.cloud.config.v1.IGetResourceChangeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceChange,
+        protos.google.cloud.config.v1.IGetResourceChangeRequest|undefined, {}|undefined
+      ]>;
+  getResourceChange(
+      request: protos.google.cloud.config.v1.IGetResourceChangeRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.config.v1.IResourceChange,
+          protos.google.cloud.config.v1.IGetResourceChangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceChange(
+      request: protos.google.cloud.config.v1.IGetResourceChangeRequest,
+      callback: Callback<
+          protos.google.cloud.config.v1.IResourceChange,
+          protos.google.cloud.config.v1.IGetResourceChangeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceChange(
+      request?: protos.google.cloud.config.v1.IGetResourceChangeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.config.v1.IResourceChange,
+          protos.google.cloud.config.v1.IGetResourceChangeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.config.v1.IResourceChange,
+          protos.google.cloud.config.v1.IGetResourceChangeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceChange,
+        protos.google.cloud.config.v1.IGetResourceChangeRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getResourceChange request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.config.v1.IResourceChange,
+        protos.google.cloud.config.v1.IGetResourceChangeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getResourceChange response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getResourceChange(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.config.v1.IResourceChange,
+        protos.google.cloud.config.v1.IGetResourceChangeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getResourceChange response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Get a ResourceDrift for a given preview.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the resource drift to retrieve.
+ *   Format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}/resourceDrifts/{resource_drift}'.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.ResourceDrift|ResourceDrift}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.get_resource_drift.js</caption>
+ * region_tag:config_v1_generated_Config_GetResourceDrift_async
+ */
+  getResourceDrift(
+      request?: protos.google.cloud.config.v1.IGetResourceDriftRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceDrift,
+        protos.google.cloud.config.v1.IGetResourceDriftRequest|undefined, {}|undefined
+      ]>;
+  getResourceDrift(
+      request: protos.google.cloud.config.v1.IGetResourceDriftRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.config.v1.IResourceDrift,
+          protos.google.cloud.config.v1.IGetResourceDriftRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceDrift(
+      request: protos.google.cloud.config.v1.IGetResourceDriftRequest,
+      callback: Callback<
+          protos.google.cloud.config.v1.IResourceDrift,
+          protos.google.cloud.config.v1.IGetResourceDriftRequest|null|undefined,
+          {}|null|undefined>): void;
+  getResourceDrift(
+      request?: protos.google.cloud.config.v1.IGetResourceDriftRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.config.v1.IResourceDrift,
+          protos.google.cloud.config.v1.IGetResourceDriftRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.config.v1.IResourceDrift,
+          protos.google.cloud.config.v1.IGetResourceDriftRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceDrift,
+        protos.google.cloud.config.v1.IGetResourceDriftRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getResourceDrift request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.config.v1.IResourceDrift,
+        protos.google.cloud.config.v1.IGetResourceDriftRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getResourceDrift response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getResourceDrift(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.config.v1.IResourceDrift,
+        protos.google.cloud.config.v1.IGetResourceDriftRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getResourceDrift response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -3471,13 +3673,13 @@ export class ConfigClient {
  *   parent value is in the format:
  *   'projects/{project_id}/locations/{location}'.
  * @param {number} [request.pageSize]
- *   Optional. When requesting a page of resources, 'page_size' specifies number
- *   of resources to return. If unspecified, at most 500 will be returned. The
- *   maximum value is 1000.
+ *   Optional. When requesting a page of terraform versions, 'page_size'
+ *   specifies number of terraform versions to return. If unspecified, at most
+ *   500 will be returned. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. Token returned by previous call to 'ListTerraformVersions' which
  *   specifies the position in the list from where to continue listing the
- *   resources.
+ *   terraform versions.
  * @param {string} [request.filter]
  *   Optional. Lists the TerraformVersions that match the filter expression. A
  *   filter expression filters the resources listed in the response. The
@@ -3586,13 +3788,13 @@ export class ConfigClient {
  *   parent value is in the format:
  *   'projects/{project_id}/locations/{location}'.
  * @param {number} [request.pageSize]
- *   Optional. When requesting a page of resources, 'page_size' specifies number
- *   of resources to return. If unspecified, at most 500 will be returned. The
- *   maximum value is 1000.
+ *   Optional. When requesting a page of terraform versions, 'page_size'
+ *   specifies number of terraform versions to return. If unspecified, at most
+ *   500 will be returned. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. Token returned by previous call to 'ListTerraformVersions' which
  *   specifies the position in the list from where to continue listing the
- *   resources.
+ *   terraform versions.
  * @param {string} [request.filter]
  *   Optional. Lists the TerraformVersions that match the filter expression. A
  *   filter expression filters the resources listed in the response. The
@@ -3650,13 +3852,13 @@ export class ConfigClient {
  *   parent value is in the format:
  *   'projects/{project_id}/locations/{location}'.
  * @param {number} [request.pageSize]
- *   Optional. When requesting a page of resources, 'page_size' specifies number
- *   of resources to return. If unspecified, at most 500 will be returned. The
- *   maximum value is 1000.
+ *   Optional. When requesting a page of terraform versions, 'page_size'
+ *   specifies number of terraform versions to return. If unspecified, at most
+ *   500 will be returned. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. Token returned by previous call to 'ListTerraformVersions' which
  *   specifies the position in the list from where to continue listing the
- *   resources.
+ *   terraform versions.
  * @param {string} [request.filter]
  *   Optional. Lists the TerraformVersions that match the filter expression. A
  *   filter expression filters the resources listed in the response. The
@@ -3702,6 +3904,526 @@ export class ConfigClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.config.v1.ITerraformVersion>;
+  }
+ /**
+ * Lists ResourceChanges for a given preview.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceChanges are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource changes, 'page_size' specifies
+ *   number of resource changes to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceChanges' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource changes.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource changes that match the filter expression. A
+ *   filter expression filters the resource changes listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.config.v1.ResourceChange|ResourceChange}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listResourceChangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listResourceChanges(
+      request?: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceChange[],
+        protos.google.cloud.config.v1.IListResourceChangesRequest|null,
+        protos.google.cloud.config.v1.IListResourceChangesResponse
+      ]>;
+  listResourceChanges(
+      request: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceChangesRequest,
+          protos.google.cloud.config.v1.IListResourceChangesResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceChange>): void;
+  listResourceChanges(
+      request: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceChangesRequest,
+          protos.google.cloud.config.v1.IListResourceChangesResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceChange>): void;
+  listResourceChanges(
+      request?: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceChangesRequest,
+          protos.google.cloud.config.v1.IListResourceChangesResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceChange>,
+      callback?: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceChangesRequest,
+          protos.google.cloud.config.v1.IListResourceChangesResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceChange>):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceChange[],
+        protos.google.cloud.config.v1.IListResourceChangesRequest|null,
+        protos.google.cloud.config.v1.IListResourceChangesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.config.v1.IListResourceChangesRequest,
+      protos.google.cloud.config.v1.IListResourceChangesResponse|null|undefined,
+      protos.google.cloud.config.v1.IResourceChange>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listResourceChanges values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listResourceChanges request %j', request);
+    return this.innerApiCalls
+      .listResourceChanges(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.config.v1.IResourceChange[],
+        protos.google.cloud.config.v1.IListResourceChangesRequest|null,
+        protos.google.cloud.config.v1.IListResourceChangesResponse
+      ]) => {
+        this._log.info('listResourceChanges values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listResourceChanges`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceChanges are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource changes, 'page_size' specifies
+ *   number of resource changes to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceChanges' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource changes.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource changes that match the filter expression. A
+ *   filter expression filters the resource changes listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.ResourceChange|ResourceChange} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listResourceChangesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listResourceChangesStream(
+      request?: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listResourceChanges'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listResourceChanges stream %j', request);
+    return this.descriptors.page.listResourceChanges.createStream(
+      this.innerApiCalls.listResourceChanges as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listResourceChanges`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceChanges are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource changes, 'page_size' specifies
+ *   number of resource changes to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceChanges' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource changes.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource changes that match the filter expression. A
+ *   filter expression filters the resource changes listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.config.v1.ResourceChange|ResourceChange}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.list_resource_changes.js</caption>
+ * region_tag:config_v1_generated_Config_ListResourceChanges_async
+ */
+  listResourceChangesAsync(
+      request?: protos.google.cloud.config.v1.IListResourceChangesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.config.v1.IResourceChange>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listResourceChanges'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listResourceChanges iterate %j', request);
+    return this.descriptors.page.listResourceChanges.asyncIterate(
+      this.innerApiCalls['listResourceChanges'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.IResourceChange>;
+  }
+ /**
+ * List ResourceDrifts for a given preview.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceDrifts are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource drifts, 'page_size' specifies
+ *   number of resource drifts to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceDrifts' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource drifts.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource drifts that match the filter expression. A
+ *   filter expression filters the resource drifts listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceDrifts/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.config.v1.ResourceDrift|ResourceDrift}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listResourceDriftsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listResourceDrifts(
+      request?: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceDrift[],
+        protos.google.cloud.config.v1.IListResourceDriftsRequest|null,
+        protos.google.cloud.config.v1.IListResourceDriftsResponse
+      ]>;
+  listResourceDrifts(
+      request: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceDriftsRequest,
+          protos.google.cloud.config.v1.IListResourceDriftsResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceDrift>): void;
+  listResourceDrifts(
+      request: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceDriftsRequest,
+          protos.google.cloud.config.v1.IListResourceDriftsResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceDrift>): void;
+  listResourceDrifts(
+      request?: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceDriftsRequest,
+          protos.google.cloud.config.v1.IListResourceDriftsResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceDrift>,
+      callback?: PaginationCallback<
+          protos.google.cloud.config.v1.IListResourceDriftsRequest,
+          protos.google.cloud.config.v1.IListResourceDriftsResponse|null|undefined,
+          protos.google.cloud.config.v1.IResourceDrift>):
+      Promise<[
+        protos.google.cloud.config.v1.IResourceDrift[],
+        protos.google.cloud.config.v1.IListResourceDriftsRequest|null,
+        protos.google.cloud.config.v1.IListResourceDriftsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      protos.google.cloud.config.v1.IListResourceDriftsResponse|null|undefined,
+      protos.google.cloud.config.v1.IResourceDrift>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listResourceDrifts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listResourceDrifts request %j', request);
+    return this.innerApiCalls
+      .listResourceDrifts(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.config.v1.IResourceDrift[],
+        protos.google.cloud.config.v1.IListResourceDriftsRequest|null,
+        protos.google.cloud.config.v1.IListResourceDriftsResponse
+      ]) => {
+        this._log.info('listResourceDrifts values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listResourceDrifts`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceDrifts are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource drifts, 'page_size' specifies
+ *   number of resource drifts to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceDrifts' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource drifts.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource drifts that match the filter expression. A
+ *   filter expression filters the resource drifts listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceDrifts/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.ResourceDrift|ResourceDrift} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listResourceDriftsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listResourceDriftsStream(
+      request?: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listResourceDrifts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listResourceDrifts stream %j', request);
+    return this.descriptors.page.listResourceDrifts.createStream(
+      this.innerApiCalls.listResourceDrifts as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listResourceDrifts`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent in whose context the ResourceDrifts are listed. The
+ *   parent value is in the format:
+ *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+ * @param {number} [request.pageSize]
+ *   Optional. When requesting a page of resource drifts, 'page_size' specifies
+ *   number of resource drifts to return. If unspecified, at most 500 will be
+ *   returned. The maximum value is 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Token returned by previous call to 'ListResourceDrifts' which
+ *   specifies the position in the list from where to continue listing the
+ *   resource drifts.
+ * @param {string} [request.filter]
+ *   Optional. Lists the resource drifts that match the filter expression. A
+ *   filter expression filters the resource drifts listed in the response. The
+ *   expression must be of the form '{field} {operator} {value}' where
+ *   operators: '<', '>',
+ *   '<=',
+ *   '>=',
+ *   '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+ *   roughly synonymous with equality). {field} can refer to a proto or JSON
+ *   field, or a synthetic field. Field names can be camelCase or snake_case.
+ *
+ *   Examples:
+ *   - Filter by name:
+ *     name =
+ *     "projects/foo/locations/us-central1/previews/dep/resourceDrifts/baz
+ * @param {string} [request.orderBy]
+ *   Optional. Field to use to sort the list.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.config.v1.ResourceDrift|ResourceDrift}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/config.list_resource_drifts.js</caption>
+ * region_tag:config_v1_generated_Config_ListResourceDrifts_async
+ */
+  listResourceDriftsAsync(
+      request?: protos.google.cloud.config.v1.IListResourceDriftsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.config.v1.IResourceDrift>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listResourceDrifts'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listResourceDrifts iterate %j', request);
+    return this.descriptors.page.listResourceDrifts.asyncIterate(
+      this.innerApiCalls['listResourceDrifts'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.IResourceDrift>;
   }
 /**
  * Gets the access control policy for a resource. Returns an empty policy
@@ -4354,6 +5076,130 @@ export class ConfigClient {
    */
   matchResourceFromResourceName(resourceName: string) {
     return this.pathTemplates.resourcePathTemplate.match(resourceName).resource;
+  }
+
+  /**
+   * Return a fully-qualified resourceChange resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} preview
+   * @param {string} resource_change
+   * @returns {string} Resource name string.
+   */
+  resourceChangePath(project:string,location:string,preview:string,resourceChange:string) {
+    return this.pathTemplates.resourceChangePathTemplate.render({
+      project: project,
+      location: location,
+      preview: preview,
+      resource_change: resourceChange,
+    });
+  }
+
+  /**
+   * Parse the project from ResourceChange resource.
+   *
+   * @param {string} resourceChangeName
+   *   A fully-qualified path representing ResourceChange resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromResourceChangeName(resourceChangeName: string) {
+    return this.pathTemplates.resourceChangePathTemplate.match(resourceChangeName).project;
+  }
+
+  /**
+   * Parse the location from ResourceChange resource.
+   *
+   * @param {string} resourceChangeName
+   *   A fully-qualified path representing ResourceChange resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromResourceChangeName(resourceChangeName: string) {
+    return this.pathTemplates.resourceChangePathTemplate.match(resourceChangeName).location;
+  }
+
+  /**
+   * Parse the preview from ResourceChange resource.
+   *
+   * @param {string} resourceChangeName
+   *   A fully-qualified path representing ResourceChange resource.
+   * @returns {string} A string representing the preview.
+   */
+  matchPreviewFromResourceChangeName(resourceChangeName: string) {
+    return this.pathTemplates.resourceChangePathTemplate.match(resourceChangeName).preview;
+  }
+
+  /**
+   * Parse the resource_change from ResourceChange resource.
+   *
+   * @param {string} resourceChangeName
+   *   A fully-qualified path representing ResourceChange resource.
+   * @returns {string} A string representing the resource_change.
+   */
+  matchResourceChangeFromResourceChangeName(resourceChangeName: string) {
+    return this.pathTemplates.resourceChangePathTemplate.match(resourceChangeName).resource_change;
+  }
+
+  /**
+   * Return a fully-qualified resourceDrift resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} preview
+   * @param {string} resource_drift
+   * @returns {string} Resource name string.
+   */
+  resourceDriftPath(project:string,location:string,preview:string,resourceDrift:string) {
+    return this.pathTemplates.resourceDriftPathTemplate.render({
+      project: project,
+      location: location,
+      preview: preview,
+      resource_drift: resourceDrift,
+    });
+  }
+
+  /**
+   * Parse the project from ResourceDrift resource.
+   *
+   * @param {string} resourceDriftName
+   *   A fully-qualified path representing ResourceDrift resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromResourceDriftName(resourceDriftName: string) {
+    return this.pathTemplates.resourceDriftPathTemplate.match(resourceDriftName).project;
+  }
+
+  /**
+   * Parse the location from ResourceDrift resource.
+   *
+   * @param {string} resourceDriftName
+   *   A fully-qualified path representing ResourceDrift resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromResourceDriftName(resourceDriftName: string) {
+    return this.pathTemplates.resourceDriftPathTemplate.match(resourceDriftName).location;
+  }
+
+  /**
+   * Parse the preview from ResourceDrift resource.
+   *
+   * @param {string} resourceDriftName
+   *   A fully-qualified path representing ResourceDrift resource.
+   * @returns {string} A string representing the preview.
+   */
+  matchPreviewFromResourceDriftName(resourceDriftName: string) {
+    return this.pathTemplates.resourceDriftPathTemplate.match(resourceDriftName).preview;
+  }
+
+  /**
+   * Parse the resource_drift from ResourceDrift resource.
+   *
+   * @param {string} resourceDriftName
+   *   A fully-qualified path representing ResourceDrift resource.
+   * @returns {string} A string representing the resource_drift.
+   */
+  matchResourceDriftFromResourceDriftName(resourceDriftName: string) {
+    return this.pathTemplates.resourceDriftPathTemplate.match(resourceDriftName).resource_drift;
   }
 
   /**
