@@ -1463,6 +1463,222 @@ describe('v1.ConfigClient', () => {
         });
     });
 
+    describe('getResourceChange', () => {
+        it('invokes getResourceChange without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.ResourceChange()
+            );
+            client.innerApiCalls.getResourceChange = stubSimpleCall(expectedResponse);
+            const [response] = await client.getResourceChange(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceChange without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.ResourceChange()
+            );
+            client.innerApiCalls.getResourceChange = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getResourceChange(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IResourceChange|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceChange with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getResourceChange = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getResourceChange(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceChange as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceChange with closed client', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceChangeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceChangeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getResourceChange(request), expectedError);
+        });
+    });
+
+    describe('getResourceDrift', () => {
+        it('invokes getResourceDrift without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceDriftRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceDriftRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.ResourceDrift()
+            );
+            client.innerApiCalls.getResourceDrift = stubSimpleCall(expectedResponse);
+            const [response] = await client.getResourceDrift(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceDrift without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceDriftRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceDriftRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.config.v1.ResourceDrift()
+            );
+            client.innerApiCalls.getResourceDrift = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getResourceDrift(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IResourceDrift|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceDrift with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceDriftRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceDriftRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getResourceDrift = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getResourceDrift(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getResourceDrift as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getResourceDrift with closed client', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.GetResourceDriftRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.GetResourceDriftRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getResourceDrift(request), expectedError);
+        });
+    });
+
     describe('createDeployment', () => {
         it('invokes createDeployment without error', async () => {
             const client = new configModule.v1.ConfigClient({
@@ -3769,6 +3985,496 @@ describe('v1.ConfigClient', () => {
             );
         });
     });
+
+    describe('listResourceChanges', () => {
+        it('invokes listResourceChanges without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+            ];
+            client.innerApiCalls.listResourceChanges = stubSimpleCall(expectedResponse);
+            const [response] = await client.listResourceChanges(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceChanges without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+            ];
+            client.innerApiCalls.listResourceChanges = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listResourceChanges(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IResourceChange[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceChanges with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listResourceChanges = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listResourceChanges(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceChanges as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceChangesStream without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+            ];
+            client.descriptors.page.listResourceChanges.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listResourceChangesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.ResourceChange[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.ResourceChange) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listResourceChanges.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceChanges, request));
+            assert(
+                (client.descriptors.page.listResourceChanges.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listResourceChangesStream with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceChanges.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listResourceChangesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.ResourceChange[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.ResourceChange) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listResourceChanges.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceChanges, request));
+            assert(
+                (client.descriptors.page.listResourceChanges.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listResourceChanges without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceChange()),
+            ];
+            client.descriptors.page.listResourceChanges.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.config.v1.IResourceChange[] = [];
+            const iterable = client.listResourceChangesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listResourceChanges with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceChangesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceChangesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceChanges.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listResourceChangesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.config.v1.IResourceChange[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listResourceDrifts', () => {
+        it('invokes listResourceDrifts without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+            ];
+            client.innerApiCalls.listResourceDrifts = stubSimpleCall(expectedResponse);
+            const [response] = await client.listResourceDrifts(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceDrifts without error using callback', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+            ];
+            client.innerApiCalls.listResourceDrifts = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listResourceDrifts(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.config.v1.IResourceDrift[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceDrifts with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listResourceDrifts = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listResourceDrifts(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listResourceDrifts as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listResourceDriftsStream without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+            ];
+            client.descriptors.page.listResourceDrifts.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listResourceDriftsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.ResourceDrift[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.ResourceDrift) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listResourceDrifts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceDrifts, request));
+            assert(
+                (client.descriptors.page.listResourceDrifts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listResourceDriftsStream with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceDrifts.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listResourceDriftsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.config.v1.ResourceDrift[] = [];
+                stream.on('data', (response: protos.google.cloud.config.v1.ResourceDrift) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listResourceDrifts.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listResourceDrifts, request));
+            assert(
+                (client.descriptors.page.listResourceDrifts.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listResourceDrifts without error', async () => {
+            const client = new configModule.v1.ConfigClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+              generateSampleMessage(new protos.google.cloud.config.v1.ResourceDrift()),
+            ];
+            client.descriptors.page.listResourceDrifts.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.config.v1.IResourceDrift[] = [];
+            const iterable = client.listResourceDriftsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listResourceDrifts with error', async () => {
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.config.v1.ListResourceDriftsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.config.v1.ListResourceDriftsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listResourceDrifts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listResourceDriftsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.config.v1.IResourceDrift[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getIamPolicy', () => {
         it('invokes getIamPolicy without error', async () => {
             const client = new configModule.v1.ConfigClient({
@@ -4657,6 +5363,114 @@ describe('v1.ConfigClient', () => {
                 const result = client.matchResourceFromResourceName(fakePath);
                 assert.strictEqual(result, "resourceValue");
                 assert((client.pathTemplates.resourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('resourceChange', async () => {
+            const fakePath = "/rendered/path/resourceChange";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                preview: "previewValue",
+                resource_change: "resourceChangeValue",
+            };
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.resourceChangePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.resourceChangePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('resourceChangePath', () => {
+                const result = client.resourceChangePath("projectValue", "locationValue", "previewValue", "resourceChangeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.resourceChangePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromResourceChangeName', () => {
+                const result = client.matchProjectFromResourceChangeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.resourceChangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromResourceChangeName', () => {
+                const result = client.matchLocationFromResourceChangeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.resourceChangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPreviewFromResourceChangeName', () => {
+                const result = client.matchPreviewFromResourceChangeName(fakePath);
+                assert.strictEqual(result, "previewValue");
+                assert((client.pathTemplates.resourceChangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResourceChangeFromResourceChangeName', () => {
+                const result = client.matchResourceChangeFromResourceChangeName(fakePath);
+                assert.strictEqual(result, "resourceChangeValue");
+                assert((client.pathTemplates.resourceChangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('resourceDrift', async () => {
+            const fakePath = "/rendered/path/resourceDrift";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                preview: "previewValue",
+                resource_drift: "resourceDriftValue",
+            };
+            const client = new configModule.v1.ConfigClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.resourceDriftPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.resourceDriftPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('resourceDriftPath', () => {
+                const result = client.resourceDriftPath("projectValue", "locationValue", "previewValue", "resourceDriftValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.resourceDriftPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromResourceDriftName', () => {
+                const result = client.matchProjectFromResourceDriftName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.resourceDriftPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromResourceDriftName', () => {
+                const result = client.matchLocationFromResourceDriftName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.resourceDriftPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPreviewFromResourceDriftName', () => {
+                const result = client.matchPreviewFromResourceDriftName(fakePath);
+                assert.strictEqual(result, "previewValue");
+                assert((client.pathTemplates.resourceDriftPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchResourceDriftFromResourceDriftName', () => {
+                const result = client.matchResourceDriftFromResourceDriftName(fakePath);
+                assert.strictEqual(result, "resourceDriftValue");
+                assert((client.pathTemplates.resourceDriftPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
