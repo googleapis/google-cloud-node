@@ -2175,6 +2175,12 @@ export namespace google {
                         /** ProductReviewAttributes isSpam */
                         isSpam?: (boolean|null);
 
+                        /** ProductReviewAttributes isVerifiedPurchase */
+                        isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview */
+                        isIncentivizedReview?: (boolean|null);
+
                         /** ProductReviewAttributes collectionMethod */
                         collectionMethod?: (google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|null);
 
@@ -2271,6 +2277,12 @@ export namespace google {
 
                         /** ProductReviewAttributes isSpam. */
                         public isSpam?: (boolean|null);
+
+                        /** ProductReviewAttributes isVerifiedPurchase. */
+                        public isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview. */
+                        public isIncentivizedReview?: (boolean|null);
 
                         /** ProductReviewAttributes collectionMethod. */
                         public collectionMethod: (google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod);

@@ -5381,6 +5381,8 @@
                              * @property {Array.<string>|null} [skus] ProductReviewAttributes skus
                              * @property {Array.<string>|null} [brands] ProductReviewAttributes brands
                              * @property {boolean|null} [isSpam] ProductReviewAttributes isSpam
+                             * @property {boolean|null} [isVerifiedPurchase] ProductReviewAttributes isVerifiedPurchase
+                             * @property {boolean|null} [isIncentivizedReview] ProductReviewAttributes isIncentivizedReview
                              * @property {google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|null} [collectionMethod] ProductReviewAttributes collectionMethod
                              * @property {string|null} [transactionId] ProductReviewAttributes transactionId
                              */
@@ -5627,6 +5629,22 @@
                             ProductReviewAttributes.prototype.isSpam = null;
     
                             /**
+                             * ProductReviewAttributes isVerifiedPurchase.
+                             * @member {boolean|null|undefined} isVerifiedPurchase
+                             * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
+                             * @instance
+                             */
+                            ProductReviewAttributes.prototype.isVerifiedPurchase = null;
+    
+                            /**
+                             * ProductReviewAttributes isIncentivizedReview.
+                             * @member {boolean|null|undefined} isIncentivizedReview
+                             * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
+                             * @instance
+                             */
+                            ProductReviewAttributes.prototype.isIncentivizedReview = null;
+    
+                            /**
                              * ProductReviewAttributes collectionMethod.
                              * @member {google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod} collectionMethod
                              * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
@@ -5735,6 +5753,18 @@
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductReviewAttributes.prototype, "_isVerifiedPurchase", {
+                                get: $util.oneOfGetter($oneOfFields = ["isVerifiedPurchase"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductReviewAttributes.prototype, "_isIncentivizedReview", {
+                                get: $util.oneOfGetter($oneOfFields = ["isIncentivizedReview"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
                             /**
                              * Creates a new ProductReviewAttributes instance using the specified properties.
                              * @function create
@@ -5827,6 +5857,10 @@
                                     writer.uint32(/* id 28, wireType 0 =*/224).int32(message.collectionMethod);
                                 if (message.transactionId != null && Object.hasOwnProperty.call(message, "transactionId"))
                                     writer.uint32(/* id 29, wireType 2 =*/234).string(message.transactionId);
+                                if (message.isVerifiedPurchase != null && Object.hasOwnProperty.call(message, "isVerifiedPurchase"))
+                                    writer.uint32(/* id 30, wireType 0 =*/240).bool(message.isVerifiedPurchase);
+                                if (message.isIncentivizedReview != null && Object.hasOwnProperty.call(message, "isIncentivizedReview"))
+                                    writer.uint32(/* id 31, wireType 0 =*/248).bool(message.isIncentivizedReview);
                                 return writer;
                             };
     
@@ -5989,6 +6023,14 @@
                                         }
                                     case 27: {
                                             message.isSpam = reader.bool();
+                                            break;
+                                        }
+                                    case 30: {
+                                            message.isVerifiedPurchase = reader.bool();
+                                            break;
+                                        }
+                                    case 31: {
+                                            message.isIncentivizedReview = reader.bool();
                                             break;
                                         }
                                     case 28: {
@@ -6190,6 +6232,16 @@
                                     if (typeof message.isSpam !== "boolean")
                                         return "isSpam: boolean expected";
                                 }
+                                if (message.isVerifiedPurchase != null && message.hasOwnProperty("isVerifiedPurchase")) {
+                                    properties._isVerifiedPurchase = 1;
+                                    if (typeof message.isVerifiedPurchase !== "boolean")
+                                        return "isVerifiedPurchase: boolean expected";
+                                }
+                                if (message.isIncentivizedReview != null && message.hasOwnProperty("isIncentivizedReview")) {
+                                    properties._isIncentivizedReview = 1;
+                                    if (typeof message.isIncentivizedReview !== "boolean")
+                                        return "isIncentivizedReview: boolean expected";
+                                }
                                 if (message.collectionMethod != null && message.hasOwnProperty("collectionMethod"))
                                     switch (message.collectionMethod) {
                                     default:
@@ -6341,6 +6393,10 @@
                                 }
                                 if (object.isSpam != null)
                                     message.isSpam = Boolean(object.isSpam);
+                                if (object.isVerifiedPurchase != null)
+                                    message.isVerifiedPurchase = Boolean(object.isVerifiedPurchase);
+                                if (object.isIncentivizedReview != null)
+                                    message.isIncentivizedReview = Boolean(object.isIncentivizedReview);
                                 switch (object.collectionMethod) {
                                 default:
                                     if (typeof object.collectionMethod === "number") {
@@ -6536,6 +6592,16 @@
                                     object.collectionMethod = options.enums === String ? $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod[message.collectionMethod] === undefined ? message.collectionMethod : $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod[message.collectionMethod] : message.collectionMethod;
                                 if (message.transactionId != null && message.hasOwnProperty("transactionId"))
                                     object.transactionId = message.transactionId;
+                                if (message.isVerifiedPurchase != null && message.hasOwnProperty("isVerifiedPurchase")) {
+                                    object.isVerifiedPurchase = message.isVerifiedPurchase;
+                                    if (options.oneofs)
+                                        object._isVerifiedPurchase = "isVerifiedPurchase";
+                                }
+                                if (message.isIncentivizedReview != null && message.hasOwnProperty("isIncentivizedReview")) {
+                                    object.isIncentivizedReview = message.isIncentivizedReview;
+                                    if (options.oneofs)
+                                        object._isIncentivizedReview = "isIncentivizedReview";
+                                }
                                 return object;
                             };
     
