@@ -180262,6 +180262,9 @@ export namespace google {
                 /** Properties of an EvaluateDatasetResponse. */
                 interface IEvaluateDatasetResponse {
 
+                    /** EvaluateDatasetResponse aggregationOutput */
+                    aggregationOutput?: (google.cloud.aiplatform.v1beta1.IAggregationOutput|null);
+
                     /** EvaluateDatasetResponse outputInfo */
                     outputInfo?: (google.cloud.aiplatform.v1beta1.IOutputInfo|null);
                 }
@@ -180274,6 +180277,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IEvaluateDatasetResponse);
+
+                    /** EvaluateDatasetResponse aggregationOutput. */
+                    public aggregationOutput?: (google.cloud.aiplatform.v1beta1.IAggregationOutput|null);
 
                     /** EvaluateDatasetResponse outputInfo. */
                     public outputInfo?: (google.cloud.aiplatform.v1beta1.IOutputInfo|null);
@@ -180450,6 +180456,239 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OutputInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregationOutput. */
+                interface IAggregationOutput {
+
+                    /** AggregationOutput dataset */
+                    dataset?: (google.cloud.aiplatform.v1beta1.IEvaluationDataset|null);
+
+                    /** AggregationOutput aggregationResults */
+                    aggregationResults?: (google.cloud.aiplatform.v1beta1.IAggregationResult[]|null);
+                }
+
+                /** Represents an AggregationOutput. */
+                class AggregationOutput implements IAggregationOutput {
+
+                    /**
+                     * Constructs a new AggregationOutput.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IAggregationOutput);
+
+                    /** AggregationOutput dataset. */
+                    public dataset?: (google.cloud.aiplatform.v1beta1.IEvaluationDataset|null);
+
+                    /** AggregationOutput aggregationResults. */
+                    public aggregationResults: google.cloud.aiplatform.v1beta1.IAggregationResult[];
+
+                    /**
+                     * Creates a new AggregationOutput instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregationOutput instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IAggregationOutput): google.cloud.aiplatform.v1beta1.AggregationOutput;
+
+                    /**
+                     * Encodes the specified AggregationOutput message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AggregationOutput.verify|verify} messages.
+                     * @param message AggregationOutput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IAggregationOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregationOutput message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AggregationOutput.verify|verify} messages.
+                     * @param message AggregationOutput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IAggregationOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregationOutput message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregationOutput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.AggregationOutput;
+
+                    /**
+                     * Decodes an AggregationOutput message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregationOutput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.AggregationOutput;
+
+                    /**
+                     * Verifies an AggregationOutput message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregationOutput message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregationOutput
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.AggregationOutput;
+
+                    /**
+                     * Creates a plain object from an AggregationOutput message. Also converts values to other types if specified.
+                     * @param message AggregationOutput
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.AggregationOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregationOutput to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregationOutput
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregationResult. */
+                interface IAggregationResult {
+
+                    /** AggregationResult pointwiseMetricResult */
+                    pointwiseMetricResult?: (google.cloud.aiplatform.v1beta1.IPointwiseMetricResult|null);
+
+                    /** AggregationResult pairwiseMetricResult */
+                    pairwiseMetricResult?: (google.cloud.aiplatform.v1beta1.IPairwiseMetricResult|null);
+
+                    /** AggregationResult exactMatchMetricValue */
+                    exactMatchMetricValue?: (google.cloud.aiplatform.v1beta1.IExactMatchMetricValue|null);
+
+                    /** AggregationResult bleuMetricValue */
+                    bleuMetricValue?: (google.cloud.aiplatform.v1beta1.IBleuMetricValue|null);
+
+                    /** AggregationResult rougeMetricValue */
+                    rougeMetricValue?: (google.cloud.aiplatform.v1beta1.IRougeMetricValue|null);
+
+                    /** AggregationResult aggregationMetric */
+                    aggregationMetric?: (google.cloud.aiplatform.v1beta1.Metric.AggregationMetric|keyof typeof google.cloud.aiplatform.v1beta1.Metric.AggregationMetric|null);
+                }
+
+                /** Represents an AggregationResult. */
+                class AggregationResult implements IAggregationResult {
+
+                    /**
+                     * Constructs a new AggregationResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IAggregationResult);
+
+                    /** AggregationResult pointwiseMetricResult. */
+                    public pointwiseMetricResult?: (google.cloud.aiplatform.v1beta1.IPointwiseMetricResult|null);
+
+                    /** AggregationResult pairwiseMetricResult. */
+                    public pairwiseMetricResult?: (google.cloud.aiplatform.v1beta1.IPairwiseMetricResult|null);
+
+                    /** AggregationResult exactMatchMetricValue. */
+                    public exactMatchMetricValue?: (google.cloud.aiplatform.v1beta1.IExactMatchMetricValue|null);
+
+                    /** AggregationResult bleuMetricValue. */
+                    public bleuMetricValue?: (google.cloud.aiplatform.v1beta1.IBleuMetricValue|null);
+
+                    /** AggregationResult rougeMetricValue. */
+                    public rougeMetricValue?: (google.cloud.aiplatform.v1beta1.IRougeMetricValue|null);
+
+                    /** AggregationResult aggregationMetric. */
+                    public aggregationMetric: (google.cloud.aiplatform.v1beta1.Metric.AggregationMetric|keyof typeof google.cloud.aiplatform.v1beta1.Metric.AggregationMetric);
+
+                    /** AggregationResult aggregationResult. */
+                    public aggregationResult?: ("pointwiseMetricResult"|"pairwiseMetricResult"|"exactMatchMetricValue"|"bleuMetricValue"|"rougeMetricValue");
+
+                    /**
+                     * Creates a new AggregationResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregationResult instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IAggregationResult): google.cloud.aiplatform.v1beta1.AggregationResult;
+
+                    /**
+                     * Encodes the specified AggregationResult message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AggregationResult.verify|verify} messages.
+                     * @param message AggregationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IAggregationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregationResult message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.AggregationResult.verify|verify} messages.
+                     * @param message AggregationResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IAggregationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregationResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.AggregationResult;
+
+                    /**
+                     * Decodes an AggregationResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregationResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.AggregationResult;
+
+                    /**
+                     * Verifies an AggregationResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregationResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregationResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.AggregationResult;
+
+                    /**
+                     * Creates a plain object from an AggregationResult message. Also converts values to other types if specified.
+                     * @param message AggregationResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.AggregationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregationResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregationResult
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
