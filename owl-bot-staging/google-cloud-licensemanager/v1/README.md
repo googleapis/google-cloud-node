@@ -1,1 +1,0 @@
-Licensemanager: Nodejs Client
