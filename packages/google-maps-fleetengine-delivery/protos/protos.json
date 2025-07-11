@@ -172,6 +172,22 @@
                           "type": "google.protobuf.DoubleValue",
                           "id": 25
                         },
+                        "flpLocation": {
+                          "type": "google.type.LatLng",
+                          "id": 29
+                        },
+                        "flpUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 30
+                        },
+                        "flpLatlngAccuracyMeters": {
+                          "type": "google.protobuf.DoubleValue",
+                          "id": 31
+                        },
+                        "flpHeadingDegrees": {
+                          "type": "google.protobuf.Int32Value",
+                          "id": 32
+                        },
                         "supplementalLocation": {
                           "type": "google.type.LatLng",
                           "id": 18

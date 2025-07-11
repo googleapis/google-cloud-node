@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/streetview-publish",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": " client for Node.js",
   "repository": {
     "type": "git",

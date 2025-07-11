@@ -315,6 +315,22 @@
                       "type": "google.protobuf.DoubleValue",
                       "id": 25
                     },
+                    "flpLocation": {
+                      "type": "google.type.LatLng",
+                      "id": 29
+                    },
+                    "flpUpdateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 30
+                    },
+                    "flpLatlngAccuracyMeters": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 31
+                    },
+                    "flpHeadingDegrees": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 32
+                    },
                     "supplementalLocation": {
                       "type": "google.type.LatLng",
                       "id": 18
@@ -351,6 +367,35 @@
                     "FLEET_ENGINE_LOCATION": 6,
                     "FUSED_LOCATION_PROVIDER": 100,
                     "CORE_LOCATION": 200
+                  }
+                },
+                "TripAttribute": {
+                  "oneofs": {
+                    "tripAttributeValue": {
+                      "oneof": [
+                        "stringValue",
+                        "boolValue",
+                        "numberValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "key": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "boolValue": {
+                      "type": "bool",
+                      "id": 3
+                    },
+                    "numberValue": {
+                      "type": "double",
+                      "id": 4
+                    }
                   }
                 },
                 "SpeedReadingInterval": {
@@ -683,7 +728,10 @@
                     },
                     "remainingWaypointsVersion": {
                       "type": "google.protobuf.Timestamp",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "routeFormatType": {
                       "type": "PolylineFormatType",
@@ -1046,6 +1094,11 @@
                     "view": {
                       "type": "TripView",
                       "id": 31
+                    },
+                    "attributes": {
+                      "rule": "repeated",
+                      "type": "TripAttribute",
+                      "id": 35
                     }
                   }
                 },

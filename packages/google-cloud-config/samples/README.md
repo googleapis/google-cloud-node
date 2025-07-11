@@ -24,11 +24,15 @@
   * [Config.get_deployment](#config.get_deployment)
   * [Config.get_preview](#config.get_preview)
   * [Config.get_resource](#config.get_resource)
+  * [Config.get_resource_change](#config.get_resource_change)
+  * [Config.get_resource_drift](#config.get_resource_drift)
   * [Config.get_revision](#config.get_revision)
   * [Config.get_terraform_version](#config.get_terraform_version)
   * [Config.import_statefile](#config.import_statefile)
   * [Config.list_deployments](#config.list_deployments)
   * [Config.list_previews](#config.list_previews)
+  * [Config.list_resource_changes](#config.list_resource_changes)
+  * [Config.list_resource_drifts](#config.list_resource_drifts)
   * [Config.list_resources](#config.list_resources)
   * [Config.list_revisions](#config.list_revisions)
   * [Config.list_terraform_versions](#config.list_terraform_versions)
@@ -256,6 +260,40 @@ __Usage:__
 
 
 
+### Config.get_resource_change
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js`
+
+
+-----
+
+
+
+
+### Config.get_resource_drift
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js`
+
+
+-----
+
+
+
+
 ### Config.get_revision
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_revision.js).
@@ -334,6 +372,40 @@ __Usage:__
 
 
 `node packages/google-cloud-config/samples/generated/v1/config.list_previews.js`
+
+
+-----
+
+
+
+
+### Config.list_resource_changes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js`
+
+
+-----
+
+
+
+
+### Config.list_resource_drifts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js`
 
 
 -----

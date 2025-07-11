@@ -1,1 +1,0 @@
-Schemaregistry: Nodejs Client
