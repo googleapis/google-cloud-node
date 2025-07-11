@@ -25,6 +25,7 @@
   * [License_manager.query_configuration_license_usage](#license_manager.query_configuration_license_usage)
   * [License_manager.reactivate_configuration](#license_manager.reactivate_configuration)
   * [License_manager.update_configuration](#license_manager.update_configuration)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -255,6 +256,23 @@ __Usage:__
 
 
 `node packages/google-cloud-licensemanager/samples/generated/v1/license_manager.update_configuration.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-licensemanager/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-licensemanager/samples/quickstart.js`
 
 
 
