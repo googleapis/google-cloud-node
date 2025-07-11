@@ -1564,6 +1564,10 @@
                      * @property {google.protobuf.ITimestamp|null} [rawLocationTime] VehicleLocation rawLocationTime
                      * @property {maps.fleetengine.v1.LocationSensor|null} [rawLocationSensor] VehicleLocation rawLocationSensor
                      * @property {google.protobuf.IDoubleValue|null} [rawLocationAccuracy] VehicleLocation rawLocationAccuracy
+                     * @property {google.type.ILatLng|null} [flpLocation] VehicleLocation flpLocation
+                     * @property {google.protobuf.ITimestamp|null} [flpUpdateTime] VehicleLocation flpUpdateTime
+                     * @property {google.protobuf.IDoubleValue|null} [flpLatlngAccuracyMeters] VehicleLocation flpLatlngAccuracyMeters
+                     * @property {google.protobuf.IInt32Value|null} [flpHeadingDegrees] VehicleLocation flpHeadingDegrees
                      * @property {google.type.ILatLng|null} [supplementalLocation] VehicleLocation supplementalLocation
                      * @property {google.protobuf.ITimestamp|null} [supplementalLocationTime] VehicleLocation supplementalLocationTime
                      * @property {maps.fleetengine.v1.LocationSensor|null} [supplementalLocationSensor] VehicleLocation supplementalLocationSensor
@@ -1771,6 +1775,38 @@
                     VehicleLocation.prototype.rawLocationAccuracy = null;
     
                     /**
+                     * VehicleLocation flpLocation.
+                     * @member {google.type.ILatLng|null|undefined} flpLocation
+                     * @memberof maps.fleetengine.v1.VehicleLocation
+                     * @instance
+                     */
+                    VehicleLocation.prototype.flpLocation = null;
+    
+                    /**
+                     * VehicleLocation flpUpdateTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} flpUpdateTime
+                     * @memberof maps.fleetengine.v1.VehicleLocation
+                     * @instance
+                     */
+                    VehicleLocation.prototype.flpUpdateTime = null;
+    
+                    /**
+                     * VehicleLocation flpLatlngAccuracyMeters.
+                     * @member {google.protobuf.IDoubleValue|null|undefined} flpLatlngAccuracyMeters
+                     * @memberof maps.fleetengine.v1.VehicleLocation
+                     * @instance
+                     */
+                    VehicleLocation.prototype.flpLatlngAccuracyMeters = null;
+    
+                    /**
+                     * VehicleLocation flpHeadingDegrees.
+                     * @member {google.protobuf.IInt32Value|null|undefined} flpHeadingDegrees
+                     * @memberof maps.fleetengine.v1.VehicleLocation
+                     * @instance
+                     */
+                    VehicleLocation.prototype.flpHeadingDegrees = null;
+    
+                    /**
                      * VehicleLocation supplementalLocation.
                      * @member {google.type.ILatLng|null|undefined} supplementalLocation
                      * @memberof maps.fleetengine.v1.VehicleLocation
@@ -1890,6 +1926,14 @@
                             $root.google.protobuf.BoolValue.encode(message.isRoadSnapped, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                         if (message.rawLocationSensor != null && Object.hasOwnProperty.call(message, "rawLocationSensor"))
                             writer.uint32(/* id 28, wireType 0 =*/224).int32(message.rawLocationSensor);
+                        if (message.flpLocation != null && Object.hasOwnProperty.call(message, "flpLocation"))
+                            $root.google.type.LatLng.encode(message.flpLocation, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                        if (message.flpUpdateTime != null && Object.hasOwnProperty.call(message, "flpUpdateTime"))
+                            $root.google.protobuf.Timestamp.encode(message.flpUpdateTime, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                        if (message.flpLatlngAccuracyMeters != null && Object.hasOwnProperty.call(message, "flpLatlngAccuracyMeters"))
+                            $root.google.protobuf.DoubleValue.encode(message.flpLatlngAccuracyMeters, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                        if (message.flpHeadingDegrees != null && Object.hasOwnProperty.call(message, "flpHeadingDegrees"))
+                            $root.google.protobuf.Int32Value.encode(message.flpHeadingDegrees, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                         return writer;
                     };
     
@@ -2016,6 +2060,22 @@
                                 }
                             case 25: {
                                     message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 29: {
+                                    message.flpLocation = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 30: {
+                                    message.flpUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 31: {
+                                    message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 32: {
+                                    message.flpHeadingDegrees = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 18: {
@@ -2207,6 +2267,26 @@
                             var error = $root.google.protobuf.DoubleValue.verify(message.rawLocationAccuracy);
                             if (error)
                                 return "rawLocationAccuracy." + error;
+                        }
+                        if (message.flpLocation != null && message.hasOwnProperty("flpLocation")) {
+                            var error = $root.google.type.LatLng.verify(message.flpLocation);
+                            if (error)
+                                return "flpLocation." + error;
+                        }
+                        if (message.flpUpdateTime != null && message.hasOwnProperty("flpUpdateTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.flpUpdateTime);
+                            if (error)
+                                return "flpUpdateTime." + error;
+                        }
+                        if (message.flpLatlngAccuracyMeters != null && message.hasOwnProperty("flpLatlngAccuracyMeters")) {
+                            var error = $root.google.protobuf.DoubleValue.verify(message.flpLatlngAccuracyMeters);
+                            if (error)
+                                return "flpLatlngAccuracyMeters." + error;
+                        }
+                        if (message.flpHeadingDegrees != null && message.hasOwnProperty("flpHeadingDegrees")) {
+                            var error = $root.google.protobuf.Int32Value.verify(message.flpHeadingDegrees);
+                            if (error)
+                                return "flpHeadingDegrees." + error;
                         }
                         if (message.supplementalLocation != null && message.hasOwnProperty("supplementalLocation")) {
                             var error = $root.google.type.LatLng.verify(message.supplementalLocation);
@@ -2449,6 +2529,26 @@
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.rawLocationAccuracy: object expected");
                             message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.rawLocationAccuracy);
                         }
+                        if (object.flpLocation != null) {
+                            if (typeof object.flpLocation !== "object")
+                                throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpLocation: object expected");
+                            message.flpLocation = $root.google.type.LatLng.fromObject(object.flpLocation);
+                        }
+                        if (object.flpUpdateTime != null) {
+                            if (typeof object.flpUpdateTime !== "object")
+                                throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpUpdateTime: object expected");
+                            message.flpUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.flpUpdateTime);
+                        }
+                        if (object.flpLatlngAccuracyMeters != null) {
+                            if (typeof object.flpLatlngAccuracyMeters !== "object")
+                                throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpLatlngAccuracyMeters: object expected");
+                            message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.fromObject(object.flpLatlngAccuracyMeters);
+                        }
+                        if (object.flpHeadingDegrees != null) {
+                            if (typeof object.flpHeadingDegrees !== "object")
+                                throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpHeadingDegrees: object expected");
+                            message.flpHeadingDegrees = $root.google.protobuf.Int32Value.fromObject(object.flpHeadingDegrees);
+                        }
                         if (object.supplementalLocation != null) {
                             if (typeof object.supplementalLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.supplementalLocation: object expected");
@@ -2555,6 +2655,10 @@
                             object.roadSnapped = false;
                             object.isRoadSnapped = null;
                             object.rawLocationSensor = options.enums === String ? "UNKNOWN_SENSOR" : 0;
+                            object.flpLocation = null;
+                            object.flpUpdateTime = null;
+                            object.flpLatlngAccuracyMeters = null;
+                            object.flpHeadingDegrees = null;
                         }
                         if (message.location != null && message.hasOwnProperty("location"))
                             object.location = $root.google.type.LatLng.toObject(message.location, options);
@@ -2612,6 +2716,14 @@
                             object.isRoadSnapped = $root.google.protobuf.BoolValue.toObject(message.isRoadSnapped, options);
                         if (message.rawLocationSensor != null && message.hasOwnProperty("rawLocationSensor"))
                             object.rawLocationSensor = options.enums === String ? $root.maps.fleetengine.v1.LocationSensor[message.rawLocationSensor] === undefined ? message.rawLocationSensor : $root.maps.fleetengine.v1.LocationSensor[message.rawLocationSensor] : message.rawLocationSensor;
+                        if (message.flpLocation != null && message.hasOwnProperty("flpLocation"))
+                            object.flpLocation = $root.google.type.LatLng.toObject(message.flpLocation, options);
+                        if (message.flpUpdateTime != null && message.hasOwnProperty("flpUpdateTime"))
+                            object.flpUpdateTime = $root.google.protobuf.Timestamp.toObject(message.flpUpdateTime, options);
+                        if (message.flpLatlngAccuracyMeters != null && message.hasOwnProperty("flpLatlngAccuracyMeters"))
+                            object.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.toObject(message.flpLatlngAccuracyMeters, options);
+                        if (message.flpHeadingDegrees != null && message.hasOwnProperty("flpHeadingDegrees"))
+                            object.flpHeadingDegrees = $root.google.protobuf.Int32Value.toObject(message.flpHeadingDegrees, options);
                         return object;
                     };
     
@@ -2670,6 +2782,311 @@
                     values[valuesById[100] = "FUSED_LOCATION_PROVIDER"] = 100;
                     values[valuesById[200] = "CORE_LOCATION"] = 200;
                     return values;
+                })();
+    
+                v1.TripAttribute = (function() {
+    
+                    /**
+                     * Properties of a TripAttribute.
+                     * @memberof maps.fleetengine.v1
+                     * @interface ITripAttribute
+                     * @property {string|null} [key] TripAttribute key
+                     * @property {string|null} [stringValue] TripAttribute stringValue
+                     * @property {boolean|null} [boolValue] TripAttribute boolValue
+                     * @property {number|null} [numberValue] TripAttribute numberValue
+                     */
+    
+                    /**
+                     * Constructs a new TripAttribute.
+                     * @memberof maps.fleetengine.v1
+                     * @classdesc Represents a TripAttribute.
+                     * @implements ITripAttribute
+                     * @constructor
+                     * @param {maps.fleetengine.v1.ITripAttribute=} [properties] Properties to set
+                     */
+                    function TripAttribute(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TripAttribute key.
+                     * @member {string} key
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     */
+                    TripAttribute.prototype.key = "";
+    
+                    /**
+                     * TripAttribute stringValue.
+                     * @member {string|null|undefined} stringValue
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     */
+                    TripAttribute.prototype.stringValue = null;
+    
+                    /**
+                     * TripAttribute boolValue.
+                     * @member {boolean|null|undefined} boolValue
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     */
+                    TripAttribute.prototype.boolValue = null;
+    
+                    /**
+                     * TripAttribute numberValue.
+                     * @member {number|null|undefined} numberValue
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     */
+                    TripAttribute.prototype.numberValue = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * TripAttribute tripAttributeValue.
+                     * @member {"stringValue"|"boolValue"|"numberValue"|undefined} tripAttributeValue
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     */
+                    Object.defineProperty(TripAttribute.prototype, "tripAttributeValue", {
+                        get: $util.oneOfGetter($oneOfFields = ["stringValue", "boolValue", "numberValue"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new TripAttribute instance using the specified properties.
+                     * @function create
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {maps.fleetengine.v1.ITripAttribute=} [properties] Properties to set
+                     * @returns {maps.fleetengine.v1.TripAttribute} TripAttribute instance
+                     */
+                    TripAttribute.create = function create(properties) {
+                        return new TripAttribute(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TripAttribute message. Does not implicitly {@link maps.fleetengine.v1.TripAttribute.verify|verify} messages.
+                     * @function encode
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {maps.fleetengine.v1.ITripAttribute} message TripAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TripAttribute.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                        if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.stringValue);
+                        if (message.boolValue != null && Object.hasOwnProperty.call(message, "boolValue"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.boolValue);
+                        if (message.numberValue != null && Object.hasOwnProperty.call(message, "numberValue"))
+                            writer.uint32(/* id 4, wireType 1 =*/33).double(message.numberValue);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TripAttribute message, length delimited. Does not implicitly {@link maps.fleetengine.v1.TripAttribute.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {maps.fleetengine.v1.ITripAttribute} message TripAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TripAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TripAttribute message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {maps.fleetengine.v1.TripAttribute} TripAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TripAttribute.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TripAttribute();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.key = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.stringValue = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.boolValue = reader.bool();
+                                    break;
+                                }
+                            case 4: {
+                                    message.numberValue = reader.double();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TripAttribute message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {maps.fleetengine.v1.TripAttribute} TripAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TripAttribute.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TripAttribute message.
+                     * @function verify
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TripAttribute.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.key != null && message.hasOwnProperty("key"))
+                            if (!$util.isString(message.key))
+                                return "key: string expected";
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            properties.tripAttributeValue = 1;
+                            if (!$util.isString(message.stringValue))
+                                return "stringValue: string expected";
+                        }
+                        if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                            if (properties.tripAttributeValue === 1)
+                                return "tripAttributeValue: multiple values";
+                            properties.tripAttributeValue = 1;
+                            if (typeof message.boolValue !== "boolean")
+                                return "boolValue: boolean expected";
+                        }
+                        if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                            if (properties.tripAttributeValue === 1)
+                                return "tripAttributeValue: multiple values";
+                            properties.tripAttributeValue = 1;
+                            if (typeof message.numberValue !== "number")
+                                return "numberValue: number expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TripAttribute message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {maps.fleetengine.v1.TripAttribute} TripAttribute
+                     */
+                    TripAttribute.fromObject = function fromObject(object) {
+                        if (object instanceof $root.maps.fleetengine.v1.TripAttribute)
+                            return object;
+                        var message = new $root.maps.fleetengine.v1.TripAttribute();
+                        if (object.key != null)
+                            message.key = String(object.key);
+                        if (object.stringValue != null)
+                            message.stringValue = String(object.stringValue);
+                        if (object.boolValue != null)
+                            message.boolValue = Boolean(object.boolValue);
+                        if (object.numberValue != null)
+                            message.numberValue = Number(object.numberValue);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TripAttribute message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {maps.fleetengine.v1.TripAttribute} message TripAttribute
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TripAttribute.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.key = "";
+                        if (message.key != null && message.hasOwnProperty("key"))
+                            object.key = message.key;
+                        if (message.stringValue != null && message.hasOwnProperty("stringValue")) {
+                            object.stringValue = message.stringValue;
+                            if (options.oneofs)
+                                object.tripAttributeValue = "stringValue";
+                        }
+                        if (message.boolValue != null && message.hasOwnProperty("boolValue")) {
+                            object.boolValue = message.boolValue;
+                            if (options.oneofs)
+                                object.tripAttributeValue = "boolValue";
+                        }
+                        if (message.numberValue != null && message.hasOwnProperty("numberValue")) {
+                            object.numberValue = options.json && !isFinite(message.numberValue) ? String(message.numberValue) : message.numberValue;
+                            if (options.oneofs)
+                                object.tripAttributeValue = "numberValue";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TripAttribute to JSON.
+                     * @function toJSON
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TripAttribute.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TripAttribute
+                     * @function getTypeUrl
+                     * @memberof maps.fleetengine.v1.TripAttribute
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TripAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/maps.fleetengine.v1.TripAttribute";
+                    };
+    
+                    return TripAttribute;
                 })();
     
                 v1.SpeedReadingInterval = (function() {
@@ -6286,6 +6703,7 @@
                      * @property {maps.fleetengine.v1.IVehicleLocation|null} [lastLocation] Trip lastLocation
                      * @property {boolean|null} [lastLocationSnappable] Trip lastLocationSnappable
                      * @property {maps.fleetengine.v1.TripView|null} [view] Trip view
+                     * @property {Array.<maps.fleetengine.v1.ITripAttribute>|null} [attributes] Trip attributes
                      */
     
                     /**
@@ -6303,6 +6721,7 @@
                         this.remainingWaypoints = [];
                         this.vehicleWaypoints = [];
                         this.route = [];
+                        this.attributes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -6574,6 +6993,14 @@
                     Trip.prototype.view = 0;
     
                     /**
+                     * Trip attributes.
+                     * @member {Array.<maps.fleetengine.v1.ITripAttribute>} attributes
+                     * @memberof maps.fleetengine.v1.Trip
+                     * @instance
+                     */
+                    Trip.prototype.attributes = $util.emptyArray;
+    
+                    /**
                      * Creates a new Trip instance using the specified properties.
                      * @function create
                      * @memberof maps.fleetengine.v1.Trip
@@ -6669,6 +7096,9 @@
                         if (message.actualIntermediateDestinations != null && message.actualIntermediateDestinations.length)
                             for (var i = 0; i < message.actualIntermediateDestinations.length; ++i)
                                 $root.maps.fleetengine.v1.StopLocation.encode(message.actualIntermediateDestinations[i], writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                        if (message.attributes != null && message.attributes.length)
+                            for (var i = 0; i < message.attributes.length; ++i)
+                                $root.maps.fleetengine.v1.TripAttribute.encode(message.attributes[i], writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                         return writer;
                     };
     
@@ -6847,6 +7277,12 @@
                                 }
                             case 31: {
                                     message.view = reader.int32();
+                                    break;
+                                }
+                            case 35: {
+                                    if (!(message.attributes && message.attributes.length))
+                                        message.attributes = [];
+                                    message.attributes.push($root.maps.fleetengine.v1.TripAttribute.decode(reader, reader.uint32()));
                                     break;
                                 }
                             default:
@@ -7079,6 +7515,15 @@
                             case 2:
                                 break;
                             }
+                        if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                            if (!Array.isArray(message.attributes))
+                                return "attributes: array expected";
+                            for (var i = 0; i < message.attributes.length; ++i) {
+                                var error = $root.maps.fleetengine.v1.TripAttribute.verify(message.attributes[i]);
+                                if (error)
+                                    return "attributes." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -7340,6 +7785,16 @@
                             message.view = 2;
                             break;
                         }
+                        if (object.attributes) {
+                            if (!Array.isArray(object.attributes))
+                                throw TypeError(".maps.fleetengine.v1.Trip.attributes: array expected");
+                            message.attributes = [];
+                            for (var i = 0; i < object.attributes.length; ++i) {
+                                if (typeof object.attributes[i] !== "object")
+                                    throw TypeError(".maps.fleetengine.v1.Trip.attributes: object expected");
+                                message.attributes[i] = $root.maps.fleetengine.v1.TripAttribute.fromObject(object.attributes[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -7363,6 +7818,7 @@
                             object.vehicleWaypoints = [];
                             object.actualIntermediateDestinationArrivalPoints = [];
                             object.actualIntermediateDestinations = [];
+                            object.attributes = [];
                         }
                         if (options.defaults) {
                             object.name = "";
@@ -7476,6 +7932,11 @@
                             object.actualIntermediateDestinations = [];
                             for (var j = 0; j < message.actualIntermediateDestinations.length; ++j)
                                 object.actualIntermediateDestinations[j] = $root.maps.fleetengine.v1.StopLocation.toObject(message.actualIntermediateDestinations[j], options);
+                        }
+                        if (message.attributes && message.attributes.length) {
+                            object.attributes = [];
+                            for (var j = 0; j < message.attributes.length; ++j)
+                                object.attributes[j] = $root.maps.fleetengine.v1.TripAttribute.toObject(message.attributes[j], options);
                         }
                         return object;
                     };

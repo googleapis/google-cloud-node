@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.2.0...aiplatform-v4.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add invoke_route_prefix to ModelContainerSpec in aiplatform v1 models.proto ([#6433](https://github.com/googleapis/google-cloud-node/issues/6433)) ([32a196b](https://github.com/googleapis/google-cloud-node/commit/32a196bf8be28a29be7671fa73491e8346044dd7))
+* Add json schema support to structured output and function declaration ([#6314](https://github.com/googleapis/google-cloud-node/issues/6314)) ([901c552](https://github.com/googleapis/google-cloud-node/commit/901c552faa7d83682fa4ac6a90398e2a55c529ee))
+* Add message ColabImage, add field colab_image to NotebookSoftwareConfig ([#6452](https://github.com/googleapis/google-cloud-node/issues/6452)) ([d6cf158](https://github.com/googleapis/google-cloud-node/commit/d6cf1586c2b4b5866e1b459e71278169137f03e3))
+* Add Model Garden deploy OSS model API ([#6412](https://github.com/googleapis/google-cloud-node/issues/6412)) ([73f3477](https://github.com/googleapis/google-cloud-node/commit/73f3477eb5c07f7356cd426e8105419e0e2bd60e))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+* Expose UrlContextMetadata API to v1 ([#6399](https://github.com/googleapis/google-cloud-node/issues/6399)) ([46839ea](https://github.com/googleapis/google-cloud-node/commit/46839ea7a92b2d69acf2838caa0f2aefa13c7dd1))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.1.0...aiplatform-v4.2.0) (2025-05-09)
 
 

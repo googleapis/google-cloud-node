@@ -1098,6 +1098,457 @@
                     }
                   }
                 },
+                "v1alpha1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.NetworkSecurity.V1Alpha1",
+                    "go_package": "cloud.google.com/go/networksecurity/apiv1alpha1/networksecuritypb;networksecuritypb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "CommonProto",
+                    "java_package": "com.google.cloud.networksecurity.v1alpha1",
+                    "php_namespace": "Google\\Cloud\\NetworkSecurity\\V1alpha1",
+                    "ruby_package": "Google::Cloud::NetworkSecurity::V1alpha1"
+                  },
+                  "nested": {
+                    "ClientTlsPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "networksecurity.googleapis.com/ClientTlsPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sni": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientCertificate": {
+                          "type": "CertificateProvider",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serverValidationCa": {
+                          "rule": "repeated",
+                          "type": "ValidationCA",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListClientTlsPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networksecurity.googleapis.com/ClientTlsPolicy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListClientTlsPoliciesResponse": {
+                      "fields": {
+                        "clientTlsPolicies": {
+                          "rule": "repeated",
+                          "type": "ClientTlsPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetClientTlsPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/ClientTlsPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "CreateClientTlsPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networksecurity.googleapis.com/ClientTlsPolicy"
+                          }
+                        },
+                        "clientTlsPolicyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientTlsPolicy": {
+                          "type": "ClientTlsPolicy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateClientTlsPolicyRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientTlsPolicy": {
+                          "type": "ClientTlsPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteClientTlsPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networksecurity.googleapis.com/ClientTlsPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "GrpcEndpoint": {
+                      "fields": {
+                        "targetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ValidationCA": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "caCertPath",
+                            "grpcEndpoint",
+                            "certificateProviderInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "caCertPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "grpcEndpoint": {
+                          "type": "GrpcEndpoint",
+                          "id": 2
+                        },
+                        "certificateProviderInstance": {
+                          "type": "CertificateProviderInstance",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CertificateProviderInstance": {
+                      "fields": {
+                        "pluginInstance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CertificateProvider": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "localFilepath",
+                            "grpcEndpoint",
+                            "certificateProviderInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "localFilepath": {
+                          "type": "TlsCertificateFiles",
+                          "id": 1
+                        },
+                        "grpcEndpoint": {
+                          "type": "GrpcEndpoint",
+                          "id": 2
+                        },
+                        "certificateProviderInstance": {
+                          "type": "CertificateProviderInstance",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "TlsCertificateFiles": {
+                          "fields": {
+                            "certificatePath": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "privateKeyPath": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "NetworkSecurity": {
+                      "options": {
+                        "(google.api.default_host)": "networksecurity.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListClientTlsPolicies": {
+                          "requestType": "ListClientTlsPoliciesRequest",
+                          "responseType": "ListClientTlsPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha1/{parent=projects/*/locations/*}/clientTlsPolicies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{parent=projects/*/locations/*}/clientTlsPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetClientTlsPolicy": {
+                          "requestType": "GetClientTlsPolicyRequest",
+                          "responseType": "ClientTlsPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha1/{name=projects/*/locations/*/clientTlsPolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha1/{name=projects/*/locations/*/clientTlsPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateClientTlsPolicy": {
+                          "requestType": "CreateClientTlsPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha1/{parent=projects/*/locations/*}/clientTlsPolicies",
+                            "(google.api.http).body": "client_tls_policy",
+                            "(google.api.method_signature)": "parent,client_tls_policy,client_tls_policy_id",
+                            "(google.longrunning.operation_info).response_type": "ClientTlsPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha1/{parent=projects/*/locations/*}/clientTlsPolicies",
+                                "body": "client_tls_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,client_tls_policy,client_tls_policy_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ClientTlsPolicy",
+                                "metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateClientTlsPolicy": {
+                          "requestType": "UpdateClientTlsPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha1/{client_tls_policy.name=projects/*/locations/*/clientTlsPolicies/*}",
+                            "(google.api.http).body": "client_tls_policy",
+                            "(google.api.method_signature)": "client_tls_policy,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ClientTlsPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha1/{client_tls_policy.name=projects/*/locations/*/clientTlsPolicies/*}",
+                                "body": "client_tls_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "client_tls_policy,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ClientTlsPolicy",
+                                "metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteClientTlsPolicy": {
+                          "requestType": "DeleteClientTlsPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha1/{name=projects/*/locations/*/clientTlsPolicies/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha1/{name=projects/*/locations/*/clientTlsPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networksecurity.v1alpha1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.NetworkSecurity.V1Beta1",

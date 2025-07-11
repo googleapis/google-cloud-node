@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v5.2.0...compute-v5.3.0) (2025-07-09)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250601 ([#1052](https://github.com/googleapis/google-cloud-node/issues/1052)) ([#6363](https://github.com/googleapis/google-cloud-node/issues/6363)) ([e1de991](https://github.com/googleapis/google-cloud-node/commit/e1de991a0bc00a3042e4b19990f9a84f20363bcb))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency nodemailer to v7 ([#6336](https://github.com/googleapis/google-cloud-node/issues/6336)) ([bebe8fe](https://github.com/googleapis/google-cloud-node/commit/bebe8febba147fc5653c2eb86d0967a5eae9f578))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/compute-v5.1.0...compute-v5.2.0) (2025-05-09)
 
 
