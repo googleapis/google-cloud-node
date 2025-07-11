@@ -141,7 +141,7 @@
                               "type": "int64",
                               "id": 7,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.field_behavior)": "IMMUTABLE",
                                 "proto3_optional": true
                               }
                             },
@@ -635,7 +635,15 @@
                             "gtin": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 26
+                              "id": 26,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "gtins": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 140
                             },
                             "itemGroupId": {
                               "type": "string",
@@ -668,6 +676,10 @@
                             "price": {
                               "type": "google.shopping.type.Price",
                               "id": 31
+                            },
+                            "maximumRetailPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 139
                             },
                             "installment": {
                               "type": "Installment",
@@ -798,12 +810,16 @@
                             "taxes": {
                               "rule": "repeated",
                               "type": "Tax",
-                              "id": 51
+                              "id": 51,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "taxCategory": {
                               "type": "string",
                               "id": 52,
                               "options": {
+                                "deprecated": true,
                                 "proto3_optional": true
                               }
                             },

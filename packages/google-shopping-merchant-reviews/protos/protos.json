@@ -221,7 +221,7 @@
                               "type": "google.shopping.type.CustomAttribute",
                               "id": 4,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "dataSource": {
@@ -440,7 +440,7 @@
                               "type": "string",
                               "id": 15,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -875,6 +875,16 @@
                               "oneof": [
                                 "isSpam"
                               ]
+                            },
+                            "_isVerifiedPurchase": {
+                              "oneof": [
+                                "isVerifiedPurchase"
+                              ]
+                            },
+                            "_isIncentivizedReview": {
+                              "oneof": [
+                                "isIncentivizedReview"
+                              ]
                             }
                           },
                           "fields": {
@@ -969,7 +979,7 @@
                               "type": "string",
                               "id": 12,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -1087,6 +1097,22 @@
                             "isSpam": {
                               "type": "bool",
                               "id": 27,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "isVerifiedPurchase": {
+                              "type": "bool",
+                              "id": 30,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "isIncentivizedReview": {
+                              "type": "bool",
+                              "id": 31,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true

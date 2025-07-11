@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@googlemaps/routing": "^2.0.1"
+    "@googlemaps/routing": "^2.1.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

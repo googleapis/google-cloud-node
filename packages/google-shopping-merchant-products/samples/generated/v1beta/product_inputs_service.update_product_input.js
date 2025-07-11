@@ -50,7 +50,8 @@ function main(productInput, dataSource) {
    *  Required. The primary or supplemental product data source where
    *  `data_source` name identifies the product input to be updated.
    *  Only API data sources are supported.
-   *  Format: `accounts/{account}/dataSources/{datasource}`.
+   *  Format: `accounts/{account}/dataSources/{datasource}`. For example,
+   *  `accounts/123456/dataSources/104628`.
    */
   // const dataSource = 'abc123'
 

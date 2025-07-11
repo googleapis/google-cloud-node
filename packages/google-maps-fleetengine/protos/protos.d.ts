@@ -628,6 +628,18 @@ export namespace maps {
                 /** VehicleLocation rawLocationAccuracy */
                 rawLocationAccuracy?: (google.protobuf.IDoubleValue|null);
 
+                /** VehicleLocation flpLocation */
+                flpLocation?: (google.type.ILatLng|null);
+
+                /** VehicleLocation flpUpdateTime */
+                flpUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** VehicleLocation flpLatlngAccuracyMeters */
+                flpLatlngAccuracyMeters?: (google.protobuf.IDoubleValue|null);
+
+                /** VehicleLocation flpHeadingDegrees */
+                flpHeadingDegrees?: (google.protobuf.IInt32Value|null);
+
                 /** VehicleLocation supplementalLocation */
                 supplementalLocation?: (google.type.ILatLng|null);
 
@@ -721,6 +733,18 @@ export namespace maps {
 
                 /** VehicleLocation rawLocationAccuracy. */
                 public rawLocationAccuracy?: (google.protobuf.IDoubleValue|null);
+
+                /** VehicleLocation flpLocation. */
+                public flpLocation?: (google.type.ILatLng|null);
+
+                /** VehicleLocation flpUpdateTime. */
+                public flpUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** VehicleLocation flpLatlngAccuracyMeters. */
+                public flpLatlngAccuracyMeters?: (google.protobuf.IDoubleValue|null);
+
+                /** VehicleLocation flpHeadingDegrees. */
+                public flpHeadingDegrees?: (google.protobuf.IInt32Value|null);
 
                 /** VehicleLocation supplementalLocation. */
                 public supplementalLocation?: (google.type.ILatLng|null);
@@ -826,6 +850,124 @@ export namespace maps {
                 FLEET_ENGINE_LOCATION = 6,
                 FUSED_LOCATION_PROVIDER = 100,
                 CORE_LOCATION = 200
+            }
+
+            /** Properties of a TripAttribute. */
+            interface ITripAttribute {
+
+                /** TripAttribute key */
+                key?: (string|null);
+
+                /** TripAttribute stringValue */
+                stringValue?: (string|null);
+
+                /** TripAttribute boolValue */
+                boolValue?: (boolean|null);
+
+                /** TripAttribute numberValue */
+                numberValue?: (number|null);
+            }
+
+            /** Represents a TripAttribute. */
+            class TripAttribute implements ITripAttribute {
+
+                /**
+                 * Constructs a new TripAttribute.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: maps.fleetengine.v1.ITripAttribute);
+
+                /** TripAttribute key. */
+                public key: string;
+
+                /** TripAttribute stringValue. */
+                public stringValue?: (string|null);
+
+                /** TripAttribute boolValue. */
+                public boolValue?: (boolean|null);
+
+                /** TripAttribute numberValue. */
+                public numberValue?: (number|null);
+
+                /** TripAttribute tripAttributeValue. */
+                public tripAttributeValue?: ("stringValue"|"boolValue"|"numberValue");
+
+                /**
+                 * Creates a new TripAttribute instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TripAttribute instance
+                 */
+                public static create(properties?: maps.fleetengine.v1.ITripAttribute): maps.fleetengine.v1.TripAttribute;
+
+                /**
+                 * Encodes the specified TripAttribute message. Does not implicitly {@link maps.fleetengine.v1.TripAttribute.verify|verify} messages.
+                 * @param message TripAttribute message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: maps.fleetengine.v1.ITripAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TripAttribute message, length delimited. Does not implicitly {@link maps.fleetengine.v1.TripAttribute.verify|verify} messages.
+                 * @param message TripAttribute message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: maps.fleetengine.v1.ITripAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TripAttribute message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TripAttribute
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): maps.fleetengine.v1.TripAttribute;
+
+                /**
+                 * Decodes a TripAttribute message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TripAttribute
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): maps.fleetengine.v1.TripAttribute;
+
+                /**
+                 * Verifies a TripAttribute message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TripAttribute message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TripAttribute
+                 */
+                public static fromObject(object: { [k: string]: any }): maps.fleetengine.v1.TripAttribute;
+
+                /**
+                 * Creates a plain object from a TripAttribute message. Also converts values to other types if specified.
+                 * @param message TripAttribute
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: maps.fleetengine.v1.TripAttribute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TripAttribute to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for TripAttribute
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a SpeedReadingInterval. */
@@ -2322,6 +2464,9 @@ export namespace maps {
 
                 /** Trip view */
                 view?: (maps.fleetengine.v1.TripView|keyof typeof maps.fleetengine.v1.TripView|null);
+
+                /** Trip attributes */
+                attributes?: (maps.fleetengine.v1.ITripAttribute[]|null);
             }
 
             /** Represents a Trip. */
@@ -2431,6 +2576,9 @@ export namespace maps {
 
                 /** Trip view. */
                 public view: (maps.fleetengine.v1.TripView|keyof typeof maps.fleetengine.v1.TripView);
+
+                /** Trip attributes. */
+                public attributes: maps.fleetengine.v1.ITripAttribute[];
 
                 /**
                  * Creates a new Trip instance using the specified properties.
