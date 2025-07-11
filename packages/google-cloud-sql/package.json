@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/sql",
-  "version": "0.20.1",
+  "version": "0.21.0",
   "description": "Sql client for Node.js",
   "repository": {
     "type": "git",

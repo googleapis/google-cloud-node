@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/fleetengine",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Local Rides and Deliveries API client for Node.js",
   "repository": {
     "type": "git",

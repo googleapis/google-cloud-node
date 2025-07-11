@@ -1465,11 +1465,13 @@
                              * @property {string|null} [gender] Attributes gender
                              * @property {string|null} [googleProductCategory] Attributes googleProductCategory
                              * @property {Array.<string>|null} [gtin] Attributes gtin
+                             * @property {Array.<string>|null} [gtins] Attributes gtins
                              * @property {string|null} [itemGroupId] Attributes itemGroupId
                              * @property {string|null} [material] Attributes material
                              * @property {string|null} [mpn] Attributes mpn
                              * @property {string|null} [pattern] Attributes pattern
                              * @property {google.shopping.type.IPrice|null} [price] Attributes price
+                             * @property {google.shopping.type.IPrice|null} [maximumRetailPrice] Attributes maximumRetailPrice
                              * @property {google.shopping.merchant.products.v1beta.IInstallment|null} [installment] Attributes installment
                              * @property {google.shopping.merchant.products.v1beta.ISubscriptionCost|null} [subscriptionCost] Attributes subscriptionCost
                              * @property {google.shopping.merchant.products.v1beta.ILoyaltyPoints|null} [loyaltyPoints] Attributes loyaltyPoints
@@ -1550,6 +1552,7 @@
                             function Attributes(properties) {
                                 this.additionalImageLinks = [];
                                 this.gtin = [];
+                                this.gtins = [];
                                 this.loyaltyPrograms = [];
                                 this.productTypes = [];
                                 this.shipping = [];
@@ -1743,6 +1746,14 @@
                             Attributes.prototype.gtin = $util.emptyArray;
     
                             /**
+                             * Attributes gtins.
+                             * @member {Array.<string>} gtins
+                             * @memberof google.shopping.merchant.products.v1beta.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.gtins = $util.emptyArray;
+    
+                            /**
                              * Attributes itemGroupId.
                              * @member {string|null|undefined} itemGroupId
                              * @memberof google.shopping.merchant.products.v1beta.Attributes
@@ -1781,6 +1792,14 @@
                              * @instance
                              */
                             Attributes.prototype.price = null;
+    
+                            /**
+                             * Attributes maximumRetailPrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} maximumRetailPrice
+                             * @memberof google.shopping.merchant.products.v1beta.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.maximumRetailPrice = null;
     
                             /**
                              * Attributes installment.
@@ -2863,6 +2882,11 @@
                                 if (message.sustainabilityIncentives != null && message.sustainabilityIncentives.length)
                                     for (var i = 0; i < message.sustainabilityIncentives.length; ++i)
                                         $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.encode(message.sustainabilityIncentives[i], writer.uint32(/* id 138, wireType 2 =*/1106).fork()).ldelim();
+                                if (message.maximumRetailPrice != null && Object.hasOwnProperty.call(message, "maximumRetailPrice"))
+                                    $root.google.shopping.type.Price.encode(message.maximumRetailPrice, writer.uint32(/* id 139, wireType 2 =*/1114).fork()).ldelim();
+                                if (message.gtins != null && message.gtins.length)
+                                    for (var i = 0; i < message.gtins.length; ++i)
+                                        writer.uint32(/* id 140, wireType 2 =*/1122).string(message.gtins[i]);
                                 return writer;
                             };
     
@@ -2987,6 +3011,12 @@
                                             message.gtin.push(reader.string());
                                             break;
                                         }
+                                    case 140: {
+                                            if (!(message.gtins && message.gtins.length))
+                                                message.gtins = [];
+                                            message.gtins.push(reader.string());
+                                            break;
+                                        }
                                     case 27: {
                                             message.itemGroupId = reader.string();
                                             break;
@@ -3005,6 +3035,10 @@
                                         }
                                     case 31: {
                                             message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 139: {
+                                            message.maximumRetailPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 32: {
@@ -3456,6 +3490,13 @@
                                         if (!$util.isString(message.gtin[i]))
                                             return "gtin: string[] expected";
                                 }
+                                if (message.gtins != null && message.hasOwnProperty("gtins")) {
+                                    if (!Array.isArray(message.gtins))
+                                        return "gtins: array expected";
+                                    for (var i = 0; i < message.gtins.length; ++i)
+                                        if (!$util.isString(message.gtins[i]))
+                                            return "gtins: string[] expected";
+                                }
                                 if (message.itemGroupId != null && message.hasOwnProperty("itemGroupId")) {
                                     properties._itemGroupId = 1;
                                     if (!$util.isString(message.itemGroupId))
@@ -3480,6 +3521,11 @@
                                     var error = $root.google.shopping.type.Price.verify(message.price);
                                     if (error)
                                         return "price." + error;
+                                }
+                                if (message.maximumRetailPrice != null && message.hasOwnProperty("maximumRetailPrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.maximumRetailPrice);
+                                    if (error)
+                                        return "maximumRetailPrice." + error;
                                 }
                                 if (message.installment != null && message.hasOwnProperty("installment")) {
                                     var error = $root.google.shopping.merchant.products.v1beta.Installment.verify(message.installment);
@@ -3950,6 +3996,13 @@
                                     for (var i = 0; i < object.gtin.length; ++i)
                                         message.gtin[i] = String(object.gtin[i]);
                                 }
+                                if (object.gtins) {
+                                    if (!Array.isArray(object.gtins))
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.gtins: array expected");
+                                    message.gtins = [];
+                                    for (var i = 0; i < object.gtins.length; ++i)
+                                        message.gtins[i] = String(object.gtins[i]);
+                                }
                                 if (object.itemGroupId != null)
                                     message.itemGroupId = String(object.itemGroupId);
                                 if (object.material != null)
@@ -3962,6 +4015,11 @@
                                     if (typeof object.price !== "object")
                                         throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.price: object expected");
                                     message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.maximumRetailPrice != null) {
+                                    if (typeof object.maximumRetailPrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.maximumRetailPrice: object expected");
+                                    message.maximumRetailPrice = $root.google.shopping.type.Price.fromObject(object.maximumRetailPrice);
                                 }
                                 if (object.installment != null) {
                                     if (typeof object.installment !== "object")
@@ -4333,6 +4391,7 @@
                                     object.freeShippingThreshold = [];
                                     object.loyaltyPrograms = [];
                                     object.sustainabilityIncentives = [];
+                                    object.gtins = [];
                                 }
                                 if (options.defaults) {
                                     object.expirationDate = null;
@@ -4356,6 +4415,7 @@
                                     object.productWidth = null;
                                     object.productWeight = null;
                                     object.autoPricingMinPrice = null;
+                                    object.maximumRetailPrice = null;
                                 }
                                 if (message.externalSellerId != null && message.hasOwnProperty("externalSellerId")) {
                                     object.externalSellerId = message.externalSellerId;
@@ -4770,6 +4830,13 @@
                                     object.sustainabilityIncentives = [];
                                     for (var j = 0; j < message.sustainabilityIncentives.length; ++j)
                                         object.sustainabilityIncentives[j] = $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.toObject(message.sustainabilityIncentives[j], options);
+                                }
+                                if (message.maximumRetailPrice != null && message.hasOwnProperty("maximumRetailPrice"))
+                                    object.maximumRetailPrice = $root.google.shopping.type.Price.toObject(message.maximumRetailPrice, options);
+                                if (message.gtins && message.gtins.length) {
+                                    object.gtins = [];
+                                    for (var j = 0; j < message.gtins.length; ++j)
+                                        object.gtins[j] = message.gtins[j];
                                 }
                                 return object;
                             };

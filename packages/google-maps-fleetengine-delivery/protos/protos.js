@@ -424,6 +424,10 @@
                          * @property {google.protobuf.ITimestamp|null} [rawLocationTime] DeliveryVehicleLocation rawLocationTime
                          * @property {maps.fleetengine.delivery.v1.DeliveryVehicleLocationSensor|null} [rawLocationSensor] DeliveryVehicleLocation rawLocationSensor
                          * @property {google.protobuf.IDoubleValue|null} [rawLocationAccuracy] DeliveryVehicleLocation rawLocationAccuracy
+                         * @property {google.type.ILatLng|null} [flpLocation] DeliveryVehicleLocation flpLocation
+                         * @property {google.protobuf.ITimestamp|null} [flpUpdateTime] DeliveryVehicleLocation flpUpdateTime
+                         * @property {google.protobuf.IDoubleValue|null} [flpLatlngAccuracyMeters] DeliveryVehicleLocation flpLatlngAccuracyMeters
+                         * @property {google.protobuf.IInt32Value|null} [flpHeadingDegrees] DeliveryVehicleLocation flpHeadingDegrees
                          * @property {google.type.ILatLng|null} [supplementalLocation] DeliveryVehicleLocation supplementalLocation
                          * @property {google.protobuf.ITimestamp|null} [supplementalLocationTime] DeliveryVehicleLocation supplementalLocationTime
                          * @property {maps.fleetengine.delivery.v1.DeliveryVehicleLocationSensor|null} [supplementalLocationSensor] DeliveryVehicleLocation supplementalLocationSensor
@@ -631,6 +635,38 @@
                         DeliveryVehicleLocation.prototype.rawLocationAccuracy = null;
     
                         /**
+                         * DeliveryVehicleLocation flpLocation.
+                         * @member {google.type.ILatLng|null|undefined} flpLocation
+                         * @memberof maps.fleetengine.delivery.v1.DeliveryVehicleLocation
+                         * @instance
+                         */
+                        DeliveryVehicleLocation.prototype.flpLocation = null;
+    
+                        /**
+                         * DeliveryVehicleLocation flpUpdateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} flpUpdateTime
+                         * @memberof maps.fleetengine.delivery.v1.DeliveryVehicleLocation
+                         * @instance
+                         */
+                        DeliveryVehicleLocation.prototype.flpUpdateTime = null;
+    
+                        /**
+                         * DeliveryVehicleLocation flpLatlngAccuracyMeters.
+                         * @member {google.protobuf.IDoubleValue|null|undefined} flpLatlngAccuracyMeters
+                         * @memberof maps.fleetengine.delivery.v1.DeliveryVehicleLocation
+                         * @instance
+                         */
+                        DeliveryVehicleLocation.prototype.flpLatlngAccuracyMeters = null;
+    
+                        /**
+                         * DeliveryVehicleLocation flpHeadingDegrees.
+                         * @member {google.protobuf.IInt32Value|null|undefined} flpHeadingDegrees
+                         * @memberof maps.fleetengine.delivery.v1.DeliveryVehicleLocation
+                         * @instance
+                         */
+                        DeliveryVehicleLocation.prototype.flpHeadingDegrees = null;
+    
+                        /**
                          * DeliveryVehicleLocation supplementalLocation.
                          * @member {google.type.ILatLng|null|undefined} supplementalLocation
                          * @memberof maps.fleetengine.delivery.v1.DeliveryVehicleLocation
@@ -750,6 +786,14 @@
                                 $root.google.protobuf.BoolValue.encode(message.isRoadSnapped, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.rawLocationSensor != null && Object.hasOwnProperty.call(message, "rawLocationSensor"))
                                 writer.uint32(/* id 28, wireType 0 =*/224).int32(message.rawLocationSensor);
+                            if (message.flpLocation != null && Object.hasOwnProperty.call(message, "flpLocation"))
+                                $root.google.type.LatLng.encode(message.flpLocation, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                            if (message.flpUpdateTime != null && Object.hasOwnProperty.call(message, "flpUpdateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.flpUpdateTime, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.flpLatlngAccuracyMeters != null && Object.hasOwnProperty.call(message, "flpLatlngAccuracyMeters"))
+                                $root.google.protobuf.DoubleValue.encode(message.flpLatlngAccuracyMeters, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.flpHeadingDegrees != null && Object.hasOwnProperty.call(message, "flpHeadingDegrees"))
+                                $root.google.protobuf.Int32Value.encode(message.flpHeadingDegrees, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                             return writer;
                         };
     
@@ -876,6 +920,22 @@
                                     }
                                 case 25: {
                                         message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 29: {
+                                        message.flpLocation = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 30: {
+                                        message.flpUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 31: {
+                                        message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 32: {
+                                        message.flpHeadingDegrees = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 18: {
@@ -1067,6 +1127,26 @@
                                 var error = $root.google.protobuf.DoubleValue.verify(message.rawLocationAccuracy);
                                 if (error)
                                     return "rawLocationAccuracy." + error;
+                            }
+                            if (message.flpLocation != null && message.hasOwnProperty("flpLocation")) {
+                                var error = $root.google.type.LatLng.verify(message.flpLocation);
+                                if (error)
+                                    return "flpLocation." + error;
+                            }
+                            if (message.flpUpdateTime != null && message.hasOwnProperty("flpUpdateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.flpUpdateTime);
+                                if (error)
+                                    return "flpUpdateTime." + error;
+                            }
+                            if (message.flpLatlngAccuracyMeters != null && message.hasOwnProperty("flpLatlngAccuracyMeters")) {
+                                var error = $root.google.protobuf.DoubleValue.verify(message.flpLatlngAccuracyMeters);
+                                if (error)
+                                    return "flpLatlngAccuracyMeters." + error;
+                            }
+                            if (message.flpHeadingDegrees != null && message.hasOwnProperty("flpHeadingDegrees")) {
+                                var error = $root.google.protobuf.Int32Value.verify(message.flpHeadingDegrees);
+                                if (error)
+                                    return "flpHeadingDegrees." + error;
                             }
                             if (message.supplementalLocation != null && message.hasOwnProperty("supplementalLocation")) {
                                 var error = $root.google.type.LatLng.verify(message.supplementalLocation);
@@ -1309,6 +1389,26 @@
                                     throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.rawLocationAccuracy: object expected");
                                 message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.rawLocationAccuracy);
                             }
+                            if (object.flpLocation != null) {
+                                if (typeof object.flpLocation !== "object")
+                                    throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.flpLocation: object expected");
+                                message.flpLocation = $root.google.type.LatLng.fromObject(object.flpLocation);
+                            }
+                            if (object.flpUpdateTime != null) {
+                                if (typeof object.flpUpdateTime !== "object")
+                                    throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.flpUpdateTime: object expected");
+                                message.flpUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.flpUpdateTime);
+                            }
+                            if (object.flpLatlngAccuracyMeters != null) {
+                                if (typeof object.flpLatlngAccuracyMeters !== "object")
+                                    throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.flpLatlngAccuracyMeters: object expected");
+                                message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.fromObject(object.flpLatlngAccuracyMeters);
+                            }
+                            if (object.flpHeadingDegrees != null) {
+                                if (typeof object.flpHeadingDegrees !== "object")
+                                    throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.flpHeadingDegrees: object expected");
+                                message.flpHeadingDegrees = $root.google.protobuf.Int32Value.fromObject(object.flpHeadingDegrees);
+                            }
                             if (object.supplementalLocation != null) {
                                 if (typeof object.supplementalLocation !== "object")
                                     throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicleLocation.supplementalLocation: object expected");
@@ -1415,6 +1515,10 @@
                                 object.roadSnapped = false;
                                 object.isRoadSnapped = null;
                                 object.rawLocationSensor = options.enums === String ? "UNKNOWN_SENSOR" : 0;
+                                object.flpLocation = null;
+                                object.flpUpdateTime = null;
+                                object.flpLatlngAccuracyMeters = null;
+                                object.flpHeadingDegrees = null;
                             }
                             if (message.location != null && message.hasOwnProperty("location"))
                                 object.location = $root.google.type.LatLng.toObject(message.location, options);
@@ -1472,6 +1576,14 @@
                                 object.isRoadSnapped = $root.google.protobuf.BoolValue.toObject(message.isRoadSnapped, options);
                             if (message.rawLocationSensor != null && message.hasOwnProperty("rawLocationSensor"))
                                 object.rawLocationSensor = options.enums === String ? $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocationSensor[message.rawLocationSensor] === undefined ? message.rawLocationSensor : $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocationSensor[message.rawLocationSensor] : message.rawLocationSensor;
+                            if (message.flpLocation != null && message.hasOwnProperty("flpLocation"))
+                                object.flpLocation = $root.google.type.LatLng.toObject(message.flpLocation, options);
+                            if (message.flpUpdateTime != null && message.hasOwnProperty("flpUpdateTime"))
+                                object.flpUpdateTime = $root.google.protobuf.Timestamp.toObject(message.flpUpdateTime, options);
+                            if (message.flpLatlngAccuracyMeters != null && message.hasOwnProperty("flpLatlngAccuracyMeters"))
+                                object.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.toObject(message.flpLatlngAccuracyMeters, options);
+                            if (message.flpHeadingDegrees != null && message.hasOwnProperty("flpHeadingDegrees"))
+                                object.flpHeadingDegrees = $root.google.protobuf.Int32Value.toObject(message.flpHeadingDegrees, options);
                             return object;
                         };
     
