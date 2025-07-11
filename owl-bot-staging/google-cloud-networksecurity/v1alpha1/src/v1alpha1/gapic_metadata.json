@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networksecurity.v1alpha1",
+  "libraryPackage": "@google-cloud/networksecurity",
+  "services": {
+    "NetworkSecurity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkSecurityClient",
+          "rpcs": {
+            "GetClientTlsPolicy": {
+              "methods": [
+                "getClientTlsPolicy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "createClientTlsPolicy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "updateClientTlsPolicy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "deleteClientTlsPolicy"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "listClientTlsPolicies",
+                "listClientTlsPoliciesStream",
+                "listClientTlsPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkSecurityClient",
+          "rpcs": {
+            "GetClientTlsPolicy": {
+              "methods": [
+                "getClientTlsPolicy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "createClientTlsPolicy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "updateClientTlsPolicy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "deleteClientTlsPolicy"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "listClientTlsPolicies",
+                "listClientTlsPoliciesStream",
+                "listClientTlsPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
