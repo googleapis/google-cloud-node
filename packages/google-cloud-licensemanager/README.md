@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -54,60 +54,6 @@ npm install @google-cloud/licensemanager
 ```
 
 
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Parent value for ListInstancesRequest
- */
-// const parent = 'abc123'
-/**
- *  Optional. Requested page size. Server may return fewer items than
- *  requested. If unspecified, server will pick an appropriate default.
- */
-// const pageSize = 1234
-/**
- *  Optional. A token identifying a page of results the server should return.
- */
-// const pageToken = 'abc123'
-/**
- *  Optional. Filtering results
- */
-// const filter = 'abc123'
-/**
- *  Optional. Hint for how to order the results
- */
-// const orderBy = 'abc123'
-
-// Imports the Licensemanager library
-const {LicenseManagerClient} = require('@google-cloud/licensemanager').v1;
-
-// Instantiates a client
-const licensemanagerClient = new LicenseManagerClient();
-
-async function callListInstances() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = licensemanagerClient.listInstancesAsync(request);
-  for await (const response of iterable) {
-      console.log(response);
-  }
-}
-
-callListInstances();
-
-```
-
 
 
 ## Samples
@@ -129,7 +75,6 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | License_manager.query_configuration_license_usage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.query_configuration_license_usage.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-licensemanager/samples/generated/v1/license_manager.query_configuration_license_usage.js,packages/google-cloud-licensemanager/samples/README.md) |
 | License_manager.reactivate_configuration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.reactivate_configuration.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-licensemanager/samples/generated/v1/license_manager.reactivate_configuration.js,packages/google-cloud-licensemanager/samples/README.md) |
 | License_manager.update_configuration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/generated/v1/license_manager.update_configuration.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-licensemanager/samples/generated/v1/license_manager.update_configuration.js,packages/google-cloud-licensemanager/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-licensemanager/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-licensemanager/samples/quickstart.js,packages/google-cloud-licensemanager/samples/README.md) |
 
 
 
