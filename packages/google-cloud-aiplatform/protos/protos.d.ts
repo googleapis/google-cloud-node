@@ -226039,6 +226039,9 @@ export namespace google {
                     /** TuningJob description */
                     description?: (string|null);
 
+                    /** TuningJob customBaseModel */
+                    customBaseModel?: (string|null);
+
                     /** TuningJob state */
                     state?: (google.cloud.aiplatform.v1beta1.JobState|keyof typeof google.cloud.aiplatform.v1beta1.JobState|null);
 
@@ -226077,6 +226080,9 @@ export namespace google {
 
                     /** TuningJob serviceAccount */
                     serviceAccount?: (string|null);
+
+                    /** TuningJob outputUri */
+                    outputUri?: (string|null);
                 }
 
                 /** Represents a TuningJob. */
@@ -226108,6 +226114,9 @@ export namespace google {
 
                     /** TuningJob description. */
                     public description: string;
+
+                    /** TuningJob customBaseModel. */
+                    public customBaseModel: string;
 
                     /** TuningJob state. */
                     public state: (google.cloud.aiplatform.v1beta1.JobState|keyof typeof google.cloud.aiplatform.v1beta1.JobState);
@@ -226147,6 +226156,9 @@ export namespace google {
 
                     /** TuningJob serviceAccount. */
                     public serviceAccount: string;
+
+                    /** TuningJob outputUri. */
+                    public outputUri: string;
 
                     /** TuningJob sourceModel. */
                     public sourceModel?: "baseModel";
@@ -227363,8 +227375,14 @@ export namespace google {
                     /** SupervisedHyperParameters learningRateMultiplier */
                     learningRateMultiplier?: (number|null);
 
+                    /** SupervisedHyperParameters learningRate */
+                    learningRate?: (number|null);
+
                     /** SupervisedHyperParameters adapterSize */
                     adapterSize?: (google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|null);
+
+                    /** SupervisedHyperParameters batchSize */
+                    batchSize?: (number|Long|string|null);
                 }
 
                 /** Represents a SupervisedHyperParameters. */
@@ -227382,8 +227400,14 @@ export namespace google {
                     /** SupervisedHyperParameters learningRateMultiplier. */
                     public learningRateMultiplier: number;
 
+                    /** SupervisedHyperParameters learningRate. */
+                    public learningRate: number;
+
                     /** SupervisedHyperParameters adapterSize. */
                     public adapterSize: (google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize);
+
+                    /** SupervisedHyperParameters batchSize. */
+                    public batchSize: (number|Long|string);
 
                     /**
                      * Creates a new SupervisedHyperParameters instance using the specified properties.
@@ -227491,6 +227515,9 @@ export namespace google {
 
                     /** SupervisedTuningSpec exportLastCheckpointOnly */
                     exportLastCheckpointOnly?: (boolean|null);
+
+                    /** SupervisedTuningSpec tuningMode */
+                    tuningMode?: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|null);
                 }
 
                 /** Represents a SupervisedTuningSpec. */
@@ -227513,6 +227540,9 @@ export namespace google {
 
                     /** SupervisedTuningSpec exportLastCheckpointOnly. */
                     public exportLastCheckpointOnly: boolean;
+
+                    /** SupervisedTuningSpec tuningMode. */
+                    public tuningMode: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode);
 
                     /**
                      * Creates a new SupervisedTuningSpec instance using the specified properties.
@@ -227590,6 +227620,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SupervisedTuningSpec {
+
+                    /** TuningMode enum. */
+                    enum TuningMode {
+                        TUNING_MODE_UNSPECIFIED = 0,
+                        TUNING_MODE_FULL = 1,
+                        TUNING_MODE_PEFT_ADAPTER = 2
+                    }
                 }
 
                 /** Properties of a DistillationSpec. */

@@ -60083,6 +60083,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "customBaseModel": {
+                          "type": "string",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "state": {
                           "type": "JobState",
                           "id": 6,
@@ -60170,6 +60177,13 @@
                         "serviceAccount": {
                           "type": "string",
                           "id": 22
+                        },
+                        "outputUri": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -60595,9 +60609,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "learningRate": {
+                          "type": "double",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "adapterSize": {
                           "type": "AdapterSize",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "batchSize": {
+                          "type": "int64",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -60645,6 +60673,19 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tuningMode": {
+                          "type": "TuningMode",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "TuningMode": {
+                          "values": {
+                            "TUNING_MODE_UNSPECIFIED": 0,
+                            "TUNING_MODE_FULL": 1,
+                            "TUNING_MODE_PEFT_ADAPTER": 2
                           }
                         }
                       }
