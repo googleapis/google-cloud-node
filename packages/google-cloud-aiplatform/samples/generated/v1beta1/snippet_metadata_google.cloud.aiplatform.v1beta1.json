@@ -10622,7 +10622,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -10638,6 +10638,10 @@
                     {
                         "name": "hugging_face_model_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "custom_model",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel"
                     },
                     {
                         "name": "destination",
