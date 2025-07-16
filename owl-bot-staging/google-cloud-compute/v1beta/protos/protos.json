@@ -28064,6 +28064,13 @@
                       }
                     },
                     "GetReservationBlockRequest": {
+                      "oneofs": {
+                        "_view": {
+                          "oneof": [
+                            "view"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -28086,11 +28093,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "view": {
+                          "type": "string",
+                          "id": 3619493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "UNDEFINED_VIEW": 0,
+                            "BASIC": 62970894,
+                            "BLOCK_VIEW_UNSPECIFIED": 275070479,
+                            "FULL": 2169487
                           }
                         }
                       }
@@ -74370,6 +74394,83 @@
                         "cluster": {
                           "type": "string",
                           "id": 335221242,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "ReservationBlockPhysicalTopologyInstance",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstance": {
+                      "oneofs": {
+                        "_instanceId": {
+                          "oneof": [
+                            "instanceId"
+                          ]
+                        },
+                        "_physicalHostTopology": {
+                          "oneof": [
+                            "physicalHostTopology"
+                          ]
+                        },
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceId": {
+                          "type": "uint64",
+                          "id": 45488389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "physicalHostTopology": {
+                          "type": "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology",
+                          "id": 390842814,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectId": {
+                          "type": "uint64",
+                          "id": 177513473,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology": {
+                      "oneofs": {
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
                           "options": {
                             "proto3_optional": true
                           }

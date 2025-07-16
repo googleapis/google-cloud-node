@@ -38482,7 +38482,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 68,
+          "end": 73,
           "type": "FULL"
         }
       ],
@@ -38501,6 +38501,10 @@
           },
           {
             "name": "reservation_block",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
             "type": "TYPE_STRING"
           },
           {

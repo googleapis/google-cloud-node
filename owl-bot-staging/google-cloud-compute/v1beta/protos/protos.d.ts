@@ -65394,6 +65394,9 @@ export namespace google {
                     /** GetReservationBlockRequest reservationBlock */
                     reservationBlock?: (string|null);
 
+                    /** GetReservationBlockRequest view */
+                    view?: (string|null);
+
                     /** GetReservationBlockRequest zone */
                     zone?: (string|null);
                 }
@@ -65415,6 +65418,9 @@ export namespace google {
 
                     /** GetReservationBlockRequest reservationBlock. */
                     public reservationBlock: string;
+
+                    /** GetReservationBlockRequest view. */
+                    public view?: (string|null);
 
                     /** GetReservationBlockRequest zone. */
                     public zone: string;
@@ -65495,6 +65501,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GetReservationBlockRequest {
+
+                    /** View enum. */
+                    enum View {
+                        UNDEFINED_VIEW = 0,
+                        BASIC = 62970894,
+                        BLOCK_VIEW_UNSPECIFIED = 275070479,
+                        FULL = 2169487
+                    }
                 }
 
                 /** Properties of a GetReservationRequest. */
@@ -162673,6 +162690,9 @@ export namespace google {
 
                     /** ReservationBlockPhysicalTopology cluster */
                     cluster?: (string|null);
+
+                    /** ReservationBlockPhysicalTopology instances */
+                    instances?: (google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance[]|null);
                 }
 
                 /** Represents a ReservationBlockPhysicalTopology. */
@@ -162689,6 +162709,9 @@ export namespace google {
 
                     /** ReservationBlockPhysicalTopology cluster. */
                     public cluster?: (string|null);
+
+                    /** ReservationBlockPhysicalTopology instances. */
+                    public instances: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance[];
 
                     /**
                      * Creates a new ReservationBlockPhysicalTopology instance using the specified properties.
@@ -162762,6 +162785,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReservationBlockPhysicalTopology
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReservationBlockPhysicalTopologyInstance. */
+                interface IReservationBlockPhysicalTopologyInstance {
+
+                    /** ReservationBlockPhysicalTopologyInstance instanceId */
+                    instanceId?: (number|Long|string|null);
+
+                    /** ReservationBlockPhysicalTopologyInstance physicalHostTopology */
+                    physicalHostTopology?: (google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology|null);
+
+                    /** ReservationBlockPhysicalTopologyInstance projectId */
+                    projectId?: (number|Long|string|null);
+                }
+
+                /** Represents a ReservationBlockPhysicalTopologyInstance. */
+                class ReservationBlockPhysicalTopologyInstance implements IReservationBlockPhysicalTopologyInstance {
+
+                    /**
+                     * Constructs a new ReservationBlockPhysicalTopologyInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance);
+
+                    /** ReservationBlockPhysicalTopologyInstance instanceId. */
+                    public instanceId?: (number|Long|string|null);
+
+                    /** ReservationBlockPhysicalTopologyInstance physicalHostTopology. */
+                    public physicalHostTopology?: (google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology|null);
+
+                    /** ReservationBlockPhysicalTopologyInstance projectId. */
+                    public projectId?: (number|Long|string|null);
+
+                    /**
+                     * Creates a new ReservationBlockPhysicalTopologyInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationBlockPhysicalTopologyInstance instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance;
+
+                    /**
+                     * Encodes the specified ReservationBlockPhysicalTopologyInstance message. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance.verify|verify} messages.
+                     * @param message ReservationBlockPhysicalTopologyInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationBlockPhysicalTopologyInstance message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance.verify|verify} messages.
+                     * @param message ReservationBlockPhysicalTopologyInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationBlockPhysicalTopologyInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationBlockPhysicalTopologyInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance;
+
+                    /**
+                     * Decodes a ReservationBlockPhysicalTopologyInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationBlockPhysicalTopologyInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance;
+
+                    /**
+                     * Verifies a ReservationBlockPhysicalTopologyInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationBlockPhysicalTopologyInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationBlockPhysicalTopologyInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance;
+
+                    /**
+                     * Creates a plain object from a ReservationBlockPhysicalTopologyInstance message. Also converts values to other types if specified.
+                     * @param message ReservationBlockPhysicalTopologyInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationBlockPhysicalTopologyInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationBlockPhysicalTopologyInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology. */
+                interface IReservationBlockPhysicalTopologyInstancePhysicalHostTopology {
+
+                    /** ReservationBlockPhysicalTopologyInstancePhysicalHostTopology host */
+                    host?: (string|null);
+
+                    /** ReservationBlockPhysicalTopologyInstancePhysicalHostTopology subBlock */
+                    subBlock?: (string|null);
+                }
+
+                /** Represents a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology. */
+                class ReservationBlockPhysicalTopologyInstancePhysicalHostTopology implements IReservationBlockPhysicalTopologyInstancePhysicalHostTopology {
+
+                    /**
+                     * Constructs a new ReservationBlockPhysicalTopologyInstancePhysicalHostTopology.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology);
+
+                    /** ReservationBlockPhysicalTopologyInstancePhysicalHostTopology host. */
+                    public host?: (string|null);
+
+                    /** ReservationBlockPhysicalTopologyInstancePhysicalHostTopology subBlock. */
+                    public subBlock?: (string|null);
+
+                    /**
+                     * Creates a new ReservationBlockPhysicalTopologyInstancePhysicalHostTopology instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationBlockPhysicalTopologyInstancePhysicalHostTopology instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology;
+
+                    /**
+                     * Encodes the specified ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology.verify|verify} messages.
+                     * @param message ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology.verify|verify} messages.
+                     * @param message ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IReservationBlockPhysicalTopologyInstancePhysicalHostTopology, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology;
+
+                    /**
+                     * Decodes a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology;
+
+                    /**
+                     * Verifies a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology;
+
+                    /**
+                     * Creates a plain object from a ReservationBlockPhysicalTopologyInstancePhysicalHostTopology message. Also converts values to other types if specified.
+                     * @param message ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ReservationBlockPhysicalTopologyInstancePhysicalHostTopology, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationBlockPhysicalTopologyInstancePhysicalHostTopology to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
