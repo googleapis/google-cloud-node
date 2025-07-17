@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/managedkafka-schemaregistry",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Managed Service for Apache Kafka API client for Node.js",
   "repository": {
     "type": "git",

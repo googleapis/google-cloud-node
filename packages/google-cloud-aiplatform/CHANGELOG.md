@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.3.0...aiplatform-v4.4.0) (2025-07-17)
+
+
+### Features
+
+* Add Aggregation Output in EvaluateDataset Get Operation Response ([#6474](https://github.com/googleapis/google-cloud-node/issues/6474)) ([d5d5573](https://github.com/googleapis/google-cloud-node/commit/d5d55738b1e2a07f0942041654588cf012cde3e7))
+* Add API for Managed OSS Fine Tuning ([#6494](https://github.com/googleapis/google-cloud-node/issues/6494)) ([a71d814](https://github.com/googleapis/google-cloud-node/commit/a71d814de86954fa3fae816cd6e63be842d84dca))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.2.0...aiplatform-v4.3.0) (2025-07-09)
 
 
