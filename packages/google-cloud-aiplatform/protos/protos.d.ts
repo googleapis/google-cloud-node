@@ -171309,12 +171309,6 @@ export namespace google {
                     /** AssessDataRequest batchPredictionResourceUsageAssessmentConfig */
                     batchPredictionResourceUsageAssessmentConfig?: (google.cloud.aiplatform.v1beta1.AssessDataRequest.IBatchPredictionResourceUsageAssessmentConfig|null);
 
-                    /** AssessDataRequest geminiTemplateConfig */
-                    geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssessDataRequest requestColumnName */
-                    requestColumnName?: (string|null);
-
                     /** AssessDataRequest name */
                     name?: (string|null);
 
@@ -171343,12 +171337,6 @@ export namespace google {
                     /** AssessDataRequest batchPredictionResourceUsageAssessmentConfig. */
                     public batchPredictionResourceUsageAssessmentConfig?: (google.cloud.aiplatform.v1beta1.AssessDataRequest.IBatchPredictionResourceUsageAssessmentConfig|null);
 
-                    /** AssessDataRequest geminiTemplateConfig. */
-                    public geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssessDataRequest requestColumnName. */
-                    public requestColumnName?: (string|null);
-
                     /** AssessDataRequest name. */
                     public name: string;
 
@@ -171357,9 +171345,6 @@ export namespace google {
 
                     /** AssessDataRequest assessmentConfig. */
                     public assessmentConfig?: ("tuningValidationAssessmentConfig"|"tuningResourceUsageAssessmentConfig"|"batchPredictionValidationAssessmentConfig"|"batchPredictionResourceUsageAssessmentConfig");
-
-                    /** AssessDataRequest readConfig. */
-                    public readConfig?: ("geminiTemplateConfig"|"requestColumnName");
 
                     /**
                      * Creates a new AssessDataRequest instance using the specified properties.
@@ -172815,12 +172800,6 @@ export namespace google {
                 /** Properties of an AssembleDataRequest. */
                 interface IAssembleDataRequest {
 
-                    /** AssembleDataRequest geminiTemplateConfig */
-                    geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssembleDataRequest requestColumnName */
-                    requestColumnName?: (string|null);
-
                     /** AssembleDataRequest name */
                     name?: (string|null);
 
@@ -172837,20 +172816,11 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IAssembleDataRequest);
 
-                    /** AssembleDataRequest geminiTemplateConfig. */
-                    public geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssembleDataRequest requestColumnName. */
-                    public requestColumnName?: (string|null);
-
                     /** AssembleDataRequest name. */
                     public name: string;
 
                     /** AssembleDataRequest geminiRequestReadConfig. */
                     public geminiRequestReadConfig?: (google.cloud.aiplatform.v1beta1.IGeminiRequestReadConfig|null);
-
-                    /** AssembleDataRequest readConfig. */
-                    public readConfig?: ("geminiTemplateConfig"|"requestColumnName");
 
                     /**
                      * Creates a new AssembleDataRequest instance using the specified properties.

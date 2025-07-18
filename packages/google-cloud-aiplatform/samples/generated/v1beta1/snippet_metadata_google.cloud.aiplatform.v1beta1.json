@@ -966,7 +966,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -990,14 +990,6 @@
                     {
                         "name": "batch_prediction_resource_usage_assessment_config",
                         "type": ".google.cloud.aiplatform.v1beta1.AssessDataRequest.BatchPredictionResourceUsageAssessmentConfig"
-                    },
-                    {
-                        "name": "gemini_template_config",
-                        "type": ".google.cloud.aiplatform.v1beta1.GeminiTemplateConfig"
-                    },
-                    {
-                        "name": "request_column_name",
-                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "name",
@@ -1034,7 +1026,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1043,14 +1035,6 @@
                 "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.AssembleData",
                 "async": true,
                 "parameters": [
-                    {
-                        "name": "gemini_template_config",
-                        "type": ".google.cloud.aiplatform.v1beta1.GeminiTemplateConfig"
-                    },
-                    {
-                        "name": "request_column_name",
-                        "type": "TYPE_STRING"
-                    },
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
