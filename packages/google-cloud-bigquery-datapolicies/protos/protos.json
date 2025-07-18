@@ -721,6 +721,511 @@
                         }
                       }
                     },
+                    "v2": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.BigQuery.DataPolicies.V2",
+                        "go_package": "cloud.google.com/go/bigquery/datapolicies/apiv2/datapoliciespb;datapoliciespb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "DataPolicyProto",
+                        "java_package": "com.google.cloud.bigquery.datapolicies.v2",
+                        "php_namespace": "Google\\Cloud\\BigQuery\\DataPolicies\\V2",
+                        "ruby_package": "Google::Cloud::Bigquery::DataPolicies::V2",
+                        "(google.api.resource_definition).type": "bigquery.googleapis.com/Routine",
+                        "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/routines/{routine}"
+                      },
+                      "nested": {
+                        "DataPolicyService": {
+                          "options": {
+                            "(google.api.default_host)": "bigquerydatapolicy.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "CreateDataPolicy": {
+                              "requestType": "CreateDataPolicyRequest",
+                              "responseType": "DataPolicy",
+                              "options": {
+                                "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/dataPolicies",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "parent,data_policy,data_policy_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{parent=projects/*/locations/*}/dataPolicies",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,data_policy,data_policy_id"
+                                }
+                              ]
+                            },
+                            "AddGrantees": {
+                              "requestType": "AddGranteesRequest",
+                              "responseType": "DataPolicy",
+                              "options": {
+                                "(google.api.http).post": "/v2/{data_policy=projects/*/locations/*/dataPolicies/*}:addGrantees",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "data_policy,grantees"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{data_policy=projects/*/locations/*/dataPolicies/*}:addGrantees",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "data_policy,grantees"
+                                }
+                              ]
+                            },
+                            "RemoveGrantees": {
+                              "requestType": "RemoveGranteesRequest",
+                              "responseType": "DataPolicy",
+                              "options": {
+                                "(google.api.http).post": "/v2/{data_policy=projects/*/locations/*/dataPolicies/*}:removeGrantees",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "data_policy,grantees"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{data_policy=projects/*/locations/*/dataPolicies/*}:removeGrantees",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "data_policy,grantees"
+                                }
+                              ]
+                            },
+                            "UpdateDataPolicy": {
+                              "requestType": "UpdateDataPolicyRequest",
+                              "responseType": "DataPolicy",
+                              "options": {
+                                "(google.api.http).patch": "/v2/{data_policy.name=projects/*/locations/*/dataPolicies/*}",
+                                "(google.api.http).body": "data_policy",
+                                "(google.api.method_signature)": "data_policy,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v2/{data_policy.name=projects/*/locations/*/dataPolicies/*}",
+                                    "body": "data_policy"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "data_policy,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteDataPolicy": {
+                              "requestType": "DeleteDataPolicyRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/v2/{name=projects/*/locations/*/dataPolicies/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v2/{name=projects/*/locations/*/dataPolicies/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "GetDataPolicy": {
+                              "requestType": "GetDataPolicyRequest",
+                              "responseType": "DataPolicy",
+                              "options": {
+                                "(google.api.http).get": "/v2/{name=projects/*/locations/*/dataPolicies/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v2/{name=projects/*/locations/*/dataPolicies/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListDataPolicies": {
+                              "requestType": "ListDataPoliciesRequest",
+                              "responseType": "ListDataPoliciesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/dataPolicies",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v2/{parent=projects/*/locations/*}/dataPolicies"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetIamPolicy": {
+                              "requestType": "google.iam.v1.GetIamPolicyRequest",
+                              "responseType": "google.iam.v1.Policy",
+                              "options": {
+                                "(google.api.http).post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:getIamPolicy",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:getIamPolicy",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            },
+                            "SetIamPolicy": {
+                              "requestType": "google.iam.v1.SetIamPolicyRequest",
+                              "responseType": "google.iam.v1.Policy",
+                              "options": {
+                                "(google.api.http).post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:setIamPolicy",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:setIamPolicy",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            },
+                            "TestIamPermissions": {
+                              "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                              "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                              "options": {
+                                "(google.api.http).post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:testIamPermissions",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v2/{resource=projects/*/locations/*/dataPolicies/*}:testIamPermissions",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateDataPolicyRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            },
+                            "dataPolicyId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dataPolicy": {
+                              "type": "DataPolicy",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateDataPolicyRequest": {
+                          "fields": {
+                            "dataPolicy": {
+                              "type": "DataPolicy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "allowMissing": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "AddGranteesRequest": {
+                          "fields": {
+                            "dataPolicy": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            },
+                            "grantees": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RemoveGranteesRequest": {
+                          "fields": {
+                            "dataPolicy": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            },
+                            "grantees": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteDataPolicyRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            }
+                          }
+                        },
+                        "GetDataPolicyRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            }
+                          }
+                        },
+                        "ListDataPoliciesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "bigquerydatapolicy.googleapis.com/DataPolicy"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListDataPoliciesResponse": {
+                          "fields": {
+                            "dataPolicies": {
+                              "rule": "repeated",
+                              "type": "DataPolicy",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataPolicy": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerydatapolicy.googleapis.com/DataPolicy",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataPolicies/{data_policy}",
+                            "(google.api.resource).plural": "dataPolicies",
+                            "(google.api.resource).singular": "dataPolicy"
+                          },
+                          "oneofs": {
+                            "policy": {
+                              "oneof": [
+                                "dataMaskingPolicy"
+                              ]
+                            },
+                            "_etag": {
+                              "oneof": [
+                                "etag"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "dataMaskingPolicy": {
+                              "type": "DataMaskingPolicy",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "dataPolicyId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "dataPolicyType": {
+                              "type": "DataPolicyType",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "policyTag": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "datacatalog.googleapis.com/PolicyTag"
+                              }
+                            },
+                            "grantees": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "version": {
+                              "type": "Version",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataPolicyType": {
+                              "values": {
+                                "DATA_POLICY_TYPE_UNSPECIFIED": 0,
+                                "DATA_MASKING_POLICY": 1,
+                                "RAW_DATA_ACCESS_POLICY": 2,
+                                "COLUMN_LEVEL_SECURITY_POLICY": 3
+                              }
+                            },
+                            "Version": {
+                              "values": {
+                                "VERSION_UNSPECIFIED": 0,
+                                "V1": 1,
+                                "V2": 2
+                              }
+                            }
+                          }
+                        },
+                        "DataMaskingPolicy": {
+                          "oneofs": {
+                            "maskingExpression": {
+                              "oneof": [
+                                "predefinedExpression",
+                                "routine"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "predefinedExpression": {
+                              "type": "PredefinedExpression",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "routine": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "bigquery.googleapis.com/Routine"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PredefinedExpression": {
+                              "values": {
+                                "PREDEFINED_EXPRESSION_UNSPECIFIED": 0,
+                                "SHA256": 1,
+                                "ALWAYS_NULL": 2,
+                                "DEFAULT_MASKING_VALUE": 3,
+                                "LAST_FOUR_CHARACTERS": 4,
+                                "FIRST_FOUR_CHARACTERS": 5,
+                                "EMAIL_MASK": 6,
+                                "DATE_YEAR_MASK": 7,
+                                "RANDOM_HASH": 8
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v2beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataPolicies.V2Beta1",
