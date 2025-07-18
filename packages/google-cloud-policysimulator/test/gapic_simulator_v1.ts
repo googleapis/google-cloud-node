@@ -1039,6 +1039,82 @@ describe('v1.SimulatorClient', () => {
 
     describe('Path templates', () => {
 
+        describe('customConstraint', async () => {
+            const fakePath = "/rendered/path/customConstraint";
+            const expectedParameters = {
+                organization: "organizationValue",
+                custom_constraint: "customConstraintValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.customConstraintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.customConstraintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('customConstraintPath', () => {
+                const result = client.customConstraintPath("organizationValue", "customConstraintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.customConstraintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromCustomConstraintName', () => {
+                const result = client.matchOrganizationFromCustomConstraintName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomConstraintFromCustomConstraintName', () => {
+                const result = client.matchCustomConstraintFromCustomConstraintName(fakePath);
+                assert.strictEqual(result, "customConstraintValue");
+                assert((client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderConstraint', async () => {
+            const fakePath = "/rendered/path/folderConstraint";
+            const expectedParameters = {
+                folder: "folderValue",
+                constraint: "constraintValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderConstraintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderConstraintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderConstraintPath', () => {
+                const result = client.folderConstraintPath("folderValue", "constraintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderConstraintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderConstraintName', () => {
+                const result = client.matchFolderFromFolderConstraintName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintFromFolderConstraintName', () => {
+                const result = client.matchConstraintFromFolderConstraintName(fakePath);
+                assert.strictEqual(result, "constraintValue");
+                assert((client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('folderLocationReplay', async () => {
             const fakePath = "/rendered/path/folderLocationReplay";
             const expectedParameters = {
@@ -1135,6 +1211,182 @@ describe('v1.SimulatorClient', () => {
                 const result = client.matchReplayResultFromFolderLocationReplayReplayResultName(fakePath);
                 assert.strictEqual(result, "replayResultValue");
                 assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('folderPolicy', async () => {
+            const fakePath = "/rendered/path/folderPolicy";
+            const expectedParameters = {
+                folder: "folderValue",
+                policy: "policyValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderPolicyPath', () => {
+                const result = client.folderPolicyPath("folderValue", "policyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderPolicyName', () => {
+                const result = client.matchFolderFromFolderPolicyName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPolicyFromFolderPolicyName', () => {
+                const result = client.matchPolicyFromFolderPolicyName(fakePath);
+                assert.strictEqual(result, "policyValue");
+                assert((client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('orgPolicyViolation', async () => {
+            const fakePath = "/rendered/path/orgPolicyViolation";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                org_policy_violations_preview: "orgPolicyViolationsPreviewValue",
+                org_policy_violation: "orgPolicyViolationValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.orgPolicyViolationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.orgPolicyViolationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('orgPolicyViolationPath', () => {
+                const result = client.orgPolicyViolationPath("organizationValue", "locationValue", "orgPolicyViolationsPreviewValue", "orgPolicyViolationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.orgPolicyViolationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrgPolicyViolationName', () => {
+                const result = client.matchOrganizationFromOrgPolicyViolationName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrgPolicyViolationName', () => {
+                const result = client.matchLocationFromOrgPolicyViolationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName', () => {
+                const result = client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName(fakePath);
+                assert.strictEqual(result, "orgPolicyViolationsPreviewValue");
+                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrgPolicyViolationFromOrgPolicyViolationName', () => {
+                const result = client.matchOrgPolicyViolationFromOrgPolicyViolationName(fakePath);
+                assert.strictEqual(result, "orgPolicyViolationValue");
+                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('orgPolicyViolationsPreview', async () => {
+            const fakePath = "/rendered/path/orgPolicyViolationsPreview";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                org_policy_violations_preview: "orgPolicyViolationsPreviewValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('orgPolicyViolationsPreviewPath', () => {
+                const result = client.orgPolicyViolationsPreviewPath("organizationValue", "locationValue", "orgPolicyViolationsPreviewValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrgPolicyViolationsPreviewName', () => {
+                const result = client.matchOrganizationFromOrgPolicyViolationsPreviewName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrgPolicyViolationsPreviewName', () => {
+                const result = client.matchLocationFromOrgPolicyViolationsPreviewName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName', () => {
+                const result = client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName(fakePath);
+                assert.strictEqual(result, "orgPolicyViolationsPreviewValue");
+                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationConstraint', async () => {
+            const fakePath = "/rendered/path/organizationConstraint";
+            const expectedParameters = {
+                organization: "organizationValue",
+                constraint: "constraintValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationConstraintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationConstraintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationConstraintPath', () => {
+                const result = client.organizationConstraintPath("organizationValue", "constraintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationConstraintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationConstraintName', () => {
+                const result = client.matchOrganizationFromOrganizationConstraintName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintFromOrganizationConstraintName', () => {
+                const result = client.matchConstraintFromOrganizationConstraintName(fakePath);
+                assert.strictEqual(result, "constraintValue");
+                assert((client.pathTemplates.organizationConstraintPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1239,6 +1491,82 @@ describe('v1.SimulatorClient', () => {
             });
         });
 
+        describe('organizationPolicy', async () => {
+            const fakePath = "/rendered/path/organizationPolicy";
+            const expectedParameters = {
+                organization: "organizationValue",
+                policy: "policyValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationPolicyPath', () => {
+                const result = client.organizationPolicyPath("organizationValue", "policyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationPolicyName', () => {
+                const result = client.matchOrganizationFromOrganizationPolicyName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPolicyFromOrganizationPolicyName', () => {
+                const result = client.matchPolicyFromOrganizationPolicyName(fakePath);
+                assert.strictEqual(result, "policyValue");
+                assert((client.pathTemplates.organizationPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectConstraint', async () => {
+            const fakePath = "/rendered/path/projectConstraint";
+            const expectedParameters = {
+                project: "projectValue",
+                constraint: "constraintValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectConstraintPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectConstraintPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectConstraintPath', () => {
+                const result = client.projectConstraintPath("projectValue", "constraintValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectConstraintPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectConstraintName', () => {
+                const result = client.matchProjectFromProjectConstraintName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchConstraintFromProjectConstraintName', () => {
+                const result = client.matchConstraintFromProjectConstraintName(fakePath);
+                assert.strictEqual(result, "constraintValue");
+                assert((client.pathTemplates.projectConstraintPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('projectLocationReplay', async () => {
             const fakePath = "/rendered/path/projectLocationReplay";
             const expectedParameters = {
@@ -1335,6 +1663,44 @@ describe('v1.SimulatorClient', () => {
                 const result = client.matchReplayResultFromProjectLocationReplayReplayResultName(fakePath);
                 assert.strictEqual(result, "replayResultValue");
                 assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectPolicy', async () => {
+            const fakePath = "/rendered/path/projectPolicy";
+            const expectedParameters = {
+                project: "projectValue",
+                policy: "policyValue",
+            };
+            const client = new simulatorModule.v1.SimulatorClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectPolicyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectPolicyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectPolicyPath', () => {
+                const result = client.projectPolicyPath("projectValue", "policyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectPolicyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectPolicyName', () => {
+                const result = client.matchProjectFromProjectPolicyName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPolicyFromProjectPolicyName', () => {
+                const result = client.matchPolicyFromProjectPolicyName(fakePath);
+                assert.strictEqual(result, "policyValue");
+                assert((client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
