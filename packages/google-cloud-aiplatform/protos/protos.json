@@ -46039,12 +46039,6 @@
                             "batchPredictionValidationAssessmentConfig",
                             "batchPredictionResourceUsageAssessmentConfig"
                           ]
-                        },
-                        "readConfig": {
-                          "oneof": [
-                            "geminiTemplateConfig",
-                            "requestColumnName"
-                          ]
                         }
                       },
                       "fields": {
@@ -46072,20 +46066,6 @@
                         "batchPredictionResourceUsageAssessmentConfig": {
                           "type": "BatchPredictionResourceUsageAssessmentConfig",
                           "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "geminiTemplateConfig": {
-                          "type": "GeminiTemplateConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "requestColumnName": {
-                          "type": "string",
-                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -46384,29 +46364,7 @@
                       }
                     },
                     "AssembleDataRequest": {
-                      "oneofs": {
-                        "readConfig": {
-                          "oneof": [
-                            "geminiTemplateConfig",
-                            "requestColumnName"
-                          ]
-                        }
-                      },
                       "fields": {
-                        "geminiTemplateConfig": {
-                          "type": "GeminiTemplateConfig",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "requestColumnName": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "name": {
                           "type": "string",
                           "id": 1,
