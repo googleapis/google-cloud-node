@@ -18,5 +18,8 @@
     "system-test/*.ts",
     "src/**/*.json",
     "protos/protos.json"
+  ],
+  "exclude": [
+    "test/fixtures"
   ]
 }
