@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.7.0...fleetengine-v0.8.0) (2025-07-17)
+
+
+### Features
+
+* [fleetengine] add ability to specify trip attributes to Trip and deprecate Trip.remaining_waypoints_version ([#6481](https://github.com/googleapis/google-cloud-node/issues/6481)) ([ebf2538](https://github.com/googleapis/google-cloud-node/commit/ebf2538352a7b9bf92f100ff1cabdb9ab58e1c4d))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.6.1...fleetengine-v0.7.0) (2025-07-09)
 
 

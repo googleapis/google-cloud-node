@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.2.0...network-security-v3.3.0) (2025-07-17)
+
+
+### Features
+
+* [networksecurity] publish v1alpha1 Network Security API client and ClientTlsPolicy API resource ([#6486](https://github.com/googleapis/google-cloud-node/issues/6486)) ([971ea02](https://github.com/googleapis/google-cloud-node/commit/971ea02c65b80f9d92340935f619d1e2e320ce83))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.1.0...network-security-v3.2.0) (2025-07-09)
 
 

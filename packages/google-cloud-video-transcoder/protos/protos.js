@@ -96,6 +96,7 @@
                              * @property {google.cloud.video.transcoder.v1.Job.ProcessingMode|null} [mode] Job mode
                              * @property {number|null} [batchModePriority] Job batchModePriority
                              * @property {google.cloud.video.transcoder.v1.Job.OptimizationStrategy|null} [optimization] Job optimization
+                             * @property {boolean|null} [fillContentGaps] Job fillContentGaps
                              */
     
                             /**
@@ -234,6 +235,14 @@
                              */
                             Job.prototype.optimization = 0;
     
+                            /**
+                             * Job fillContentGaps.
+                             * @member {boolean} fillContentGaps
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.fillContentGaps = false;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -303,6 +312,8 @@
                                     writer.uint32(/* id 21, wireType 0 =*/168).int32(message.batchModePriority);
                                 if (message.optimization != null && Object.hasOwnProperty.call(message, "optimization"))
                                     writer.uint32(/* id 22, wireType 0 =*/176).int32(message.optimization);
+                                if (message.fillContentGaps != null && Object.hasOwnProperty.call(message, "fillContentGaps"))
+                                    writer.uint32(/* id 25, wireType 0 =*/200).bool(message.fillContentGaps);
                                 return writer;
                             };
     
@@ -416,6 +427,10 @@
                                         }
                                     case 22: {
                                             message.optimization = reader.int32();
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.fillContentGaps = reader.bool();
                                             break;
                                         }
                                     default:
@@ -541,6 +556,9 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.fillContentGaps != null && message.hasOwnProperty("fillContentGaps"))
+                                    if (typeof message.fillContentGaps !== "boolean")
+                                        return "fillContentGaps: boolean expected";
                                 return null;
                             };
     
@@ -668,6 +686,8 @@
                                     message.optimization = 2;
                                     break;
                                 }
+                                if (object.fillContentGaps != null)
+                                    message.fillContentGaps = Boolean(object.fillContentGaps);
                                 return message;
                             };
     
@@ -699,6 +719,7 @@
                                     object.mode = options.enums === String ? "PROCESSING_MODE_UNSPECIFIED" : 0;
                                     object.batchModePriority = 0;
                                     object.optimization = options.enums === String ? "OPTIMIZATION_STRATEGY_UNSPECIFIED" : 0;
+                                    object.fillContentGaps = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -740,6 +761,8 @@
                                     object.batchModePriority = message.batchModePriority;
                                 if (message.optimization != null && message.hasOwnProperty("optimization"))
                                     object.optimization = options.enums === String ? $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] === undefined ? message.optimization : $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] : message.optimization;
+                                if (message.fillContentGaps != null && message.hasOwnProperty("fillContentGaps"))
+                                    object.fillContentGaps = message.fillContentGaps;
                                 return object;
                             };
     
@@ -3063,6 +3086,7 @@
                              * @property {Array.<string>|null} [elementaryStreams] MuxStream elementaryStreams
                              * @property {google.cloud.video.transcoder.v1.ISegmentSettings|null} [segmentSettings] MuxStream segmentSettings
                              * @property {string|null} [encryptionId] MuxStream encryptionId
+                             * @property {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null} [fmp4] MuxStream fmp4
                              */
     
                             /**
@@ -3130,6 +3154,28 @@
                             MuxStream.prototype.encryptionId = "";
     
                             /**
+                             * MuxStream fmp4.
+                             * @member {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null|undefined} fmp4
+                             * @memberof google.cloud.video.transcoder.v1.MuxStream
+                             * @instance
+                             */
+                            MuxStream.prototype.fmp4 = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * MuxStream containerConfig.
+                             * @member {"fmp4"|undefined} containerConfig
+                             * @memberof google.cloud.video.transcoder.v1.MuxStream
+                             * @instance
+                             */
+                            Object.defineProperty(MuxStream.prototype, "containerConfig", {
+                                get: $util.oneOfGetter($oneOfFields = ["fmp4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new MuxStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.MuxStream
@@ -3166,6 +3212,8 @@
                                     $root.google.cloud.video.transcoder.v1.SegmentSettings.encode(message.segmentSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.encryptionId != null && Object.hasOwnProperty.call(message, "encryptionId"))
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.encryptionId);
+                                if (message.fmp4 != null && Object.hasOwnProperty.call(message, "fmp4"))
+                                    $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.encode(message.fmp4, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3228,6 +3276,10 @@
                                             message.encryptionId = reader.string();
                                             break;
                                         }
+                                    case 8: {
+                                            message.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3263,6 +3315,7 @@
                             MuxStream.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     if (!$util.isString(message.key))
                                         return "key: string expected";
@@ -3287,6 +3340,14 @@
                                 if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
                                     if (!$util.isString(message.encryptionId))
                                         return "encryptionId: string expected";
+                                if (message.fmp4 != null && message.hasOwnProperty("fmp4")) {
+                                    properties.containerConfig = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify(message.fmp4);
+                                        if (error)
+                                            return "fmp4." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -3322,6 +3383,11 @@
                                 }
                                 if (object.encryptionId != null)
                                     message.encryptionId = String(object.encryptionId);
+                                if (object.fmp4 != null) {
+                                    if (typeof object.fmp4 !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.MuxStream.fmp4: object expected");
+                                    message.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.fromObject(object.fmp4);
+                                }
                                 return message;
                             };
     
@@ -3362,6 +3428,11 @@
                                     object.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.toObject(message.segmentSettings, options);
                                 if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
                                     object.encryptionId = message.encryptionId;
+                                if (message.fmp4 != null && message.hasOwnProperty("fmp4")) {
+                                    object.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.toObject(message.fmp4, options);
+                                    if (options.oneofs)
+                                        object.containerConfig = "fmp4";
+                                }
                                 return object;
                             };
     
@@ -3390,6 +3461,211 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.transcoder.v1.MuxStream";
                             };
+    
+                            MuxStream.Fmp4Config = (function() {
+    
+                                /**
+                                 * Properties of a Fmp4Config.
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream
+                                 * @interface IFmp4Config
+                                 * @property {string|null} [codecTag] Fmp4Config codecTag
+                                 */
+    
+                                /**
+                                 * Constructs a new Fmp4Config.
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream
+                                 * @classdesc Represents a Fmp4Config.
+                                 * @implements IFmp4Config
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config=} [properties] Properties to set
+                                 */
+                                function Fmp4Config(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Fmp4Config codecTag.
+                                 * @member {string} codecTag
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @instance
+                                 */
+                                Fmp4Config.prototype.codecTag = "";
+    
+                                /**
+                                 * Creates a new Fmp4Config instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config instance
+                                 */
+                                Fmp4Config.create = function create(properties) {
+                                    return new Fmp4Config(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Fmp4Config message. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config} message Fmp4Config message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fmp4Config.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.codecTag != null && Object.hasOwnProperty.call(message, "codecTag"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.codecTag);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Fmp4Config message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config} message Fmp4Config message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fmp4Config.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Fmp4Config message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fmp4Config.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.codecTag = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Fmp4Config message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fmp4Config.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Fmp4Config message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Fmp4Config.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.codecTag != null && message.hasOwnProperty("codecTag"))
+                                        if (!$util.isString(message.codecTag))
+                                            return "codecTag: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Fmp4Config message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 */
+                                Fmp4Config.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config();
+                                    if (object.codecTag != null)
+                                        message.codecTag = String(object.codecTag);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Fmp4Config message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} message Fmp4Config
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Fmp4Config.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.codecTag = "";
+                                    if (message.codecTag != null && message.hasOwnProperty("codecTag"))
+                                        object.codecTag = message.codecTag;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Fmp4Config to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Fmp4Config.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Fmp4Config
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Fmp4Config.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.MuxStream.Fmp4Config";
+                                };
+    
+                                return Fmp4Config;
+                            })();
     
                             return MuxStream;
                         })();
@@ -9475,6 +9751,376 @@
                                 return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream";
                             };
     
+                            /**
+                             * FrameRateConversionStrategy enum.
+                             * @name google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy
+                             * @enum {number}
+                             * @property {number} FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED=0 FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED value
+                             * @property {number} DOWNSAMPLE=1 DOWNSAMPLE value
+                             * @property {number} DROP_DUPLICATE=2 DROP_DUPLICATE value
+                             */
+                            VideoStream.FrameRateConversionStrategy = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DOWNSAMPLE"] = 1;
+                                values[valuesById[2] = "DROP_DUPLICATE"] = 2;
+                                return values;
+                            })();
+    
+                            VideoStream.H264ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a H264ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH264ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new H264ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H264ColorFormatSDR.
+                                 * @implements IH264ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function H264ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H264ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR instance
+                                 */
+                                H264ColorFormatSDR.create = function create(properties) {
+                                    return new H264ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR} message H264ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR} message H264ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H264ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H264ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H264ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 */
+                                H264ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H264ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} message H264ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H264ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H264ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H264ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H264ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H264ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR";
+                                };
+    
+                                return H264ColorFormatSDR;
+                            })();
+    
+                            VideoStream.H264ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a H264ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH264ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new H264ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H264ColorFormatHLG.
+                                 * @implements IH264ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function H264ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H264ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG instance
+                                 */
+                                H264ColorFormatHLG.create = function create(properties) {
+                                    return new H264ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG} message H264ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG} message H264ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H264ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H264ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H264ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 */
+                                H264ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H264ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} message H264ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H264ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H264ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H264ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H264ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H264ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG";
+                                };
+    
+                                return H264ColorFormatHLG;
+                            })();
+    
                             VideoStream.H264CodecSettings = (function() {
     
                                 /**
@@ -9484,6 +10130,7 @@
                                  * @property {number|null} [widthPixels] H264CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] H264CodecSettings heightPixels
                                  * @property {number|null} [frameRate] H264CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] H264CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] H264CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] H264CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] H264CodecSettings rateControlMode
@@ -9501,6 +10148,8 @@
                                  * @property {string|null} [profile] H264CodecSettings profile
                                  * @property {string|null} [tune] H264CodecSettings tune
                                  * @property {string|null} [preset] H264CodecSettings preset
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null} [sdr] H264CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null} [hlg] H264CodecSettings hlg
                                  */
     
                                 /**
@@ -9541,6 +10190,14 @@
                                  * @instance
                                  */
                                 H264CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * H264CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * H264CodecSettings bitrateBps.
@@ -9678,6 +10335,22 @@
                                  */
                                 H264CodecSettings.prototype.preset = "";
     
+                                /**
+                                 * H264CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * H264CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.hlg = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -9689,6 +10362,17 @@
                                  */
                                 Object.defineProperty(H264CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * H264CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(H264CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -9756,6 +10440,12 @@
                                         writer.uint32(/* id 19, wireType 2 =*/154).string(message.tune);
                                     if (message.preset != null && Object.hasOwnProperty.call(message, "preset"))
                                         writer.uint32(/* id 20, wireType 2 =*/162).string(message.preset);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 23, wireType 0 =*/184).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -9802,6 +10492,10 @@
                                             }
                                         case 3: {
                                                 message.frameRate = reader.double();
+                                                break;
+                                            }
+                                        case 23: {
+                                                message.frameRateConversionStrategy = reader.int32();
                                                 break;
                                             }
                                         case 4: {
@@ -9872,6 +10566,14 @@
                                                 message.preset = reader.string();
                                                 break;
                                             }
+                                        case 21: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 22: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -9917,6 +10619,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -9977,6 +10688,24 @@
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         if (!$util.isString(message.preset))
                                             return "preset: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -9998,6 +10727,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -10035,6 +10784,16 @@
                                         message.tune = String(object.tune);
                                     if (object.preset != null)
                                         message.preset = String(object.preset);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.fromObject(object.hlg);
+                                    }
                                     return message;
                                 };
     
@@ -10070,6 +10829,7 @@
                                         object.profile = "";
                                         object.tune = "";
                                         object.preset = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -10117,6 +10877,18 @@
                                         object.tune = message.tune;
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         object.preset = message.preset;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     
@@ -10149,6 +10921,537 @@
                                 return H264CodecSettings;
                             })();
     
+                            VideoStream.H265ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatSDR.
+                                 * @implements IH265ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR instance
+                                 */
+                                H265ColorFormatSDR.create = function create(properties) {
+                                    return new H265ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR} message H265ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR} message H265ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 */
+                                H265ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} message H265ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR";
+                                };
+    
+                                return H265ColorFormatSDR;
+                            })();
+    
+                            VideoStream.H265ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatHLG.
+                                 * @implements IH265ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG instance
+                                 */
+                                H265ColorFormatHLG.create = function create(properties) {
+                                    return new H265ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG} message H265ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG} message H265ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 */
+                                H265ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} message H265ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG";
+                                };
+    
+                                return H265ColorFormatHLG;
+                            })();
+    
+                            VideoStream.H265ColorFormatHDR10 = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatHDR10.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatHDR10
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatHDR10.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatHDR10.
+                                 * @implements IH265ColorFormatHDR10
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatHDR10(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatHDR10 instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10 instance
+                                 */
+                                H265ColorFormatHDR10.create = function create(properties) {
+                                    return new H265ColorFormatHDR10(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHDR10 message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10} message H265ColorFormatHDR10 message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHDR10.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHDR10 message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10} message H265ColorFormatHDR10 message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHDR10.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHDR10.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHDR10.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatHDR10 message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatHDR10.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatHDR10 message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 */
+                                H265ColorFormatHDR10.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatHDR10 message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} message H265ColorFormatHDR10
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatHDR10.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatHDR10 to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatHDR10.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatHDR10
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatHDR10.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10";
+                                };
+    
+                                return H265ColorFormatHDR10;
+                            })();
+    
                             VideoStream.H265CodecSettings = (function() {
     
                                 /**
@@ -10158,6 +11461,7 @@
                                  * @property {number|null} [widthPixels] H265CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] H265CodecSettings heightPixels
                                  * @property {number|null} [frameRate] H265CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] H265CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] H265CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] H265CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] H265CodecSettings rateControlMode
@@ -10174,6 +11478,9 @@
                                  * @property {string|null} [profile] H265CodecSettings profile
                                  * @property {string|null} [tune] H265CodecSettings tune
                                  * @property {string|null} [preset] H265CodecSettings preset
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null} [sdr] H265CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null} [hlg] H265CodecSettings hlg
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null} [hdr10] H265CodecSettings hdr10
                                  */
     
                                 /**
@@ -10214,6 +11521,14 @@
                                  * @instance
                                  */
                                 H265CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * H265CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * H265CodecSettings bitrateBps.
@@ -10343,6 +11658,30 @@
                                  */
                                 H265CodecSettings.prototype.preset = "";
     
+                                /**
+                                 * H265CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * H265CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.hlg = null;
+    
+                                /**
+                                 * H265CodecSettings hdr10.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null|undefined} hdr10
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.hdr10 = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -10354,6 +11693,17 @@
                                  */
                                 Object.defineProperty(H265CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * H265CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|"hdr10"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(H265CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg", "hdr10"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -10419,6 +11769,14 @@
                                         writer.uint32(/* id 18, wireType 2 =*/146).string(message.tune);
                                     if (message.preset != null && Object.hasOwnProperty.call(message, "preset"))
                                         writer.uint32(/* id 19, wireType 2 =*/154).string(message.preset);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                    if (message.hdr10 != null && Object.hasOwnProperty.call(message, "hdr10"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.encode(message.hdr10, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 23, wireType 0 =*/184).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -10465,6 +11823,10 @@
                                             }
                                         case 3: {
                                                 message.frameRate = reader.double();
+                                                break;
+                                            }
+                                        case 23: {
+                                                message.frameRateConversionStrategy = reader.int32();
                                                 break;
                                             }
                                         case 4: {
@@ -10531,6 +11893,18 @@
                                                 message.preset = reader.string();
                                                 break;
                                             }
+                                        case 20: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 21: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 22: {
+                                                message.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -10576,6 +11950,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -10633,6 +12016,34 @@
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         if (!$util.isString(message.preset))
                                             return "preset: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
+                                    if (message.hdr10 != null && message.hasOwnProperty("hdr10")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify(message.hdr10);
+                                            if (error)
+                                                return "hdr10." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -10654,6 +12065,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -10689,6 +12120,21 @@
                                         message.tune = String(object.tune);
                                     if (object.preset != null)
                                         message.preset = String(object.preset);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.fromObject(object.hlg);
+                                    }
+                                    if (object.hdr10 != null) {
+                                        if (typeof object.hdr10 !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.hdr10: object expected");
+                                        message.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.fromObject(object.hdr10);
+                                    }
                                     return message;
                                 };
     
@@ -10723,6 +12169,7 @@
                                         object.profile = "";
                                         object.tune = "";
                                         object.preset = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -10768,6 +12215,23 @@
                                         object.tune = message.tune;
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         object.preset = message.preset;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.hdr10 != null && message.hasOwnProperty("hdr10")) {
+                                        object.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.toObject(message.hdr10, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hdr10";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     
@@ -10800,6 +12264,360 @@
                                 return H265CodecSettings;
                             })();
     
+                            VideoStream.Vp9ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a Vp9ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IVp9ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new Vp9ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a Vp9ColorFormatSDR.
+                                 * @implements IVp9ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function Vp9ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Vp9ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR instance
+                                 */
+                                Vp9ColorFormatSDR.create = function create(properties) {
+                                    return new Vp9ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR} message Vp9ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR} message Vp9ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Vp9ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Vp9ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Vp9ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 */
+                                Vp9ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Vp9ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} message Vp9ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Vp9ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Vp9ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Vp9ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Vp9ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Vp9ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR";
+                                };
+    
+                                return Vp9ColorFormatSDR;
+                            })();
+    
+                            VideoStream.Vp9ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a Vp9ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IVp9ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new Vp9ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a Vp9ColorFormatHLG.
+                                 * @implements IVp9ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function Vp9ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Vp9ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG instance
+                                 */
+                                Vp9ColorFormatHLG.create = function create(properties) {
+                                    return new Vp9ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG} message Vp9ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG} message Vp9ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Vp9ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Vp9ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Vp9ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 */
+                                Vp9ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Vp9ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} message Vp9ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Vp9ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Vp9ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Vp9ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Vp9ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Vp9ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG";
+                                };
+    
+                                return Vp9ColorFormatHLG;
+                            })();
+    
                             VideoStream.Vp9CodecSettings = (function() {
     
                                 /**
@@ -10809,6 +12627,7 @@
                                  * @property {number|null} [widthPixels] Vp9CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] Vp9CodecSettings heightPixels
                                  * @property {number|null} [frameRate] Vp9CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] Vp9CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] Vp9CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] Vp9CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] Vp9CodecSettings rateControlMode
@@ -10816,6 +12635,8 @@
                                  * @property {number|null} [gopFrameCount] Vp9CodecSettings gopFrameCount
                                  * @property {google.protobuf.IDuration|null} [gopDuration] Vp9CodecSettings gopDuration
                                  * @property {string|null} [profile] Vp9CodecSettings profile
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null} [sdr] Vp9CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null} [hlg] Vp9CodecSettings hlg
                                  */
     
                                 /**
@@ -10856,6 +12677,14 @@
                                  * @instance
                                  */
                                 Vp9CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * Vp9CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * Vp9CodecSettings bitrateBps.
@@ -10913,6 +12742,22 @@
                                  */
                                 Vp9CodecSettings.prototype.profile = "";
     
+                                /**
+                                 * Vp9CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * Vp9CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.hlg = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -10924,6 +12769,17 @@
                                  */
                                 Object.defineProperty(Vp9CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Vp9CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(Vp9CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -10971,6 +12827,12 @@
                                         $root.google.protobuf.Duration.encode(message.gopDuration, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                     if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
                                         writer.uint32(/* id 10, wireType 2 =*/82).string(message.profile);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 13, wireType 0 =*/104).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -11019,6 +12881,10 @@
                                                 message.frameRate = reader.double();
                                                 break;
                                             }
+                                        case 13: {
+                                                message.frameRateConversionStrategy = reader.int32();
+                                                break;
+                                            }
                                         case 4: {
                                                 message.bitrateBps = reader.int32();
                                                 break;
@@ -11045,6 +12911,14 @@
                                             }
                                         case 10: {
                                                 message.profile = reader.string();
+                                                break;
+                                            }
+                                        case 11: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 12: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -11092,6 +12966,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -11122,6 +13005,24 @@
                                     if (message.profile != null && message.hasOwnProperty("profile"))
                                         if (!$util.isString(message.profile))
                                             return "profile: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -11143,6 +13044,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -11160,6 +13081,16 @@
                                     }
                                     if (object.profile != null)
                                         message.profile = String(object.profile);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.fromObject(object.hlg);
+                                    }
                                     return message;
                                 };
     
@@ -11185,6 +13116,7 @@
                                         object.rateControlMode = "";
                                         object.crfLevel = 0;
                                         object.profile = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -11212,6 +13144,18 @@
                                     }
                                     if (message.profile != null && message.hasOwnProperty("profile"))
                                         object.profile = message.profile;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     
@@ -19468,6 +21412,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -19503,6 +21448,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -19534,6 +21487,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -19583,6 +21538,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -19636,6 +21595,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -19678,6 +21642,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -19696,8 +21665,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -19705,6 +21676,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -21527,6 +23500,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -21551,6 +23525,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -21578,6 +23560,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -21616,6 +23600,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -21658,6 +23646,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -21678,6 +23671,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -21694,10 +23692,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -21726,6 +23728,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -22603,6 +24857,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -22614,6 +24869,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -22627,6 +24883,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -22654,6 +24918,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -22684,7 +24951,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -22692,6 +24959,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -22734,6 +25024,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -22754,6 +25052,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -22770,10 +25075,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -23412,6 +25725,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -23681,6 +26239,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -23695,6 +26254,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -23719,6 +26279,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -23741,6 +26302,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -23790,6 +26352,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -23912,6 +26482,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -23982,6 +26555,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -24086,6 +26665,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -24140,6 +26726,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -24191,6 +26778,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -24254,6 +26848,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -24320,6 +26918,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -24376,6 +26975,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -24424,6 +27028,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -24530,6 +27135,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -24581,6 +27194,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -24671,6 +27286,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -24786,6 +27405,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -24885,6 +27513,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -24914,6 +27562,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -24959,6 +27608,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -27003,6 +29654,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -27064,6 +29716,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -27100,6 +29760,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -27160,6 +29822,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -27230,6 +29896,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -27279,6 +29954,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -27303,6 +29998,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -27323,6 +30019,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -29641,6 +32339,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -29762,6 +32461,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -29835,6 +32542,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -29934,6 +32643,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -30070,6 +32783,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -30259,6 +32977,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -30356,6 +33079,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -30388,6 +33112,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -30660,6 +33386,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -30700,6 +33427,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -30798,6 +33529,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -31392,6 +34605,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -31436,6 +34650,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -31473,6 +34695,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -31522,6 +34746,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -31576,6 +34804,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -31609,6 +34842,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -31641,6 +34879,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -31648,6 +34887,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -33087,6 +36328,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -33153,6 +36396,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -33188,6 +36447,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -33246,6 +36509,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -33336,6 +36607,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -33477,6 +36768,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -33500,6 +36839,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -33513,6 +36854,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -33638,6 +36983,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -33824,6 +37382,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -33841,6 +37400,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -33888,6 +37448,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -33940,6 +37504,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -34049,7 +37617,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -34076,12 +37645,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -34107,10 +37684,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -34151,8 +37730,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -34195,6 +37778,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -34207,10 +37791,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -34237,6 +37826,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -34279,10 +37872,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -34301,13 +37899,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -35520,6 +39121,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {
