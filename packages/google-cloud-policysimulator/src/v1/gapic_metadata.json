@@ -5,6 +5,68 @@
   "protoPackage": "google.cloud.policysimulator.v1",
   "libraryPackage": "@google-cloud/policysimulator",
   "services": {
+    "OrgPolicyViolationsPreviewService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrgPolicyViolationsPreviewServiceClient",
+          "rpcs": {
+            "GetOrgPolicyViolationsPreview": {
+              "methods": [
+                "getOrgPolicyViolationsPreview"
+              ]
+            },
+            "CreateOrgPolicyViolationsPreview": {
+              "methods": [
+                "createOrgPolicyViolationsPreview"
+              ]
+            },
+            "ListOrgPolicyViolationsPreviews": {
+              "methods": [
+                "listOrgPolicyViolationsPreviews",
+                "listOrgPolicyViolationsPreviewsStream",
+                "listOrgPolicyViolationsPreviewsAsync"
+              ]
+            },
+            "ListOrgPolicyViolations": {
+              "methods": [
+                "listOrgPolicyViolations",
+                "listOrgPolicyViolationsStream",
+                "listOrgPolicyViolationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrgPolicyViolationsPreviewServiceClient",
+          "rpcs": {
+            "GetOrgPolicyViolationsPreview": {
+              "methods": [
+                "getOrgPolicyViolationsPreview"
+              ]
+            },
+            "CreateOrgPolicyViolationsPreview": {
+              "methods": [
+                "createOrgPolicyViolationsPreview"
+              ]
+            },
+            "ListOrgPolicyViolationsPreviews": {
+              "methods": [
+                "listOrgPolicyViolationsPreviews",
+                "listOrgPolicyViolationsPreviewsStream",
+                "listOrgPolicyViolationsPreviewsAsync"
+              ]
+            },
+            "ListOrgPolicyViolations": {
+              "methods": [
+                "listOrgPolicyViolations",
+                "listOrgPolicyViolationsStream",
+                "listOrgPolicyViolationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Simulator": {
       "clients": {
         "grpc": {

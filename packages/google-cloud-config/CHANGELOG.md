@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.9.0...config-v0.10.0) (2025-07-17)
+
+
+### Features
+
+* [infra-manager] added resource change and drift details for the preview ([#6475](https://github.com/googleapis/google-cloud-node/issues/6475)) ([c949b3f](https://github.com/googleapis/google-cloud-node/commit/c949b3f677349035c669b1052ce49f0f8a6fbf06))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.8.1...config-v0.9.0) (2025-07-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/lustre-v0.1.0...lustre-v0.2.0) (2025-07-17)
+
+
+### Features
+
+* Add a new instance state UPDATING ([b127b20](https://github.com/googleapis/google-cloud-node/commit/b127b20f0def69757a57519d1cc656e134f37ad6))
+
 ## 0.1.0 (2025-07-09)
 
 

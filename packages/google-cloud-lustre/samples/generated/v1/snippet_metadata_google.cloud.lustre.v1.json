@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-lustre",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -262,7 +262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 74,
                     "type": "FULL"
                 }
             ],
@@ -318,7 +318,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],

@@ -29,16 +29,6 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Config for assembling templates with a Gemini API structure.
-   */
-  // const geminiTemplateConfig = {}
-  /**
-   *  Optional. The column name in the underlying table that contains already
-   *  fully assembled requests. If this field is set, the original request will
-   *  be copied to the output table.
-   */
-  // const requestColumnName = 'abc123'
-  /**
    *  Required. The name of the Dataset resource (used only for MULTIMODAL
    *  datasets). Format:
    *  `projects/{project}/locations/{location}/datasets/{dataset}`
