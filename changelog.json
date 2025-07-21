@@ -5,6 +5,217 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "06390df47b477de5a89ecc4bc525372865d62cc3",
+          "message": "Add initial files for google.cloud.licensemanager.v1",
+          "issues": [
+            "6493"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/licensemanager",
+      "id": "179c2bc7-ae60-443d-ac9f-e27ccc86169b",
+      "createTime": "2025-07-17T01:18:58.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "75c7785f7fd37fb0129d75f5bfdd28a332c81037",
+          "message": "Add initial files for google.cloud.managedkafka.schemaregistry.v1",
+          "issues": [
+            "6476"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka-schemaregistry",
+      "id": "320ca86d-0db0-4881-b476-a9ec4bff8ed6",
+      "createTime": "2025-07-17T01:18:58.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b127b20f0def69757a57519d1cc656e134f37ad6",
+          "message": "Add a new instance state UPDATING",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "9485282c-d8b1-4410-aea5-70e7187d5b82",
+      "createTime": "2025-07-17T01:18:58.779Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ebf2538352a7b9bf92f100ff1cabdb9ab58e1c4d",
+          "message": "[fleetengine] add ability to specify trip attributes to Trip and deprecate Trip.remaining_waypoints_version",
+          "issues": [
+            "6481"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "5dba8039-5316-4c45-9c74-b64e2b4771ab",
+      "createTime": "2025-07-17T01:18:58.758Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "51493a701fab76e1598048fc879eb1c31a3313b9",
+          "message": "[fleetengine-delivery] add ability to specify trip attributes to Trip and deprecate Trip.remaining_waypoints_version",
+          "issues": [
+            "6482"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "6af394da-1aac-46bd-883a-8601361617cf",
+      "createTime": "2025-07-17T01:18:58.735Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c46a08f885753f84cdc0bb9b609820f9be0114ad",
+          "message": "[container] A new enum `TransparentHugepageEnabled` is added",
+          "issues": [
+            "6496"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "64d8670b-ce30-4caf-8e65-4287961660f6",
+      "createTime": "2025-07-17T01:18:58.715Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "6ac1df8ff2e813499c8f4f2248ed3b8b16193446",
+          "message": "Update dependency redis to ~5.6.0",
+          "issues": [
+            "6469"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "30debead-6e07-48eb-ad06-9803219d0106",
+      "createTime": "2025-07-17T01:18:58.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "971ea02c65b80f9d92340935f619d1e2e320ce83",
+          "message": "[networksecurity] publish v1alpha1 Network Security API client and ClientTlsPolicy API resource",
+          "issues": [
+            "6486"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "a33fc2d1-cee0-441b-88a2-621a5328d873",
+      "createTime": "2025-07-17T01:18:58.671Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02a74ee2eaa244dbb70b33b94e7884878a1457e2",
+          "message": "[dialogflow-cx] Add support for generator settings on fulfillment",
+          "issues": [
+            "6466"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "5cbca282-c36e-4241-982e-7b7d2a2f32a8",
+      "createTime": "2025-07-17T01:18:58.647Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c949b3f677349035c669b1052ce49f0f8a6fbf06",
+          "message": "[infra-manager] added resource change and drift details for the preview",
+          "issues": [
+            "6475"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "30136d11-cbac-408e-a82c-adb54311871e",
+      "createTime": "2025-07-17T01:18:58.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e30eb7c9ca1a668d02aa46e7197ac21414e8250f",
+          "message": "[bigquery-datapolicies] Release v2beta1 version containing Data Policy on Column",
+          "issues": [
+            "6480"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "9bdbbb86-1f74-4614-918f-4b3742c37aaa",
+      "createTime": "2025-07-17T01:18:58.580Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a71d814de86954fa3fae816cd6e63be842d84dca",
+          "message": "Add API for Managed OSS Fine Tuning",
+          "issues": [
+            "6494"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d5d55738b1e2a07f0942041654588cf012cde3e7",
+          "message": "Add Aggregation Output in EvaluateDataset Get Operation Response",
+          "issues": [
+            "6474"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "42e45b1d-a936-416c-adc2-ff3548148bf2",
+      "createTime": "2025-07-17T01:18:58.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e36659cfb89be11915cb4b4c48cfc394d112b3fc",
           "message": "Add initial files for google.cloud.maintenance.api.v1beta",
           "issues": [
@@ -59140,5 +59351,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-07-09T00:06:47.630Z"
+  "updateTime": "2025-07-17T01:18:58.823Z"
 }

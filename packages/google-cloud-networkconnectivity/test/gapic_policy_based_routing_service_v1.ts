@@ -1773,6 +1773,52 @@ describe('v1.PolicyBasedRoutingServiceClient', () => {
             });
         });
 
+        describe('internalRange', async () => {
+            const fakePath = "/rendered/path/internalRange";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                internal_range: "internalRangeValue",
+            };
+            const client = new policybasedroutingserviceModule.v1.PolicyBasedRoutingServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.internalRangePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.internalRangePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('internalRangePath', () => {
+                const result = client.internalRangePath("projectValue", "locationValue", "internalRangeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.internalRangePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInternalRangeName', () => {
+                const result = client.matchProjectFromInternalRangeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.internalRangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInternalRangeName', () => {
+                const result = client.matchLocationFromInternalRangeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.internalRangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInternalRangeFromInternalRangeName', () => {
+                const result = client.matchInternalRangeFromInternalRangeName(fakePath);
+                assert.strictEqual(result, "internalRangeValue");
+                assert((client.pathTemplates.internalRangePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('location', async () => {
             const fakePath = "/rendered/path/location";
             const expectedParameters = {

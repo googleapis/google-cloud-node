@@ -3172,6 +3172,24 @@
     "support_documentation": "https://developers.google.com/maps/documentation/transportation-logistics/mobility/docs/getting-support"
   },
   {
+    "name": "licensemanager",
+    "name_pretty": "License Manager API",
+    "product_documentation": "https://cloud.google.com/compute/docs/instances/windows/ms-licensing",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/licensemanager/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/licensemanager",
+    "api_id": "licensemanager.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "licensemanager",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-licensemanager",
+    "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
+  },
+  {
     "name": "lifesciences",
     "name_pretty": "Life Sciences",
     "product_documentation": "https://cloud.google.com/life-sciences/",
@@ -3242,6 +3260,24 @@
     "api_shortname": "lustre",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lustre",
     "support_documentation": "https://cloud.google.com/managed-lustre/docs/getting-support"
+  },
+  {
+    "name": "managedkafka",
+    "name_pretty": "Managed Service for Apache Kafka API",
+    "product_documentation": "https://cloud.google.com/managed-service-for-apache-kafka/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/managedkafka/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/managedkafka-schemaregistry",
+    "api_id": "managedkafka.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "managedkafka",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry",
+    "support_documentation": "https://cloud.google.com/managed-service-for-apache-kafka/docs/getting-support"
   },
   {
     "name": "managedkafka",

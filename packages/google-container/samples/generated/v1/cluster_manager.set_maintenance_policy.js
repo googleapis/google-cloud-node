@@ -35,8 +35,8 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
   // const projectId = 'abc123'
   /**
    *  Required. The name of the Google Compute Engine
-   *  zone (https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides.
+   *  zone (https://cloud.google.com/compute/docs/zones#available)
+   *  in which the cluster resides.
    */
   // const zone = 'abc123'
   /**

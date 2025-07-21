@@ -2048,12 +2048,6 @@ export class DatasetServiceClient {
  * @param {google.cloud.aiplatform.v1beta1.AssessDataRequest.BatchPredictionResourceUsageAssessmentConfig} [request.batchPredictionResourceUsageAssessmentConfig]
  *   Optional. Configuration for the batch prediction resource usage
  *   assessment.
- * @param {google.cloud.aiplatform.v1beta1.GeminiTemplateConfig} [request.geminiTemplateConfig]
- *   Optional. Config for assembling templates with a Gemini API structure to
- *   assess assembled data.
- * @param {string} [request.requestColumnName]
- *   Optional. The column name in the underlying table that contains already
- *   fully assembled requests.
  * @param {string} request.name
  *   Required. The name of the Dataset resource. Used only for MULTIMODAL
  *   datasets. Format:
@@ -2166,12 +2160,6 @@ export class DatasetServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
- * @param {google.cloud.aiplatform.v1beta1.GeminiTemplateConfig} [request.geminiTemplateConfig]
- *   Optional. Config for assembling templates with a Gemini API structure.
- * @param {string} [request.requestColumnName]
- *   Optional. The column name in the underlying table that contains already
- *   fully assembled requests. If this field is set, the original request will
- *   be copied to the output table.
  * @param {string} request.name
  *   Required. The name of the Dataset resource (used only for MULTIMODAL
  *   datasets). Format:

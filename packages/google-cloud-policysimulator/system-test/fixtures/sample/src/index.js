@@ -21,6 +21,7 @@
 const policysimulator = require('@google-cloud/policysimulator');
 
 function main() {
+  const orgPolicyViolationsPreviewServiceClient = new policysimulator.OrgPolicyViolationsPreviewServiceClient();
   const simulatorClient = new policysimulator.SimulatorClient();
 }
 
