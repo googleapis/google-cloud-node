@@ -1046,7 +1046,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 94,
                     "type": "FULL"
                 }
             ],
@@ -1078,6 +1078,10 @@
                     {
                         "name": "scope",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "semantic_search",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.dataplex.v1.SearchEntriesResponse",
