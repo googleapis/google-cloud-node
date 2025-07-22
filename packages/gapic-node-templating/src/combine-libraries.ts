@@ -1,5 +1,3 @@
-import { read } from "node:fs";
-
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
 
@@ -9,67 +7,87 @@ const path = require('path');
  * @param {string} currentPath The current path being processed.
  * @param {Set<string>} accumulator A Set to accumulate unique paths.
  */
-export async function traverseDirectory(currentPath: string, accumulator: {filePath: string, content: string}[], stringToRemove?: RegExp) {
-    // Add the current directory itself to the set
-    // accumulator.push(path.resolve(currentPath));
+export async function traverseDirectory(
+  currentPath: string,
+  accumulator: {filePath: string; content: string}[],
+  stringToRemove?: RegExp,
+) {
+  // Add the current directory itself to the set
+  // accumulator.push(path.resolve(currentPath));
 
-    const items = await fs.readdir(currentPath, { withFileTypes: true }); // Get dirent objects
+  const items = await fs.readdir(currentPath, {withFileTypes: true}); // Get dirent objects
 
-    for (const item of items) {
-      const itemPath = path.join(currentPath, item.name);
+  for (const item of items) {
+    const itemPath = path.join(currentPath, item.name);
 
-      // Add the current item (file or directory) to the set
+    // Add the current item (file or directory) to the set
     //   accumulator.push(path.resolve(itemPath));
 
-      if (item.isDirectory()) {
-        // If it's a directory, recurse into it
-        await traverseDirectory(itemPath, accumulator, stringToRemove);
-      } else {
-        let filePath = itemPath.replace(stringToRemove, "")
-        let content = await fs.readFile(itemPath, 'utf8');
-        accumulator.push({filePath, content});
-      }
-      // If it's a file, we've already added its path above, so no further action needed
+    if (item.isDirectory()) {
+      // If it's a directory, recurse into it
+      await traverseDirectory(itemPath, accumulator, stringToRemove);
+    } else {
+      const filePath = itemPath.replace(stringToRemove, '');
+      const content = await fs.readFile(itemPath, 'utf8');
+      accumulator.push({filePath, content});
     }
+    // If it's a file, we've already added its path above, so no further action needed
+  }
 
-    // console.log(accumulator);
-    return accumulator;
+  // console.log(accumulator);
+  return accumulator;
 }
-
 
 export async function generateFinalDirectoryPath(currentPath: string) {
-    // Get a full list of all the file paths in all the libraries
-    let fullPathsAndContent: {filePath: string, content: string}[] = [];
+  // Get a full list of all the file paths in all the libraries
+  let fullPathsAndContent: {filePath: string; content: string}[] = [];
 
-    const directories = await fs.readdir(currentPath);
-    for (const directory of directories) {
-        fullPathsAndContent = fullPathsAndContent.concat(await traverseDirectory(path.join(currentPath, directory), [], path.join(currentPath, directory)))
+  const directories = await fs.readdir(currentPath);
+  for (const directory of directories) {
+    fullPathsAndContent = fullPathsAndContent.concat(
+      await traverseDirectory(
+        path.join(currentPath, directory),
+        [],
+        path.join(currentPath, directory),
+      ),
+    );
+  }
+
+  // Now we need to clean out duplicates
+  const uniquePaths = new Set();
+  const uniquefullPathAndContent = [];
+
+  // const filesToExclude = [
+  //   '/protos/protos.js',
+  //   '/protos/protos.json',
+  //   '/protos/protos.d.ts',
+  // ];
+  for (const fullPathAndContent of fullPathsAndContent) {
+    if (!uniquePaths.has(fullPathAndContent.filePath)) {
+      uniquePaths.add(fullPathAndContent.filePath);
+      uniquefullPathAndContent.push(fullPathAndContent);
     }
+  }
 
-    // Now we need to clean out duplicates
-    const uniquePaths = new Set();
-    const uniquefullPathAndContent = [];
-
-    for (const fullPathAndContent of fullPathsAndContent) {
-        if (!uniquePaths.has(fullPathAndContent.filePath)) {
-            uniquePaths.add(fullPathAndContent.filePath);
-            uniquefullPathAndContent.push(fullPathAndContent);
-        }
-    }
-    return uniquefullPathAndContent;
+  // uniquefullPathAndContent.sort((a, b) => a.filePath.length - b.filePath.length);
+  // console.log(uniquefullPathAndContent.map(x => x.filePath))
+  return uniquefullPathAndContent;
 }
 
-export async function createDirectory(readDirectory: string, writeDirectory?: string) {
-    // If we're testing, we'll create a new directory, otherwise
-    // we'll just overwrite 
-    writeDirectory = writeDirectory ?? readDirectory;
-    const uniquefullPathAndContent = await generateFinalDirectoryPath(readDirectory);
+export async function createDirectory(
+  readDirectory: string,
+  writeDirectory?: string,
+) {
+  // If we're testing, we'll create a new directory, otherwise
+  // we'll just overwrite
+  writeDirectory = writeDirectory ?? readDirectory;
+  const uniquefullPathAndContent =
+    await generateFinalDirectoryPath(readDirectory);
 
-    // console.log("HELLO")
-    // console.log(writeDirectory)
-    // console.log(uniquefullPathAndContent)
-    createDirectoryAndWriteFiles(writeDirectory, uniquefullPathAndContent)
-
+  // console.log("HELLO")
+  // console.log(writeDirectory)
+  // console.log(uniquefullPathAndContent)
+  await createDirectoryAndWriteFiles(writeDirectory, uniquefullPathAndContent);
 }
 
 /**
@@ -80,15 +98,20 @@ export async function createDirectory(readDirectory: string, writeDirectory?: st
  */
 async function ensureDirectoryExists(filePath: string) {
   const dirPath = path.dirname(filePath);
-  try {
-    await fs.mkdir(dirPath, { recursive: true });
-    // console.log(`Ensured directory exists for: ${dirPath}`); // Optional: for debugging
-  } catch (error) {
-    if ((error as any).code !== 'EEXIST') { // EEXIST means it already exists, which is fine
-      console.error(`Error ensuring directory ${dirPath} exists:`, error);
-      throw error;
-    }
-  }
+  // console.log('DIRPATH');
+  // console.log(dirPath);
+  // console.log((await fs.stat(dirPath)).isDirectory());
+  // try {
+  // if (!(await fs.stat(dirPath)).isDirectory()) {
+  await fs.mkdir(dirPath, {recursive: true});
+  // }
+  // console.log(`Ensured directory exists for: ${dirPath}`); // Optional: for debugging
+  // } catch (error) {
+  //   if ((error as any).code !== 'EEXIST') { // EEXIST means it already exists, which is fine
+  //     console.error(`Error ensuring directory ${dirPath} exists:`, error);
+  //     throw error;
+  //   }
+  // }
 }
 
 /**
@@ -100,7 +123,10 @@ async function ensureDirectoryExists(filePath: string) {
  * - {string} content: The full content to write to the file.
  * @returns {Promise<void>} A promise that resolves when all files are written.
  */
-async function createDirectoryAndWriteFiles(baseOutputDir: string, files: {filePath: string, content: string}[]) {
+async function createDirectoryAndWriteFiles(
+  baseOutputDir: string,
+  files: {filePath: string; content: string}[],
+) {
   if (!baseOutputDir) {
     throw new Error('baseOutputDir cannot be empty.');
   }
@@ -109,18 +135,18 @@ async function createDirectoryAndWriteFiles(baseOutputDir: string, files: {fileP
   }
 
   // Ensure the base output directory itself exists first
-//   try {
-    await fs.mkdir(baseOutputDir);
-//     console.log(`Base output directory created/ensured: ${baseOutputDir}`);
-//   } catch (error) {
-//     console.error(`Failed to create base output directory ${baseOutputDir}:`, error);
-//     throw error;
-//   }
+  //   try {
+  await fs.mkdir(baseOutputDir);
+  //     console.log(`Base output directory created/ensured: ${baseOutputDir}`);
+  //   } catch (error) {
+  //     console.error(`Failed to create base output directory ${baseOutputDir}:`, error);
+  //     throw error;
+  //   }
 
-  console.log('BASE OUTPUT DIR')
-  console.log(baseOutputDir)
-  const writePromises = files.map(async (fileData) => {
-    console.log(fileData.filePath)
+  //   console.log('BASE OUTPUT DIR')
+  //   console.log(baseOutputDir)
+  const writePromises = files.map(async fileData => {
+    // console.log(fileData.filePath)
     const fullFilePath = path.join(baseOutputDir, fileData.filePath);
     console.log(`Processing: ${fullFilePath}`);
 
@@ -139,7 +165,9 @@ async function createDirectoryAndWriteFiles(baseOutputDir: string, files: {fileP
 
   // Wait for all file writing operations to complete
   await Promise.all(writePromises);
-  console.log(`\nSuccessfully created directory and wrote all specified files to: ${baseOutputDir}`);
+  console.log(
+    `\nSuccessfully created directory and wrote all specified files to: ${baseOutputDir}`,
+  );
 }
 
 // export async function mergeDirectories(dirPath: string) {
@@ -341,7 +369,7 @@ async function createDirectoryAndWriteFiles(baseOutputDir: string, files: {fileP
 // }
 
 // // --- Main Script Logic ---
-export async function combineLibraries(packageDirPath: string, apiId: string) {};
+export async function combineLibraries(packageDirPath: string, apiId: string) {}
 //         // We expect to have the combined library created.
 //         // At this point, we do not expect to change the library name.
 //         // Eventually we'll need to remove the *-nodejs at the end of the
