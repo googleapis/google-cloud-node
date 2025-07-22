@@ -948,6 +948,20 @@
                         "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
                       }
+                    },
+                    "transparentHugepageEnabled": {
+                      "type": "TransparentHugepageEnabled",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "transparentHugepageDefrag": {
+                      "type": "TransparentHugepageDefrag",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -989,6 +1003,24 @@
                           }
                         }
                       }
+                    },
+                    "TransparentHugepageEnabled": {
+                      "values": {
+                        "TRANSPARENT_HUGEPAGE_ENABLED_UNSPECIFIED": 0,
+                        "TRANSPARENT_HUGEPAGE_ENABLED_ALWAYS": 1,
+                        "TRANSPARENT_HUGEPAGE_ENABLED_MADVISE": 2,
+                        "TRANSPARENT_HUGEPAGE_ENABLED_NEVER": 3
+                      }
+                    },
+                    "TransparentHugepageDefrag": {
+                      "values": {
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_UNSPECIFIED": 0,
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_ALWAYS": 1,
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_DEFER": 2,
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_DEFER_WITH_MADVISE": 3,
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_MADVISE": 4,
+                        "TRANSPARENT_HUGEPAGE_DEFRAG_NEVER": 5
+                      }
                     }
                   }
                 },
@@ -1014,6 +1046,11 @@
                     "_insecureKubeletReadonlyPortEnabled": {
                       "oneof": [
                         "insecureKubeletReadonlyPortEnabled"
+                      ]
+                    },
+                    "_singleProcessOomKill": {
+                      "oneof": [
+                        "singleProcessOomKill"
                       ]
                     }
                   },
@@ -1104,6 +1141,49 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "evictionSoft": {
+                      "type": "EvictionSignals",
+                      "id": 17,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "evictionSoftGracePeriod": {
+                      "type": "EvictionGracePeriod",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "evictionMinimumReclaim": {
+                      "type": "EvictionMinimumReclaim",
+                      "id": 19,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "evictionMaxPodGracePeriodSeconds": {
+                      "type": "int32",
+                      "id": 20,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "maxParallelImagePulls": {
+                      "type": "int32",
+                      "id": 21,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "singleProcessOomKill": {
+                      "type": "bool",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -1124,6 +1204,144 @@
                     "policy": {
                       "type": "string",
                       "id": 1
+                    }
+                  }
+                },
+                "EvictionSignals": {
+                  "fields": {
+                    "memoryAvailable": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsAvailable": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsInodesFree": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsAvailable": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsInodesFree": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pidAvailable": {
+                      "type": "string",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "EvictionGracePeriod": {
+                  "fields": {
+                    "memoryAvailable": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsAvailable": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsInodesFree": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsAvailable": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsInodesFree": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pidAvailable": {
+                      "type": "string",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "EvictionMinimumReclaim": {
+                  "fields": {
+                    "memoryAvailable": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsAvailable": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "nodefsInodesFree": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsAvailable": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "imagefsInodesFree": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pidAvailable": {
+                      "type": "string",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1353,6 +1571,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "bootDisk": {
+                      "type": "BootDisk",
+                      "id": 57
                     }
                   },
                   "nested": {
@@ -1484,6 +1706,13 @@
                     "podIpv4RangeUtilization": {
                       "type": "double",
                       "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 19,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -1620,11 +1849,26 @@
                   }
                 },
                 "SoleTenantConfig": {
+                  "oneofs": {
+                    "_minNodeCpus": {
+                      "oneof": [
+                        "minNodeCpus"
+                      ]
+                    }
+                  },
                   "fields": {
                     "nodeAffinities": {
                       "rule": "repeated",
                       "type": "NodeAffinity",
                       "id": 1
+                    },
+                    "minNodeCpus": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -1894,6 +2138,10 @@
                     "highScaleCheckpointingConfig": {
                       "type": "HighScaleCheckpointingConfig",
                       "id": 22
+                    },
+                    "lustreCsiDriverConfig": {
+                      "type": "LustreCsiDriverConfig",
+                      "id": 23
                     }
                   }
                 },
@@ -2082,6 +2330,18 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    }
+                  }
+                },
+                "LustreCsiDriverConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "enableLegacyLustrePort": {
+                      "type": "bool",
+                      "id": 3
                     }
                   }
                 },
@@ -2340,6 +2600,21 @@
                       "id": 25,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "additionalIpRangesConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalIPRangesConfig",
+                      "id": 29,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "autoIpamConfig": {
+                      "type": "AutoIpamConfig",
+                      "id": 30,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }
@@ -2766,6 +3041,10 @@
                         "proto3_optional": true
                       }
                     },
+                    "gkeAutoUpgradeConfig": {
+                      "type": "GkeAutoUpgradeConfig",
+                      "id": 163
+                    },
                     "anonymousAuthenticationConfig": {
                       "type": "AnonymousAuthenticationConfig",
                       "id": 164
@@ -2878,7 +3157,21 @@
                   }
                 },
                 "AnonymousAuthenticationConfig": {
-                  "fields": {}
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "ENABLED": 1,
+                        "LIMITED": 2
+                      }
+                    }
+                  }
                 },
                 "CompliancePostureConfig": {
                   "oneofs": {
@@ -3370,7 +3663,10 @@
                     },
                     "userManagedKeysConfig": {
                       "type": "UserManagedKeysConfig",
-                      "id": 143
+                      "id": 143,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "desiredRbacBindingConfig": {
                       "type": "RBACBindingConfig",
@@ -3379,9 +3675,17 @@
                         "proto3_optional": true
                       }
                     },
+                    "desiredAdditionalIpRangesConfig": {
+                      "type": "DesiredAdditionalIPRangesConfig",
+                      "id": 145
+                    },
                     "desiredEnterpriseConfig": {
                       "type": "DesiredEnterpriseConfig",
                       "id": 147
+                    },
+                    "desiredAutoIpamConfig": {
+                      "type": "AutoIpamConfig",
+                      "id": 148
                     },
                     "desiredDisableL4LbFirewallReconciliation": {
                       "type": "bool",
@@ -3394,9 +3698,17 @@
                       "type": "LinuxNodeConfig",
                       "id": 150
                     },
+                    "desiredUserManagedKeysConfig": {
+                      "type": "UserManagedKeysConfig",
+                      "id": 152
+                    },
                     "desiredAnonymousAuthenticationConfig": {
                       "type": "AnonymousAuthenticationConfig",
                       "id": 156
+                    },
+                    "gkeAutoUpgradeConfig": {
+                      "type": "GkeAutoUpgradeConfig",
+                      "id": 154
                     }
                   }
                 },
@@ -3416,6 +3728,31 @@
                       }
                     }
                   }
+                },
+                "AdditionalIPRangesConfig": {
+                  "fields": {
+                    "subnetwork": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "podIpv4RangeNames": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "DesiredAdditionalIPRangesConfig": {
+                  "fields": {
+                    "additionalIpRangesConfigs": {
+                      "rule": "repeated",
+                      "type": "AdditionalIPRangesConfig",
+                      "id": 1
+                    }
+                  }
+                },
+                "AutoIpamConfig": {
+                  "fields": {}
                 },
                 "RangeInfo": {
                   "fields": {
@@ -3931,6 +4268,10 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "bootDisk": {
+                      "type": "BootDisk",
+                      "id": 47
                     }
                   }
                 },
@@ -5207,6 +5548,10 @@
                       "rule": "repeated",
                       "type": "string",
                       "id": 5
+                    },
+                    "defaultComputeClassConfig": {
+                      "type": "DefaultComputeClassConfig",
+                      "id": 9
                     }
                   },
                   "nested": {
@@ -5294,6 +5639,14 @@
                     "maximum": {
                       "type": "int64",
                       "id": 3
+                    }
+                  }
+                },
+                "DefaultComputeClassConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 },
@@ -5698,7 +6051,8 @@
                         "SET_BY_OPERATOR": 4,
                         "CLOUD_KMS_KEY_ERROR": 7,
                         "CA_EXPIRING": 9,
-                        "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS": 10
+                        "NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS": 10,
+                        "CLOUD_KMS_KEY_DESTROYED": 11
                       }
                     }
                   }
@@ -7168,6 +7522,26 @@
                     }
                   }
                 },
+                "BootDisk": {
+                  "fields": {
+                    "diskType": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "sizeGb": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "provisionedIops": {
+                      "type": "int64",
+                      "id": 3
+                    },
+                    "provisionedThroughput": {
+                      "type": "int64",
+                      "id": 4
+                    }
+                  }
+                },
                 "SecondaryBootDisk": {
                   "fields": {
                     "mode": {
@@ -7469,6 +7843,22 @@
                         "MAINTENANCE_EXCLUSION_NO_UPGRADES": 2,
                         "MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES": 3,
                         "SYSTEM_CONFIG": 4
+                      }
+                    }
+                  }
+                },
+                "GkeAutoUpgradeConfig": {
+                  "fields": {
+                    "patchMode": {
+                      "type": "PatchMode",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "PatchMode": {
+                      "values": {
+                        "PATCH_MODE_UNSPECIFIED": 0,
+                        "ACCELERATED": 1
                       }
                     }
                   }
@@ -15597,8 +15987,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -15722,6 +16111,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -15862,6 +16255,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -15919,6 +16334,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -15978,6 +16398,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -16112,12 +16545,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -16155,6 +16595,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -16244,6 +16689,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -16469,6 +16918,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -16683,6 +17136,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -16818,7 +17272,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -16845,6 +17300,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -16913,6 +17372,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -17002,6 +17481,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -17145,6 +17628,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -17155,6 +17639,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -17165,6 +17650,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -17175,6 +17661,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -17185,7 +17672,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -17195,27 +17683,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -17260,7 +17759,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -17274,6 +17779,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -17302,11 +17834,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -17319,6 +17866,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -17402,6 +17955,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {

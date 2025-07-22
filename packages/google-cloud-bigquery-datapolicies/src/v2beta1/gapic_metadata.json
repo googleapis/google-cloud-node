@@ -1,0 +1,127 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.bigquery.datapolicies.v2beta1",
+  "libraryPackage": "@google-cloud/datapolicies",
+  "services": {
+    "DataPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataPolicyServiceClient",
+          "rpcs": {
+            "CreateDataPolicy": {
+              "methods": [
+                "createDataPolicy"
+              ]
+            },
+            "AddGrantees": {
+              "methods": [
+                "addGrantees"
+              ]
+            },
+            "RemoveGrantees": {
+              "methods": [
+                "removeGrantees"
+              ]
+            },
+            "UpdateDataPolicy": {
+              "methods": [
+                "updateDataPolicy"
+              ]
+            },
+            "DeleteDataPolicy": {
+              "methods": [
+                "deleteDataPolicy"
+              ]
+            },
+            "GetDataPolicy": {
+              "methods": [
+                "getDataPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListDataPolicies": {
+              "methods": [
+                "listDataPolicies",
+                "listDataPoliciesStream",
+                "listDataPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataPolicyServiceClient",
+          "rpcs": {
+            "CreateDataPolicy": {
+              "methods": [
+                "createDataPolicy"
+              ]
+            },
+            "AddGrantees": {
+              "methods": [
+                "addGrantees"
+              ]
+            },
+            "RemoveGrantees": {
+              "methods": [
+                "removeGrantees"
+              ]
+            },
+            "UpdateDataPolicy": {
+              "methods": [
+                "updateDataPolicy"
+              ]
+            },
+            "DeleteDataPolicy": {
+              "methods": [
+                "deleteDataPolicy"
+              ]
+            },
+            "GetDataPolicy": {
+              "methods": [
+                "getDataPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "ListDataPolicies": {
+              "methods": [
+                "listDataPolicies",
+                "listDataPoliciesStream",
+                "listDataPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

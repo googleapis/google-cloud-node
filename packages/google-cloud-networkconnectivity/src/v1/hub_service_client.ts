@@ -204,6 +204,9 @@ export class HubServiceClient {
       interconnectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/interconnectAttachments/{resource_id}'
       ),
+      internalRangePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/internalRanges/{internal_range}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -266,9 +269,9 @@ export class HubServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',body: '*',}],
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/internalRanges/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/internalRanges/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/internalRanges/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -4600,6 +4603,55 @@ export class HubServiceClient {
    */
   matchResourceIdFromInterconnectAttachmentName(interconnectAttachmentName: string) {
     return this.pathTemplates.interconnectAttachmentPathTemplate.match(interconnectAttachmentName).resource_id;
+  }
+
+  /**
+   * Return a fully-qualified internalRange resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} internal_range
+   * @returns {string} Resource name string.
+   */
+  internalRangePath(project:string,location:string,internalRange:string) {
+    return this.pathTemplates.internalRangePathTemplate.render({
+      project: project,
+      location: location,
+      internal_range: internalRange,
+    });
+  }
+
+  /**
+   * Parse the project from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).project;
+  }
+
+  /**
+   * Parse the location from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).location;
+  }
+
+  /**
+   * Parse the internal_range from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the internal_range.
+   */
+  matchInternalRangeFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).internal_range;
   }
 
   /**

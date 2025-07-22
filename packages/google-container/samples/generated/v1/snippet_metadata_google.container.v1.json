@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "6.1.0",
+        "version": "6.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 213,
+                    "end": 220,
                     "type": "FULL"
                 }
             ],
@@ -374,6 +374,10 @@
                     {
                         "name": "flex_start",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "boot_disk",
+                        "type": ".google.container.v1.BootDisk"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

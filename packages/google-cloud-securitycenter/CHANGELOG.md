@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.0.1...security-center-v9.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6423](https://github.com/googleapis/google-cloud-node/issues/6423)) ([df9184f](https://github.com/googleapis/google-cloud-node/commit/df9184fe9fb00013ef519f093c4de5fd54ec2ce9))
+* [securitycenter] Add AffectedResources proto ([#6456](https://github.com/googleapis/google-cloud-node/issues/6456)) ([ed5e825](https://github.com/googleapis/google-cloud-node/commit/ed5e825efe5be0728a1394f8b9f1a760ca1e7fa2))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/pubsub to v5 ([#6311](https://github.com/googleapis/google-cloud-node/issues/6311)) ([1f69d9a](https://github.com/googleapis/google-cloud-node/commit/1f69d9a5e789b4c76c1fbd7700a5da12ce0b956e))
+
 ## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.0.0...security-center-v9.0.1) (2025-03-19)
 
 

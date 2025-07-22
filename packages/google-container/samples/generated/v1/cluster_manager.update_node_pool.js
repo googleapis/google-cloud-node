@@ -42,8 +42,8 @@ function main(nodeVersion, imageType) {
   // const nodeVersion = 'abc123'
   /**
    *  Required. The desired image type for the node pool. Please see
-   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-   *  available image types.
+   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
+   *  for available image types.
    */
   // const imageType = 'abc123'
   /**
@@ -54,10 +54,10 @@ function main(nodeVersion, imageType) {
   // const name = 'abc123'
   /**
    *  The desired list of Google Compute Engine
-   *  zones (https://cloud.google.com/compute/docs/zones#available) in which the
-   *  node pool's nodes should be located. Changing the locations for a node pool
-   *  will result in nodes being either created or removed from the node pool,
-   *  depending on whether locations are being added or removed.
+   *  zones (https://cloud.google.com/compute/docs/zones#available)
+   *  in which the node pool's nodes should be located. Changing the locations
+   *  for a node pool will result in nodes being either created or removed from
+   *  the node pool, depending on whether locations are being added or removed.
    */
   // const locations = ['abc','def']
   /**
@@ -136,15 +136,16 @@ function main(nodeVersion, imageType) {
   // const windowsNodeConfig = {}
   /**
    *  A list of hardware accelerators to be attached to each node.
-   *  See https://cloud.google.com/compute/docs/gpus for more information about
-   *  support for GPUs.
+   *  See
+   *  https://cloud.google.com/compute/docs/gpus
+   *  for more information about support for GPUs.
    */
   // const accelerators = [1,2,3,4]
   /**
    *  Optional. The desired Google Compute Engine machine
-   *  type (https://cloud.google.com/compute/docs/machine-types) for nodes in the
-   *  node pool. Initiates an upgrade operation that migrates the nodes in the
-   *  node pool to the specified machine type.
+   *  type (https://cloud.google.com/compute/docs/machine-types)
+   *  for nodes in the node pool. Initiates an upgrade operation that migrates
+   *  the nodes in the node pool to the specified machine type.
    */
   // const machineType = 'abc123'
   /**
@@ -191,6 +192,12 @@ function main(nodeVersion, imageType) {
    *  Flex Start flag for enabling Flex Start VM.
    */
   // const flexStart = true
+  /**
+   *  The desired boot disk config for nodes in the node pool.
+   *  Initiates an upgrade operation that migrates the nodes in the
+   *  node pool to the specified boot disk config.
+   */
+  // const bootDisk = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

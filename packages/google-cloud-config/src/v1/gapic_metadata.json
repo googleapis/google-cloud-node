@@ -65,6 +65,16 @@
                 "getTerraformVersion"
               ]
             },
+            "GetResourceChange": {
+              "methods": [
+                "getResourceChange"
+              ]
+            },
+            "GetResourceDrift": {
+              "methods": [
+                "getResourceDrift"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -133,6 +143,20 @@
                 "listTerraformVersions",
                 "listTerraformVersionsStream",
                 "listTerraformVersionsAsync"
+              ]
+            },
+            "ListResourceChanges": {
+              "methods": [
+                "listResourceChanges",
+                "listResourceChangesStream",
+                "listResourceChangesAsync"
+              ]
+            },
+            "ListResourceDrifts": {
+              "methods": [
+                "listResourceDrifts",
+                "listResourceDriftsStream",
+                "listResourceDriftsAsync"
               ]
             }
           }
@@ -195,6 +219,16 @@
                 "getTerraformVersion"
               ]
             },
+            "GetResourceChange": {
+              "methods": [
+                "getResourceChange"
+              ]
+            },
+            "GetResourceDrift": {
+              "methods": [
+                "getResourceDrift"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -263,6 +297,20 @@
                 "listTerraformVersions",
                 "listTerraformVersionsStream",
                 "listTerraformVersionsAsync"
+              ]
+            },
+            "ListResourceChanges": {
+              "methods": [
+                "listResourceChanges",
+                "listResourceChangesStream",
+                "listResourceChangesAsync"
+              ]
+            },
+            "ListResourceDrifts": {
+              "methods": [
+                "listResourceDrifts",
+                "listResourceDriftsStream",
+                "listResourceDriftsAsync"
               ]
             }
           }

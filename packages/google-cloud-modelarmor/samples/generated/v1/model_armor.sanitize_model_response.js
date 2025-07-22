@@ -41,6 +41,10 @@ function main(name, modelResponseData) {
    *  Optional. User Prompt associated with Model response.
    */
   // const userPrompt = 'abc123'
+  /**
+   *  Optional. Metadata related for multi language detection.
+   */
+  // const multiLanguageDetectionMetadata = {}
 
   // Imports the Modelarmor library
   const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;

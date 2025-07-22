@@ -23,10 +23,12 @@ const CrossNetworkAutomationServiceClient = v1.CrossNetworkAutomationServiceClie
 type CrossNetworkAutomationServiceClient = v1.CrossNetworkAutomationServiceClient;
 const HubServiceClient = v1.HubServiceClient;
 type HubServiceClient = v1.HubServiceClient;
+const InternalRangeServiceClient = v1.InternalRangeServiceClient;
+type InternalRangeServiceClient = v1.InternalRangeServiceClient;
 const PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
 type PolicyBasedRoutingServiceClient = v1.PolicyBasedRoutingServiceClient;
 
-export {v1, v1alpha1, CrossNetworkAutomationServiceClient, HubServiceClient, PolicyBasedRoutingServiceClient};
-export default {v1, v1alpha1, CrossNetworkAutomationServiceClient, HubServiceClient, PolicyBasedRoutingServiceClient};
+export {v1, v1alpha1, CrossNetworkAutomationServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
+export default {v1, v1alpha1, CrossNetworkAutomationServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

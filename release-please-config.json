@@ -207,7 +207,9 @@
     "packages/google-cloud-storagebatchoperations": {},
     "packages/google-apps-events-subscriptions": {},
     "packages/google-cloud-maintenance-api": {},
-    "packages/google-cloud-geminidataanalytics": {}
+    "packages/google-cloud-geminidataanalytics": {},
+    "packages/google-cloud-managedkafka-schemaregistry": {},
+    "packages/google-cloud-licensemanager": {}
   },
   "plugins": [
     {

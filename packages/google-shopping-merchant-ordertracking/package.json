@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/ordertracking",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",
