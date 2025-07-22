@@ -5,6 +5,160 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a39702e4f0e8a9536cef0adbc64d5fd3045592d8",
+          "message": "[addressvalidation] add has_spell_corrected_components field to the Address Validation verdict in the API response",
+          "issues": [
+            "6498"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "072accf7-cbed-4a8a-ae86-b31a1e73bc33",
+      "createTime": "2025-07-22T18:14:26.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0cb9bb2180f333f075aabd0fd637918352e88cf7",
+          "message": "Remove is dependency",
+          "issues": [
+            "6516"
+          ]
+        }
+      ],
+      "version": "5.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "ed875108-35c7-4e89-9363-ddc481c66909",
+      "createTime": "2025-07-22T18:14:26.530Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f2cd7fd1f89c904fbf56967f93d7b7fc7fcfa1d4",
+          "message": "[video-transcoder] added support for specifying HEVC codec tag",
+          "issues": [
+            "6504"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "50d92ceb-75fb-4f51-a346-a31f44a9b9ec",
+      "createTime": "2025-07-22T18:14:26.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2d56d45f0a0e8bc9be618875af71abf89ca79e9d",
+          "message": "[run] support GPU zonal redundancy setting for Cloud Run jobs",
+          "issues": [
+            "6499"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "9175e9d6-8c65-42ab-8219-bf87fb2eacd7",
+      "createTime": "2025-07-22T18:14:26.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "778fbd3c8ae51d3ef185454bfb0c44efda250edd",
+          "message": "[policysimulator] added OrgPolicyViolationsPreviewService v1 API to simulate Org Policy",
+          "issues": [
+            "6509"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "2b3b93a8-8435-468c-a90c-4d461a201a12",
+      "createTime": "2025-07-22T18:14:26.456Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "872ff6ea741976c5173fbae5c5f5fee8f7f99a51",
+          "message": "[networkconnectivity] add Network Connectivity Center APIs for Internal Range service",
+          "issues": [
+            "6512"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "e4dde342-8bbf-4525-895c-ea39854a8cb6",
+      "createTime": "2025-07-22T18:14:26.435Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "67792d85893a9f5ae5de70998c012bf92c789313",
+          "message": "[bigquery-datapolicies] Add client libraries for V2 Data Policy api",
+          "issues": [
+            "6503"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "a5a118b4-a20e-40dc-921a-1df67f34d68b",
+      "createTime": "2025-07-22T18:14:26.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7e751ac51e5e5f66e1fda8419cae4a36cd7e22c5",
+          "message": "Remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData",
+          "issues": [
+            "6508"
+          ],
+          "breakingChangeNote": "remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData ([#6508](https://github.com/googleapis/google-cloud-node/issues/6508))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "9f4d1243-fdc9-409c-9a17-33b8e3bfd217",
+      "createTime": "2025-07-22T18:14:26.383Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ff417302f401a0ef9af47f7e8c43cbc9a2f0d0ba",
+          "message": "[servicecontrol] ServiceController V2 APIs are out of private preview",
+          "issues": [
+            "6513"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "5a40fe8f-cd9f-4f54-a49f-3cb6701ec4d9",
+      "createTime": "2025-07-22T18:14:26.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "06390df47b477de5a89ecc4bc525372865d62cc3",
           "message": "Add initial files for google.cloud.licensemanager.v1",
           "issues": [
@@ -59351,5 +59505,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-07-17T01:18:58.823Z"
+  "updateTime": "2025-07-22T18:14:26.548Z"
 }

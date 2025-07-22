@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v4.2.0...service-control-v4.3.0) (2025-07-22)
+
+
+### Features
+
+* [servicecontrol] ServiceController V2 APIs are out of private preview ([#6513](https://github.com/googleapis/google-cloud-node/issues/6513)) ([ff41730](https://github.com/googleapis/google-cloud-node/commit/ff417302f401a0ef9af47f7e8c43cbc9a2f0d0ba))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v4.1.0...service-control-v4.2.0) (2025-07-09)
 
 
