@@ -26,7 +26,7 @@ export async function compileTemplates(
     `copying from ${dirNameReadAbsolute} to ${dirNameWriteAbsolute}...`,
   );
   const files = fs.readdirSync(dirNameReadAbsolute);
-  files.forEach(file => {
+  files.forEach(async file => {
     const fileName = file.toString();
 
     const readName = path.join(dirNameReadAbsolute, fileName);
@@ -36,7 +36,7 @@ export async function compileTemplates(
     if (fs.statSync(readName).isDirectory()) {
       fs.mkdirSync(writeName, {recursive: true});
       console.log(writeName + ' generated');
-      compileTemplates(readName, writeName, vars);
+      await compileTemplates(readName, writeName, vars);
     } else {
       const compiledTemplate = nj.render(readName, vars);
       fs.writeFileSync(writeName.replace('.njk', ''), compiledTemplate);
