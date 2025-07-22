@@ -33920,6 +33920,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_ReservationSubBlocks_PerformMaintenance_async",
+            "title": "AcceleratorTypes performMaintenance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Allows customers to perform maintenance on a reservation subBlock",
+            "canonical": true,
+            "file": "reservation_sub_blocks.perform_maintenance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PerformMaintenance",
+                "fullName": "google.cloud.compute.v1.ReservationSubBlocks.PerformMaintenance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reservation_sub_block",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "ReservationSubBlocksClient",
+                    "fullName": "google.cloud.compute.v1.ReservationSubBlocksClient"
+                },
+                "method": {
+                    "shortName": "PerformMaintenance",
+                    "fullName": "google.cloud.compute.v1.ReservationSubBlocks.PerformMaintenance",
+                    "service": {
+                        "shortName": "ReservationSubBlocks",
+                        "fullName": "google.cloud.compute.v1.ReservationSubBlocks"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_ResourcePolicies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",

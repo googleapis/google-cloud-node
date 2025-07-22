@@ -629,6 +629,7 @@
   * [Reservation_blocks.perform_maintenance](#reservation_blocks.perform_maintenance)
   * [Reservation_sub_blocks.get](#reservation_sub_blocks.get)
   * [Reservation_sub_blocks.list](#reservation_sub_blocks.list)
+  * [Reservation_sub_blocks.perform_maintenance](#reservation_sub_blocks.perform_maintenance)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
   * [Reservations.delete](#reservations.delete)
   * [Reservations.get](#reservations.get)
@@ -1551,6 +1552,7 @@
   * [Reservation_blocks.perform_maintenance](#reservation_blocks.perform_maintenance)
   * [Reservation_sub_blocks.get](#reservation_sub_blocks.get)
   * [Reservation_sub_blocks.list](#reservation_sub_blocks.list)
+  * [Reservation_sub_blocks.perform_maintenance](#reservation_sub_blocks.perform_maintenance)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
   * [Reservations.delete](#reservations.delete)
   * [Reservations.get](#reservations.get)
@@ -12278,6 +12280,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.perform_maintenance.js`
 
 
 -----
@@ -27952,6 +27971,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.list.js`
+
+
+-----
+
+
+
+
+### Reservation_sub_blocks.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1beta/reservation_sub_blocks.perform_maintenance.js`
 
 
 -----
