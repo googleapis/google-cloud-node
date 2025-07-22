@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 210,
+                    "end": 217,
                     "type": "FULL"
                 }
             ],
@@ -374,6 +374,10 @@
                     {
                         "name": "flex_start",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "boot_disk",
+                        "type": ".google.container.v1beta1.BootDisk"
                     }
                 ],
                 "resultType": ".google.container.v1beta1.Operation",

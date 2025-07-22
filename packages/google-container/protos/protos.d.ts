@@ -27784,6 +27784,12 @@ export namespace google {
 
                 /** LinuxNodeConfig hugepages */
                 hugepages?: (google.container.v1beta1.LinuxNodeConfig.IHugepagesConfig|null);
+
+                /** LinuxNodeConfig transparentHugepageEnabled */
+                transparentHugepageEnabled?: (google.container.v1beta1.LinuxNodeConfig.TransparentHugepageEnabled|keyof typeof google.container.v1beta1.LinuxNodeConfig.TransparentHugepageEnabled|null);
+
+                /** LinuxNodeConfig transparentHugepageDefrag */
+                transparentHugepageDefrag?: (google.container.v1beta1.LinuxNodeConfig.TransparentHugepageDefrag|keyof typeof google.container.v1beta1.LinuxNodeConfig.TransparentHugepageDefrag|null);
             }
 
             /** Represents a LinuxNodeConfig. */
@@ -27803,6 +27809,12 @@ export namespace google {
 
                 /** LinuxNodeConfig hugepages. */
                 public hugepages?: (google.container.v1beta1.LinuxNodeConfig.IHugepagesConfig|null);
+
+                /** LinuxNodeConfig transparentHugepageEnabled. */
+                public transparentHugepageEnabled: (google.container.v1beta1.LinuxNodeConfig.TransparentHugepageEnabled|keyof typeof google.container.v1beta1.LinuxNodeConfig.TransparentHugepageEnabled);
+
+                /** LinuxNodeConfig transparentHugepageDefrag. */
+                public transparentHugepageDefrag: (google.container.v1beta1.LinuxNodeConfig.TransparentHugepageDefrag|keyof typeof google.container.v1beta1.LinuxNodeConfig.TransparentHugepageDefrag);
 
                 /**
                  * Creates a new LinuxNodeConfig instance using the specified properties.
@@ -27993,6 +28005,24 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** TransparentHugepageEnabled enum. */
+                enum TransparentHugepageEnabled {
+                    TRANSPARENT_HUGEPAGE_ENABLED_UNSPECIFIED = 0,
+                    TRANSPARENT_HUGEPAGE_ENABLED_ALWAYS = 1,
+                    TRANSPARENT_HUGEPAGE_ENABLED_MADVISE = 2,
+                    TRANSPARENT_HUGEPAGE_ENABLED_NEVER = 3
+                }
+
+                /** TransparentHugepageDefrag enum. */
+                enum TransparentHugepageDefrag {
+                    TRANSPARENT_HUGEPAGE_DEFRAG_UNSPECIFIED = 0,
+                    TRANSPARENT_HUGEPAGE_DEFRAG_ALWAYS = 1,
+                    TRANSPARENT_HUGEPAGE_DEFRAG_DEFER = 2,
+                    TRANSPARENT_HUGEPAGE_DEFRAG_DEFER_WITH_MADVISE = 3,
+                    TRANSPARENT_HUGEPAGE_DEFRAG_MADVISE = 4,
+                    TRANSPARENT_HUGEPAGE_DEFRAG_NEVER = 5
+                }
             }
 
             /** Properties of a WindowsNodeConfig. */
@@ -28146,6 +28176,24 @@ export namespace google {
 
                 /** NodeKubeletConfig allowedUnsafeSysctls */
                 allowedUnsafeSysctls?: (string[]|null);
+
+                /** NodeKubeletConfig evictionSoft */
+                evictionSoft?: (google.container.v1beta1.IEvictionSignals|null);
+
+                /** NodeKubeletConfig evictionSoftGracePeriod */
+                evictionSoftGracePeriod?: (google.container.v1beta1.IEvictionGracePeriod|null);
+
+                /** NodeKubeletConfig evictionMinimumReclaim */
+                evictionMinimumReclaim?: (google.container.v1beta1.IEvictionMinimumReclaim|null);
+
+                /** NodeKubeletConfig evictionMaxPodGracePeriodSeconds */
+                evictionMaxPodGracePeriodSeconds?: (number|null);
+
+                /** NodeKubeletConfig maxParallelImagePulls */
+                maxParallelImagePulls?: (number|null);
+
+                /** NodeKubeletConfig singleProcessOomKill */
+                singleProcessOomKill?: (boolean|null);
             }
 
             /** Represents a NodeKubeletConfig. */
@@ -28198,6 +28246,24 @@ export namespace google {
 
                 /** NodeKubeletConfig allowedUnsafeSysctls. */
                 public allowedUnsafeSysctls: string[];
+
+                /** NodeKubeletConfig evictionSoft. */
+                public evictionSoft?: (google.container.v1beta1.IEvictionSignals|null);
+
+                /** NodeKubeletConfig evictionSoftGracePeriod. */
+                public evictionSoftGracePeriod?: (google.container.v1beta1.IEvictionGracePeriod|null);
+
+                /** NodeKubeletConfig evictionMinimumReclaim. */
+                public evictionMinimumReclaim?: (google.container.v1beta1.IEvictionMinimumReclaim|null);
+
+                /** NodeKubeletConfig evictionMaxPodGracePeriodSeconds. */
+                public evictionMaxPodGracePeriodSeconds: number;
+
+                /** NodeKubeletConfig maxParallelImagePulls. */
+                public maxParallelImagePulls: number;
+
+                /** NodeKubeletConfig singleProcessOomKill. */
+                public singleProcessOomKill?: (boolean|null);
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -28477,6 +28543,387 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of an EvictionSignals. */
+            interface IEvictionSignals {
+
+                /** EvictionSignals memoryAvailable */
+                memoryAvailable?: (string|null);
+
+                /** EvictionSignals nodefsAvailable */
+                nodefsAvailable?: (string|null);
+
+                /** EvictionSignals nodefsInodesFree */
+                nodefsInodesFree?: (string|null);
+
+                /** EvictionSignals imagefsAvailable */
+                imagefsAvailable?: (string|null);
+
+                /** EvictionSignals imagefsInodesFree */
+                imagefsInodesFree?: (string|null);
+
+                /** EvictionSignals pidAvailable */
+                pidAvailable?: (string|null);
+            }
+
+            /** Represents an EvictionSignals. */
+            class EvictionSignals implements IEvictionSignals {
+
+                /**
+                 * Constructs a new EvictionSignals.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IEvictionSignals);
+
+                /** EvictionSignals memoryAvailable. */
+                public memoryAvailable: string;
+
+                /** EvictionSignals nodefsAvailable. */
+                public nodefsAvailable: string;
+
+                /** EvictionSignals nodefsInodesFree. */
+                public nodefsInodesFree: string;
+
+                /** EvictionSignals imagefsAvailable. */
+                public imagefsAvailable: string;
+
+                /** EvictionSignals imagefsInodesFree. */
+                public imagefsInodesFree: string;
+
+                /** EvictionSignals pidAvailable. */
+                public pidAvailable: string;
+
+                /**
+                 * Creates a new EvictionSignals instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EvictionSignals instance
+                 */
+                public static create(properties?: google.container.v1beta1.IEvictionSignals): google.container.v1beta1.EvictionSignals;
+
+                /**
+                 * Encodes the specified EvictionSignals message. Does not implicitly {@link google.container.v1beta1.EvictionSignals.verify|verify} messages.
+                 * @param message EvictionSignals message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IEvictionSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EvictionSignals message, length delimited. Does not implicitly {@link google.container.v1beta1.EvictionSignals.verify|verify} messages.
+                 * @param message EvictionSignals message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IEvictionSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EvictionSignals message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EvictionSignals
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.EvictionSignals;
+
+                /**
+                 * Decodes an EvictionSignals message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EvictionSignals
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.EvictionSignals;
+
+                /**
+                 * Verifies an EvictionSignals message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EvictionSignals message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EvictionSignals
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.EvictionSignals;
+
+                /**
+                 * Creates a plain object from an EvictionSignals message. Also converts values to other types if specified.
+                 * @param message EvictionSignals
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.EvictionSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EvictionSignals to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EvictionSignals
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an EvictionGracePeriod. */
+            interface IEvictionGracePeriod {
+
+                /** EvictionGracePeriod memoryAvailable */
+                memoryAvailable?: (string|null);
+
+                /** EvictionGracePeriod nodefsAvailable */
+                nodefsAvailable?: (string|null);
+
+                /** EvictionGracePeriod nodefsInodesFree */
+                nodefsInodesFree?: (string|null);
+
+                /** EvictionGracePeriod imagefsAvailable */
+                imagefsAvailable?: (string|null);
+
+                /** EvictionGracePeriod imagefsInodesFree */
+                imagefsInodesFree?: (string|null);
+
+                /** EvictionGracePeriod pidAvailable */
+                pidAvailable?: (string|null);
+            }
+
+            /** Represents an EvictionGracePeriod. */
+            class EvictionGracePeriod implements IEvictionGracePeriod {
+
+                /**
+                 * Constructs a new EvictionGracePeriod.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IEvictionGracePeriod);
+
+                /** EvictionGracePeriod memoryAvailable. */
+                public memoryAvailable: string;
+
+                /** EvictionGracePeriod nodefsAvailable. */
+                public nodefsAvailable: string;
+
+                /** EvictionGracePeriod nodefsInodesFree. */
+                public nodefsInodesFree: string;
+
+                /** EvictionGracePeriod imagefsAvailable. */
+                public imagefsAvailable: string;
+
+                /** EvictionGracePeriod imagefsInodesFree. */
+                public imagefsInodesFree: string;
+
+                /** EvictionGracePeriod pidAvailable. */
+                public pidAvailable: string;
+
+                /**
+                 * Creates a new EvictionGracePeriod instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EvictionGracePeriod instance
+                 */
+                public static create(properties?: google.container.v1beta1.IEvictionGracePeriod): google.container.v1beta1.EvictionGracePeriod;
+
+                /**
+                 * Encodes the specified EvictionGracePeriod message. Does not implicitly {@link google.container.v1beta1.EvictionGracePeriod.verify|verify} messages.
+                 * @param message EvictionGracePeriod message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IEvictionGracePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EvictionGracePeriod message, length delimited. Does not implicitly {@link google.container.v1beta1.EvictionGracePeriod.verify|verify} messages.
+                 * @param message EvictionGracePeriod message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IEvictionGracePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EvictionGracePeriod message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EvictionGracePeriod
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.EvictionGracePeriod;
+
+                /**
+                 * Decodes an EvictionGracePeriod message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EvictionGracePeriod
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.EvictionGracePeriod;
+
+                /**
+                 * Verifies an EvictionGracePeriod message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EvictionGracePeriod message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EvictionGracePeriod
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.EvictionGracePeriod;
+
+                /**
+                 * Creates a plain object from an EvictionGracePeriod message. Also converts values to other types if specified.
+                 * @param message EvictionGracePeriod
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.EvictionGracePeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EvictionGracePeriod to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EvictionGracePeriod
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an EvictionMinimumReclaim. */
+            interface IEvictionMinimumReclaim {
+
+                /** EvictionMinimumReclaim memoryAvailable */
+                memoryAvailable?: (string|null);
+
+                /** EvictionMinimumReclaim nodefsAvailable */
+                nodefsAvailable?: (string|null);
+
+                /** EvictionMinimumReclaim nodefsInodesFree */
+                nodefsInodesFree?: (string|null);
+
+                /** EvictionMinimumReclaim imagefsAvailable */
+                imagefsAvailable?: (string|null);
+
+                /** EvictionMinimumReclaim imagefsInodesFree */
+                imagefsInodesFree?: (string|null);
+
+                /** EvictionMinimumReclaim pidAvailable */
+                pidAvailable?: (string|null);
+            }
+
+            /** Represents an EvictionMinimumReclaim. */
+            class EvictionMinimumReclaim implements IEvictionMinimumReclaim {
+
+                /**
+                 * Constructs a new EvictionMinimumReclaim.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IEvictionMinimumReclaim);
+
+                /** EvictionMinimumReclaim memoryAvailable. */
+                public memoryAvailable: string;
+
+                /** EvictionMinimumReclaim nodefsAvailable. */
+                public nodefsAvailable: string;
+
+                /** EvictionMinimumReclaim nodefsInodesFree. */
+                public nodefsInodesFree: string;
+
+                /** EvictionMinimumReclaim imagefsAvailable. */
+                public imagefsAvailable: string;
+
+                /** EvictionMinimumReclaim imagefsInodesFree. */
+                public imagefsInodesFree: string;
+
+                /** EvictionMinimumReclaim pidAvailable. */
+                public pidAvailable: string;
+
+                /**
+                 * Creates a new EvictionMinimumReclaim instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EvictionMinimumReclaim instance
+                 */
+                public static create(properties?: google.container.v1beta1.IEvictionMinimumReclaim): google.container.v1beta1.EvictionMinimumReclaim;
+
+                /**
+                 * Encodes the specified EvictionMinimumReclaim message. Does not implicitly {@link google.container.v1beta1.EvictionMinimumReclaim.verify|verify} messages.
+                 * @param message EvictionMinimumReclaim message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IEvictionMinimumReclaim, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EvictionMinimumReclaim message, length delimited. Does not implicitly {@link google.container.v1beta1.EvictionMinimumReclaim.verify|verify} messages.
+                 * @param message EvictionMinimumReclaim message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IEvictionMinimumReclaim, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EvictionMinimumReclaim message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EvictionMinimumReclaim
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.EvictionMinimumReclaim;
+
+                /**
+                 * Decodes an EvictionMinimumReclaim message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EvictionMinimumReclaim
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.EvictionMinimumReclaim;
+
+                /**
+                 * Verifies an EvictionMinimumReclaim message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EvictionMinimumReclaim message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EvictionMinimumReclaim
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.EvictionMinimumReclaim;
+
+                /**
+                 * Creates a plain object from an EvictionMinimumReclaim message. Also converts values to other types if specified.
+                 * @param message EvictionMinimumReclaim
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.EvictionMinimumReclaim, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EvictionMinimumReclaim to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EvictionMinimumReclaim
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a NodeConfig. */
             interface INodeConfig {
 
@@ -28617,6 +29064,9 @@ export namespace google {
 
                 /** NodeConfig flexStart */
                 flexStart?: (boolean|null);
+
+                /** NodeConfig bootDisk */
+                bootDisk?: (google.container.v1beta1.IBootDisk|null);
             }
 
             /** Represents a NodeConfig. */
@@ -28765,6 +29215,9 @@ export namespace google {
 
                 /** NodeConfig flexStart. */
                 public flexStart?: (boolean|null);
+
+                /** NodeConfig bootDisk. */
+                public bootDisk?: (google.container.v1beta1.IBootDisk|null);
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -29010,6 +29463,9 @@ export namespace google {
 
                 /** NodeNetworkConfig podIpv4RangeUtilization */
                 podIpv4RangeUtilization?: (number|null);
+
+                /** NodeNetworkConfig subnetwork */
+                subnetwork?: (string|null);
             }
 
             /** Represents a NodeNetworkConfig. */
@@ -29047,6 +29503,9 @@ export namespace google {
 
                 /** NodeNetworkConfig podIpv4RangeUtilization. */
                 public podIpv4RangeUtilization: number;
+
+                /** NodeNetworkConfig subnetwork. */
+                public subnetwork: string;
 
                 /**
                  * Creates a new NodeNetworkConfig instance using the specified properties.
@@ -30187,6 +30646,9 @@ export namespace google {
 
                 /** SoleTenantConfig nodeAffinities */
                 nodeAffinities?: (google.container.v1beta1.SoleTenantConfig.INodeAffinity[]|null);
+
+                /** SoleTenantConfig minNodeCpus */
+                minNodeCpus?: (number|null);
             }
 
             /** Represents a SoleTenantConfig. */
@@ -30200,6 +30662,9 @@ export namespace google {
 
                 /** SoleTenantConfig nodeAffinities. */
                 public nodeAffinities: google.container.v1beta1.SoleTenantConfig.INodeAffinity[];
+
+                /** SoleTenantConfig minNodeCpus. */
+                public minNodeCpus?: (number|null);
 
                 /**
                  * Creates a new SoleTenantConfig instance using the specified properties.
@@ -31823,6 +32288,9 @@ export namespace google {
 
                 /** AddonsConfig highScaleCheckpointingConfig */
                 highScaleCheckpointingConfig?: (google.container.v1beta1.IHighScaleCheckpointingConfig|null);
+
+                /** AddonsConfig lustreCsiDriverConfig */
+                lustreCsiDriverConfig?: (google.container.v1beta1.ILustreCsiDriverConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -31884,6 +32352,9 @@ export namespace google {
 
                 /** AddonsConfig highScaleCheckpointingConfig. */
                 public highScaleCheckpointingConfig?: (google.container.v1beta1.IHighScaleCheckpointingConfig|null);
+
+                /** AddonsConfig lustreCsiDriverConfig. */
+                public lustreCsiDriverConfig?: (google.container.v1beta1.ILustreCsiDriverConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -33321,6 +33792,109 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a LustreCsiDriverConfig. */
+            interface ILustreCsiDriverConfig {
+
+                /** LustreCsiDriverConfig enabled */
+                enabled?: (boolean|null);
+
+                /** LustreCsiDriverConfig enableLegacyLustrePort */
+                enableLegacyLustrePort?: (boolean|null);
+            }
+
+            /** Represents a LustreCsiDriverConfig. */
+            class LustreCsiDriverConfig implements ILustreCsiDriverConfig {
+
+                /**
+                 * Constructs a new LustreCsiDriverConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ILustreCsiDriverConfig);
+
+                /** LustreCsiDriverConfig enabled. */
+                public enabled: boolean;
+
+                /** LustreCsiDriverConfig enableLegacyLustrePort. */
+                public enableLegacyLustrePort: boolean;
+
+                /**
+                 * Creates a new LustreCsiDriverConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LustreCsiDriverConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.ILustreCsiDriverConfig): google.container.v1beta1.LustreCsiDriverConfig;
+
+                /**
+                 * Encodes the specified LustreCsiDriverConfig message. Does not implicitly {@link google.container.v1beta1.LustreCsiDriverConfig.verify|verify} messages.
+                 * @param message LustreCsiDriverConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ILustreCsiDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LustreCsiDriverConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.LustreCsiDriverConfig.verify|verify} messages.
+                 * @param message LustreCsiDriverConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ILustreCsiDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LustreCsiDriverConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LustreCsiDriverConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.LustreCsiDriverConfig;
+
+                /**
+                 * Decodes a LustreCsiDriverConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LustreCsiDriverConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.LustreCsiDriverConfig;
+
+                /**
+                 * Verifies a LustreCsiDriverConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LustreCsiDriverConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LustreCsiDriverConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.LustreCsiDriverConfig;
+
+                /**
+                 * Creates a plain object from a LustreCsiDriverConfig message. Also converts values to other types if specified.
+                 * @param message LustreCsiDriverConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.LustreCsiDriverConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LustreCsiDriverConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LustreCsiDriverConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a RayOperatorConfig. */
             interface IRayOperatorConfig {
 
@@ -34483,6 +35057,12 @@ export namespace google {
 
                 /** IPAllocationPolicy defaultPodIpv4RangeUtilization */
                 defaultPodIpv4RangeUtilization?: (number|null);
+
+                /** IPAllocationPolicy additionalIpRangesConfigs */
+                additionalIpRangesConfigs?: (google.container.v1beta1.IAdditionalIPRangesConfig[]|null);
+
+                /** IPAllocationPolicy autoIpamConfig */
+                autoIpamConfig?: (google.container.v1beta1.IAutoIpamConfig|null);
             }
 
             /** Represents a IPAllocationPolicy. */
@@ -34556,6 +35136,12 @@ export namespace google {
 
                 /** IPAllocationPolicy defaultPodIpv4RangeUtilization. */
                 public defaultPodIpv4RangeUtilization: number;
+
+                /** IPAllocationPolicy additionalIpRangesConfigs. */
+                public additionalIpRangesConfigs: google.container.v1beta1.IAdditionalIPRangesConfig[];
+
+                /** IPAllocationPolicy autoIpamConfig. */
+                public autoIpamConfig?: (google.container.v1beta1.IAutoIpamConfig|null);
 
                 /**
                  * Creates a new IPAllocationPolicy instance using the specified properties.
@@ -35436,6 +36022,9 @@ export namespace google {
                 /** Cluster rbacBindingConfig */
                 rbacBindingConfig?: (google.container.v1beta1.IRBACBindingConfig|null);
 
+                /** Cluster gkeAutoUpgradeConfig */
+                gkeAutoUpgradeConfig?: (google.container.v1beta1.IGkeAutoUpgradeConfig|null);
+
                 /** Cluster anonymousAuthenticationConfig */
                 anonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
             }
@@ -35703,6 +36292,9 @@ export namespace google {
 
                 /** Cluster rbacBindingConfig. */
                 public rbacBindingConfig?: (google.container.v1beta1.IRBACBindingConfig|null);
+
+                /** Cluster gkeAutoUpgradeConfig. */
+                public gkeAutoUpgradeConfig?: (google.container.v1beta1.IGkeAutoUpgradeConfig|null);
 
                 /** Cluster anonymousAuthenticationConfig. */
                 public anonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
@@ -36043,6 +36635,9 @@ export namespace google {
 
             /** Properties of an AnonymousAuthenticationConfig. */
             interface IAnonymousAuthenticationConfig {
+
+                /** AnonymousAuthenticationConfig mode */
+                mode?: (google.container.v1beta1.AnonymousAuthenticationConfig.Mode|keyof typeof google.container.v1beta1.AnonymousAuthenticationConfig.Mode|null);
             }
 
             /** Represents an AnonymousAuthenticationConfig. */
@@ -36053,6 +36648,9 @@ export namespace google {
                  * @param [properties] Properties to set
                  */
                 constructor(properties?: google.container.v1beta1.IAnonymousAuthenticationConfig);
+
+                /** AnonymousAuthenticationConfig mode. */
+                public mode: (google.container.v1beta1.AnonymousAuthenticationConfig.Mode|keyof typeof google.container.v1beta1.AnonymousAuthenticationConfig.Mode);
 
                 /**
                  * Creates a new AnonymousAuthenticationConfig instance using the specified properties.
@@ -36130,6 +36728,16 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AnonymousAuthenticationConfig {
+
+                /** Mode enum. */
+                enum Mode {
+                    MODE_UNSPECIFIED = 0,
+                    ENABLED = 1,
+                    LIMITED = 2
+                }
             }
 
             /** Properties of a CompliancePostureConfig. */
@@ -37335,8 +37943,14 @@ export namespace google {
                 /** ClusterUpdate desiredRbacBindingConfig */
                 desiredRbacBindingConfig?: (google.container.v1beta1.IRBACBindingConfig|null);
 
+                /** ClusterUpdate desiredAdditionalIpRangesConfig */
+                desiredAdditionalIpRangesConfig?: (google.container.v1beta1.IDesiredAdditionalIPRangesConfig|null);
+
                 /** ClusterUpdate desiredEnterpriseConfig */
                 desiredEnterpriseConfig?: (google.container.v1beta1.IDesiredEnterpriseConfig|null);
+
+                /** ClusterUpdate desiredAutoIpamConfig */
+                desiredAutoIpamConfig?: (google.container.v1beta1.IAutoIpamConfig|null);
 
                 /** ClusterUpdate desiredDisableL4LbFirewallReconciliation */
                 desiredDisableL4LbFirewallReconciliation?: (boolean|null);
@@ -37344,8 +37958,14 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolAutoConfigLinuxNodeConfig */
                 desiredNodePoolAutoConfigLinuxNodeConfig?: (google.container.v1beta1.ILinuxNodeConfig|null);
 
+                /** ClusterUpdate desiredUserManagedKeysConfig */
+                desiredUserManagedKeysConfig?: (google.container.v1beta1.IUserManagedKeysConfig|null);
+
                 /** ClusterUpdate desiredAnonymousAuthenticationConfig */
                 desiredAnonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
+
+                /** ClusterUpdate gkeAutoUpgradeConfig */
+                gkeAutoUpgradeConfig?: (google.container.v1beta1.IGkeAutoUpgradeConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -37573,8 +38193,14 @@ export namespace google {
                 /** ClusterUpdate desiredRbacBindingConfig. */
                 public desiredRbacBindingConfig?: (google.container.v1beta1.IRBACBindingConfig|null);
 
+                /** ClusterUpdate desiredAdditionalIpRangesConfig. */
+                public desiredAdditionalIpRangesConfig?: (google.container.v1beta1.IDesiredAdditionalIPRangesConfig|null);
+
                 /** ClusterUpdate desiredEnterpriseConfig. */
                 public desiredEnterpriseConfig?: (google.container.v1beta1.IDesiredEnterpriseConfig|null);
+
+                /** ClusterUpdate desiredAutoIpamConfig. */
+                public desiredAutoIpamConfig?: (google.container.v1beta1.IAutoIpamConfig|null);
 
                 /** ClusterUpdate desiredDisableL4LbFirewallReconciliation. */
                 public desiredDisableL4LbFirewallReconciliation?: (boolean|null);
@@ -37582,8 +38208,14 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolAutoConfigLinuxNodeConfig. */
                 public desiredNodePoolAutoConfigLinuxNodeConfig?: (google.container.v1beta1.ILinuxNodeConfig|null);
 
+                /** ClusterUpdate desiredUserManagedKeysConfig. */
+                public desiredUserManagedKeysConfig?: (google.container.v1beta1.IUserManagedKeysConfig|null);
+
                 /** ClusterUpdate desiredAnonymousAuthenticationConfig. */
                 public desiredAnonymousAuthenticationConfig?: (google.container.v1beta1.IAnonymousAuthenticationConfig|null);
+
+                /** ClusterUpdate gkeAutoUpgradeConfig. */
+                public gkeAutoUpgradeConfig?: (google.container.v1beta1.IGkeAutoUpgradeConfig|null);
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -37760,6 +38392,297 @@ export namespace google {
 
                 /**
                  * Gets the default type url for AdditionalPodRangesConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AdditionalIPRangesConfig. */
+            interface IAdditionalIPRangesConfig {
+
+                /** AdditionalIPRangesConfig subnetwork */
+                subnetwork?: (string|null);
+
+                /** AdditionalIPRangesConfig podIpv4RangeNames */
+                podIpv4RangeNames?: (string[]|null);
+            }
+
+            /** Represents an AdditionalIPRangesConfig. */
+            class AdditionalIPRangesConfig implements IAdditionalIPRangesConfig {
+
+                /**
+                 * Constructs a new AdditionalIPRangesConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAdditionalIPRangesConfig);
+
+                /** AdditionalIPRangesConfig subnetwork. */
+                public subnetwork: string;
+
+                /** AdditionalIPRangesConfig podIpv4RangeNames. */
+                public podIpv4RangeNames: string[];
+
+                /**
+                 * Creates a new AdditionalIPRangesConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AdditionalIPRangesConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAdditionalIPRangesConfig): google.container.v1beta1.AdditionalIPRangesConfig;
+
+                /**
+                 * Encodes the specified AdditionalIPRangesConfig message. Does not implicitly {@link google.container.v1beta1.AdditionalIPRangesConfig.verify|verify} messages.
+                 * @param message AdditionalIPRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAdditionalIPRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AdditionalIPRangesConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AdditionalIPRangesConfig.verify|verify} messages.
+                 * @param message AdditionalIPRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAdditionalIPRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AdditionalIPRangesConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AdditionalIPRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AdditionalIPRangesConfig;
+
+                /**
+                 * Decodes an AdditionalIPRangesConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AdditionalIPRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AdditionalIPRangesConfig;
+
+                /**
+                 * Verifies an AdditionalIPRangesConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AdditionalIPRangesConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AdditionalIPRangesConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AdditionalIPRangesConfig;
+
+                /**
+                 * Creates a plain object from an AdditionalIPRangesConfig message. Also converts values to other types if specified.
+                 * @param message AdditionalIPRangesConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AdditionalIPRangesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AdditionalIPRangesConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AdditionalIPRangesConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DesiredAdditionalIPRangesConfig. */
+            interface IDesiredAdditionalIPRangesConfig {
+
+                /** DesiredAdditionalIPRangesConfig additionalIpRangesConfigs */
+                additionalIpRangesConfigs?: (google.container.v1beta1.IAdditionalIPRangesConfig[]|null);
+            }
+
+            /** Represents a DesiredAdditionalIPRangesConfig. */
+            class DesiredAdditionalIPRangesConfig implements IDesiredAdditionalIPRangesConfig {
+
+                /**
+                 * Constructs a new DesiredAdditionalIPRangesConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IDesiredAdditionalIPRangesConfig);
+
+                /** DesiredAdditionalIPRangesConfig additionalIpRangesConfigs. */
+                public additionalIpRangesConfigs: google.container.v1beta1.IAdditionalIPRangesConfig[];
+
+                /**
+                 * Creates a new DesiredAdditionalIPRangesConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DesiredAdditionalIPRangesConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IDesiredAdditionalIPRangesConfig): google.container.v1beta1.DesiredAdditionalIPRangesConfig;
+
+                /**
+                 * Encodes the specified DesiredAdditionalIPRangesConfig message. Does not implicitly {@link google.container.v1beta1.DesiredAdditionalIPRangesConfig.verify|verify} messages.
+                 * @param message DesiredAdditionalIPRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IDesiredAdditionalIPRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DesiredAdditionalIPRangesConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.DesiredAdditionalIPRangesConfig.verify|verify} messages.
+                 * @param message DesiredAdditionalIPRangesConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IDesiredAdditionalIPRangesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DesiredAdditionalIPRangesConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DesiredAdditionalIPRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.DesiredAdditionalIPRangesConfig;
+
+                /**
+                 * Decodes a DesiredAdditionalIPRangesConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DesiredAdditionalIPRangesConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.DesiredAdditionalIPRangesConfig;
+
+                /**
+                 * Verifies a DesiredAdditionalIPRangesConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DesiredAdditionalIPRangesConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DesiredAdditionalIPRangesConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.DesiredAdditionalIPRangesConfig;
+
+                /**
+                 * Creates a plain object from a DesiredAdditionalIPRangesConfig message. Also converts values to other types if specified.
+                 * @param message DesiredAdditionalIPRangesConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.DesiredAdditionalIPRangesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DesiredAdditionalIPRangesConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DesiredAdditionalIPRangesConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AutoIpamConfig. */
+            interface IAutoIpamConfig {
+            }
+
+            /** Represents an AutoIpamConfig. */
+            class AutoIpamConfig implements IAutoIpamConfig {
+
+                /**
+                 * Constructs a new AutoIpamConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IAutoIpamConfig);
+
+                /**
+                 * Creates a new AutoIpamConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AutoIpamConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IAutoIpamConfig): google.container.v1beta1.AutoIpamConfig;
+
+                /**
+                 * Encodes the specified AutoIpamConfig message. Does not implicitly {@link google.container.v1beta1.AutoIpamConfig.verify|verify} messages.
+                 * @param message AutoIpamConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IAutoIpamConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AutoIpamConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.AutoIpamConfig.verify|verify} messages.
+                 * @param message AutoIpamConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IAutoIpamConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AutoIpamConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AutoIpamConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.AutoIpamConfig;
+
+                /**
+                 * Decodes an AutoIpamConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AutoIpamConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.AutoIpamConfig;
+
+                /**
+                 * Verifies an AutoIpamConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AutoIpamConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AutoIpamConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.AutoIpamConfig;
+
+                /**
+                 * Creates a plain object from an AutoIpamConfig message. Also converts values to other types if specified.
+                 * @param message AutoIpamConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.AutoIpamConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AutoIpamConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AutoIpamConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -38873,6 +39796,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest flexStart */
                 flexStart?: (boolean|null);
+
+                /** UpdateNodePoolRequest bootDisk */
+                bootDisk?: (google.container.v1beta1.IBootDisk|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -38985,6 +39911,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest flexStart. */
                 public flexStart?: (boolean|null);
+
+                /** UpdateNodePoolRequest bootDisk. */
+                public bootDisk?: (google.container.v1beta1.IBootDisk|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -44525,6 +45454,9 @@ export namespace google {
 
                 /** ClusterAutoscaling autoprovisioningLocations */
                 autoprovisioningLocations?: (string[]|null);
+
+                /** ClusterAutoscaling defaultComputeClassConfig */
+                defaultComputeClassConfig?: (google.container.v1beta1.IDefaultComputeClassConfig|null);
             }
 
             /** Represents a ClusterAutoscaling. */
@@ -44550,6 +45482,9 @@ export namespace google {
 
                 /** ClusterAutoscaling autoprovisioningLocations. */
                 public autoprovisioningLocations: string[];
+
+                /** ClusterAutoscaling defaultComputeClassConfig. */
+                public defaultComputeClassConfig?: (google.container.v1beta1.IDefaultComputeClassConfig|null);
 
                 /**
                  * Creates a new ClusterAutoscaling instance using the specified properties.
@@ -44899,6 +45834,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ResourceLimit
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DefaultComputeClassConfig. */
+            interface IDefaultComputeClassConfig {
+
+                /** DefaultComputeClassConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a DefaultComputeClassConfig. */
+            class DefaultComputeClassConfig implements IDefaultComputeClassConfig {
+
+                /**
+                 * Constructs a new DefaultComputeClassConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IDefaultComputeClassConfig);
+
+                /** DefaultComputeClassConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new DefaultComputeClassConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DefaultComputeClassConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IDefaultComputeClassConfig): google.container.v1beta1.DefaultComputeClassConfig;
+
+                /**
+                 * Encodes the specified DefaultComputeClassConfig message. Does not implicitly {@link google.container.v1beta1.DefaultComputeClassConfig.verify|verify} messages.
+                 * @param message DefaultComputeClassConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IDefaultComputeClassConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DefaultComputeClassConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.DefaultComputeClassConfig.verify|verify} messages.
+                 * @param message DefaultComputeClassConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IDefaultComputeClassConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DefaultComputeClassConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DefaultComputeClassConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.DefaultComputeClassConfig;
+
+                /**
+                 * Decodes a DefaultComputeClassConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DefaultComputeClassConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.DefaultComputeClassConfig;
+
+                /**
+                 * Verifies a DefaultComputeClassConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DefaultComputeClassConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DefaultComputeClassConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.DefaultComputeClassConfig;
+
+                /**
+                 * Creates a plain object from a DefaultComputeClassConfig message. Also converts values to other types if specified.
+                 * @param message DefaultComputeClassConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.DefaultComputeClassConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DefaultComputeClassConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DefaultComputeClassConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -46892,7 +47924,8 @@ export namespace google {
                     SET_BY_OPERATOR = 4,
                     CLOUD_KMS_KEY_ERROR = 7,
                     CA_EXPIRING = 9,
-                    NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS = 10
+                    NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS = 10,
+                    CLOUD_KMS_KEY_DESTROYED = 11
                 }
             }
 
@@ -54444,6 +55477,121 @@ export namespace google {
                 }
             }
 
+            /** Properties of a BootDisk. */
+            interface IBootDisk {
+
+                /** BootDisk diskType */
+                diskType?: (string|null);
+
+                /** BootDisk sizeGb */
+                sizeGb?: (number|Long|string|null);
+
+                /** BootDisk provisionedIops */
+                provisionedIops?: (number|Long|string|null);
+
+                /** BootDisk provisionedThroughput */
+                provisionedThroughput?: (number|Long|string|null);
+            }
+
+            /** Represents a BootDisk. */
+            class BootDisk implements IBootDisk {
+
+                /**
+                 * Constructs a new BootDisk.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IBootDisk);
+
+                /** BootDisk diskType. */
+                public diskType: string;
+
+                /** BootDisk sizeGb. */
+                public sizeGb: (number|Long|string);
+
+                /** BootDisk provisionedIops. */
+                public provisionedIops: (number|Long|string);
+
+                /** BootDisk provisionedThroughput. */
+                public provisionedThroughput: (number|Long|string);
+
+                /**
+                 * Creates a new BootDisk instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BootDisk instance
+                 */
+                public static create(properties?: google.container.v1beta1.IBootDisk): google.container.v1beta1.BootDisk;
+
+                /**
+                 * Encodes the specified BootDisk message. Does not implicitly {@link google.container.v1beta1.BootDisk.verify|verify} messages.
+                 * @param message BootDisk message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BootDisk message, length delimited. Does not implicitly {@link google.container.v1beta1.BootDisk.verify|verify} messages.
+                 * @param message BootDisk message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BootDisk message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BootDisk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.BootDisk;
+
+                /**
+                 * Decodes a BootDisk message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BootDisk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.BootDisk;
+
+                /**
+                 * Verifies a BootDisk message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BootDisk message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BootDisk
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.BootDisk;
+
+                /**
+                 * Creates a plain object from a BootDisk message. Also converts values to other types if specified.
+                 * @param message BootDisk
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.BootDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BootDisk to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BootDisk
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a SecondaryBootDisk. */
             interface ISecondaryBootDisk {
 
@@ -55311,6 +56459,112 @@ export namespace google {
                     MAINTENANCE_EXCLUSION_NO_UPGRADES = 2,
                     MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES = 3,
                     SYSTEM_CONFIG = 4
+                }
+            }
+
+            /** Properties of a GkeAutoUpgradeConfig. */
+            interface IGkeAutoUpgradeConfig {
+
+                /** GkeAutoUpgradeConfig patchMode */
+                patchMode?: (google.container.v1beta1.GkeAutoUpgradeConfig.PatchMode|keyof typeof google.container.v1beta1.GkeAutoUpgradeConfig.PatchMode|null);
+            }
+
+            /** Represents a GkeAutoUpgradeConfig. */
+            class GkeAutoUpgradeConfig implements IGkeAutoUpgradeConfig {
+
+                /**
+                 * Constructs a new GkeAutoUpgradeConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IGkeAutoUpgradeConfig);
+
+                /** GkeAutoUpgradeConfig patchMode. */
+                public patchMode: (google.container.v1beta1.GkeAutoUpgradeConfig.PatchMode|keyof typeof google.container.v1beta1.GkeAutoUpgradeConfig.PatchMode);
+
+                /**
+                 * Creates a new GkeAutoUpgradeConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GkeAutoUpgradeConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IGkeAutoUpgradeConfig): google.container.v1beta1.GkeAutoUpgradeConfig;
+
+                /**
+                 * Encodes the specified GkeAutoUpgradeConfig message. Does not implicitly {@link google.container.v1beta1.GkeAutoUpgradeConfig.verify|verify} messages.
+                 * @param message GkeAutoUpgradeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IGkeAutoUpgradeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GkeAutoUpgradeConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.GkeAutoUpgradeConfig.verify|verify} messages.
+                 * @param message GkeAutoUpgradeConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IGkeAutoUpgradeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GkeAutoUpgradeConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GkeAutoUpgradeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.GkeAutoUpgradeConfig;
+
+                /**
+                 * Decodes a GkeAutoUpgradeConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GkeAutoUpgradeConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.GkeAutoUpgradeConfig;
+
+                /**
+                 * Verifies a GkeAutoUpgradeConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GkeAutoUpgradeConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GkeAutoUpgradeConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.GkeAutoUpgradeConfig;
+
+                /**
+                 * Creates a plain object from a GkeAutoUpgradeConfig message. Also converts values to other types if specified.
+                 * @param message GkeAutoUpgradeConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.GkeAutoUpgradeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GkeAutoUpgradeConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GkeAutoUpgradeConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace GkeAutoUpgradeConfig {
+
+                /** PatchMode enum. */
+                enum PatchMode {
+                    PATCH_MODE_UNSPECIFIED = 0,
+                    ACCELERATED = 1
                 }
             }
         }
