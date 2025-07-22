@@ -54,6 +54,10 @@ function main(name, resourceType) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. The configuration for initializing a Cloud SQL instance.
+   */
+  // const cloudSqlInstanceInitializationConfig = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
