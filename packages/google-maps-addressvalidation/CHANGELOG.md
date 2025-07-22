@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.1.0...addressvalidation-v3.2.0) (2025-07-22)
+
+
+### Features
+
+* [addressvalidation] add has_spell_corrected_components field to the Address Validation verdict in the API response ([#6498](https://github.com/googleapis/google-cloud-node/issues/6498)) ([a39702e](https://github.com/googleapis/google-cloud-node/commit/a39702e4f0e8a9536cef0adbc64d5fd3045592d8))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.0.1...addressvalidation-v3.1.0) (2025-07-09)
 
 

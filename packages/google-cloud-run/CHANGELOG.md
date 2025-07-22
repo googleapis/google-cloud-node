@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/run-v2.2.0...run-v2.3.0) (2025-07-22)
+
+
+### Features
+
+* [run] support GPU zonal redundancy setting for Cloud Run jobs ([#6499](https://github.com/googleapis/google-cloud-node/issues/6499)) ([2d56d45](https://github.com/googleapis/google-cloud-node/commit/2d56d45f0a0e8bc9be618875af71abf89ca79e9d))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/run-v2.1.0...run-v2.2.0) (2025-07-09)
 
 

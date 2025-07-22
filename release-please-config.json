@@ -208,7 +208,8 @@
     "packages/google-apps-events-subscriptions": {},
     "packages/google-cloud-maintenance-api": {},
     "packages/google-cloud-managedkafka-schemaregistry": {},
-    "packages/google-cloud-licensemanager": {}
+    "packages/google-cloud-licensemanager": {},
+    "packages/google-cloud-configdelivery": {}
   },
   "plugins": [
     {
