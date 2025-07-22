@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/policysimulator-v0.7.0...policysimulator-v0.8.0) (2025-07-22)
+
+
+### Features
+
+* [policysimulator] added OrgPolicyViolationsPreviewService v1 API to simulate Org Policy ([#6509](https://github.com/googleapis/google-cloud-node/issues/6509)) ([778fbd3](https://github.com/googleapis/google-cloud-node/commit/778fbd3c8ae51d3ef185454bfb0c44efda250edd))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/policysimulator-v0.6.0...policysimulator-v0.7.0) (2025-07-09)
 
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.4.0...aiplatform-v5.0.0) (2025-07-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData ([#6508](https://github.com/googleapis/google-cloud-node/issues/6508))
+
+### Bug Fixes
+
+* Remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData ([#6508](https://github.com/googleapis/google-cloud-node/issues/6508)) ([7e751ac](https://github.com/googleapis/google-cloud-node/commit/7e751ac51e5e5f66e1fda8419cae4a36cd7e22c5))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.3.0...aiplatform-v4.4.0) (2025-07-17)
 
 

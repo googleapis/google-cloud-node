@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.1...vision-v5.3.2) (2025-07-22)
+
+
+### Bug Fixes
+
+* Remove is dependency ([#6516](https://github.com/googleapis/google-cloud-node/issues/6516)) ([0cb9bb2](https://github.com/googleapis/google-cloud-node/commit/0cb9bb2180f333f075aabd0fd637918352e88cf7))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.0...vision-v5.3.1) (2025-07-17)
 
 

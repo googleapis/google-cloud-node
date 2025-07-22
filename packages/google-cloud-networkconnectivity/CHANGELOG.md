@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.3.0...network-connectivity-v4.4.0) (2025-07-22)
+
+
+### Features
+
+* [networkconnectivity] add Network Connectivity Center APIs for Internal Range service ([#6512](https://github.com/googleapis/google-cloud-node/issues/6512)) ([872ff6e](https://github.com/googleapis/google-cloud-node/commit/872ff6ea741976c5173fbae5c5f5fee8f7f99a51))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.2.0...network-connectivity-v4.3.0) (2025-07-09)
 
 
