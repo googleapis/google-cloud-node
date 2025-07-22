@@ -9047,6 +9047,11 @@
                 "get"
               ]
             },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -9062,6 +9067,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "List": {

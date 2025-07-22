@@ -9487,6 +9487,11 @@
                           "oneof": [
                             "timeoutSec"
                           ]
+                        },
+                        "_tlsSettings": {
+                          "oneof": [
+                            "tlsSettings"
+                          ]
                         }
                       },
                       "fields": {
@@ -9799,6 +9804,13 @@
                         "timeoutSec": {
                           "type": "int32",
                           "id": 79994995,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tlsSettings": {
+                          "type": "BackendServiceTlsSettings",
+                          "id": 81794791,
                           "options": {
                             "proto3_optional": true
                           }
@@ -10813,6 +10825,71 @@
                         "backendService": {
                           "type": "string",
                           "id": 306946058,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BackendServiceTlsSettings": {
+                      "oneofs": {
+                        "_authenticationConfig": {
+                          "oneof": [
+                            "authenticationConfig"
+                          ]
+                        },
+                        "_sni": {
+                          "oneof": [
+                            "sni"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "authenticationConfig": {
+                          "type": "string",
+                          "id": 408053481,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sni": {
+                          "type": "string",
+                          "id": 114030,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subjectAltNames": {
+                          "rule": "repeated",
+                          "type": "BackendServiceTlsSettingsSubjectAltName",
+                          "id": 330029535
+                        }
+                      }
+                    },
+                    "BackendServiceTlsSettingsSubjectAltName": {
+                      "oneofs": {
+                        "_dnsName": {
+                          "oneof": [
+                            "dnsName"
+                          ]
+                        },
+                        "_uniformResourceIdentifier": {
+                          "oneof": [
+                            "uniformResourceIdentifier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dnsName": {
+                          "type": "string",
+                          "id": 411992033,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "uniformResourceIdentifier": {
+                          "type": "string",
+                          "id": 491409007,
                           "options": {
                             "proto3_optional": true
                           }
@@ -24354,6 +24431,13 @@
                       }
                     },
                     "GetReservationBlockRequest": {
+                      "oneofs": {
+                        "_view": {
+                          "oneof": [
+                            "view"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -24376,11 +24460,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "view": {
+                          "type": "string",
+                          "id": 3619493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "UNDEFINED_VIEW": 0,
+                            "BASIC": 62970894,
+                            "BLOCK_VIEW_UNSPECIFIED": 275070479,
+                            "FULL": 2169487
                           }
                         }
                       }
@@ -25554,6 +25655,16 @@
                     },
                     "GroupMaintenanceInfo": {
                       "oneofs": {
+                        "_instanceMaintenanceOngoingCount": {
+                          "oneof": [
+                            "instanceMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_instanceMaintenancePendingCount": {
+                          "oneof": [
+                            "instanceMaintenancePendingCount"
+                          ]
+                        },
                         "_maintenanceOngoingCount": {
                           "oneof": [
                             "maintenanceOngoingCount"
@@ -25569,6 +25680,16 @@
                             "schedulingType"
                           ]
                         },
+                        "_subblockInfraMaintenanceOngoingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_subblockInfraMaintenancePendingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenancePendingCount"
+                          ]
+                        },
                         "_upcomingGroupMaintenance": {
                           "oneof": [
                             "upcomingGroupMaintenance"
@@ -25576,6 +25697,20 @@
                         }
                       },
                       "fields": {
+                        "instanceMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 137611253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 76612881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "maintenanceOngoingCount": {
                           "type": "int32",
                           "id": 219781919,
@@ -25593,6 +25728,20 @@
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 366161790,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 305163418,
                           "options": {
                             "proto3_optional": true
                           }
@@ -61616,6 +61765,54 @@
                         }
                       }
                     },
+                    "PerformMaintenanceReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "Policy": {
                       "oneofs": {
                         "_etag": {
@@ -66269,6 +66466,83 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "ReservationBlockPhysicalTopologyInstance",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstance": {
+                      "oneofs": {
+                        "_instanceId": {
+                          "oneof": [
+                            "instanceId"
+                          ]
+                        },
+                        "_physicalHostTopology": {
+                          "oneof": [
+                            "physicalHostTopology"
+                          ]
+                        },
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceId": {
+                          "type": "uint64",
+                          "id": 45488389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "physicalHostTopology": {
+                          "type": "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology",
+                          "id": 390842814,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectId": {
+                          "type": "uint64",
+                          "id": 177513473,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology": {
+                      "oneofs": {
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -66469,6 +66743,11 @@
                             "physicalTopology"
                           ]
                         },
+                        "_reservationSubBlockMaintenance": {
+                          "oneof": [
+                            "reservationSubBlockMaintenance"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -66536,6 +66815,13 @@
                         "physicalTopology": {
                           "type": "ReservationSubBlockPhysicalTopology",
                           "id": 279778519,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlockMaintenance": {
+                          "type": "GroupMaintenanceInfo",
+                          "id": 377005551,
                           "options": {
                             "proto3_optional": true
                           }
@@ -104292,7 +104578,7 @@
                     "ReservationSubBlocks": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "Get": {
@@ -104328,6 +104614,28 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name"
+                            }
+                          ]
+                        },
+                        "PerformMaintenance": {
+                          "requestType": "PerformMaintenanceReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         }
@@ -136770,6 +137078,13 @@
                       }
                     },
                     "GetReservationBlockRequest": {
+                      "oneofs": {
+                        "_view": {
+                          "oneof": [
+                            "view"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -136792,11 +137107,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "view": {
+                          "type": "string",
+                          "id": 3619493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "UNDEFINED_VIEW": 0,
+                            "BASIC": 62970894,
+                            "BLOCK_VIEW_UNSPECIFIED": 275070479,
+                            "FULL": 2169487
                           }
                         }
                       }
@@ -138045,6 +138377,16 @@
                     },
                     "GroupMaintenanceInfo": {
                       "oneofs": {
+                        "_instanceMaintenanceOngoingCount": {
+                          "oneof": [
+                            "instanceMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_instanceMaintenancePendingCount": {
+                          "oneof": [
+                            "instanceMaintenancePendingCount"
+                          ]
+                        },
                         "_maintenanceOngoingCount": {
                           "oneof": [
                             "maintenanceOngoingCount"
@@ -138060,6 +138402,16 @@
                             "schedulingType"
                           ]
                         },
+                        "_subblockInfraMaintenanceOngoingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_subblockInfraMaintenancePendingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenancePendingCount"
+                          ]
+                        },
                         "_upcomingGroupMaintenance": {
                           "oneof": [
                             "upcomingGroupMaintenance"
@@ -138067,6 +138419,20 @@
                         }
                       },
                       "fields": {
+                        "instanceMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 137611253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 76612881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "maintenanceOngoingCount": {
                           "type": "int32",
                           "id": 219781919,
@@ -138084,6 +138450,20 @@
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 366161790,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 305163418,
                           "options": {
                             "proto3_optional": true
                           }
@@ -177541,6 +177921,54 @@
                         }
                       }
                     },
+                    "PerformMaintenanceReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "Policy": {
                       "oneofs": {
                         "_etag": {
@@ -182983,6 +183411,83 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "ReservationBlockPhysicalTopologyInstance",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstance": {
+                      "oneofs": {
+                        "_instanceId": {
+                          "oneof": [
+                            "instanceId"
+                          ]
+                        },
+                        "_physicalHostTopology": {
+                          "oneof": [
+                            "physicalHostTopology"
+                          ]
+                        },
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceId": {
+                          "type": "uint64",
+                          "id": 45488389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "physicalHostTopology": {
+                          "type": "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology",
+                          "id": 390842814,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectId": {
+                          "type": "uint64",
+                          "id": 177513473,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology": {
+                      "oneofs": {
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -183183,6 +183688,11 @@
                             "physicalTopology"
                           ]
                         },
+                        "_reservationSubBlockMaintenance": {
+                          "oneof": [
+                            "reservationSubBlockMaintenance"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -183250,6 +183760,13 @@
                         "physicalTopology": {
                           "type": "ReservationSubBlockPhysicalTopology",
                           "id": 279778519,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlockMaintenance": {
+                          "type": "GroupMaintenanceInfo",
+                          "id": 377005551,
                           "options": {
                             "proto3_optional": true
                           }
@@ -226827,7 +227344,7 @@
                     "ReservationSubBlocks": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "Get": {
@@ -226863,6 +227380,28 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name"
+                            }
+                          ]
+                        },
+                        "PerformMaintenance": {
+                          "requestType": "PerformMaintenanceReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         }
@@ -233059,8 +233598,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -233184,6 +233722,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -233324,6 +233866,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -233381,6 +233945,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -233440,6 +234009,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -233574,12 +234156,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -233617,6 +234206,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -233706,6 +234300,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -233931,6 +234529,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -234145,6 +234747,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -234280,7 +234883,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -234307,6 +234911,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -234375,6 +234983,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -234464,6 +235092,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -234607,6 +235239,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -234617,6 +235250,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -234627,6 +235261,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -234637,6 +235272,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -234647,7 +235283,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -234657,27 +235294,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -234722,7 +235370,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -234736,6 +235390,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -234764,11 +235445,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -234781,6 +235477,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -234864,6 +235566,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
