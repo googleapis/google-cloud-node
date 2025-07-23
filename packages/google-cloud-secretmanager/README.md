@@ -53,37 +53,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/secret-manager
 ```
 
-### Using the client library
 
-```javascript
-// Imports the Google Cloud client library
-const { SecretManagerServiceClient } =
-  require("@google-cloud/secret-manager").v1;
-
-// Creates a client using Application Default Credentials
-const secretmanagerClient = new SecretManagerServiceClient();
-
-// TODO(developer): Uncomment these variables before running the sample.
-// const projectId = 'your-project-id';
-// const secretName = 'name-of-your-secret';
-// const versionId = 'latest'; // 'latest' returns latest value added
-
-/**
- * Accesses values of specific version of a secret from Secret Manager.
- * Returns {Promise<string>} that resolves to the secret payload as a string.
- */
-async function accessSecretVersion() {
-  // Construct request
-  const request = {
-    name: `projects/${projectId}/secrets/${secretName}/versions/${versionId}`,
-  };
-  // Send request
-  const [response] = await secretmanagerClient.accessSecretVersion(request);
-  const payload = response.payload.data.toString();
-
-  return payload;
-}
-```
 
 
 ## Samples
