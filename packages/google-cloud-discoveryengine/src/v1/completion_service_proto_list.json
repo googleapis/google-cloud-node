@@ -38,6 +38,7 @@
   "../../protos/google/cloud/discoveryengine/v1/serving_config.proto",
   "../../protos/google/cloud/discoveryengine/v1/serving_config_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/session.proto",
+  "../../protos/google/cloud/discoveryengine/v1/session_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/site_search_engine.proto",
   "../../protos/google/cloud/discoveryengine/v1/site_search_engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/user_event.proto",

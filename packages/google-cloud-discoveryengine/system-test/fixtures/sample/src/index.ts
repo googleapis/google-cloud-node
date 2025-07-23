@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AssistantServiceClient, CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
+import {AssistantServiceClient, CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SessionServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
 function doStuffWithAssistantServiceClient(client: AssistantServiceClient) {
@@ -68,6 +68,9 @@ function doStuffWithSearchTuningServiceClient(client: SearchTuningServiceClient)
   client.close();
 }
 function doStuffWithServingConfigServiceClient(client: ServingConfigServiceClient) {
+  client.close();
+}
+function doStuffWithSessionServiceClient(client: SessionServiceClient) {
   client.close();
 }
 function doStuffWithSiteSearchEngineServiceClient(client: SiteSearchEngineServiceClient) {
@@ -132,6 +135,9 @@ function main() {
   // check that the client instance can be created
   const servingConfigServiceClient = new ServingConfigServiceClient();
   doStuffWithServingConfigServiceClient(servingConfigServiceClient);
+  // check that the client instance can be created
+  const sessionServiceClient = new SessionServiceClient();
+  doStuffWithSessionServiceClient(sessionServiceClient);
   // check that the client instance can be created
   const siteSearchEngineServiceClient = new SiteSearchEngineServiceClient();
   doStuffWithSiteSearchEngineServiceClient(siteSearchEngineServiceClient);

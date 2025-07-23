@@ -44,10 +44,22 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  A filter to apply on the list results. The supported features are:
-   *  user_pseudo_id, state.
-   *  Example:
+   *  A comma-separated list of fields to filter by, in EBNF grammar.
+   *  The supported fields are:
+   *  * `user_pseudo_id`
+   *  * `state`
+   *  * `display_name`
+   *  * `starred`
+   *  * `is_pinned`
+   *  * `labels`
+   *  * `create_time`
+   *  * `update_time`
+   *  Examples:
    *  "user_pseudo_id = some_id"
+   *  "display_name = \"some_name\""
+   *  "starred = true"
+   *  "is_pinned=true AND (NOT labels:hidden)"
+   *  "create_time > \"1970-01-01T12:00:00Z\""
    */
   // const filter = 'abc123'
   /**

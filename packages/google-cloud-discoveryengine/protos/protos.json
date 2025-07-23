@@ -2651,7 +2651,9 @@
                     "Session": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/Session",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}",
+                        "(google.api.resource).plural": "sessions",
+                        "(google.api.resource).singular": "session"
                       },
                       "fields": {
                         "name": {
@@ -2708,12 +2710,16 @@
                           "fields": {
                             "query": {
                               "type": "Query",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "answer": {
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Answer"
                               }
                             },
@@ -2722,6 +2728,14 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryConfig": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -2749,7 +2763,10 @@
                         },
                         "queryId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -10610,6 +10627,159 @@
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SessionService": {
+                      "options": {
+                        "(google.api.default_host)": "discoveryengine.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateSession": {
+                          "requestType": "CreateSessionRequest",
+                          "responseType": "Session",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/dataStores/*}/sessions",
+                            "(google.api.http).body": "session",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/collections/*/engines/*}/sessions",
+                            "(google.api.http).additional_bindings.body": "session",
+                            "(google.api.method_signature)": "parent,session"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/dataStores/*}/sessions",
+                                "body": "session",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/sessions",
+                                    "body": "session"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/locations/*/collections/*/engines/*}/sessions",
+                                    "body": "session"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,session"
+                            }
+                          ]
+                        },
+                        "DeleteSession": {
+                          "requestType": "DeleteSessionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/dataStores/*/sessions/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/collections/*/engines/*/sessions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/dataStores/*/sessions/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=projects/*/locations/*/collections/*/dataStores/*/sessions/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/locations/*/collections/*/engines/*/sessions/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateSession": {
+                          "requestType": "UpdateSessionRequest",
+                          "responseType": "Session",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{session.name=projects/*/locations/*/dataStores/*/sessions/*}",
+                            "(google.api.http).body": "session",
+                            "(google.api.http).additional_bindings.patch": "/v1/{session.name=projects/*/locations/*/collections/*/engines/*/sessions/*}",
+                            "(google.api.http).additional_bindings.body": "session",
+                            "(google.api.method_signature)": "session,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{session.name=projects/*/locations/*/dataStores/*/sessions/*}",
+                                "body": "session",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{session.name=projects/*/locations/*/collections/*/dataStores/*/sessions/*}",
+                                    "body": "session"
+                                  },
+                                  {
+                                    "patch": "/v1/{session.name=projects/*/locations/*/collections/*/engines/*/sessions/*}",
+                                    "body": "session"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "session,update_mask"
+                            }
+                          ]
+                        },
+                        "GetSession": {
+                          "requestType": "GetSessionRequest",
+                          "responseType": "Session",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataStores/*/sessions/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/collections/*/engines/*/sessions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/dataStores/*/sessions/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=projects/*/locations/*/collections/*/dataStores/*/sessions/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/locations/*/collections/*/engines/*/sessions/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSessions": {
+                          "requestType": "ListSessionsRequest",
+                          "responseType": "ListSessionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/dataStores/*}/sessions",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/collections/*/engines/*}/sessions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/dataStores/*}/sessions",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/sessions"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/locations/*/collections/*/engines/*}/sessions"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },

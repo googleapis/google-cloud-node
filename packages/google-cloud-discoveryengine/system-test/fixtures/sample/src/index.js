@@ -38,6 +38,7 @@ function main() {
   const searchServiceClient = new discoveryengine.SearchServiceClient();
   const searchTuningServiceClient = new discoveryengine.SearchTuningServiceClient();
   const servingConfigServiceClient = new discoveryengine.ServingConfigServiceClient();
+  const sessionServiceClient = new discoveryengine.SessionServiceClient();
   const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
   const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();
