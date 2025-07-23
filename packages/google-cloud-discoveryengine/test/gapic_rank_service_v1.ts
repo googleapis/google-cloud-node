@@ -508,6 +508,138 @@ describe('v1.RankServiceClient', () => {
 
     describe('Path templates', () => {
 
+        describe('assistAnswer', async () => {
+            const fakePath = "/rendered/path/assistAnswer";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                session: "sessionValue",
+                assist_answer: "assistAnswerValue",
+            };
+            const client = new rankserviceModule.v1.RankServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.assistAnswerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assistAnswerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('assistAnswerPath', () => {
+                const result = client.assistAnswerPath("projectValue", "locationValue", "collectionValue", "engineValue", "sessionValue", "assistAnswerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assistAnswerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAssistAnswerName', () => {
+                const result = client.matchProjectFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAssistAnswerName', () => {
+                const result = client.matchLocationFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromAssistAnswerName', () => {
+                const result = client.matchCollectionFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromAssistAnswerName', () => {
+                const result = client.matchEngineFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromAssistAnswerName', () => {
+                const result = client.matchSessionFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssistAnswerFromAssistAnswerName', () => {
+                const result = client.matchAssistAnswerFromAssistAnswerName(fakePath);
+                assert.strictEqual(result, "assistAnswerValue");
+                assert((client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('assistant', async () => {
+            const fakePath = "/rendered/path/assistant";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                engine: "engineValue",
+                assistant: "assistantValue",
+            };
+            const client = new rankserviceModule.v1.RankServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.assistantPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.assistantPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('assistantPath', () => {
+                const result = client.assistantPath("projectValue", "locationValue", "collectionValue", "engineValue", "assistantValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.assistantPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromAssistantName', () => {
+                const result = client.matchProjectFromAssistantName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.assistantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromAssistantName', () => {
+                const result = client.matchLocationFromAssistantName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.assistantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromAssistantName', () => {
+                const result = client.matchCollectionFromAssistantName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.assistantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEngineFromAssistantName', () => {
+                const result = client.matchEngineFromAssistantName(fakePath);
+                assert.strictEqual(result, "engineValue");
+                assert((client.pathTemplates.assistantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAssistantFromAssistantName', () => {
+                const result = client.matchAssistantFromAssistantName(fakePath);
+                assert.strictEqual(result, "assistantValue");
+                assert((client.pathTemplates.assistantPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('engine', async () => {
             const fakePath = "/rendered/path/engine";
             const expectedParameters = {

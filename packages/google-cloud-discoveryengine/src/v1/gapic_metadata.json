@@ -5,6 +5,24 @@
   "protoPackage": "google.cloud.discoveryengine.v1",
   "libraryPackage": "@google-cloud/discoveryengine",
   "services": {
+    "AssistantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AssistantServiceClient",
+          "rpcs": {
+            "StreamAssist": {
+              "methods": [
+                "streamAssist"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AssistantServiceClient",
+          "rpcs": {}
+        }
+      }
+    },
     "CmekConfigService": {
       "clients": {
         "grpc": {

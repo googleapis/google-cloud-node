@@ -611,6 +611,8 @@ export class SearchServiceClient {
  *
  *   If this field is set to an invalid value other than these, an
  *   INVALID_ARGUMENT error is returned.
+ * @param {string} [request.experimentId]
+ *   Optional. An ID for the experiment group this search belongs to.
  * @param {string[]} request.pageCategories
  *   The categories associated with a category page. Must be set for category
  *   navigation queries to achieve good search quality. The format should be
@@ -694,7 +696,7 @@ export class SearchServiceClient {
  *   search results.
  *   * Populate at most 100 key-value pairs per query.
  *   * Only supports string keys and repeated string values.
- *   * Duplcate keys are not allowed within a single query.
+ *   * Duplicate keys are not allowed within a single query.
  *
  *   Example:
  *      user_attributes: [
@@ -1003,6 +1005,8 @@ export class SearchServiceClient {
  *
  *   If this field is set to an invalid value other than these, an
  *   INVALID_ARGUMENT error is returned.
+ * @param {string} [request.experimentId]
+ *   Optional. An ID for the experiment group this search belongs to.
  * @param {string[]} request.pageCategories
  *   The categories associated with a category page. Must be set for category
  *   navigation queries to achieve good search quality. The format should be
@@ -1086,7 +1090,7 @@ export class SearchServiceClient {
  *   search results.
  *   * Populate at most 100 key-value pairs per query.
  *   * Only supports string keys and repeated string values.
- *   * Duplcate keys are not allowed within a single query.
+ *   * Duplicate keys are not allowed within a single query.
  *
  *   Example:
  *      user_attributes: [
@@ -1344,6 +1348,8 @@ export class SearchServiceClient {
  *
  *   If this field is set to an invalid value other than these, an
  *   INVALID_ARGUMENT error is returned.
+ * @param {string} [request.experimentId]
+ *   Optional. An ID for the experiment group this search belongs to.
  * @param {string[]} request.pageCategories
  *   The categories associated with a category page. Must be set for category
  *   navigation queries to achieve good search quality. The format should be
@@ -1427,7 +1433,7 @@ export class SearchServiceClient {
  *   search results.
  *   * Populate at most 100 key-value pairs per query.
  *   * Only supports string keys and repeated string values.
- *   * Duplcate keys are not allowed within a single query.
+ *   * Duplicate keys are not allowed within a single query.
  *
  *   Example:
  *      user_attributes: [

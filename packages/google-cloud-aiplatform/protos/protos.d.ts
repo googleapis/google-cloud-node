@@ -114842,6 +114842,9 @@ export namespace google {
                 /** Properties of a ReasoningEngineSpec. */
                 interface IReasoningEngineSpec {
 
+                    /** ReasoningEngineSpec serviceAccount */
+                    serviceAccount?: (string|null);
+
                     /** ReasoningEngineSpec packageSpec */
                     packageSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IPackageSpec|null);
 
@@ -114863,6 +114866,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.IReasoningEngineSpec);
+
+                    /** ReasoningEngineSpec serviceAccount. */
+                    public serviceAccount?: (string|null);
 
                     /** ReasoningEngineSpec packageSpec. */
                     public packageSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IPackageSpec|null);
@@ -287640,6 +287646,9 @@ export namespace google {
                 /** Properties of a ReasoningEngineSpec. */
                 interface IReasoningEngineSpec {
 
+                    /** ReasoningEngineSpec serviceAccount */
+                    serviceAccount?: (string|null);
+
                     /** ReasoningEngineSpec packageSpec */
                     packageSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IPackageSpec|null);
 
@@ -287661,6 +287670,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IReasoningEngineSpec);
+
+                    /** ReasoningEngineSpec serviceAccount. */
+                    public serviceAccount?: (string|null);
 
                     /** ReasoningEngineSpec packageSpec. */
                     public packageSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IPackageSpec|null);

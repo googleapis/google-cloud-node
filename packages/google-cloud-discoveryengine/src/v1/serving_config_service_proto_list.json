@@ -1,5 +1,8 @@
 [
   "../../protos/google/cloud/discoveryengine/v1/answer.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assist_answer.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assistant.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assistant_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/chunk.proto",
   "../../protos/google/cloud/discoveryengine/v1/cmek_config_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/common.proto",

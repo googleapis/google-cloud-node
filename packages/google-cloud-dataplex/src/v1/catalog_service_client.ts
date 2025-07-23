@@ -3733,6 +3733,9 @@ export class CatalogServiceClient {
  *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
  *   unspecified, it defaults to the organization where the project provided in
  *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -3851,6 +3854,9 @@ export class CatalogServiceClient {
  *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
  *   unspecified, it defaults to the organization where the project provided in
  *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -3918,6 +3924,9 @@ export class CatalogServiceClient {
  *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
  *   unspecified, it defaults to the organization where the project provided in
  *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

@@ -520,8 +520,9 @@ export class CertificateAuthorityServiceClient {
  *   Optional. It must be unique within a location and match the regular
  *   expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
  *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
- *   in the Enterprise {@link protos.|CertificateAuthority.Tier}, but is optional and its
- *   value is ignored otherwise.
+ *   in the Enterprise
+ *   {@link protos.google.cloud.security.privateca.v1.CertificateAuthority.tier|CertificateAuthority.tier},
+ *   but is optional and its value is ignored otherwise.
  * @param {google.cloud.security.privateca.v1.Certificate} request.certificate
  *   Required. A {@link protos.google.cloud.security.privateca.v1.Certificate|Certificate}
  *   with initial field values.

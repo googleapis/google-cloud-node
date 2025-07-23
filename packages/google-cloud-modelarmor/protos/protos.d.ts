@@ -441,6 +441,9 @@ export namespace google {
                         /** TemplateMetadata logSanitizeOperations */
                         logSanitizeOperations?: (boolean|null);
 
+                        /** TemplateMetadata enforcementType */
+                        enforcementType?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|null);
+
                         /** TemplateMetadata multiLanguageDetection */
                         multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
                     }
@@ -474,6 +477,9 @@ export namespace google {
 
                         /** TemplateMetadata logSanitizeOperations. */
                         public logSanitizeOperations: boolean;
+
+                        /** TemplateMetadata enforcementType. */
+                        public enforcementType: (google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType);
 
                         /** TemplateMetadata multiLanguageDetection. */
                         public multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
@@ -654,6 +660,13 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** EnforcementType enum. */
+                        enum EnforcementType {
+                            ENFORCEMENT_TYPE_UNSPECIFIED = 0,
+                            INSPECT_ONLY = 1,
+                            INSPECT_AND_BLOCK = 2
+                        }
                     }
                 }
 
@@ -674,6 +687,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement */
                     enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices */
+                    integratedServices?: (google.cloud.modelarmor.v1.FloorSetting.IntegratedService[]|null);
+
+                    /** FloorSetting aiPlatformFloorSetting */
+                    aiPlatformFloorSetting?: (google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata */
+                    floorSettingMetadata?: (google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null);
                 }
 
                 /** Represents a FloorSetting. */
@@ -699,6 +721,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices. */
+                    public integratedServices: google.cloud.modelarmor.v1.FloorSetting.IntegratedService[];
+
+                    /** FloorSetting aiPlatformFloorSetting. */
+                    public aiPlatformFloorSetting?: (google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata. */
+                    public floorSettingMetadata?: (google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null);
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -772,6 +803,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FloorSetting {
+
+                    /** Properties of a FloorSettingMetadata. */
+                    interface IFloorSettingMetadata {
+                    }
+
+                    /** Represents a FloorSettingMetadata. */
+                    class FloorSettingMetadata implements IFloorSettingMetadata {
+
+                        /**
+                         * Constructs a new FloorSettingMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata);
+
+                        /**
+                         * Creates a new FloorSettingMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FloorSettingMetadata instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Verifies a FloorSettingMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FloorSettingMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                         * @param message FloorSettingMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FloorSettingMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FloorSettingMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** IntegratedService enum. */
+                    enum IntegratedService {
+                        INTEGRATED_SERVICE_UNSPECIFIED = 0,
+                        AI_PLATFORM = 1
+                    }
+                }
+
+                /** Properties of an AiPlatformFloorSetting. */
+                interface IAiPlatformFloorSetting {
+
+                    /** AiPlatformFloorSetting inspectOnly */
+                    inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock */
+                    inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging */
+                    enableCloudLogging?: (boolean|null);
+                }
+
+                /** Represents an AiPlatformFloorSetting. */
+                class AiPlatformFloorSetting implements IAiPlatformFloorSetting {
+
+                    /**
+                     * Constructs a new AiPlatformFloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.IAiPlatformFloorSetting);
+
+                    /** AiPlatformFloorSetting inspectOnly. */
+                    public inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock. */
+                    public inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging. */
+                    public enableCloudLogging: boolean;
+
+                    /** AiPlatformFloorSetting enforcementType. */
+                    public enforcementType?: ("inspectOnly"|"inspectAndBlock");
+
+                    /**
+                     * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AiPlatformFloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.IAiPlatformFloorSetting): google.cloud.modelarmor.v1.AiPlatformFloorSetting;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.AiPlatformFloorSetting;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.AiPlatformFloorSetting;
+
+                    /**
+                     * Verifies an AiPlatformFloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AiPlatformFloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.AiPlatformFloorSetting;
+
+                    /**
+                     * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                     * @param message AiPlatformFloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.AiPlatformFloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AiPlatformFloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AiPlatformFloorSetting
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5725,6 +5968,9 @@ export namespace google {
                         /** TemplateMetadata logSanitizeOperations */
                         logSanitizeOperations?: (boolean|null);
 
+                        /** TemplateMetadata enforcementType */
+                        enforcementType?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|null);
+
                         /** TemplateMetadata multiLanguageDetection */
                         multiLanguageDetection?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null);
                     }
@@ -5758,6 +6004,9 @@ export namespace google {
 
                         /** TemplateMetadata logSanitizeOperations. */
                         public logSanitizeOperations: boolean;
+
+                        /** TemplateMetadata enforcementType. */
+                        public enforcementType: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType);
 
                         /** TemplateMetadata multiLanguageDetection. */
                         public multiLanguageDetection?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null);
@@ -5938,6 +6187,13 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** EnforcementType enum. */
+                        enum EnforcementType {
+                            ENFORCEMENT_TYPE_UNSPECIFIED = 0,
+                            INSPECT_ONLY = 1,
+                            INSPECT_AND_BLOCK = 2
+                        }
                     }
                 }
 
@@ -5958,6 +6214,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement */
                     enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices */
+                    integratedServices?: (google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[]|null);
+
+                    /** FloorSetting aiPlatformFloorSetting */
+                    aiPlatformFloorSetting?: (google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata */
+                    floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
                 }
 
                 /** Represents a FloorSetting. */
@@ -5983,6 +6248,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices. */
+                    public integratedServices: google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[];
+
+                    /** FloorSetting aiPlatformFloorSetting. */
+                    public aiPlatformFloorSetting?: (google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata. */
+                    public floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -6056,6 +6330,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FloorSetting {
+
+                    /** Properties of a FloorSettingMetadata. */
+                    interface IFloorSettingMetadata {
+                    }
+
+                    /** Represents a FloorSettingMetadata. */
+                    class FloorSettingMetadata implements IFloorSettingMetadata {
+
+                        /**
+                         * Constructs a new FloorSettingMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata);
+
+                        /**
+                         * Creates a new FloorSettingMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FloorSettingMetadata instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Verifies a FloorSettingMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FloorSettingMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                         * @param message FloorSettingMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FloorSettingMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FloorSettingMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** IntegratedService enum. */
+                    enum IntegratedService {
+                        INTEGRATED_SERVICE_UNSPECIFIED = 0,
+                        AI_PLATFORM = 1
+                    }
+                }
+
+                /** Properties of an AiPlatformFloorSetting. */
+                interface IAiPlatformFloorSetting {
+
+                    /** AiPlatformFloorSetting inspectOnly */
+                    inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock */
+                    inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging */
+                    enableCloudLogging?: (boolean|null);
+                }
+
+                /** Represents an AiPlatformFloorSetting. */
+                class AiPlatformFloorSetting implements IAiPlatformFloorSetting {
+
+                    /**
+                     * Constructs a new AiPlatformFloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting);
+
+                    /** AiPlatformFloorSetting inspectOnly. */
+                    public inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock. */
+                    public inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging. */
+                    public enableCloudLogging: boolean;
+
+                    /** AiPlatformFloorSetting enforcementType. */
+                    public enforcementType?: ("inspectOnly"|"inspectAndBlock");
+
+                    /**
+                     * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AiPlatformFloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Verifies an AiPlatformFloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AiPlatformFloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                     * @param message AiPlatformFloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.AiPlatformFloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AiPlatformFloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AiPlatformFloorSetting
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10964,6 +11450,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -10980,6 +11469,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -11681,6 +12173,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -11694,6 +12189,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -11771,6 +12269,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -12099,6 +12709,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -12112,6 +12725,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -12437,6 +13053,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -12467,6 +13186,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -12480,6 +13202,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -12569,6 +13294,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -12927,6 +13749,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -12956,6 +13779,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -13005,6 +13831,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -13140,6 +13969,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -13180,6 +14012,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -14028,6 +14863,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -14053,6 +14891,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -14988,6 +15829,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -15045,6 +15889,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15261,6 +16108,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -15504,6 +16466,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -15525,6 +16490,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -16115,6 +17083,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -16143,6 +17117,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -16266,6 +17246,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -16385,8 +17475,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -16401,8 +17494,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -16933,6 +18029,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

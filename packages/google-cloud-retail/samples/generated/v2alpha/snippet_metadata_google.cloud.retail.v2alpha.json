@@ -2858,7 +2858,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 378,
+                    "end": 382,
                     "type": "FULL"
                 }
             ],
@@ -2934,6 +2934,10 @@
                     {
                         "name": "variant_rollup_keys",
                         "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "experiment_id",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "page_categories",

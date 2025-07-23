@@ -183,6 +183,12 @@ export class ConversationalSearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}'
+      ),
+      assistantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}'
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -2391,6 +2397,169 @@ export class ConversationalSearchServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified assistAnswer resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @param {string} assist_answer
+   * @returns {string} Resource name string.
+   */
+  assistAnswerPath(project:string,location:string,collection:string,engine:string,session:string,assistAnswer:string) {
+    return this.pathTemplates.assistAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      assist_answer: assistAnswer,
+    });
+  }
+
+  /**
+   * Parse the project from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).project;
+  }
+
+  /**
+   * Parse the location from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).location;
+  }
+
+  /**
+   * Parse the collection from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).collection;
+  }
+
+  /**
+   * Parse the engine from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).engine;
+  }
+
+  /**
+   * Parse the session from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).session;
+  }
+
+  /**
+   * Parse the assist_answer from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the assist_answer.
+   */
+  matchAssistAnswerFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName).assist_answer;
+  }
+
+  /**
+   * Return a fully-qualified assistant resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} assistant
+   * @returns {string} Resource name string.
+   */
+  assistantPath(project:string,location:string,collection:string,engine:string,assistant:string) {
+    return this.pathTemplates.assistantPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      assistant: assistant,
+    });
+  }
+
+  /**
+   * Parse the project from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).project;
+  }
+
+  /**
+   * Parse the location from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).location;
+  }
+
+  /**
+   * Parse the collection from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).collection;
+  }
+
+  /**
+   * Parse the engine from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).engine;
+  }
+
+  /**
+   * Parse the assistant from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the assistant.
+   */
+  matchAssistantFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).assistant;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.

@@ -23,17 +23,22 @@
   * [Backup_d_r.delete_backup_vault](#backup_d_r.delete_backup_vault)
   * [Backup_d_r.delete_management_server](#backup_d_r.delete_management_server)
   * [Backup_d_r.fetch_access_token](#backup_d_r.fetch_access_token)
+  * [Backup_d_r.fetch_backup_plan_associations_for_resource_type](#backup_d_r.fetch_backup_plan_associations_for_resource_type)
+  * [Backup_d_r.fetch_data_source_references_for_resource_type](#backup_d_r.fetch_data_source_references_for_resource_type)
   * [Backup_d_r.fetch_usable_backup_vaults](#backup_d_r.fetch_usable_backup_vaults)
   * [Backup_d_r.finalize_backup](#backup_d_r.finalize_backup)
   * [Backup_d_r.get_backup](#backup_d_r.get_backup)
   * [Backup_d_r.get_backup_plan](#backup_d_r.get_backup_plan)
   * [Backup_d_r.get_backup_plan_association](#backup_d_r.get_backup_plan_association)
+  * [Backup_d_r.get_backup_plan_revision](#backup_d_r.get_backup_plan_revision)
   * [Backup_d_r.get_backup_vault](#backup_d_r.get_backup_vault)
   * [Backup_d_r.get_data_source](#backup_d_r.get_data_source)
+  * [Backup_d_r.get_data_source_reference](#backup_d_r.get_data_source_reference)
   * [Backup_d_r.get_management_server](#backup_d_r.get_management_server)
   * [Backup_d_r.initialize_service](#backup_d_r.initialize_service)
   * [Backup_d_r.initiate_backup](#backup_d_r.initiate_backup)
   * [Backup_d_r.list_backup_plan_associations](#backup_d_r.list_backup_plan_associations)
+  * [Backup_d_r.list_backup_plan_revisions](#backup_d_r.list_backup_plan_revisions)
   * [Backup_d_r.list_backup_plans](#backup_d_r.list_backup_plans)
   * [Backup_d_r.list_backup_vaults](#backup_d_r.list_backup_vaults)
   * [Backup_d_r.list_backups](#backup_d_r.list_backups)
@@ -45,6 +50,8 @@
   * [Backup_d_r.test_iam_permissions](#backup_d_r.test_iam_permissions)
   * [Backup_d_r.trigger_backup](#backup_d_r.trigger_backup)
   * [Backup_d_r.update_backup](#backup_d_r.update_backup)
+  * [Backup_d_r.update_backup_plan](#backup_d_r.update_backup_plan)
+  * [Backup_d_r.update_backup_plan_association](#backup_d_r.update_backup_plan_association)
   * [Backup_d_r.update_backup_vault](#backup_d_r.update_backup_vault)
   * [Backup_d_r.update_data_source](#backup_d_r.update_data_source)
   * [Quickstart](#quickstart)
@@ -251,6 +258,40 @@ __Usage:__
 
 
 
+### Backup_d_r.fetch_backup_plan_associations_for_resource_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_backup_plan_associations_for_resource_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_backup_plan_associations_for_resource_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_backup_plan_associations_for_resource_type.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.fetch_data_source_references_for_resource_type
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_data_source_references_for_resource_type.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_data_source_references_for_resource_type.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_data_source_references_for_resource_type.js`
+
+
+-----
+
+
+
+
 ### Backup_d_r.fetch_usable_backup_vaults
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_usable_backup_vaults.js).
@@ -336,6 +377,23 @@ __Usage:__
 
 
 
+### Backup_d_r.get_backup_plan_revision
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_revision.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_revision.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_revision.js`
+
+
+-----
+
+
+
+
 ### Backup_d_r.get_backup_vault
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_vault.js).
@@ -363,6 +421,23 @@ __Usage:__
 
 
 `node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.get_data_source_reference
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source_reference.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source_reference.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source_reference.js`
 
 
 -----
@@ -431,6 +506,23 @@ __Usage:__
 
 
 `node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_associations.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.list_backup_plan_revisions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_revisions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_revisions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_revisions.js`
 
 
 -----
@@ -618,6 +710,40 @@ __Usage:__
 
 
 `node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.update_backup_plan
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan.js`
+
+
+-----
+
+
+
+
+### Backup_d_r.update_backup_plan_association
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan_association.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan_association.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_plan_association.js`
 
 
 -----

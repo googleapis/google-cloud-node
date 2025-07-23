@@ -31359,7 +31359,22 @@
                       }
                     },
                     "ReasoningEngineSpec": {
+                      "oneofs": {
+                        "_serviceAccount": {
+                          "oneof": [
+                            "serviceAccount"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "packageSpec": {
                           "type": "PackageSpec",
                           "id": 2,
@@ -76982,7 +76997,22 @@
                       }
                     },
                     "ReasoningEngineSpec": {
+                      "oneofs": {
+                        "_serviceAccount": {
+                          "oneof": [
+                            "serviceAccount"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "packageSpec": {
                           "type": "PackageSpec",
                           "id": 2,
