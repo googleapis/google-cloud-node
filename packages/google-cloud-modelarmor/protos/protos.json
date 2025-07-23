@@ -1877,6 +1877,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "enforcementType": {
+                              "type": "EnforcementType",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "multiLanguageDetection": {
                               "type": "MultiLanguageDetection",
                               "id": 9,
@@ -1896,6 +1903,13 @@
                                   }
                                 }
                               }
+                            },
+                            "EnforcementType": {
+                              "values": {
+                                "ENFORCEMENT_TYPE_UNSPECIFIED": 0,
+                                "INSPECT_ONLY": 1,
+                                "INSPECT_AND_BLOCK": 2
+                              }
                             }
                           }
                         }
@@ -1912,6 +1926,11 @@
                         "_enableFloorSettingEnforcement": {
                           "oneof": [
                             "enableFloorSettingEnforcement"
+                          ]
+                        },
+                        "_aiPlatformFloorSetting": {
+                          "oneof": [
+                            "aiPlatformFloorSetting"
                           ]
                         }
                       },
@@ -1950,6 +1969,73 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "integratedServices": {
+                          "rule": "repeated",
+                          "type": "IntegratedService",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "aiPlatformFloorSetting": {
+                          "type": "AiPlatformFloorSetting",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "floorSettingMetadata": {
+                          "type": "FloorSettingMetadata",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FloorSettingMetadata": {
+                          "fields": {}
+                        },
+                        "IntegratedService": {
+                          "values": {
+                            "INTEGRATED_SERVICE_UNSPECIFIED": 0,
+                            "AI_PLATFORM": 1
+                          }
+                        }
+                      }
+                    },
+                    "AiPlatformFloorSetting": {
+                      "oneofs": {
+                        "enforcementType": {
+                          "oneof": [
+                            "inspectOnly",
+                            "inspectAndBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inspectOnly": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectAndBlock": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableCloudLogging": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

@@ -5968,6 +5968,9 @@ export namespace google {
                         /** TemplateMetadata logSanitizeOperations */
                         logSanitizeOperations?: (boolean|null);
 
+                        /** TemplateMetadata enforcementType */
+                        enforcementType?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|null);
+
                         /** TemplateMetadata multiLanguageDetection */
                         multiLanguageDetection?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null);
                     }
@@ -6001,6 +6004,9 @@ export namespace google {
 
                         /** TemplateMetadata logSanitizeOperations. */
                         public logSanitizeOperations: boolean;
+
+                        /** TemplateMetadata enforcementType. */
+                        public enforcementType: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|keyof typeof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType);
 
                         /** TemplateMetadata multiLanguageDetection. */
                         public multiLanguageDetection?: (google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null);
@@ -6181,6 +6187,13 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** EnforcementType enum. */
+                        enum EnforcementType {
+                            ENFORCEMENT_TYPE_UNSPECIFIED = 0,
+                            INSPECT_ONLY = 1,
+                            INSPECT_AND_BLOCK = 2
+                        }
                     }
                 }
 
@@ -6201,6 +6214,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement */
                     enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices */
+                    integratedServices?: (google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[]|null);
+
+                    /** FloorSetting aiPlatformFloorSetting */
+                    aiPlatformFloorSetting?: (google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata */
+                    floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
                 }
 
                 /** Represents a FloorSetting. */
@@ -6226,6 +6248,15 @@ export namespace google {
 
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
+
+                    /** FloorSetting integratedServices. */
+                    public integratedServices: google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[];
+
+                    /** FloorSetting aiPlatformFloorSetting. */
+                    public aiPlatformFloorSetting?: (google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null);
+
+                    /** FloorSetting floorSettingMetadata. */
+                    public floorSettingMetadata?: (google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null);
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -6299,6 +6330,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FloorSetting {
+
+                    /** Properties of a FloorSettingMetadata. */
+                    interface IFloorSettingMetadata {
+                    }
+
+                    /** Represents a FloorSettingMetadata. */
+                    class FloorSettingMetadata implements IFloorSettingMetadata {
+
+                        /**
+                         * Constructs a new FloorSettingMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata);
+
+                        /**
+                         * Creates a new FloorSettingMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FloorSettingMetadata instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                         * @param message FloorSettingMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FloorSettingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Verifies a FloorSettingMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FloorSettingMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata;
+
+                        /**
+                         * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                         * @param message FloorSettingMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FloorSettingMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FloorSettingMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** IntegratedService enum. */
+                    enum IntegratedService {
+                        INTEGRATED_SERVICE_UNSPECIFIED = 0,
+                        AI_PLATFORM = 1
+                    }
+                }
+
+                /** Properties of an AiPlatformFloorSetting. */
+                interface IAiPlatformFloorSetting {
+
+                    /** AiPlatformFloorSetting inspectOnly */
+                    inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock */
+                    inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging */
+                    enableCloudLogging?: (boolean|null);
+                }
+
+                /** Represents an AiPlatformFloorSetting. */
+                class AiPlatformFloorSetting implements IAiPlatformFloorSetting {
+
+                    /**
+                     * Constructs a new AiPlatformFloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting);
+
+                    /** AiPlatformFloorSetting inspectOnly. */
+                    public inspectOnly?: (boolean|null);
+
+                    /** AiPlatformFloorSetting inspectAndBlock. */
+                    public inspectAndBlock?: (boolean|null);
+
+                    /** AiPlatformFloorSetting enableCloudLogging. */
+                    public enableCloudLogging: boolean;
+
+                    /** AiPlatformFloorSetting enforcementType. */
+                    public enforcementType?: ("inspectOnly"|"inspectAndBlock");
+
+                    /**
+                     * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AiPlatformFloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                     * @param message AiPlatformFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AiPlatformFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Verifies an AiPlatformFloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AiPlatformFloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.AiPlatformFloorSetting;
+
+                    /**
+                     * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                     * @param message AiPlatformFloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1beta.AiPlatformFloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AiPlatformFloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AiPlatformFloorSetting
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
