@@ -12,8 +12,68 @@
     },
     "snippets": [
         {
+            "regionTag": "discoveryengine_v1_generated_AssistantService_StreamAssist_async",
+            "title": "AssistantService streamAssist Sample",
+            "origin": "API_DEFINITION",
+            "description": " Assists the user with a query in a streaming fashion.",
+            "canonical": true,
+            "file": "assistant_service.stream_assist.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamAssist",
+                "fullName": "google.cloud.discoveryengine.v1.AssistantService.StreamAssist",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.discoveryengine.v1.Query"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_metadata",
+                        "type": ".google.cloud.discoveryengine.v1.AssistUserMetadata"
+                    },
+                    {
+                        "name": "tools_spec",
+                        "type": ".google.cloud.discoveryengine.v1.StreamAssistRequest.ToolsSpec"
+                    },
+                    {
+                        "name": "generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1.StreamAssistRequest.GenerationSpec"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.StreamAssistResponse",
+                "client": {
+                    "shortName": "AssistantServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.AssistantServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamAssist",
+                    "fullName": "google.cloud.discoveryengine.v1.AssistantService.StreamAssist",
+                    "service": {
+                        "shortName": "AssistantService",
+                        "fullName": "google.cloud.discoveryengine.v1.AssistantService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_async",
-            "title": "CmekConfigService updateCmekConfig Sample",
+            "title": "AssistantService updateCmekConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Provisions a CMEK key for use in a location of a customer's project. This method will also conduct location validation on the provided cmekConfig to make sure the key is valid and can be used in the selected location.",
             "canonical": true,
@@ -57,7 +117,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CmekConfigService_GetCmekConfig_async",
-            "title": "CmekConfigService getCmekConfig Sample",
+            "title": "AssistantService getCmekConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the [CmekConfig][google.cloud.discoveryengine.v1.CmekConfig].",
             "canonical": true,
@@ -97,7 +157,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CmekConfigService_ListCmekConfigs_async",
-            "title": "CmekConfigService listCmekConfigs Sample",
+            "title": "AssistantService listCmekConfigs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the [CmekConfig][google.cloud.discoveryengine.v1.CmekConfig]s with the project.",
             "canonical": true,
@@ -137,7 +197,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_async",
-            "title": "CmekConfigService deleteCmekConfig Sample",
+            "title": "AssistantService deleteCmekConfig Sample",
             "origin": "API_DEFINITION",
             "description": " De-provisions a CmekConfig.",
             "canonical": true,
@@ -177,7 +237,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CompletionService_CompleteQuery_async",
-            "title": "CmekConfigService completeQuery Sample",
+            "title": "AssistantService completeQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Completes the specified user input with keyword suggestions.",
             "canonical": true,
@@ -233,7 +293,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CompletionService_ImportSuggestionDenyListEntries_async",
-            "title": "CmekConfigService importSuggestionDenyListEntries Sample",
+            "title": "AssistantService importSuggestionDenyListEntries Sample",
             "origin": "API_DEFINITION",
             "description": " Imports all [SuggestionDenyListEntry][google.cloud.discoveryengine.v1.SuggestionDenyListEntry] for a DataStore.",
             "canonical": true,
@@ -281,7 +341,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CompletionService_PurgeSuggestionDenyListEntries_async",
-            "title": "CmekConfigService purgeSuggestionDenyListEntries Sample",
+            "title": "AssistantService purgeSuggestionDenyListEntries Sample",
             "origin": "API_DEFINITION",
             "description": " Permanently deletes all [SuggestionDenyListEntry][google.cloud.discoveryengine.v1.SuggestionDenyListEntry] for a DataStore.",
             "canonical": true,
@@ -321,7 +381,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CompletionService_ImportCompletionSuggestions_async",
-            "title": "CmekConfigService importCompletionSuggestions Sample",
+            "title": "AssistantService importCompletionSuggestions Sample",
             "origin": "API_DEFINITION",
             "description": " Imports [CompletionSuggestion][google.cloud.discoveryengine.v1.CompletionSuggestion]s for a DataStore.",
             "canonical": true,
@@ -377,7 +437,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_CompletionService_PurgeCompletionSuggestions_async",
-            "title": "CmekConfigService purgeCompletionSuggestions Sample",
+            "title": "AssistantService purgeCompletionSuggestions Sample",
             "origin": "API_DEFINITION",
             "description": " Permanently deletes all [CompletionSuggestion][google.cloud.discoveryengine.v1.CompletionSuggestion]s for a DataStore.",
             "canonical": true,
@@ -417,7 +477,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ControlService_CreateControl_async",
-            "title": "CmekConfigService createControl Sample",
+            "title": "AssistantService createControl Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Control. By default 1000 controls are allowed for a data store. A request can be submitted to adjust this limit. If the [Control][google.cloud.discoveryengine.v1.Control] to create already exists, an ALREADY_EXISTS error is returned.",
             "canonical": true,
@@ -465,7 +525,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ControlService_DeleteControl_async",
-            "title": "CmekConfigService deleteControl Sample",
+            "title": "AssistantService deleteControl Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Control. If the [Control][google.cloud.discoveryengine.v1.Control] to delete does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -505,7 +565,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ControlService_UpdateControl_async",
-            "title": "CmekConfigService updateControl Sample",
+            "title": "AssistantService updateControl Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Control. [Control][google.cloud.discoveryengine.v1.Control] action type cannot be changed. If the [Control][google.cloud.discoveryengine.v1.Control] to update does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -549,7 +609,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ControlService_GetControl_async",
-            "title": "CmekConfigService getControl Sample",
+            "title": "AssistantService getControl Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Control.",
             "canonical": true,
@@ -589,7 +649,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ControlService_ListControls_async",
-            "title": "CmekConfigService listControls Sample",
+            "title": "AssistantService listControls Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all Controls by their parent [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -641,7 +701,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_ConverseConversation_async",
-            "title": "CmekConfigService converseConversation Sample",
+            "title": "AssistantService converseConversation Sample",
             "origin": "API_DEFINITION",
             "description": " Converses a conversation.",
             "canonical": true,
@@ -713,7 +773,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_CreateConversation_async",
-            "title": "CmekConfigService createConversation Sample",
+            "title": "AssistantService createConversation Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Conversation. If the [Conversation][google.cloud.discoveryengine.v1.Conversation] to create already exists, an ALREADY_EXISTS error is returned.",
             "canonical": true,
@@ -757,7 +817,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_DeleteConversation_async",
-            "title": "CmekConfigService deleteConversation Sample",
+            "title": "AssistantService deleteConversation Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Conversation. If the [Conversation][google.cloud.discoveryengine.v1.Conversation] to delete does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -797,7 +857,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_UpdateConversation_async",
-            "title": "CmekConfigService updateConversation Sample",
+            "title": "AssistantService updateConversation Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Conversation. [Conversation][google.cloud.discoveryengine.v1.Conversation] action type cannot be changed. If the [Conversation][google.cloud.discoveryengine.v1.Conversation] to update does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -841,7 +901,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_GetConversation_async",
-            "title": "CmekConfigService getConversation Sample",
+            "title": "AssistantService getConversation Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Conversation.",
             "canonical": true,
@@ -881,7 +941,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_ListConversations_async",
-            "title": "CmekConfigService listConversations Sample",
+            "title": "AssistantService listConversations Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all Conversations by their parent [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -937,7 +997,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_AnswerQuery_async",
-            "title": "CmekConfigService answerQuery Sample",
+            "title": "AssistantService answerQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Answer query method.",
             "canonical": true,
@@ -1025,7 +1085,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_StreamAnswerQuery_async",
-            "title": "CmekConfigService streamAnswerQuery Sample",
+            "title": "AssistantService streamAnswerQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Answer query method (streaming). It takes one [AnswerQueryRequest][google.cloud.discoveryengine.v1.AnswerQueryRequest] and returns multiple [AnswerQueryResponse][google.cloud.discoveryengine.v1.AnswerQueryResponse] messages in a stream.",
             "canonical": true,
@@ -1113,7 +1173,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_GetAnswer_async",
-            "title": "CmekConfigService getAnswer Sample",
+            "title": "AssistantService getAnswer Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Answer.",
             "canonical": true,
@@ -1153,7 +1213,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_CreateSession_async",
-            "title": "CmekConfigService createSession Sample",
+            "title": "AssistantService createSession Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Session. If the [Session][google.cloud.discoveryengine.v1.Session] to create already exists, an ALREADY_EXISTS error is returned.",
             "canonical": true,
@@ -1197,7 +1257,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_DeleteSession_async",
-            "title": "CmekConfigService deleteSession Sample",
+            "title": "AssistantService deleteSession Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Session. If the [Session][google.cloud.discoveryengine.v1.Session] to delete does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -1237,7 +1297,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_UpdateSession_async",
-            "title": "CmekConfigService updateSession Sample",
+            "title": "AssistantService updateSession Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Session. [Session][google.cloud.discoveryengine.v1.Session] action type cannot be changed. If the [Session][google.cloud.discoveryengine.v1.Session] to update does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -1281,7 +1341,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_GetSession_async",
-            "title": "CmekConfigService getSession Sample",
+            "title": "AssistantService getSession Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Session.",
             "canonical": true,
@@ -1325,7 +1385,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_ListSessions_async",
-            "title": "CmekConfigService listSessions Sample",
+            "title": "AssistantService listSessions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all Sessions by their parent [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -1381,7 +1441,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DataStoreService_CreateDataStore_async",
-            "title": "CmekConfigService createDataStore Sample",
+            "title": "AssistantService createDataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [DataStore][google.cloud.discoveryengine.v1.DataStore]. DataStore is for storing [Documents][google.cloud.discoveryengine.v1.Document]. To serve these documents for Search, or Recommendation use case, an [Engine][google.cloud.discoveryengine.v1.Engine] needs to be created separately.",
             "canonical": true,
@@ -1445,7 +1505,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DataStoreService_GetDataStore_async",
-            "title": "CmekConfigService getDataStore Sample",
+            "title": "AssistantService getDataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -1485,7 +1545,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DataStoreService_ListDataStores_async",
-            "title": "CmekConfigService listDataStores Sample",
+            "title": "AssistantService listDataStores Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the [DataStore][google.cloud.discoveryengine.v1.DataStore]s associated with the project.",
             "canonical": true,
@@ -1537,7 +1597,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DataStoreService_DeleteDataStore_async",
-            "title": "CmekConfigService deleteDataStore Sample",
+            "title": "AssistantService deleteDataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -1577,7 +1637,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DataStoreService_UpdateDataStore_async",
-            "title": "CmekConfigService updateDataStore Sample",
+            "title": "AssistantService updateDataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a [DataStore][google.cloud.discoveryengine.v1.DataStore]",
             "canonical": true,
@@ -1621,7 +1681,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_GetDocument_async",
-            "title": "CmekConfigService getDocument Sample",
+            "title": "AssistantService getDocument Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
@@ -1661,7 +1721,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_ListDocuments_async",
-            "title": "CmekConfigService listDocuments Sample",
+            "title": "AssistantService listDocuments Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a list of [Document][google.cloud.discoveryengine.v1.Document]s.",
             "canonical": true,
@@ -1709,7 +1769,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_CreateDocument_async",
-            "title": "CmekConfigService createDocument Sample",
+            "title": "AssistantService createDocument Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
@@ -1757,7 +1817,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_UpdateDocument_async",
-            "title": "CmekConfigService updateDocument Sample",
+            "title": "AssistantService updateDocument Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
@@ -1805,7 +1865,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_DeleteDocument_async",
-            "title": "CmekConfigService deleteDocument Sample",
+            "title": "AssistantService deleteDocument Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [Document][google.cloud.discoveryengine.v1.Document].",
             "canonical": true,
@@ -1845,7 +1905,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_ImportDocuments_async",
-            "title": "CmekConfigService importDocuments Sample",
+            "title": "AssistantService importDocuments Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of multiple [Document][google.cloud.discoveryengine.v1.Document]s. Request processing may be synchronous. Non-existing items are created. Note: It is possible for a subset of the [Document][google.cloud.discoveryengine.v1.Document]s to be successfully updated.",
             "canonical": true,
@@ -1945,7 +2005,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_PurgeDocuments_async",
-            "title": "CmekConfigService purgeDocuments Sample",
+            "title": "AssistantService purgeDocuments Sample",
             "origin": "API_DEFINITION",
             "description": " Permanently deletes all selected [Document][google.cloud.discoveryengine.v1.Document]s in a branch. This process is asynchronous. Depending on the number of [Document][google.cloud.discoveryengine.v1.Document]s to be deleted, this operation can take hours to complete. Before the delete operation completes, some [Document][google.cloud.discoveryengine.v1.Document]s might still be returned by [DocumentService.GetDocument][google.cloud.discoveryengine.v1.DocumentService.GetDocument] or [DocumentService.ListDocuments][google.cloud.discoveryengine.v1.DocumentService.ListDocuments]. To get a list of the [Document][google.cloud.discoveryengine.v1.Document]s to be deleted, set [PurgeDocumentsRequest.force][google.cloud.discoveryengine.v1.PurgeDocumentsRequest.force] to false.",
             "canonical": true,
@@ -2005,7 +2065,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_DocumentService_BatchGetDocumentsMetadata_async",
-            "title": "CmekConfigService batchGetDocumentsMetadata Sample",
+            "title": "AssistantService batchGetDocumentsMetadata Sample",
             "origin": "API_DEFINITION",
             "description": " Gets index freshness metadata for [Document][google.cloud.discoveryengine.v1.Document]s. Supported for website search only.",
             "canonical": true,
@@ -2049,7 +2109,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_EngineService_CreateEngine_async",
-            "title": "CmekConfigService createEngine Sample",
+            "title": "AssistantService createEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [Engine][google.cloud.discoveryengine.v1.Engine].",
             "canonical": true,
@@ -2097,7 +2157,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_EngineService_DeleteEngine_async",
-            "title": "CmekConfigService deleteEngine Sample",
+            "title": "AssistantService deleteEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [Engine][google.cloud.discoveryengine.v1.Engine].",
             "canonical": true,
@@ -2137,7 +2197,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_EngineService_UpdateEngine_async",
-            "title": "CmekConfigService updateEngine Sample",
+            "title": "AssistantService updateEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an [Engine][google.cloud.discoveryengine.v1.Engine]",
             "canonical": true,
@@ -2181,7 +2241,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_EngineService_GetEngine_async",
-            "title": "CmekConfigService getEngine Sample",
+            "title": "AssistantService getEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [Engine][google.cloud.discoveryengine.v1.Engine].",
             "canonical": true,
@@ -2221,7 +2281,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_EngineService_ListEngines_async",
-            "title": "CmekConfigService listEngines Sample",
+            "title": "AssistantService listEngines Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the [Engine][google.cloud.discoveryengine.v1.Engine]s associated with the project.",
             "canonical": true,
@@ -2273,7 +2333,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_StreamGenerateGroundedContent_async",
-            "title": "CmekConfigService streamGenerateGroundedContent Sample",
+            "title": "AssistantService streamGenerateGroundedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Generates grounded content in a streaming fashion.",
             "canonical": true,
@@ -2333,7 +2393,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_GenerateGroundedContent_async",
-            "title": "CmekConfigService generateGroundedContent Sample",
+            "title": "AssistantService generateGroundedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Generates grounded content.",
             "canonical": true,
@@ -2393,7 +2453,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_CheckGrounding_async",
-            "title": "CmekConfigService checkGrounding Sample",
+            "title": "AssistantService checkGrounding Sample",
             "origin": "API_DEFINITION",
             "description": " Performs a grounding check.",
             "canonical": true,
@@ -2449,7 +2509,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_CreateIdentityMappingStore_async",
-            "title": "CmekConfigService createIdentityMappingStore Sample",
+            "title": "AssistantService createIdentityMappingStore Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Identity Mapping Store.",
             "canonical": true,
@@ -2505,7 +2565,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_GetIdentityMappingStore_async",
-            "title": "CmekConfigService getIdentityMappingStore Sample",
+            "title": "AssistantService getIdentityMappingStore Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the Identity Mapping Store.",
             "canonical": true,
@@ -2545,7 +2605,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_DeleteIdentityMappingStore_async",
-            "title": "CmekConfigService deleteIdentityMappingStore Sample",
+            "title": "AssistantService deleteIdentityMappingStore Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes the Identity Mapping Store.",
             "canonical": true,
@@ -2585,7 +2645,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_ImportIdentityMappings_async",
-            "title": "CmekConfigService importIdentityMappings Sample",
+            "title": "AssistantService importIdentityMappings Sample",
             "origin": "API_DEFINITION",
             "description": " Imports a list of Identity Mapping Entries to an Identity Mapping Store.",
             "canonical": true,
@@ -2629,7 +2689,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_PurgeIdentityMappings_async",
-            "title": "CmekConfigService purgeIdentityMappings Sample",
+            "title": "AssistantService purgeIdentityMappings Sample",
             "origin": "API_DEFINITION",
             "description": " Purges specified or all Identity Mapping Entries from an Identity Mapping Store.",
             "canonical": true,
@@ -2681,7 +2741,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappings_async",
-            "title": "CmekConfigService listIdentityMappings Sample",
+            "title": "AssistantService listIdentityMappings Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Identity Mappings in an Identity Mapping Store.",
             "canonical": true,
@@ -2729,7 +2789,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappingStores_async",
-            "title": "CmekConfigService listIdentityMappingStores Sample",
+            "title": "AssistantService listIdentityMappingStores Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all Identity Mapping Stores.",
             "canonical": true,
@@ -2777,7 +2837,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ProjectService_ProvisionProject_async",
-            "title": "CmekConfigService provisionProject Sample",
+            "title": "AssistantService provisionProject Sample",
             "origin": "API_DEFINITION",
             "description": " Provisions the project resource. During the process, related systems will get prepared and initialized. Caller must read the [Terms for data use](https://cloud.google.com/retail/data-use-terms), and optionally specify in request to provide consent to that service terms.",
             "canonical": true,
@@ -2825,7 +2885,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_RankService_Rank_async",
-            "title": "CmekConfigService rank Sample",
+            "title": "AssistantService rank Sample",
             "origin": "API_DEFINITION",
             "description": " Ranks a list of text records based on the given input query.",
             "canonical": true,
@@ -2889,7 +2949,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_RecommendationService_Recommend_async",
-            "title": "CmekConfigService recommend Sample",
+            "title": "AssistantService recommend Sample",
             "origin": "API_DEFINITION",
             "description": " Makes a recommendation, which requires a contextual user event.",
             "canonical": true,
@@ -2953,7 +3013,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SchemaService_GetSchema_async",
-            "title": "CmekConfigService getSchema Sample",
+            "title": "AssistantService getSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
@@ -2993,7 +3053,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SchemaService_ListSchemas_async",
-            "title": "CmekConfigService listSchemas Sample",
+            "title": "AssistantService listSchemas Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a list of [Schema][google.cloud.discoveryengine.v1.Schema]s.",
             "canonical": true,
@@ -3041,7 +3101,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SchemaService_CreateSchema_async",
-            "title": "CmekConfigService createSchema Sample",
+            "title": "AssistantService createSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
@@ -3089,7 +3149,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SchemaService_UpdateSchema_async",
-            "title": "CmekConfigService updateSchema Sample",
+            "title": "AssistantService updateSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
@@ -3133,7 +3193,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SchemaService_DeleteSchema_async",
-            "title": "CmekConfigService deleteSchema Sample",
+            "title": "AssistantService deleteSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [Schema][google.cloud.discoveryengine.v1.Schema].",
             "canonical": true,
@@ -3173,7 +3233,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SearchService_Search_async",
-            "title": "CmekConfigService search Sample",
+            "title": "AssistantService search Sample",
             "origin": "API_DEFINITION",
             "description": " Performs a search.",
             "canonical": true,
@@ -3325,7 +3385,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SearchService_SearchLite_async",
-            "title": "CmekConfigService searchLite Sample",
+            "title": "AssistantService searchLite Sample",
             "origin": "API_DEFINITION",
             "description": " Performs a search. Similar to the [SearchService.Search][google.cloud.discoveryengine.v1.SearchService.Search] method, but a lite version that allows API key for authentication, where OAuth and IAM checks are not required. Only public website search is supported by this method. If data stores and engines not associated with public website search are specified, a `FAILED_PRECONDITION` error is returned. This method can be used for easy onboarding without having to implement an authentication backend. However, it is strongly recommended to use [SearchService.Search][google.cloud.discoveryengine.v1.SearchService.Search] instead with required OAuth and IAM checks to provide better data security.",
             "canonical": true,
@@ -3477,7 +3537,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SearchTuningService_TrainCustomModel_async",
-            "title": "CmekConfigService trainCustomModel Sample",
+            "title": "AssistantService trainCustomModel Sample",
             "origin": "API_DEFINITION",
             "description": " Trains a custom model.",
             "canonical": true,
@@ -3533,7 +3593,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SearchTuningService_ListCustomModels_async",
-            "title": "CmekConfigService listCustomModels Sample",
+            "title": "AssistantService listCustomModels Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a list of all the custom models.",
             "canonical": true,
@@ -3573,7 +3633,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_ServingConfigService_UpdateServingConfig_async",
-            "title": "CmekConfigService updateServingConfig Sample",
+            "title": "AssistantService updateServingConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a ServingConfig. Returns a NOT_FOUND error if the ServingConfig does not exist.",
             "canonical": true,
@@ -3617,7 +3677,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_GetSiteSearchEngine_async",
-            "title": "CmekConfigService getSiteSearchEngine Sample",
+            "title": "AssistantService getSiteSearchEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the [SiteSearchEngine][google.cloud.discoveryengine.v1.SiteSearchEngine].",
             "canonical": true,
@@ -3657,7 +3717,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_CreateTargetSite_async",
-            "title": "CmekConfigService createTargetSite Sample",
+            "title": "AssistantService createTargetSite Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [TargetSite][google.cloud.discoveryengine.v1.TargetSite].",
             "canonical": true,
@@ -3701,7 +3761,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_BatchCreateTargetSites_async",
-            "title": "CmekConfigService batchCreateTargetSites Sample",
+            "title": "AssistantService batchCreateTargetSites Sample",
             "origin": "API_DEFINITION",
             "description": " Creates [TargetSite][google.cloud.discoveryengine.v1.TargetSite] in a batch.",
             "canonical": true,
@@ -3745,7 +3805,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_GetTargetSite_async",
-            "title": "CmekConfigService getTargetSite Sample",
+            "title": "AssistantService getTargetSite Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [TargetSite][google.cloud.discoveryengine.v1.TargetSite].",
             "canonical": true,
@@ -3785,7 +3845,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_UpdateTargetSite_async",
-            "title": "CmekConfigService updateTargetSite Sample",
+            "title": "AssistantService updateTargetSite Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a [TargetSite][google.cloud.discoveryengine.v1.TargetSite].",
             "canonical": true,
@@ -3825,7 +3885,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_DeleteTargetSite_async",
-            "title": "CmekConfigService deleteTargetSite Sample",
+            "title": "AssistantService deleteTargetSite Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [TargetSite][google.cloud.discoveryengine.v1.TargetSite].",
             "canonical": true,
@@ -3865,7 +3925,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_ListTargetSites_async",
-            "title": "CmekConfigService listTargetSites Sample",
+            "title": "AssistantService listTargetSites Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a list of [TargetSite][google.cloud.discoveryengine.v1.TargetSite]s.",
             "canonical": true,
@@ -3913,7 +3973,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_CreateSitemap_async",
-            "title": "CmekConfigService createSitemap Sample",
+            "title": "AssistantService createSitemap Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [Sitemap][google.cloud.discoveryengine.v1.Sitemap].",
             "canonical": true,
@@ -3957,7 +4017,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_DeleteSitemap_async",
-            "title": "CmekConfigService deleteSitemap Sample",
+            "title": "AssistantService deleteSitemap Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [Sitemap][google.cloud.discoveryengine.v1.Sitemap].",
             "canonical": true,
@@ -3997,7 +4057,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_FetchSitemaps_async",
-            "title": "CmekConfigService fetchSitemaps Sample",
+            "title": "AssistantService fetchSitemaps Sample",
             "origin": "API_DEFINITION",
             "description": " Fetch [Sitemap][google.cloud.discoveryengine.v1.Sitemap]s in a [DataStore][google.cloud.discoveryengine.v1.DataStore].",
             "canonical": true,
@@ -4041,7 +4101,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async",
-            "title": "CmekConfigService enableAdvancedSiteSearch Sample",
+            "title": "AssistantService enableAdvancedSiteSearch Sample",
             "origin": "API_DEFINITION",
             "description": " Upgrade from basic site search to advanced site search.",
             "canonical": true,
@@ -4081,7 +4141,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_DisableAdvancedSiteSearch_async",
-            "title": "CmekConfigService disableAdvancedSiteSearch Sample",
+            "title": "AssistantService disableAdvancedSiteSearch Sample",
             "origin": "API_DEFINITION",
             "description": " Downgrade from advanced site search to basic site search.",
             "canonical": true,
@@ -4121,7 +4181,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_RecrawlUris_async",
-            "title": "CmekConfigService recrawlUris Sample",
+            "title": "AssistantService recrawlUris Sample",
             "origin": "API_DEFINITION",
             "description": " Request on-demand recrawl for a list of URIs.",
             "canonical": true,
@@ -4169,7 +4229,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_BatchVerifyTargetSites_async",
-            "title": "CmekConfigService batchVerifyTargetSites Sample",
+            "title": "AssistantService batchVerifyTargetSites Sample",
             "origin": "API_DEFINITION",
             "description": " Verify target sites' ownership and validity. This API sends all the target sites under site search engine for verification.",
             "canonical": true,
@@ -4209,7 +4269,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_FetchDomainVerificationStatus_async",
-            "title": "CmekConfigService fetchDomainVerificationStatus Sample",
+            "title": "AssistantService fetchDomainVerificationStatus Sample",
             "origin": "API_DEFINITION",
             "description": " Returns list of target sites with its domain verification status. This method can only be called under data store with BASIC_SITE_SEARCH state at the moment.",
             "canonical": true,
@@ -4257,7 +4317,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserEventService_WriteUserEvent_async",
-            "title": "CmekConfigService writeUserEvent Sample",
+            "title": "AssistantService writeUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event.",
             "canonical": true,
@@ -4305,7 +4365,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserEventService_CollectUserEvent_async",
-            "title": "CmekConfigService collectUserEvent Sample",
+            "title": "AssistantService collectUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a third-party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
             "canonical": true,
@@ -4357,7 +4417,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserEventService_PurgeUserEvents_async",
-            "title": "CmekConfigService purgeUserEvents Sample",
+            "title": "AssistantService purgeUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.",
             "canonical": true,
@@ -4405,7 +4465,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserEventService_ImportUserEvents_async",
-            "title": "CmekConfigService importUserEvents Sample",
+            "title": "AssistantService importUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of user events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully inserted. Operation.metadata is of type ImportMetadata.",
             "canonical": true,
@@ -4461,7 +4521,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserLicenseService_ListUserLicenses_async",
-            "title": "CmekConfigService listUserLicenses Sample",
+            "title": "AssistantService listUserLicenses Sample",
             "origin": "API_DEFINITION",
             "description": " Lists the User Licenses.",
             "canonical": true,
@@ -4513,7 +4573,7 @@
         },
         {
             "regionTag": "discoveryengine_v1_generated_UserLicenseService_BatchUpdateUserLicenses_async",
-            "title": "CmekConfigService batchUpdateUserLicenses Sample",
+            "title": "AssistantService batchUpdateUserLicenses Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the User License. This method is used for batch assign/unassign licenses to users.",
             "canonical": true,

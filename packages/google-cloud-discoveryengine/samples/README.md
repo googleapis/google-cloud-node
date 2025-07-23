@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Assistant_service.stream_assist](#assistant_service.stream_assist)
   * [Cmek_config_service.delete_cmek_config](#cmek_config_service.delete_cmek_config)
   * [Cmek_config_service.get_cmek_config](#cmek_config_service.get_cmek_config)
   * [Cmek_config_service.list_cmek_configs](#cmek_config_service.list_cmek_configs)
@@ -315,6 +316,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Assistant_service.stream_assist
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js`
+
+
+-----
+
 
 
 

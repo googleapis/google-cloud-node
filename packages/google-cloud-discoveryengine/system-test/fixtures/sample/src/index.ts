@@ -16,9 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
+import {AssistantServiceClient, CmekConfigServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, IdentityMappingStoreServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, ServingConfigServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient, UserLicenseServiceClient} from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
+function doStuffWithAssistantServiceClient(client: AssistantServiceClient) {
+  client.close();
+}
 function doStuffWithCmekConfigServiceClient(client: CmekConfigServiceClient) {
   client.close();
 }
@@ -78,6 +81,9 @@ function doStuffWithUserLicenseServiceClient(client: UserLicenseServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const assistantServiceClient = new AssistantServiceClient();
+  doStuffWithAssistantServiceClient(assistantServiceClient);
   // check that the client instance can be created
   const cmekConfigServiceClient = new CmekConfigServiceClient();
   doStuffWithCmekConfigServiceClient(cmekConfigServiceClient);

@@ -21,6 +21,7 @@
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const assistantServiceClient = new discoveryengine.AssistantServiceClient();
   const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();

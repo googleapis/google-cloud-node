@@ -646,6 +646,1497 @@
                         }
                       }
                     },
+                    "AssistAnswer": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/AssistAnswer",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "replies": {
+                          "rule": "repeated",
+                          "type": "Reply",
+                          "id": 3
+                        },
+                        "assistSkippedReasons": {
+                          "rule": "repeated",
+                          "type": "AssistSkippedReason",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Reply": {
+                          "oneofs": {
+                            "reply": {
+                              "oneof": [
+                                "groundedContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "groundedContent": {
+                              "type": "AssistantGroundedContent",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1,
+                            "FAILED": 2,
+                            "SUCCEEDED": 3,
+                            "SKIPPED": 4
+                          }
+                        },
+                        "AssistSkippedReason": {
+                          "values": {
+                            "ASSIST_SKIPPED_REASON_UNSPECIFIED": 0,
+                            "NON_ASSIST_SEEKING_QUERY_IGNORED": 1,
+                            "CUSTOMER_POLICY_VIOLATION": 2
+                          }
+                        }
+                      }
+                    },
+                    "AssistantContent": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "text",
+                            "inlineData",
+                            "file",
+                            "executableCode",
+                            "codeExecutionResult"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "inlineData": {
+                          "type": "Blob",
+                          "id": 3
+                        },
+                        "file": {
+                          "type": "File",
+                          "id": 4
+                        },
+                        "executableCode": {
+                          "type": "ExecutableCode",
+                          "id": 7
+                        },
+                        "codeExecutionResult": {
+                          "type": "CodeExecutionResult",
+                          "id": 8
+                        },
+                        "role": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "thought": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Blob": {
+                          "fields": {
+                            "mimeType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "data": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "File": {
+                          "fields": {
+                            "mimeType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fileId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ExecutableCode": {
+                          "fields": {
+                            "code": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "CodeExecutionResult": {
+                          "fields": {
+                            "outcome": {
+                              "type": "Outcome",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "output": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Outcome": {
+                              "values": {
+                                "OUTCOME_UNSPECIFIED": 0,
+                                "OUTCOME_OK": 1,
+                                "OUTCOME_FAILED": 2,
+                                "OUTCOME_DEADLINE_EXCEEDED": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AssistantGroundedContent": {
+                      "oneofs": {
+                        "metadata": {
+                          "oneof": [
+                            "textGroundingMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textGroundingMetadata": {
+                          "type": "TextGroundingMetadata",
+                          "id": 3
+                        },
+                        "content": {
+                          "type": "AssistantContent",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "TextGroundingMetadata": {
+                          "fields": {
+                            "segments": {
+                              "rule": "repeated",
+                              "type": "Segment",
+                              "id": 4
+                            },
+                            "references": {
+                              "rule": "repeated",
+                              "type": "Reference",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Segment": {
+                              "fields": {
+                                "startIndex": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "endIndex": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "referenceIndices": {
+                                  "rule": "repeated",
+                                  "type": "int32",
+                                  "id": 4
+                                },
+                                "groundingScore": {
+                                  "type": "float",
+                                  "id": 5
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "id": 6
+                                }
+                              }
+                            },
+                            "Reference": {
+                              "fields": {
+                                "content": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "documentMetadata": {
+                                  "type": "DocumentMetadata",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "DocumentMetadata": {
+                                  "oneofs": {
+                                    "_document": {
+                                      "oneof": [
+                                        "document"
+                                      ]
+                                    },
+                                    "_uri": {
+                                      "oneof": [
+                                        "uri"
+                                      ]
+                                    },
+                                    "_title": {
+                                      "oneof": [
+                                        "title"
+                                      ]
+                                    },
+                                    "_pageIdentifier": {
+                                      "oneof": [
+                                        "pageIdentifier"
+                                      ]
+                                    },
+                                    "_domain": {
+                                      "oneof": [
+                                        "domain"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "document": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document",
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "uri": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "pageIdentifier": {
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "domain": {
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Assistant": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/Assistant",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "AssistantService": {
+                      "options": {
+                        "(google.api.default_host)": "discoveryengine.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "StreamAssist": {
+                          "requestType": "StreamAssistRequest",
+                          "responseType": "StreamAssistResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/collections/*/engines/*/assistants/*}:streamAssist",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/collections/*/engines/*/assistants/*}:streamAssist",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "AssistUserMetadata": {
+                      "fields": {
+                        "timeZone": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "preferredLanguageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamAssistRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Assistant"
+                          }
+                        },
+                        "query": {
+                          "type": "Query",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "session": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Session"
+                          }
+                        },
+                        "userMetadata": {
+                          "type": "AssistUserMetadata",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "toolsSpec": {
+                          "type": "ToolsSpec",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationSpec": {
+                          "type": "GenerationSpec",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ToolsSpec": {
+                          "fields": {
+                            "vertexAiSearchSpec": {
+                              "type": "VertexAiSearchSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "webGroundingSpec": {
+                              "type": "WebGroundingSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "imageGenerationSpec": {
+                              "type": "ImageGenerationSpec",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "videoGenerationSpec": {
+                              "type": "VideoGenerationSpec",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "VertexAiSearchSpec": {
+                              "fields": {
+                                "dataStoreSpecs": {
+                                  "rule": "repeated",
+                                  "type": "SearchRequest.DataStoreSpec",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "filter": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "WebGroundingSpec": {
+                              "fields": {}
+                            },
+                            "ImageGenerationSpec": {
+                              "fields": {}
+                            },
+                            "VideoGenerationSpec": {
+                              "fields": {}
+                            }
+                          }
+                        },
+                        "GenerationSpec": {
+                          "fields": {
+                            "modelId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "StreamAssistResponse": {
+                      "fields": {
+                        "answer": {
+                          "type": "AssistAnswer",
+                          "id": 1
+                        },
+                        "sessionInfo": {
+                          "type": "SessionInfo",
+                          "id": 2
+                        },
+                        "assistToken": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "SessionInfo": {
+                          "fields": {
+                            "session": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Session"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchService": {
+                      "options": {
+                        "(google.api.default_host)": "discoveryengine.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Search": {
+                          "requestType": "SearchRequest",
+                          "responseType": "SearchResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:search",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:search",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:search",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        "SearchLite": {
+                          "requestType": "SearchRequest",
+                          "responseType": "SearchResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:searchLite",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SearchRequest": {
+                      "fields": {
+                        "servingConfig": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/ServingConfig"
+                          }
+                        },
+                        "branch": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Branch"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "imageQuery": {
+                          "type": "ImageQuery",
+                          "id": 19
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "offset": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "oneBoxPageSize": {
+                          "type": "int32",
+                          "id": 47
+                        },
+                        "dataStoreSpecs": {
+                          "rule": "repeated",
+                          "type": "DataStoreSpec",
+                          "id": 32
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "canonicalFilter": {
+                          "type": "string",
+                          "id": 29
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 21
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 35
+                        },
+                        "facetSpecs": {
+                          "rule": "repeated",
+                          "type": "FacetSpec",
+                          "id": 9
+                        },
+                        "boostSpec": {
+                          "type": "BoostSpec",
+                          "id": 10
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 11
+                        },
+                        "queryExpansionSpec": {
+                          "type": "QueryExpansionSpec",
+                          "id": 13
+                        },
+                        "spellCorrectionSpec": {
+                          "type": "SpellCorrectionSpec",
+                          "id": 14
+                        },
+                        "userPseudoId": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "contentSearchSpec": {
+                          "type": "ContentSearchSpec",
+                          "id": 24
+                        },
+                        "safeSearch": {
+                          "type": "bool",
+                          "id": 20
+                        },
+                        "userLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 22
+                        },
+                        "searchAsYouTypeSpec": {
+                          "type": "SearchAsYouTypeSpec",
+                          "id": 31
+                        },
+                        "displaySpec": {
+                          "type": "DisplaySpec",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "session": {
+                          "type": "string",
+                          "id": 41,
+                          "options": {
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Session"
+                          }
+                        },
+                        "sessionSpec": {
+                          "type": "SessionSpec",
+                          "id": 42
+                        },
+                        "relevanceThreshold": {
+                          "type": "RelevanceThreshold",
+                          "id": 44
+                        },
+                        "relevanceScoreSpec": {
+                          "type": "RelevanceScoreSpec",
+                          "id": 52,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ImageQuery": {
+                          "oneofs": {
+                            "image": {
+                              "oneof": [
+                                "imageBytes"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "imageBytes": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "DataStoreSpec": {
+                          "fields": {
+                            "dataStore": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "boostSpec": {
+                              "type": "BoostSpec",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customSearchOperators": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "FacetSpec": {
+                          "fields": {
+                            "facetKey": {
+                              "type": "FacetKey",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "limit": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "excludedFilterKeys": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "enableDynamicPosition": {
+                              "type": "bool",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "FacetKey": {
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "intervals": {
+                                  "rule": "repeated",
+                                  "type": "Interval",
+                                  "id": 2
+                                },
+                                "restrictedValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "prefixes": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "contains": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "caseInsensitive": {
+                                  "type": "bool",
+                                  "id": 6
+                                },
+                                "orderBy": {
+                                  "type": "string",
+                                  "id": 7
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "BoostSpec": {
+                          "fields": {
+                            "conditionBoostSpecs": {
+                              "rule": "repeated",
+                              "type": "ConditionBoostSpec",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "ConditionBoostSpec": {
+                              "fields": {
+                                "condition": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "boost": {
+                                  "type": "float",
+                                  "id": 2
+                                },
+                                "boostControlSpec": {
+                                  "type": "BoostControlSpec",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "BoostControlSpec": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "attributeType": {
+                                      "type": "AttributeType",
+                                      "id": 2
+                                    },
+                                    "interpolationType": {
+                                      "type": "InterpolationType",
+                                      "id": 3
+                                    },
+                                    "controlPoints": {
+                                      "rule": "repeated",
+                                      "type": "ControlPoint",
+                                      "id": 4
+                                    }
+                                  },
+                                  "nested": {
+                                    "ControlPoint": {
+                                      "fields": {
+                                        "attributeValue": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "boostAmount": {
+                                          "type": "float",
+                                          "id": 2
+                                        }
+                                      }
+                                    },
+                                    "AttributeType": {
+                                      "values": {
+                                        "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                                        "NUMERICAL": 1,
+                                        "FRESHNESS": 2
+                                      }
+                                    },
+                                    "InterpolationType": {
+                                      "values": {
+                                        "INTERPOLATION_TYPE_UNSPECIFIED": 0,
+                                        "LINEAR": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "QueryExpansionSpec": {
+                          "fields": {
+                            "condition": {
+                              "type": "Condition",
+                              "id": 1
+                            },
+                            "pinUnexpandedResults": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Condition": {
+                              "values": {
+                                "CONDITION_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "AUTO": 2
+                              }
+                            }
+                          }
+                        },
+                        "SpellCorrectionSpec": {
+                          "fields": {
+                            "mode": {
+                              "type": "Mode",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "SUGGESTION_ONLY": 1,
+                                "AUTO": 2
+                              }
+                            }
+                          }
+                        },
+                        "ContentSearchSpec": {
+                          "fields": {
+                            "snippetSpec": {
+                              "type": "SnippetSpec",
+                              "id": 1
+                            },
+                            "summarySpec": {
+                              "type": "SummarySpec",
+                              "id": 2
+                            },
+                            "extractiveContentSpec": {
+                              "type": "ExtractiveContentSpec",
+                              "id": 3
+                            },
+                            "searchResultMode": {
+                              "type": "SearchResultMode",
+                              "id": 4
+                            },
+                            "chunkSpec": {
+                              "type": "ChunkSpec",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "SnippetSpec": {
+                              "fields": {
+                                "maxSnippetCount": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "deprecated": true
+                                  }
+                                },
+                                "referenceOnly": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "deprecated": true
+                                  }
+                                },
+                                "returnSnippet": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "SummarySpec": {
+                              "fields": {
+                                "summaryResultCount": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "includeCitations": {
+                                  "type": "bool",
+                                  "id": 2
+                                },
+                                "ignoreAdversarialQuery": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "ignoreNonSummarySeekingQuery": {
+                                  "type": "bool",
+                                  "id": 4
+                                },
+                                "ignoreLowRelevantContent": {
+                                  "type": "bool",
+                                  "id": 9
+                                },
+                                "ignoreJailBreakingQuery": {
+                                  "type": "bool",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "modelPromptSpec": {
+                                  "type": "ModelPromptSpec",
+                                  "id": 5
+                                },
+                                "languageCode": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "modelSpec": {
+                                  "type": "ModelSpec",
+                                  "id": 7
+                                },
+                                "useSemanticChunks": {
+                                  "type": "bool",
+                                  "id": 8
+                                }
+                              },
+                              "nested": {
+                                "ModelPromptSpec": {
+                                  "fields": {
+                                    "preamble": {
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "ModelSpec": {
+                                  "fields": {
+                                    "version": {
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "ExtractiveContentSpec": {
+                              "fields": {
+                                "maxExtractiveAnswerCount": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "maxExtractiveSegmentCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "returnExtractiveSegmentScore": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "numPreviousSegments": {
+                                  "type": "int32",
+                                  "id": 4
+                                },
+                                "numNextSegments": {
+                                  "type": "int32",
+                                  "id": 5
+                                }
+                              }
+                            },
+                            "ChunkSpec": {
+                              "fields": {
+                                "numPreviousChunks": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "numNextChunks": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SearchResultMode": {
+                              "values": {
+                                "SEARCH_RESULT_MODE_UNSPECIFIED": 0,
+                                "DOCUMENTS": 1,
+                                "CHUNKS": 2
+                              }
+                            }
+                          }
+                        },
+                        "SearchAsYouTypeSpec": {
+                          "fields": {
+                            "condition": {
+                              "type": "Condition",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Condition": {
+                              "values": {
+                                "CONDITION_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "ENABLED": 2,
+                                "AUTO": 3
+                              }
+                            }
+                          }
+                        },
+                        "DisplaySpec": {
+                          "fields": {
+                            "matchHighlightingCondition": {
+                              "type": "MatchHighlightingCondition",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "MatchHighlightingCondition": {
+                              "values": {
+                                "MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED": 0,
+                                "MATCH_HIGHLIGHTING_DISABLED": 1,
+                                "MATCH_HIGHLIGHTING_ENABLED": 2
+                              }
+                            }
+                          }
+                        },
+                        "SessionSpec": {
+                          "oneofs": {
+                            "_searchResultPersistenceCount": {
+                              "oneof": [
+                                "searchResultPersistenceCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "queryId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "searchResultPersistenceCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "RelevanceScoreSpec": {
+                          "fields": {
+                            "returnRelevanceScore": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "RelevanceThreshold": {
+                          "values": {
+                            "RELEVANCE_THRESHOLD_UNSPECIFIED": 0,
+                            "LOWEST": 1,
+                            "LOW": 2,
+                            "MEDIUM": 3,
+                            "HIGH": 4
+                          }
+                        }
+                      }
+                    },
+                    "SearchResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SearchResult",
+                          "id": 1
+                        },
+                        "facets": {
+                          "rule": "repeated",
+                          "type": "Facet",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "attributionToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "redirectUri": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "correctedQuery": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "summary": {
+                          "type": "Summary",
+                          "id": 9
+                        },
+                        "queryExpansionInfo": {
+                          "type": "QueryExpansionInfo",
+                          "id": 14
+                        },
+                        "sessionInfo": {
+                          "type": "SessionInfo",
+                          "id": 19
+                        },
+                        "searchLinkPromotions": {
+                          "rule": "repeated",
+                          "type": "SearchLinkPromotion",
+                          "id": 23
+                        }
+                      },
+                      "nested": {
+                        "SearchResult": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "document": {
+                              "type": "Document",
+                              "id": 2
+                            },
+                            "chunk": {
+                              "type": "Chunk",
+                              "id": 18
+                            },
+                            "modelScores": {
+                              "keyType": "string",
+                              "type": "DoubleList",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Facet": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "values": {
+                              "rule": "repeated",
+                              "type": "FacetValue",
+                              "id": 2
+                            },
+                            "dynamicFacet": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "FacetValue": {
+                              "oneofs": {
+                                "facetValue": {
+                                  "oneof": [
+                                    "value",
+                                    "interval"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "interval": {
+                                  "type": "Interval",
+                                  "id": 2
+                                },
+                                "count": {
+                                  "type": "int64",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "Summary": {
+                          "fields": {
+                            "summaryText": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "summarySkippedReasons": {
+                              "rule": "repeated",
+                              "type": "SummarySkippedReason",
+                              "id": 2
+                            },
+                            "safetyAttributes": {
+                              "type": "SafetyAttributes",
+                              "id": 3
+                            },
+                            "summaryWithMetadata": {
+                              "type": "SummaryWithMetadata",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "SafetyAttributes": {
+                              "fields": {
+                                "categories": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "scores": {
+                                  "rule": "repeated",
+                                  "type": "float",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "CitationMetadata": {
+                              "fields": {
+                                "citations": {
+                                  "rule": "repeated",
+                                  "type": "Citation",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "Citation": {
+                              "fields": {
+                                "startIndex": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "endIndex": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "sources": {
+                                  "rule": "repeated",
+                                  "type": "CitationSource",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "CitationSource": {
+                              "fields": {
+                                "referenceIndex": {
+                                  "type": "int64",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "Reference": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "document": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                                  }
+                                },
+                                "uri": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "chunkContents": {
+                                  "rule": "repeated",
+                                  "type": "ChunkContent",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "ChunkContent": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "pageIdentifier": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "SummaryWithMetadata": {
+                              "fields": {
+                                "summary": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "citationMetadata": {
+                                  "type": "CitationMetadata",
+                                  "id": 2
+                                },
+                                "references": {
+                                  "rule": "repeated",
+                                  "type": "Reference",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "SummarySkippedReason": {
+                              "values": {
+                                "SUMMARY_SKIPPED_REASON_UNSPECIFIED": 0,
+                                "ADVERSARIAL_QUERY_IGNORED": 1,
+                                "NON_SUMMARY_SEEKING_QUERY_IGNORED": 2,
+                                "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
+                                "POTENTIAL_POLICY_VIOLATION": 4,
+                                "LLM_ADDON_NOT_ENABLED": 5,
+                                "NO_RELEVANT_CONTENT": 6,
+                                "JAIL_BREAKING_QUERY_IGNORED": 7,
+                                "CUSTOMER_POLICY_VIOLATION": 8,
+                                "NON_SUMMARY_SEEKING_QUERY_IGNORED_V2": 9,
+                                "TIME_OUT": 10
+                              }
+                            }
+                          }
+                        },
+                        "QueryExpansionInfo": {
+                          "fields": {
+                            "expandedQuery": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "pinnedResultCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SessionInfo": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "queryId": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Chunk": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/Chunk",
@@ -812,6 +2303,453 @@
                             "SIGNATURE_STRUCTURE": 2,
                             "CHECKBOX_STRUCTURE": 3
                           }
+                        }
+                      }
+                    },
+                    "IndustryVertical": {
+                      "values": {
+                        "INDUSTRY_VERTICAL_UNSPECIFIED": 0,
+                        "GENERIC": 1,
+                        "MEDIA": 2,
+                        "HEALTHCARE_FHIR": 7
+                      }
+                    },
+                    "SolutionType": {
+                      "values": {
+                        "SOLUTION_TYPE_UNSPECIFIED": 0,
+                        "SOLUTION_TYPE_RECOMMENDATION": 1,
+                        "SOLUTION_TYPE_SEARCH": 2,
+                        "SOLUTION_TYPE_CHAT": 3,
+                        "SOLUTION_TYPE_GENERATIVE_CHAT": 4
+                      }
+                    },
+                    "SearchUseCase": {
+                      "values": {
+                        "SEARCH_USE_CASE_UNSPECIFIED": 0,
+                        "SEARCH_USE_CASE_SEARCH": 1,
+                        "SEARCH_USE_CASE_BROWSE": 2
+                      }
+                    },
+                    "SearchTier": {
+                      "values": {
+                        "SEARCH_TIER_UNSPECIFIED": 0,
+                        "SEARCH_TIER_STANDARD": 1,
+                        "SEARCH_TIER_ENTERPRISE": 2
+                      }
+                    },
+                    "SearchAddOn": {
+                      "values": {
+                        "SEARCH_ADD_ON_UNSPECIFIED": 0,
+                        "SEARCH_ADD_ON_LLM": 1
+                      }
+                    },
+                    "Interval": {
+                      "oneofs": {
+                        "min": {
+                          "oneof": [
+                            "minimum",
+                            "exclusiveMinimum"
+                          ]
+                        },
+                        "max": {
+                          "oneof": [
+                            "maximum",
+                            "exclusiveMaximum"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "minimum": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "exclusiveMinimum": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "maximum": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "exclusiveMaximum": {
+                          "type": "double",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "CustomAttribute": {
+                      "fields": {
+                        "text": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "numbers": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UserInfo": {
+                      "fields": {
+                        "userId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "userAgent": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DoubleList": {
+                      "fields": {
+                        "values": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Principal": {
+                      "oneofs": {
+                        "principal": {
+                          "oneof": [
+                            "userId",
+                            "groupId",
+                            "externalEntityId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "userId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "externalEntityId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HealthcareFhirConfig": {
+                      "fields": {
+                        "enableConfigurableSchema": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "enableStaticIndexingForBatchIngestion": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchLinkPromotion": {
+                      "fields": {
+                        "title": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "document": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                          }
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Document": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/Document",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}"
+                      },
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "structData",
+                            "jsonData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "structData": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4
+                        },
+                        "jsonData": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "schemaId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "content": {
+                          "type": "Content",
+                          "id": 10
+                        },
+                        "parentDocumentId": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "derivedStructData": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "aclInfo": {
+                          "type": "AclInfo",
+                          "id": 11
+                        },
+                        "indexTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "indexStatus": {
+                          "type": "IndexStatus",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Content": {
+                          "oneofs": {
+                            "content": {
+                              "oneof": [
+                                "rawBytes",
+                                "uri"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rawBytes": {
+                              "type": "bytes",
+                              "id": 2
+                            },
+                            "uri": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "mimeType": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AclInfo": {
+                          "fields": {
+                            "readers": {
+                              "rule": "repeated",
+                              "type": "AccessRestriction",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "AccessRestriction": {
+                              "fields": {
+                                "principals": {
+                                  "rule": "repeated",
+                                  "type": "Principal",
+                                  "id": 1
+                                },
+                                "idpWide": {
+                                  "type": "bool",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "IndexStatus": {
+                          "fields": {
+                            "indexTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "errorSamples": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            },
+                            "pendingMessage": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Session": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/Session",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "userPseudoId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "turns": {
+                          "rule": "repeated",
+                          "type": "Turn",
+                          "id": 4
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "isPinned": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Turn": {
+                          "fields": {
+                            "query": {
+                              "type": "Query",
+                              "id": 1
+                            },
+                            "answer": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Answer"
+                              }
+                            },
+                            "detailedAnswer": {
+                              "type": "Answer",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1
+                          }
+                        }
+                      }
+                    },
+                    "Query": {
+                      "oneofs": {
+                        "content": {
+                          "oneof": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "queryId": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1106,203 +3044,6 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 2
-                        }
-                      }
-                    },
-                    "IndustryVertical": {
-                      "values": {
-                        "INDUSTRY_VERTICAL_UNSPECIFIED": 0,
-                        "GENERIC": 1,
-                        "MEDIA": 2,
-                        "HEALTHCARE_FHIR": 7
-                      }
-                    },
-                    "SolutionType": {
-                      "values": {
-                        "SOLUTION_TYPE_UNSPECIFIED": 0,
-                        "SOLUTION_TYPE_RECOMMENDATION": 1,
-                        "SOLUTION_TYPE_SEARCH": 2,
-                        "SOLUTION_TYPE_CHAT": 3,
-                        "SOLUTION_TYPE_GENERATIVE_CHAT": 4
-                      }
-                    },
-                    "SearchUseCase": {
-                      "values": {
-                        "SEARCH_USE_CASE_UNSPECIFIED": 0,
-                        "SEARCH_USE_CASE_SEARCH": 1,
-                        "SEARCH_USE_CASE_BROWSE": 2
-                      }
-                    },
-                    "SearchTier": {
-                      "values": {
-                        "SEARCH_TIER_UNSPECIFIED": 0,
-                        "SEARCH_TIER_STANDARD": 1,
-                        "SEARCH_TIER_ENTERPRISE": 2
-                      }
-                    },
-                    "SearchAddOn": {
-                      "values": {
-                        "SEARCH_ADD_ON_UNSPECIFIED": 0,
-                        "SEARCH_ADD_ON_LLM": 1
-                      }
-                    },
-                    "Interval": {
-                      "oneofs": {
-                        "min": {
-                          "oneof": [
-                            "minimum",
-                            "exclusiveMinimum"
-                          ]
-                        },
-                        "max": {
-                          "oneof": [
-                            "maximum",
-                            "exclusiveMaximum"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "minimum": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "exclusiveMinimum": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "maximum": {
-                          "type": "double",
-                          "id": 3
-                        },
-                        "exclusiveMaximum": {
-                          "type": "double",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "CustomAttribute": {
-                      "fields": {
-                        "text": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        },
-                        "numbers": {
-                          "rule": "repeated",
-                          "type": "double",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "UserInfo": {
-                      "fields": {
-                        "userId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "userAgent": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "timeZone": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DoubleList": {
-                      "fields": {
-                        "values": {
-                          "rule": "repeated",
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Principal": {
-                      "oneofs": {
-                        "principal": {
-                          "oneof": [
-                            "userId",
-                            "groupId",
-                            "externalEntityId"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "userId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "groupId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "externalEntityId": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "HealthcareFhirConfig": {
-                      "fields": {
-                        "enableConfigurableSchema": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "enableStaticIndexingForBatchIngestion": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "SearchLinkPromotion": {
-                      "fields": {
-                        "title": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "uri": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "document": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
-                          }
-                        },
-                        "imageUri": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "enabled": {
-                          "type": "bool",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
                         }
                       }
                     },
@@ -2317,151 +4058,6 @@
                         "failureCount": {
                           "type": "int64",
                           "id": 4
-                        }
-                      }
-                    },
-                    "Document": {
-                      "options": {
-                        "(google.api.resource).type": "discoveryengine.googleapis.com/Document",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}"
-                      },
-                      "oneofs": {
-                        "data": {
-                          "oneof": [
-                            "structData",
-                            "jsonData"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "structData": {
-                          "type": "google.protobuf.Struct",
-                          "id": 4
-                        },
-                        "jsonData": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "id": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "schemaId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "content": {
-                          "type": "Content",
-                          "id": 10
-                        },
-                        "parentDocumentId": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "derivedStructData": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "aclInfo": {
-                          "type": "AclInfo",
-                          "id": 11
-                        },
-                        "indexTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 13,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "indexStatus": {
-                          "type": "IndexStatus",
-                          "id": 15,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Content": {
-                          "oneofs": {
-                            "content": {
-                              "oneof": [
-                                "rawBytes",
-                                "uri"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "rawBytes": {
-                              "type": "bytes",
-                              "id": 2
-                            },
-                            "uri": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "mimeType": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "AclInfo": {
-                          "fields": {
-                            "readers": {
-                              "rule": "repeated",
-                              "type": "AccessRestriction",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "AccessRestriction": {
-                              "fields": {
-                                "principals": {
-                                  "rule": "repeated",
-                                  "type": "Principal",
-                                  "id": 1
-                                },
-                                "idpWide": {
-                                  "type": "bool",
-                                  "id": 2
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "IndexStatus": {
-                          "fields": {
-                            "indexTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
-                            "errorSamples": {
-                              "rule": "repeated",
-                              "type": "google.rpc.Status",
-                              "id": 2
-                            },
-                            "pendingMessage": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE"
-                              }
-                            }
-                          }
                         }
                       }
                     },
@@ -3757,959 +5353,6 @@
                         }
                       }
                     },
-                    "SearchService": {
-                      "options": {
-                        "(google.api.default_host)": "discoveryengine.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "Search": {
-                          "requestType": "SearchRequest",
-                          "responseType": "SearchResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:search",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:search",
-                                "body": "*",
-                                "additional_bindings": [
-                                  {
-                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:search",
-                                    "body": "*"
-                                  },
-                                  {
-                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search",
-                                    "body": "*"
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        },
-                        "SearchLite": {
-                          "requestType": "SearchRequest",
-                          "responseType": "SearchResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
-                                "body": "*",
-                                "additional_bindings": [
-                                  {
-                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:searchLite",
-                                    "body": "*"
-                                  },
-                                  {
-                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
-                                    "body": "*"
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "SearchRequest": {
-                      "fields": {
-                        "servingConfig": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/ServingConfig"
-                          }
-                        },
-                        "branch": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Branch"
-                          }
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "imageQuery": {
-                          "type": "ImageQuery",
-                          "id": 19
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 4
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "offset": {
-                          "type": "int32",
-                          "id": 6
-                        },
-                        "oneBoxPageSize": {
-                          "type": "int32",
-                          "id": 47
-                        },
-                        "dataStoreSpecs": {
-                          "rule": "repeated",
-                          "type": "DataStoreSpec",
-                          "id": 32
-                        },
-                        "filter": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "canonicalFilter": {
-                          "type": "string",
-                          "id": 29
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "userInfo": {
-                          "type": "UserInfo",
-                          "id": 21
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 35
-                        },
-                        "facetSpecs": {
-                          "rule": "repeated",
-                          "type": "FacetSpec",
-                          "id": 9
-                        },
-                        "boostSpec": {
-                          "type": "BoostSpec",
-                          "id": 10
-                        },
-                        "params": {
-                          "keyType": "string",
-                          "type": "google.protobuf.Value",
-                          "id": 11
-                        },
-                        "queryExpansionSpec": {
-                          "type": "QueryExpansionSpec",
-                          "id": 13
-                        },
-                        "spellCorrectionSpec": {
-                          "type": "SpellCorrectionSpec",
-                          "id": 14
-                        },
-                        "userPseudoId": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "contentSearchSpec": {
-                          "type": "ContentSearchSpec",
-                          "id": 24
-                        },
-                        "safeSearch": {
-                          "type": "bool",
-                          "id": 20
-                        },
-                        "userLabels": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 22
-                        },
-                        "searchAsYouTypeSpec": {
-                          "type": "SearchAsYouTypeSpec",
-                          "id": 31
-                        },
-                        "displaySpec": {
-                          "type": "DisplaySpec",
-                          "id": 38,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "session": {
-                          "type": "string",
-                          "id": 41,
-                          "options": {
-                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Session"
-                          }
-                        },
-                        "sessionSpec": {
-                          "type": "SessionSpec",
-                          "id": 42
-                        },
-                        "relevanceThreshold": {
-                          "type": "RelevanceThreshold",
-                          "id": 44
-                        },
-                        "relevanceScoreSpec": {
-                          "type": "RelevanceScoreSpec",
-                          "id": 52,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ImageQuery": {
-                          "oneofs": {
-                            "image": {
-                              "oneof": [
-                                "imageBytes"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "imageBytes": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "DataStoreSpec": {
-                          "fields": {
-                            "dataStore": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
-                              }
-                            },
-                            "filter": {
-                              "type": "string",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "boostSpec": {
-                              "type": "BoostSpec",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "customSearchOperators": {
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "FacetSpec": {
-                          "fields": {
-                            "facetKey": {
-                              "type": "FacetKey",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "limit": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "excludedFilterKeys": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            },
-                            "enableDynamicPosition": {
-                              "type": "bool",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "FacetKey": {
-                              "fields": {
-                                "key": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "intervals": {
-                                  "rule": "repeated",
-                                  "type": "Interval",
-                                  "id": 2
-                                },
-                                "restrictedValues": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 3
-                                },
-                                "prefixes": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 4
-                                },
-                                "contains": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 5
-                                },
-                                "caseInsensitive": {
-                                  "type": "bool",
-                                  "id": 6
-                                },
-                                "orderBy": {
-                                  "type": "string",
-                                  "id": 7
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "BoostSpec": {
-                          "fields": {
-                            "conditionBoostSpecs": {
-                              "rule": "repeated",
-                              "type": "ConditionBoostSpec",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "ConditionBoostSpec": {
-                              "fields": {
-                                "condition": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "boost": {
-                                  "type": "float",
-                                  "id": 2
-                                },
-                                "boostControlSpec": {
-                                  "type": "BoostControlSpec",
-                                  "id": 3
-                                }
-                              },
-                              "nested": {
-                                "BoostControlSpec": {
-                                  "fields": {
-                                    "fieldName": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "attributeType": {
-                                      "type": "AttributeType",
-                                      "id": 2
-                                    },
-                                    "interpolationType": {
-                                      "type": "InterpolationType",
-                                      "id": 3
-                                    },
-                                    "controlPoints": {
-                                      "rule": "repeated",
-                                      "type": "ControlPoint",
-                                      "id": 4
-                                    }
-                                  },
-                                  "nested": {
-                                    "ControlPoint": {
-                                      "fields": {
-                                        "attributeValue": {
-                                          "type": "string",
-                                          "id": 1
-                                        },
-                                        "boostAmount": {
-                                          "type": "float",
-                                          "id": 2
-                                        }
-                                      }
-                                    },
-                                    "AttributeType": {
-                                      "values": {
-                                        "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
-                                        "NUMERICAL": 1,
-                                        "FRESHNESS": 2
-                                      }
-                                    },
-                                    "InterpolationType": {
-                                      "values": {
-                                        "INTERPOLATION_TYPE_UNSPECIFIED": 0,
-                                        "LINEAR": 1
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "QueryExpansionSpec": {
-                          "fields": {
-                            "condition": {
-                              "type": "Condition",
-                              "id": 1
-                            },
-                            "pinUnexpandedResults": {
-                              "type": "bool",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "Condition": {
-                              "values": {
-                                "CONDITION_UNSPECIFIED": 0,
-                                "DISABLED": 1,
-                                "AUTO": 2
-                              }
-                            }
-                          }
-                        },
-                        "SpellCorrectionSpec": {
-                          "fields": {
-                            "mode": {
-                              "type": "Mode",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "Mode": {
-                              "values": {
-                                "MODE_UNSPECIFIED": 0,
-                                "SUGGESTION_ONLY": 1,
-                                "AUTO": 2
-                              }
-                            }
-                          }
-                        },
-                        "ContentSearchSpec": {
-                          "fields": {
-                            "snippetSpec": {
-                              "type": "SnippetSpec",
-                              "id": 1
-                            },
-                            "summarySpec": {
-                              "type": "SummarySpec",
-                              "id": 2
-                            },
-                            "extractiveContentSpec": {
-                              "type": "ExtractiveContentSpec",
-                              "id": 3
-                            },
-                            "searchResultMode": {
-                              "type": "SearchResultMode",
-                              "id": 4
-                            },
-                            "chunkSpec": {
-                              "type": "ChunkSpec",
-                              "id": 5
-                            }
-                          },
-                          "nested": {
-                            "SnippetSpec": {
-                              "fields": {
-                                "maxSnippetCount": {
-                                  "type": "int32",
-                                  "id": 1,
-                                  "options": {
-                                    "deprecated": true
-                                  }
-                                },
-                                "referenceOnly": {
-                                  "type": "bool",
-                                  "id": 2,
-                                  "options": {
-                                    "deprecated": true
-                                  }
-                                },
-                                "returnSnippet": {
-                                  "type": "bool",
-                                  "id": 3
-                                }
-                              }
-                            },
-                            "SummarySpec": {
-                              "fields": {
-                                "summaryResultCount": {
-                                  "type": "int32",
-                                  "id": 1
-                                },
-                                "includeCitations": {
-                                  "type": "bool",
-                                  "id": 2
-                                },
-                                "ignoreAdversarialQuery": {
-                                  "type": "bool",
-                                  "id": 3
-                                },
-                                "ignoreNonSummarySeekingQuery": {
-                                  "type": "bool",
-                                  "id": 4
-                                },
-                                "ignoreLowRelevantContent": {
-                                  "type": "bool",
-                                  "id": 9
-                                },
-                                "ignoreJailBreakingQuery": {
-                                  "type": "bool",
-                                  "id": 10,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                },
-                                "modelPromptSpec": {
-                                  "type": "ModelPromptSpec",
-                                  "id": 5
-                                },
-                                "languageCode": {
-                                  "type": "string",
-                                  "id": 6
-                                },
-                                "modelSpec": {
-                                  "type": "ModelSpec",
-                                  "id": 7
-                                },
-                                "useSemanticChunks": {
-                                  "type": "bool",
-                                  "id": 8
-                                }
-                              },
-                              "nested": {
-                                "ModelPromptSpec": {
-                                  "fields": {
-                                    "preamble": {
-                                      "type": "string",
-                                      "id": 1
-                                    }
-                                  }
-                                },
-                                "ModelSpec": {
-                                  "fields": {
-                                    "version": {
-                                      "type": "string",
-                                      "id": 1
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "ExtractiveContentSpec": {
-                              "fields": {
-                                "maxExtractiveAnswerCount": {
-                                  "type": "int32",
-                                  "id": 1
-                                },
-                                "maxExtractiveSegmentCount": {
-                                  "type": "int32",
-                                  "id": 2
-                                },
-                                "returnExtractiveSegmentScore": {
-                                  "type": "bool",
-                                  "id": 3
-                                },
-                                "numPreviousSegments": {
-                                  "type": "int32",
-                                  "id": 4
-                                },
-                                "numNextSegments": {
-                                  "type": "int32",
-                                  "id": 5
-                                }
-                              }
-                            },
-                            "ChunkSpec": {
-                              "fields": {
-                                "numPreviousChunks": {
-                                  "type": "int32",
-                                  "id": 1
-                                },
-                                "numNextChunks": {
-                                  "type": "int32",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "SearchResultMode": {
-                              "values": {
-                                "SEARCH_RESULT_MODE_UNSPECIFIED": 0,
-                                "DOCUMENTS": 1,
-                                "CHUNKS": 2
-                              }
-                            }
-                          }
-                        },
-                        "SearchAsYouTypeSpec": {
-                          "fields": {
-                            "condition": {
-                              "type": "Condition",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "Condition": {
-                              "values": {
-                                "CONDITION_UNSPECIFIED": 0,
-                                "DISABLED": 1,
-                                "ENABLED": 2,
-                                "AUTO": 3
-                              }
-                            }
-                          }
-                        },
-                        "DisplaySpec": {
-                          "fields": {
-                            "matchHighlightingCondition": {
-                              "type": "MatchHighlightingCondition",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "MatchHighlightingCondition": {
-                              "values": {
-                                "MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED": 0,
-                                "MATCH_HIGHLIGHTING_DISABLED": 1,
-                                "MATCH_HIGHLIGHTING_ENABLED": 2
-                              }
-                            }
-                          }
-                        },
-                        "SessionSpec": {
-                          "oneofs": {
-                            "_searchResultPersistenceCount": {
-                              "oneof": [
-                                "searchResultPersistenceCount"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "queryId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "searchResultPersistenceCount": {
-                              "type": "int32",
-                              "id": 2,
-                              "options": {
-                                "proto3_optional": true
-                              }
-                            }
-                          }
-                        },
-                        "RelevanceScoreSpec": {
-                          "fields": {
-                            "returnRelevanceScore": {
-                              "type": "bool",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "RelevanceThreshold": {
-                          "values": {
-                            "RELEVANCE_THRESHOLD_UNSPECIFIED": 0,
-                            "LOWEST": 1,
-                            "LOW": 2,
-                            "MEDIUM": 3,
-                            "HIGH": 4
-                          }
-                        }
-                      }
-                    },
-                    "SearchResponse": {
-                      "fields": {
-                        "results": {
-                          "rule": "repeated",
-                          "type": "SearchResult",
-                          "id": 1
-                        },
-                        "facets": {
-                          "rule": "repeated",
-                          "type": "Facet",
-                          "id": 2
-                        },
-                        "totalSize": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "attributionToken": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "redirectUri": {
-                          "type": "string",
-                          "id": 12
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "correctedQuery": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "summary": {
-                          "type": "Summary",
-                          "id": 9
-                        },
-                        "queryExpansionInfo": {
-                          "type": "QueryExpansionInfo",
-                          "id": 14
-                        },
-                        "sessionInfo": {
-                          "type": "SessionInfo",
-                          "id": 19
-                        },
-                        "searchLinkPromotions": {
-                          "rule": "repeated",
-                          "type": "SearchLinkPromotion",
-                          "id": 23
-                        }
-                      },
-                      "nested": {
-                        "SearchResult": {
-                          "fields": {
-                            "id": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "document": {
-                              "type": "Document",
-                              "id": 2
-                            },
-                            "chunk": {
-                              "type": "Chunk",
-                              "id": 18
-                            },
-                            "modelScores": {
-                              "keyType": "string",
-                              "type": "DoubleList",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "Facet": {
-                          "fields": {
-                            "key": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "values": {
-                              "rule": "repeated",
-                              "type": "FacetValue",
-                              "id": 2
-                            },
-                            "dynamicFacet": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "FacetValue": {
-                              "oneofs": {
-                                "facetValue": {
-                                  "oneof": [
-                                    "value",
-                                    "interval"
-                                  ]
-                                }
-                              },
-                              "fields": {
-                                "value": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "interval": {
-                                  "type": "Interval",
-                                  "id": 2
-                                },
-                                "count": {
-                                  "type": "int64",
-                                  "id": 3
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "Summary": {
-                          "fields": {
-                            "summaryText": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "summarySkippedReasons": {
-                              "rule": "repeated",
-                              "type": "SummarySkippedReason",
-                              "id": 2
-                            },
-                            "safetyAttributes": {
-                              "type": "SafetyAttributes",
-                              "id": 3
-                            },
-                            "summaryWithMetadata": {
-                              "type": "SummaryWithMetadata",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "SafetyAttributes": {
-                              "fields": {
-                                "categories": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "scores": {
-                                  "rule": "repeated",
-                                  "type": "float",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "CitationMetadata": {
-                              "fields": {
-                                "citations": {
-                                  "rule": "repeated",
-                                  "type": "Citation",
-                                  "id": 1
-                                }
-                              }
-                            },
-                            "Citation": {
-                              "fields": {
-                                "startIndex": {
-                                  "type": "int64",
-                                  "id": 1
-                                },
-                                "endIndex": {
-                                  "type": "int64",
-                                  "id": 2
-                                },
-                                "sources": {
-                                  "rule": "repeated",
-                                  "type": "CitationSource",
-                                  "id": 3
-                                }
-                              }
-                            },
-                            "CitationSource": {
-                              "fields": {
-                                "referenceIndex": {
-                                  "type": "int64",
-                                  "id": 4
-                                }
-                              }
-                            },
-                            "Reference": {
-                              "fields": {
-                                "title": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "document": {
-                                  "type": "string",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED",
-                                    "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
-                                  }
-                                },
-                                "uri": {
-                                  "type": "string",
-                                  "id": 3
-                                },
-                                "chunkContents": {
-                                  "rule": "repeated",
-                                  "type": "ChunkContent",
-                                  "id": 4
-                                }
-                              },
-                              "nested": {
-                                "ChunkContent": {
-                                  "fields": {
-                                    "content": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "pageIdentifier": {
-                                      "type": "string",
-                                      "id": 2
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "SummaryWithMetadata": {
-                              "fields": {
-                                "summary": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "citationMetadata": {
-                                  "type": "CitationMetadata",
-                                  "id": 2
-                                },
-                                "references": {
-                                  "rule": "repeated",
-                                  "type": "Reference",
-                                  "id": 3
-                                }
-                              }
-                            },
-                            "SummarySkippedReason": {
-                              "values": {
-                                "SUMMARY_SKIPPED_REASON_UNSPECIFIED": 0,
-                                "ADVERSARIAL_QUERY_IGNORED": 1,
-                                "NON_SUMMARY_SEEKING_QUERY_IGNORED": 2,
-                                "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
-                                "POTENTIAL_POLICY_VIOLATION": 4,
-                                "LLM_ADDON_NOT_ENABLED": 5,
-                                "NO_RELEVANT_CONTENT": 6,
-                                "JAIL_BREAKING_QUERY_IGNORED": 7,
-                                "CUSTOMER_POLICY_VIOLATION": 8,
-                                "NON_SUMMARY_SEEKING_QUERY_IGNORED_V2": 9,
-                                "TIME_OUT": 10
-                              }
-                            }
-                          }
-                        },
-                        "QueryExpansionInfo": {
-                          "fields": {
-                            "expandedQuery": {
-                              "type": "bool",
-                              "id": 1
-                            },
-                            "pinnedResultCount": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SessionInfo": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "queryId": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
                     "ConversationalSearchService": {
                       "options": {
                         "(google.api.default_host)": "discoveryengine.googleapis.com",
@@ -5978,111 +6621,6 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
-                        }
-                      }
-                    },
-                    "Session": {
-                      "options": {
-                        "(google.api.resource).type": "discoveryengine.googleapis.com/Session",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 2
-                        },
-                        "userPseudoId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "turns": {
-                          "rule": "repeated",
-                          "type": "Turn",
-                          "id": 4
-                        },
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "isPinned": {
-                          "type": "bool",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "Turn": {
-                          "fields": {
-                            "query": {
-                              "type": "Query",
-                              "id": 1
-                            },
-                            "answer": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Answer"
-                              }
-                            },
-                            "detailedAnswer": {
-                              "type": "Answer",
-                              "id": 7,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "IN_PROGRESS": 1
-                          }
-                        }
-                      }
-                    },
-                    "Query": {
-                      "oneofs": {
-                        "content": {
-                          "oneof": [
-                            "text"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "text": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "queryId": {
-                          "type": "string",
-                          "id": 1
                         }
                       }
                     },
@@ -34311,8 +34849,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "HttpBodyProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -34535,6 +35072,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -34675,6 +35216,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -34732,6 +35295,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -34793,6 +35361,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -34843,12 +35424,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -34886,6 +35474,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -34975,6 +35568,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -35200,6 +35797,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -35414,6 +36015,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -35549,7 +36151,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -35576,6 +36179,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -35644,6 +36251,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -35733,6 +36360,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -35876,6 +36507,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -35886,6 +36518,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -35896,6 +36529,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -35906,6 +36540,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -35916,7 +36551,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -35926,27 +36562,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -35991,7 +36638,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -36005,6 +36658,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -36033,11 +36713,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -36050,6 +36745,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -36133,6 +36834,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Struct": {
@@ -36248,6 +36957,35 @@
             }
           }
         },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
         "longrunning": {
           "options": {
             "cc_enable_arenas": true,
@@ -36256,6 +36994,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
@@ -36459,35 +37198,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }
