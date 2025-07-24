@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,64 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/secret-manager
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The resource name of the project associated with the
+ *  Secrets google.cloud.secretmanager.v1.Secret, in the format `projects/*`.
+ */
+// const parent = 'abc123'
+/**
+ *  Optional. The maximum number of results to be returned in a single page. If
+ *  set to 0, the server decides the number of results to return. If the
+ *  number is greater than 25000, it is capped at 25000.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. Pagination token, returned earlier via
+ *  ListSecretsResponse.next_page_token google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Optional. Filter string, adhering to the rules in
+ *  List-operation
+ *  filtering (https://cloud.google.com/secret-manager/docs/filtering). List
+ *  only secrets matching the filter. If filter is empty, all secrets are
+ *  listed.
+ */
+// const filter = 'abc123'
+
+// Imports the Secretmanager library
+const {SecretManagerServiceClient} =
+  require('@google-cloud/secret-manager').v1;
+
+// Instantiates a client
+const secretmanagerClient = new SecretManagerServiceClient();
+
+async function callListSecrets() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await secretmanagerClient.listSecretsAsync(request);
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListSecrets();
+
+```
 
 
 
