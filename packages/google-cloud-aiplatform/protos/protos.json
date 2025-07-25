@@ -39012,6 +39012,20 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "flexStart": {
+                          "type": "FlexStart",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "spot": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

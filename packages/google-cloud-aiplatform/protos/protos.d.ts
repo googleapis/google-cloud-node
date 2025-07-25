@@ -146233,6 +146233,12 @@ export namespace google {
 
                     /** BatchDedicatedResources maxReplicaCount */
                     maxReplicaCount?: (number|null);
+
+                    /** BatchDedicatedResources flexStart */
+                    flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** BatchDedicatedResources spot */
+                    spot?: (boolean|null);
                 }
 
                 /** Represents a BatchDedicatedResources. */
@@ -146252,6 +146258,12 @@ export namespace google {
 
                     /** BatchDedicatedResources maxReplicaCount. */
                     public maxReplicaCount: number;
+
+                    /** BatchDedicatedResources flexStart. */
+                    public flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** BatchDedicatedResources spot. */
+                    public spot: boolean;
 
                     /**
                      * Creates a new BatchDedicatedResources instance using the specified properties.
