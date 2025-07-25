@@ -118221,6 +118221,9 @@ export namespace google {
 
                     /** GetSessionRequest name */
                     name?: (string|null);
+
+                    /** GetSessionRequest includeAnswerDetails */
+                    includeAnswerDetails?: (boolean|null);
                 }
 
                 /** Represents a GetSessionRequest. */
@@ -118234,6 +118237,9 @@ export namespace google {
 
                     /** GetSessionRequest name. */
                     public name: string;
+
+                    /** GetSessionRequest includeAnswerDetails. */
+                    public includeAnswerDetails: boolean;
 
                     /**
                      * Creates a new GetSessionRequest instance using the specified properties.
@@ -118543,6 +118549,9 @@ export namespace google {
                     /** Session name */
                     name?: (string|null);
 
+                    /** Session displayName */
+                    displayName?: (string|null);
+
                     /** Session state */
                     state?: (google.cloud.discoveryengine.v1beta.Session.State|keyof typeof google.cloud.discoveryengine.v1beta.Session.State|null);
 
@@ -118557,6 +118566,9 @@ export namespace google {
 
                     /** Session endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session isPinned */
+                    isPinned?: (boolean|null);
                 }
 
                 /** Represents a Session. */
@@ -118570,6 +118582,9 @@ export namespace google {
 
                     /** Session name. */
                     public name: string;
+
+                    /** Session displayName. */
+                    public displayName: string;
 
                     /** Session state. */
                     public state: (google.cloud.discoveryengine.v1beta.Session.State|keyof typeof google.cloud.discoveryengine.v1beta.Session.State);
@@ -118585,6 +118600,9 @@ export namespace google {
 
                     /** Session endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session isPinned. */
+                    public isPinned: boolean;
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -118674,6 +118692,12 @@ export namespace google {
 
                         /** Turn answer */
                         answer?: (string|null);
+
+                        /** Turn detailedAnswer */
+                        detailedAnswer?: (google.cloud.discoveryengine.v1beta.IAnswer|null);
+
+                        /** Turn queryConfig */
+                        queryConfig?: ({ [k: string]: string }|null);
                     }
 
                     /** Represents a Turn. */
@@ -118690,6 +118714,12 @@ export namespace google {
 
                         /** Turn answer. */
                         public answer: string;
+
+                        /** Turn detailedAnswer. */
+                        public detailedAnswer?: (google.cloud.discoveryengine.v1beta.IAnswer|null);
+
+                        /** Turn queryConfig. */
+                        public queryConfig: { [k: string]: string };
 
                         /**
                          * Creates a new Turn instance using the specified properties.
@@ -135561,6 +135591,135 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SessionService */
+                class SessionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SessionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SessionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SessionService;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public createSession(request: google.cloud.discoveryengine.v1beta.ICreateSessionRequest, callback: google.cloud.discoveryengine.v1beta.SessionService.CreateSessionCallback): void;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSession(request: google.cloud.discoveryengine.v1beta.ICreateSessionRequest): Promise<google.cloud.discoveryengine.v1beta.Session>;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSession(request: google.cloud.discoveryengine.v1beta.IDeleteSessionRequest, callback: google.cloud.discoveryengine.v1beta.SessionService.DeleteSessionCallback): void;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSession(request: google.cloud.discoveryengine.v1beta.IDeleteSessionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateSession.
+                     * @param request UpdateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public updateSession(request: google.cloud.discoveryengine.v1beta.IUpdateSessionRequest, callback: google.cloud.discoveryengine.v1beta.SessionService.UpdateSessionCallback): void;
+
+                    /**
+                     * Calls UpdateSession.
+                     * @param request UpdateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSession(request: google.cloud.discoveryengine.v1beta.IUpdateSessionRequest): Promise<google.cloud.discoveryengine.v1beta.Session>;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public getSession(request: google.cloud.discoveryengine.v1beta.IGetSessionRequest, callback: google.cloud.discoveryengine.v1beta.SessionService.GetSessionCallback): void;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSession(request: google.cloud.discoveryengine.v1beta.IGetSessionRequest): Promise<google.cloud.discoveryengine.v1beta.Session>;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSessionsResponse
+                     */
+                    public listSessions(request: google.cloud.discoveryengine.v1beta.IListSessionsRequest, callback: google.cloud.discoveryengine.v1beta.SessionService.ListSessionsCallback): void;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSessions(request: google.cloud.discoveryengine.v1beta.IListSessionsRequest): Promise<google.cloud.discoveryengine.v1beta.ListSessionsResponse>;
+                }
+
+                namespace SessionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SessionService|createSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type CreateSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1beta.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SessionService|deleteSession}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSessionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SessionService|updateSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type UpdateSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1beta.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SessionService|getSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type GetSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1beta.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SessionService|listSessions}.
+                     * @param error Error, if any
+                     * @param [response] ListSessionsResponse
+                     */
+                    type ListSessionsCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1beta.ListSessionsResponse) => void;
                 }
 
                 /** Properties of a SiteSearchEngine. */
