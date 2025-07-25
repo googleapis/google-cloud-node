@@ -12,7 +12,16 @@ export async function traverseDirectory(
   accumulator: {filePath: string; content: string}[],
   stringToRemove?: RegExp,
 ) {
-  const items = await fs.readdir(currentPath, {withFileTypes: true}); // Get dirent objects
+  let items;
+  try {
+    items = await fs.readdir(currentPath, {withFileTypes: true}); // Get dirent objects
+  } catch (err) {
+    // If this fails, it means that the library is not
+    // in the format we expect. This could happen if we
+    // are rerunning the command on a well-formed library
+    // or its otherwise unexpected. In this case, fail early
+    throw new Error('Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.')
+  }
 
   for (const item of items) {
     const itemPath = path.join(currentPath, item.name);
@@ -59,14 +68,35 @@ export async function generateFinalDirectoryPath(currentPath: string) {
   return uniquefullPathAndContent;
 }
 
-export async function createDirectory(
+/**
+ * Recursively creates all directories in a given file path if they don't already exist.
+ *
+ * @param {string} filePath The full path including the file name.
+ * @returns {Promise<void>} A promise that resolves when all directories are created.
+ */
+async function ensureDirectoryExists(filePath: string) {
+  const dirPath = path.dirname(filePath);
+  try {
+    await fs.mkdir(dirPath, { recursive: true });
+    // console.log(`Ensured directory exists for: ${dirPath}`); // Optional: for debugging
+  } catch (error) {
+    if ((error as any).code !== 'EEXIST') { // EEXIST means it already exists, which is fine
+      console.error(`Error ensuring directory ${dirPath} exists:`, error);
+      throw error;
+    }
+  }
+}
+
+export async function combineLibraries(
   readDirectory: string,
   writeDirectory?: string,
 ) {
   writeDirectory = writeDirectory ?? readDirectory;
+  console.log(`Generating all unique paths in all library versions from ${readDirectory} to ${writeDirectory}`);
   const uniquefullPathAndContent =
     await generateFinalDirectoryPath(readDirectory);
 
+  console.log(`Creating new library in ${writeDirectory} with ${uniquefullPathAndContent.length} items`);
   await createDirectoryAndWriteFiles(writeDirectory, uniquefullPathAndContent);
 }
 /**
@@ -89,7 +119,10 @@ async function createDirectoryAndWriteFiles(
     throw new Error('Files must be an array of objects.');
   }
 
-  await fs.mkdir(baseOutputDir);
+  // first, remove any existing files; this ensures
+  // we're overwriting the existing file
+  await fs.rm(baseOutputDir, { recursive: true, force: true });
+  await ensureDirectoryExists(baseOutputDir);
 
   const writePromises = files.map(async fileData => {
     const fullFilePath = path.join(baseOutputDir, fileData.filePath);
@@ -97,7 +130,8 @@ async function createDirectoryAndWriteFiles(
 
     try {
       // 1. Ensure all parent directories for the current file exist
-      await fs.mkdir(path.dirname(fileData.filePath), {recursive: true});
+      await ensureDirectoryExists(path.join(baseOutputDir,fileData.filePath));
+      // await fs.mkdir(path.dirname(fileData.filePath), {recursive: true});
 
       // 2. Write the file with its content
       await fs.writeFile(fullFilePath, fileData.content, 'utf8');

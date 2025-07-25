@@ -15,5 +15,12 @@
 
 import yargs = require('yargs');
 import {bootstrapLibrary} from './commands/bootstrap-library';
+import { generateCombinedLibraries } from './commands/generate-combined-library';
 
-yargs(process.argv.slice(2)).command(bootstrapLibrary).demandCommand(1).parse();
+yargs(process.argv.slice(2))
+  .command(bootstrapLibrary)
+  .command(generateCombinedLibraries) // Add the new command here
+  .demandCommand(1, 'You need at least one command before moving on') // Ensure at least one command is provided
+  .help() // Enable the --help option
+  .alias('h', 'help') // Alias -h to --help
+  .parse();

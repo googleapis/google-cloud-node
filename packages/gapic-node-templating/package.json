@@ -1,7 +1,7 @@
 {
-  "name": "gapic-node-templating",
-  "version": "1.0.0",
-  "description": "Generates Node templates for gapic libraries",
+  "name": "gapic-node-processing",
+  "version": "0.1.10-experimental",
+  "description": "Does various processing functions for Nodejs gapic libraries",
   "bin": "./build/src/cli.js",
   "scripts": {
     "clean": "gts clean",
@@ -37,6 +37,11 @@
   },
   "engines": {
     "node": ">=18"
+  },
+ "repository": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/gapic-node-templating"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.2",
