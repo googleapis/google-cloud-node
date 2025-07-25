@@ -48348,6 +48348,14 @@ export namespace google {
                     SEARCH_ADD_ON_LLM = 1
                 }
 
+                /** FileOriginType enum. */
+                enum FileOriginType {
+                    FILE_ORIGIN_TYPE_UNSPECIFIED = 0,
+                    USER_PROVIDED = 1,
+                    AI_GENERATED = 2,
+                    INTERNALLY_GENERATED = 3
+                }
+
                 /** Properties of an Interval. */
                 interface IInterval {
 
@@ -72141,6 +72149,9 @@ export namespace google {
 
                     /** GetSessionRequest name */
                     name?: (string|null);
+
+                    /** GetSessionRequest includeAnswerDetails */
+                    includeAnswerDetails?: (boolean|null);
                 }
 
                 /** Represents a GetSessionRequest. */
@@ -72154,6 +72165,9 @@ export namespace google {
 
                     /** GetSessionRequest name. */
                     public name: string;
+
+                    /** GetSessionRequest includeAnswerDetails. */
+                    public includeAnswerDetails: boolean;
 
                     /**
                      * Creates a new GetSessionRequest instance using the specified properties.
@@ -72457,11 +72471,24 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** FileSource enum. */
+                enum FileSource {
+                    FILE_SOURCE_UNSPECIFIED = 0,
+                    FILE_SOURCE_INLINE = 1,
+                    FILE_SOURCE_LOCAL = 2,
+                    FILE_SOURCE_CLOUD_STORAGE = 3,
+                    FILE_SOURCE_CLOUD_DRIVE = 4,
+                    FILE_SOURCE_URL = 5
+                }
+
                 /** Properties of a Session. */
                 interface ISession {
 
                     /** Session name */
                     name?: (string|null);
+
+                    /** Session displayName */
+                    displayName?: (string|null);
 
                     /** Session state */
                     state?: (google.cloud.discoveryengine.v1alpha.Session.State|keyof typeof google.cloud.discoveryengine.v1alpha.Session.State|null);
@@ -72477,6 +72504,9 @@ export namespace google {
 
                     /** Session endTime */
                     endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session isPinned */
+                    isPinned?: (boolean|null);
                 }
 
                 /** Represents a Session. */
@@ -72490,6 +72520,9 @@ export namespace google {
 
                     /** Session name. */
                     public name: string;
+
+                    /** Session displayName. */
+                    public displayName: string;
 
                     /** Session state. */
                     public state: (google.cloud.discoveryengine.v1alpha.Session.State|keyof typeof google.cloud.discoveryengine.v1alpha.Session.State);
@@ -72505,6 +72538,9 @@ export namespace google {
 
                     /** Session endTime. */
                     public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session isPinned. */
+                    public isPinned: boolean;
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -72594,6 +72630,12 @@ export namespace google {
 
                         /** Turn answer */
                         answer?: (string|null);
+
+                        /** Turn detailedAnswer */
+                        detailedAnswer?: (google.cloud.discoveryengine.v1alpha.IAnswer|null);
+
+                        /** Turn queryConfig */
+                        queryConfig?: ({ [k: string]: string }|null);
                     }
 
                     /** Represents a Turn. */
@@ -72610,6 +72652,12 @@ export namespace google {
 
                         /** Turn answer. */
                         public answer: string;
+
+                        /** Turn detailedAnswer. */
+                        public detailedAnswer?: (google.cloud.discoveryengine.v1alpha.IAnswer|null);
+
+                        /** Turn queryConfig. */
+                        public queryConfig: { [k: string]: string };
 
                         /**
                          * Creates a new Turn instance using the specified properties.
@@ -72796,6 +72844,675 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Query
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImageCharacteristics. */
+                interface IImageCharacteristics {
+
+                    /** ImageCharacteristics width */
+                    width?: (number|null);
+
+                    /** ImageCharacteristics height */
+                    height?: (number|null);
+
+                    /** ImageCharacteristics colorSpace */
+                    colorSpace?: (google.cloud.discoveryengine.v1alpha.ImageCharacteristics.ColorSpace|keyof typeof google.cloud.discoveryengine.v1alpha.ImageCharacteristics.ColorSpace|null);
+
+                    /** ImageCharacteristics bitDepth */
+                    bitDepth?: (number|null);
+                }
+
+                /** Represents an ImageCharacteristics. */
+                class ImageCharacteristics implements IImageCharacteristics {
+
+                    /**
+                     * Constructs a new ImageCharacteristics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IImageCharacteristics);
+
+                    /** ImageCharacteristics width. */
+                    public width: number;
+
+                    /** ImageCharacteristics height. */
+                    public height: number;
+
+                    /** ImageCharacteristics colorSpace. */
+                    public colorSpace: (google.cloud.discoveryengine.v1alpha.ImageCharacteristics.ColorSpace|keyof typeof google.cloud.discoveryengine.v1alpha.ImageCharacteristics.ColorSpace);
+
+                    /** ImageCharacteristics bitDepth. */
+                    public bitDepth: number;
+
+                    /**
+                     * Creates a new ImageCharacteristics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageCharacteristics instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IImageCharacteristics): google.cloud.discoveryengine.v1alpha.ImageCharacteristics;
+
+                    /**
+                     * Encodes the specified ImageCharacteristics message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ImageCharacteristics.verify|verify} messages.
+                     * @param message ImageCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IImageCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageCharacteristics message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ImageCharacteristics.verify|verify} messages.
+                     * @param message ImageCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IImageCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageCharacteristics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ImageCharacteristics;
+
+                    /**
+                     * Decodes an ImageCharacteristics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ImageCharacteristics;
+
+                    /**
+                     * Verifies an ImageCharacteristics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageCharacteristics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageCharacteristics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ImageCharacteristics;
+
+                    /**
+                     * Creates a plain object from an ImageCharacteristics message. Also converts values to other types if specified.
+                     * @param message ImageCharacteristics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ImageCharacteristics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageCharacteristics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageCharacteristics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImageCharacteristics {
+
+                    /** ColorSpace enum. */
+                    enum ColorSpace {
+                        COLOR_SPACE_UNSPECIFIED = 0,
+                        RGB = 1,
+                        CMYK = 2,
+                        GRAYSCALE = 3,
+                        YUV = 4,
+                        OTHER_COLOR_SPACE = 5
+                    }
+                }
+
+                /** Properties of a VideoCharacteristics. */
+                interface IVideoCharacteristics {
+
+                    /** VideoCharacteristics width */
+                    width?: (number|null);
+
+                    /** VideoCharacteristics height */
+                    height?: (number|null);
+
+                    /** VideoCharacteristics duration */
+                    duration?: (google.protobuf.IDuration|null);
+
+                    /** VideoCharacteristics frameRate */
+                    frameRate?: (number|null);
+
+                    /** VideoCharacteristics audioCodecs */
+                    audioCodecs?: (string[]|null);
+
+                    /** VideoCharacteristics videoCodecs */
+                    videoCodecs?: (string[]|null);
+
+                    /** VideoCharacteristics videoBitrateKbps */
+                    videoBitrateKbps?: (number|null);
+
+                    /** VideoCharacteristics audioBitrateKbps */
+                    audioBitrateKbps?: (number|null);
+                }
+
+                /** Represents a VideoCharacteristics. */
+                class VideoCharacteristics implements IVideoCharacteristics {
+
+                    /**
+                     * Constructs a new VideoCharacteristics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IVideoCharacteristics);
+
+                    /** VideoCharacteristics width. */
+                    public width: number;
+
+                    /** VideoCharacteristics height. */
+                    public height: number;
+
+                    /** VideoCharacteristics duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /** VideoCharacteristics frameRate. */
+                    public frameRate: number;
+
+                    /** VideoCharacteristics audioCodecs. */
+                    public audioCodecs: string[];
+
+                    /** VideoCharacteristics videoCodecs. */
+                    public videoCodecs: string[];
+
+                    /** VideoCharacteristics videoBitrateKbps. */
+                    public videoBitrateKbps: number;
+
+                    /** VideoCharacteristics audioBitrateKbps. */
+                    public audioBitrateKbps: number;
+
+                    /**
+                     * Creates a new VideoCharacteristics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VideoCharacteristics instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IVideoCharacteristics): google.cloud.discoveryengine.v1alpha.VideoCharacteristics;
+
+                    /**
+                     * Encodes the specified VideoCharacteristics message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.VideoCharacteristics.verify|verify} messages.
+                     * @param message VideoCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IVideoCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VideoCharacteristics message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.VideoCharacteristics.verify|verify} messages.
+                     * @param message VideoCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IVideoCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VideoCharacteristics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VideoCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.VideoCharacteristics;
+
+                    /**
+                     * Decodes a VideoCharacteristics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VideoCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.VideoCharacteristics;
+
+                    /**
+                     * Verifies a VideoCharacteristics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VideoCharacteristics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VideoCharacteristics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.VideoCharacteristics;
+
+                    /**
+                     * Creates a plain object from a VideoCharacteristics message. Also converts values to other types if specified.
+                     * @param message VideoCharacteristics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.VideoCharacteristics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VideoCharacteristics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VideoCharacteristics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileCharacteristics. */
+                interface IFileCharacteristics {
+
+                    /** FileCharacteristics characteristics */
+                    characteristics?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a FileCharacteristics. */
+                class FileCharacteristics implements IFileCharacteristics {
+
+                    /**
+                     * Constructs a new FileCharacteristics.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IFileCharacteristics);
+
+                    /** FileCharacteristics characteristics. */
+                    public characteristics: { [k: string]: string };
+
+                    /**
+                     * Creates a new FileCharacteristics instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileCharacteristics instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IFileCharacteristics): google.cloud.discoveryengine.v1alpha.FileCharacteristics;
+
+                    /**
+                     * Encodes the specified FileCharacteristics message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileCharacteristics.verify|verify} messages.
+                     * @param message FileCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IFileCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileCharacteristics message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileCharacteristics.verify|verify} messages.
+                     * @param message FileCharacteristics message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IFileCharacteristics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileCharacteristics message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.FileCharacteristics;
+
+                    /**
+                     * Decodes a FileCharacteristics message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileCharacteristics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.FileCharacteristics;
+
+                    /**
+                     * Verifies a FileCharacteristics message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileCharacteristics message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileCharacteristics
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.FileCharacteristics;
+
+                    /**
+                     * Creates a plain object from a FileCharacteristics message. Also converts values to other types if specified.
+                     * @param message FileCharacteristics
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.FileCharacteristics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileCharacteristics to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileCharacteristics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileView. */
+                interface IFileView {
+
+                    /** FileView imageCharacteristics */
+                    imageCharacteristics?: (google.cloud.discoveryengine.v1alpha.IImageCharacteristics|null);
+
+                    /** FileView videoCharacteristics */
+                    videoCharacteristics?: (google.cloud.discoveryengine.v1alpha.IVideoCharacteristics|null);
+
+                    /** FileView fileCharacteristics */
+                    fileCharacteristics?: (google.cloud.discoveryengine.v1alpha.IFileCharacteristics|null);
+
+                    /** FileView viewId */
+                    viewId?: (string|null);
+
+                    /** FileView uri */
+                    uri?: (string|null);
+
+                    /** FileView mimeType */
+                    mimeType?: (string|null);
+
+                    /** FileView byteSize */
+                    byteSize?: (number|Long|string|null);
+
+                    /** FileView createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a FileView. */
+                class FileView implements IFileView {
+
+                    /**
+                     * Constructs a new FileView.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IFileView);
+
+                    /** FileView imageCharacteristics. */
+                    public imageCharacteristics?: (google.cloud.discoveryengine.v1alpha.IImageCharacteristics|null);
+
+                    /** FileView videoCharacteristics. */
+                    public videoCharacteristics?: (google.cloud.discoveryengine.v1alpha.IVideoCharacteristics|null);
+
+                    /** FileView fileCharacteristics. */
+                    public fileCharacteristics?: (google.cloud.discoveryengine.v1alpha.IFileCharacteristics|null);
+
+                    /** FileView viewId. */
+                    public viewId: string;
+
+                    /** FileView uri. */
+                    public uri: string;
+
+                    /** FileView mimeType. */
+                    public mimeType: string;
+
+                    /** FileView byteSize. */
+                    public byteSize: (number|Long|string);
+
+                    /** FileView createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileView characteristics. */
+                    public characteristics?: ("imageCharacteristics"|"videoCharacteristics"|"fileCharacteristics");
+
+                    /**
+                     * Creates a new FileView instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileView instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IFileView): google.cloud.discoveryengine.v1alpha.FileView;
+
+                    /**
+                     * Encodes the specified FileView message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileView.verify|verify} messages.
+                     * @param message FileView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IFileView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileView message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileView.verify|verify} messages.
+                     * @param message FileView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IFileView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileView message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.FileView;
+
+                    /**
+                     * Decodes a FileView message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.FileView;
+
+                    /**
+                     * Verifies a FileView message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileView message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileView
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.FileView;
+
+                    /**
+                     * Creates a plain object from a FileView message. Also converts values to other types if specified.
+                     * @param message FileView
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.FileView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileView to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileView
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileMetadata. */
+                interface IFileMetadata {
+
+                    /** FileMetadata fileId */
+                    fileId?: (string|null);
+
+                    /** FileMetadata name */
+                    name?: (string|null);
+
+                    /** FileMetadata mimeType */
+                    mimeType?: (string|null);
+
+                    /** FileMetadata byteSize */
+                    byteSize?: (number|Long|string|null);
+
+                    /** FileMetadata originalUri */
+                    originalUri?: (string|null);
+
+                    /** FileMetadata originalSourceType */
+                    originalSourceType?: (google.cloud.discoveryengine.v1alpha.FileSource|keyof typeof google.cloud.discoveryengine.v1alpha.FileSource|null);
+
+                    /** FileMetadata uploadTime */
+                    uploadTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileMetadata lastAddTime */
+                    lastAddTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileMetadata metadata */
+                    metadata?: ({ [k: string]: string }|null);
+
+                    /** FileMetadata downloadUri */
+                    downloadUri?: (string|null);
+
+                    /** FileMetadata fileOriginType */
+                    fileOriginType?: (google.cloud.discoveryengine.v1alpha.FileOriginType|keyof typeof google.cloud.discoveryengine.v1alpha.FileOriginType|null);
+
+                    /** FileMetadata views */
+                    views?: ({ [k: string]: google.cloud.discoveryengine.v1alpha.IFileView }|null);
+                }
+
+                /** Represents a FileMetadata. */
+                class FileMetadata implements IFileMetadata {
+
+                    /**
+                     * Constructs a new FileMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IFileMetadata);
+
+                    /** FileMetadata fileId. */
+                    public fileId: string;
+
+                    /** FileMetadata name. */
+                    public name: string;
+
+                    /** FileMetadata mimeType. */
+                    public mimeType: string;
+
+                    /** FileMetadata byteSize. */
+                    public byteSize: (number|Long|string);
+
+                    /** FileMetadata originalUri. */
+                    public originalUri: string;
+
+                    /** FileMetadata originalSourceType. */
+                    public originalSourceType: (google.cloud.discoveryengine.v1alpha.FileSource|keyof typeof google.cloud.discoveryengine.v1alpha.FileSource);
+
+                    /** FileMetadata uploadTime. */
+                    public uploadTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileMetadata lastAddTime. */
+                    public lastAddTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileMetadata metadata. */
+                    public metadata: { [k: string]: string };
+
+                    /** FileMetadata downloadUri. */
+                    public downloadUri: string;
+
+                    /** FileMetadata fileOriginType. */
+                    public fileOriginType: (google.cloud.discoveryengine.v1alpha.FileOriginType|keyof typeof google.cloud.discoveryengine.v1alpha.FileOriginType);
+
+                    /** FileMetadata views. */
+                    public views: { [k: string]: google.cloud.discoveryengine.v1alpha.IFileView };
+
+                    /**
+                     * Creates a new FileMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IFileMetadata): google.cloud.discoveryengine.v1alpha.FileMetadata;
+
+                    /**
+                     * Encodes the specified FileMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileMetadata.verify|verify} messages.
+                     * @param message FileMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IFileMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.FileMetadata.verify|verify} messages.
+                     * @param message FileMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IFileMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.FileMetadata;
+
+                    /**
+                     * Decodes a FileMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.FileMetadata;
+
+                    /**
+                     * Verifies a FileMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.FileMetadata;
+
+                    /**
+                     * Creates a plain object from a FileMetadata message. Also converts values to other types if specified.
+                     * @param message FileMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.FileMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -88693,6 +89410,374 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListServingConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SessionService */
+                class SessionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SessionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SessionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SessionService;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public createSession(request: google.cloud.discoveryengine.v1alpha.ICreateSessionRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.CreateSessionCallback): void;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSession(request: google.cloud.discoveryengine.v1alpha.ICreateSessionRequest): Promise<google.cloud.discoveryengine.v1alpha.Session>;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSession(request: google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.DeleteSessionCallback): void;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSession(request: google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateSession.
+                     * @param request UpdateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public updateSession(request: google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.UpdateSessionCallback): void;
+
+                    /**
+                     * Calls UpdateSession.
+                     * @param request UpdateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSession(request: google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest): Promise<google.cloud.discoveryengine.v1alpha.Session>;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public getSession(request: google.cloud.discoveryengine.v1alpha.IGetSessionRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.GetSessionCallback): void;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSession(request: google.cloud.discoveryengine.v1alpha.IGetSessionRequest): Promise<google.cloud.discoveryengine.v1alpha.Session>;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSessionsResponse
+                     */
+                    public listSessions(request: google.cloud.discoveryengine.v1alpha.IListSessionsRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.ListSessionsCallback): void;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSessions(request: google.cloud.discoveryengine.v1alpha.IListSessionsRequest): Promise<google.cloud.discoveryengine.v1alpha.ListSessionsResponse>;
+
+                    /**
+                     * Calls ListFiles.
+                     * @param request ListFilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFilesResponse
+                     */
+                    public listFiles(request: google.cloud.discoveryengine.v1alpha.IListFilesRequest, callback: google.cloud.discoveryengine.v1alpha.SessionService.ListFilesCallback): void;
+
+                    /**
+                     * Calls ListFiles.
+                     * @param request ListFilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFiles(request: google.cloud.discoveryengine.v1alpha.IListFilesRequest): Promise<google.cloud.discoveryengine.v1alpha.ListFilesResponse>;
+                }
+
+                namespace SessionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|createSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type CreateSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|deleteSession}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSessionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|updateSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type UpdateSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|getSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type GetSessionCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|listSessions}.
+                     * @param error Error, if any
+                     * @param [response] ListSessionsResponse
+                     */
+                    type ListSessionsCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.ListSessionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1alpha.SessionService|listFiles}.
+                     * @param error Error, if any
+                     * @param [response] ListFilesResponse
+                     */
+                    type ListFilesCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1alpha.ListFilesResponse) => void;
+                }
+
+                /** Properties of a ListFilesRequest. */
+                interface IListFilesRequest {
+
+                    /** ListFilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFilesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListFilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFilesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListFilesRequest. */
+                class ListFilesRequest implements IListFilesRequest {
+
+                    /**
+                     * Constructs a new ListFilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListFilesRequest);
+
+                    /** ListFilesRequest parent. */
+                    public parent: string;
+
+                    /** ListFilesRequest filter. */
+                    public filter: string;
+
+                    /** ListFilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListFilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFilesRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListFilesRequest): google.cloud.discoveryengine.v1alpha.ListFilesRequest;
+
+                    /**
+                     * Encodes the specified ListFilesRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListFilesRequest.verify|verify} messages.
+                     * @param message ListFilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListFilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFilesRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListFilesRequest.verify|verify} messages.
+                     * @param message ListFilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListFilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListFilesRequest;
+
+                    /**
+                     * Decodes a ListFilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListFilesRequest;
+
+                    /**
+                     * Verifies a ListFilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListFilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListFilesRequest message. Also converts values to other types if specified.
+                     * @param message ListFilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListFilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFilesResponse. */
+                interface IListFilesResponse {
+
+                    /** ListFilesResponse files */
+                    files?: (google.cloud.discoveryengine.v1alpha.IFileMetadata[]|null);
+
+                    /** ListFilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFilesResponse. */
+                class ListFilesResponse implements IListFilesResponse {
+
+                    /**
+                     * Constructs a new ListFilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1alpha.IListFilesResponse);
+
+                    /** ListFilesResponse files. */
+                    public files: google.cloud.discoveryengine.v1alpha.IFileMetadata[];
+
+                    /** ListFilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFilesResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1alpha.IListFilesResponse): google.cloud.discoveryengine.v1alpha.ListFilesResponse;
+
+                    /**
+                     * Encodes the specified ListFilesResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListFilesResponse.verify|verify} messages.
+                     * @param message ListFilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1alpha.IListFilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFilesResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1alpha.ListFilesResponse.verify|verify} messages.
+                     * @param message ListFilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1alpha.IListFilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1alpha.ListFilesResponse;
+
+                    /**
+                     * Decodes a ListFilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1alpha.ListFilesResponse;
+
+                    /**
+                     * Verifies a ListFilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1alpha.ListFilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListFilesResponse message. Also converts values to other types if specified.
+                     * @param message ListFilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1alpha.ListFilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFilesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
