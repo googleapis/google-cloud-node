@@ -13,11 +13,13 @@
 // limitations under the License.
 
 import yargs = require('yargs');
-import { combineLibraries } from '../combine-libraries';
-import { generateIndexTs } from '../generate-index';
+import {combineLibraries} from '../combine-libraries';
+import {generateIndexTs} from '../generate-index';
+import {generateReadMe} from '../generate-readme';
 export interface CliArgs {
   'library-path': string;
   'destination-path'?: string;
+  'default-version'?: string;
 }
 export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
   command: 'combine-library',
@@ -33,13 +35,16 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         describe: 'path where to copy over the library',
         type: 'string',
       })
-      .option('default version', {
-        describe: 'what is the default version of the library (default is highest)',
+      .option('default-version', {
+        describe:
+          'what is the default version of the library (default is highest)',
         type: 'string',
-      })
+      });
   },
   async handler(argv: CliArgs) {
-    console.log(`Combining libraries in ${argv['library-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`)
+    console.log(
+      `Combining libraries in ${argv['library-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`,
+    );
     try {
       await combineLibraries(argv['library-path'], argv['destination-path']);
     } catch (err) {
@@ -47,7 +52,14 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         throw err;
       }
     }
-    console.log(`Generating index.ts in ${argv['destination-path'] ?? argv['library-path']}`)
-    await generateIndexTs(argv['destination-path'] ?? argv['library-path']);
+    console.log(
+      `Generating index.ts in ${argv['destination-path'] ?? argv['library-path']}`,
+    );
+    await generateIndexTs(
+      argv['destination-path'] ?? argv['library-path'],
+      argv['default-version'],
+    );
+    console.log('abot to generate readme')
+    await generateReadMe(argv['destination-path'] ?? argv['library-path']);
   },
 };
