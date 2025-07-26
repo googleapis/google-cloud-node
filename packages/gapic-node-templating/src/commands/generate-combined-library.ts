@@ -33,8 +33,8 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         describe: 'path where to copy over the library',
         type: 'string',
       })
-      .option('index.ts template location', {
-        describe: 'where the index.ts template lives (must be passed if running in bazel)',
+      .option('default version', {
+        describe: 'what is the default version of the library (default is highest)',
         type: 'string',
       })
   },

@@ -1,3 +1,17 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 import { Dirent } from "fs";
 import * as nj from 'nunjucks';
 
@@ -7,7 +21,7 @@ const path = require('path');
 const SRC_PATH = 'src/';
 const INDEX_PATH = 'index.ts';
 
-const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
+export const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
   __dirname,
   '../../templates/post-processing-templates'
 );
@@ -40,7 +54,7 @@ export async function extractClients(currentPath: string) {
     return clientsAndVersions;
 }
 
-export async function generateIndexTs(currentLibrary: string, templateLocation?: string) {
+export async function generateIndexTs(currentLibrary: string, defaultVersion?: string) {
 
     // Get all the versions
     const versions = await extractVersions(currentLibrary);
@@ -49,11 +63,7 @@ export async function generateIndexTs(currentLibrary: string, templateLocation?:
     // Get all the clients in each specific version
     const clientsAndVersions = await extractClients(currentLibrary);
     console.log(`All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`)
-    
-    // Get the default version
-    const defaultVersion = getHighestVersionWithPrecedence(versions);
-    console.log(`All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`)
-    
+        
     // Get the default versions' clients
     const defaultClientAndVersions = clientsAndVersions.find(x => x.version === defaultVersion);
     console.log(`The default version is ${JSON.stringify(defaultClientAndVersions, null, 2)}`)
@@ -61,11 +71,8 @@ export async function generateIndexTs(currentLibrary: string, templateLocation?:
     // Render index.ts
     const variables = {versions, defaultClientAndVersions}
 
-    const absoluteTemplateLocation = templateLocation ?? POST_PROCESSING_TEMPLATES_PATH;
-    // The directory where Nunjucks should search for templates
-    const templateDirectory = absoluteTemplateLocation; 
-    const templateFileName = 'index.ts.njk';
-    const fullTemplateFilePath = path.join(templateDirectory, templateFileName);
+    const TEMPLATE_FILE_NAME = 'index.ts.njk';
+    const fullTemplateFilePath = path.join(POST_PROCESSING_TEMPLATES_PATH, TEMPLATE_FILE_NAME);
 
     console.log('about to describe absolute template location??')
     console.log(`Attempting to load template from: ${fullTemplateFilePath}`) // Use fullTemplateFilePath here
@@ -97,16 +104,16 @@ export async function generateIndexTs(currentLibrary: string, templateLocation?:
 
     try {
         // --- THE CRITICAL FIX: Configure Nunjucks with a FileSystemLoader ---
-        console.log(`Configuring Nunjucks with FileSystemLoader for directory: ${templateDirectory}`);
+        console.log(`Configuring Nunjucks with FileSystemLoader for directory: ${POST_PROCESSING_TEMPLATES_PATH}`);
         // Create a new Nunjucks environment configured to load from the templateDirectory
         const env = new nj.Environment(
-            new nj.FileSystemLoader(templateDirectory),
+            new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
             { autoescape: false } // Disable autoescaping for code generation
         );
 
         // Now, render using the template's filename, and Nunjucks will find it
         // within the configured templateDirectory.
-        compiledTemplate = env.render(templateFileName, variables); // <-- RENDER BY FILENAME
+        compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
         console.log('Nunjucks template rendered successfully.');
         // console.log('Compiled Template Output (first 200 chars):', compiledTemplate.substring(0, 200)); // Optional: peek at output
     } catch (nunjucksRenderError) {

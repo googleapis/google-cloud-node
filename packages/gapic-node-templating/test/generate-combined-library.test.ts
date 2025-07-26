@@ -45,7 +45,7 @@ describe('tests running build trigger', () => {
 //   });
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
 
-  it.only('it should generate a full library', async () => {
+  it('it should generate a full library', async () => {
     await generateCombinedLibraries.handler({
       'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
