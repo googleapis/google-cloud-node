@@ -39774,6 +39774,12 @@ export namespace google {
 
                     /** ConversationalSearchRequest conversationalFilteringSpec */
                     conversationalFilteringSpec?: (google.cloud.retail.v2alpha.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+
+                    /** ConversationalSearchRequest safetySettings */
+                    safetySettings?: (google.cloud.retail.v2alpha.ISafetySetting[]|null);
                 }
 
                 /** Represents a ConversationalSearchRequest. */
@@ -39811,6 +39817,12 @@ export namespace google {
 
                     /** ConversationalSearchRequest conversationalFilteringSpec. */
                     public conversationalFilteringSpec?: (google.cloud.retail.v2alpha.ConversationalSearchRequest.IConversationalFilteringSpec|null);
+
+                    /** ConversationalSearchRequest userLabels. */
+                    public userLabels: { [k: string]: string };
+
+                    /** ConversationalSearchRequest safetySettings. */
+                    public safetySettings: google.cloud.retail.v2alpha.ISafetySetting[];
 
                     /**
                      * Creates a new ConversationalSearchRequest instance using the specified properties.
@@ -40327,6 +40339,8 @@ export namespace google {
                         /** Mode enum. */
                         enum Mode {
                             MODE_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2,
                             CONVERSATIONAL_FILTER_ONLY = 3
                         }
                     }
@@ -40334,6 +40348,15 @@ export namespace google {
 
                 /** Properties of a ConversationalSearchResponse. */
                 interface IConversationalSearchResponse {
+
+                    /** ConversationalSearchResponse userQueryTypes */
+                    userQueryTypes?: (string[]|null);
+
+                    /** ConversationalSearchResponse conversationalTextResponse */
+                    conversationalTextResponse?: (string|null);
+
+                    /** ConversationalSearchResponse followupQuestion */
+                    followupQuestion?: (google.cloud.retail.v2alpha.ConversationalSearchResponse.IFollowupQuestion|null);
 
                     /** ConversationalSearchResponse conversationId */
                     conversationId?: (string|null);
@@ -40343,6 +40366,9 @@ export namespace google {
 
                     /** ConversationalSearchResponse conversationalFilteringResult */
                     conversationalFilteringResult?: (google.cloud.retail.v2alpha.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state */
+                    state?: (google.cloud.retail.v2alpha.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2alpha.ConversationalSearchResponse.State|null);
                 }
 
                 /** Represents a ConversationalSearchResponse. */
@@ -40354,6 +40380,15 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.retail.v2alpha.IConversationalSearchResponse);
 
+                    /** ConversationalSearchResponse userQueryTypes. */
+                    public userQueryTypes: string[];
+
+                    /** ConversationalSearchResponse conversationalTextResponse. */
+                    public conversationalTextResponse: string;
+
+                    /** ConversationalSearchResponse followupQuestion. */
+                    public followupQuestion?: (google.cloud.retail.v2alpha.ConversationalSearchResponse.IFollowupQuestion|null);
+
                     /** ConversationalSearchResponse conversationId. */
                     public conversationId: string;
 
@@ -40362,6 +40397,9 @@ export namespace google {
 
                     /** ConversationalSearchResponse conversationalFilteringResult. */
                     public conversationalFilteringResult?: (google.cloud.retail.v2alpha.ConversationalSearchResponse.IConversationalFilteringResult|null);
+
+                    /** ConversationalSearchResponse state. */
+                    public state: (google.cloud.retail.v2alpha.ConversationalSearchResponse.State|keyof typeof google.cloud.retail.v2alpha.ConversationalSearchResponse.State);
 
                     /**
                      * Creates a new ConversationalSearchResponse instance using the specified properties.
@@ -40944,6 +40982,152 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STREAMING = 1,
+                        SUCCEEDED = 2
+                    }
+                }
+
+                /** HarmCategory enum. */
+                enum HarmCategory {
+                    HARM_CATEGORY_UNSPECIFIED = 0,
+                    HARM_CATEGORY_HATE_SPEECH = 1,
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 2,
+                    HARM_CATEGORY_HARASSMENT = 3,
+                    HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                }
+
+                /** Properties of a SafetySetting. */
+                interface ISafetySetting {
+
+                    /** SafetySetting category */
+                    category?: (google.cloud.retail.v2alpha.HarmCategory|keyof typeof google.cloud.retail.v2alpha.HarmCategory|null);
+
+                    /** SafetySetting threshold */
+                    threshold?: (google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold|null);
+
+                    /** SafetySetting method */
+                    method?: (google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod|null);
+                }
+
+                /** Represents a SafetySetting. */
+                class SafetySetting implements ISafetySetting {
+
+                    /**
+                     * Constructs a new SafetySetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2alpha.ISafetySetting);
+
+                    /** SafetySetting category. */
+                    public category: (google.cloud.retail.v2alpha.HarmCategory|keyof typeof google.cloud.retail.v2alpha.HarmCategory);
+
+                    /** SafetySetting threshold. */
+                    public threshold: (google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold|keyof typeof google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold);
+
+                    /** SafetySetting method. */
+                    public method: (google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod|keyof typeof google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod);
+
+                    /**
+                     * Creates a new SafetySetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SafetySetting instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2alpha.ISafetySetting): google.cloud.retail.v2alpha.SafetySetting;
+
+                    /**
+                     * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.retail.v2alpha.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2alpha.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.SafetySetting.verify|verify} messages.
+                     * @param message SafetySetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2alpha.ISafetySetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2alpha.SafetySetting;
+
+                    /**
+                     * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SafetySetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2alpha.SafetySetting;
+
+                    /**
+                     * Verifies a SafetySetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SafetySetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2alpha.SafetySetting;
+
+                    /**
+                     * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                     * @param message SafetySetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2alpha.SafetySetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SafetySetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SafetySetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SafetySetting {
+
+                    /** HarmBlockThreshold enum. */
+                    enum HarmBlockThreshold {
+                        HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0,
+                        BLOCK_LOW_AND_ABOVE = 1,
+                        BLOCK_MEDIUM_AND_ABOVE = 2,
+                        BLOCK_ONLY_HIGH = 3,
+                        BLOCK_NONE = 4,
+                        OFF = 5
+                    }
+
+                    /** HarmBlockMethod enum. */
+                    enum HarmBlockMethod {
+                        HARM_BLOCK_METHOD_UNSPECIFIED = 0,
+                        SEVERITY = 1,
+                        PROBABILITY = 2
                     }
                 }
 

@@ -1034,7 +1034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 120,
+                    "end": 143,
                     "type": "FULL"
                 }
             ],
@@ -1078,6 +1078,14 @@
                     {
                         "name": "conversational_filtering_spec",
                         "type": ".google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "safety_settings",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2alpha.ConversationalSearchResponse",

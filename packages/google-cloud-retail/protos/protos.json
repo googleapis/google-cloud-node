@@ -9696,6 +9696,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "userLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "safetySettings": {
+                          "rule": "repeated",
+                          "type": "SafetySetting",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9796,6 +9812,8 @@
                             "Mode": {
                               "values": {
                                 "MODE_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "ENABLED": 2,
                                 "CONVERSATIONAL_FILTER_ONLY": 3
                               }
                             }
@@ -9805,6 +9823,19 @@
                     },
                     "ConversationalSearchResponse": {
                       "fields": {
+                        "userQueryTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 10
+                        },
+                        "conversationalTextResponse": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "followupQuestion": {
+                          "type": "FollowupQuestion",
+                          "id": 3
+                        },
                         "conversationId": {
                           "type": "string",
                           "id": 4
@@ -9817,6 +9848,13 @@
                         "conversationalFilteringResult": {
                           "type": "ConversationalFilteringResult",
                           "id": 7
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -9871,6 +9909,61 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STREAMING": 1,
+                            "SUCCEEDED": 2
+                          }
+                        }
+                      }
+                    },
+                    "HarmCategory": {
+                      "values": {
+                        "HARM_CATEGORY_UNSPECIFIED": 0,
+                        "HARM_CATEGORY_HATE_SPEECH": 1,
+                        "HARM_CATEGORY_DANGEROUS_CONTENT": 2,
+                        "HARM_CATEGORY_HARASSMENT": 3,
+                        "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4,
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": 5
+                      }
+                    },
+                    "SafetySetting": {
+                      "fields": {
+                        "category": {
+                          "type": "HarmCategory",
+                          "id": 1
+                        },
+                        "threshold": {
+                          "type": "HarmBlockThreshold",
+                          "id": 2
+                        },
+                        "method": {
+                          "type": "HarmBlockMethod",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HarmBlockThreshold": {
+                          "values": {
+                            "HARM_BLOCK_THRESHOLD_UNSPECIFIED": 0,
+                            "BLOCK_LOW_AND_ABOVE": 1,
+                            "BLOCK_MEDIUM_AND_ABOVE": 2,
+                            "BLOCK_ONLY_HIGH": 3,
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
+                          }
+                        },
+                        "HarmBlockMethod": {
+                          "values": {
+                            "HARM_BLOCK_METHOD_UNSPECIFIED": 0,
+                            "SEVERITY": 1,
+                            "PROBABILITY": 2
                           }
                         }
                       }

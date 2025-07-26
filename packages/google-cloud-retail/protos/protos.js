@@ -99412,6 +99412,8 @@
                          * @property {string|null} [visitorId] ConversationalSearchRequest visitorId
                          * @property {google.cloud.retail.v2alpha.IUserInfo|null} [userInfo] ConversationalSearchRequest userInfo
                          * @property {google.cloud.retail.v2alpha.ConversationalSearchRequest.IConversationalFilteringSpec|null} [conversationalFilteringSpec] ConversationalSearchRequest conversationalFilteringSpec
+                         * @property {Object.<string,string>|null} [userLabels] ConversationalSearchRequest userLabels
+                         * @property {Array.<google.cloud.retail.v2alpha.ISafetySetting>|null} [safetySettings] ConversationalSearchRequest safetySettings
                          */
     
                         /**
@@ -99424,6 +99426,8 @@
                          */
                         function ConversationalSearchRequest(properties) {
                             this.pageCategories = [];
+                            this.userLabels = {};
+                            this.safetySettings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -99503,6 +99507,22 @@
                         ConversationalSearchRequest.prototype.conversationalFilteringSpec = null;
     
                         /**
+                         * ConversationalSearchRequest userLabels.
+                         * @member {Object.<string,string>} userLabels
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.userLabels = $util.emptyObject;
+    
+                        /**
+                         * ConversationalSearchRequest safetySettings.
+                         * @member {Array.<google.cloud.retail.v2alpha.ISafetySetting>} safetySettings
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchRequest
+                         * @instance
+                         */
+                        ConversationalSearchRequest.prototype.safetySettings = $util.emptyArray;
+    
+                        /**
                          * Creates a new ConversationalSearchRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.retail.v2alpha.ConversationalSearchRequest
@@ -99545,6 +99565,12 @@
                                 $root.google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec.encode(message.conversationalFilteringSpec, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.visitorId != null && Object.hasOwnProperty.call(message, "visitorId"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.visitorId);
+                            if (message.userLabels != null && Object.hasOwnProperty.call(message, "userLabels"))
+                                for (var keys = Object.keys(message.userLabels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userLabels[keys[i]]).ldelim();
+                            if (message.safetySettings != null && message.safetySettings.length)
+                                for (var i = 0; i < message.safetySettings.length; ++i)
+                                    $root.google.cloud.retail.v2alpha.SafetySetting.encode(message.safetySettings[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -99575,7 +99601,7 @@
                         ConversationalSearchRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2alpha.ConversationalSearchRequest();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2alpha.ConversationalSearchRequest(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -99617,6 +99643,35 @@
                                     }
                                 case 8: {
                                         message.conversationalFilteringSpec = $root.google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (message.userLabels === $util.emptyObject)
+                                            message.userLabels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.userLabels[key] = value;
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.safetySettings && message.safetySettings.length))
+                                            message.safetySettings = [];
+                                        message.safetySettings.push($root.google.cloud.retail.v2alpha.SafetySetting.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -99691,6 +99746,23 @@
                                 if (error)
                                     return "conversationalFilteringSpec." + error;
                             }
+                            if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
+                                if (!$util.isObject(message.userLabels))
+                                    return "userLabels: object expected";
+                                var key = Object.keys(message.userLabels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.userLabels[key[i]]))
+                                        return "userLabels: string{k:string} expected";
+                            }
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings")) {
+                                if (!Array.isArray(message.safetySettings))
+                                    return "safetySettings: array expected";
+                                for (var i = 0; i < message.safetySettings.length; ++i) {
+                                    var error = $root.google.cloud.retail.v2alpha.SafetySetting.verify(message.safetySettings[i]);
+                                    if (error)
+                                        return "safetySettings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -99738,6 +99810,23 @@
                                     throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchRequest.conversationalFilteringSpec: object expected");
                                 message.conversationalFilteringSpec = $root.google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec.fromObject(object.conversationalFilteringSpec);
                             }
+                            if (object.userLabels) {
+                                if (typeof object.userLabels !== "object")
+                                    throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchRequest.userLabels: object expected");
+                                message.userLabels = {};
+                                for (var keys = Object.keys(object.userLabels), i = 0; i < keys.length; ++i)
+                                    message.userLabels[keys[i]] = String(object.userLabels[keys[i]]);
+                            }
+                            if (object.safetySettings) {
+                                if (!Array.isArray(object.safetySettings))
+                                    throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchRequest.safetySettings: array expected");
+                                message.safetySettings = [];
+                                for (var i = 0; i < object.safetySettings.length; ++i) {
+                                    if (typeof object.safetySettings[i] !== "object")
+                                        throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchRequest.safetySettings: object expected");
+                                    message.safetySettings[i] = $root.google.cloud.retail.v2alpha.SafetySetting.fromObject(object.safetySettings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -99754,8 +99843,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.pageCategories = [];
+                                object.safetySettings = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.userLabels = {};
                             if (options.defaults) {
                                 object.placement = "";
                                 object.branch = "";
@@ -99787,6 +99880,17 @@
                                 object.conversationalFilteringSpec = $root.google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec.toObject(message.conversationalFilteringSpec, options);
                             if (message.visitorId != null && message.hasOwnProperty("visitorId"))
                                 object.visitorId = message.visitorId;
+                            var keys2;
+                            if (message.userLabels && (keys2 = Object.keys(message.userLabels)).length) {
+                                object.userLabels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.userLabels[keys2[j]] = message.userLabels[keys2[j]];
+                            }
+                            if (message.safetySettings && message.safetySettings.length) {
+                                object.safetySettings = [];
+                                for (var j = 0; j < message.safetySettings.length; ++j)
+                                    object.safetySettings[j] = $root.google.cloud.retail.v2alpha.SafetySetting.toObject(message.safetySettings[j], options);
+                            }
                             return object;
                         };
     
@@ -100740,6 +100844,8 @@
                                     default:
                                         return "conversationalFilteringMode: enum value expected";
                                     case 0:
+                                    case 1:
+                                    case 2:
                                     case 3:
                                         break;
                                     }
@@ -100775,6 +100881,14 @@
                                 case "MODE_UNSPECIFIED":
                                 case 0:
                                     message.conversationalFilteringMode = 0;
+                                    break;
+                                case "DISABLED":
+                                case 1:
+                                    message.conversationalFilteringMode = 1;
+                                    break;
+                                case "ENABLED":
+                                case 2:
+                                    message.conversationalFilteringMode = 2;
                                     break;
                                 case "CONVERSATIONAL_FILTER_ONLY":
                                 case 3:
@@ -100842,11 +100956,15 @@
                              * @name google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec.Mode
                              * @enum {number}
                              * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
+                             * @property {number} DISABLED=1 DISABLED value
+                             * @property {number} ENABLED=2 ENABLED value
                              * @property {number} CONVERSATIONAL_FILTER_ONLY=3 CONVERSATIONAL_FILTER_ONLY value
                              */
                             ConversationalFilteringSpec.Mode = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DISABLED"] = 1;
+                                values[valuesById[2] = "ENABLED"] = 2;
                                 values[valuesById[3] = "CONVERSATIONAL_FILTER_ONLY"] = 3;
                                 return values;
                             })();
@@ -100863,9 +100981,13 @@
                          * Properties of a ConversationalSearchResponse.
                          * @memberof google.cloud.retail.v2alpha
                          * @interface IConversationalSearchResponse
+                         * @property {Array.<string>|null} [userQueryTypes] ConversationalSearchResponse userQueryTypes
+                         * @property {string|null} [conversationalTextResponse] ConversationalSearchResponse conversationalTextResponse
+                         * @property {google.cloud.retail.v2alpha.ConversationalSearchResponse.IFollowupQuestion|null} [followupQuestion] ConversationalSearchResponse followupQuestion
                          * @property {string|null} [conversationId] ConversationalSearchResponse conversationId
                          * @property {Array.<google.cloud.retail.v2alpha.ConversationalSearchResponse.IRefinedSearch>|null} [refinedSearch] ConversationalSearchResponse refinedSearch
                          * @property {google.cloud.retail.v2alpha.ConversationalSearchResponse.IConversationalFilteringResult|null} [conversationalFilteringResult] ConversationalSearchResponse conversationalFilteringResult
+                         * @property {google.cloud.retail.v2alpha.ConversationalSearchResponse.State|null} [state] ConversationalSearchResponse state
                          */
     
                         /**
@@ -100877,12 +100999,37 @@
                          * @param {google.cloud.retail.v2alpha.IConversationalSearchResponse=} [properties] Properties to set
                          */
                         function ConversationalSearchResponse(properties) {
+                            this.userQueryTypes = [];
                             this.refinedSearch = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ConversationalSearchResponse userQueryTypes.
+                         * @member {Array.<string>} userQueryTypes
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.userQueryTypes = $util.emptyArray;
+    
+                        /**
+                         * ConversationalSearchResponse conversationalTextResponse.
+                         * @member {string} conversationalTextResponse
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.conversationalTextResponse = "";
+    
+                        /**
+                         * ConversationalSearchResponse followupQuestion.
+                         * @member {google.cloud.retail.v2alpha.ConversationalSearchResponse.IFollowupQuestion|null|undefined} followupQuestion
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.followupQuestion = null;
     
                         /**
                          * ConversationalSearchResponse conversationId.
@@ -100909,6 +101056,14 @@
                         ConversationalSearchResponse.prototype.conversationalFilteringResult = null;
     
                         /**
+                         * ConversationalSearchResponse state.
+                         * @member {google.cloud.retail.v2alpha.ConversationalSearchResponse.State} state
+                         * @memberof google.cloud.retail.v2alpha.ConversationalSearchResponse
+                         * @instance
+                         */
+                        ConversationalSearchResponse.prototype.state = 0;
+    
+                        /**
                          * Creates a new ConversationalSearchResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.retail.v2alpha.ConversationalSearchResponse
@@ -100932,6 +101087,10 @@
                         ConversationalSearchResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.conversationalTextResponse != null && Object.hasOwnProperty.call(message, "conversationalTextResponse"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.conversationalTextResponse);
+                            if (message.followupQuestion != null && Object.hasOwnProperty.call(message, "followupQuestion"))
+                                $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.FollowupQuestion.encode(message.followupQuestion, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.conversationId != null && Object.hasOwnProperty.call(message, "conversationId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.conversationId);
                             if (message.refinedSearch != null && message.refinedSearch.length)
@@ -100939,6 +101098,11 @@
                                     $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.RefinedSearch.encode(message.refinedSearch[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.conversationalFilteringResult != null && Object.hasOwnProperty.call(message, "conversationalFilteringResult"))
                                 $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.ConversationalFilteringResult.encode(message.conversationalFilteringResult, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
+                            if (message.userQueryTypes != null && message.userQueryTypes.length)
+                                for (var i = 0; i < message.userQueryTypes.length; ++i)
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.userQueryTypes[i]);
                             return writer;
                         };
     
@@ -100975,6 +101139,20 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 10: {
+                                        if (!(message.userQueryTypes && message.userQueryTypes.length))
+                                            message.userQueryTypes = [];
+                                        message.userQueryTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.conversationalTextResponse = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.followupQuestion = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.FollowupQuestion.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.conversationId = reader.string();
                                         break;
@@ -100987,6 +101165,10 @@
                                     }
                                 case 7: {
                                         message.conversationalFilteringResult = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.ConversationalFilteringResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.state = reader.int32();
                                         break;
                                     }
                                 default:
@@ -101024,6 +101206,21 @@
                         ConversationalSearchResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.userQueryTypes != null && message.hasOwnProperty("userQueryTypes")) {
+                                if (!Array.isArray(message.userQueryTypes))
+                                    return "userQueryTypes: array expected";
+                                for (var i = 0; i < message.userQueryTypes.length; ++i)
+                                    if (!$util.isString(message.userQueryTypes[i]))
+                                        return "userQueryTypes: string[] expected";
+                            }
+                            if (message.conversationalTextResponse != null && message.hasOwnProperty("conversationalTextResponse"))
+                                if (!$util.isString(message.conversationalTextResponse))
+                                    return "conversationalTextResponse: string expected";
+                            if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion")) {
+                                var error = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.FollowupQuestion.verify(message.followupQuestion);
+                                if (error)
+                                    return "followupQuestion." + error;
+                            }
                             if (message.conversationId != null && message.hasOwnProperty("conversationId"))
                                 if (!$util.isString(message.conversationId))
                                     return "conversationId: string expected";
@@ -101041,6 +101238,15 @@
                                 if (error)
                                     return "conversationalFilteringResult." + error;
                             }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -101056,6 +101262,20 @@
                             if (object instanceof $root.google.cloud.retail.v2alpha.ConversationalSearchResponse)
                                 return object;
                             var message = new $root.google.cloud.retail.v2alpha.ConversationalSearchResponse();
+                            if (object.userQueryTypes) {
+                                if (!Array.isArray(object.userQueryTypes))
+                                    throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchResponse.userQueryTypes: array expected");
+                                message.userQueryTypes = [];
+                                for (var i = 0; i < object.userQueryTypes.length; ++i)
+                                    message.userQueryTypes[i] = String(object.userQueryTypes[i]);
+                            }
+                            if (object.conversationalTextResponse != null)
+                                message.conversationalTextResponse = String(object.conversationalTextResponse);
+                            if (object.followupQuestion != null) {
+                                if (typeof object.followupQuestion !== "object")
+                                    throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchResponse.followupQuestion: object expected");
+                                message.followupQuestion = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.FollowupQuestion.fromObject(object.followupQuestion);
+                            }
                             if (object.conversationId != null)
                                 message.conversationId = String(object.conversationId);
                             if (object.refinedSearch) {
@@ -101073,6 +101293,26 @@
                                     throw TypeError(".google.cloud.retail.v2alpha.ConversationalSearchResponse.conversationalFilteringResult: object expected");
                                 message.conversationalFilteringResult = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.ConversationalFilteringResult.fromObject(object.conversationalFilteringResult);
                             }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "STREAMING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -101089,12 +101329,21 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.refinedSearch = [];
+                                object.userQueryTypes = [];
+                            }
                             if (options.defaults) {
+                                object.conversationalTextResponse = "";
+                                object.followupQuestion = null;
                                 object.conversationId = "";
                                 object.conversationalFilteringResult = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
+                            if (message.conversationalTextResponse != null && message.hasOwnProperty("conversationalTextResponse"))
+                                object.conversationalTextResponse = message.conversationalTextResponse;
+                            if (message.followupQuestion != null && message.hasOwnProperty("followupQuestion"))
+                                object.followupQuestion = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.FollowupQuestion.toObject(message.followupQuestion, options);
                             if (message.conversationId != null && message.hasOwnProperty("conversationId"))
                                 object.conversationId = message.conversationId;
                             if (message.refinedSearch && message.refinedSearch.length) {
@@ -101104,6 +101353,13 @@
                             }
                             if (message.conversationalFilteringResult != null && message.hasOwnProperty("conversationalFilteringResult"))
                                 object.conversationalFilteringResult = $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.ConversationalFilteringResult.toObject(message.conversationalFilteringResult, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.State[message.state] === undefined ? message.state : $root.google.cloud.retail.v2alpha.ConversationalSearchResponse.State[message.state] : message.state;
+                            if (message.userQueryTypes && message.userQueryTypes.length) {
+                                object.userQueryTypes = [];
+                                for (var j = 0; j < message.userQueryTypes.length; ++j)
+                                    object.userQueryTypes[j] = message.userQueryTypes[j];
+                            }
                             return object;
                         };
     
@@ -102247,7 +102503,437 @@
                             return ConversationalFilteringResult;
                         })();
     
+                        /**
+                         * State enum.
+                         * @name google.cloud.retail.v2alpha.ConversationalSearchResponse.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} STREAMING=1 STREAMING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         */
+                        ConversationalSearchResponse.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STREAMING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            return values;
+                        })();
+    
                         return ConversationalSearchResponse;
+                    })();
+    
+                    /**
+                     * HarmCategory enum.
+                     * @name google.cloud.retail.v2alpha.HarmCategory
+                     * @enum {number}
+                     * @property {number} HARM_CATEGORY_UNSPECIFIED=0 HARM_CATEGORY_UNSPECIFIED value
+                     * @property {number} HARM_CATEGORY_HATE_SPEECH=1 HARM_CATEGORY_HATE_SPEECH value
+                     * @property {number} HARM_CATEGORY_DANGEROUS_CONTENT=2 HARM_CATEGORY_DANGEROUS_CONTENT value
+                     * @property {number} HARM_CATEGORY_HARASSMENT=3 HARM_CATEGORY_HARASSMENT value
+                     * @property {number} HARM_CATEGORY_SEXUALLY_EXPLICIT=4 HARM_CATEGORY_SEXUALLY_EXPLICIT value
+                     * @property {number} HARM_CATEGORY_CIVIC_INTEGRITY=5 HARM_CATEGORY_CIVIC_INTEGRITY value
+                     */
+                    v2alpha.HarmCategory = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HARM_CATEGORY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "HARM_CATEGORY_HATE_SPEECH"] = 1;
+                        values[valuesById[2] = "HARM_CATEGORY_DANGEROUS_CONTENT"] = 2;
+                        values[valuesById[3] = "HARM_CATEGORY_HARASSMENT"] = 3;
+                        values[valuesById[4] = "HARM_CATEGORY_SEXUALLY_EXPLICIT"] = 4;
+                        values[valuesById[5] = "HARM_CATEGORY_CIVIC_INTEGRITY"] = 5;
+                        return values;
+                    })();
+    
+                    v2alpha.SafetySetting = (function() {
+    
+                        /**
+                         * Properties of a SafetySetting.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @interface ISafetySetting
+                         * @property {google.cloud.retail.v2alpha.HarmCategory|null} [category] SafetySetting category
+                         * @property {google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold|null} [threshold] SafetySetting threshold
+                         * @property {google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod|null} [method] SafetySetting method
+                         */
+    
+                        /**
+                         * Constructs a new SafetySetting.
+                         * @memberof google.cloud.retail.v2alpha
+                         * @classdesc Represents a SafetySetting.
+                         * @implements ISafetySetting
+                         * @constructor
+                         * @param {google.cloud.retail.v2alpha.ISafetySetting=} [properties] Properties to set
+                         */
+                        function SafetySetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SafetySetting category.
+                         * @member {google.cloud.retail.v2alpha.HarmCategory} category
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.category = 0;
+    
+                        /**
+                         * SafetySetting threshold.
+                         * @member {google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold} threshold
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.threshold = 0;
+    
+                        /**
+                         * SafetySetting method.
+                         * @member {google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod} method
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @instance
+                         */
+                        SafetySetting.prototype.method = 0;
+    
+                        /**
+                         * Creates a new SafetySetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.ISafetySetting=} [properties] Properties to set
+                         * @returns {google.cloud.retail.v2alpha.SafetySetting} SafetySetting instance
+                         */
+                        SafetySetting.create = function create(properties) {
+                            return new SafetySetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.retail.v2alpha.SafetySetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                            if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.threshold);
+                            if (message.method != null && Object.hasOwnProperty.call(message, "method"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.method);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.retail.v2alpha.SafetySetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.ISafetySetting} message SafetySetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SafetySetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.retail.v2alpha.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.retail.v2alpha.SafetySetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.threshold = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.method = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.retail.v2alpha.SafetySetting} SafetySetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SafetySetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SafetySetting message.
+                         * @function verify
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SafetySetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                switch (message.threshold) {
+                                default:
+                                    return "threshold: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                switch (message.method) {
+                                default:
+                                    return "method: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.retail.v2alpha.SafetySetting} SafetySetting
+                         */
+                        SafetySetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.retail.v2alpha.SafetySetting)
+                                return object;
+                            var message = new $root.google.cloud.retail.v2alpha.SafetySetting();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "HARM_CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "HARM_CATEGORY_HATE_SPEECH":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "HARM_CATEGORY_DANGEROUS_CONTENT":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            case "HARM_CATEGORY_HARASSMENT":
+                            case 3:
+                                message.category = 3;
+                                break;
+                            case "HARM_CATEGORY_SEXUALLY_EXPLICIT":
+                            case 4:
+                                message.category = 4;
+                                break;
+                            case "HARM_CATEGORY_CIVIC_INTEGRITY":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            }
+                            switch (object.threshold) {
+                            default:
+                                if (typeof object.threshold === "number") {
+                                    message.threshold = object.threshold;
+                                    break;
+                                }
+                                break;
+                            case "HARM_BLOCK_THRESHOLD_UNSPECIFIED":
+                            case 0:
+                                message.threshold = 0;
+                                break;
+                            case "BLOCK_LOW_AND_ABOVE":
+                            case 1:
+                                message.threshold = 1;
+                                break;
+                            case "BLOCK_MEDIUM_AND_ABOVE":
+                            case 2:
+                                message.threshold = 2;
+                                break;
+                            case "BLOCK_ONLY_HIGH":
+                            case 3:
+                                message.threshold = 3;
+                                break;
+                            case "BLOCK_NONE":
+                            case 4:
+                                message.threshold = 4;
+                                break;
+                            case "OFF":
+                            case 5:
+                                message.threshold = 5;
+                                break;
+                            }
+                            switch (object.method) {
+                            default:
+                                if (typeof object.method === "number") {
+                                    message.method = object.method;
+                                    break;
+                                }
+                                break;
+                            case "HARM_BLOCK_METHOD_UNSPECIFIED":
+                            case 0:
+                                message.method = 0;
+                                break;
+                            case "SEVERITY":
+                            case 1:
+                                message.method = 1;
+                                break;
+                            case "PROBABILITY":
+                            case 2:
+                                message.method = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {google.cloud.retail.v2alpha.SafetySetting} message SafetySetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SafetySetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                object.threshold = options.enums === String ? "HARM_BLOCK_THRESHOLD_UNSPECIFIED" : 0;
+                                object.method = options.enums === String ? "HARM_BLOCK_METHOD_UNSPECIFIED" : 0;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.cloud.retail.v2alpha.HarmCategory[message.category] === undefined ? message.category : $root.google.cloud.retail.v2alpha.HarmCategory[message.category] : message.category;
+                            if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                object.threshold = options.enums === String ? $root.google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold[message.threshold] === undefined ? message.threshold : $root.google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold[message.threshold] : message.threshold;
+                            if (message.method != null && message.hasOwnProperty("method"))
+                                object.method = options.enums === String ? $root.google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod[message.method] === undefined ? message.method : $root.google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod[message.method] : message.method;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SafetySetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SafetySetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SafetySetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.retail.v2alpha.SafetySetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SafetySetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.retail.v2alpha.SafetySetting";
+                        };
+    
+                        /**
+                         * HarmBlockThreshold enum.
+                         * @name google.cloud.retail.v2alpha.SafetySetting.HarmBlockThreshold
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_THRESHOLD_UNSPECIFIED=0 HARM_BLOCK_THRESHOLD_UNSPECIFIED value
+                         * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
+                         * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
+                         * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
+                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
+                         * @property {number} OFF=5 OFF value
+                         */
+                        SafetySetting.HarmBlockThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
+                            values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
+                            values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
+                            values[valuesById[4] = "BLOCK_NONE"] = 4;
+                            values[valuesById[5] = "OFF"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * HarmBlockMethod enum.
+                         * @name google.cloud.retail.v2alpha.SafetySetting.HarmBlockMethod
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_METHOD_UNSPECIFIED=0 HARM_BLOCK_METHOD_UNSPECIFIED value
+                         * @property {number} SEVERITY=1 SEVERITY value
+                         * @property {number} PROBABILITY=2 PROBABILITY value
+                         */
+                        SafetySetting.HarmBlockMethod = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_METHOD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SEVERITY"] = 1;
+                            values[valuesById[2] = "PROBABILITY"] = 2;
+                            return values;
+                        })();
+    
+                        return SafetySetting;
                     })();
     
                     v2alpha.GenerativeQuestionsFeatureConfig = (function() {
