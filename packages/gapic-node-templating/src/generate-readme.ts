@@ -23,10 +23,13 @@ const SAMPLES_TEMPLATE_PATH = 'sample.njk';
 const SAMPLES_PATH = 'samples/generated';
 
 export async function getSamplesMetadata(currentLibrary: string) {
+  console.log(currentLibrary);
+  // Let's remove the main library, since we'll need it in the path
+  const stringToRemove = currentLibrary.split('/').slice(0, currentLibrary.split('/').length-1).join('/');
   const samples = await traverseDirectory(
     path.join(currentLibrary, SAMPLES_PATH),
     [],
-    new RegExp(currentLibrary),
+    new RegExp(stringToRemove),
   );
   samples.map(sample => {
     // Here, the 'getSampleName' refers to the exported function

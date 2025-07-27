@@ -60,9 +60,9 @@ describe('combine libraries', () => {
         // console.log(speechV2NodejsPaths);
     });
 
-    it('should get all the samples', async () => {
+    it.only('should get all the samples', async () => {
         // let accumulator: string[] = [];
-        console.log(await getSamplesMetadata(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech')))
+        await getSamplesMetadata(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech'))
         // console.log(paths)
         // console.log((new Set(paths)));
         // console.log(speechV1NodejsPaths);
@@ -70,7 +70,7 @@ describe('combine libraries', () => {
         // console.log(speechV2NodejsPaths);
     });
 
-    it.only('should rewrite the README correctly', async () => {
+    it('should rewrite the README correctly', async () => {
         // let accumulator: string[] = [];
         console.log(await generateReadMe(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')))
         // console.log(paths)
