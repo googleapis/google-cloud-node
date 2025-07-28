@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/managedkafka",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Apache Kafka for BigQuery API client for Node.js",
   "repository": {
     "type": "git",

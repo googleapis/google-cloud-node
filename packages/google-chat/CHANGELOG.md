@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.16.0...chat-v0.17.0) (2025-07-28)
+
+
+### Features
+
+* [chat] Exposing 1p integration message content (drive, calendar, huddle, meet chips) ([#6517](https://github.com/googleapis/google-cloud-node/issues/6517)) ([e29b9a3](https://github.com/googleapis/google-cloud-node/commit/e29b9a30ca4580fb6370c83cd99279f03f251479))
+
 ## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.15.0...chat-v0.16.0) (2025-07-09)
 
 

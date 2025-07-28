@@ -14,7 +14,7 @@
     "test": "mocha test --timeout 1000000"
   },
   "dependencies": {
-    "@google-cloud/container": "^6.3.0",
+    "@google-cloud/container": "^6.4.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

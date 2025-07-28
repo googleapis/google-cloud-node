@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.3.0...discoveryengine-v2.4.0) (2025-07-28)
+
+
+### Features
+
+* [discoveryengine] add AssistantService ([#6524](https://github.com/googleapis/google-cloud-node/issues/6524)) ([fe83966](https://github.com/googleapis/google-cloud-node/commit/fe839667fab84d85b7dedc82947309579cf443c6))
+* [discoveryengine] add SessionService ([#6528](https://github.com/googleapis/google-cloud-node/issues/6528)) ([032112f](https://github.com/googleapis/google-cloud-node/commit/032112fc61ff177814bfde60f95bc5dbaf170605))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.2.0...discoveryengine-v2.3.0) (2025-07-09)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.0.0...aiplatform-v5.1.0) (2025-07-28)
+
+
+### Features
+
+* Add service_account to Reasoning Engine public protos ([#6523](https://github.com/googleapis/google-cloud-node/issues/6523)) ([4afa04e](https://github.com/googleapis/google-cloud-node/commit/4afa04ea37f9a1d3df1082b481891ce4b844d7bf))
+* Adds DWS and spot VM feature support to custom batch predictions 2.0 ([#6536](https://github.com/googleapis/google-cloud-node/issues/6536)) ([4ef705b](https://github.com/googleapis/google-cloud-node/commit/4ef705b409954f45fae7638064aafa61ade1bcc8))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.4.0...aiplatform-v5.0.0) (2025-07-22)
 
 

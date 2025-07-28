@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.3.0...container-v6.4.0) (2025-07-28)
+
+
+### Features
+
+* [container] A new enum `TransparentHugepageEnabled` is added ([#6522](https://github.com/googleapis/google-cloud-node/issues/6522)) ([c73b860](https://github.com/googleapis/google-cloud-node/commit/c73b860e2473725fe7443a89b8b6410047825888))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.2.0...container-v6.3.0) (2025-07-17)
 
 

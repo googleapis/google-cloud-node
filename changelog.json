@@ -5,6 +5,1391 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0c21b6970375c5ee7a25f910cc081fbe2f492eaa",
+          "message": "Add initial files for google.cloud.configdelivery.v1",
+          "issues": [
+            "6518"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configdelivery",
+      "id": "e161a16f-c51a-4005-9936-109fec51d8a3",
+      "createTime": "2025-07-28T18:29:20.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2a038b6294d5e45efbe082278feb08ac10f24ced",
+          "message": "[modelarmor] MultiLanguage Detection in Model Armor Floor Setting",
+          "issues": [
+            "6527"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "2cba89d6-6c0e-4814-af38-00b3bcb555f5",
+      "createTime": "2025-07-28T18:29:20.394Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0413b68d2220637f007679641d3c6a55df0bfc68",
+          "message": "[merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview`",
+          "issues": [
+            "6533"
+          ],
+          "breakingChangeNote": "[merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview` ([#6533](https://github.com/googleapis/google-cloud-node/issues/6533))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "de8196bd-8a3b-40cd-b7cc-751ae47bb7f3",
+      "createTime": "2025-07-28T18:29:20.357Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "339efa88-6901-442e-82aa-3658ab6e3a8d",
+      "createTime": "2025-07-28T18:29:20.321Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce2c32f00e6cbc6dd6b5a8aa585568e85f919af9",
+          "message": "[securesourcemanager] add support for new API resources: Issues, IssueComments, PullRequests, PullRequestComments, Blobs",
+          "issues": [
+            "6529"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "8161141a-9ac7-4329-acab-588c196af62f",
+      "createTime": "2025-07-28T18:29:20.286Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b592fd0ee3bc242732830a68d0041dc4680f0848",
+          "message": "[backupdr] Add support for Cloud SQL backup and restore",
+          "issues": [
+            "6521"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "c089238d-1329-4f72-ab23-af68a8925aba",
+      "createTime": "2025-07-28T18:29:20.258Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e29b9a30ca4580fb6370c83cd99279f03f251479",
+          "message": "[chat] Exposing 1p integration message content (drive, calendar, huddle, meet chips)",
+          "issues": [
+            "6517"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "ce702f73-4dd9-4d41-bc7e-01223b67eb74",
+      "createTime": "2025-07-28T18:29:20.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c73b860e2473725fe7443a89b8b6410047825888",
+          "message": "[container] A new enum `TransparentHugepageEnabled` is added",
+          "issues": [
+            "6522"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "6a8ef66c-3b43-4cf7-b0d8-fd30e3230610",
+      "createTime": "2025-07-28T18:29:20.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "4d34b130-1095-4e0d-947c-627770470503",
+      "createTime": "2025-07-28T18:29:20.168Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ec9102c5b3417b8d461e8ee9bca271c62a95ccf7",
+          "message": "[retail] add new fields in conversational search public SDK",
+          "issues": [
+            "6537"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6ab93f6acc75210bffe3455ecbf1b4dbcb57cc7e",
+          "message": "[retail] add experiment_id in the SearchRequest proto",
+          "issues": [
+            "6519"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "00ca2199-4bad-4552-a333-a01a1a46a945",
+      "createTime": "2025-07-28T18:29:20.138Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "36902c53-a563-43be-978f-92ed0d078642",
+      "createTime": "2025-07-28T18:29:20.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "f8bda808-e748-4602-9d13-6446e2f16387",
+      "createTime": "2025-07-28T18:29:20.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "032112fc61ff177814bfde60f95bc5dbaf170605",
+          "message": "[discoveryengine] add SessionService",
+          "issues": [
+            "6528"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "fe839667fab84d85b7dedc82947309579cf443c6",
+          "message": "[discoveryengine] add AssistantService",
+          "issues": [
+            "6524"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "44055438-a75a-41f9-b049-40d940dc6217",
+      "createTime": "2025-07-28T18:29:20.013Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "f54c946e-a769-446c-b9de-f1e8be6e3f86",
+      "createTime": "2025-07-28T18:29:19.980Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "11e810577f3d6550fc60397785bcea5018a53286",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20250708 (#1072)",
+          "issues": [
+            "6501"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Enable organization-level support for VPC Flow Logs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `service_uri` to message `Endpoint.CloudRunRevisionEndpoint`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add message `Endpoint.SingleEdgeResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add http additional_bindings",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `Status` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `running` to message `InstanceInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `policy_priority` to message `NetworkInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `RouteInfo.NextHopType.SECURE_WEB_PROXY_GATEWAY`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `DeliverInfo.GoogleServiceType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add field `google_service_type` to message `DeliverInfo`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum value `AbortInfo.Cause.GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum values `NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS`, `TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED`, `NO_MATCHING_NAT64_GATEWAY`, `LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH`, and `NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION` to `DropInfo.Cause`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add rpc `VpcFlowLogsService.QueryOrgVpcFlowLogsConfigs`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add service `OrganizationVpcFlowLogsService`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.CrossProjectMetadata`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add enum `VpcFlowLogsConfig.TargetResourceState`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add fields `cross_project_metadata`, `target_resource_state`, `network`, and `subnet` to message `VpcFlowLogsConfig`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "A new field `semantic_search` is added to `message.google.cloud.dataplex.v1.SearchEntriesRequest`",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Correct resource reference type for `parent` field in `data_chat_service.proto`",
+          "issues": [],
+          "breakingChangeNote": "Correct resource reference type for `parent` field in `data_chat_service.proto`"
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Pagination response for Compute Subnetworks.ListUsable (39952d9)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update libraries and clients for Managed Kafka",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1 API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Update Compute Engine v1beta API to revision 20250626",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Remove field `restricted` within encryption enforcement config.",
+          "issues": [],
+          "breakingChangeNote": "Remove field `restricted` within encryption enforcement config."
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add new field `restriction_mode` for encryption enforcement config in message Bucket",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add isolation support to prevent cross-region overflow by adding a new field \"isolation_config\" to message \"ServiceLbPolicy\"",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add safebrowsing proto defs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add User Defined Access URLs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add backdate duration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Adds tbs_certificate_digest to CertificateDescription",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7e3d10b075bb9b7c8f9e88a47e77b6d55a80bf31",
+          "message": "Add RDN sequence",
+          "issues": []
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "21600dd8-fc3b-454f-8f96-fea40e60fcc4",
+      "createTime": "2025-07-28T18:29:19.933Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4ef705b409954f45fae7638064aafa61ade1bcc8",
+          "message": "Adds DWS and spot VM feature support to custom batch predictions 2.0",
+          "issues": [
+            "6536"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4afa04ea37f9a1d3df1082b481891ce4b844d7bf",
+          "message": "Add service_account to Reasoning Engine public protos",
+          "issues": [
+            "6523"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "aa97e87e-5145-4751-b936-e6f5d79b6c31",
+      "createTime": "2025-07-28T18:29:19.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a39702e4f0e8a9536cef0adbc64d5fd3045592d8",
           "message": "[addressvalidation] add has_spell_corrected_components field to the Address Validation verdict in the API response",
           "issues": [
@@ -59505,5 +60890,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-07-22T18:14:26.548Z"
+  "updateTime": "2025-07-28T18:29:20.426Z"
 }
