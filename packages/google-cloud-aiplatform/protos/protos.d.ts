@@ -154986,7 +154986,8 @@ export namespace google {
                         BLOCKLIST = 6,
                         PROHIBITED_CONTENT = 7,
                         SPII = 8,
-                        MALFORMED_FUNCTION_CALL = 9
+                        MALFORMED_FUNCTION_CALL = 9,
+                        MODEL_ARMOR = 10
                     }
                 }
 
@@ -156387,6 +156388,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RetrievalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModelArmorConfig. */
+                interface IModelArmorConfig {
+
+                    /** ModelArmorConfig promptTemplateName */
+                    promptTemplateName?: (string|null);
+
+                    /** ModelArmorConfig responseTemplateName */
+                    responseTemplateName?: (string|null);
+                }
+
+                /** Represents a ModelArmorConfig. */
+                class ModelArmorConfig implements IModelArmorConfig {
+
+                    /**
+                     * Constructs a new ModelArmorConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IModelArmorConfig);
+
+                    /** ModelArmorConfig promptTemplateName. */
+                    public promptTemplateName: string;
+
+                    /** ModelArmorConfig responseTemplateName. */
+                    public responseTemplateName: string;
+
+                    /**
+                     * Creates a new ModelArmorConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModelArmorConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IModelArmorConfig): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Verifies a ModelArmorConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModelArmorConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModelArmorConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Creates a plain object from a ModelArmorConfig message. Also converts values to other types if specified.
+                     * @param message ModelArmorConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ModelArmorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModelArmorConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModelArmorConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -226018,6 +226122,9 @@ export namespace google {
                     /** TuningJob partnerModelTuningSpec */
                     partnerModelTuningSpec?: (google.cloud.aiplatform.v1beta1.IPartnerModelTuningSpec|null);
 
+                    /** TuningJob veoTuningSpec */
+                    veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
+
                     /** TuningJob name */
                     name?: (string|null);
 
@@ -226094,6 +226201,9 @@ export namespace google {
                     /** TuningJob partnerModelTuningSpec. */
                     public partnerModelTuningSpec?: (google.cloud.aiplatform.v1beta1.IPartnerModelTuningSpec|null);
 
+                    /** TuningJob veoTuningSpec. */
+                    public veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
+
                     /** TuningJob name. */
                     public name: string;
 
@@ -226152,7 +226262,7 @@ export namespace google {
                     public sourceModel?: "baseModel";
 
                     /** TuningJob tuningSpec. */
-                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec");
+                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec");
 
                     /**
                      * Creates a new TuningJob instance using the specified properties.
@@ -228080,6 +228190,234 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TunedModelRef
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VeoHyperParameters. */
+                interface IVeoHyperParameters {
+
+                    /** VeoHyperParameters epochCount */
+                    epochCount?: (number|Long|string|null);
+
+                    /** VeoHyperParameters learningRateMultiplier */
+                    learningRateMultiplier?: (number|null);
+
+                    /** VeoHyperParameters tuningTask */
+                    tuningTask?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|null);
+                }
+
+                /** Represents a VeoHyperParameters. */
+                class VeoHyperParameters implements IVeoHyperParameters {
+
+                    /**
+                     * Constructs a new VeoHyperParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IVeoHyperParameters);
+
+                    /** VeoHyperParameters epochCount. */
+                    public epochCount: (number|Long|string);
+
+                    /** VeoHyperParameters learningRateMultiplier. */
+                    public learningRateMultiplier: number;
+
+                    /** VeoHyperParameters tuningTask. */
+                    public tuningTask: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask);
+
+                    /**
+                     * Creates a new VeoHyperParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VeoHyperParameters instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IVeoHyperParameters): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Encodes the specified VeoHyperParameters message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoHyperParameters.verify|verify} messages.
+                     * @param message VeoHyperParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IVeoHyperParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VeoHyperParameters message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoHyperParameters.verify|verify} messages.
+                     * @param message VeoHyperParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IVeoHyperParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VeoHyperParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VeoHyperParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Decodes a VeoHyperParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VeoHyperParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Verifies a VeoHyperParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VeoHyperParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VeoHyperParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Creates a plain object from a VeoHyperParameters message. Also converts values to other types if specified.
+                     * @param message VeoHyperParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.VeoHyperParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VeoHyperParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VeoHyperParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VeoHyperParameters {
+
+                    /** TuningTask enum. */
+                    enum TuningTask {
+                        TUNING_TASK_UNSPECIFIED = 0,
+                        TUNING_TASK_I2V = 1,
+                        TUNING_TASK_T2V = 2
+                    }
+                }
+
+                /** Properties of a VeoTuningSpec. */
+                interface IVeoTuningSpec {
+
+                    /** VeoTuningSpec trainingDatasetUri */
+                    trainingDatasetUri?: (string|null);
+
+                    /** VeoTuningSpec validationDatasetUri */
+                    validationDatasetUri?: (string|null);
+
+                    /** VeoTuningSpec hyperParameters */
+                    hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+                }
+
+                /** Represents a VeoTuningSpec. */
+                class VeoTuningSpec implements IVeoTuningSpec {
+
+                    /**
+                     * Constructs a new VeoTuningSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IVeoTuningSpec);
+
+                    /** VeoTuningSpec trainingDatasetUri. */
+                    public trainingDatasetUri: string;
+
+                    /** VeoTuningSpec validationDatasetUri. */
+                    public validationDatasetUri: string;
+
+                    /** VeoTuningSpec hyperParameters. */
+                    public hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+
+                    /**
+                     * Creates a new VeoTuningSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VeoTuningSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IVeoTuningSpec): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Encodes the specified VeoTuningSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoTuningSpec.verify|verify} messages.
+                     * @param message VeoTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IVeoTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VeoTuningSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoTuningSpec.verify|verify} messages.
+                     * @param message VeoTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IVeoTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VeoTuningSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VeoTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Decodes a VeoTuningSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VeoTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Verifies a VeoTuningSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VeoTuningSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VeoTuningSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Creates a plain object from a VeoTuningSpec message. Also converts values to other types if specified.
+                     * @param message VeoTuningSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.VeoTuningSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VeoTuningSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VeoTuningSpec
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -286744,6 +287082,9 @@ export namespace google {
                     /** GenerateContentRequest safetySettings */
                     safetySettings?: (google.cloud.aiplatform.v1beta1.ISafetySetting[]|null);
 
+                    /** GenerateContentRequest modelArmorConfig */
+                    modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
+
                     /** GenerateContentRequest generationConfig */
                     generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
                 }
@@ -286780,6 +287121,9 @@ export namespace google {
 
                     /** GenerateContentRequest safetySettings. */
                     public safetySettings: google.cloud.aiplatform.v1beta1.ISafetySetting[];
+
+                    /** GenerateContentRequest modelArmorConfig. */
+                    public modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
 
                     /** GenerateContentRequest generationConfig. */
                     public generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
@@ -287108,7 +287452,8 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2,
                             BLOCKLIST = 3,
-                            PROHIBITED_CONTENT = 4
+                            PROHIBITED_CONTENT = 4,
+                            MODEL_ARMOR = 5
                         }
                     }
 
