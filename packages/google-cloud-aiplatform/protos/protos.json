@@ -41483,7 +41483,8 @@
                             "BLOCKLIST": 6,
                             "PROHIBITED_CONTENT": 7,
                             "SPII": 8,
-                            "MALFORMED_FUNCTION_CALL": 9
+                            "MALFORMED_FUNCTION_CALL": 9,
+                            "MODEL_ARMOR": 10
                           }
                         }
                       }
@@ -41837,6 +41838,26 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ModelArmorConfig": {
+                      "fields": {
+                        "promptTemplateName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
+                          }
+                        },
+                        "responseTemplateName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "modelarmor.googleapis.com/Template"
                           }
                         }
                       }
@@ -60028,7 +60049,8 @@
                           "oneof": [
                             "supervisedTuningSpec",
                             "distillationSpec",
-                            "partnerModelTuningSpec"
+                            "partnerModelTuningSpec",
+                            "veoTuningSpec"
                           ]
                         }
                       },
@@ -60048,6 +60070,10 @@
                         "partnerModelTuningSpec": {
                           "type": "PartnerModelTuningSpec",
                           "id": 21
+                        },
+                        "veoTuningSpec": {
+                          "type": "VeoTuningSpec",
+                          "id": 33
                         },
                         "name": {
                           "type": "string",
@@ -60830,6 +60856,65 @@
                           "id": 3,
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
+                    "VeoHyperParameters": {
+                      "fields": {
+                        "epochCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "learningRateMultiplier": {
+                          "type": "double",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tuningTask": {
+                          "type": "TuningTask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TuningTask": {
+                          "values": {
+                            "TUNING_TASK_UNSPECIFIED": 0,
+                            "TUNING_TASK_I2V": 1,
+                            "TUNING_TASK_T2V": 2
+                          }
+                        }
+                      }
+                    },
+                    "VeoTuningSpec": {
+                      "fields": {
+                        "trainingDatasetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationDatasetUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hyperParameters": {
+                          "type": "VeoHyperParameters",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -62233,6 +62318,13 @@
                         "enableAccessLogging": {
                           "type": "bool",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableDatapointUpsertLogging": {
+                          "type": "bool",
+                          "id": 20,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -76799,6 +76891,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "modelArmorConfig": {
+                          "type": "ModelArmorConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "generationConfig": {
                           "type": "GenerationConfig",
                           "id": 4,
@@ -76884,7 +76983,8 @@
                                 "SAFETY": 1,
                                 "OTHER": 2,
                                 "BLOCKLIST": 3,
-                                "PROHIBITED_CONTENT": 4
+                                "PROHIBITED_CONTENT": 4,
+                                "MODEL_ARMOR": 5
                               }
                             }
                           }

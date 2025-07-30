@@ -14430,7 +14430,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 116,
                     "type": "FULL"
                 }
             ],
@@ -14472,6 +14472,10 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelArmorConfig"
+                    },
+                    {
                         "name": "generation_config",
                         "type": ".google.cloud.aiplatform.v1beta1.GenerationConfig"
                     }
@@ -14502,7 +14506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 113,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -14542,6 +14546,10 @@
                     {
                         "name": "safety_settings",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelArmorConfig"
                     },
                     {
                         "name": "generation_config",

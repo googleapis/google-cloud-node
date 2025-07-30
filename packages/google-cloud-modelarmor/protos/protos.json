@@ -482,7 +482,28 @@
                       },
                       "nested": {
                         "FloorSettingMetadata": {
-                          "fields": {}
+                          "fields": {
+                            "multiLanguageDetection": {
+                              "type": "MultiLanguageDetection",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MultiLanguageDetection": {
+                              "fields": {
+                                "enableMultiLanguageDetection": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         },
                         "IntegratedService": {
                           "values": {
@@ -1997,7 +2018,28 @@
                       },
                       "nested": {
                         "FloorSettingMetadata": {
-                          "fields": {}
+                          "fields": {
+                            "multiLanguageDetection": {
+                              "type": "MultiLanguageDetection",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MultiLanguageDetection": {
+                              "fields": {
+                                "enableMultiLanguageDetection": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         },
                         "IntegratedService": {
                           "values": {

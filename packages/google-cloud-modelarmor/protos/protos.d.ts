@@ -813,6 +813,9 @@ export namespace google {
 
                     /** Properties of a FloorSettingMetadata. */
                     interface IFloorSettingMetadata {
+
+                        /** FloorSettingMetadata multiLanguageDetection */
+                        multiLanguageDetection?: (google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null);
                     }
 
                     /** Represents a FloorSettingMetadata. */
@@ -823,6 +826,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata);
+
+                        /** FloorSettingMetadata multiLanguageDetection. */
+                        public multiLanguageDetection?: (google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null);
 
                         /**
                          * Creates a new FloorSettingMetadata instance using the specified properties.
@@ -900,6 +906,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FloorSettingMetadata {
+
+                        /** Properties of a MultiLanguageDetection. */
+                        interface IMultiLanguageDetection {
+
+                            /** MultiLanguageDetection enableMultiLanguageDetection */
+                            enableMultiLanguageDetection?: (boolean|null);
+                        }
+
+                        /** Represents a MultiLanguageDetection. */
+                        class MultiLanguageDetection implements IMultiLanguageDetection {
+
+                            /**
+                             * Constructs a new MultiLanguageDetection.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection);
+
+                            /** MultiLanguageDetection enableMultiLanguageDetection. */
+                            public enableMultiLanguageDetection: boolean;
+
+                            /**
+                             * Creates a new MultiLanguageDetection instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MultiLanguageDetection instance
+                             */
+                            public static create(properties?: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                             * @param message MultiLanguageDetection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                             * @param message MultiLanguageDetection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MultiLanguageDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MultiLanguageDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Verifies a MultiLanguageDetection message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MultiLanguageDetection
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                             * @param message MultiLanguageDetection
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MultiLanguageDetection to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MultiLanguageDetection
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** IntegratedService enum. */
@@ -6340,6 +6446,9 @@ export namespace google {
 
                     /** Properties of a FloorSettingMetadata. */
                     interface IFloorSettingMetadata {
+
+                        /** FloorSettingMetadata multiLanguageDetection */
+                        multiLanguageDetection?: (google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null);
                     }
 
                     /** Represents a FloorSettingMetadata. */
@@ -6350,6 +6459,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata);
+
+                        /** FloorSettingMetadata multiLanguageDetection. */
+                        public multiLanguageDetection?: (google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null);
 
                         /**
                          * Creates a new FloorSettingMetadata instance using the specified properties.
@@ -6427,6 +6539,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FloorSettingMetadata {
+
+                        /** Properties of a MultiLanguageDetection. */
+                        interface IMultiLanguageDetection {
+
+                            /** MultiLanguageDetection enableMultiLanguageDetection */
+                            enableMultiLanguageDetection?: (boolean|null);
+                        }
+
+                        /** Represents a MultiLanguageDetection. */
+                        class MultiLanguageDetection implements IMultiLanguageDetection {
+
+                            /**
+                             * Constructs a new MultiLanguageDetection.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection);
+
+                            /** MultiLanguageDetection enableMultiLanguageDetection. */
+                            public enableMultiLanguageDetection: boolean;
+
+                            /**
+                             * Creates a new MultiLanguageDetection instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns MultiLanguageDetection instance
+                             */
+                            public static create(properties?: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                             * @param message MultiLanguageDetection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                             * @param message MultiLanguageDetection message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns MultiLanguageDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns MultiLanguageDetection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Verifies a MultiLanguageDetection message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns MultiLanguageDetection
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection;
+
+                            /**
+                             * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                             * @param message MultiLanguageDetection
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this MultiLanguageDetection to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for MultiLanguageDetection
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** IntegratedService enum. */
