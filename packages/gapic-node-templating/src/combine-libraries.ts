@@ -106,7 +106,7 @@ export async function combineLibraries(
   readDirectory: string,
   writeDirectory?: string,
 ) {
-  writeDirectory = writeDirectory ?? readDirectory;
+  writeDirectory = writeDirectory || readDirectory;
   console.log(`Generating all unique paths in all library versions from ${readDirectory} to ${writeDirectory}`);
   const uniquefullPathAndContent =
     await generateFinalDirectoryPath(readDirectory);
@@ -150,7 +150,6 @@ async function createDirectoryAndWriteFiles(
 
       // 2. Write the file with its content
       await fs.writeFile(fullFilePath, fileData.content, 'utf8');
-      // console.log(`Successfully wrote: ${fullFilePath}`); // Optional: for debugging
     } catch (error) {
       console.error(`Failed to write file ${fullFilePath}:`, error);
       throw error; // Re-throw to indicate overall failure

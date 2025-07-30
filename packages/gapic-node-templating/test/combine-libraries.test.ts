@@ -60,15 +60,25 @@ describe('combine libraries', () => {
         // console.log(speechV2NodejsPaths);
     });
 
-    it.only('should get all the samples', async () => {
+    it.only('should get all the samples (clean)', async () => {
         // let accumulator: string[] = [];
-        await getSamplesMetadata(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech'))
+        await getSamplesMetadata(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'))
         // console.log(paths)
         // console.log((new Set(paths)));
         // console.log(speechV1NodejsPaths);
         // console.log(speechV1P1Beta1NodejsPaths);
         // console.log(speechV2NodejsPaths);
     });
+
+    // it.only('should clean all the samples from ', async () => {
+    //     // let accumulator: string[] = [];
+    //     await getSamplesMetadata(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech'))
+    //     // console.log(paths)
+    //     // console.log((new Set(paths)));
+    //     // console.log(speechV1NodejsPaths);
+    //     // console.log(speechV1P1Beta1NodejsPaths);
+    //     // console.log(speechV2NodejsPaths);
+    // });
 
     it('should rewrite the README correctly', async () => {
         // let accumulator: string[] = [];

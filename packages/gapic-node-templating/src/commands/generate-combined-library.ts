@@ -18,8 +18,9 @@ import {generateIndexTs} from '../generate-index';
 import {generateReadMe} from '../generate-readme';
 export interface CliArgs {
   'library-path': string;
-  'destination-path'?: string;
+  'release-level'?: string;
   'default-version'?: string;
+  'destination-path'?: string; 
 }
 export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
   command: 'combine-library',
@@ -39,9 +40,15 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         describe:
           'what is the default version of the library (default is highest)',
         type: 'string',
+      })
+      .option('release-level', {
+        describe:
+          'what is the release level of the library (default is preview)',
+        type: 'string',
       });
   },
   async handler(argv: CliArgs) {
+    const writeDestination = argv['destination-path'] || argv['library-path'];
     console.log(
       `Combining libraries in ${argv['library-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`,
     );
@@ -53,13 +60,13 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       }
     }
     console.log(
-      `Generating index.ts in ${argv['destination-path'] ?? argv['library-path']}`,
+      `Generating index.ts in ${writeDestination}`,
     );
     await generateIndexTs(
-      argv['destination-path'] ?? argv['library-path'],
+      writeDestination,
       argv['default-version'],
     );
     console.log('abot to generate readme')
-    await generateReadMe(argv['destination-path'] ?? argv['library-path']);
+    await generateReadMe(writeDestination, argv['release-level']);
   },
 };

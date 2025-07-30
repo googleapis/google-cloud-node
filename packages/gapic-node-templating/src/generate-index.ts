@@ -20,6 +20,7 @@ const path = require('path');
 
 const SRC_PATH = 'src/';
 const INDEX_PATH = 'index.ts';
+const TEMPLATE_FILE_NAME = 'index.ts.njk';
 
 export const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
   __dirname,
@@ -44,13 +45,11 @@ export async function extractClients(currentPath: string) {
     let clientsAndVersions: {version: string, clients: string[]}[] = [];
     for (const directory of directories) {
         const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
-        console.log(indexFile)
         if (await fs.stat(indexFile)) {
             const clientsRegexMatch = [...(await fs.readFile(indexFile, 'utf8')).matchAll(regex)];
             clientsAndVersions.push({version: directory, clients: clientsRegexMatch.map((x: any) => x[1])});
         }
     }
-    console.log(clientsAndVersions);
     return clientsAndVersions;
 }
 
@@ -64,6 +63,7 @@ export async function generateIndexTs(currentLibrary: string, defaultVersion?: s
     const clientsAndVersions = await extractClients(currentLibrary);
     console.log(`All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`)
         
+    defaultVersion = defaultVersion || getHighestVersionWithPrecedence(versions);
     // Get the default versions' clients
     const defaultClientAndVersions = clientsAndVersions.find(x => x.version === defaultVersion);
     console.log(`The default version is ${JSON.stringify(defaultClientAndVersions, null, 2)}`)
@@ -71,40 +71,12 @@ export async function generateIndexTs(currentLibrary: string, defaultVersion?: s
     // Render index.ts
     const variables = {versions, defaultClientAndVersions}
 
-    const TEMPLATE_FILE_NAME = 'index.ts.njk';
-    const fullTemplateFilePath = path.join(POST_PROCESSING_TEMPLATES_PATH, TEMPLATE_FILE_NAME);
-
-    console.log('about to describe absolute template location??')
-    console.log(`Attempting to load template from: ${fullTemplateFilePath}`) // Use fullTemplateFilePath here
-
-    console.log('debugging')
-    console.log(`is nj.render available? ${typeof nj.render==='function'}`)
     
-    // --- CHECK 1: Nunjucks availability ---
-    if (typeof nj.render !== 'function') {
-        console.error('ERROR: Nunjucks (nj.render) is not a function. Nunjucks might not be correctly loaded.');
-        process.exit(1);
-    }
-    console.log('Nunjucks (nj.render) function appears to be available.');
-
-    // --- CHECK 2: Template file existence and readability ---
-    try {
-        await fs.access(fullTemplateFilePath, fs.constants.R_OK);
-        console.log(`Template file exists and is readable: ${fullTemplateFilePath}`);
-    } catch (fileAccessError) {
-        console.error(`FATAL ERROR: Template file does NOT exist or is not readable: ${fullTemplateFilePath}`);
-        console.error(fileAccessError);
-        process.exit(1);
-    }
-    
-    console.log(`what does this path contain? ${await fs.readFile(fullTemplateFilePath, 'utf8')}`) // Read content for debug
-    console.log(`what variables do we have? ${JSON.stringify(variables)}`) // Variables for debug
 
     let compiledTemplate: string; // Declare compiledTemplate outside the try block
 
     try {
         // --- THE CRITICAL FIX: Configure Nunjucks with a FileSystemLoader ---
-        console.log(`Configuring Nunjucks with FileSystemLoader for directory: ${POST_PROCESSING_TEMPLATES_PATH}`);
         // Create a new Nunjucks environment configured to load from the templateDirectory
         const env = new nj.Environment(
             new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
@@ -130,7 +102,7 @@ export async function generateIndexTs(currentLibrary: string, defaultVersion?: s
 
 function getHighestVersionWithPrecedence(versions: string[]) {
     if (!versions || versions.length === 0) {
-        return null;
+        throw new Error ('No versions found in library; cannot generate index.ts');
     }
 
     // Define the precedence of pre-release types

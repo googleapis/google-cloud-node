@@ -15,6 +15,7 @@
 import {traverseDirectory} from './combine-libraries';
 import * as nj from 'nunjucks';
 import {POST_PROCESSING_TEMPLATES_PATH} from './generate-index';
+import { release } from 'os';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
@@ -22,11 +23,21 @@ const README_PATH = 'README.md';
 const SAMPLES_TEMPLATE_PATH = 'sample.njk';
 const SAMPLES_PATH = 'samples/generated';
 
+const RELEASE_LEVEL_STABLE = `This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority`;
+
+const RELEASE_LEVEL_PREVIEW = `This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.`;
+
+const DEFAULT_RELEASE_LEVEL = 'preview';
+
 export async function getSamplesMetadata(currentLibrary: string) {
-  console.log(currentLibrary);
   // Let's remove the main library, since we'll need it in the path
   const stringToRemove = currentLibrary.split('/').slice(0, currentLibrary.split('/').length-1).join('/');
-  const samples = await traverseDirectory(
+  let samples = await traverseDirectory(
     path.join(currentLibrary, SAMPLES_PATH),
     [],
     new RegExp(stringToRemove),
@@ -35,7 +46,20 @@ export async function getSamplesMetadata(currentLibrary: string) {
     // Here, the 'getSampleName' refers to the exported function
     Object.assign(sample, {title: getSampleName(sample)});
   });
-  console.log(samples);
+  samples = cleanNodejsFromLibraryPath(samples);
+  return samples;
+}
+
+// This function is somewhat of a hacky helper. Essentially, while we are still using
+// bazel-bot, we still need to name our library api-id-with-dashes-nodejs,
+// so we can search for it using bazel bot. However that means our
+// file paths won't match what exists in google-cloud-node, i.e.,
+// https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data-nodejs/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js
+// does not exist, we need to remove the *-nodejs from the path. This does that.
+export function cleanNodejsFromLibraryPath(samples: {filePath: string, content: string}[]) {
+  samples.forEach(sample => {
+    sample.filePath = sample.filePath.replace('-nodejs', '');
+  })
   return samples;
 }
 
@@ -51,8 +75,10 @@ export function getSampleName(sample: {filePath: string}): string {
   sampleName = sampleName.replace(/_/g, ' ');
   return sampleName;
 }
-export async function generateReadMe(currentLibrary: string) {
+export async function generateReadMe(currentLibrary: string, releaseLevel?: string) {
   const samplesMetadata = await getSamplesMetadata(currentLibrary);
+  releaseLevel = releaseLevel || DEFAULT_RELEASE_LEVEL;
+  const releaseLevelMessage = (/stable/i).test(releaseLevel) ? RELEASE_LEVEL_STABLE : RELEASE_LEVEL_PREVIEW;
   let contents = await fs.readFile(
     path.join(currentLibrary, README_PATH),
     'utf8',
@@ -71,9 +97,8 @@ export async function generateReadMe(currentLibrary: string) {
   const compiledTemplate = env.render(SAMPLES_TEMPLATE_PATH, {
     samplesMetadata: samplesMetadata,
   }); // <-- RENDER BY FILENAME
-  console.log(compiledTemplate);
   contents = contents.replace('[//]: # "samples"', compiledTemplate);
-  console.log(contents);
+  contents = contents.replace('[//]: # "releaseLevel"', releaseLevelMessage);
   await fs.writeFile(path.join(currentLibrary, README_PATH), contents);
   console.log('Nunjucks template rendered successfully.');
 }
