@@ -49682,6 +49682,7 @@
                      * @property {boolean|null} [adminInstalled] Space adminInstalled
                      * @property {google.chat.v1.Space.IMembershipCount|null} [membershipCount] Space membershipCount
                      * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
+                     * @property {string|null} [customer] Space customer
                      * @property {string|null} [spaceUri] Space spaceUri
                      * @property {google.chat.v1.Space.PredefinedPermissionSettings|null} [predefinedPermissionSettings] Space predefinedPermissionSettings
                      * @property {google.chat.v1.Space.IPermissionSettings|null} [permissionSettings] Space permissionSettings
@@ -49832,6 +49833,14 @@
                     Space.prototype.accessSettings = null;
     
                     /**
+                     * Space customer.
+                     * @member {string|null|undefined} customer
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.customer = null;
+    
+                    /**
                      * Space spaceUri.
                      * @member {string} spaceUri
                      * @memberof google.chat.v1.Space
@@ -49865,6 +49874,12 @@
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Space.prototype, "_customer", {
+                        get: $util.oneOfGetter($oneOfFields = ["customer"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
                      * Space spacePermissionSettings.
@@ -49933,6 +49948,8 @@
                             $root.google.chat.v1.Space.MembershipCount.encode(message.membershipCount, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                         if (message.accessSettings != null && Object.hasOwnProperty.call(message, "accessSettings"))
                             $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                            writer.uint32(/* id 24, wireType 2 =*/194).string(message.customer);
                         if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
                             writer.uint32(/* id 25, wireType 2 =*/202).string(message.spaceUri);
                         if (message.predefinedPermissionSettings != null && Object.hasOwnProperty.call(message, "predefinedPermissionSettings"))
@@ -50039,6 +50056,10 @@
                                 }
                             case 23: {
                                     message.accessSettings = $root.google.chat.v1.Space.AccessSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 24: {
+                                    message.customer = reader.string();
                                     break;
                                 }
                             case 25: {
@@ -50176,6 +50197,11 @@
                             var error = $root.google.chat.v1.Space.AccessSettings.verify(message.accessSettings);
                             if (error)
                                 return "accessSettings." + error;
+                        }
+                        if (message.customer != null && message.hasOwnProperty("customer")) {
+                            properties._customer = 1;
+                            if (!$util.isString(message.customer))
+                                return "customer: string expected";
                         }
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             if (!$util.isString(message.spaceUri))
@@ -50348,6 +50374,8 @@
                                 throw TypeError(".google.chat.v1.Space.accessSettings: object expected");
                             message.accessSettings = $root.google.chat.v1.Space.AccessSettings.fromObject(object.accessSettings);
                         }
+                        if (object.customer != null)
+                            message.customer = String(object.customer);
                         if (object.spaceUri != null)
                             message.spaceUri = String(object.spaceUri);
                         switch (object.predefinedPermissionSettings) {
@@ -50448,6 +50476,11 @@
                             object.membershipCount = $root.google.chat.v1.Space.MembershipCount.toObject(message.membershipCount, options);
                         if (message.accessSettings != null && message.hasOwnProperty("accessSettings"))
                             object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
+                        if (message.customer != null && message.hasOwnProperty("customer")) {
+                            object.customer = message.customer;
+                            if (options.oneofs)
+                                object._customer = "customer";
+                        }
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             object.spaceUri = message.spaceUri;
                         if (message.predefinedPermissionSettings != null && message.hasOwnProperty("predefinedPermissionSettings")) {
