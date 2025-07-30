@@ -6175,7 +6175,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         },
                         "name": {
