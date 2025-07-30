@@ -86,6 +86,11 @@ function main(model, contents) {
    */
   // const safetySettings = [1,2,3,4]
   /**
+   *  Optional. Settings for prompt and response sanitization using the Model
+   *  Armor service. If supplied, safety_settings must not be supplied.
+   */
+  // const modelArmorConfig = {}
+  /**
    *  Optional. Generation config.
    */
   // const generationConfig = {}
