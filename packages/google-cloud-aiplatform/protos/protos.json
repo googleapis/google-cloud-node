@@ -8549,6 +8549,19 @@
                         }
                       }
                     },
+                    "DeploymentStage": {
+                      "values": {
+                        "DEPLOYMENT_STAGE_UNSPECIFIED": 0,
+                        "STARTING_DEPLOYMENT": 5,
+                        "PREPARING_MODEL": 6,
+                        "CREATING_SERVING_CLUSTER": 7,
+                        "ADDING_NODES_TO_CLUSTER": 8,
+                        "GETTING_CONTAINER_IMAGE": 9,
+                        "STARTING_MODEL_SERVER": 3,
+                        "FINISHING_UP": 4,
+                        "DEPLOYMENT_TERMINATED": 10
+                      }
+                    },
                     "EndpointService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -8813,6 +8826,13 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        },
+                        "deploymentStage": {
+                          "type": "DeploymentStage",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -8971,6 +8991,13 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        },
+                        "deploymentStage": {
+                          "type": "DeploymentStage",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },

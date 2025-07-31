@@ -19,6 +19,7 @@
   "../../protos/google/cloud/aiplatform/v1/deployed_model_ref.proto",
   "../../protos/google/cloud/aiplatform/v1/deployment_resource_pool.proto",
   "../../protos/google/cloud/aiplatform/v1/deployment_resource_pool_service.proto",
+  "../../protos/google/cloud/aiplatform/v1/deployment_stage.proto",
   "../../protos/google/cloud/aiplatform/v1/encryption_spec.proto",
   "../../protos/google/cloud/aiplatform/v1/endpoint.proto",
   "../../protos/google/cloud/aiplatform/v1/endpoint_service.proto",
