@@ -69999,6 +69999,9 @@ export namespace google {
                     /** DeployedIndex enableAccessLogging */
                     enableAccessLogging?: (boolean|null);
 
+                    /** DeployedIndex enableDatapointUpsertLogging */
+                    enableDatapointUpsertLogging?: (boolean|null);
+
                     /** DeployedIndex deployedIndexAuthConfig */
                     deployedIndexAuthConfig?: (google.cloud.aiplatform.v1.IDeployedIndexAuthConfig|null);
 
@@ -70047,6 +70050,9 @@ export namespace google {
 
                     /** DeployedIndex enableAccessLogging. */
                     public enableAccessLogging: boolean;
+
+                    /** DeployedIndex enableDatapointUpsertLogging. */
+                    public enableDatapointUpsertLogging: boolean;
 
                     /** DeployedIndex deployedIndexAuthConfig. */
                     public deployedIndexAuthConfig?: (google.cloud.aiplatform.v1.IDeployedIndexAuthConfig|null);

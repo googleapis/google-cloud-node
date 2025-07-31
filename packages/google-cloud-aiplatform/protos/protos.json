@@ -19134,6 +19134,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "enableDatapointUpsertLogging": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "deployedIndexAuthConfig": {
                           "type": "DeployedIndexAuthConfig",
                           "id": 9,
