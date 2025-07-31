@@ -75,14 +75,14 @@ export function getSampleName(sample: {filePath: string}): string {
   sampleName = sampleName.replace(/_/g, ' ');
   return sampleName;
 }
-export async function generateReadMe(currentLibrary: string, releaseLevel?: string) {
+
+// We have two readme generations because the initial generation step
+// will be a little different than what's available during post-processing
+export async function initialGenerateReadMe(currentLibrary: string, releaseLevel?: string, writeLibrary?: string) {
   const samplesMetadata = await getSamplesMetadata(currentLibrary);
   releaseLevel = releaseLevel || DEFAULT_RELEASE_LEVEL;
   const releaseLevelMessage = (/stable/i).test(releaseLevel) ? RELEASE_LEVEL_STABLE : RELEASE_LEVEL_PREVIEW;
-  let contents = await fs.readFile(
-    path.join(currentLibrary, README_PATH),
-    'utf8',
-  );
+
   console.log(
     `Configuring Nunjucks with FileSystemLoader for directory: ${POST_PROCESSING_TEMPLATES_PATH}`,
   );
@@ -96,9 +96,26 @@ export async function generateReadMe(currentLibrary: string, releaseLevel?: stri
   // within the configured templateDirectory.
   const compiledTemplate = env.render(SAMPLES_TEMPLATE_PATH, {
     samplesMetadata: samplesMetadata,
-  }); // <-- RENDER BY FILENAME
-  contents = contents.replace('[//]: # "samples"', compiledTemplate);
-  contents = contents.replace('[//]: # "releaseLevel"', releaseLevelMessage);
-  await fs.writeFile(path.join(currentLibrary, README_PATH), contents);
+  });
+  await writeToReadme(currentLibrary, '[//]: # "samples"', compiledTemplate, writeLibrary);
+  await writeToReadme(currentLibrary, '[//]: # "releaseLevel"', releaseLevelMessage, writeLibrary)
   console.log('Nunjucks template rendered successfully.');
+}
+
+// Gets the current README contents
+// Searches for the string to replace
+// Replaces with replacement
+export async function writeToReadme(currentLibrary: string, stringToReplace: string, replacementString: string, writeLibrary?: string) {
+  const readmePath = path.join(currentLibrary, README_PATH);
+  const writeFilePath = writeLibrary ? path.join(writeLibrary, README_PATH) : readmePath;
+  let contents = await fs.readFile(
+    readmePath,
+    'utf8',
+  );
+  contents = contents.replace(stringToReplace, replacementString);
+  await fs.writeFile(writeFilePath, contents);
+}
+
+export async function postInitialGenerateReadme(readLibrary: string, stringToReplace: string, replacementString: string, writeLibrary?: string) {
+    await writeToReadme(readLibrary, stringToReplace, replacementString, writeLibrary)
 }

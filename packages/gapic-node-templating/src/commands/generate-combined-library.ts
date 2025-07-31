@@ -15,10 +15,9 @@
 import yargs = require('yargs');
 import {combineLibraries} from '../combine-libraries';
 import {generateIndexTs} from '../generate-index';
-import {generateReadMe} from '../generate-readme';
+import {initialGenerateReadMe} from '../generate-readme';
 export interface CliArgs {
   'library-path': string;
-  'release-level'?: string;
   'default-version'?: string;
   'destination-path'?: string; 
 }
@@ -41,11 +40,6 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
           'what is the default version of the library (default is highest)',
         type: 'string',
       })
-      .option('release-level', {
-        describe:
-          'what is the release level of the library (default is preview)',
-        type: 'string',
-      });
   },
   async handler(argv: CliArgs) {
     const writeDestination = argv['destination-path'] || argv['library-path'];
@@ -67,6 +61,5 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       argv['default-version'],
     );
     console.log('abot to generate readme')
-    await generateReadMe(writeDestination, argv['release-level']);
   },
 };

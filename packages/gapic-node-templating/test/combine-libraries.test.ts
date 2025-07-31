@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { extractClients, generateIndexTs } from '../src/generate-index';
 import { getSamplesMetadata } from '../src/generate-readme';
-import { generateReadMe } from '../src/generate-readme';
+// import { generateReadMe } from '../src/generate-readme';
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
 describe('combine libraries', () => {
     // beforeEach( async() => {
@@ -82,7 +82,7 @@ describe('combine libraries', () => {
 
     it('should rewrite the README correctly', async () => {
         // let accumulator: string[] = [];
-        console.log(await generateReadMe(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')))
+        // console.log(await generateReadMe(path.resolve(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')))
         // console.log(paths)
         // console.log((new Set(paths)));
         // console.log(speechV1NodejsPaths);
