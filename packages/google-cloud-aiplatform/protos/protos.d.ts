@@ -288541,6 +288541,9 @@ export namespace google {
 
                     /** ReasoningEngine contextSpec */
                     contextSpec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineContextSpec|null);
+
+                    /** ReasoningEngine encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -288575,6 +288578,9 @@ export namespace google {
 
                     /** ReasoningEngine contextSpec. */
                     public contextSpec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineContextSpec|null);
+
+                    /** ReasoningEngine encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
