@@ -176864,6 +176864,19 @@ export namespace google {
                     }
                 }
 
+                /** DeploymentStage enum. */
+                enum DeploymentStage {
+                    DEPLOYMENT_STAGE_UNSPECIFIED = 0,
+                    STARTING_DEPLOYMENT = 5,
+                    PREPARING_MODEL = 6,
+                    CREATING_SERVING_CLUSTER = 7,
+                    ADDING_NODES_TO_CLUSTER = 8,
+                    GETTING_CONTAINER_IMAGE = 9,
+                    STARTING_MODEL_SERVER = 3,
+                    FINISHING_UP = 4,
+                    DEPLOYMENT_TERMINATED = 10
+                }
+
                 /** Represents an EndpointService */
                 class EndpointService extends $protobuf.rpc.Service {
 
@@ -177233,6 +177246,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage|null);
                 }
 
                 /** Represents a CreateEndpointOperationMetadata. */
@@ -177246,6 +177262,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage);
 
                     /**
                      * Creates a new CreateEndpointOperationMetadata instance using the specified properties.
@@ -178251,6 +178270,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage|null);
                 }
 
                 /** Represents a DeployModelOperationMetadata. */
@@ -178264,6 +178286,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage);
 
                     /**
                      * Creates a new DeployModelOperationMetadata instance using the specified properties.

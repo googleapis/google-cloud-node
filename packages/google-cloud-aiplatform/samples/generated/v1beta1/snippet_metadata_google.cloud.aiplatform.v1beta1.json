@@ -1695,14 +1695,14 @@
             "regionTag": "aiplatform_v1beta1_generated_EndpointService_MutateDeployedModel_async",
             "title": "DatasetService mutateDeployedModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
+            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `required_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
             "canonical": true,
             "file": "endpoint_service.mutate_deployed_model.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
