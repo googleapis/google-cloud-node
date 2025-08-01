@@ -11995,6 +11995,9 @@ export namespace google {
                 /** Properties of an AllocationResourceStatus. */
                 interface IAllocationResourceStatus {
 
+                    /** AllocationResourceStatus healthInfo */
+                    healthInfo?: (google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo|null);
+
                     /** AllocationResourceStatus reservationBlockCount */
                     reservationBlockCount?: (number|null);
 
@@ -12013,6 +12016,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1beta.IAllocationResourceStatus);
+
+                    /** AllocationResourceStatus healthInfo. */
+                    public healthInfo?: (google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo|null);
 
                     /** AllocationResourceStatus reservationBlockCount. */
                     public reservationBlockCount?: (number|null);
@@ -12099,6 +12105,126 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AllocationResourceStatusHealthInfo. */
+                interface IAllocationResourceStatusHealthInfo {
+
+                    /** AllocationResourceStatusHealthInfo degradedBlockCount */
+                    degradedBlockCount?: (number|null);
+
+                    /** AllocationResourceStatusHealthInfo healthStatus */
+                    healthStatus?: (string|null);
+
+                    /** AllocationResourceStatusHealthInfo healthyBlockCount */
+                    healthyBlockCount?: (number|null);
+                }
+
+                /** Represents an AllocationResourceStatusHealthInfo. */
+                class AllocationResourceStatusHealthInfo implements IAllocationResourceStatusHealthInfo {
+
+                    /**
+                     * Constructs a new AllocationResourceStatusHealthInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo);
+
+                    /** AllocationResourceStatusHealthInfo degradedBlockCount. */
+                    public degradedBlockCount?: (number|null);
+
+                    /** AllocationResourceStatusHealthInfo healthStatus. */
+                    public healthStatus?: (string|null);
+
+                    /** AllocationResourceStatusHealthInfo healthyBlockCount. */
+                    public healthyBlockCount?: (number|null);
+
+                    /**
+                     * Creates a new AllocationResourceStatusHealthInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AllocationResourceStatusHealthInfo instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo): google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo;
+
+                    /**
+                     * Encodes the specified AllocationResourceStatusHealthInfo message. Does not implicitly {@link google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo.verify|verify} messages.
+                     * @param message AllocationResourceStatusHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AllocationResourceStatusHealthInfo message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo.verify|verify} messages.
+                     * @param message AllocationResourceStatusHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IAllocationResourceStatusHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AllocationResourceStatusHealthInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AllocationResourceStatusHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo;
+
+                    /**
+                     * Decodes an AllocationResourceStatusHealthInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AllocationResourceStatusHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo;
+
+                    /**
+                     * Verifies an AllocationResourceStatusHealthInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AllocationResourceStatusHealthInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AllocationResourceStatusHealthInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo;
+
+                    /**
+                     * Creates a plain object from an AllocationResourceStatusHealthInfo message. Also converts values to other types if specified.
+                     * @param message AllocationResourceStatusHealthInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.AllocationResourceStatusHealthInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AllocationResourceStatusHealthInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AllocationResourceStatusHealthInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AllocationResourceStatusHealthInfo {
+
+                    /** HealthStatus enum. */
+                    enum HealthStatus {
+                        UNDEFINED_HEALTH_STATUS = 0,
+                        DEGRADED = 396890926,
+                        HEALTHY = 439801213,
+                        HEALTH_STATUS_UNSPECIFIED = 482246925
+                    }
                 }
 
                 /** Properties of an AllocationResourceStatusSpecificSKUAllocation. */
@@ -162035,6 +162161,9 @@ export namespace google {
                     /** Reservation satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
+                    /** Reservation schedulingType */
+                    schedulingType?: (string|null);
+
                     /** Reservation selfLink */
                     selfLink?: (string|null);
 
@@ -162113,6 +162242,9 @@ export namespace google {
 
                     /** Reservation satisfiesPzs. */
                     public satisfiesPzs?: (boolean|null);
+
+                    /** Reservation schedulingType. */
+                    public schedulingType?: (string|null);
 
                     /** Reservation selfLink. */
                     public selfLink?: (string|null);
@@ -162226,6 +162358,14 @@ export namespace google {
                         CALENDAR = 67431230,
                         DEFAULT = 115302945,
                         RESERVATION_MODE_UNSPECIFIED = 233810606
+                    }
+
+                    /** SchedulingType enum. */
+                    enum SchedulingType {
+                        UNDEFINED_SCHEDULING_TYPE = 0,
+                        GROUPED = 474540862,
+                        GROUP_MAINTENANCE_TYPE_UNSPECIFIED = 447183678,
+                        INDEPENDENT = 127011674
                     }
 
                     /** Status enum. */
@@ -162504,6 +162644,9 @@ export namespace google {
                     /** ReservationBlock creationTimestamp */
                     creationTimestamp?: (string|null);
 
+                    /** ReservationBlock healthInfo */
+                    healthInfo?: (google.cloud.compute.v1beta.IReservationBlockHealthInfo|null);
+
                     /** ReservationBlock id */
                     id?: (number|Long|string|null);
 
@@ -162555,6 +162698,9 @@ export namespace google {
 
                     /** ReservationBlock creationTimestamp. */
                     public creationTimestamp?: (string|null);
+
+                    /** ReservationBlock healthInfo. */
+                    public healthInfo?: (google.cloud.compute.v1beta.IReservationBlockHealthInfo|null);
 
                     /** ReservationBlock id. */
                     public id?: (number|Long|string|null);
@@ -162679,6 +162825,126 @@ export namespace google {
                         DELETING = 528602024,
                         INVALID = 530283991,
                         READY = 77848963
+                    }
+                }
+
+                /** Properties of a ReservationBlockHealthInfo. */
+                interface IReservationBlockHealthInfo {
+
+                    /** ReservationBlockHealthInfo degradedSubBlockCount */
+                    degradedSubBlockCount?: (number|null);
+
+                    /** ReservationBlockHealthInfo healthStatus */
+                    healthStatus?: (string|null);
+
+                    /** ReservationBlockHealthInfo healthySubBlockCount */
+                    healthySubBlockCount?: (number|null);
+                }
+
+                /** Represents a ReservationBlockHealthInfo. */
+                class ReservationBlockHealthInfo implements IReservationBlockHealthInfo {
+
+                    /**
+                     * Constructs a new ReservationBlockHealthInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IReservationBlockHealthInfo);
+
+                    /** ReservationBlockHealthInfo degradedSubBlockCount. */
+                    public degradedSubBlockCount?: (number|null);
+
+                    /** ReservationBlockHealthInfo healthStatus. */
+                    public healthStatus?: (string|null);
+
+                    /** ReservationBlockHealthInfo healthySubBlockCount. */
+                    public healthySubBlockCount?: (number|null);
+
+                    /**
+                     * Creates a new ReservationBlockHealthInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationBlockHealthInfo instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IReservationBlockHealthInfo): google.cloud.compute.v1beta.ReservationBlockHealthInfo;
+
+                    /**
+                     * Encodes the specified ReservationBlockHealthInfo message. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockHealthInfo.verify|verify} messages.
+                     * @param message ReservationBlockHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IReservationBlockHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationBlockHealthInfo message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ReservationBlockHealthInfo.verify|verify} messages.
+                     * @param message ReservationBlockHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IReservationBlockHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationBlockHealthInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationBlockHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ReservationBlockHealthInfo;
+
+                    /**
+                     * Decodes a ReservationBlockHealthInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationBlockHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ReservationBlockHealthInfo;
+
+                    /**
+                     * Verifies a ReservationBlockHealthInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationBlockHealthInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationBlockHealthInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ReservationBlockHealthInfo;
+
+                    /**
+                     * Creates a plain object from a ReservationBlockHealthInfo message. Also converts values to other types if specified.
+                     * @param message ReservationBlockHealthInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ReservationBlockHealthInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationBlockHealthInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationBlockHealthInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReservationBlockHealthInfo {
+
+                    /** HealthStatus enum. */
+                    enum HealthStatus {
+                        UNDEFINED_HEALTH_STATUS = 0,
+                        DEGRADED = 396890926,
+                        HEALTHY = 439801213,
+                        HEALTH_STATUS_UNSPECIFIED = 482246925
                     }
                 }
 
@@ -163363,6 +163629,9 @@ export namespace google {
                     /** ReservationSubBlock creationTimestamp */
                     creationTimestamp?: (string|null);
 
+                    /** ReservationSubBlock healthInfo */
+                    healthInfo?: (google.cloud.compute.v1beta.IReservationSubBlockHealthInfo|null);
+
                     /** ReservationSubBlock id */
                     id?: (number|Long|string|null);
 
@@ -163408,6 +163677,9 @@ export namespace google {
 
                     /** ReservationSubBlock creationTimestamp. */
                     public creationTimestamp?: (string|null);
+
+                    /** ReservationSubBlock healthInfo. */
+                    public healthInfo?: (google.cloud.compute.v1beta.IReservationSubBlockHealthInfo|null);
 
                     /** ReservationSubBlock id. */
                     public id?: (number|Long|string|null);
@@ -163526,6 +163798,138 @@ export namespace google {
                         DELETING = 528602024,
                         INVALID = 530283991,
                         READY = 77848963
+                    }
+                }
+
+                /** Properties of a ReservationSubBlockHealthInfo. */
+                interface IReservationSubBlockHealthInfo {
+
+                    /** ReservationSubBlockHealthInfo degradedHostCount */
+                    degradedHostCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo degradedInfraCount */
+                    degradedInfraCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo healthStatus */
+                    healthStatus?: (string|null);
+
+                    /** ReservationSubBlockHealthInfo healthyHostCount */
+                    healthyHostCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo healthyInfraCount */
+                    healthyInfraCount?: (number|null);
+                }
+
+                /** Represents a ReservationSubBlockHealthInfo. */
+                class ReservationSubBlockHealthInfo implements IReservationSubBlockHealthInfo {
+
+                    /**
+                     * Constructs a new ReservationSubBlockHealthInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IReservationSubBlockHealthInfo);
+
+                    /** ReservationSubBlockHealthInfo degradedHostCount. */
+                    public degradedHostCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo degradedInfraCount. */
+                    public degradedInfraCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo healthStatus. */
+                    public healthStatus?: (string|null);
+
+                    /** ReservationSubBlockHealthInfo healthyHostCount. */
+                    public healthyHostCount?: (number|null);
+
+                    /** ReservationSubBlockHealthInfo healthyInfraCount. */
+                    public healthyInfraCount?: (number|null);
+
+                    /**
+                     * Creates a new ReservationSubBlockHealthInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationSubBlockHealthInfo instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IReservationSubBlockHealthInfo): google.cloud.compute.v1beta.ReservationSubBlockHealthInfo;
+
+                    /**
+                     * Encodes the specified ReservationSubBlockHealthInfo message. Does not implicitly {@link google.cloud.compute.v1beta.ReservationSubBlockHealthInfo.verify|verify} messages.
+                     * @param message ReservationSubBlockHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IReservationSubBlockHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationSubBlockHealthInfo message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.ReservationSubBlockHealthInfo.verify|verify} messages.
+                     * @param message ReservationSubBlockHealthInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IReservationSubBlockHealthInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationSubBlockHealthInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationSubBlockHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.ReservationSubBlockHealthInfo;
+
+                    /**
+                     * Decodes a ReservationSubBlockHealthInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationSubBlockHealthInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.ReservationSubBlockHealthInfo;
+
+                    /**
+                     * Verifies a ReservationSubBlockHealthInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationSubBlockHealthInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationSubBlockHealthInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.ReservationSubBlockHealthInfo;
+
+                    /**
+                     * Creates a plain object from a ReservationSubBlockHealthInfo message. Also converts values to other types if specified.
+                     * @param message ReservationSubBlockHealthInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.ReservationSubBlockHealthInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationSubBlockHealthInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationSubBlockHealthInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReservationSubBlockHealthInfo {
+
+                    /** HealthStatus enum. */
+                    enum HealthStatus {
+                        UNDEFINED_HEALTH_STATUS = 0,
+                        DEGRADED = 396890926,
+                        HEALTHY = 439801213,
+                        HEALTH_STATUS_UNSPECIFIED = 482246925
                     }
                 }
 
@@ -216699,6 +217103,9 @@ export namespace google {
                     /** UpcomingMaintenance maintenanceOnShutdown */
                     maintenanceOnShutdown?: (boolean|null);
 
+                    /** UpcomingMaintenance maintenanceReasons */
+                    maintenanceReasons?: (string[]|null);
+
                     /** UpcomingMaintenance maintenanceStatus */
                     maintenanceStatus?: (string|null);
 
@@ -216729,6 +217136,9 @@ export namespace google {
 
                     /** UpcomingMaintenance maintenanceOnShutdown. */
                     public maintenanceOnShutdown?: (boolean|null);
+
+                    /** UpcomingMaintenance maintenanceReasons. */
+                    public maintenanceReasons: string[];
 
                     /** UpcomingMaintenance maintenanceStatus. */
                     public maintenanceStatus?: (string|null);
@@ -216821,6 +217231,22 @@ export namespace google {
                 }
 
                 namespace UpcomingMaintenance {
+
+                    /** MaintenanceReasons enum. */
+                    enum MaintenanceReasons {
+                        UNDEFINED_MAINTENANCE_REASONS = 0,
+                        FAILURE_DISK = 8573778,
+                        FAILURE_GPU = 467876919,
+                        FAILURE_GPU_TEMPERATURE = 24926540,
+                        FAILURE_GPU_XID = 51956587,
+                        FAILURE_INFRA = 270541467,
+                        FAILURE_INTERFACE = 390068356,
+                        FAILURE_MEMORY = 440132982,
+                        FAILURE_NETWORK = 42811449,
+                        FAILURE_NVLINK = 484426295,
+                        INFRASTRUCTURE_RELOCATION = 359845636,
+                        MAINTENANCE_REASON_UNKNOWN = 50570235
+                    }
 
                     /** MaintenanceStatus enum. */
                     enum MaintenanceStatus {

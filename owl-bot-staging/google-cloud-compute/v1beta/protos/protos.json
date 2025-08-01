@@ -7091,6 +7091,11 @@
                     },
                     "AllocationResourceStatus": {
                       "oneofs": {
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_reservationBlockCount": {
                           "oneof": [
                             "reservationBlockCount"
@@ -7108,6 +7113,13 @@
                         }
                       },
                       "fields": {
+                        "healthInfo": {
+                          "type": "AllocationResourceStatusHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "reservationBlockCount": {
                           "type": "int32",
                           "id": 161835754,
@@ -7127,6 +7139,58 @@
                           "id": 196231151,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AllocationResourceStatusHealthInfo": {
+                      "oneofs": {
+                        "_degradedBlockCount": {
+                          "oneof": [
+                            "degradedBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyBlockCount": {
+                          "oneof": [
+                            "healthyBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedBlockCount": {
+                          "type": "int32",
+                          "id": 514082636,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyBlockCount": {
+                          "type": "int32",
+                          "id": 223625019,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -73842,6 +73906,11 @@
                             "satisfiesPzs"
                           ]
                         },
+                        "_schedulingType": {
+                          "oneof": [
+                            "schedulingType"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -73989,6 +74058,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "schedulingType": {
+                          "type": "string",
+                          "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
@@ -74047,6 +74123,14 @@
                             "CALENDAR": 67431230,
                             "DEFAULT": 115302945,
                             "RESERVATION_MODE_UNSPECIFIED": 233810606
+                          }
+                        },
+                        "SchedulingType": {
+                          "values": {
+                            "UNDEFINED_SCHEDULING_TYPE": 0,
+                            "GROUPED": 474540862,
+                            "GROUP_MAINTENANCE_TYPE_UNSPECIFIED": 447183678,
+                            "INDEPENDENT": 127011674
                           }
                         },
                         "Status": {
@@ -74197,6 +74281,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -74269,6 +74358,13 @@
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthInfo": {
+                          "type": "ReservationBlockHealthInfo",
+                          "id": 235287729,
                           "options": {
                             "proto3_optional": true
                           }
@@ -74366,6 +74462,58 @@
                             "DELETING": 528602024,
                             "INVALID": 530283991,
                             "READY": 77848963
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedSubBlockCount": {
+                          "oneof": [
+                            "degradedSubBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthySubBlockCount": {
+                          "oneof": [
+                            "healthySubBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedSubBlockCount": {
+                          "type": "int32",
+                          "id": 458044493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthySubBlockCount": {
+                          "type": "int32",
+                          "id": 5348540,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -74649,6 +74797,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -74711,6 +74864,13 @@
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthInfo": {
+                          "type": "ReservationSubBlockHealthInfo",
+                          "id": 235287729,
                           "options": {
                             "proto3_optional": true
                           }
@@ -74794,6 +74954,82 @@
                             "DELETING": 528602024,
                             "INVALID": 530283991,
                             "READY": 77848963
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedHostCount": {
+                          "oneof": [
+                            "degradedHostCount"
+                          ]
+                        },
+                        "_degradedInfraCount": {
+                          "oneof": [
+                            "degradedInfraCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyHostCount": {
+                          "oneof": [
+                            "healthyHostCount"
+                          ]
+                        },
+                        "_healthyInfraCount": {
+                          "oneof": [
+                            "healthyInfraCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedHostCount": {
+                          "type": "int32",
+                          "id": 535025001,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "degradedInfraCount": {
+                          "type": "int32",
+                          "id": 138638927,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyHostCount": {
+                          "type": "int32",
+                          "id": 40739738,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyInfraCount": {
+                          "type": "int32",
+                          "id": 385052222,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -97251,6 +97487,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "maintenanceReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 140283267
+                        },
                         "maintenanceStatus": {
                           "type": "string",
                           "id": 81645214,
@@ -97281,6 +97522,22 @@
                         }
                       },
                       "nested": {
+                        "MaintenanceReasons": {
+                          "values": {
+                            "UNDEFINED_MAINTENANCE_REASONS": 0,
+                            "FAILURE_DISK": 8573778,
+                            "FAILURE_GPU": 467876919,
+                            "FAILURE_GPU_TEMPERATURE": 24926540,
+                            "FAILURE_GPU_XID": 51956587,
+                            "FAILURE_INFRA": 270541467,
+                            "FAILURE_INTERFACE": 390068356,
+                            "FAILURE_MEMORY": 440132982,
+                            "FAILURE_NETWORK": 42811449,
+                            "FAILURE_NVLINK": 484426295,
+                            "INFRASTRUCTURE_RELOCATION": 359845636,
+                            "MAINTENANCE_REASON_UNKNOWN": 50570235
+                          }
+                        },
                         "MaintenanceStatus": {
                           "values": {
                             "UNDEFINED_MAINTENANCE_STATUS": 0,
