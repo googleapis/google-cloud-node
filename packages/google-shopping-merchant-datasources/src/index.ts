@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const DataSourcesServiceClient = v1beta.DataSourcesServiceClient;
@@ -23,7 +24,7 @@ type DataSourcesServiceClient = v1beta.DataSourcesServiceClient;
 const FileUploadsServiceClient = v1beta.FileUploadsServiceClient;
 type FileUploadsServiceClient = v1beta.FileUploadsServiceClient;
 
-export {v1beta, DataSourcesServiceClient, FileUploadsServiceClient};
-export default {v1beta, DataSourcesServiceClient, FileUploadsServiceClient};
+export {v1, v1beta, DataSourcesServiceClient, FileUploadsServiceClient};
+export default {v1, v1beta, DataSourcesServiceClient, FileUploadsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
