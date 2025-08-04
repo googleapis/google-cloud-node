@@ -4170,7 +4170,16 @@
                       },
                       "nested": {
                         "GoogleSearch": {
-                          "fields": {}
+                          "fields": {
+                            "excludeDomains": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         },
                         "CodeExecution": {
                           "fields": {}
@@ -4497,7 +4506,16 @@
                       }
                     },
                     "EnterpriseWebSearch": {
-                      "fields": {}
+                      "fields": {
+                        "excludeDomains": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
