@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.notifications.v1",
+  "libraryPackage": "@google-cloud/notifications",
+  "services": {
+    "NotificationsApiService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotificationsApiServiceClient",
+          "rpcs": {
+            "GetNotificationSubscription": {
+              "methods": [
+                "getNotificationSubscription"
+              ]
+            },
+            "CreateNotificationSubscription": {
+              "methods": [
+                "createNotificationSubscription"
+              ]
+            },
+            "UpdateNotificationSubscription": {
+              "methods": [
+                "updateNotificationSubscription"
+              ]
+            },
+            "DeleteNotificationSubscription": {
+              "methods": [
+                "deleteNotificationSubscription"
+              ]
+            },
+            "GetNotificationSubscriptionHealthMetrics": {
+              "methods": [
+                "getNotificationSubscriptionHealthMetrics"
+              ]
+            },
+            "ListNotificationSubscriptions": {
+              "methods": [
+                "listNotificationSubscriptions",
+                "listNotificationSubscriptionsStream",
+                "listNotificationSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotificationsApiServiceClient",
+          "rpcs": {
+            "GetNotificationSubscription": {
+              "methods": [
+                "getNotificationSubscription"
+              ]
+            },
+            "CreateNotificationSubscription": {
+              "methods": [
+                "createNotificationSubscription"
+              ]
+            },
+            "UpdateNotificationSubscription": {
+              "methods": [
+                "updateNotificationSubscription"
+              ]
+            },
+            "DeleteNotificationSubscription": {
+              "methods": [
+                "deleteNotificationSubscription"
+              ]
+            },
+            "GetNotificationSubscriptionHealthMetrics": {
+              "methods": [
+                "getNotificationSubscriptionHealthMetrics"
+              ]
+            },
+            "ListNotificationSubscriptions": {
+              "methods": [
+                "listNotificationSubscriptions",
+                "listNotificationSubscriptionsStream",
+                "listNotificationSubscriptionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

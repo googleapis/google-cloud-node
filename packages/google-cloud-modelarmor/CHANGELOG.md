@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.3.0...modelarmor-v0.4.0) (2025-08-04)
+
+
+### Features
+
+* [modelarmor] MultiLanguage Detection in Model Armor Floor Setting ([#6543](https://github.com/googleapis/google-cloud-node/issues/6543)) ([10ef432](https://github.com/googleapis/google-cloud-node/commit/10ef432ef35d71e59f6f2c9e6406cf9103ca1a24))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.2.0...modelarmor-v0.3.0) (2025-07-28)
 
 

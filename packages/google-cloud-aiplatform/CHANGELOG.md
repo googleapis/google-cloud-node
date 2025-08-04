@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.1.0...aiplatform-v5.2.0) (2025-08-04)
+
+
+### Features
+
+* Add a FooBar API ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Add enable_datapoint_upsert_logging to google.cloud.aiplatform.v1.DeployedIndex ([#6542](https://github.com/googleapis/google-cloud-node/issues/6542)) ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Add field ReasoningEngineSpec.service_account ([#6547](https://github.com/googleapis/google-cloud-node/issues/6547)) ([9643347](https://github.com/googleapis/google-cloud-node/commit/9643347354333438637958811c1029d501720563))
+* Add the VeoTuningSpec ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Remove private preview label from Model Armor protos ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.0.0...aiplatform-v5.1.0) (2025-07-28)
 
 
