@@ -7,7 +7,7 @@
   "pinVersions": false,
   "rebaseStalePrs": true,
   "schedule": [
-    "weekly"
+    "every Monday"
   ],
   "prCreation": "not-recreate",
   "gitAuthor": null,
@@ -17,13 +17,10 @@
       "groupName": "linters"
     },
     {
-      "matchPackagePatterns": [
-        "*"
+      "matchUpdateTypes": [
+        "minor"
       ],
-      "allowedUpdateTypes": [
-        "major",
-        "patch"
-      ]
+      "enabled": false
     }
   ],
   "ignoreDeps": [
