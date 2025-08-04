@@ -69153,6 +69153,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag */
                     crowdingTag?: (google.cloud.aiplatform.v1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata */
+                    embeddingMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an IndexDatapoint. */
@@ -69181,6 +69184,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag. */
                     public crowdingTag?: (google.cloud.aiplatform.v1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata. */
+                    public embeddingMetadata?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new IndexDatapoint instance using the specified properties.
