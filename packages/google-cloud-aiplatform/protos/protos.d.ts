@@ -41,6 +41,7 @@ export namespace google {
                     NVIDIA_H100_MEGA_80GB = 14,
                     NVIDIA_H200_141GB = 15,
                     NVIDIA_B200 = 16,
+                    NVIDIA_GB200 = 17,
                     TPU_V2 = 6,
                     TPU_V3 = 7,
                     TPU_V4_POD = 10,
