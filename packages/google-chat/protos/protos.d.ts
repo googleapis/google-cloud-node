@@ -19171,6 +19171,9 @@ export namespace google {
                 /** Space accessSettings */
                 accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
 
+                /** Space customer */
+                customer?: (string|null);
+
                 /** Space spaceUri */
                 spaceUri?: (string|null);
 
@@ -19240,6 +19243,9 @@ export namespace google {
 
                 /** Space accessSettings. */
                 public accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space customer. */
+                public customer?: (string|null);
 
                 /** Space spaceUri. */
                 public spaceUri: string;

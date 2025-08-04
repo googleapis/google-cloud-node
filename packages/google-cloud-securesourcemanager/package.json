@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/securesourcemanager",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Secure Source Manager API client for Node.js",
   "repository": {
     "type": "git",

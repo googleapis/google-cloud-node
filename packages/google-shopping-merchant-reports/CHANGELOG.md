@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.10.0...reports-v0.11.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] Add additional YouTube report fields to Merchant reports endpoint ([#6549](https://github.com/googleapis/google-cloud-node/issues/6549)) ([7c4f983](https://github.com/googleapis/google-cloud-node/commit/7c4f983971be37e7bdd1b2344166c8ff662b01b9))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.9.0...reports-v0.10.0) (2025-07-09)
 
 
