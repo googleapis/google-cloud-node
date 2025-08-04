@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.6.0...lfp-v0.7.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add lfp API for v1 ([#6558](https://github.com/googleapis/google-cloud-node/issues/6558)) ([dfa3722](https://github.com/googleapis/google-cloud-node/commit/dfa37220357f8294ec5e65073ccce4f6a25f62aa))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.5.0...lfp-v0.6.0) (2025-07-09)
 
 

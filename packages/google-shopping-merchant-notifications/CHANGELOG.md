@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.5.0...notifications-v0.6.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add notifications API client libraries for v1 ([#6554](https://github.com/googleapis/google-cloud-node/issues/6554)) ([92e9a78](https://github.com/googleapis/google-cloud-node/commit/92e9a783579873f4c92ec2f643143515dfa16fe7))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.4.1...notifications-v0.5.0) (2025-07-09)
 
 

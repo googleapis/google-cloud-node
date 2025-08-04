@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.5.0...quota-v0.6.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add quota API for v1 ([#6559](https://github.com/googleapis/google-cloud-node/issues/6559)) ([741b41b](https://github.com/googleapis/google-cloud-node/commit/741b41bdeb78e63021a239aa53df21a845eff5e1))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.4.0...quota-v0.5.0) (2025-07-09)
 
 
