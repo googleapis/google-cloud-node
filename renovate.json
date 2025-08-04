@@ -1,15 +1,29 @@
 {
-  "extends": ["config:base", "docker:disable"],
+  "extends": [
+    "config:base",
+    "docker:disable"
+  ],
   "constraintsFiltering": "strict",
   "pinVersions": false,
   "rebaseStalePrs": true,
-  "schedule": ["after 9am and before 3pm"],
+  "schedule": [
+    "every Monday"
+  ],
+  "prCreation": "not-recreate",
   "gitAuthor": null,
   "packageRules": [
     {
       "extends": "packages:linters",
       "groupName": "linters"
+    },
+    {
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "enabled": false
     }
   ],
-  "ignoreDeps": ["typescript"]
+  "ignoreDeps": [
+    "typescript"
+  ]
 }

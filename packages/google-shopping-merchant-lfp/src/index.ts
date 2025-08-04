@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const LfpInventoryServiceClient = v1beta.LfpInventoryServiceClient;
@@ -27,7 +28,7 @@ type LfpSaleServiceClient = v1beta.LfpSaleServiceClient;
 const LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
 type LfpStoreServiceClient = v1beta.LfpStoreServiceClient;
 
-export {v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
-export default {v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
+export {v1, v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
+export default {v1, v1beta, LfpInventoryServiceClient, LfpMerchantStateServiceClient, LfpSaleServiceClient, LfpStoreServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
