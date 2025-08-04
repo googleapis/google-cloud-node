@@ -5,6 +5,180 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "10ef432ef35d71e59f6f2c9e6406cf9103ca1a24",
+          "message": "[modelarmor] MultiLanguage Detection in Model Armor Floor Setting",
+          "issues": [
+            "6543"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "4131be7e-6f9a-4ef1-ba2b-265d29a3f359",
+      "createTime": "2025-08-04T16:58:23.073Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "445f9a3370e3849d4b4b6e50c48706cdff10ee67",
+          "message": "[privilegedaccessmanager] Introducing new Grant states for Withdrawal operation",
+          "issues": [
+            "6550"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "f25e8f64-3242-421a-b3a2-a5b98d5d0214",
+      "createTime": "2025-08-04T16:58:23.057Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7a644781448f2cc6c56549b30f1fe5c1fd69a70",
+          "message": "Remove private preview label from Model Armor protos",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "c7a644781448f2cc6c56549b30f1fe5c1fd69a70",
+          "message": "Add a FooBar API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "c7a644781448f2cc6c56549b30f1fe5c1fd69a70",
+          "message": "Add the VeoTuningSpec",
+          "issues": []
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "e679b89c-5cf7-4c23-8be3-bf461f31d5bb",
+      "createTime": "2025-08-04T16:58:23.042Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f185fb1681c37ade2d8159af240b27a308ac05e3",
+          "message": "[chat] Addition of app auth support for chat api",
+          "issues": [
+            "6545"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "d95be9e8-21ab-4679-a7fb-6a872ac930f3",
+      "createTime": "2025-08-04T16:58:23.025Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c4f983971be37e7bdd1b2344166c8ff662b01b9",
+          "message": "[merchantapi] Add additional YouTube report fields to Merchant reports endpoint",
+          "issues": [
+            "6549"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "f61b8f84-43ee-4df9-bc4f-cf8515e333a8",
+      "createTime": "2025-08-04T16:58:23.006Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "517a9caaf1ef6bf7484208745f2fb27a57fc49da",
+          "message": "Update dependency redis to ~5.7.0",
+          "issues": [
+            "6551"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "e475125c-53ab-4cd3-b18f-a3eb2a289b06",
+      "createTime": "2025-08-04T16:58:22.987Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "36c69e324c01ed96f87e4305636823f5e459ad41",
+          "message": "Update dependency @google-cloud/compute to v6",
+          "issues": [
+            "6544"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "2aa8a737-2411-4983-b1f7-18c43c87eb55",
+      "createTime": "2025-08-04T16:58:22.969Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9643347354333438637958811c1029d501720563",
+          "message": "Add field ReasoningEngineSpec.service_account",
+          "issues": [
+            "6547"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1783b417e71850cf29137544d613ef204f882d25",
+          "message": "Add enable_datapoint_upsert_logging to google.cloud.aiplatform.v1.DeployedIndex",
+          "issues": [
+            "6542"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1783b417e71850cf29137544d613ef204f882d25",
+          "message": "Remove private preview label from Model Armor protos",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "1783b417e71850cf29137544d613ef204f882d25",
+          "message": "Add a FooBar API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "1783b417e71850cf29137544d613ef204f882d25",
+          "message": "Add the VeoTuningSpec",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "8ece3ee1-6e09-42e1-8b5c-eeddb6df2f4f",
+      "createTime": "2025-08-04T16:58:22.953Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "0c21b6970375c5ee7a25f910cc081fbe2f492eaa",
           "message": "Add initial files for google.cloud.configdelivery.v1",
           "issues": [
@@ -60890,5 +61064,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-07-28T18:29:20.426Z"
+  "updateTime": "2025-08-04T16:58:23.073Z"
 }

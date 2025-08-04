@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.17.0...chat-v0.18.0) (2025-08-04)
+
+
+### Features
+
+* [chat] Addition of app auth support for chat api ([#6545](https://github.com/googleapis/google-cloud-node/issues/6545)) ([f185fb1](https://github.com/googleapis/google-cloud-node/commit/f185fb1681c37ade2d8159af240b27a308ac05e3))
+
 ## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.16.0...chat-v0.17.0) (2025-07-28)
 
 

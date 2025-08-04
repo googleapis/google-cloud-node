@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/asset-v6.2.0...asset-v6.2.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/compute to v6 ([#6544](https://github.com/googleapis/google-cloud-node/issues/6544)) ([36c69e3](https://github.com/googleapis/google-cloud-node/commit/36c69e324c01ed96f87e4305636823f5e459ad41))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/asset-v6.1.0...asset-v6.2.0) (2025-07-09)
 
 
