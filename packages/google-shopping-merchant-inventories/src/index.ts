@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const LocalInventoryServiceClient = v1beta.LocalInventoryServiceClient;
@@ -23,7 +24,7 @@ type LocalInventoryServiceClient = v1beta.LocalInventoryServiceClient;
 const RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
 type RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
 
-export {v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
-export default {v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
+export {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
+export default {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
