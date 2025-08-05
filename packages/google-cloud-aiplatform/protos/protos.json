@@ -14041,6 +14041,24 @@
                               }
                             }
                           ]
+                        },
+                        "FeatureViewDirectWrite": {
+                          "requestType": "FeatureViewDirectWriteRequest",
+                          "requestStream": true,
+                          "responseType": "FeatureViewDirectWriteResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:directWrite",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:directWrite",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -14402,6 +14420,88 @@
                         "nearestNeighbors": {
                           "type": "NearestNeighbors",
                           "id": 1
+                        }
+                      }
+                    },
+                    "FeatureViewDirectWriteRequest": {
+                      "fields": {
+                        "featureView": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureView"
+                          }
+                        },
+                        "dataKeyAndFeatureValues": {
+                          "rule": "repeated",
+                          "type": "DataKeyAndFeatureValues",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataKeyAndFeatureValues": {
+                          "fields": {
+                            "dataKey": {
+                              "type": "FeatureViewDataKey",
+                              "id": 1
+                            },
+                            "features": {
+                              "rule": "repeated",
+                              "type": "Feature",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Feature": {
+                              "oneofs": {
+                                "dataOneof": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "FeatureValue",
+                                  "id": 3
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FeatureViewDirectWriteResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "writeResponses": {
+                          "rule": "repeated",
+                          "type": "WriteResponse",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "WriteResponse": {
+                          "fields": {
+                            "dataKey": {
+                              "type": "FeatureViewDataKey",
+                              "id": 1
+                            },
+                            "onlineStoreWriteTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -56744,11 +56844,16 @@
                               "oneofs": {
                                 "dataOneof": {
                                   "oneof": [
+                                    "value",
                                     "valueAndTimestamp"
                                   ]
                                 }
                               },
                               "fields": {
+                                "value": {
+                                  "type": "FeatureValue",
+                                  "id": 3
+                                },
                                 "valueAndTimestamp": {
                                   "type": "FeatureValueAndTimestamp",
                                   "id": 2

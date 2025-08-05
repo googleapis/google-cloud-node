@@ -51467,6 +51467,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public searchNearestEntities(request: google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest): Promise<google.cloud.aiplatform.v1.SearchNearestEntitiesResponse>;
+
+                    /**
+                     * Calls FeatureViewDirectWrite.
+                     * @param request FeatureViewDirectWriteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeatureViewDirectWriteResponse
+                     */
+                    public featureViewDirectWrite(request: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, callback: google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWriteCallback): void;
+
+                    /**
+                     * Calls FeatureViewDirectWrite.
+                     * @param request FeatureViewDirectWriteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public featureViewDirectWrite(request: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest): Promise<google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse>;
                 }
 
                 namespace FeatureOnlineStoreService {
@@ -51484,6 +51498,13 @@ export namespace google {
                      * @param [response] SearchNearestEntitiesResponse
                      */
                     type SearchNearestEntitiesCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.SearchNearestEntitiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.FeatureOnlineStoreService|featureViewDirectWrite}.
+                     * @param error Error, if any
+                     * @param [response] FeatureViewDirectWriteResponse
+                     */
+                    type FeatureViewDirectWriteCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => void;
                 }
 
                 /** FeatureViewDataFormat enum. */
@@ -53128,6 +53149,533 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FeatureViewDirectWriteRequest. */
+                interface IFeatureViewDirectWriteRequest {
+
+                    /** FeatureViewDirectWriteRequest featureView */
+                    featureView?: (string|null);
+
+                    /** FeatureViewDirectWriteRequest dataKeyAndFeatureValues */
+                    dataKeyAndFeatureValues?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues[]|null);
+                }
+
+                /** Represents a FeatureViewDirectWriteRequest. */
+                class FeatureViewDirectWriteRequest implements IFeatureViewDirectWriteRequest {
+
+                    /**
+                     * Constructs a new FeatureViewDirectWriteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest);
+
+                    /** FeatureViewDirectWriteRequest featureView. */
+                    public featureView: string;
+
+                    /** FeatureViewDirectWriteRequest dataKeyAndFeatureValues. */
+                    public dataKeyAndFeatureValues: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues[];
+
+                    /**
+                     * Creates a new FeatureViewDirectWriteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeatureViewDirectWriteRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeatureViewDirectWriteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeatureViewDirectWriteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Verifies a FeatureViewDirectWriteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeatureViewDirectWriteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeatureViewDirectWriteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Creates a plain object from a FeatureViewDirectWriteRequest message. Also converts values to other types if specified.
+                     * @param message FeatureViewDirectWriteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeatureViewDirectWriteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeatureViewDirectWriteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FeatureViewDirectWriteRequest {
+
+                    /** Properties of a DataKeyAndFeatureValues. */
+                    interface IDataKeyAndFeatureValues {
+
+                        /** DataKeyAndFeatureValues dataKey */
+                        dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** DataKeyAndFeatureValues features */
+                        features?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature[]|null);
+                    }
+
+                    /** Represents a DataKeyAndFeatureValues. */
+                    class DataKeyAndFeatureValues implements IDataKeyAndFeatureValues {
+
+                        /**
+                         * Constructs a new DataKeyAndFeatureValues.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues);
+
+                        /** DataKeyAndFeatureValues dataKey. */
+                        public dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** DataKeyAndFeatureValues features. */
+                        public features: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature[];
+
+                        /**
+                         * Creates a new DataKeyAndFeatureValues instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataKeyAndFeatureValues instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Encodes the specified DataKeyAndFeatureValues message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.verify|verify} messages.
+                         * @param message DataKeyAndFeatureValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataKeyAndFeatureValues message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.verify|verify} messages.
+                         * @param message DataKeyAndFeatureValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataKeyAndFeatureValues message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataKeyAndFeatureValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Decodes a DataKeyAndFeatureValues message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataKeyAndFeatureValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Verifies a DataKeyAndFeatureValues message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataKeyAndFeatureValues message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataKeyAndFeatureValues
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Creates a plain object from a DataKeyAndFeatureValues message. Also converts values to other types if specified.
+                         * @param message DataKeyAndFeatureValues
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataKeyAndFeatureValues to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataKeyAndFeatureValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataKeyAndFeatureValues {
+
+                        /** Properties of a Feature. */
+                        interface IFeature {
+
+                            /** Feature value */
+                            value?: (google.cloud.aiplatform.v1.IFeatureValue|null);
+
+                            /** Feature name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a Feature. */
+                        class Feature implements IFeature {
+
+                            /**
+                             * Constructs a new Feature.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature);
+
+                            /** Feature value. */
+                            public value?: (google.cloud.aiplatform.v1.IFeatureValue|null);
+
+                            /** Feature name. */
+                            public name: string;
+
+                            /** Feature dataOneof. */
+                            public dataOneof?: "value";
+
+                            /**
+                             * Creates a new Feature instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Feature instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Encodes the specified Feature message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.verify|verify} messages.
+                             * @param message Feature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Feature message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.verify|verify} messages.
+                             * @param message Feature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Feature message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Feature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Decodes a Feature message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Feature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Verifies a Feature message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Feature message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Feature
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Creates a plain object from a Feature message. Also converts values to other types if specified.
+                             * @param message Feature
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Feature to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Feature
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a FeatureViewDirectWriteResponse. */
+                interface IFeatureViewDirectWriteResponse {
+
+                    /** FeatureViewDirectWriteResponse status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** FeatureViewDirectWriteResponse writeResponses */
+                    writeResponses?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse[]|null);
+                }
+
+                /** Represents a FeatureViewDirectWriteResponse. */
+                class FeatureViewDirectWriteResponse implements IFeatureViewDirectWriteResponse {
+
+                    /**
+                     * Constructs a new FeatureViewDirectWriteResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse);
+
+                    /** FeatureViewDirectWriteResponse status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** FeatureViewDirectWriteResponse writeResponses. */
+                    public writeResponses: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse[];
+
+                    /**
+                     * Creates a new FeatureViewDirectWriteResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeatureViewDirectWriteResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeatureViewDirectWriteResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeatureViewDirectWriteResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Verifies a FeatureViewDirectWriteResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeatureViewDirectWriteResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeatureViewDirectWriteResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Creates a plain object from a FeatureViewDirectWriteResponse message. Also converts values to other types if specified.
+                     * @param message FeatureViewDirectWriteResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeatureViewDirectWriteResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeatureViewDirectWriteResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FeatureViewDirectWriteResponse {
+
+                    /** Properties of a WriteResponse. */
+                    interface IWriteResponse {
+
+                        /** WriteResponse dataKey */
+                        dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** WriteResponse onlineStoreWriteTime */
+                        onlineStoreWriteTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a WriteResponse. */
+                    class WriteResponse implements IWriteResponse {
+
+                        /**
+                         * Constructs a new WriteResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse);
+
+                        /** WriteResponse dataKey. */
+                        public dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** WriteResponse onlineStoreWriteTime. */
+                        public onlineStoreWriteTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new WriteResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WriteResponse instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Encodes the specified WriteResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse.verify|verify} messages.
+                         * @param message WriteResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WriteResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse.verify|verify} messages.
+                         * @param message WriteResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WriteResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WriteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Decodes a WriteResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WriteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Verifies a WriteResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WriteResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WriteResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Creates a plain object from a WriteResponse message. Also converts values to other types if specified.
+                         * @param message WriteResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WriteResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WriteResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents a FeaturestoreOnlineServingService */
@@ -212815,6 +213363,9 @@ export namespace google {
                         /** Properties of a Feature. */
                         interface IFeature {
 
+                            /** Feature value */
+                            value?: (google.cloud.aiplatform.v1beta1.IFeatureValue|null);
+
                             /** Feature valueAndTimestamp */
                             valueAndTimestamp?: (google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.IFeatureValueAndTimestamp|null);
 
@@ -212831,6 +213382,9 @@ export namespace google {
                              */
                             constructor(properties?: google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature);
 
+                            /** Feature value. */
+                            public value?: (google.cloud.aiplatform.v1beta1.IFeatureValue|null);
+
                             /** Feature valueAndTimestamp. */
                             public valueAndTimestamp?: (google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.IFeatureValueAndTimestamp|null);
 
@@ -212838,7 +213392,7 @@ export namespace google {
                             public name: string;
 
                             /** Feature dataOneof. */
-                            public dataOneof?: "valueAndTimestamp";
+                            public dataOneof?: ("value"|"valueAndTimestamp");
 
                             /**
                              * Creates a new Feature instance using the specified properties.
