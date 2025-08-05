@@ -66,6 +66,10586 @@
                      */
                     var issueresolution = {};
     
+                    issueresolution.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.issueresolution
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.AggregateProductStatusesService = (function() {
+    
+                            /**
+                             * Constructs a new AggregateProductStatusesService service.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an AggregateProductStatusesService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function AggregateProductStatusesService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (AggregateProductStatusesService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AggregateProductStatusesService;
+    
+                            /**
+                             * Creates new AggregateProductStatusesService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {AggregateProductStatusesService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            AggregateProductStatusesService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService|listAggregateProductStatuses}.
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService
+                             * @typedef ListAggregateProductStatusesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} [response] ListAggregateProductStatusesResponse
+                             */
+    
+                            /**
+                             * Calls ListAggregateProductStatuses.
+                             * @function listAggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest} request ListAggregateProductStatusesRequest message or plain object
+                             * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService.ListAggregateProductStatusesCallback} callback Node-style callback called with the error, if any, and ListAggregateProductStatusesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AggregateProductStatusesService.prototype.listAggregateProductStatuses = function listAggregateProductStatuses(request, callback) {
+                                return this.rpcCall(listAggregateProductStatuses, $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest, $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse, request, callback);
+                            }, "name", { value: "ListAggregateProductStatuses" });
+    
+                            /**
+                             * Calls ListAggregateProductStatuses.
+                             * @function listAggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest} request ListAggregateProductStatusesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return AggregateProductStatusesService;
+                        })();
+    
+                        v1.ListAggregateProductStatusesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListAggregateProductStatusesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IListAggregateProductStatusesRequest
+                             * @property {string|null} [parent] ListAggregateProductStatusesRequest parent
+                             * @property {number|null} [pageSize] ListAggregateProductStatusesRequest pageSize
+                             * @property {string|null} [pageToken] ListAggregateProductStatusesRequest pageToken
+                             * @property {string|null} [filter] ListAggregateProductStatusesRequest filter
+                             */
+    
+                            /**
+                             * Constructs a new ListAggregateProductStatusesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a ListAggregateProductStatusesRequest.
+                             * @implements IListAggregateProductStatusesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest=} [properties] Properties to set
+                             */
+                            function ListAggregateProductStatusesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAggregateProductStatusesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListAggregateProductStatusesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListAggregateProductStatusesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListAggregateProductStatusesRequest filter.
+                             * @member {string} filter
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @instance
+                             */
+                            ListAggregateProductStatusesRequest.prototype.filter = "";
+    
+                            /**
+                             * Creates a new ListAggregateProductStatusesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest instance
+                             */
+                            ListAggregateProductStatusesRequest.create = function create(properties) {
+                                return new ListAggregateProductStatusesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAggregateProductStatusesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAggregateProductStatusesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAggregateProductStatusesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest} ListAggregateProductStatusesRequest
+                             */
+                            ListAggregateProductStatusesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAggregateProductStatusesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest} message ListAggregateProductStatusesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAggregateProductStatusesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAggregateProductStatusesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAggregateProductStatusesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAggregateProductStatusesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAggregateProductStatusesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest";
+                            };
+    
+                            return ListAggregateProductStatusesRequest;
+                        })();
+    
+                        v1.ListAggregateProductStatusesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListAggregateProductStatusesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IListAggregateProductStatusesResponse
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IAggregateProductStatus>|null} [aggregateProductStatuses] ListAggregateProductStatusesResponse aggregateProductStatuses
+                             * @property {string|null} [nextPageToken] ListAggregateProductStatusesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListAggregateProductStatusesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a ListAggregateProductStatusesResponse.
+                             * @implements IListAggregateProductStatusesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse=} [properties] Properties to set
+                             */
+                            function ListAggregateProductStatusesResponse(properties) {
+                                this.aggregateProductStatuses = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListAggregateProductStatusesResponse aggregateProductStatuses.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IAggregateProductStatus>} aggregateProductStatuses
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @instance
+                             */
+                            ListAggregateProductStatusesResponse.prototype.aggregateProductStatuses = $util.emptyArray;
+    
+                            /**
+                             * ListAggregateProductStatusesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @instance
+                             */
+                            ListAggregateProductStatusesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListAggregateProductStatusesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse instance
+                             */
+                            ListAggregateProductStatusesResponse.create = function create(properties) {
+                                return new ListAggregateProductStatusesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.aggregateProductStatuses != null && message.aggregateProductStatuses.length)
+                                    for (var i = 0; i < message.aggregateProductStatuses.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.encode(message.aggregateProductStatuses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListAggregateProductStatusesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListAggregateProductStatusesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.aggregateProductStatuses && message.aggregateProductStatuses.length))
+                                                message.aggregateProductStatuses = [];
+                                            message.aggregateProductStatuses.push($root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListAggregateProductStatusesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListAggregateProductStatusesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListAggregateProductStatusesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.aggregateProductStatuses != null && message.hasOwnProperty("aggregateProductStatuses")) {
+                                    if (!Array.isArray(message.aggregateProductStatuses))
+                                        return "aggregateProductStatuses: array expected";
+                                    for (var i = 0; i < message.aggregateProductStatuses.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.verify(message.aggregateProductStatuses[i]);
+                                        if (error)
+                                            return "aggregateProductStatuses." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListAggregateProductStatusesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} ListAggregateProductStatusesResponse
+                             */
+                            ListAggregateProductStatusesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse();
+                                if (object.aggregateProductStatuses) {
+                                    if (!Array.isArray(object.aggregateProductStatuses))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.aggregateProductStatuses: array expected");
+                                    message.aggregateProductStatuses = [];
+                                    for (var i = 0; i < object.aggregateProductStatuses.length; ++i) {
+                                        if (typeof object.aggregateProductStatuses[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.aggregateProductStatuses: object expected");
+                                        message.aggregateProductStatuses[i] = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.fromObject(object.aggregateProductStatuses[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListAggregateProductStatusesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse} message ListAggregateProductStatusesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListAggregateProductStatusesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.aggregateProductStatuses = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.aggregateProductStatuses && message.aggregateProductStatuses.length) {
+                                    object.aggregateProductStatuses = [];
+                                    for (var j = 0; j < message.aggregateProductStatuses.length; ++j)
+                                        object.aggregateProductStatuses[j] = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.toObject(message.aggregateProductStatuses[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListAggregateProductStatusesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListAggregateProductStatusesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListAggregateProductStatusesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListAggregateProductStatusesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse";
+                            };
+    
+                            return ListAggregateProductStatusesResponse;
+                        })();
+    
+                        v1.AggregateProductStatus = (function() {
+    
+                            /**
+                             * Properties of an AggregateProductStatus.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IAggregateProductStatus
+                             * @property {string|null} [name] AggregateProductStatus name
+                             * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] AggregateProductStatus reportingContext
+                             * @property {string|null} [country] AggregateProductStatus country
+                             * @property {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats|null} [stats] AggregateProductStatus stats
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue>|null} [itemLevelIssues] AggregateProductStatus itemLevelIssues
+                             */
+    
+                            /**
+                             * Constructs a new AggregateProductStatus.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an AggregateProductStatus.
+                             * @implements IAggregateProductStatus
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IAggregateProductStatus=} [properties] Properties to set
+                             */
+                            function AggregateProductStatus(properties) {
+                                this.itemLevelIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AggregateProductStatus name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.name = "";
+    
+                            /**
+                             * AggregateProductStatus reportingContext.
+                             * @member {google.shopping.type.ReportingContext.ReportingContextEnum} reportingContext
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.reportingContext = 0;
+    
+                            /**
+                             * AggregateProductStatus country.
+                             * @member {string} country
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.country = "";
+    
+                            /**
+                             * AggregateProductStatus stats.
+                             * @member {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats|null|undefined} stats
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.stats = null;
+    
+                            /**
+                             * AggregateProductStatus itemLevelIssues.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue>} itemLevelIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             */
+                            AggregateProductStatus.prototype.itemLevelIssues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AggregateProductStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAggregateProductStatus=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus} AggregateProductStatus instance
+                             */
+                            AggregateProductStatus.create = function create(properties) {
+                                return new AggregateProductStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AggregateProductStatus message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAggregateProductStatus} message AggregateProductStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AggregateProductStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.reportingContext);
+                                if (message.country != null && Object.hasOwnProperty.call(message, "country"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.country);
+                                if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
+                                    $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.encode(message.stats, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.itemLevelIssues != null && message.itemLevelIssues.length)
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.encode(message.itemLevelIssues[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AggregateProductStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAggregateProductStatus} message AggregateProductStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AggregateProductStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AggregateProductStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus} AggregateProductStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AggregateProductStatus.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reportingContext = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.country = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.stats = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.itemLevelIssues && message.itemLevelIssues.length))
+                                                message.itemLevelIssues = [];
+                                            message.itemLevelIssues.push($root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AggregateProductStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus} AggregateProductStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AggregateProductStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AggregateProductStatus message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AggregateProductStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                    switch (message.reportingContext) {
+                                    default:
+                                        return "reportingContext: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 13:
+                                    case 14:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                        break;
+                                    }
+                                if (message.country != null && message.hasOwnProperty("country"))
+                                    if (!$util.isString(message.country))
+                                        return "country: string expected";
+                                if (message.stats != null && message.hasOwnProperty("stats")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.verify(message.stats);
+                                    if (error)
+                                        return "stats." + error;
+                                }
+                                if (message.itemLevelIssues != null && message.hasOwnProperty("itemLevelIssues")) {
+                                    if (!Array.isArray(message.itemLevelIssues))
+                                        return "itemLevelIssues: array expected";
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.verify(message.itemLevelIssues[i]);
+                                        if (error)
+                                            return "itemLevelIssues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AggregateProductStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus} AggregateProductStatus
+                             */
+                            AggregateProductStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.reportingContext) {
+                                default:
+                                    if (typeof object.reportingContext === "number") {
+                                        message.reportingContext = object.reportingContext;
+                                        break;
+                                    }
+                                    break;
+                                case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                case 0:
+                                    message.reportingContext = 0;
+                                    break;
+                                case "SHOPPING_ADS":
+                                case 1:
+                                    message.reportingContext = 1;
+                                    break;
+                                case "DISCOVERY_ADS":
+                                case 2:
+                                    message.reportingContext = 2;
+                                    break;
+                                case "DEMAND_GEN_ADS":
+                                case 13:
+                                    message.reportingContext = 13;
+                                    break;
+                                case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                case 14:
+                                    message.reportingContext = 14;
+                                    break;
+                                case "VIDEO_ADS":
+                                case 3:
+                                    message.reportingContext = 3;
+                                    break;
+                                case "DISPLAY_ADS":
+                                case 4:
+                                    message.reportingContext = 4;
+                                    break;
+                                case "LOCAL_INVENTORY_ADS":
+                                case 5:
+                                    message.reportingContext = 5;
+                                    break;
+                                case "VEHICLE_INVENTORY_ADS":
+                                case 6:
+                                    message.reportingContext = 6;
+                                    break;
+                                case "FREE_LISTINGS":
+                                case 7:
+                                    message.reportingContext = 7;
+                                    break;
+                                case "FREE_LOCAL_LISTINGS":
+                                case 8:
+                                    message.reportingContext = 8;
+                                    break;
+                                case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                case 9:
+                                    message.reportingContext = 9;
+                                    break;
+                                case "YOUTUBE_SHOPPING":
+                                case 10:
+                                    message.reportingContext = 10;
+                                    break;
+                                case "CLOUD_RETAIL":
+                                case 11:
+                                    message.reportingContext = 11;
+                                    break;
+                                case "LOCAL_CLOUD_RETAIL":
+                                case 12:
+                                    message.reportingContext = 12;
+                                    break;
+                                }
+                                if (object.country != null)
+                                    message.country = String(object.country);
+                                if (object.stats != null) {
+                                    if (typeof object.stats !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.AggregateProductStatus.stats: object expected");
+                                    message.stats = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.fromObject(object.stats);
+                                }
+                                if (object.itemLevelIssues) {
+                                    if (!Array.isArray(object.itemLevelIssues))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.AggregateProductStatus.itemLevelIssues: array expected");
+                                    message.itemLevelIssues = [];
+                                    for (var i = 0; i < object.itemLevelIssues.length; ++i) {
+                                        if (typeof object.itemLevelIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.AggregateProductStatus.itemLevelIssues: object expected");
+                                        message.itemLevelIssues[i] = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.fromObject(object.itemLevelIssues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AggregateProductStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus} message AggregateProductStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AggregateProductStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.itemLevelIssues = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.reportingContext = options.enums === String ? "REPORTING_CONTEXT_ENUM_UNSPECIFIED" : 0;
+                                    object.country = "";
+                                    object.stats = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                    object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                if (message.country != null && message.hasOwnProperty("country"))
+                                    object.country = message.country;
+                                if (message.stats != null && message.hasOwnProperty("stats"))
+                                    object.stats = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.toObject(message.stats, options);
+                                if (message.itemLevelIssues && message.itemLevelIssues.length) {
+                                    object.itemLevelIssues = [];
+                                    for (var j = 0; j < message.itemLevelIssues.length; ++j)
+                                        object.itemLevelIssues[j] = $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.toObject(message.itemLevelIssues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AggregateProductStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AggregateProductStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AggregateProductStatus
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AggregateProductStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.AggregateProductStatus";
+                            };
+    
+                            AggregateProductStatus.Stats = (function() {
+    
+                                /**
+                                 * Properties of a Stats.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                                 * @interface IStats
+                                 * @property {number|Long|null} [activeCount] Stats activeCount
+                                 * @property {number|Long|null} [pendingCount] Stats pendingCount
+                                 * @property {number|Long|null} [disapprovedCount] Stats disapprovedCount
+                                 * @property {number|Long|null} [expiringCount] Stats expiringCount
+                                 */
+    
+                                /**
+                                 * Constructs a new Stats.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                                 * @classdesc Represents a Stats.
+                                 * @implements IStats
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats=} [properties] Properties to set
+                                 */
+                                function Stats(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Stats activeCount.
+                                 * @member {number|Long} activeCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.activeCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats pendingCount.
+                                 * @member {number|Long} pendingCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.pendingCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats disapprovedCount.
+                                 * @member {number|Long} disapprovedCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.disapprovedCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Stats expiringCount.
+                                 * @member {number|Long} expiringCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @instance
+                                 */
+                                Stats.prototype.expiringCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new Stats instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats} Stats instance
+                                 */
+                                Stats.create = function create(properties) {
+                                    return new Stats(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.activeCount != null && Object.hasOwnProperty.call(message, "activeCount"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.activeCount);
+                                    if (message.pendingCount != null && Object.hasOwnProperty.call(message, "pendingCount"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.pendingCount);
+                                    if (message.disapprovedCount != null && Object.hasOwnProperty.call(message, "disapprovedCount"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.disapprovedCount);
+                                    if (message.expiringCount != null && Object.hasOwnProperty.call(message, "expiringCount"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.expiringCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Stats message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats} message Stats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Stats.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.activeCount = reader.int64();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.pendingCount = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.disapprovedCount = reader.int64();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.expiringCount = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Stats message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats} Stats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Stats.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Stats message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Stats.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.activeCount != null && message.hasOwnProperty("activeCount"))
+                                        if (!$util.isInteger(message.activeCount) && !(message.activeCount && $util.isInteger(message.activeCount.low) && $util.isInteger(message.activeCount.high)))
+                                            return "activeCount: integer|Long expected";
+                                    if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                        if (!$util.isInteger(message.pendingCount) && !(message.pendingCount && $util.isInteger(message.pendingCount.low) && $util.isInteger(message.pendingCount.high)))
+                                            return "pendingCount: integer|Long expected";
+                                    if (message.disapprovedCount != null && message.hasOwnProperty("disapprovedCount"))
+                                        if (!$util.isInteger(message.disapprovedCount) && !(message.disapprovedCount && $util.isInteger(message.disapprovedCount.low) && $util.isInteger(message.disapprovedCount.high)))
+                                            return "disapprovedCount: integer|Long expected";
+                                    if (message.expiringCount != null && message.hasOwnProperty("expiringCount"))
+                                        if (!$util.isInteger(message.expiringCount) && !(message.expiringCount && $util.isInteger(message.expiringCount.low) && $util.isInteger(message.expiringCount.high)))
+                                            return "expiringCount: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Stats message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats} Stats
+                                 */
+                                Stats.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats();
+                                    if (object.activeCount != null)
+                                        if ($util.Long)
+                                            (message.activeCount = $util.Long.fromValue(object.activeCount)).unsigned = false;
+                                        else if (typeof object.activeCount === "string")
+                                            message.activeCount = parseInt(object.activeCount, 10);
+                                        else if (typeof object.activeCount === "number")
+                                            message.activeCount = object.activeCount;
+                                        else if (typeof object.activeCount === "object")
+                                            message.activeCount = new $util.LongBits(object.activeCount.low >>> 0, object.activeCount.high >>> 0).toNumber();
+                                    if (object.pendingCount != null)
+                                        if ($util.Long)
+                                            (message.pendingCount = $util.Long.fromValue(object.pendingCount)).unsigned = false;
+                                        else if (typeof object.pendingCount === "string")
+                                            message.pendingCount = parseInt(object.pendingCount, 10);
+                                        else if (typeof object.pendingCount === "number")
+                                            message.pendingCount = object.pendingCount;
+                                        else if (typeof object.pendingCount === "object")
+                                            message.pendingCount = new $util.LongBits(object.pendingCount.low >>> 0, object.pendingCount.high >>> 0).toNumber();
+                                    if (object.disapprovedCount != null)
+                                        if ($util.Long)
+                                            (message.disapprovedCount = $util.Long.fromValue(object.disapprovedCount)).unsigned = false;
+                                        else if (typeof object.disapprovedCount === "string")
+                                            message.disapprovedCount = parseInt(object.disapprovedCount, 10);
+                                        else if (typeof object.disapprovedCount === "number")
+                                            message.disapprovedCount = object.disapprovedCount;
+                                        else if (typeof object.disapprovedCount === "object")
+                                            message.disapprovedCount = new $util.LongBits(object.disapprovedCount.low >>> 0, object.disapprovedCount.high >>> 0).toNumber();
+                                    if (object.expiringCount != null)
+                                        if ($util.Long)
+                                            (message.expiringCount = $util.Long.fromValue(object.expiringCount)).unsigned = false;
+                                        else if (typeof object.expiringCount === "string")
+                                            message.expiringCount = parseInt(object.expiringCount, 10);
+                                        else if (typeof object.expiringCount === "number")
+                                            message.expiringCount = object.expiringCount;
+                                        else if (typeof object.expiringCount === "object")
+                                            message.expiringCount = new $util.LongBits(object.expiringCount.low >>> 0, object.expiringCount.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Stats message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats} message Stats
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Stats.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.activeCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.activeCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.pendingCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.pendingCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.disapprovedCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.disapprovedCount = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.expiringCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.expiringCount = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.activeCount != null && message.hasOwnProperty("activeCount"))
+                                        if (typeof message.activeCount === "number")
+                                            object.activeCount = options.longs === String ? String(message.activeCount) : message.activeCount;
+                                        else
+                                            object.activeCount = options.longs === String ? $util.Long.prototype.toString.call(message.activeCount) : options.longs === Number ? new $util.LongBits(message.activeCount.low >>> 0, message.activeCount.high >>> 0).toNumber() : message.activeCount;
+                                    if (message.pendingCount != null && message.hasOwnProperty("pendingCount"))
+                                        if (typeof message.pendingCount === "number")
+                                            object.pendingCount = options.longs === String ? String(message.pendingCount) : message.pendingCount;
+                                        else
+                                            object.pendingCount = options.longs === String ? $util.Long.prototype.toString.call(message.pendingCount) : options.longs === Number ? new $util.LongBits(message.pendingCount.low >>> 0, message.pendingCount.high >>> 0).toNumber() : message.pendingCount;
+                                    if (message.disapprovedCount != null && message.hasOwnProperty("disapprovedCount"))
+                                        if (typeof message.disapprovedCount === "number")
+                                            object.disapprovedCount = options.longs === String ? String(message.disapprovedCount) : message.disapprovedCount;
+                                        else
+                                            object.disapprovedCount = options.longs === String ? $util.Long.prototype.toString.call(message.disapprovedCount) : options.longs === Number ? new $util.LongBits(message.disapprovedCount.low >>> 0, message.disapprovedCount.high >>> 0).toNumber() : message.disapprovedCount;
+                                    if (message.expiringCount != null && message.hasOwnProperty("expiringCount"))
+                                        if (typeof message.expiringCount === "number")
+                                            object.expiringCount = options.longs === String ? String(message.expiringCount) : message.expiringCount;
+                                        else
+                                            object.expiringCount = options.longs === String ? $util.Long.prototype.toString.call(message.expiringCount) : options.longs === Number ? new $util.LongBits(message.expiringCount.low >>> 0, message.expiringCount.high >>> 0).toNumber() : message.expiringCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Stats to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Stats.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Stats
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Stats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats";
+                                };
+    
+                                return Stats;
+                            })();
+    
+                            AggregateProductStatus.ItemLevelIssue = (function() {
+    
+                                /**
+                                 * Properties of an ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                                 * @interface IItemLevelIssue
+                                 * @property {string|null} [code] ItemLevelIssue code
+                                 * @property {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity|null} [severity] ItemLevelIssue severity
+                                 * @property {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution|null} [resolution] ItemLevelIssue resolution
+                                 * @property {string|null} [attribute] ItemLevelIssue attribute
+                                 * @property {string|null} [description] ItemLevelIssue description
+                                 * @property {string|null} [detail] ItemLevelIssue detail
+                                 * @property {string|null} [documentationUri] ItemLevelIssue documentationUri
+                                 * @property {number|Long|null} [productCount] ItemLevelIssue productCount
+                                 */
+    
+                                /**
+                                 * Constructs a new ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus
+                                 * @classdesc Represents an ItemLevelIssue.
+                                 * @implements IItemLevelIssue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue=} [properties] Properties to set
+                                 */
+                                function ItemLevelIssue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ItemLevelIssue code.
+                                 * @member {string} code
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.code = "";
+    
+                                /**
+                                 * ItemLevelIssue severity.
+                                 * @member {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity} severity
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.severity = 0;
+    
+                                /**
+                                 * ItemLevelIssue resolution.
+                                 * @member {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution} resolution
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.resolution = 0;
+    
+                                /**
+                                 * ItemLevelIssue attribute.
+                                 * @member {string} attribute
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.attribute = "";
+    
+                                /**
+                                 * ItemLevelIssue description.
+                                 * @member {string} description
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.description = "";
+    
+                                /**
+                                 * ItemLevelIssue detail.
+                                 * @member {string} detail
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.detail = "";
+    
+                                /**
+                                 * ItemLevelIssue documentationUri.
+                                 * @member {string} documentationUri
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.documentationUri = "";
+    
+                                /**
+                                 * ItemLevelIssue productCount.
+                                 * @member {number|Long} productCount
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.productCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new ItemLevelIssue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue instance
+                                 */
+                                ItemLevelIssue.create = function create(properties) {
+                                    return new ItemLevelIssue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                                    if (message.resolution != null && Object.hasOwnProperty.call(message, "resolution"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.resolution);
+                                    if (message.attribute != null && Object.hasOwnProperty.call(message, "attribute"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.attribute);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                                    if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.detail);
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.documentationUri);
+                                    if (message.productCount != null && Object.hasOwnProperty.call(message, "productCount"))
+                                        writer.uint32(/* id 9, wireType 0 =*/72).int64(message.productCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.code = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.severity = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.resolution = reader.int32();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.attribute = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.detail = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.documentationUri = reader.string();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.productCount = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ItemLevelIssue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ItemLevelIssue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        if (!$util.isString(message.code))
+                                            return "code: string expected";
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        switch (message.severity) {
+                                        default:
+                                            return "severity: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        switch (message.resolution) {
+                                        default:
+                                            return "resolution: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        if (!$util.isString(message.attribute))
+                                            return "attribute: string expected";
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        if (!$util.isString(message.detail))
+                                            return "detail: string expected";
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        if (!$util.isString(message.documentationUri))
+                                            return "documentationUri: string expected";
+                                    if (message.productCount != null && message.hasOwnProperty("productCount"))
+                                        if (!$util.isInteger(message.productCount) && !(message.productCount && $util.isInteger(message.productCount.low) && $util.isInteger(message.productCount.high)))
+                                            return "productCount: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ItemLevelIssue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue} ItemLevelIssue
+                                 */
+                                ItemLevelIssue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue();
+                                    if (object.code != null)
+                                        message.code = String(object.code);
+                                    switch (object.severity) {
+                                    default:
+                                        if (typeof object.severity === "number") {
+                                            message.severity = object.severity;
+                                            break;
+                                        }
+                                        break;
+                                    case "SEVERITY_UNSPECIFIED":
+                                    case 0:
+                                        message.severity = 0;
+                                        break;
+                                    case "NOT_IMPACTED":
+                                    case 1:
+                                        message.severity = 1;
+                                        break;
+                                    case "DEMOTED":
+                                    case 2:
+                                        message.severity = 2;
+                                        break;
+                                    case "DISAPPROVED":
+                                    case 3:
+                                        message.severity = 3;
+                                        break;
+                                    }
+                                    switch (object.resolution) {
+                                    default:
+                                        if (typeof object.resolution === "number") {
+                                            message.resolution = object.resolution;
+                                            break;
+                                        }
+                                        break;
+                                    case "RESOLUTION_UNSPECIFIED":
+                                    case 0:
+                                        message.resolution = 0;
+                                        break;
+                                    case "MERCHANT_ACTION":
+                                    case 1:
+                                        message.resolution = 1;
+                                        break;
+                                    case "PENDING_PROCESSING":
+                                    case 2:
+                                        message.resolution = 2;
+                                        break;
+                                    }
+                                    if (object.attribute != null)
+                                        message.attribute = String(object.attribute);
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.detail != null)
+                                        message.detail = String(object.detail);
+                                    if (object.documentationUri != null)
+                                        message.documentationUri = String(object.documentationUri);
+                                    if (object.productCount != null)
+                                        if ($util.Long)
+                                            (message.productCount = $util.Long.fromValue(object.productCount)).unsigned = false;
+                                        else if (typeof object.productCount === "string")
+                                            message.productCount = parseInt(object.productCount, 10);
+                                        else if (typeof object.productCount === "number")
+                                            message.productCount = object.productCount;
+                                        else if (typeof object.productCount === "object")
+                                            message.productCount = new $util.LongBits(object.productCount.low >>> 0, object.productCount.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ItemLevelIssue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue} message ItemLevelIssue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ItemLevelIssue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.code = "";
+                                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                        object.resolution = options.enums === String ? "RESOLUTION_UNSPECIFIED" : 0;
+                                        object.attribute = "";
+                                        object.description = "";
+                                        object.detail = "";
+                                        object.documentationUri = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.productCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.productCount = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        object.code = message.code;
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        object.severity = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity[message.severity] : message.severity;
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        object.resolution = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution[message.resolution] === undefined ? message.resolution : $root.google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution[message.resolution] : message.resolution;
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        object.attribute = message.attribute;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        object.detail = message.detail;
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        object.documentationUri = message.documentationUri;
+                                    if (message.productCount != null && message.hasOwnProperty("productCount"))
+                                        if (typeof message.productCount === "number")
+                                            object.productCount = options.longs === String ? String(message.productCount) : message.productCount;
+                                        else
+                                            object.productCount = options.longs === String ? $util.Long.prototype.toString.call(message.productCount) : options.longs === Number ? new $util.LongBits(message.productCount.low >>> 0, message.productCount.high >>> 0).toNumber() : message.productCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ItemLevelIssue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ItemLevelIssue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ItemLevelIssue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ItemLevelIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue";
+                                };
+    
+                                /**
+                                 * Severity enum.
+                                 * @name google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity
+                                 * @enum {number}
+                                 * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                                 * @property {number} NOT_IMPACTED=1 NOT_IMPACTED value
+                                 * @property {number} DEMOTED=2 DEMOTED value
+                                 * @property {number} DISAPPROVED=3 DISAPPROVED value
+                                 */
+                                ItemLevelIssue.Severity = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "NOT_IMPACTED"] = 1;
+                                    values[valuesById[2] = "DEMOTED"] = 2;
+                                    values[valuesById[3] = "DISAPPROVED"] = 3;
+                                    return values;
+                                })();
+    
+                                /**
+                                 * Resolution enum.
+                                 * @name google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution
+                                 * @enum {number}
+                                 * @property {number} RESOLUTION_UNSPECIFIED=0 RESOLUTION_UNSPECIFIED value
+                                 * @property {number} MERCHANT_ACTION=1 MERCHANT_ACTION value
+                                 * @property {number} PENDING_PROCESSING=2 PENDING_PROCESSING value
+                                 */
+                                ItemLevelIssue.Resolution = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "RESOLUTION_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "MERCHANT_ACTION"] = 1;
+                                    values[valuesById[2] = "PENDING_PROCESSING"] = 2;
+                                    return values;
+                                })();
+    
+                                return ItemLevelIssue;
+                            })();
+    
+                            return AggregateProductStatus;
+                        })();
+    
+                        v1.IssueResolutionService = (function() {
+    
+                            /**
+                             * Constructs a new IssueResolutionService service.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an IssueResolutionService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function IssueResolutionService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (IssueResolutionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IssueResolutionService;
+    
+                            /**
+                             * Creates new IssueResolutionService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {IssueResolutionService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            IssueResolutionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|renderAccountIssues}.
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @typedef RenderAccountIssuesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} [response] RenderAccountIssuesResponse
+                             */
+    
+                            /**
+                             * Calls RenderAccountIssues.
+                             * @function renderAccountIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest} request RenderAccountIssuesRequest message or plain object
+                             * @param {google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderAccountIssuesCallback} callback Node-style callback called with the error, if any, and RenderAccountIssuesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(IssueResolutionService.prototype.renderAccountIssues = function renderAccountIssues(request, callback) {
+                                return this.rpcCall(renderAccountIssues, $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest, $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse, request, callback);
+                            }, "name", { value: "RenderAccountIssues" });
+    
+                            /**
+                             * Calls RenderAccountIssues.
+                             * @function renderAccountIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest} request RenderAccountIssuesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|renderProductIssues}.
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @typedef RenderProductIssuesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} [response] RenderProductIssuesResponse
+                             */
+    
+                            /**
+                             * Calls RenderProductIssues.
+                             * @function renderProductIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest} request RenderProductIssuesRequest message or plain object
+                             * @param {google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderProductIssuesCallback} callback Node-style callback called with the error, if any, and RenderProductIssuesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(IssueResolutionService.prototype.renderProductIssues = function renderProductIssues(request, callback) {
+                                return this.rpcCall(renderProductIssues, $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest, $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse, request, callback);
+                            }, "name", { value: "RenderProductIssues" });
+    
+                            /**
+                             * Calls RenderProductIssues.
+                             * @function renderProductIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest} request RenderProductIssuesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|triggerAction}.
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @typedef TriggerActionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} [response] TriggerActionResponse
+                             */
+    
+                            /**
+                             * Calls TriggerAction.
+                             * @function triggerAction
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest} request TriggerActionRequest message or plain object
+                             * @param {google.shopping.merchant.issueresolution.v1.IssueResolutionService.TriggerActionCallback} callback Node-style callback called with the error, if any, and TriggerActionResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(IssueResolutionService.prototype.triggerAction = function triggerAction(request, callback) {
+                                return this.rpcCall(triggerAction, $root.google.shopping.merchant.issueresolution.v1.TriggerActionRequest, $root.google.shopping.merchant.issueresolution.v1.TriggerActionResponse, request, callback);
+                            }, "name", { value: "TriggerAction" });
+    
+                            /**
+                             * Calls TriggerAction.
+                             * @function triggerAction
+                             * @memberof google.shopping.merchant.issueresolution.v1.IssueResolutionService
+                             * @instance
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest} request TriggerActionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.issueresolution.v1.TriggerActionResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return IssueResolutionService;
+                        })();
+    
+                        /**
+                         * Severity enum.
+                         * @name google.shopping.merchant.issueresolution.v1.Severity
+                         * @enum {number}
+                         * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                         * @property {number} ERROR=1 ERROR value
+                         * @property {number} WARNING=2 WARNING value
+                         * @property {number} INFO=3 INFO value
+                         */
+                        v1.Severity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ERROR"] = 1;
+                            values[valuesById[2] = "WARNING"] = 2;
+                            values[valuesById[3] = "INFO"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * ContentOption enum.
+                         * @name google.shopping.merchant.issueresolution.v1.ContentOption
+                         * @enum {number}
+                         * @property {number} CONTENT_OPTION_UNSPECIFIED=0 CONTENT_OPTION_UNSPECIFIED value
+                         * @property {number} PRE_RENDERED_HTML=1 PRE_RENDERED_HTML value
+                         */
+                        v1.ContentOption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONTENT_OPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRE_RENDERED_HTML"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * UserInputActionRenderingOption enum.
+                         * @name google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption
+                         * @enum {number}
+                         * @property {number} USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED=0 USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED value
+                         * @property {number} REDIRECT_TO_MERCHANT_CENTER=1 REDIRECT_TO_MERCHANT_CENTER value
+                         * @property {number} BUILT_IN_USER_INPUT_ACTIONS=2 BUILT_IN_USER_INPUT_ACTIONS value
+                         */
+                        v1.UserInputActionRenderingOption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REDIRECT_TO_MERCHANT_CENTER"] = 1;
+                            values[valuesById[2] = "BUILT_IN_USER_INPUT_ACTIONS"] = 2;
+                            return values;
+                        })();
+    
+                        v1.RenderAccountIssuesResponse = (function() {
+    
+                            /**
+                             * Properties of a RenderAccountIssuesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderAccountIssuesResponse
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IRenderedIssue>|null} [renderedIssues] RenderAccountIssuesResponse renderedIssues
+                             */
+    
+                            /**
+                             * Constructs a new RenderAccountIssuesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderAccountIssuesResponse.
+                             * @implements IRenderAccountIssuesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse=} [properties] Properties to set
+                             */
+                            function RenderAccountIssuesResponse(properties) {
+                                this.renderedIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderAccountIssuesResponse renderedIssues.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IRenderedIssue>} renderedIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @instance
+                             */
+                            RenderAccountIssuesResponse.prototype.renderedIssues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RenderAccountIssuesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} RenderAccountIssuesResponse instance
+                             */
+                            RenderAccountIssuesResponse.create = function create(properties) {
+                                return new RenderAccountIssuesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderAccountIssuesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse} message RenderAccountIssuesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderAccountIssuesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.renderedIssues != null && message.renderedIssues.length)
+                                    for (var i = 0; i < message.renderedIssues.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.encode(message.renderedIssues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderAccountIssuesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse} message RenderAccountIssuesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderAccountIssuesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderAccountIssuesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} RenderAccountIssuesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderAccountIssuesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.renderedIssues && message.renderedIssues.length))
+                                                message.renderedIssues = [];
+                                            message.renderedIssues.push($root.google.shopping.merchant.issueresolution.v1.RenderedIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderAccountIssuesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} RenderAccountIssuesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderAccountIssuesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderAccountIssuesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderAccountIssuesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.renderedIssues != null && message.hasOwnProperty("renderedIssues")) {
+                                    if (!Array.isArray(message.renderedIssues))
+                                        return "renderedIssues: array expected";
+                                    for (var i = 0; i < message.renderedIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.verify(message.renderedIssues[i]);
+                                        if (error)
+                                            return "renderedIssues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderAccountIssuesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} RenderAccountIssuesResponse
+                             */
+                            RenderAccountIssuesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse();
+                                if (object.renderedIssues) {
+                                    if (!Array.isArray(object.renderedIssues))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.renderedIssues: array expected");
+                                    message.renderedIssues = [];
+                                    for (var i = 0; i < object.renderedIssues.length; ++i) {
+                                        if (typeof object.renderedIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.renderedIssues: object expected");
+                                        message.renderedIssues[i] = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.fromObject(object.renderedIssues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderAccountIssuesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse} message RenderAccountIssuesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderAccountIssuesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.renderedIssues = [];
+                                if (message.renderedIssues && message.renderedIssues.length) {
+                                    object.renderedIssues = [];
+                                    for (var j = 0; j < message.renderedIssues.length; ++j)
+                                        object.renderedIssues[j] = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.toObject(message.renderedIssues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderAccountIssuesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderAccountIssuesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderAccountIssuesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderAccountIssuesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse";
+                            };
+    
+                            return RenderAccountIssuesResponse;
+                        })();
+    
+                        v1.RenderAccountIssuesRequest = (function() {
+    
+                            /**
+                             * Properties of a RenderAccountIssuesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderAccountIssuesRequest
+                             * @property {string|null} [name] RenderAccountIssuesRequest name
+                             * @property {string|null} [languageCode] RenderAccountIssuesRequest languageCode
+                             * @property {string|null} [timeZone] RenderAccountIssuesRequest timeZone
+                             * @property {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null} [payload] RenderAccountIssuesRequest payload
+                             */
+    
+                            /**
+                             * Constructs a new RenderAccountIssuesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderAccountIssuesRequest.
+                             * @implements IRenderAccountIssuesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest=} [properties] Properties to set
+                             */
+                            function RenderAccountIssuesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderAccountIssuesRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @instance
+                             */
+                            RenderAccountIssuesRequest.prototype.name = "";
+    
+                            /**
+                             * RenderAccountIssuesRequest languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @instance
+                             */
+                            RenderAccountIssuesRequest.prototype.languageCode = "";
+    
+                            /**
+                             * RenderAccountIssuesRequest timeZone.
+                             * @member {string} timeZone
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @instance
+                             */
+                            RenderAccountIssuesRequest.prototype.timeZone = "";
+    
+                            /**
+                             * RenderAccountIssuesRequest payload.
+                             * @member {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null|undefined} payload
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @instance
+                             */
+                            RenderAccountIssuesRequest.prototype.payload = null;
+    
+                            /**
+                             * Creates a new RenderAccountIssuesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest} RenderAccountIssuesRequest instance
+                             */
+                            RenderAccountIssuesRequest.create = function create(properties) {
+                                return new RenderAccountIssuesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderAccountIssuesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest} message RenderAccountIssuesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderAccountIssuesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                                if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.timeZone);
+                                if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                    $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.encode(message.payload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderAccountIssuesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest} message RenderAccountIssuesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderAccountIssuesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderAccountIssuesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest} RenderAccountIssuesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderAccountIssuesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.timeZone = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderAccountIssuesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest} RenderAccountIssuesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderAccountIssuesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderAccountIssuesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderAccountIssuesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (!$util.isString(message.timeZone))
+                                        return "timeZone: string expected";
+                                if (message.payload != null && message.hasOwnProperty("payload")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify(message.payload);
+                                    if (error)
+                                        return "payload." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderAccountIssuesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest} RenderAccountIssuesRequest
+                             */
+                            RenderAccountIssuesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                if (object.timeZone != null)
+                                    message.timeZone = String(object.timeZone);
+                                if (object.payload != null) {
+                                    if (typeof object.payload !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest.payload: object expected");
+                                    message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.fromObject(object.payload);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderAccountIssuesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest} message RenderAccountIssuesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderAccountIssuesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.languageCode = "";
+                                    object.timeZone = "";
+                                    object.payload = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
+                                if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    object.timeZone = message.timeZone;
+                                if (message.payload != null && message.hasOwnProperty("payload"))
+                                    object.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.toObject(message.payload, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderAccountIssuesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderAccountIssuesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderAccountIssuesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderAccountIssuesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest";
+                            };
+    
+                            return RenderAccountIssuesRequest;
+                        })();
+    
+                        v1.RenderIssuesRequestPayload = (function() {
+    
+                            /**
+                             * Properties of a RenderIssuesRequestPayload.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderIssuesRequestPayload
+                             * @property {google.shopping.merchant.issueresolution.v1.ContentOption|null} [contentOption] RenderIssuesRequestPayload contentOption
+                             * @property {google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|null} [userInputActionOption] RenderIssuesRequestPayload userInputActionOption
+                             */
+    
+                            /**
+                             * Constructs a new RenderIssuesRequestPayload.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderIssuesRequestPayload.
+                             * @implements IRenderIssuesRequestPayload
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload=} [properties] Properties to set
+                             */
+                            function RenderIssuesRequestPayload(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderIssuesRequestPayload contentOption.
+                             * @member {google.shopping.merchant.issueresolution.v1.ContentOption|null|undefined} contentOption
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @instance
+                             */
+                            RenderIssuesRequestPayload.prototype.contentOption = null;
+    
+                            /**
+                             * RenderIssuesRequestPayload userInputActionOption.
+                             * @member {google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|null|undefined} userInputActionOption
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @instance
+                             */
+                            RenderIssuesRequestPayload.prototype.userInputActionOption = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RenderIssuesRequestPayload.prototype, "_contentOption", {
+                                get: $util.oneOfGetter($oneOfFields = ["contentOption"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RenderIssuesRequestPayload.prototype, "_userInputActionOption", {
+                                get: $util.oneOfGetter($oneOfFields = ["userInputActionOption"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RenderIssuesRequestPayload instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload} RenderIssuesRequestPayload instance
+                             */
+                            RenderIssuesRequestPayload.create = function create(properties) {
+                                return new RenderIssuesRequestPayload(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderIssuesRequestPayload message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload} message RenderIssuesRequestPayload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderIssuesRequestPayload.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.contentOption != null && Object.hasOwnProperty.call(message, "contentOption"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.contentOption);
+                                if (message.userInputActionOption != null && Object.hasOwnProperty.call(message, "userInputActionOption"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.userInputActionOption);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderIssuesRequestPayload message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload} message RenderIssuesRequestPayload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderIssuesRequestPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderIssuesRequestPayload message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload} RenderIssuesRequestPayload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderIssuesRequestPayload.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.contentOption = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.userInputActionOption = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderIssuesRequestPayload message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload} RenderIssuesRequestPayload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderIssuesRequestPayload.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderIssuesRequestPayload message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderIssuesRequestPayload.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.contentOption != null && message.hasOwnProperty("contentOption")) {
+                                    properties._contentOption = 1;
+                                    switch (message.contentOption) {
+                                    default:
+                                        return "contentOption: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                }
+                                if (message.userInputActionOption != null && message.hasOwnProperty("userInputActionOption")) {
+                                    properties._userInputActionOption = 1;
+                                    switch (message.userInputActionOption) {
+                                    default:
+                                        return "userInputActionOption: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderIssuesRequestPayload message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload} RenderIssuesRequestPayload
+                             */
+                            RenderIssuesRequestPayload.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload();
+                                switch (object.contentOption) {
+                                default:
+                                    if (typeof object.contentOption === "number") {
+                                        message.contentOption = object.contentOption;
+                                        break;
+                                    }
+                                    break;
+                                case "CONTENT_OPTION_UNSPECIFIED":
+                                case 0:
+                                    message.contentOption = 0;
+                                    break;
+                                case "PRE_RENDERED_HTML":
+                                case 1:
+                                    message.contentOption = 1;
+                                    break;
+                                }
+                                switch (object.userInputActionOption) {
+                                default:
+                                    if (typeof object.userInputActionOption === "number") {
+                                        message.userInputActionOption = object.userInputActionOption;
+                                        break;
+                                    }
+                                    break;
+                                case "USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED":
+                                case 0:
+                                    message.userInputActionOption = 0;
+                                    break;
+                                case "REDIRECT_TO_MERCHANT_CENTER":
+                                case 1:
+                                    message.userInputActionOption = 1;
+                                    break;
+                                case "BUILT_IN_USER_INPUT_ACTIONS":
+                                case 2:
+                                    message.userInputActionOption = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderIssuesRequestPayload message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload} message RenderIssuesRequestPayload
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderIssuesRequestPayload.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.contentOption != null && message.hasOwnProperty("contentOption")) {
+                                    object.contentOption = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.ContentOption[message.contentOption] === undefined ? message.contentOption : $root.google.shopping.merchant.issueresolution.v1.ContentOption[message.contentOption] : message.contentOption;
+                                    if (options.oneofs)
+                                        object._contentOption = "contentOption";
+                                }
+                                if (message.userInputActionOption != null && message.hasOwnProperty("userInputActionOption")) {
+                                    object.userInputActionOption = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption[message.userInputActionOption] === undefined ? message.userInputActionOption : $root.google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption[message.userInputActionOption] : message.userInputActionOption;
+                                    if (options.oneofs)
+                                        object._userInputActionOption = "userInputActionOption";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderIssuesRequestPayload to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderIssuesRequestPayload.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderIssuesRequestPayload
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderIssuesRequestPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload";
+                            };
+    
+                            return RenderIssuesRequestPayload;
+                        })();
+    
+                        v1.RenderProductIssuesResponse = (function() {
+    
+                            /**
+                             * Properties of a RenderProductIssuesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderProductIssuesResponse
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IRenderedIssue>|null} [renderedIssues] RenderProductIssuesResponse renderedIssues
+                             */
+    
+                            /**
+                             * Constructs a new RenderProductIssuesResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderProductIssuesResponse.
+                             * @implements IRenderProductIssuesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse=} [properties] Properties to set
+                             */
+                            function RenderProductIssuesResponse(properties) {
+                                this.renderedIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderProductIssuesResponse renderedIssues.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IRenderedIssue>} renderedIssues
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @instance
+                             */
+                            RenderProductIssuesResponse.prototype.renderedIssues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RenderProductIssuesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} RenderProductIssuesResponse instance
+                             */
+                            RenderProductIssuesResponse.create = function create(properties) {
+                                return new RenderProductIssuesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderProductIssuesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse} message RenderProductIssuesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderProductIssuesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.renderedIssues != null && message.renderedIssues.length)
+                                    for (var i = 0; i < message.renderedIssues.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.encode(message.renderedIssues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderProductIssuesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse} message RenderProductIssuesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderProductIssuesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderProductIssuesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} RenderProductIssuesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderProductIssuesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.renderedIssues && message.renderedIssues.length))
+                                                message.renderedIssues = [];
+                                            message.renderedIssues.push($root.google.shopping.merchant.issueresolution.v1.RenderedIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderProductIssuesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} RenderProductIssuesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderProductIssuesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderProductIssuesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderProductIssuesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.renderedIssues != null && message.hasOwnProperty("renderedIssues")) {
+                                    if (!Array.isArray(message.renderedIssues))
+                                        return "renderedIssues: array expected";
+                                    for (var i = 0; i < message.renderedIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.verify(message.renderedIssues[i]);
+                                        if (error)
+                                            return "renderedIssues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderProductIssuesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} RenderProductIssuesResponse
+                             */
+                            RenderProductIssuesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse();
+                                if (object.renderedIssues) {
+                                    if (!Array.isArray(object.renderedIssues))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.renderedIssues: array expected");
+                                    message.renderedIssues = [];
+                                    for (var i = 0; i < object.renderedIssues.length; ++i) {
+                                        if (typeof object.renderedIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.renderedIssues: object expected");
+                                        message.renderedIssues[i] = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.fromObject(object.renderedIssues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderProductIssuesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse} message RenderProductIssuesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderProductIssuesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.renderedIssues = [];
+                                if (message.renderedIssues && message.renderedIssues.length) {
+                                    object.renderedIssues = [];
+                                    for (var j = 0; j < message.renderedIssues.length; ++j)
+                                        object.renderedIssues[j] = $root.google.shopping.merchant.issueresolution.v1.RenderedIssue.toObject(message.renderedIssues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderProductIssuesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderProductIssuesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderProductIssuesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderProductIssuesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse";
+                            };
+    
+                            return RenderProductIssuesResponse;
+                        })();
+    
+                        v1.RenderProductIssuesRequest = (function() {
+    
+                            /**
+                             * Properties of a RenderProductIssuesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderProductIssuesRequest
+                             * @property {string|null} [name] RenderProductIssuesRequest name
+                             * @property {string|null} [languageCode] RenderProductIssuesRequest languageCode
+                             * @property {string|null} [timeZone] RenderProductIssuesRequest timeZone
+                             * @property {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null} [payload] RenderProductIssuesRequest payload
+                             */
+    
+                            /**
+                             * Constructs a new RenderProductIssuesRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderProductIssuesRequest.
+                             * @implements IRenderProductIssuesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest=} [properties] Properties to set
+                             */
+                            function RenderProductIssuesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderProductIssuesRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.name = "";
+    
+                            /**
+                             * RenderProductIssuesRequest languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.languageCode = "";
+    
+                            /**
+                             * RenderProductIssuesRequest timeZone.
+                             * @member {string} timeZone
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.timeZone = "";
+    
+                            /**
+                             * RenderProductIssuesRequest payload.
+                             * @member {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null|undefined} payload
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.payload = null;
+    
+                            /**
+                             * Creates a new RenderProductIssuesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest} RenderProductIssuesRequest instance
+                             */
+                            RenderProductIssuesRequest.create = function create(properties) {
+                                return new RenderProductIssuesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderProductIssuesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest} message RenderProductIssuesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderProductIssuesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                                if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.timeZone);
+                                if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                    $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.encode(message.payload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderProductIssuesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest} message RenderProductIssuesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderProductIssuesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderProductIssuesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest} RenderProductIssuesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderProductIssuesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.timeZone = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderProductIssuesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest} RenderProductIssuesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderProductIssuesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderProductIssuesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderProductIssuesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    if (!$util.isString(message.timeZone))
+                                        return "timeZone: string expected";
+                                if (message.payload != null && message.hasOwnProperty("payload")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify(message.payload);
+                                    if (error)
+                                        return "payload." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderProductIssuesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest} RenderProductIssuesRequest
+                             */
+                            RenderProductIssuesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                if (object.timeZone != null)
+                                    message.timeZone = String(object.timeZone);
+                                if (object.payload != null) {
+                                    if (typeof object.payload !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.payload: object expected");
+                                    message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.fromObject(object.payload);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderProductIssuesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest} message RenderProductIssuesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderProductIssuesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.languageCode = "";
+                                    object.timeZone = "";
+                                    object.payload = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
+                                if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                    object.timeZone = message.timeZone;
+                                if (message.payload != null && message.hasOwnProperty("payload"))
+                                    object.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.toObject(message.payload, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderProductIssuesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderProductIssuesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderProductIssuesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderProductIssuesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest";
+                            };
+    
+                            return RenderProductIssuesRequest;
+                        })();
+    
+                        v1.RenderedIssue = (function() {
+    
+                            /**
+                             * Properties of a RenderedIssue.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IRenderedIssue
+                             * @property {string|null} [prerenderedContent] RenderedIssue prerenderedContent
+                             * @property {string|null} [prerenderedOutOfCourtDisputeSettlement] RenderedIssue prerenderedOutOfCourtDisputeSettlement
+                             * @property {string|null} [title] RenderedIssue title
+                             * @property {google.shopping.merchant.issueresolution.v1.IImpact|null} [impact] RenderedIssue impact
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IAction>|null} [actions] RenderedIssue actions
+                             */
+    
+                            /**
+                             * Constructs a new RenderedIssue.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a RenderedIssue.
+                             * @implements IRenderedIssue
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderedIssue=} [properties] Properties to set
+                             */
+                            function RenderedIssue(properties) {
+                                this.actions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RenderedIssue prerenderedContent.
+                             * @member {string|null|undefined} prerenderedContent
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            RenderedIssue.prototype.prerenderedContent = null;
+    
+                            /**
+                             * RenderedIssue prerenderedOutOfCourtDisputeSettlement.
+                             * @member {string|null|undefined} prerenderedOutOfCourtDisputeSettlement
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            RenderedIssue.prototype.prerenderedOutOfCourtDisputeSettlement = null;
+    
+                            /**
+                             * RenderedIssue title.
+                             * @member {string} title
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            RenderedIssue.prototype.title = "";
+    
+                            /**
+                             * RenderedIssue impact.
+                             * @member {google.shopping.merchant.issueresolution.v1.IImpact|null|undefined} impact
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            RenderedIssue.prototype.impact = null;
+    
+                            /**
+                             * RenderedIssue actions.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IAction>} actions
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            RenderedIssue.prototype.actions = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * RenderedIssue content.
+                             * @member {"prerenderedContent"|undefined} content
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            Object.defineProperty(RenderedIssue.prototype, "content", {
+                                get: $util.oneOfGetter($oneOfFields = ["prerenderedContent"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * RenderedIssue outOfCourtDisputeSettlement.
+                             * @member {"prerenderedOutOfCourtDisputeSettlement"|undefined} outOfCourtDisputeSettlement
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             */
+                            Object.defineProperty(RenderedIssue.prototype, "outOfCourtDisputeSettlement", {
+                                get: $util.oneOfGetter($oneOfFields = ["prerenderedOutOfCourtDisputeSettlement"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RenderedIssue instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderedIssue=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderedIssue} RenderedIssue instance
+                             */
+                            RenderedIssue.create = function create(properties) {
+                                return new RenderedIssue(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RenderedIssue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderedIssue.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderedIssue} message RenderedIssue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderedIssue.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                if (message.impact != null && Object.hasOwnProperty.call(message, "impact"))
+                                    $root.google.shopping.merchant.issueresolution.v1.Impact.encode(message.impact, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.prerenderedContent != null && Object.hasOwnProperty.call(message, "prerenderedContent"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.prerenderedContent);
+                                if (message.actions != null && message.actions.length)
+                                    for (var i = 0; i < message.actions.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.Action.encode(message.actions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.prerenderedOutOfCourtDisputeSettlement != null && Object.hasOwnProperty.call(message, "prerenderedOutOfCourtDisputeSettlement"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.prerenderedOutOfCourtDisputeSettlement);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RenderedIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderedIssue.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IRenderedIssue} message RenderedIssue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RenderedIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RenderedIssue message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderedIssue} RenderedIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderedIssue.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.RenderedIssue();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.prerenderedContent = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.prerenderedOutOfCourtDisputeSettlement = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.impact = $root.google.shopping.merchant.issueresolution.v1.Impact.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.actions && message.actions.length))
+                                                message.actions = [];
+                                            message.actions.push($root.google.shopping.merchant.issueresolution.v1.Action.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RenderedIssue message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderedIssue} RenderedIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RenderedIssue.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RenderedIssue message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RenderedIssue.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.prerenderedContent != null && message.hasOwnProperty("prerenderedContent")) {
+                                    properties.content = 1;
+                                    if (!$util.isString(message.prerenderedContent))
+                                        return "prerenderedContent: string expected";
+                                }
+                                if (message.prerenderedOutOfCourtDisputeSettlement != null && message.hasOwnProperty("prerenderedOutOfCourtDisputeSettlement")) {
+                                    properties.outOfCourtDisputeSettlement = 1;
+                                    if (!$util.isString(message.prerenderedOutOfCourtDisputeSettlement))
+                                        return "prerenderedOutOfCourtDisputeSettlement: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                if (message.impact != null && message.hasOwnProperty("impact")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.Impact.verify(message.impact);
+                                    if (error)
+                                        return "impact." + error;
+                                }
+                                if (message.actions != null && message.hasOwnProperty("actions")) {
+                                    if (!Array.isArray(message.actions))
+                                        return "actions: array expected";
+                                    for (var i = 0; i < message.actions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.Action.verify(message.actions[i]);
+                                        if (error)
+                                            return "actions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RenderedIssue message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.RenderedIssue} RenderedIssue
+                             */
+                            RenderedIssue.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.RenderedIssue)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.RenderedIssue();
+                                if (object.prerenderedContent != null)
+                                    message.prerenderedContent = String(object.prerenderedContent);
+                                if (object.prerenderedOutOfCourtDisputeSettlement != null)
+                                    message.prerenderedOutOfCourtDisputeSettlement = String(object.prerenderedOutOfCourtDisputeSettlement);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.impact != null) {
+                                    if (typeof object.impact !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderedIssue.impact: object expected");
+                                    message.impact = $root.google.shopping.merchant.issueresolution.v1.Impact.fromObject(object.impact);
+                                }
+                                if (object.actions) {
+                                    if (!Array.isArray(object.actions))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderedIssue.actions: array expected");
+                                    message.actions = [];
+                                    for (var i = 0; i < object.actions.length; ++i) {
+                                        if (typeof object.actions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderedIssue.actions: object expected");
+                                        message.actions[i] = $root.google.shopping.merchant.issueresolution.v1.Action.fromObject(object.actions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RenderedIssue message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.RenderedIssue} message RenderedIssue
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RenderedIssue.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.actions = [];
+                                if (options.defaults) {
+                                    object.title = "";
+                                    object.impact = null;
+                                }
+                                if (message.title != null && message.hasOwnProperty("title"))
+                                    object.title = message.title;
+                                if (message.impact != null && message.hasOwnProperty("impact"))
+                                    object.impact = $root.google.shopping.merchant.issueresolution.v1.Impact.toObject(message.impact, options);
+                                if (message.prerenderedContent != null && message.hasOwnProperty("prerenderedContent")) {
+                                    object.prerenderedContent = message.prerenderedContent;
+                                    if (options.oneofs)
+                                        object.content = "prerenderedContent";
+                                }
+                                if (message.actions && message.actions.length) {
+                                    object.actions = [];
+                                    for (var j = 0; j < message.actions.length; ++j)
+                                        object.actions[j] = $root.google.shopping.merchant.issueresolution.v1.Action.toObject(message.actions[j], options);
+                                }
+                                if (message.prerenderedOutOfCourtDisputeSettlement != null && message.hasOwnProperty("prerenderedOutOfCourtDisputeSettlement")) {
+                                    object.prerenderedOutOfCourtDisputeSettlement = message.prerenderedOutOfCourtDisputeSettlement;
+                                    if (options.oneofs)
+                                        object.outOfCourtDisputeSettlement = "prerenderedOutOfCourtDisputeSettlement";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RenderedIssue to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RenderedIssue.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RenderedIssue
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderedIssue
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RenderedIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.RenderedIssue";
+                            };
+    
+                            return RenderedIssue;
+                        })();
+    
+                        v1.Impact = (function() {
+    
+                            /**
+                             * Properties of an Impact.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IImpact
+                             * @property {string|null} [message] Impact message
+                             * @property {google.shopping.merchant.issueresolution.v1.Severity|null} [severity] Impact severity
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IBreakdown>|null} [breakdowns] Impact breakdowns
+                             */
+    
+                            /**
+                             * Constructs a new Impact.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an Impact.
+                             * @implements IImpact
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IImpact=} [properties] Properties to set
+                             */
+                            function Impact(properties) {
+                                this.breakdowns = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Impact message.
+                             * @member {string} message
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @instance
+                             */
+                            Impact.prototype.message = "";
+    
+                            /**
+                             * Impact severity.
+                             * @member {google.shopping.merchant.issueresolution.v1.Severity} severity
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @instance
+                             */
+                            Impact.prototype.severity = 0;
+    
+                            /**
+                             * Impact breakdowns.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IBreakdown>} breakdowns
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @instance
+                             */
+                            Impact.prototype.breakdowns = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Impact instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IImpact=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.Impact} Impact instance
+                             */
+                            Impact.create = function create(properties) {
+                                return new Impact(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Impact message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Impact.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IImpact} message Impact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Impact.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                                if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                                if (message.breakdowns != null && message.breakdowns.length)
+                                    for (var i = 0; i < message.breakdowns.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.Breakdown.encode(message.breakdowns[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Impact message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Impact.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IImpact} message Impact message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Impact.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Impact message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.Impact} Impact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Impact.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Impact();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.severity = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.breakdowns && message.breakdowns.length))
+                                                message.breakdowns = [];
+                                            message.breakdowns.push($root.google.shopping.merchant.issueresolution.v1.Breakdown.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Impact message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.Impact} Impact
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Impact.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Impact message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Impact.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    switch (message.severity) {
+                                    default:
+                                        return "severity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.breakdowns != null && message.hasOwnProperty("breakdowns")) {
+                                    if (!Array.isArray(message.breakdowns))
+                                        return "breakdowns: array expected";
+                                    for (var i = 0; i < message.breakdowns.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.Breakdown.verify(message.breakdowns[i]);
+                                        if (error)
+                                            return "breakdowns." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Impact message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.Impact} Impact
+                             */
+                            Impact.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Impact)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.Impact();
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                switch (object.severity) {
+                                default:
+                                    if (typeof object.severity === "number") {
+                                        message.severity = object.severity;
+                                        break;
+                                    }
+                                    break;
+                                case "SEVERITY_UNSPECIFIED":
+                                case 0:
+                                    message.severity = 0;
+                                    break;
+                                case "ERROR":
+                                case 1:
+                                    message.severity = 1;
+                                    break;
+                                case "WARNING":
+                                case 2:
+                                    message.severity = 2;
+                                    break;
+                                case "INFO":
+                                case 3:
+                                    message.severity = 3;
+                                    break;
+                                }
+                                if (object.breakdowns) {
+                                    if (!Array.isArray(object.breakdowns))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Impact.breakdowns: array expected");
+                                    message.breakdowns = [];
+                                    for (var i = 0; i < object.breakdowns.length; ++i) {
+                                        if (typeof object.breakdowns[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.Impact.breakdowns: object expected");
+                                        message.breakdowns[i] = $root.google.shopping.merchant.issueresolution.v1.Breakdown.fromObject(object.breakdowns[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Impact message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.Impact} message Impact
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Impact.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.breakdowns = [];
+                                if (options.defaults) {
+                                    object.message = "";
+                                    object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                }
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    object.severity = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.issueresolution.v1.Severity[message.severity] : message.severity;
+                                if (message.breakdowns && message.breakdowns.length) {
+                                    object.breakdowns = [];
+                                    for (var j = 0; j < message.breakdowns.length; ++j)
+                                        object.breakdowns[j] = $root.google.shopping.merchant.issueresolution.v1.Breakdown.toObject(message.breakdowns[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Impact to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Impact.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Impact
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.Impact
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Impact.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Impact";
+                            };
+    
+                            return Impact;
+                        })();
+    
+                        v1.Breakdown = (function() {
+    
+                            /**
+                             * Properties of a Breakdown.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IBreakdown
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.Breakdown.IRegion>|null} [regions] Breakdown regions
+                             * @property {Array.<string>|null} [details] Breakdown details
+                             */
+    
+                            /**
+                             * Constructs a new Breakdown.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a Breakdown.
+                             * @implements IBreakdown
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IBreakdown=} [properties] Properties to set
+                             */
+                            function Breakdown(properties) {
+                                this.regions = [];
+                                this.details = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Breakdown regions.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.Breakdown.IRegion>} regions
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @instance
+                             */
+                            Breakdown.prototype.regions = $util.emptyArray;
+    
+                            /**
+                             * Breakdown details.
+                             * @member {Array.<string>} details
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @instance
+                             */
+                            Breakdown.prototype.details = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Breakdown instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBreakdown=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.Breakdown} Breakdown instance
+                             */
+                            Breakdown.create = function create(properties) {
+                                return new Breakdown(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Breakdown message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBreakdown} message Breakdown message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Breakdown.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.regions != null && message.regions.length)
+                                    for (var i = 0; i < message.regions.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region.encode(message.regions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.details != null && message.details.length)
+                                    for (var i = 0; i < message.details.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.details[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Breakdown message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBreakdown} message Breakdown message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Breakdown.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Breakdown message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.Breakdown} Breakdown
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Breakdown.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Breakdown();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.regions && message.regions.length))
+                                                message.regions = [];
+                                            message.regions.push($root.google.shopping.merchant.issueresolution.v1.Breakdown.Region.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.details && message.details.length))
+                                                message.details = [];
+                                            message.details.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Breakdown message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.Breakdown} Breakdown
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Breakdown.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Breakdown message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Breakdown.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.regions != null && message.hasOwnProperty("regions")) {
+                                    if (!Array.isArray(message.regions))
+                                        return "regions: array expected";
+                                    for (var i = 0; i < message.regions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region.verify(message.regions[i]);
+                                        if (error)
+                                            return "regions." + error;
+                                    }
+                                }
+                                if (message.details != null && message.hasOwnProperty("details")) {
+                                    if (!Array.isArray(message.details))
+                                        return "details: array expected";
+                                    for (var i = 0; i < message.details.length; ++i)
+                                        if (!$util.isString(message.details[i]))
+                                            return "details: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Breakdown message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.Breakdown} Breakdown
+                             */
+                            Breakdown.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Breakdown)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.Breakdown();
+                                if (object.regions) {
+                                    if (!Array.isArray(object.regions))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Breakdown.regions: array expected");
+                                    message.regions = [];
+                                    for (var i = 0; i < object.regions.length; ++i) {
+                                        if (typeof object.regions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.Breakdown.regions: object expected");
+                                        message.regions[i] = $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region.fromObject(object.regions[i]);
+                                    }
+                                }
+                                if (object.details) {
+                                    if (!Array.isArray(object.details))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Breakdown.details: array expected");
+                                    message.details = [];
+                                    for (var i = 0; i < object.details.length; ++i)
+                                        message.details[i] = String(object.details[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Breakdown message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.Breakdown} message Breakdown
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Breakdown.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.regions = [];
+                                    object.details = [];
+                                }
+                                if (message.regions && message.regions.length) {
+                                    object.regions = [];
+                                    for (var j = 0; j < message.regions.length; ++j)
+                                        object.regions[j] = $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region.toObject(message.regions[j], options);
+                                }
+                                if (message.details && message.details.length) {
+                                    object.details = [];
+                                    for (var j = 0; j < message.details.length; ++j)
+                                        object.details[j] = message.details[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Breakdown to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Breakdown.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Breakdown
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Breakdown.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Breakdown";
+                            };
+    
+                            Breakdown.Region = (function() {
+    
+                                /**
+                                 * Properties of a Region.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                                 * @interface IRegion
+                                 * @property {string|null} [code] Region code
+                                 * @property {string|null} [name] Region name
+                                 */
+    
+                                /**
+                                 * Constructs a new Region.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown
+                                 * @classdesc Represents a Region.
+                                 * @implements IRegion
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.Breakdown.IRegion=} [properties] Properties to set
+                                 */
+                                function Region(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Region code.
+                                 * @member {string} code
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @instance
+                                 */
+                                Region.prototype.code = "";
+    
+                                /**
+                                 * Region name.
+                                 * @member {string} name
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @instance
+                                 */
+                                Region.prototype.name = "";
+    
+                                /**
+                                 * Creates a new Region instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Breakdown.IRegion=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Breakdown.Region} Region instance
+                                 */
+                                Region.create = function create(properties) {
+                                    return new Region(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Region message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.Region.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Breakdown.IRegion} message Region message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Region.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Region message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.Region.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Breakdown.IRegion} message Region message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Region.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Region message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Breakdown.Region} Region
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Region.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.code = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.name = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Region message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Breakdown.Region} Region
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Region.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Region message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Region.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        if (!$util.isString(message.code))
+                                            return "code: string expected";
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        if (!$util.isString(message.name))
+                                            return "name: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Region message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Breakdown.Region} Region
+                                 */
+                                Region.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.Breakdown.Region();
+                                    if (object.code != null)
+                                        message.code = String(object.code);
+                                    if (object.name != null)
+                                        message.name = String(object.name);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Region message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Breakdown.Region} message Region
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Region.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.code = "";
+                                        object.name = "";
+                                    }
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        object.code = message.code;
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        object.name = message.name;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Region to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Region.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Region
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Breakdown.Region
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Region.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Breakdown.Region";
+                                };
+    
+                                return Region;
+                            })();
+    
+                            return Breakdown;
+                        })();
+    
+                        v1.Action = (function() {
+    
+                            /**
+                             * Properties of an Action.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IAction
+                             * @property {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction|null} [builtinSimpleAction] Action builtinSimpleAction
+                             * @property {google.shopping.merchant.issueresolution.v1.IExternalAction|null} [externalAction] Action externalAction
+                             * @property {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction|null} [builtinUserInputAction] Action builtinUserInputAction
+                             * @property {string|null} [buttonLabel] Action buttonLabel
+                             * @property {boolean|null} [isAvailable] Action isAvailable
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.Action.IReason>|null} [reasons] Action reasons
+                             */
+    
+                            /**
+                             * Constructs a new Action.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an Action.
+                             * @implements IAction
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IAction=} [properties] Properties to set
+                             */
+                            function Action(properties) {
+                                this.reasons = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Action builtinSimpleAction.
+                             * @member {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction|null|undefined} builtinSimpleAction
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.builtinSimpleAction = null;
+    
+                            /**
+                             * Action externalAction.
+                             * @member {google.shopping.merchant.issueresolution.v1.IExternalAction|null|undefined} externalAction
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.externalAction = null;
+    
+                            /**
+                             * Action builtinUserInputAction.
+                             * @member {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction|null|undefined} builtinUserInputAction
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.builtinUserInputAction = null;
+    
+                            /**
+                             * Action buttonLabel.
+                             * @member {string} buttonLabel
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.buttonLabel = "";
+    
+                            /**
+                             * Action isAvailable.
+                             * @member {boolean} isAvailable
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.isAvailable = false;
+    
+                            /**
+                             * Action reasons.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.Action.IReason>} reasons
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Action.prototype.reasons = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Action action.
+                             * @member {"builtinSimpleAction"|"externalAction"|"builtinUserInputAction"|undefined} action
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             */
+                            Object.defineProperty(Action.prototype, "action", {
+                                get: $util.oneOfGetter($oneOfFields = ["builtinSimpleAction", "externalAction", "builtinUserInputAction"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Action instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAction=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.Action} Action instance
+                             */
+                            Action.create = function create(properties) {
+                                return new Action(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Action message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAction} message Action message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Action.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.builtinSimpleAction != null && Object.hasOwnProperty.call(message, "builtinSimpleAction"))
+                                    $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.encode(message.builtinSimpleAction, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.externalAction != null && Object.hasOwnProperty.call(message, "externalAction"))
+                                    $root.google.shopping.merchant.issueresolution.v1.ExternalAction.encode(message.externalAction, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.buttonLabel != null && Object.hasOwnProperty.call(message, "buttonLabel"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.buttonLabel);
+                                if (message.isAvailable != null && Object.hasOwnProperty.call(message, "isAvailable"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isAvailable);
+                                if (message.reasons != null && message.reasons.length)
+                                    for (var i = 0; i < message.reasons.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.Action.Reason.encode(message.reasons[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.builtinUserInputAction != null && Object.hasOwnProperty.call(message, "builtinUserInputAction"))
+                                    $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.encode(message.builtinUserInputAction, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Action message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IAction} message Action message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Action.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Action message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.Action} Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Action.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Action();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.builtinSimpleAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.externalAction = $root.google.shopping.merchant.issueresolution.v1.ExternalAction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.builtinUserInputAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.buttonLabel = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.isAvailable = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.reasons && message.reasons.length))
+                                                message.reasons = [];
+                                            message.reasons.push($root.google.shopping.merchant.issueresolution.v1.Action.Reason.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Action message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.Action} Action
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Action.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Action message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Action.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.builtinSimpleAction != null && message.hasOwnProperty("builtinSimpleAction")) {
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.verify(message.builtinSimpleAction);
+                                        if (error)
+                                            return "builtinSimpleAction." + error;
+                                    }
+                                }
+                                if (message.externalAction != null && message.hasOwnProperty("externalAction")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.ExternalAction.verify(message.externalAction);
+                                        if (error)
+                                            return "externalAction." + error;
+                                    }
+                                }
+                                if (message.builtinUserInputAction != null && message.hasOwnProperty("builtinUserInputAction")) {
+                                    if (properties.action === 1)
+                                        return "action: multiple values";
+                                    properties.action = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.verify(message.builtinUserInputAction);
+                                        if (error)
+                                            return "builtinUserInputAction." + error;
+                                    }
+                                }
+                                if (message.buttonLabel != null && message.hasOwnProperty("buttonLabel"))
+                                    if (!$util.isString(message.buttonLabel))
+                                        return "buttonLabel: string expected";
+                                if (message.isAvailable != null && message.hasOwnProperty("isAvailable"))
+                                    if (typeof message.isAvailable !== "boolean")
+                                        return "isAvailable: boolean expected";
+                                if (message.reasons != null && message.hasOwnProperty("reasons")) {
+                                    if (!Array.isArray(message.reasons))
+                                        return "reasons: array expected";
+                                    for (var i = 0; i < message.reasons.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.Action.Reason.verify(message.reasons[i]);
+                                        if (error)
+                                            return "reasons." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Action message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.Action} Action
+                             */
+                            Action.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Action)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.Action();
+                                if (object.builtinSimpleAction != null) {
+                                    if (typeof object.builtinSimpleAction !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.builtinSimpleAction: object expected");
+                                    message.builtinSimpleAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.fromObject(object.builtinSimpleAction);
+                                }
+                                if (object.externalAction != null) {
+                                    if (typeof object.externalAction !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.externalAction: object expected");
+                                    message.externalAction = $root.google.shopping.merchant.issueresolution.v1.ExternalAction.fromObject(object.externalAction);
+                                }
+                                if (object.builtinUserInputAction != null) {
+                                    if (typeof object.builtinUserInputAction !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.builtinUserInputAction: object expected");
+                                    message.builtinUserInputAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.fromObject(object.builtinUserInputAction);
+                                }
+                                if (object.buttonLabel != null)
+                                    message.buttonLabel = String(object.buttonLabel);
+                                if (object.isAvailable != null)
+                                    message.isAvailable = Boolean(object.isAvailable);
+                                if (object.reasons) {
+                                    if (!Array.isArray(object.reasons))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.reasons: array expected");
+                                    message.reasons = [];
+                                    for (var i = 0; i < object.reasons.length; ++i) {
+                                        if (typeof object.reasons[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.reasons: object expected");
+                                        message.reasons[i] = $root.google.shopping.merchant.issueresolution.v1.Action.Reason.fromObject(object.reasons[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Action message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.Action} message Action
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Action.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.reasons = [];
+                                if (options.defaults) {
+                                    object.buttonLabel = "";
+                                    object.isAvailable = false;
+                                }
+                                if (message.builtinSimpleAction != null && message.hasOwnProperty("builtinSimpleAction")) {
+                                    object.builtinSimpleAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.toObject(message.builtinSimpleAction, options);
+                                    if (options.oneofs)
+                                        object.action = "builtinSimpleAction";
+                                }
+                                if (message.externalAction != null && message.hasOwnProperty("externalAction")) {
+                                    object.externalAction = $root.google.shopping.merchant.issueresolution.v1.ExternalAction.toObject(message.externalAction, options);
+                                    if (options.oneofs)
+                                        object.action = "externalAction";
+                                }
+                                if (message.buttonLabel != null && message.hasOwnProperty("buttonLabel"))
+                                    object.buttonLabel = message.buttonLabel;
+                                if (message.isAvailable != null && message.hasOwnProperty("isAvailable"))
+                                    object.isAvailable = message.isAvailable;
+                                if (message.reasons && message.reasons.length) {
+                                    object.reasons = [];
+                                    for (var j = 0; j < message.reasons.length; ++j)
+                                        object.reasons[j] = $root.google.shopping.merchant.issueresolution.v1.Action.Reason.toObject(message.reasons[j], options);
+                                }
+                                if (message.builtinUserInputAction != null && message.hasOwnProperty("builtinUserInputAction")) {
+                                    object.builtinUserInputAction = $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.toObject(message.builtinUserInputAction, options);
+                                    if (options.oneofs)
+                                        object.action = "builtinUserInputAction";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Action to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Action.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Action
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.Action
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Action.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Action";
+                            };
+    
+                            Action.Reason = (function() {
+    
+                                /**
+                                 * Properties of a Reason.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action
+                                 * @interface IReason
+                                 * @property {string|null} [message] Reason message
+                                 * @property {string|null} [detail] Reason detail
+                                 * @property {google.shopping.merchant.issueresolution.v1.IAction|null} [action] Reason action
+                                 */
+    
+                                /**
+                                 * Constructs a new Reason.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action
+                                 * @classdesc Represents a Reason.
+                                 * @implements IReason
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.Action.IReason=} [properties] Properties to set
+                                 */
+                                function Reason(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Reason message.
+                                 * @member {string} message
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @instance
+                                 */
+                                Reason.prototype.message = "";
+    
+                                /**
+                                 * Reason detail.
+                                 * @member {string|null|undefined} detail
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @instance
+                                 */
+                                Reason.prototype.detail = null;
+    
+                                /**
+                                 * Reason action.
+                                 * @member {google.shopping.merchant.issueresolution.v1.IAction|null|undefined} action
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @instance
+                                 */
+                                Reason.prototype.action = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(Reason.prototype, "_detail", {
+                                    get: $util.oneOfGetter($oneOfFields = ["detail"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(Reason.prototype, "_action", {
+                                    get: $util.oneOfGetter($oneOfFields = ["action"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new Reason instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Action.IReason=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Action.Reason} Reason instance
+                                 */
+                                Reason.create = function create(properties) {
+                                    return new Reason(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Reason message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.Reason.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Action.IReason} message Reason message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Reason.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                                    if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.detail);
+                                    if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                        $root.google.shopping.merchant.issueresolution.v1.Action.encode(message.action, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Reason message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.Reason.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Action.IReason} message Reason message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Reason.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Reason message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Action.Reason} Reason
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Reason.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Action.Reason();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.message = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.detail = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.action = $root.google.shopping.merchant.issueresolution.v1.Action.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Reason message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Action.Reason} Reason
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Reason.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Reason message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Reason.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.message != null && message.hasOwnProperty("message"))
+                                        if (!$util.isString(message.message))
+                                            return "message: string expected";
+                                    if (message.detail != null && message.hasOwnProperty("detail")) {
+                                        properties._detail = 1;
+                                        if (!$util.isString(message.detail))
+                                            return "detail: string expected";
+                                    }
+                                    if (message.action != null && message.hasOwnProperty("action")) {
+                                        properties._action = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.issueresolution.v1.Action.verify(message.action);
+                                            if (error)
+                                                return "action." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Reason message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.Action.Reason} Reason
+                                 */
+                                Reason.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Action.Reason)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.Action.Reason();
+                                    if (object.message != null)
+                                        message.message = String(object.message);
+                                    if (object.detail != null)
+                                        message.detail = String(object.detail);
+                                    if (object.action != null) {
+                                        if (typeof object.action !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.Action.Reason.action: object expected");
+                                        message.action = $root.google.shopping.merchant.issueresolution.v1.Action.fromObject(object.action);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Reason message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.Action.Reason} message Reason
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Reason.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.message = "";
+                                    if (message.message != null && message.hasOwnProperty("message"))
+                                        object.message = message.message;
+                                    if (message.detail != null && message.hasOwnProperty("detail")) {
+                                        object.detail = message.detail;
+                                        if (options.oneofs)
+                                            object._detail = "detail";
+                                    }
+                                    if (message.action != null && message.hasOwnProperty("action")) {
+                                        object.action = $root.google.shopping.merchant.issueresolution.v1.Action.toObject(message.action, options);
+                                        if (options.oneofs)
+                                            object._action = "action";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Reason to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Reason.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Reason
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.Action.Reason
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Reason.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Action.Reason";
+                                };
+    
+                                return Reason;
+                            })();
+    
+                            return Action;
+                        })();
+    
+                        v1.BuiltInSimpleAction = (function() {
+    
+                            /**
+                             * Properties of a BuiltInSimpleAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IBuiltInSimpleAction
+                             * @property {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType|null} [type] BuiltInSimpleAction type
+                             * @property {string|null} [attributeCode] BuiltInSimpleAction attributeCode
+                             * @property {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent|null} [additionalContent] BuiltInSimpleAction additionalContent
+                             */
+    
+                            /**
+                             * Constructs a new BuiltInSimpleAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a BuiltInSimpleAction.
+                             * @implements IBuiltInSimpleAction
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction=} [properties] Properties to set
+                             */
+                            function BuiltInSimpleAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BuiltInSimpleAction type.
+                             * @member {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType} type
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @instance
+                             */
+                            BuiltInSimpleAction.prototype.type = 0;
+    
+                            /**
+                             * BuiltInSimpleAction attributeCode.
+                             * @member {string|null|undefined} attributeCode
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @instance
+                             */
+                            BuiltInSimpleAction.prototype.attributeCode = null;
+    
+                            /**
+                             * BuiltInSimpleAction additionalContent.
+                             * @member {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent|null|undefined} additionalContent
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @instance
+                             */
+                            BuiltInSimpleAction.prototype.additionalContent = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BuiltInSimpleAction.prototype, "_attributeCode", {
+                                get: $util.oneOfGetter($oneOfFields = ["attributeCode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(BuiltInSimpleAction.prototype, "_additionalContent", {
+                                get: $util.oneOfGetter($oneOfFields = ["additionalContent"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BuiltInSimpleAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction} BuiltInSimpleAction instance
+                             */
+                            BuiltInSimpleAction.create = function create(properties) {
+                                return new BuiltInSimpleAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BuiltInSimpleAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction} message BuiltInSimpleAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BuiltInSimpleAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.attributeCode != null && Object.hasOwnProperty.call(message, "attributeCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.attributeCode);
+                                if (message.additionalContent != null && Object.hasOwnProperty.call(message, "additionalContent"))
+                                    $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.encode(message.additionalContent, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BuiltInSimpleAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction} message BuiltInSimpleAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BuiltInSimpleAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BuiltInSimpleAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction} BuiltInSimpleAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BuiltInSimpleAction.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.attributeCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.additionalContent = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BuiltInSimpleAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction} BuiltInSimpleAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BuiltInSimpleAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BuiltInSimpleAction message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BuiltInSimpleAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                        break;
+                                    }
+                                if (message.attributeCode != null && message.hasOwnProperty("attributeCode")) {
+                                    properties._attributeCode = 1;
+                                    if (!$util.isString(message.attributeCode))
+                                        return "attributeCode: string expected";
+                                }
+                                if (message.additionalContent != null && message.hasOwnProperty("additionalContent")) {
+                                    properties._additionalContent = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.verify(message.additionalContent);
+                                        if (error)
+                                            return "additionalContent." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BuiltInSimpleAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction} BuiltInSimpleAction
+                             */
+                            BuiltInSimpleAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "VERIFY_PHONE":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "CLAIM_WEBSITE":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "ADD_PRODUCTS":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "ADD_CONTACT_INFO":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "LINK_ADS_ACCOUNT":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                case "ADD_BUSINESS_REGISTRATION_NUMBER":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                case "EDIT_ITEM_ATTRIBUTE":
+                                case 7:
+                                    message.type = 7;
+                                    break;
+                                case "FIX_ACCOUNT_ISSUE":
+                                case 8:
+                                    message.type = 8;
+                                    break;
+                                case "SHOW_ADDITIONAL_CONTENT":
+                                case 9:
+                                    message.type = 9;
+                                    break;
+                                }
+                                if (object.attributeCode != null)
+                                    message.attributeCode = String(object.attributeCode);
+                                if (object.additionalContent != null) {
+                                    if (typeof object.additionalContent !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.additionalContent: object expected");
+                                    message.additionalContent = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.fromObject(object.additionalContent);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BuiltInSimpleAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction} message BuiltInSimpleAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BuiltInSimpleAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.type = options.enums === String ? "BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED" : 0;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType[message.type] === undefined ? message.type : $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType[message.type] : message.type;
+                                if (message.attributeCode != null && message.hasOwnProperty("attributeCode")) {
+                                    object.attributeCode = message.attributeCode;
+                                    if (options.oneofs)
+                                        object._attributeCode = "attributeCode";
+                                }
+                                if (message.additionalContent != null && message.hasOwnProperty("additionalContent")) {
+                                    object.additionalContent = $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.toObject(message.additionalContent, options);
+                                    if (options.oneofs)
+                                        object._additionalContent = "additionalContent";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BuiltInSimpleAction to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BuiltInSimpleAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BuiltInSimpleAction
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BuiltInSimpleAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction";
+                            };
+    
+                            BuiltInSimpleAction.AdditionalContent = (function() {
+    
+                                /**
+                                 * Properties of an AdditionalContent.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                                 * @interface IAdditionalContent
+                                 * @property {string|null} [title] AdditionalContent title
+                                 * @property {Array.<string>|null} [paragraphs] AdditionalContent paragraphs
+                                 */
+    
+                                /**
+                                 * Constructs a new AdditionalContent.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction
+                                 * @classdesc Represents an AdditionalContent.
+                                 * @implements IAdditionalContent
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent=} [properties] Properties to set
+                                 */
+                                function AdditionalContent(properties) {
+                                    this.paragraphs = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AdditionalContent title.
+                                 * @member {string} title
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @instance
+                                 */
+                                AdditionalContent.prototype.title = "";
+    
+                                /**
+                                 * AdditionalContent paragraphs.
+                                 * @member {Array.<string>} paragraphs
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @instance
+                                 */
+                                AdditionalContent.prototype.paragraphs = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new AdditionalContent instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent} AdditionalContent instance
+                                 */
+                                AdditionalContent.create = function create(properties) {
+                                    return new AdditionalContent(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AdditionalContent message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent} message AdditionalContent message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AdditionalContent.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                    if (message.paragraphs != null && message.paragraphs.length)
+                                        for (var i = 0; i < message.paragraphs.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.paragraphs[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AdditionalContent message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent} message AdditionalContent message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AdditionalContent.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AdditionalContent message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent} AdditionalContent
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AdditionalContent.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.title = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.paragraphs && message.paragraphs.length))
+                                                    message.paragraphs = [];
+                                                message.paragraphs.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AdditionalContent message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent} AdditionalContent
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AdditionalContent.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AdditionalContent message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AdditionalContent.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        if (!$util.isString(message.title))
+                                            return "title: string expected";
+                                    if (message.paragraphs != null && message.hasOwnProperty("paragraphs")) {
+                                        if (!Array.isArray(message.paragraphs))
+                                            return "paragraphs: array expected";
+                                        for (var i = 0; i < message.paragraphs.length; ++i)
+                                            if (!$util.isString(message.paragraphs[i]))
+                                                return "paragraphs: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AdditionalContent message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent} AdditionalContent
+                                 */
+                                AdditionalContent.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent();
+                                    if (object.title != null)
+                                        message.title = String(object.title);
+                                    if (object.paragraphs) {
+                                        if (!Array.isArray(object.paragraphs))
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.paragraphs: array expected");
+                                        message.paragraphs = [];
+                                        for (var i = 0; i < object.paragraphs.length; ++i)
+                                            message.paragraphs[i] = String(object.paragraphs[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AdditionalContent message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent} message AdditionalContent
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AdditionalContent.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.paragraphs = [];
+                                    if (options.defaults)
+                                        object.title = "";
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        object.title = message.title;
+                                    if (message.paragraphs && message.paragraphs.length) {
+                                        object.paragraphs = [];
+                                        for (var j = 0; j < message.paragraphs.length; ++j)
+                                            object.paragraphs[j] = message.paragraphs[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AdditionalContent to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AdditionalContent.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AdditionalContent
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AdditionalContent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent";
+                                };
+    
+                                return AdditionalContent;
+                            })();
+    
+                            /**
+                             * BuiltInSimpleActionType enum.
+                             * @name google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType
+                             * @enum {number}
+                             * @property {number} BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED=0 BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED value
+                             * @property {number} VERIFY_PHONE=1 VERIFY_PHONE value
+                             * @property {number} CLAIM_WEBSITE=2 CLAIM_WEBSITE value
+                             * @property {number} ADD_PRODUCTS=3 ADD_PRODUCTS value
+                             * @property {number} ADD_CONTACT_INFO=4 ADD_CONTACT_INFO value
+                             * @property {number} LINK_ADS_ACCOUNT=5 LINK_ADS_ACCOUNT value
+                             * @property {number} ADD_BUSINESS_REGISTRATION_NUMBER=6 ADD_BUSINESS_REGISTRATION_NUMBER value
+                             * @property {number} EDIT_ITEM_ATTRIBUTE=7 EDIT_ITEM_ATTRIBUTE value
+                             * @property {number} FIX_ACCOUNT_ISSUE=8 FIX_ACCOUNT_ISSUE value
+                             * @property {number} SHOW_ADDITIONAL_CONTENT=9 SHOW_ADDITIONAL_CONTENT value
+                             */
+                            BuiltInSimpleAction.BuiltInSimpleActionType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "VERIFY_PHONE"] = 1;
+                                values[valuesById[2] = "CLAIM_WEBSITE"] = 2;
+                                values[valuesById[3] = "ADD_PRODUCTS"] = 3;
+                                values[valuesById[4] = "ADD_CONTACT_INFO"] = 4;
+                                values[valuesById[5] = "LINK_ADS_ACCOUNT"] = 5;
+                                values[valuesById[6] = "ADD_BUSINESS_REGISTRATION_NUMBER"] = 6;
+                                values[valuesById[7] = "EDIT_ITEM_ATTRIBUTE"] = 7;
+                                values[valuesById[8] = "FIX_ACCOUNT_ISSUE"] = 8;
+                                values[valuesById[9] = "SHOW_ADDITIONAL_CONTENT"] = 9;
+                                return values;
+                            })();
+    
+                            return BuiltInSimpleAction;
+                        })();
+    
+                        v1.BuiltInUserInputAction = (function() {
+    
+                            /**
+                             * Properties of a BuiltInUserInputAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IBuiltInUserInputAction
+                             * @property {string|null} [actionContext] BuiltInUserInputAction actionContext
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IActionFlow>|null} [flows] BuiltInUserInputAction flows
+                             */
+    
+                            /**
+                             * Constructs a new BuiltInUserInputAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a BuiltInUserInputAction.
+                             * @implements IBuiltInUserInputAction
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction=} [properties] Properties to set
+                             */
+                            function BuiltInUserInputAction(properties) {
+                                this.flows = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BuiltInUserInputAction actionContext.
+                             * @member {string} actionContext
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @instance
+                             */
+                            BuiltInUserInputAction.prototype.actionContext = "";
+    
+                            /**
+                             * BuiltInUserInputAction flows.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IActionFlow>} flows
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @instance
+                             */
+                            BuiltInUserInputAction.prototype.flows = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BuiltInUserInputAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction} BuiltInUserInputAction instance
+                             */
+                            BuiltInUserInputAction.create = function create(properties) {
+                                return new BuiltInUserInputAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BuiltInUserInputAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction} message BuiltInUserInputAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BuiltInUserInputAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.actionContext != null && Object.hasOwnProperty.call(message, "actionContext"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actionContext);
+                                if (message.flows != null && message.flows.length)
+                                    for (var i = 0; i < message.flows.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.ActionFlow.encode(message.flows[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BuiltInUserInputAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction} message BuiltInUserInputAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BuiltInUserInputAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BuiltInUserInputAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction} BuiltInUserInputAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BuiltInUserInputAction.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.actionContext = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.flows && message.flows.length))
+                                                message.flows = [];
+                                            message.flows.push($root.google.shopping.merchant.issueresolution.v1.ActionFlow.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BuiltInUserInputAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction} BuiltInUserInputAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BuiltInUserInputAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BuiltInUserInputAction message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BuiltInUserInputAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.actionContext != null && message.hasOwnProperty("actionContext"))
+                                    if (!$util.isString(message.actionContext))
+                                        return "actionContext: string expected";
+                                if (message.flows != null && message.hasOwnProperty("flows")) {
+                                    if (!Array.isArray(message.flows))
+                                        return "flows: array expected";
+                                    for (var i = 0; i < message.flows.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.ActionFlow.verify(message.flows[i]);
+                                        if (error)
+                                            return "flows." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BuiltInUserInputAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction} BuiltInUserInputAction
+                             */
+                            BuiltInUserInputAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction();
+                                if (object.actionContext != null)
+                                    message.actionContext = String(object.actionContext);
+                                if (object.flows) {
+                                    if (!Array.isArray(object.flows))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.flows: array expected");
+                                    message.flows = [];
+                                    for (var i = 0; i < object.flows.length; ++i) {
+                                        if (typeof object.flows[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.flows: object expected");
+                                        message.flows[i] = $root.google.shopping.merchant.issueresolution.v1.ActionFlow.fromObject(object.flows[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BuiltInUserInputAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction} message BuiltInUserInputAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BuiltInUserInputAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.flows = [];
+                                if (options.defaults)
+                                    object.actionContext = "";
+                                if (message.actionContext != null && message.hasOwnProperty("actionContext"))
+                                    object.actionContext = message.actionContext;
+                                if (message.flows && message.flows.length) {
+                                    object.flows = [];
+                                    for (var j = 0; j < message.flows.length; ++j)
+                                        object.flows[j] = $root.google.shopping.merchant.issueresolution.v1.ActionFlow.toObject(message.flows[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BuiltInUserInputAction to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BuiltInUserInputAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BuiltInUserInputAction
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BuiltInUserInputAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction";
+                            };
+    
+                            return BuiltInUserInputAction;
+                        })();
+    
+                        v1.ActionFlow = (function() {
+    
+                            /**
+                             * Properties of an ActionFlow.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IActionFlow
+                             * @property {string|null} [id] ActionFlow id
+                             * @property {string|null} [label] ActionFlow label
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IInputField>|null} [inputs] ActionFlow inputs
+                             * @property {string|null} [dialogTitle] ActionFlow dialogTitle
+                             * @property {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null} [dialogMessage] ActionFlow dialogMessage
+                             * @property {google.shopping.merchant.issueresolution.v1.ICallout|null} [dialogCallout] ActionFlow dialogCallout
+                             * @property {string|null} [dialogButtonLabel] ActionFlow dialogButtonLabel
+                             */
+    
+                            /**
+                             * Constructs a new ActionFlow.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an ActionFlow.
+                             * @implements IActionFlow
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionFlow=} [properties] Properties to set
+                             */
+                            function ActionFlow(properties) {
+                                this.inputs = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ActionFlow id.
+                             * @member {string} id
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.id = "";
+    
+                            /**
+                             * ActionFlow label.
+                             * @member {string} label
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.label = "";
+    
+                            /**
+                             * ActionFlow inputs.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IInputField>} inputs
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.inputs = $util.emptyArray;
+    
+                            /**
+                             * ActionFlow dialogTitle.
+                             * @member {string} dialogTitle
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.dialogTitle = "";
+    
+                            /**
+                             * ActionFlow dialogMessage.
+                             * @member {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null|undefined} dialogMessage
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.dialogMessage = null;
+    
+                            /**
+                             * ActionFlow dialogCallout.
+                             * @member {google.shopping.merchant.issueresolution.v1.ICallout|null|undefined} dialogCallout
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.dialogCallout = null;
+    
+                            /**
+                             * ActionFlow dialogButtonLabel.
+                             * @member {string} dialogButtonLabel
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             */
+                            ActionFlow.prototype.dialogButtonLabel = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ActionFlow.prototype, "_dialogMessage", {
+                                get: $util.oneOfGetter($oneOfFields = ["dialogMessage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ActionFlow.prototype, "_dialogCallout", {
+                                get: $util.oneOfGetter($oneOfFields = ["dialogCallout"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ActionFlow instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionFlow=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionFlow} ActionFlow instance
+                             */
+                            ActionFlow.create = function create(properties) {
+                                return new ActionFlow(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ActionFlow message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionFlow.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionFlow} message ActionFlow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActionFlow.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+                                if (message.inputs != null && message.inputs.length)
+                                    for (var i = 0; i < message.inputs.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.InputField.encode(message.inputs[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.dialogTitle != null && Object.hasOwnProperty.call(message, "dialogTitle"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.dialogTitle);
+                                if (message.dialogMessage != null && Object.hasOwnProperty.call(message, "dialogMessage"))
+                                    $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.encode(message.dialogMessage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.dialogCallout != null && Object.hasOwnProperty.call(message, "dialogCallout"))
+                                    $root.google.shopping.merchant.issueresolution.v1.Callout.encode(message.dialogCallout, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.dialogButtonLabel != null && Object.hasOwnProperty.call(message, "dialogButtonLabel"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.dialogButtonLabel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ActionFlow message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionFlow.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionFlow} message ActionFlow message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActionFlow.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ActionFlow message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionFlow} ActionFlow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActionFlow.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.ActionFlow();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.label = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.inputs && message.inputs.length))
+                                                message.inputs = [];
+                                            message.inputs.push($root.google.shopping.merchant.issueresolution.v1.InputField.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.dialogTitle = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.dialogMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.dialogCallout = $root.google.shopping.merchant.issueresolution.v1.Callout.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.dialogButtonLabel = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ActionFlow message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionFlow} ActionFlow
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActionFlow.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ActionFlow message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ActionFlow.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.label != null && message.hasOwnProperty("label"))
+                                    if (!$util.isString(message.label))
+                                        return "label: string expected";
+                                if (message.inputs != null && message.hasOwnProperty("inputs")) {
+                                    if (!Array.isArray(message.inputs))
+                                        return "inputs: array expected";
+                                    for (var i = 0; i < message.inputs.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputField.verify(message.inputs[i]);
+                                        if (error)
+                                            return "inputs." + error;
+                                    }
+                                }
+                                if (message.dialogTitle != null && message.hasOwnProperty("dialogTitle"))
+                                    if (!$util.isString(message.dialogTitle))
+                                        return "dialogTitle: string expected";
+                                if (message.dialogMessage != null && message.hasOwnProperty("dialogMessage")) {
+                                    properties._dialogMessage = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify(message.dialogMessage);
+                                        if (error)
+                                            return "dialogMessage." + error;
+                                    }
+                                }
+                                if (message.dialogCallout != null && message.hasOwnProperty("dialogCallout")) {
+                                    properties._dialogCallout = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.Callout.verify(message.dialogCallout);
+                                        if (error)
+                                            return "dialogCallout." + error;
+                                    }
+                                }
+                                if (message.dialogButtonLabel != null && message.hasOwnProperty("dialogButtonLabel"))
+                                    if (!$util.isString(message.dialogButtonLabel))
+                                        return "dialogButtonLabel: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ActionFlow message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionFlow} ActionFlow
+                             */
+                            ActionFlow.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.ActionFlow)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.ActionFlow();
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.label != null)
+                                    message.label = String(object.label);
+                                if (object.inputs) {
+                                    if (!Array.isArray(object.inputs))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionFlow.inputs: array expected");
+                                    message.inputs = [];
+                                    for (var i = 0; i < object.inputs.length; ++i) {
+                                        if (typeof object.inputs[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionFlow.inputs: object expected");
+                                        message.inputs[i] = $root.google.shopping.merchant.issueresolution.v1.InputField.fromObject(object.inputs[i]);
+                                    }
+                                }
+                                if (object.dialogTitle != null)
+                                    message.dialogTitle = String(object.dialogTitle);
+                                if (object.dialogMessage != null) {
+                                    if (typeof object.dialogMessage !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionFlow.dialogMessage: object expected");
+                                    message.dialogMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.fromObject(object.dialogMessage);
+                                }
+                                if (object.dialogCallout != null) {
+                                    if (typeof object.dialogCallout !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionFlow.dialogCallout: object expected");
+                                    message.dialogCallout = $root.google.shopping.merchant.issueresolution.v1.Callout.fromObject(object.dialogCallout);
+                                }
+                                if (object.dialogButtonLabel != null)
+                                    message.dialogButtonLabel = String(object.dialogButtonLabel);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ActionFlow message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ActionFlow} message ActionFlow
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ActionFlow.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.inputs = [];
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.label = "";
+                                    object.dialogTitle = "";
+                                    object.dialogButtonLabel = "";
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.label != null && message.hasOwnProperty("label"))
+                                    object.label = message.label;
+                                if (message.inputs && message.inputs.length) {
+                                    object.inputs = [];
+                                    for (var j = 0; j < message.inputs.length; ++j)
+                                        object.inputs[j] = $root.google.shopping.merchant.issueresolution.v1.InputField.toObject(message.inputs[j], options);
+                                }
+                                if (message.dialogTitle != null && message.hasOwnProperty("dialogTitle"))
+                                    object.dialogTitle = message.dialogTitle;
+                                if (message.dialogMessage != null && message.hasOwnProperty("dialogMessage")) {
+                                    object.dialogMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.toObject(message.dialogMessage, options);
+                                    if (options.oneofs)
+                                        object._dialogMessage = "dialogMessage";
+                                }
+                                if (message.dialogCallout != null && message.hasOwnProperty("dialogCallout")) {
+                                    object.dialogCallout = $root.google.shopping.merchant.issueresolution.v1.Callout.toObject(message.dialogCallout, options);
+                                    if (options.oneofs)
+                                        object._dialogCallout = "dialogCallout";
+                                }
+                                if (message.dialogButtonLabel != null && message.hasOwnProperty("dialogButtonLabel"))
+                                    object.dialogButtonLabel = message.dialogButtonLabel;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ActionFlow to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ActionFlow.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ActionFlow
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionFlow
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ActionFlow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.ActionFlow";
+                            };
+    
+                            return ActionFlow;
+                        })();
+    
+                        v1.InputField = (function() {
+    
+                            /**
+                             * Properties of an InputField.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IInputField
+                             * @property {google.shopping.merchant.issueresolution.v1.InputField.ITextInput|null} [textInput] InputField textInput
+                             * @property {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput|null} [choiceInput] InputField choiceInput
+                             * @property {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput|null} [checkboxInput] InputField checkboxInput
+                             * @property {string|null} [id] InputField id
+                             * @property {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null} [label] InputField label
+                             * @property {boolean|null} [required] InputField required
+                             */
+    
+                            /**
+                             * Constructs a new InputField.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an InputField.
+                             * @implements IInputField
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputField=} [properties] Properties to set
+                             */
+                            function InputField(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputField textInput.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputField.ITextInput|null|undefined} textInput
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.textInput = null;
+    
+                            /**
+                             * InputField choiceInput.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput|null|undefined} choiceInput
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.choiceInput = null;
+    
+                            /**
+                             * InputField checkboxInput.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput|null|undefined} checkboxInput
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.checkboxInput = null;
+    
+                            /**
+                             * InputField id.
+                             * @member {string} id
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.id = "";
+    
+                            /**
+                             * InputField label.
+                             * @member {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null|undefined} label
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.label = null;
+    
+                            /**
+                             * InputField required.
+                             * @member {boolean} required
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            InputField.prototype.required = false;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * InputField valueInput.
+                             * @member {"textInput"|"choiceInput"|"checkboxInput"|undefined} valueInput
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             */
+                            Object.defineProperty(InputField.prototype, "valueInput", {
+                                get: $util.oneOfGetter($oneOfFields = ["textInput", "choiceInput", "checkboxInput"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new InputField instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputField=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputField} InputField instance
+                             */
+                            InputField.create = function create(properties) {
+                                return new InputField(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputField message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputField} message InputField message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputField.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                                    $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.encode(message.label, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.required != null && Object.hasOwnProperty.call(message, "required"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.required);
+                                if (message.textInput != null && Object.hasOwnProperty.call(message, "textInput"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.encode(message.textInput, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.choiceInput != null && Object.hasOwnProperty.call(message, "choiceInput"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.encode(message.choiceInput, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.checkboxInput != null && Object.hasOwnProperty.call(message, "checkboxInput"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.encode(message.checkboxInput, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputField message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputField} message InputField message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputField.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputField message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputField} InputField
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputField.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputField();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.textInput = $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.choiceInput = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.checkboxInput = $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.id = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.required = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputField message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputField} InputField
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputField.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputField message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputField.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.textInput != null && message.hasOwnProperty("textInput")) {
+                                    properties.valueInput = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.verify(message.textInput);
+                                        if (error)
+                                            return "textInput." + error;
+                                    }
+                                }
+                                if (message.choiceInput != null && message.hasOwnProperty("choiceInput")) {
+                                    if (properties.valueInput === 1)
+                                        return "valueInput: multiple values";
+                                    properties.valueInput = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.verify(message.choiceInput);
+                                        if (error)
+                                            return "choiceInput." + error;
+                                    }
+                                }
+                                if (message.checkboxInput != null && message.hasOwnProperty("checkboxInput")) {
+                                    if (properties.valueInput === 1)
+                                        return "valueInput: multiple values";
+                                    properties.valueInput = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.verify(message.checkboxInput);
+                                        if (error)
+                                            return "checkboxInput." + error;
+                                    }
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    if (!$util.isString(message.id))
+                                        return "id: string expected";
+                                if (message.label != null && message.hasOwnProperty("label")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify(message.label);
+                                    if (error)
+                                        return "label." + error;
+                                }
+                                if (message.required != null && message.hasOwnProperty("required"))
+                                    if (typeof message.required !== "boolean")
+                                        return "required: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputField message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputField} InputField
+                             */
+                            InputField.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputField)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.InputField();
+                                if (object.textInput != null) {
+                                    if (typeof object.textInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.textInput: object expected");
+                                    message.textInput = $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.fromObject(object.textInput);
+                                }
+                                if (object.choiceInput != null) {
+                                    if (typeof object.choiceInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.choiceInput: object expected");
+                                    message.choiceInput = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.fromObject(object.choiceInput);
+                                }
+                                if (object.checkboxInput != null) {
+                                    if (typeof object.checkboxInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.checkboxInput: object expected");
+                                    message.checkboxInput = $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.fromObject(object.checkboxInput);
+                                }
+                                if (object.id != null)
+                                    message.id = String(object.id);
+                                if (object.label != null) {
+                                    if (typeof object.label !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.label: object expected");
+                                    message.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.fromObject(object.label);
+                                }
+                                if (object.required != null)
+                                    message.required = Boolean(object.required);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputField message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.InputField} message InputField
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputField.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.id = "";
+                                    object.label = null;
+                                    object.required = false;
+                                }
+                                if (message.id != null && message.hasOwnProperty("id"))
+                                    object.id = message.id;
+                                if (message.label != null && message.hasOwnProperty("label"))
+                                    object.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.toObject(message.label, options);
+                                if (message.required != null && message.hasOwnProperty("required"))
+                                    object.required = message.required;
+                                if (message.textInput != null && message.hasOwnProperty("textInput")) {
+                                    object.textInput = $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.toObject(message.textInput, options);
+                                    if (options.oneofs)
+                                        object.valueInput = "textInput";
+                                }
+                                if (message.choiceInput != null && message.hasOwnProperty("choiceInput")) {
+                                    object.choiceInput = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.toObject(message.choiceInput, options);
+                                    if (options.oneofs)
+                                        object.valueInput = "choiceInput";
+                                }
+                                if (message.checkboxInput != null && message.hasOwnProperty("checkboxInput")) {
+                                    object.checkboxInput = $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.toObject(message.checkboxInput, options);
+                                    if (options.oneofs)
+                                        object.valueInput = "checkboxInput";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputField to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputField.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InputField
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InputField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputField";
+                            };
+    
+                            InputField.TextInput = (function() {
+    
+                                /**
+                                 * Properties of a TextInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @interface ITextInput
+                                 * @property {google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType|null} [type] TextInput type
+                                 * @property {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null} [additionalInfo] TextInput additionalInfo
+                                 * @property {string|null} [formatInfo] TextInput formatInfo
+                                 * @property {string|null} [ariaLabel] TextInput ariaLabel
+                                 */
+    
+                                /**
+                                 * Constructs a new TextInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @classdesc Represents a TextInput.
+                                 * @implements ITextInput
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ITextInput=} [properties] Properties to set
+                                 */
+                                function TextInput(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TextInput type.
+                                 * @member {google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType} type
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @instance
+                                 */
+                                TextInput.prototype.type = 0;
+    
+                                /**
+                                 * TextInput additionalInfo.
+                                 * @member {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null|undefined} additionalInfo
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @instance
+                                 */
+                                TextInput.prototype.additionalInfo = null;
+    
+                                /**
+                                 * TextInput formatInfo.
+                                 * @member {string|null|undefined} formatInfo
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @instance
+                                 */
+                                TextInput.prototype.formatInfo = null;
+    
+                                /**
+                                 * TextInput ariaLabel.
+                                 * @member {string|null|undefined} ariaLabel
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @instance
+                                 */
+                                TextInput.prototype.ariaLabel = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(TextInput.prototype, "_additionalInfo", {
+                                    get: $util.oneOfGetter($oneOfFields = ["additionalInfo"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(TextInput.prototype, "_formatInfo", {
+                                    get: $util.oneOfGetter($oneOfFields = ["formatInfo"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(TextInput.prototype, "_ariaLabel", {
+                                    get: $util.oneOfGetter($oneOfFields = ["ariaLabel"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new TextInput instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ITextInput=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.TextInput} TextInput instance
+                                 */
+                                TextInput.create = function create(properties) {
+                                    return new TextInput(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TextInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.TextInput.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ITextInput} message TextInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextInput.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                    if (message.additionalInfo != null && Object.hasOwnProperty.call(message, "additionalInfo"))
+                                        $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.encode(message.additionalInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.formatInfo != null && Object.hasOwnProperty.call(message, "formatInfo"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.formatInfo);
+                                    if (message.ariaLabel != null && Object.hasOwnProperty.call(message, "ariaLabel"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.ariaLabel);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TextInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.TextInput.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ITextInput} message TextInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TextInput message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.TextInput} TextInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextInput.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.type = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.additionalInfo = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.formatInfo = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.ariaLabel = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TextInput message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.TextInput} TextInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextInput.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TextInput message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TextInput.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        switch (message.type) {
+                                        default:
+                                            return "type: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.additionalInfo != null && message.hasOwnProperty("additionalInfo")) {
+                                        properties._additionalInfo = 1;
+                                        {
+                                            var error = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify(message.additionalInfo);
+                                            if (error)
+                                                return "additionalInfo." + error;
+                                        }
+                                    }
+                                    if (message.formatInfo != null && message.hasOwnProperty("formatInfo")) {
+                                        properties._formatInfo = 1;
+                                        if (!$util.isString(message.formatInfo))
+                                            return "formatInfo: string expected";
+                                    }
+                                    if (message.ariaLabel != null && message.hasOwnProperty("ariaLabel")) {
+                                        properties._ariaLabel = 1;
+                                        if (!$util.isString(message.ariaLabel))
+                                            return "ariaLabel: string expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TextInput message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.TextInput} TextInput
+                                 */
+                                TextInput.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput();
+                                    switch (object.type) {
+                                    default:
+                                        if (typeof object.type === "number") {
+                                            message.type = object.type;
+                                            break;
+                                        }
+                                        break;
+                                    case "TEXT_INPUT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.type = 0;
+                                        break;
+                                    case "GENERIC_SHORT_TEXT":
+                                    case 1:
+                                        message.type = 1;
+                                        break;
+                                    case "GENERIC_LONG_TEXT":
+                                    case 2:
+                                        message.type = 2;
+                                        break;
+                                    }
+                                    if (object.additionalInfo != null) {
+                                        if (typeof object.additionalInfo !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.TextInput.additionalInfo: object expected");
+                                        message.additionalInfo = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.fromObject(object.additionalInfo);
+                                    }
+                                    if (object.formatInfo != null)
+                                        message.formatInfo = String(object.formatInfo);
+                                    if (object.ariaLabel != null)
+                                        message.ariaLabel = String(object.ariaLabel);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TextInput message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.TextInput} message TextInput
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TextInput.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.type = options.enums === String ? "TEXT_INPUT_TYPE_UNSPECIFIED" : 0;
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType[message.type] === undefined ? message.type : $root.google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType[message.type] : message.type;
+                                    if (message.additionalInfo != null && message.hasOwnProperty("additionalInfo")) {
+                                        object.additionalInfo = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.toObject(message.additionalInfo, options);
+                                        if (options.oneofs)
+                                            object._additionalInfo = "additionalInfo";
+                                    }
+                                    if (message.formatInfo != null && message.hasOwnProperty("formatInfo")) {
+                                        object.formatInfo = message.formatInfo;
+                                        if (options.oneofs)
+                                            object._formatInfo = "formatInfo";
+                                    }
+                                    if (message.ariaLabel != null && message.hasOwnProperty("ariaLabel")) {
+                                        object.ariaLabel = message.ariaLabel;
+                                        if (options.oneofs)
+                                            object._ariaLabel = "ariaLabel";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TextInput to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TextInput.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TextInput
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.TextInput
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TextInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputField.TextInput";
+                                };
+    
+                                /**
+                                 * TextInputType enum.
+                                 * @name google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType
+                                 * @enum {number}
+                                 * @property {number} TEXT_INPUT_TYPE_UNSPECIFIED=0 TEXT_INPUT_TYPE_UNSPECIFIED value
+                                 * @property {number} GENERIC_SHORT_TEXT=1 GENERIC_SHORT_TEXT value
+                                 * @property {number} GENERIC_LONG_TEXT=2 GENERIC_LONG_TEXT value
+                                 */
+                                TextInput.TextInputType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "TEXT_INPUT_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "GENERIC_SHORT_TEXT"] = 1;
+                                    values[valuesById[2] = "GENERIC_LONG_TEXT"] = 2;
+                                    return values;
+                                })();
+    
+                                return TextInput;
+                            })();
+    
+                            InputField.ChoiceInput = (function() {
+    
+                                /**
+                                 * Properties of a ChoiceInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @interface IChoiceInput
+                                 * @property {Array.<google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption>|null} [options] ChoiceInput options
+                                 */
+    
+                                /**
+                                 * Constructs a new ChoiceInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @classdesc Represents a ChoiceInput.
+                                 * @implements IChoiceInput
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput=} [properties] Properties to set
+                                 */
+                                function ChoiceInput(properties) {
+                                    this.options = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ChoiceInput options.
+                                 * @member {Array.<google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption>} options
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @instance
+                                 */
+                                ChoiceInput.prototype.options = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ChoiceInput instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput} ChoiceInput instance
+                                 */
+                                ChoiceInput.create = function create(properties) {
+                                    return new ChoiceInput(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ChoiceInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput} message ChoiceInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ChoiceInput.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.options != null && message.options.length)
+                                        for (var i = 0; i < message.options.length; ++i)
+                                            $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.encode(message.options[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ChoiceInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput} message ChoiceInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ChoiceInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ChoiceInput message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput} ChoiceInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ChoiceInput.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.options && message.options.length))
+                                                    message.options = [];
+                                                message.options.push($root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ChoiceInput message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput} ChoiceInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ChoiceInput.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ChoiceInput message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ChoiceInput.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.options != null && message.hasOwnProperty("options")) {
+                                        if (!Array.isArray(message.options))
+                                            return "options: array expected";
+                                        for (var i = 0; i < message.options.length; ++i) {
+                                            var error = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.verify(message.options[i]);
+                                            if (error)
+                                                return "options." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ChoiceInput message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput} ChoiceInput
+                                 */
+                                ChoiceInput.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput();
+                                    if (object.options) {
+                                        if (!Array.isArray(object.options))
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.options: array expected");
+                                        message.options = [];
+                                        for (var i = 0; i < object.options.length; ++i) {
+                                            if (typeof object.options[i] !== "object")
+                                                throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.options: object expected");
+                                            message.options[i] = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.fromObject(object.options[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ChoiceInput message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput} message ChoiceInput
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ChoiceInput.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.options = [];
+                                    if (message.options && message.options.length) {
+                                        object.options = [];
+                                        for (var j = 0; j < message.options.length; ++j)
+                                            object.options[j] = $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.toObject(message.options[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ChoiceInput to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ChoiceInput.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ChoiceInput
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ChoiceInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput";
+                                };
+    
+                                ChoiceInput.ChoiceInputOption = (function() {
+    
+                                    /**
+                                     * Properties of a ChoiceInputOption.
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                     * @interface IChoiceInputOption
+                                     * @property {string|null} [id] ChoiceInputOption id
+                                     * @property {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null} [label] ChoiceInputOption label
+                                     * @property {google.shopping.merchant.issueresolution.v1.IInputField|null} [additionalInput] ChoiceInputOption additionalInput
+                                     */
+    
+                                    /**
+                                     * Constructs a new ChoiceInputOption.
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput
+                                     * @classdesc Represents a ChoiceInputOption.
+                                     * @implements IChoiceInputOption
+                                     * @constructor
+                                     * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption=} [properties] Properties to set
+                                     */
+                                    function ChoiceInputOption(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ChoiceInputOption id.
+                                     * @member {string} id
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @instance
+                                     */
+                                    ChoiceInputOption.prototype.id = "";
+    
+                                    /**
+                                     * ChoiceInputOption label.
+                                     * @member {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null|undefined} label
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @instance
+                                     */
+                                    ChoiceInputOption.prototype.label = null;
+    
+                                    /**
+                                     * ChoiceInputOption additionalInput.
+                                     * @member {google.shopping.merchant.issueresolution.v1.IInputField|null|undefined} additionalInput
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @instance
+                                     */
+                                    ChoiceInputOption.prototype.additionalInput = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ChoiceInputOption.prototype, "_additionalInput", {
+                                        get: $util.oneOfGetter($oneOfFields = ["additionalInput"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ChoiceInputOption instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption=} [properties] Properties to set
+                                     * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption} ChoiceInputOption instance
+                                     */
+                                    ChoiceInputOption.create = function create(properties) {
+                                        return new ChoiceInputOption(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ChoiceInputOption message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption} message ChoiceInputOption message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ChoiceInputOption.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                                        if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                                            $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.encode(message.label, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        if (message.additionalInput != null && Object.hasOwnProperty.call(message, "additionalInput"))
+                                            $root.google.shopping.merchant.issueresolution.v1.InputField.encode(message.additionalInput, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ChoiceInputOption message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption} message ChoiceInputOption message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ChoiceInputOption.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ChoiceInputOption message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption} ChoiceInputOption
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ChoiceInputOption.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.id = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.additionalInput = $root.google.shopping.merchant.issueresolution.v1.InputField.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ChoiceInputOption message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption} ChoiceInputOption
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ChoiceInputOption.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ChoiceInputOption message.
+                                     * @function verify
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ChoiceInputOption.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            if (!$util.isString(message.id))
+                                                return "id: string expected";
+                                        if (message.label != null && message.hasOwnProperty("label")) {
+                                            var error = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify(message.label);
+                                            if (error)
+                                                return "label." + error;
+                                        }
+                                        if (message.additionalInput != null && message.hasOwnProperty("additionalInput")) {
+                                            properties._additionalInput = 1;
+                                            {
+                                                var error = $root.google.shopping.merchant.issueresolution.v1.InputField.verify(message.additionalInput);
+                                                if (error)
+                                                    return "additionalInput." + error;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ChoiceInputOption message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption} ChoiceInputOption
+                                     */
+                                    ChoiceInputOption.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption)
+                                            return object;
+                                        var message = new $root.google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption();
+                                        if (object.id != null)
+                                            message.id = String(object.id);
+                                        if (object.label != null) {
+                                            if (typeof object.label !== "object")
+                                                throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.label: object expected");
+                                            message.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.fromObject(object.label);
+                                        }
+                                        if (object.additionalInput != null) {
+                                            if (typeof object.additionalInput !== "object")
+                                                throw TypeError(".google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.additionalInput: object expected");
+                                            message.additionalInput = $root.google.shopping.merchant.issueresolution.v1.InputField.fromObject(object.additionalInput);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ChoiceInputOption message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption} message ChoiceInputOption
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ChoiceInputOption.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.id = "";
+                                            object.label = null;
+                                        }
+                                        if (message.id != null && message.hasOwnProperty("id"))
+                                            object.id = message.id;
+                                        if (message.label != null && message.hasOwnProperty("label"))
+                                            object.label = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.toObject(message.label, options);
+                                        if (message.additionalInput != null && message.hasOwnProperty("additionalInput")) {
+                                            object.additionalInput = $root.google.shopping.merchant.issueresolution.v1.InputField.toObject(message.additionalInput, options);
+                                            if (options.oneofs)
+                                                object._additionalInput = "additionalInput";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ChoiceInputOption to JSON.
+                                     * @function toJSON
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ChoiceInputOption.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ChoiceInputOption
+                                     * @function getTypeUrl
+                                     * @memberof google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ChoiceInputOption.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption";
+                                    };
+    
+                                    return ChoiceInputOption;
+                                })();
+    
+                                return ChoiceInput;
+                            })();
+    
+                            InputField.CheckboxInput = (function() {
+    
+                                /**
+                                 * Properties of a CheckboxInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @interface ICheckboxInput
+                                 */
+    
+                                /**
+                                 * Constructs a new CheckboxInput.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField
+                                 * @classdesc Represents a CheckboxInput.
+                                 * @implements ICheckboxInput
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput=} [properties] Properties to set
+                                 */
+                                function CheckboxInput(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new CheckboxInput instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput} CheckboxInput instance
+                                 */
+                                CheckboxInput.create = function create(properties) {
+                                    return new CheckboxInput(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CheckboxInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput} message CheckboxInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CheckboxInput.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CheckboxInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput} message CheckboxInput message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CheckboxInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CheckboxInput message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput} CheckboxInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CheckboxInput.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CheckboxInput message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput} CheckboxInput
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CheckboxInput.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CheckboxInput message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CheckboxInput.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CheckboxInput message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput} CheckboxInput
+                                 */
+                                CheckboxInput.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput)
+                                        return object;
+                                    return new $root.google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CheckboxInput message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput} message CheckboxInput
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CheckboxInput.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this CheckboxInput to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CheckboxInput.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CheckboxInput
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CheckboxInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput";
+                                };
+    
+                                return CheckboxInput;
+                            })();
+    
+                            return InputField;
+                        })();
+    
+                        v1.TextWithTooltip = (function() {
+    
+                            /**
+                             * Properties of a TextWithTooltip.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface ITextWithTooltip
+                             * @property {string|null} [simpleValue] TextWithTooltip simpleValue
+                             * @property {string|null} [simpleTooltipValue] TextWithTooltip simpleTooltipValue
+                             * @property {google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle|null} [tooltipIconStyle] TextWithTooltip tooltipIconStyle
+                             */
+    
+                            /**
+                             * Constructs a new TextWithTooltip.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a TextWithTooltip.
+                             * @implements ITextWithTooltip
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.ITextWithTooltip=} [properties] Properties to set
+                             */
+                            function TextWithTooltip(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TextWithTooltip simpleValue.
+                             * @member {string|null|undefined} simpleValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             */
+                            TextWithTooltip.prototype.simpleValue = null;
+    
+                            /**
+                             * TextWithTooltip simpleTooltipValue.
+                             * @member {string|null|undefined} simpleTooltipValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             */
+                            TextWithTooltip.prototype.simpleTooltipValue = null;
+    
+                            /**
+                             * TextWithTooltip tooltipIconStyle.
+                             * @member {google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle} tooltipIconStyle
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             */
+                            TextWithTooltip.prototype.tooltipIconStyle = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * TextWithTooltip value.
+                             * @member {"simpleValue"|undefined} value
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             */
+                            Object.defineProperty(TextWithTooltip.prototype, "value", {
+                                get: $util.oneOfGetter($oneOfFields = ["simpleValue"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * TextWithTooltip tooltipValue.
+                             * @member {"simpleTooltipValue"|undefined} tooltipValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             */
+                            Object.defineProperty(TextWithTooltip.prototype, "tooltipValue", {
+                                get: $util.oneOfGetter($oneOfFields = ["simpleTooltipValue"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TextWithTooltip instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITextWithTooltip=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.TextWithTooltip} TextWithTooltip instance
+                             */
+                            TextWithTooltip.create = function create(properties) {
+                                return new TextWithTooltip(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TextWithTooltip message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITextWithTooltip} message TextWithTooltip message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextWithTooltip.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.simpleValue != null && Object.hasOwnProperty.call(message, "simpleValue"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.simpleValue);
+                                if (message.simpleTooltipValue != null && Object.hasOwnProperty.call(message, "simpleTooltipValue"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.simpleTooltipValue);
+                                if (message.tooltipIconStyle != null && Object.hasOwnProperty.call(message, "tooltipIconStyle"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.tooltipIconStyle);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TextWithTooltip message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITextWithTooltip} message TextWithTooltip message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TextWithTooltip.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TextWithTooltip message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.TextWithTooltip} TextWithTooltip
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextWithTooltip.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.simpleValue = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.simpleTooltipValue = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.tooltipIconStyle = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TextWithTooltip message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.TextWithTooltip} TextWithTooltip
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TextWithTooltip.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TextWithTooltip message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TextWithTooltip.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.simpleValue != null && message.hasOwnProperty("simpleValue")) {
+                                    properties.value = 1;
+                                    if (!$util.isString(message.simpleValue))
+                                        return "simpleValue: string expected";
+                                }
+                                if (message.simpleTooltipValue != null && message.hasOwnProperty("simpleTooltipValue")) {
+                                    properties.tooltipValue = 1;
+                                    if (!$util.isString(message.simpleTooltipValue))
+                                        return "simpleTooltipValue: string expected";
+                                }
+                                if (message.tooltipIconStyle != null && message.hasOwnProperty("tooltipIconStyle"))
+                                    switch (message.tooltipIconStyle) {
+                                    default:
+                                        return "tooltipIconStyle: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TextWithTooltip message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.TextWithTooltip} TextWithTooltip
+                             */
+                            TextWithTooltip.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip();
+                                if (object.simpleValue != null)
+                                    message.simpleValue = String(object.simpleValue);
+                                if (object.simpleTooltipValue != null)
+                                    message.simpleTooltipValue = String(object.simpleTooltipValue);
+                                switch (object.tooltipIconStyle) {
+                                default:
+                                    if (typeof object.tooltipIconStyle === "number") {
+                                        message.tooltipIconStyle = object.tooltipIconStyle;
+                                        break;
+                                    }
+                                    break;
+                                case "TOOLTIP_ICON_STYLE_UNSPECIFIED":
+                                case 0:
+                                    message.tooltipIconStyle = 0;
+                                    break;
+                                case "INFO":
+                                case 1:
+                                    message.tooltipIconStyle = 1;
+                                    break;
+                                case "QUESTION":
+                                case 2:
+                                    message.tooltipIconStyle = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TextWithTooltip message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.TextWithTooltip} message TextWithTooltip
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TextWithTooltip.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.tooltipIconStyle = options.enums === String ? "TOOLTIP_ICON_STYLE_UNSPECIFIED" : 0;
+                                if (message.simpleValue != null && message.hasOwnProperty("simpleValue")) {
+                                    object.simpleValue = message.simpleValue;
+                                    if (options.oneofs)
+                                        object.value = "simpleValue";
+                                }
+                                if (message.simpleTooltipValue != null && message.hasOwnProperty("simpleTooltipValue")) {
+                                    object.simpleTooltipValue = message.simpleTooltipValue;
+                                    if (options.oneofs)
+                                        object.tooltipValue = "simpleTooltipValue";
+                                }
+                                if (message.tooltipIconStyle != null && message.hasOwnProperty("tooltipIconStyle"))
+                                    object.tooltipIconStyle = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle[message.tooltipIconStyle] === undefined ? message.tooltipIconStyle : $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle[message.tooltipIconStyle] : message.tooltipIconStyle;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TextWithTooltip to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TextWithTooltip.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TextWithTooltip
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.TextWithTooltip
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TextWithTooltip.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.TextWithTooltip";
+                            };
+    
+                            /**
+                             * TooltipIconStyle enum.
+                             * @name google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle
+                             * @enum {number}
+                             * @property {number} TOOLTIP_ICON_STYLE_UNSPECIFIED=0 TOOLTIP_ICON_STYLE_UNSPECIFIED value
+                             * @property {number} INFO=1 INFO value
+                             * @property {number} QUESTION=2 QUESTION value
+                             */
+                            TextWithTooltip.TooltipIconStyle = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TOOLTIP_ICON_STYLE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INFO"] = 1;
+                                values[valuesById[2] = "QUESTION"] = 2;
+                                return values;
+                            })();
+    
+                            return TextWithTooltip;
+                        })();
+    
+                        v1.Callout = (function() {
+    
+                            /**
+                             * Properties of a Callout.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface ICallout
+                             * @property {google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint|null} [styleHint] Callout styleHint
+                             * @property {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null} [fullMessage] Callout fullMessage
+                             */
+    
+                            /**
+                             * Constructs a new Callout.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a Callout.
+                             * @implements ICallout
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.ICallout=} [properties] Properties to set
+                             */
+                            function Callout(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Callout styleHint.
+                             * @member {google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint} styleHint
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @instance
+                             */
+                            Callout.prototype.styleHint = 0;
+    
+                            /**
+                             * Callout fullMessage.
+                             * @member {google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null|undefined} fullMessage
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @instance
+                             */
+                            Callout.prototype.fullMessage = null;
+    
+                            /**
+                             * Creates a new Callout instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ICallout=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.Callout} Callout instance
+                             */
+                            Callout.create = function create(properties) {
+                                return new Callout(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Callout message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Callout.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ICallout} message Callout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Callout.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.styleHint != null && Object.hasOwnProperty.call(message, "styleHint"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.styleHint);
+                                if (message.fullMessage != null && Object.hasOwnProperty.call(message, "fullMessage"))
+                                    $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.encode(message.fullMessage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Callout message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Callout.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ICallout} message Callout message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Callout.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Callout message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.Callout} Callout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Callout.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.Callout();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.styleHint = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.fullMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Callout message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.Callout} Callout
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Callout.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Callout message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Callout.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.styleHint != null && message.hasOwnProperty("styleHint"))
+                                    switch (message.styleHint) {
+                                    default:
+                                        return "styleHint: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.fullMessage != null && message.hasOwnProperty("fullMessage")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify(message.fullMessage);
+                                    if (error)
+                                        return "fullMessage." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Callout message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.Callout} Callout
+                             */
+                            Callout.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.Callout)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.Callout();
+                                switch (object.styleHint) {
+                                default:
+                                    if (typeof object.styleHint === "number") {
+                                        message.styleHint = object.styleHint;
+                                        break;
+                                    }
+                                    break;
+                                case "CALLOUT_STYLE_HINT_UNSPECIFIED":
+                                case 0:
+                                    message.styleHint = 0;
+                                    break;
+                                case "ERROR":
+                                case 1:
+                                    message.styleHint = 1;
+                                    break;
+                                case "WARNING":
+                                case 2:
+                                    message.styleHint = 2;
+                                    break;
+                                case "INFO":
+                                case 3:
+                                    message.styleHint = 3;
+                                    break;
+                                }
+                                if (object.fullMessage != null) {
+                                    if (typeof object.fullMessage !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.Callout.fullMessage: object expected");
+                                    message.fullMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.fromObject(object.fullMessage);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Callout message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.Callout} message Callout
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Callout.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.styleHint = options.enums === String ? "CALLOUT_STYLE_HINT_UNSPECIFIED" : 0;
+                                    object.fullMessage = null;
+                                }
+                                if (message.styleHint != null && message.hasOwnProperty("styleHint"))
+                                    object.styleHint = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint[message.styleHint] === undefined ? message.styleHint : $root.google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint[message.styleHint] : message.styleHint;
+                                if (message.fullMessage != null && message.hasOwnProperty("fullMessage"))
+                                    object.fullMessage = $root.google.shopping.merchant.issueresolution.v1.TextWithTooltip.toObject(message.fullMessage, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Callout to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Callout.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Callout
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.Callout
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Callout.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.Callout";
+                            };
+    
+                            /**
+                             * CalloutStyleHint enum.
+                             * @name google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint
+                             * @enum {number}
+                             * @property {number} CALLOUT_STYLE_HINT_UNSPECIFIED=0 CALLOUT_STYLE_HINT_UNSPECIFIED value
+                             * @property {number} ERROR=1 ERROR value
+                             * @property {number} WARNING=2 WARNING value
+                             * @property {number} INFO=3 INFO value
+                             */
+                            Callout.CalloutStyleHint = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CALLOUT_STYLE_HINT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ERROR"] = 1;
+                                values[valuesById[2] = "WARNING"] = 2;
+                                values[valuesById[3] = "INFO"] = 3;
+                                return values;
+                            })();
+    
+                            return Callout;
+                        })();
+    
+                        v1.ExternalAction = (function() {
+    
+                            /**
+                             * Properties of an ExternalAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IExternalAction
+                             * @property {google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType|null} [type] ExternalAction type
+                             * @property {string|null} [uri] ExternalAction uri
+                             */
+    
+                            /**
+                             * Constructs a new ExternalAction.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an ExternalAction.
+                             * @implements IExternalAction
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IExternalAction=} [properties] Properties to set
+                             */
+                            function ExternalAction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExternalAction type.
+                             * @member {google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType} type
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @instance
+                             */
+                            ExternalAction.prototype.type = 0;
+    
+                            /**
+                             * ExternalAction uri.
+                             * @member {string} uri
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @instance
+                             */
+                            ExternalAction.prototype.uri = "";
+    
+                            /**
+                             * Creates a new ExternalAction instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IExternalAction=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.ExternalAction} ExternalAction instance
+                             */
+                            ExternalAction.create = function create(properties) {
+                                return new ExternalAction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExternalAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ExternalAction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IExternalAction} message ExternalAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExternalAction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExternalAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ExternalAction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IExternalAction} message ExternalAction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExternalAction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExternalAction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.ExternalAction} ExternalAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExternalAction.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.ExternalAction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExternalAction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.ExternalAction} ExternalAction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExternalAction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExternalAction message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExternalAction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExternalAction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.ExternalAction} ExternalAction
+                             */
+                            ExternalAction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.ExternalAction)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.ExternalAction();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "EXTERNAL_ACTION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "LEGAL_APPEAL_IN_HELP_CENTER":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "VERIFY_IDENTITY_IN_MERCHANT_CENTER":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                }
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExternalAction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ExternalAction} message ExternalAction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExternalAction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "EXTERNAL_ACTION_TYPE_UNSPECIFIED" : 0;
+                                    object.uri = "";
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType[message.type] === undefined ? message.type : $root.google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType[message.type] : message.type;
+                                if (message.uri != null && message.hasOwnProperty("uri"))
+                                    object.uri = message.uri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExternalAction to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExternalAction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExternalAction
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.ExternalAction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExternalAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.ExternalAction";
+                            };
+    
+                            /**
+                             * ExternalActionType enum.
+                             * @name google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType
+                             * @enum {number}
+                             * @property {number} EXTERNAL_ACTION_TYPE_UNSPECIFIED=0 EXTERNAL_ACTION_TYPE_UNSPECIFIED value
+                             * @property {number} REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER=1 REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER value
+                             * @property {number} REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER=2 REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER value
+                             * @property {number} LEGAL_APPEAL_IN_HELP_CENTER=3 LEGAL_APPEAL_IN_HELP_CENTER value
+                             * @property {number} VERIFY_IDENTITY_IN_MERCHANT_CENTER=4 VERIFY_IDENTITY_IN_MERCHANT_CENTER value
+                             */
+                            ExternalAction.ExternalActionType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "EXTERNAL_ACTION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER"] = 1;
+                                values[valuesById[2] = "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER"] = 2;
+                                values[valuesById[3] = "LEGAL_APPEAL_IN_HELP_CENTER"] = 3;
+                                values[valuesById[4] = "VERIFY_IDENTITY_IN_MERCHANT_CENTER"] = 4;
+                                return values;
+                            })();
+    
+                            return ExternalAction;
+                        })();
+    
+                        v1.TriggerActionRequest = (function() {
+    
+                            /**
+                             * Properties of a TriggerActionRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface ITriggerActionRequest
+                             * @property {string|null} [name] TriggerActionRequest name
+                             * @property {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload|null} [payload] TriggerActionRequest payload
+                             * @property {string|null} [languageCode] TriggerActionRequest languageCode
+                             */
+    
+                            /**
+                             * Constructs a new TriggerActionRequest.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a TriggerActionRequest.
+                             * @implements ITriggerActionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest=} [properties] Properties to set
+                             */
+                            function TriggerActionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TriggerActionRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @instance
+                             */
+                            TriggerActionRequest.prototype.name = "";
+    
+                            /**
+                             * TriggerActionRequest payload.
+                             * @member {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload|null|undefined} payload
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @instance
+                             */
+                            TriggerActionRequest.prototype.payload = null;
+    
+                            /**
+                             * TriggerActionRequest languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @instance
+                             */
+                            TriggerActionRequest.prototype.languageCode = "";
+    
+                            /**
+                             * Creates a new TriggerActionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionRequest} TriggerActionRequest instance
+                             */
+                            TriggerActionRequest.create = function create(properties) {
+                                return new TriggerActionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest} message TriggerActionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                                    $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload.encode(message.payload, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.languageCode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionRequest} message TriggerActionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionRequest} TriggerActionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.payload = $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionRequest} TriggerActionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TriggerActionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TriggerActionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.payload != null && message.hasOwnProperty("payload")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload.verify(message.payload);
+                                    if (error)
+                                        return "payload." + error;
+                                }
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TriggerActionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionRequest} TriggerActionRequest
+                             */
+                            TriggerActionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.TriggerActionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.payload != null) {
+                                    if (typeof object.payload !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.TriggerActionRequest.payload: object expected");
+                                    message.payload = $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload.fromObject(object.payload);
+                                }
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TriggerActionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.TriggerActionRequest} message TriggerActionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TriggerActionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.payload = null;
+                                    object.languageCode = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.payload != null && message.hasOwnProperty("payload"))
+                                    object.payload = $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload.toObject(message.payload, options);
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TriggerActionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TriggerActionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TriggerActionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TriggerActionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.TriggerActionRequest";
+                            };
+    
+                            return TriggerActionRequest;
+                        })();
+    
+                        v1.TriggerActionPayload = (function() {
+    
+                            /**
+                             * Properties of a TriggerActionPayload.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface ITriggerActionPayload
+                             * @property {string|null} [actionContext] TriggerActionPayload actionContext
+                             * @property {google.shopping.merchant.issueresolution.v1.IActionInput|null} [actionInput] TriggerActionPayload actionInput
+                             */
+    
+                            /**
+                             * Constructs a new TriggerActionPayload.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a TriggerActionPayload.
+                             * @implements ITriggerActionPayload
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload=} [properties] Properties to set
+                             */
+                            function TriggerActionPayload(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TriggerActionPayload actionContext.
+                             * @member {string} actionContext
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @instance
+                             */
+                            TriggerActionPayload.prototype.actionContext = "";
+    
+                            /**
+                             * TriggerActionPayload actionInput.
+                             * @member {google.shopping.merchant.issueresolution.v1.IActionInput|null|undefined} actionInput
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @instance
+                             */
+                            TriggerActionPayload.prototype.actionInput = null;
+    
+                            /**
+                             * Creates a new TriggerActionPayload instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionPayload} TriggerActionPayload instance
+                             */
+                            TriggerActionPayload.create = function create(properties) {
+                                return new TriggerActionPayload(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionPayload message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionPayload.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload} message TriggerActionPayload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionPayload.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.actionContext != null && Object.hasOwnProperty.call(message, "actionContext"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actionContext);
+                                if (message.actionInput != null && Object.hasOwnProperty.call(message, "actionInput"))
+                                    $root.google.shopping.merchant.issueresolution.v1.ActionInput.encode(message.actionInput, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionPayload message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionPayload.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionPayload} message TriggerActionPayload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionPayload message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionPayload} TriggerActionPayload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionPayload.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.actionContext = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.actionInput = $root.google.shopping.merchant.issueresolution.v1.ActionInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionPayload message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionPayload} TriggerActionPayload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionPayload.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TriggerActionPayload message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TriggerActionPayload.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.actionContext != null && message.hasOwnProperty("actionContext"))
+                                    if (!$util.isString(message.actionContext))
+                                        return "actionContext: string expected";
+                                if (message.actionInput != null && message.hasOwnProperty("actionInput")) {
+                                    var error = $root.google.shopping.merchant.issueresolution.v1.ActionInput.verify(message.actionInput);
+                                    if (error)
+                                        return "actionInput." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TriggerActionPayload message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionPayload} TriggerActionPayload
+                             */
+                            TriggerActionPayload.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionPayload();
+                                if (object.actionContext != null)
+                                    message.actionContext = String(object.actionContext);
+                                if (object.actionInput != null) {
+                                    if (typeof object.actionInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.TriggerActionPayload.actionInput: object expected");
+                                    message.actionInput = $root.google.shopping.merchant.issueresolution.v1.ActionInput.fromObject(object.actionInput);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TriggerActionPayload message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.TriggerActionPayload} message TriggerActionPayload
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TriggerActionPayload.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.actionContext = "";
+                                    object.actionInput = null;
+                                }
+                                if (message.actionContext != null && message.hasOwnProperty("actionContext"))
+                                    object.actionContext = message.actionContext;
+                                if (message.actionInput != null && message.hasOwnProperty("actionInput"))
+                                    object.actionInput = $root.google.shopping.merchant.issueresolution.v1.ActionInput.toObject(message.actionInput, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TriggerActionPayload to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TriggerActionPayload.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TriggerActionPayload
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionPayload
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TriggerActionPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.TriggerActionPayload";
+                            };
+    
+                            return TriggerActionPayload;
+                        })();
+    
+                        v1.TriggerActionResponse = (function() {
+    
+                            /**
+                             * Properties of a TriggerActionResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface ITriggerActionResponse
+                             * @property {string|null} [message] TriggerActionResponse message
+                             */
+    
+                            /**
+                             * Constructs a new TriggerActionResponse.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents a TriggerActionResponse.
+                             * @implements ITriggerActionResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionResponse=} [properties] Properties to set
+                             */
+                            function TriggerActionResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TriggerActionResponse message.
+                             * @member {string} message
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @instance
+                             */
+                            TriggerActionResponse.prototype.message = "";
+    
+                            /**
+                             * Creates a new TriggerActionResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} TriggerActionResponse instance
+                             */
+                            TriggerActionResponse.create = function create(properties) {
+                                return new TriggerActionResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionResponse} message TriggerActionResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TriggerActionResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ITriggerActionResponse} message TriggerActionResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TriggerActionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} TriggerActionResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TriggerActionResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} TriggerActionResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TriggerActionResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TriggerActionResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TriggerActionResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TriggerActionResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} TriggerActionResponse
+                             */
+                            TriggerActionResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.TriggerActionResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.TriggerActionResponse();
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TriggerActionResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.TriggerActionResponse} message TriggerActionResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TriggerActionResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.message = "";
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TriggerActionResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TriggerActionResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TriggerActionResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.TriggerActionResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TriggerActionResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.TriggerActionResponse";
+                            };
+    
+                            return TriggerActionResponse;
+                        })();
+    
+                        v1.ActionInput = (function() {
+    
+                            /**
+                             * Properties of an ActionInput.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IActionInput
+                             * @property {string|null} [actionFlowId] ActionInput actionFlowId
+                             * @property {Array.<google.shopping.merchant.issueresolution.v1.IInputValue>|null} [inputValues] ActionInput inputValues
+                             */
+    
+                            /**
+                             * Constructs a new ActionInput.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an ActionInput.
+                             * @implements IActionInput
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionInput=} [properties] Properties to set
+                             */
+                            function ActionInput(properties) {
+                                this.inputValues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ActionInput actionFlowId.
+                             * @member {string} actionFlowId
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @instance
+                             */
+                            ActionInput.prototype.actionFlowId = "";
+    
+                            /**
+                             * ActionInput inputValues.
+                             * @member {Array.<google.shopping.merchant.issueresolution.v1.IInputValue>} inputValues
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @instance
+                             */
+                            ActionInput.prototype.inputValues = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ActionInput instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionInput=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionInput} ActionInput instance
+                             */
+                            ActionInput.create = function create(properties) {
+                                return new ActionInput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ActionInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionInput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionInput} message ActionInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActionInput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.actionFlowId != null && Object.hasOwnProperty.call(message, "actionFlowId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.actionFlowId);
+                                if (message.inputValues != null && message.inputValues.length)
+                                    for (var i = 0; i < message.inputValues.length; ++i)
+                                        $root.google.shopping.merchant.issueresolution.v1.InputValue.encode(message.inputValues[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ActionInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionInput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IActionInput} message ActionInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ActionInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ActionInput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionInput} ActionInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActionInput.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.ActionInput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.actionFlowId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.inputValues && message.inputValues.length))
+                                                message.inputValues = [];
+                                            message.inputValues.push($root.google.shopping.merchant.issueresolution.v1.InputValue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ActionInput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionInput} ActionInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ActionInput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ActionInput message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ActionInput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.actionFlowId != null && message.hasOwnProperty("actionFlowId"))
+                                    if (!$util.isString(message.actionFlowId))
+                                        return "actionFlowId: string expected";
+                                if (message.inputValues != null && message.hasOwnProperty("inputValues")) {
+                                    if (!Array.isArray(message.inputValues))
+                                        return "inputValues: array expected";
+                                    for (var i = 0; i < message.inputValues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputValue.verify(message.inputValues[i]);
+                                        if (error)
+                                            return "inputValues." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ActionInput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.ActionInput} ActionInput
+                             */
+                            ActionInput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.ActionInput)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.ActionInput();
+                                if (object.actionFlowId != null)
+                                    message.actionFlowId = String(object.actionFlowId);
+                                if (object.inputValues) {
+                                    if (!Array.isArray(object.inputValues))
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionInput.inputValues: array expected");
+                                    message.inputValues = [];
+                                    for (var i = 0; i < object.inputValues.length; ++i) {
+                                        if (typeof object.inputValues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.issueresolution.v1.ActionInput.inputValues: object expected");
+                                        message.inputValues[i] = $root.google.shopping.merchant.issueresolution.v1.InputValue.fromObject(object.inputValues[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ActionInput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.ActionInput} message ActionInput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ActionInput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.inputValues = [];
+                                if (options.defaults)
+                                    object.actionFlowId = "";
+                                if (message.actionFlowId != null && message.hasOwnProperty("actionFlowId"))
+                                    object.actionFlowId = message.actionFlowId;
+                                if (message.inputValues && message.inputValues.length) {
+                                    object.inputValues = [];
+                                    for (var j = 0; j < message.inputValues.length; ++j)
+                                        object.inputValues[j] = $root.google.shopping.merchant.issueresolution.v1.InputValue.toObject(message.inputValues[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ActionInput to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ActionInput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ActionInput
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.ActionInput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ActionInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.ActionInput";
+                            };
+    
+                            return ActionInput;
+                        })();
+    
+                        v1.InputValue = (function() {
+    
+                            /**
+                             * Properties of an InputValue.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @interface IInputValue
+                             * @property {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue|null} [textInputValue] InputValue textInputValue
+                             * @property {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue|null} [choiceInputValue] InputValue choiceInputValue
+                             * @property {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue|null} [checkboxInputValue] InputValue checkboxInputValue
+                             * @property {string|null} [inputFieldId] InputValue inputFieldId
+                             */
+    
+                            /**
+                             * Constructs a new InputValue.
+                             * @memberof google.shopping.merchant.issueresolution.v1
+                             * @classdesc Represents an InputValue.
+                             * @implements IInputValue
+                             * @constructor
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputValue=} [properties] Properties to set
+                             */
+                            function InputValue(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputValue textInputValue.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue|null|undefined} textInputValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             */
+                            InputValue.prototype.textInputValue = null;
+    
+                            /**
+                             * InputValue choiceInputValue.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue|null|undefined} choiceInputValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             */
+                            InputValue.prototype.choiceInputValue = null;
+    
+                            /**
+                             * InputValue checkboxInputValue.
+                             * @member {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue|null|undefined} checkboxInputValue
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             */
+                            InputValue.prototype.checkboxInputValue = null;
+    
+                            /**
+                             * InputValue inputFieldId.
+                             * @member {string} inputFieldId
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             */
+                            InputValue.prototype.inputFieldId = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * InputValue value.
+                             * @member {"textInputValue"|"choiceInputValue"|"checkboxInputValue"|undefined} value
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             */
+                            Object.defineProperty(InputValue.prototype, "value", {
+                                get: $util.oneOfGetter($oneOfFields = ["textInputValue", "choiceInputValue", "checkboxInputValue"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new InputValue instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputValue=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputValue} InputValue instance
+                             */
+                            InputValue.create = function create(properties) {
+                                return new InputValue(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputValue} message InputValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputValue.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.inputFieldId != null && Object.hasOwnProperty.call(message, "inputFieldId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.inputFieldId);
+                                if (message.textInputValue != null && Object.hasOwnProperty.call(message, "textInputValue"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.encode(message.textInputValue, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.choiceInputValue != null && Object.hasOwnProperty.call(message, "choiceInputValue"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.encode(message.choiceInputValue, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.checkboxInputValue != null && Object.hasOwnProperty.call(message, "checkboxInputValue"))
+                                    $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.encode(message.checkboxInputValue, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.IInputValue} message InputValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputValue message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputValue} InputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputValue.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputValue();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.textInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.choiceInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.checkboxInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.inputFieldId = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputValue message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputValue} InputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputValue.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputValue message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputValue.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.textInputValue != null && message.hasOwnProperty("textInputValue")) {
+                                    properties.value = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.verify(message.textInputValue);
+                                        if (error)
+                                            return "textInputValue." + error;
+                                    }
+                                }
+                                if (message.choiceInputValue != null && message.hasOwnProperty("choiceInputValue")) {
+                                    if (properties.value === 1)
+                                        return "value: multiple values";
+                                    properties.value = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.verify(message.choiceInputValue);
+                                        if (error)
+                                            return "choiceInputValue." + error;
+                                    }
+                                }
+                                if (message.checkboxInputValue != null && message.hasOwnProperty("checkboxInputValue")) {
+                                    if (properties.value === 1)
+                                        return "value: multiple values";
+                                    properties.value = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.verify(message.checkboxInputValue);
+                                        if (error)
+                                            return "checkboxInputValue." + error;
+                                    }
+                                }
+                                if (message.inputFieldId != null && message.hasOwnProperty("inputFieldId"))
+                                    if (!$util.isString(message.inputFieldId))
+                                        return "inputFieldId: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputValue message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.issueresolution.v1.InputValue} InputValue
+                             */
+                            InputValue.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputValue)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.issueresolution.v1.InputValue();
+                                if (object.textInputValue != null) {
+                                    if (typeof object.textInputValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputValue.textInputValue: object expected");
+                                    message.textInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.fromObject(object.textInputValue);
+                                }
+                                if (object.choiceInputValue != null) {
+                                    if (typeof object.choiceInputValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputValue.choiceInputValue: object expected");
+                                    message.choiceInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.fromObject(object.choiceInputValue);
+                                }
+                                if (object.checkboxInputValue != null) {
+                                    if (typeof object.checkboxInputValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.issueresolution.v1.InputValue.checkboxInputValue: object expected");
+                                    message.checkboxInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.fromObject(object.checkboxInputValue);
+                                }
+                                if (object.inputFieldId != null)
+                                    message.inputFieldId = String(object.inputFieldId);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputValue message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {google.shopping.merchant.issueresolution.v1.InputValue} message InputValue
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputValue.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.inputFieldId = "";
+                                if (message.inputFieldId != null && message.hasOwnProperty("inputFieldId"))
+                                    object.inputFieldId = message.inputFieldId;
+                                if (message.textInputValue != null && message.hasOwnProperty("textInputValue")) {
+                                    object.textInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.toObject(message.textInputValue, options);
+                                    if (options.oneofs)
+                                        object.value = "textInputValue";
+                                }
+                                if (message.choiceInputValue != null && message.hasOwnProperty("choiceInputValue")) {
+                                    object.choiceInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.toObject(message.choiceInputValue, options);
+                                    if (options.oneofs)
+                                        object.value = "choiceInputValue";
+                                }
+                                if (message.checkboxInputValue != null && message.hasOwnProperty("checkboxInputValue")) {
+                                    object.checkboxInputValue = $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.toObject(message.checkboxInputValue, options);
+                                    if (options.oneofs)
+                                        object.value = "checkboxInputValue";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputValue to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputValue.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InputValue
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InputValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputValue";
+                            };
+    
+                            InputValue.TextInputValue = (function() {
+    
+                                /**
+                                 * Properties of a TextInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @interface ITextInputValue
+                                 * @property {string|null} [value] TextInputValue value
+                                 */
+    
+                                /**
+                                 * Constructs a new TextInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @classdesc Represents a TextInputValue.
+                                 * @implements ITextInputValue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue=} [properties] Properties to set
+                                 */
+                                function TextInputValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * TextInputValue value.
+                                 * @member {string} value
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @instance
+                                 */
+                                TextInputValue.prototype.value = "";
+    
+                                /**
+                                 * Creates a new TextInputValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue} TextInputValue instance
+                                 */
+                                TextInputValue.create = function create(properties) {
+                                    return new TextInputValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TextInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue} message TextInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextInputValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TextInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue} message TextInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextInputValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TextInputValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue} TextInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextInputValue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.value = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TextInputValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue} TextInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextInputValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TextInputValue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TextInputValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        if (!$util.isString(message.value))
+                                            return "value: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TextInputValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue} TextInputValue
+                                 */
+                                TextInputValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue();
+                                    if (object.value != null)
+                                        message.value = String(object.value);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TextInputValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue} message TextInputValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TextInputValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.value = "";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = message.value;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this TextInputValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TextInputValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TextInputValue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TextInputValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue";
+                                };
+    
+                                return TextInputValue;
+                            })();
+    
+                            InputValue.ChoiceInputValue = (function() {
+    
+                                /**
+                                 * Properties of a ChoiceInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @interface IChoiceInputValue
+                                 * @property {string|null} [choiceInputOptionId] ChoiceInputValue choiceInputOptionId
+                                 */
+    
+                                /**
+                                 * Constructs a new ChoiceInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @classdesc Represents a ChoiceInputValue.
+                                 * @implements IChoiceInputValue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue=} [properties] Properties to set
+                                 */
+                                function ChoiceInputValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ChoiceInputValue choiceInputOptionId.
+                                 * @member {string} choiceInputOptionId
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @instance
+                                 */
+                                ChoiceInputValue.prototype.choiceInputOptionId = "";
+    
+                                /**
+                                 * Creates a new ChoiceInputValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue} ChoiceInputValue instance
+                                 */
+                                ChoiceInputValue.create = function create(properties) {
+                                    return new ChoiceInputValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ChoiceInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue} message ChoiceInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ChoiceInputValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.choiceInputOptionId != null && Object.hasOwnProperty.call(message, "choiceInputOptionId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.choiceInputOptionId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ChoiceInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue} message ChoiceInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ChoiceInputValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ChoiceInputValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue} ChoiceInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ChoiceInputValue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.choiceInputOptionId = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ChoiceInputValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue} ChoiceInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ChoiceInputValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ChoiceInputValue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ChoiceInputValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.choiceInputOptionId != null && message.hasOwnProperty("choiceInputOptionId"))
+                                        if (!$util.isString(message.choiceInputOptionId))
+                                            return "choiceInputOptionId: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ChoiceInputValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue} ChoiceInputValue
+                                 */
+                                ChoiceInputValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue();
+                                    if (object.choiceInputOptionId != null)
+                                        message.choiceInputOptionId = String(object.choiceInputOptionId);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ChoiceInputValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue} message ChoiceInputValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ChoiceInputValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.choiceInputOptionId = "";
+                                    if (message.choiceInputOptionId != null && message.hasOwnProperty("choiceInputOptionId"))
+                                        object.choiceInputOptionId = message.choiceInputOptionId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ChoiceInputValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ChoiceInputValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ChoiceInputValue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ChoiceInputValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue";
+                                };
+    
+                                return ChoiceInputValue;
+                            })();
+    
+                            InputValue.CheckboxInputValue = (function() {
+    
+                                /**
+                                 * Properties of a CheckboxInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @interface ICheckboxInputValue
+                                 * @property {boolean|null} [value] CheckboxInputValue value
+                                 */
+    
+                                /**
+                                 * Constructs a new CheckboxInputValue.
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue
+                                 * @classdesc Represents a CheckboxInputValue.
+                                 * @implements ICheckboxInputValue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue=} [properties] Properties to set
+                                 */
+                                function CheckboxInputValue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CheckboxInputValue value.
+                                 * @member {boolean} value
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @instance
+                                 */
+                                CheckboxInputValue.prototype.value = false;
+    
+                                /**
+                                 * Creates a new CheckboxInputValue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue} CheckboxInputValue instance
+                                 */
+                                CheckboxInputValue.create = function create(properties) {
+                                    return new CheckboxInputValue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CheckboxInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue} message CheckboxInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CheckboxInputValue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.value);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CheckboxInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue} message CheckboxInputValue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CheckboxInputValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CheckboxInputValue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue} CheckboxInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CheckboxInputValue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.value = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CheckboxInputValue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue} CheckboxInputValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CheckboxInputValue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CheckboxInputValue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CheckboxInputValue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        if (typeof message.value !== "boolean")
+                                            return "value: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CheckboxInputValue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue} CheckboxInputValue
+                                 */
+                                CheckboxInputValue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue();
+                                    if (object.value != null)
+                                        message.value = Boolean(object.value);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CheckboxInputValue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue} message CheckboxInputValue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CheckboxInputValue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.value = false;
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = message.value;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CheckboxInputValue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CheckboxInputValue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CheckboxInputValue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CheckboxInputValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue";
+                                };
+    
+                                return CheckboxInputValue;
+                            })();
+    
+                            return InputValue;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     issueresolution.v1beta = (function() {
     
                         /**
@@ -13113,6 +23693,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -13148,6 +23729,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -13179,6 +23768,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -13228,6 +23819,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -13281,6 +23876,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -13323,6 +23923,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -13341,8 +23946,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -13350,6 +23957,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -15172,6 +25781,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -15196,6 +25806,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -15223,6 +25841,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -15261,6 +25881,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -15303,6 +25927,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -15323,6 +25952,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -15339,10 +25973,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -15371,6 +26009,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -16248,6 +27138,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -16259,6 +27150,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -16272,6 +27164,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -16299,6 +27199,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -16329,7 +27232,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -16337,6 +27240,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -16379,6 +27305,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -16399,6 +27333,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -16415,10 +27356,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -17055,6 +28004,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -18042,6 +29236,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -18056,6 +29251,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -18080,6 +29276,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -18102,6 +29299,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -18151,6 +29349,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -18273,6 +29479,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -18343,6 +29552,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -18447,6 +29662,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -18501,6 +29723,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -18552,6 +29775,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -18615,6 +29845,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -18681,6 +29915,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -18737,6 +29972,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -18785,6 +30025,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -18891,6 +30132,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -18942,6 +30191,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -19032,6 +30283,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -19147,6 +30402,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -19246,6 +30510,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -19275,6 +30559,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -19320,6 +30605,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -21364,6 +32651,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -21425,6 +32713,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -21461,6 +32757,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -21521,6 +32819,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -21591,6 +32893,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -21640,6 +32951,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -21664,6 +32995,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -21684,6 +33016,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -24002,6 +35336,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -24123,6 +35458,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -24196,6 +35539,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -24295,6 +35640,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -24431,6 +35780,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -24620,6 +35974,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -24717,6 +36076,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -24749,6 +36109,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25021,6 +36383,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -25061,6 +36424,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -25159,6 +36526,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -25753,6 +37602,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -25797,6 +37647,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -25834,6 +37692,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -25883,6 +37743,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -25937,6 +37801,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -25970,6 +37839,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -26002,6 +37876,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -26009,6 +37884,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -27448,6 +39325,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -27514,6 +39393,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -27549,6 +39444,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -27607,6 +39506,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -27697,6 +39604,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -27838,6 +39765,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -27861,6 +39836,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -27874,6 +39851,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -27999,6 +39980,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -28185,6 +40379,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -28202,6 +40397,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -28249,6 +40445,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -28301,6 +40501,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -28410,7 +40614,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -28437,12 +40642,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -28468,10 +40681,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -28512,8 +40727,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -28556,6 +40775,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -28568,10 +40788,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -28598,6 +40823,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -28640,10 +40869,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -28662,13 +40896,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -29881,6 +42118,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {
