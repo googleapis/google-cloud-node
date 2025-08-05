@@ -66,6 +66,4317 @@
                      */
                     var promotions = {};
     
+                    promotions.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.promotions
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.PromotionsService = (function() {
+    
+                            /**
+                             * Constructs a new PromotionsService service.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a PromotionsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function PromotionsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (PromotionsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PromotionsService;
+    
+                            /**
+                             * Creates new PromotionsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {PromotionsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            PromotionsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.promotions.v1.PromotionsService|insertPromotion}.
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @typedef InsertPromotionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.promotions.v1.Promotion} [response] Promotion
+                             */
+    
+                            /**
+                             * Calls InsertPromotion.
+                             * @function insertPromotion
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest} request InsertPromotionRequest message or plain object
+                             * @param {google.shopping.merchant.promotions.v1.PromotionsService.InsertPromotionCallback} callback Node-style callback called with the error, if any, and Promotion
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(PromotionsService.prototype.insertPromotion = function insertPromotion(request, callback) {
+                                return this.rpcCall(insertPromotion, $root.google.shopping.merchant.promotions.v1.InsertPromotionRequest, $root.google.shopping.merchant.promotions.v1.Promotion, request, callback);
+                            }, "name", { value: "InsertPromotion" });
+    
+                            /**
+                             * Calls InsertPromotion.
+                             * @function insertPromotion
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest} request InsertPromotionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.promotions.v1.Promotion>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.promotions.v1.PromotionsService|getPromotion}.
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @typedef GetPromotionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.promotions.v1.Promotion} [response] Promotion
+                             */
+    
+                            /**
+                             * Calls GetPromotion.
+                             * @function getPromotion
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest} request GetPromotionRequest message or plain object
+                             * @param {google.shopping.merchant.promotions.v1.PromotionsService.GetPromotionCallback} callback Node-style callback called with the error, if any, and Promotion
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(PromotionsService.prototype.getPromotion = function getPromotion(request, callback) {
+                                return this.rpcCall(getPromotion, $root.google.shopping.merchant.promotions.v1.GetPromotionRequest, $root.google.shopping.merchant.promotions.v1.Promotion, request, callback);
+                            }, "name", { value: "GetPromotion" });
+    
+                            /**
+                             * Calls GetPromotion.
+                             * @function getPromotion
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest} request GetPromotionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.promotions.v1.Promotion>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.promotions.v1.PromotionsService|listPromotions}.
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @typedef ListPromotionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.promotions.v1.ListPromotionsResponse} [response] ListPromotionsResponse
+                             */
+    
+                            /**
+                             * Calls ListPromotions.
+                             * @function listPromotions
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest} request ListPromotionsRequest message or plain object
+                             * @param {google.shopping.merchant.promotions.v1.PromotionsService.ListPromotionsCallback} callback Node-style callback called with the error, if any, and ListPromotionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(PromotionsService.prototype.listPromotions = function listPromotions(request, callback) {
+                                return this.rpcCall(listPromotions, $root.google.shopping.merchant.promotions.v1.ListPromotionsRequest, $root.google.shopping.merchant.promotions.v1.ListPromotionsResponse, request, callback);
+                            }, "name", { value: "ListPromotions" });
+    
+                            /**
+                             * Calls ListPromotions.
+                             * @function listPromotions
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionsService
+                             * @instance
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest} request ListPromotionsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.promotions.v1.ListPromotionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return PromotionsService;
+                        })();
+    
+                        v1.Promotion = (function() {
+    
+                            /**
+                             * Properties of a Promotion.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IPromotion
+                             * @property {string|null} [name] Promotion name
+                             * @property {string|null} [promotionId] Promotion promotionId
+                             * @property {string|null} [contentLanguage] Promotion contentLanguage
+                             * @property {string|null} [targetCountry] Promotion targetCountry
+                             * @property {Array.<google.shopping.merchant.promotions.v1.RedemptionChannel>|null} [redemptionChannel] Promotion redemptionChannel
+                             * @property {string|null} [dataSource] Promotion dataSource
+                             * @property {google.shopping.merchant.promotions.v1.IAttributes|null} [attributes] Promotion attributes
+                             * @property {Array.<google.shopping.type.ICustomAttribute>|null} [customAttributes] Promotion customAttributes
+                             * @property {google.shopping.merchant.promotions.v1.IPromotionStatus|null} [promotionStatus] Promotion promotionStatus
+                             * @property {number|Long|null} [versionNumber] Promotion versionNumber
+                             */
+    
+                            /**
+                             * Constructs a new Promotion.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a Promotion.
+                             * @implements IPromotion
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IPromotion=} [properties] Properties to set
+                             */
+                            function Promotion(properties) {
+                                this.redemptionChannel = [];
+                                this.customAttributes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Promotion name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.name = "";
+    
+                            /**
+                             * Promotion promotionId.
+                             * @member {string} promotionId
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.promotionId = "";
+    
+                            /**
+                             * Promotion contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.contentLanguage = "";
+    
+                            /**
+                             * Promotion targetCountry.
+                             * @member {string} targetCountry
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.targetCountry = "";
+    
+                            /**
+                             * Promotion redemptionChannel.
+                             * @member {Array.<google.shopping.merchant.promotions.v1.RedemptionChannel>} redemptionChannel
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.redemptionChannel = $util.emptyArray;
+    
+                            /**
+                             * Promotion dataSource.
+                             * @member {string} dataSource
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.dataSource = "";
+    
+                            /**
+                             * Promotion attributes.
+                             * @member {google.shopping.merchant.promotions.v1.IAttributes|null|undefined} attributes
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.attributes = null;
+    
+                            /**
+                             * Promotion customAttributes.
+                             * @member {Array.<google.shopping.type.ICustomAttribute>} customAttributes
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.customAttributes = $util.emptyArray;
+    
+                            /**
+                             * Promotion promotionStatus.
+                             * @member {google.shopping.merchant.promotions.v1.IPromotionStatus|null|undefined} promotionStatus
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.promotionStatus = null;
+    
+                            /**
+                             * Promotion versionNumber.
+                             * @member {number|Long|null|undefined} versionNumber
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             */
+                            Promotion.prototype.versionNumber = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Promotion.prototype, "_versionNumber", {
+                                get: $util.oneOfGetter($oneOfFields = ["versionNumber"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Promotion instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotion=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.Promotion} Promotion instance
+                             */
+                            Promotion.create = function create(properties) {
+                                return new Promotion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Promotion message. Does not implicitly {@link google.shopping.merchant.promotions.v1.Promotion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotion} message Promotion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Promotion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.promotionId != null && Object.hasOwnProperty.call(message, "promotionId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.promotionId);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.contentLanguage);
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetCountry);
+                                if (message.redemptionChannel != null && message.redemptionChannel.length) {
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                    for (var i = 0; i < message.redemptionChannel.length; ++i)
+                                        writer.int32(message.redemptionChannel[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.dataSource);
+                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                    $root.google.shopping.merchant.promotions.v1.Attributes.encode(message.attributes, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.customAttributes != null && message.customAttributes.length)
+                                    for (var i = 0; i < message.customAttributes.length; ++i)
+                                        $root.google.shopping.type.CustomAttribute.encode(message.customAttributes[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.promotionStatus != null && Object.hasOwnProperty.call(message, "promotionStatus"))
+                                    $root.google.shopping.merchant.promotions.v1.PromotionStatus.encode(message.promotionStatus, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.versionNumber != null && Object.hasOwnProperty.call(message, "versionNumber"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int64(message.versionNumber);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Promotion message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.Promotion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotion} message Promotion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Promotion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Promotion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.Promotion} Promotion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Promotion.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.Promotion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.promotionId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.targetCountry = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.redemptionChannel && message.redemptionChannel.length))
+                                                message.redemptionChannel = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.redemptionChannel.push(reader.int32());
+                                            } else
+                                                message.redemptionChannel.push(reader.int32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.dataSource = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.attributes = $root.google.shopping.merchant.promotions.v1.Attributes.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.customAttributes && message.customAttributes.length))
+                                                message.customAttributes = [];
+                                            message.customAttributes.push($root.google.shopping.type.CustomAttribute.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.promotionStatus = $root.google.shopping.merchant.promotions.v1.PromotionStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.versionNumber = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Promotion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.Promotion} Promotion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Promotion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Promotion message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Promotion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.promotionId != null && message.hasOwnProperty("promotionId"))
+                                    if (!$util.isString(message.promotionId))
+                                        return "promotionId: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                    if (!$util.isString(message.targetCountry))
+                                        return "targetCountry: string expected";
+                                if (message.redemptionChannel != null && message.hasOwnProperty("redemptionChannel")) {
+                                    if (!Array.isArray(message.redemptionChannel))
+                                        return "redemptionChannel: array expected";
+                                    for (var i = 0; i < message.redemptionChannel.length; ++i)
+                                        switch (message.redemptionChannel[i]) {
+                                        default:
+                                            return "redemptionChannel: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                }
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    if (!$util.isString(message.dataSource))
+                                        return "dataSource: string expected";
+                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                    var error = $root.google.shopping.merchant.promotions.v1.Attributes.verify(message.attributes);
+                                    if (error)
+                                        return "attributes." + error;
+                                }
+                                if (message.customAttributes != null && message.hasOwnProperty("customAttributes")) {
+                                    if (!Array.isArray(message.customAttributes))
+                                        return "customAttributes: array expected";
+                                    for (var i = 0; i < message.customAttributes.length; ++i) {
+                                        var error = $root.google.shopping.type.CustomAttribute.verify(message.customAttributes[i]);
+                                        if (error)
+                                            return "customAttributes." + error;
+                                    }
+                                }
+                                if (message.promotionStatus != null && message.hasOwnProperty("promotionStatus")) {
+                                    var error = $root.google.shopping.merchant.promotions.v1.PromotionStatus.verify(message.promotionStatus);
+                                    if (error)
+                                        return "promotionStatus." + error;
+                                }
+                                if (message.versionNumber != null && message.hasOwnProperty("versionNumber")) {
+                                    properties._versionNumber = 1;
+                                    if (!$util.isInteger(message.versionNumber) && !(message.versionNumber && $util.isInteger(message.versionNumber.low) && $util.isInteger(message.versionNumber.high)))
+                                        return "versionNumber: integer|Long expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Promotion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.Promotion} Promotion
+                             */
+                            Promotion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.Promotion)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.Promotion();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.promotionId != null)
+                                    message.promotionId = String(object.promotionId);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                if (object.targetCountry != null)
+                                    message.targetCountry = String(object.targetCountry);
+                                if (object.redemptionChannel) {
+                                    if (!Array.isArray(object.redemptionChannel))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Promotion.redemptionChannel: array expected");
+                                    message.redemptionChannel = [];
+                                    for (var i = 0; i < object.redemptionChannel.length; ++i)
+                                        switch (object.redemptionChannel[i]) {
+                                        default:
+                                            if (typeof object.redemptionChannel[i] === "number") {
+                                                message.redemptionChannel[i] = object.redemptionChannel[i];
+                                                break;
+                                            }
+                                        case "REDEMPTION_CHANNEL_UNSPECIFIED":
+                                        case 0:
+                                            message.redemptionChannel[i] = 0;
+                                            break;
+                                        case "IN_STORE":
+                                        case 1:
+                                            message.redemptionChannel[i] = 1;
+                                            break;
+                                        case "ONLINE":
+                                        case 2:
+                                            message.redemptionChannel[i] = 2;
+                                            break;
+                                        }
+                                }
+                                if (object.dataSource != null)
+                                    message.dataSource = String(object.dataSource);
+                                if (object.attributes != null) {
+                                    if (typeof object.attributes !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Promotion.attributes: object expected");
+                                    message.attributes = $root.google.shopping.merchant.promotions.v1.Attributes.fromObject(object.attributes);
+                                }
+                                if (object.customAttributes) {
+                                    if (!Array.isArray(object.customAttributes))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Promotion.customAttributes: array expected");
+                                    message.customAttributes = [];
+                                    for (var i = 0; i < object.customAttributes.length; ++i) {
+                                        if (typeof object.customAttributes[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.promotions.v1.Promotion.customAttributes: object expected");
+                                        message.customAttributes[i] = $root.google.shopping.type.CustomAttribute.fromObject(object.customAttributes[i]);
+                                    }
+                                }
+                                if (object.promotionStatus != null) {
+                                    if (typeof object.promotionStatus !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Promotion.promotionStatus: object expected");
+                                    message.promotionStatus = $root.google.shopping.merchant.promotions.v1.PromotionStatus.fromObject(object.promotionStatus);
+                                }
+                                if (object.versionNumber != null)
+                                    if ($util.Long)
+                                        (message.versionNumber = $util.Long.fromValue(object.versionNumber)).unsigned = false;
+                                    else if (typeof object.versionNumber === "string")
+                                        message.versionNumber = parseInt(object.versionNumber, 10);
+                                    else if (typeof object.versionNumber === "number")
+                                        message.versionNumber = object.versionNumber;
+                                    else if (typeof object.versionNumber === "object")
+                                        message.versionNumber = new $util.LongBits(object.versionNumber.low >>> 0, object.versionNumber.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Promotion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.Promotion} message Promotion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Promotion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.redemptionChannel = [];
+                                    object.customAttributes = [];
+                                }
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.promotionId = "";
+                                    object.contentLanguage = "";
+                                    object.targetCountry = "";
+                                    object.dataSource = "";
+                                    object.attributes = null;
+                                    object.promotionStatus = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.promotionId != null && message.hasOwnProperty("promotionId"))
+                                    object.promotionId = message.promotionId;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                    object.targetCountry = message.targetCountry;
+                                if (message.redemptionChannel && message.redemptionChannel.length) {
+                                    object.redemptionChannel = [];
+                                    for (var j = 0; j < message.redemptionChannel.length; ++j)
+                                        object.redemptionChannel[j] = options.enums === String ? $root.google.shopping.merchant.promotions.v1.RedemptionChannel[message.redemptionChannel[j]] === undefined ? message.redemptionChannel[j] : $root.google.shopping.merchant.promotions.v1.RedemptionChannel[message.redemptionChannel[j]] : message.redemptionChannel[j];
+                                }
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = message.dataSource;
+                                if (message.attributes != null && message.hasOwnProperty("attributes"))
+                                    object.attributes = $root.google.shopping.merchant.promotions.v1.Attributes.toObject(message.attributes, options);
+                                if (message.customAttributes && message.customAttributes.length) {
+                                    object.customAttributes = [];
+                                    for (var j = 0; j < message.customAttributes.length; ++j)
+                                        object.customAttributes[j] = $root.google.shopping.type.CustomAttribute.toObject(message.customAttributes[j], options);
+                                }
+                                if (message.promotionStatus != null && message.hasOwnProperty("promotionStatus"))
+                                    object.promotionStatus = $root.google.shopping.merchant.promotions.v1.PromotionStatus.toObject(message.promotionStatus, options);
+                                if (message.versionNumber != null && message.hasOwnProperty("versionNumber")) {
+                                    if (typeof message.versionNumber === "number")
+                                        object.versionNumber = options.longs === String ? String(message.versionNumber) : message.versionNumber;
+                                    else
+                                        object.versionNumber = options.longs === String ? $util.Long.prototype.toString.call(message.versionNumber) : options.longs === Number ? new $util.LongBits(message.versionNumber.low >>> 0, message.versionNumber.high >>> 0).toNumber() : message.versionNumber;
+                                    if (options.oneofs)
+                                        object._versionNumber = "versionNumber";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Promotion to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Promotion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Promotion
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.Promotion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Promotion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.Promotion";
+                            };
+    
+                            return Promotion;
+                        })();
+    
+                        v1.InsertPromotionRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertPromotionRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IInsertPromotionRequest
+                             * @property {string|null} [parent] InsertPromotionRequest parent
+                             * @property {google.shopping.merchant.promotions.v1.IPromotion|null} [promotion] InsertPromotionRequest promotion
+                             * @property {string|null} [dataSource] InsertPromotionRequest dataSource
+                             */
+    
+                            /**
+                             * Constructs a new InsertPromotionRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents an InsertPromotionRequest.
+                             * @implements IInsertPromotionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest=} [properties] Properties to set
+                             */
+                            function InsertPromotionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertPromotionRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @instance
+                             */
+                            InsertPromotionRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertPromotionRequest promotion.
+                             * @member {google.shopping.merchant.promotions.v1.IPromotion|null|undefined} promotion
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @instance
+                             */
+                            InsertPromotionRequest.prototype.promotion = null;
+    
+                            /**
+                             * InsertPromotionRequest dataSource.
+                             * @member {string} dataSource
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @instance
+                             */
+                            InsertPromotionRequest.prototype.dataSource = "";
+    
+                            /**
+                             * Creates a new InsertPromotionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.InsertPromotionRequest} InsertPromotionRequest instance
+                             */
+                            InsertPromotionRequest.create = function create(properties) {
+                                return new InsertPromotionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertPromotionRequest message. Does not implicitly {@link google.shopping.merchant.promotions.v1.InsertPromotionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest} message InsertPromotionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertPromotionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.promotion != null && Object.hasOwnProperty.call(message, "promotion"))
+                                    $root.google.shopping.merchant.promotions.v1.Promotion.encode(message.promotion, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataSource);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertPromotionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.InsertPromotionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IInsertPromotionRequest} message InsertPromotionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertPromotionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertPromotionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.InsertPromotionRequest} InsertPromotionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertPromotionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.InsertPromotionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.promotion = $root.google.shopping.merchant.promotions.v1.Promotion.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataSource = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertPromotionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.InsertPromotionRequest} InsertPromotionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertPromotionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertPromotionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertPromotionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.promotion != null && message.hasOwnProperty("promotion")) {
+                                    var error = $root.google.shopping.merchant.promotions.v1.Promotion.verify(message.promotion);
+                                    if (error)
+                                        return "promotion." + error;
+                                }
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    if (!$util.isString(message.dataSource))
+                                        return "dataSource: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertPromotionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.InsertPromotionRequest} InsertPromotionRequest
+                             */
+                            InsertPromotionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.InsertPromotionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.InsertPromotionRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.promotion != null) {
+                                    if (typeof object.promotion !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.InsertPromotionRequest.promotion: object expected");
+                                    message.promotion = $root.google.shopping.merchant.promotions.v1.Promotion.fromObject(object.promotion);
+                                }
+                                if (object.dataSource != null)
+                                    message.dataSource = String(object.dataSource);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertPromotionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.InsertPromotionRequest} message InsertPromotionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertPromotionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.promotion = null;
+                                    object.dataSource = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.promotion != null && message.hasOwnProperty("promotion"))
+                                    object.promotion = $root.google.shopping.merchant.promotions.v1.Promotion.toObject(message.promotion, options);
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = message.dataSource;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertPromotionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertPromotionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertPromotionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.InsertPromotionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertPromotionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.InsertPromotionRequest";
+                            };
+    
+                            return InsertPromotionRequest;
+                        })();
+    
+                        v1.GetPromotionRequest = (function() {
+    
+                            /**
+                             * Properties of a GetPromotionRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IGetPromotionRequest
+                             * @property {string|null} [name] GetPromotionRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetPromotionRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a GetPromotionRequest.
+                             * @implements IGetPromotionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest=} [properties] Properties to set
+                             */
+                            function GetPromotionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetPromotionRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @instance
+                             */
+                            GetPromotionRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetPromotionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.GetPromotionRequest} GetPromotionRequest instance
+                             */
+                            GetPromotionRequest.create = function create(properties) {
+                                return new GetPromotionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetPromotionRequest message. Does not implicitly {@link google.shopping.merchant.promotions.v1.GetPromotionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest} message GetPromotionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetPromotionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetPromotionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.GetPromotionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IGetPromotionRequest} message GetPromotionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetPromotionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetPromotionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.GetPromotionRequest} GetPromotionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetPromotionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.GetPromotionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetPromotionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.GetPromotionRequest} GetPromotionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetPromotionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetPromotionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetPromotionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetPromotionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.GetPromotionRequest} GetPromotionRequest
+                             */
+                            GetPromotionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.GetPromotionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.GetPromotionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetPromotionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.GetPromotionRequest} message GetPromotionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetPromotionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetPromotionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetPromotionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetPromotionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.GetPromotionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetPromotionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.GetPromotionRequest";
+                            };
+    
+                            return GetPromotionRequest;
+                        })();
+    
+                        v1.ListPromotionsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListPromotionsRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IListPromotionsRequest
+                             * @property {string|null} [parent] ListPromotionsRequest parent
+                             * @property {number|null} [pageSize] ListPromotionsRequest pageSize
+                             * @property {string|null} [pageToken] ListPromotionsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListPromotionsRequest.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a ListPromotionsRequest.
+                             * @implements IListPromotionsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest=} [properties] Properties to set
+                             */
+                            function ListPromotionsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListPromotionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @instance
+                             */
+                            ListPromotionsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListPromotionsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @instance
+                             */
+                            ListPromotionsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListPromotionsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @instance
+                             */
+                            ListPromotionsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListPromotionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsRequest} ListPromotionsRequest instance
+                             */
+                            ListPromotionsRequest.create = function create(properties) {
+                                return new ListPromotionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListPromotionsRequest message. Does not implicitly {@link google.shopping.merchant.promotions.v1.ListPromotionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest} message ListPromotionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPromotionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListPromotionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.ListPromotionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsRequest} message ListPromotionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPromotionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListPromotionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsRequest} ListPromotionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPromotionsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.ListPromotionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListPromotionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsRequest} ListPromotionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPromotionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListPromotionsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListPromotionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListPromotionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsRequest} ListPromotionsRequest
+                             */
+                            ListPromotionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.ListPromotionsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.ListPromotionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListPromotionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.ListPromotionsRequest} message ListPromotionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListPromotionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListPromotionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListPromotionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListPromotionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListPromotionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.ListPromotionsRequest";
+                            };
+    
+                            return ListPromotionsRequest;
+                        })();
+    
+                        v1.ListPromotionsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListPromotionsResponse.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IListPromotionsResponse
+                             * @property {Array.<google.shopping.merchant.promotions.v1.IPromotion>|null} [promotions] ListPromotionsResponse promotions
+                             * @property {string|null} [nextPageToken] ListPromotionsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListPromotionsResponse.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a ListPromotionsResponse.
+                             * @implements IListPromotionsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsResponse=} [properties] Properties to set
+                             */
+                            function ListPromotionsResponse(properties) {
+                                this.promotions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListPromotionsResponse promotions.
+                             * @member {Array.<google.shopping.merchant.promotions.v1.IPromotion>} promotions
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @instance
+                             */
+                            ListPromotionsResponse.prototype.promotions = $util.emptyArray;
+    
+                            /**
+                             * ListPromotionsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @instance
+                             */
+                            ListPromotionsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListPromotionsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsResponse} ListPromotionsResponse instance
+                             */
+                            ListPromotionsResponse.create = function create(properties) {
+                                return new ListPromotionsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListPromotionsResponse message. Does not implicitly {@link google.shopping.merchant.promotions.v1.ListPromotionsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsResponse} message ListPromotionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPromotionsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.promotions != null && message.promotions.length)
+                                    for (var i = 0; i < message.promotions.length; ++i)
+                                        $root.google.shopping.merchant.promotions.v1.Promotion.encode(message.promotions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListPromotionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.ListPromotionsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IListPromotionsResponse} message ListPromotionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListPromotionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListPromotionsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsResponse} ListPromotionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPromotionsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.ListPromotionsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.promotions && message.promotions.length))
+                                                message.promotions = [];
+                                            message.promotions.push($root.google.shopping.merchant.promotions.v1.Promotion.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListPromotionsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsResponse} ListPromotionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListPromotionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListPromotionsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListPromotionsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.promotions != null && message.hasOwnProperty("promotions")) {
+                                    if (!Array.isArray(message.promotions))
+                                        return "promotions: array expected";
+                                    for (var i = 0; i < message.promotions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.promotions.v1.Promotion.verify(message.promotions[i]);
+                                        if (error)
+                                            return "promotions." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListPromotionsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.ListPromotionsResponse} ListPromotionsResponse
+                             */
+                            ListPromotionsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.ListPromotionsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.ListPromotionsResponse();
+                                if (object.promotions) {
+                                    if (!Array.isArray(object.promotions))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.ListPromotionsResponse.promotions: array expected");
+                                    message.promotions = [];
+                                    for (var i = 0; i < object.promotions.length; ++i) {
+                                        if (typeof object.promotions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.promotions.v1.ListPromotionsResponse.promotions: object expected");
+                                        message.promotions[i] = $root.google.shopping.merchant.promotions.v1.Promotion.fromObject(object.promotions[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListPromotionsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.ListPromotionsResponse} message ListPromotionsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListPromotionsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.promotions = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.promotions && message.promotions.length) {
+                                    object.promotions = [];
+                                    for (var j = 0; j < message.promotions.length; ++j)
+                                        object.promotions[j] = $root.google.shopping.merchant.promotions.v1.Promotion.toObject(message.promotions[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListPromotionsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListPromotionsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListPromotionsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.ListPromotionsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListPromotionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.ListPromotionsResponse";
+                            };
+    
+                            return ListPromotionsResponse;
+                        })();
+    
+                        /**
+                         * ProductApplicability enum.
+                         * @name google.shopping.merchant.promotions.v1.ProductApplicability
+                         * @enum {number}
+                         * @property {number} PRODUCT_APPLICABILITY_UNSPECIFIED=0 PRODUCT_APPLICABILITY_UNSPECIFIED value
+                         * @property {number} ALL_PRODUCTS=1 ALL_PRODUCTS value
+                         * @property {number} SPECIFIC_PRODUCTS=2 SPECIFIC_PRODUCTS value
+                         */
+                        v1.ProductApplicability = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PRODUCT_APPLICABILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALL_PRODUCTS"] = 1;
+                            values[valuesById[2] = "SPECIFIC_PRODUCTS"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * StoreApplicability enum.
+                         * @name google.shopping.merchant.promotions.v1.StoreApplicability
+                         * @enum {number}
+                         * @property {number} STORE_APPLICABILITY_UNSPECIFIED=0 STORE_APPLICABILITY_UNSPECIFIED value
+                         * @property {number} ALL_STORES=1 ALL_STORES value
+                         * @property {number} SPECIFIC_STORES=2 SPECIFIC_STORES value
+                         */
+                        v1.StoreApplicability = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STORE_APPLICABILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALL_STORES"] = 1;
+                            values[valuesById[2] = "SPECIFIC_STORES"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * OfferType enum.
+                         * @name google.shopping.merchant.promotions.v1.OfferType
+                         * @enum {number}
+                         * @property {number} OFFER_TYPE_UNSPECIFIED=0 OFFER_TYPE_UNSPECIFIED value
+                         * @property {number} NO_CODE=1 NO_CODE value
+                         * @property {number} GENERIC_CODE=2 GENERIC_CODE value
+                         */
+                        v1.OfferType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "OFFER_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NO_CODE"] = 1;
+                            values[valuesById[2] = "GENERIC_CODE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * RedemptionChannel enum.
+                         * @name google.shopping.merchant.promotions.v1.RedemptionChannel
+                         * @enum {number}
+                         * @property {number} REDEMPTION_CHANNEL_UNSPECIFIED=0 REDEMPTION_CHANNEL_UNSPECIFIED value
+                         * @property {number} IN_STORE=1 IN_STORE value
+                         * @property {number} ONLINE=2 ONLINE value
+                         */
+                        v1.RedemptionChannel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REDEMPTION_CHANNEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IN_STORE"] = 1;
+                            values[valuesById[2] = "ONLINE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * CouponValueType enum.
+                         * @name google.shopping.merchant.promotions.v1.CouponValueType
+                         * @enum {number}
+                         * @property {number} COUPON_VALUE_TYPE_UNSPECIFIED=0 COUPON_VALUE_TYPE_UNSPECIFIED value
+                         * @property {number} MONEY_OFF=1 MONEY_OFF value
+                         * @property {number} PERCENT_OFF=2 PERCENT_OFF value
+                         * @property {number} BUY_M_GET_N_MONEY_OFF=3 BUY_M_GET_N_MONEY_OFF value
+                         * @property {number} BUY_M_GET_N_PERCENT_OFF=4 BUY_M_GET_N_PERCENT_OFF value
+                         * @property {number} BUY_M_GET_MONEY_OFF=5 BUY_M_GET_MONEY_OFF value
+                         * @property {number} BUY_M_GET_PERCENT_OFF=6 BUY_M_GET_PERCENT_OFF value
+                         * @property {number} FREE_GIFT=7 FREE_GIFT value
+                         * @property {number} FREE_GIFT_WITH_VALUE=8 FREE_GIFT_WITH_VALUE value
+                         * @property {number} FREE_GIFT_WITH_ITEM_ID=9 FREE_GIFT_WITH_ITEM_ID value
+                         * @property {number} FREE_SHIPPING_STANDARD=10 FREE_SHIPPING_STANDARD value
+                         * @property {number} FREE_SHIPPING_OVERNIGHT=11 FREE_SHIPPING_OVERNIGHT value
+                         * @property {number} FREE_SHIPPING_TWO_DAY=12 FREE_SHIPPING_TWO_DAY value
+                         */
+                        v1.CouponValueType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "COUPON_VALUE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MONEY_OFF"] = 1;
+                            values[valuesById[2] = "PERCENT_OFF"] = 2;
+                            values[valuesById[3] = "BUY_M_GET_N_MONEY_OFF"] = 3;
+                            values[valuesById[4] = "BUY_M_GET_N_PERCENT_OFF"] = 4;
+                            values[valuesById[5] = "BUY_M_GET_MONEY_OFF"] = 5;
+                            values[valuesById[6] = "BUY_M_GET_PERCENT_OFF"] = 6;
+                            values[valuesById[7] = "FREE_GIFT"] = 7;
+                            values[valuesById[8] = "FREE_GIFT_WITH_VALUE"] = 8;
+                            values[valuesById[9] = "FREE_GIFT_WITH_ITEM_ID"] = 9;
+                            values[valuesById[10] = "FREE_SHIPPING_STANDARD"] = 10;
+                            values[valuesById[11] = "FREE_SHIPPING_OVERNIGHT"] = 11;
+                            values[valuesById[12] = "FREE_SHIPPING_TWO_DAY"] = 12;
+                            return values;
+                        })();
+    
+                        v1.Attributes = (function() {
+    
+                            /**
+                             * Properties of an Attributes.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IAttributes
+                             * @property {google.shopping.merchant.promotions.v1.ProductApplicability|null} [productApplicability] Attributes productApplicability
+                             * @property {google.shopping.merchant.promotions.v1.OfferType|null} [offerType] Attributes offerType
+                             * @property {string|null} [genericRedemptionCode] Attributes genericRedemptionCode
+                             * @property {string|null} [longTitle] Attributes longTitle
+                             * @property {google.shopping.merchant.promotions.v1.CouponValueType|null} [couponValueType] Attributes couponValueType
+                             * @property {Array.<google.shopping.type.Destination.DestinationEnum>|null} [promotionDestinations] Attributes promotionDestinations
+                             * @property {Array.<string>|null} [itemIdInclusion] Attributes itemIdInclusion
+                             * @property {Array.<string>|null} [brandInclusion] Attributes brandInclusion
+                             * @property {Array.<string>|null} [itemGroupIdInclusion] Attributes itemGroupIdInclusion
+                             * @property {Array.<string>|null} [productTypeInclusion] Attributes productTypeInclusion
+                             * @property {Array.<string>|null} [itemIdExclusion] Attributes itemIdExclusion
+                             * @property {Array.<string>|null} [brandExclusion] Attributes brandExclusion
+                             * @property {Array.<string>|null} [itemGroupIdExclusion] Attributes itemGroupIdExclusion
+                             * @property {Array.<string>|null} [productTypeExclusion] Attributes productTypeExclusion
+                             * @property {google.shopping.type.IPrice|null} [minimumPurchaseAmount] Attributes minimumPurchaseAmount
+                             * @property {number|Long|null} [minimumPurchaseQuantity] Attributes minimumPurchaseQuantity
+                             * @property {number|Long|null} [limitQuantity] Attributes limitQuantity
+                             * @property {google.shopping.type.IPrice|null} [limitValue] Attributes limitValue
+                             * @property {number|Long|null} [percentOff] Attributes percentOff
+                             * @property {google.shopping.type.IPrice|null} [moneyOffAmount] Attributes moneyOffAmount
+                             * @property {number|Long|null} [getThisQuantityDiscounted] Attributes getThisQuantityDiscounted
+                             * @property {google.shopping.type.IPrice|null} [freeGiftValue] Attributes freeGiftValue
+                             * @property {string|null} [freeGiftDescription] Attributes freeGiftDescription
+                             * @property {string|null} [freeGiftItemId] Attributes freeGiftItemId
+                             * @property {google.type.IInterval|null} [promotionEffectiveTimePeriod] Attributes promotionEffectiveTimePeriod
+                             * @property {google.type.IInterval|null} [promotionDisplayTimePeriod] Attributes promotionDisplayTimePeriod
+                             * @property {google.shopping.merchant.promotions.v1.StoreApplicability|null} [storeApplicability] Attributes storeApplicability
+                             * @property {Array.<string>|null} [storeCodesInclusion] Attributes storeCodesInclusion
+                             * @property {Array.<string>|null} [storeCodesExclusion] Attributes storeCodesExclusion
+                             * @property {string|null} [promotionUrl] Attributes promotionUrl
+                             */
+    
+                            /**
+                             * Constructs a new Attributes.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents an Attributes.
+                             * @implements IAttributes
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IAttributes=} [properties] Properties to set
+                             */
+                            function Attributes(properties) {
+                                this.promotionDestinations = [];
+                                this.itemIdInclusion = [];
+                                this.brandInclusion = [];
+                                this.itemGroupIdInclusion = [];
+                                this.productTypeInclusion = [];
+                                this.itemIdExclusion = [];
+                                this.brandExclusion = [];
+                                this.itemGroupIdExclusion = [];
+                                this.productTypeExclusion = [];
+                                this.storeCodesInclusion = [];
+                                this.storeCodesExclusion = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Attributes productApplicability.
+                             * @member {google.shopping.merchant.promotions.v1.ProductApplicability} productApplicability
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.productApplicability = 0;
+    
+                            /**
+                             * Attributes offerType.
+                             * @member {google.shopping.merchant.promotions.v1.OfferType} offerType
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.offerType = 0;
+    
+                            /**
+                             * Attributes genericRedemptionCode.
+                             * @member {string} genericRedemptionCode
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.genericRedemptionCode = "";
+    
+                            /**
+                             * Attributes longTitle.
+                             * @member {string} longTitle
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.longTitle = "";
+    
+                            /**
+                             * Attributes couponValueType.
+                             * @member {google.shopping.merchant.promotions.v1.CouponValueType} couponValueType
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.couponValueType = 0;
+    
+                            /**
+                             * Attributes promotionDestinations.
+                             * @member {Array.<google.shopping.type.Destination.DestinationEnum>} promotionDestinations
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.promotionDestinations = $util.emptyArray;
+    
+                            /**
+                             * Attributes itemIdInclusion.
+                             * @member {Array.<string>} itemIdInclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.itemIdInclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes brandInclusion.
+                             * @member {Array.<string>} brandInclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.brandInclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes itemGroupIdInclusion.
+                             * @member {Array.<string>} itemGroupIdInclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.itemGroupIdInclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes productTypeInclusion.
+                             * @member {Array.<string>} productTypeInclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.productTypeInclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes itemIdExclusion.
+                             * @member {Array.<string>} itemIdExclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.itemIdExclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes brandExclusion.
+                             * @member {Array.<string>} brandExclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.brandExclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes itemGroupIdExclusion.
+                             * @member {Array.<string>} itemGroupIdExclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.itemGroupIdExclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes productTypeExclusion.
+                             * @member {Array.<string>} productTypeExclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.productTypeExclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes minimumPurchaseAmount.
+                             * @member {google.shopping.type.IPrice|null|undefined} minimumPurchaseAmount
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.minimumPurchaseAmount = null;
+    
+                            /**
+                             * Attributes minimumPurchaseQuantity.
+                             * @member {number|Long} minimumPurchaseQuantity
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.minimumPurchaseQuantity = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Attributes limitQuantity.
+                             * @member {number|Long} limitQuantity
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.limitQuantity = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Attributes limitValue.
+                             * @member {google.shopping.type.IPrice|null|undefined} limitValue
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.limitValue = null;
+    
+                            /**
+                             * Attributes percentOff.
+                             * @member {number|Long} percentOff
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.percentOff = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Attributes moneyOffAmount.
+                             * @member {google.shopping.type.IPrice|null|undefined} moneyOffAmount
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.moneyOffAmount = null;
+    
+                            /**
+                             * Attributes getThisQuantityDiscounted.
+                             * @member {number|Long} getThisQuantityDiscounted
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.getThisQuantityDiscounted = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Attributes freeGiftValue.
+                             * @member {google.shopping.type.IPrice|null|undefined} freeGiftValue
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.freeGiftValue = null;
+    
+                            /**
+                             * Attributes freeGiftDescription.
+                             * @member {string} freeGiftDescription
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.freeGiftDescription = "";
+    
+                            /**
+                             * Attributes freeGiftItemId.
+                             * @member {string} freeGiftItemId
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.freeGiftItemId = "";
+    
+                            /**
+                             * Attributes promotionEffectiveTimePeriod.
+                             * @member {google.type.IInterval|null|undefined} promotionEffectiveTimePeriod
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.promotionEffectiveTimePeriod = null;
+    
+                            /**
+                             * Attributes promotionDisplayTimePeriod.
+                             * @member {google.type.IInterval|null|undefined} promotionDisplayTimePeriod
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.promotionDisplayTimePeriod = null;
+    
+                            /**
+                             * Attributes storeApplicability.
+                             * @member {google.shopping.merchant.promotions.v1.StoreApplicability} storeApplicability
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.storeApplicability = 0;
+    
+                            /**
+                             * Attributes storeCodesInclusion.
+                             * @member {Array.<string>} storeCodesInclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.storeCodesInclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes storeCodesExclusion.
+                             * @member {Array.<string>} storeCodesExclusion
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.storeCodesExclusion = $util.emptyArray;
+    
+                            /**
+                             * Attributes promotionUrl.
+                             * @member {string} promotionUrl
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.promotionUrl = "";
+    
+                            /**
+                             * Creates a new Attributes instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IAttributes=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.Attributes} Attributes instance
+                             */
+                            Attributes.create = function create(properties) {
+                                return new Attributes(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Attributes message. Does not implicitly {@link google.shopping.merchant.promotions.v1.Attributes.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IAttributes} message Attributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Attributes.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.productApplicability != null && Object.hasOwnProperty.call(message, "productApplicability"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.productApplicability);
+                                if (message.offerType != null && Object.hasOwnProperty.call(message, "offerType"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.offerType);
+                                if (message.genericRedemptionCode != null && Object.hasOwnProperty.call(message, "genericRedemptionCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.genericRedemptionCode);
+                                if (message.longTitle != null && Object.hasOwnProperty.call(message, "longTitle"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.longTitle);
+                                if (message.couponValueType != null && Object.hasOwnProperty.call(message, "couponValueType"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.couponValueType);
+                                if (message.promotionDestinations != null && message.promotionDestinations.length) {
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                    for (var i = 0; i < message.promotionDestinations.length; ++i)
+                                        writer.int32(message.promotionDestinations[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.itemIdInclusion != null && message.itemIdInclusion.length)
+                                    for (var i = 0; i < message.itemIdInclusion.length; ++i)
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.itemIdInclusion[i]);
+                                if (message.brandInclusion != null && message.brandInclusion.length)
+                                    for (var i = 0; i < message.brandInclusion.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.brandInclusion[i]);
+                                if (message.itemGroupIdInclusion != null && message.itemGroupIdInclusion.length)
+                                    for (var i = 0; i < message.itemGroupIdInclusion.length; ++i)
+                                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.itemGroupIdInclusion[i]);
+                                if (message.productTypeInclusion != null && message.productTypeInclusion.length)
+                                    for (var i = 0; i < message.productTypeInclusion.length; ++i)
+                                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.productTypeInclusion[i]);
+                                if (message.itemIdExclusion != null && message.itemIdExclusion.length)
+                                    for (var i = 0; i < message.itemIdExclusion.length; ++i)
+                                        writer.uint32(/* id 11, wireType 2 =*/90).string(message.itemIdExclusion[i]);
+                                if (message.brandExclusion != null && message.brandExclusion.length)
+                                    for (var i = 0; i < message.brandExclusion.length; ++i)
+                                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.brandExclusion[i]);
+                                if (message.itemGroupIdExclusion != null && message.itemGroupIdExclusion.length)
+                                    for (var i = 0; i < message.itemGroupIdExclusion.length; ++i)
+                                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.itemGroupIdExclusion[i]);
+                                if (message.productTypeExclusion != null && message.productTypeExclusion.length)
+                                    for (var i = 0; i < message.productTypeExclusion.length; ++i)
+                                        writer.uint32(/* id 14, wireType 2 =*/114).string(message.productTypeExclusion[i]);
+                                if (message.minimumPurchaseAmount != null && Object.hasOwnProperty.call(message, "minimumPurchaseAmount"))
+                                    $root.google.shopping.type.Price.encode(message.minimumPurchaseAmount, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                                if (message.minimumPurchaseQuantity != null && Object.hasOwnProperty.call(message, "minimumPurchaseQuantity"))
+                                    writer.uint32(/* id 16, wireType 0 =*/128).int64(message.minimumPurchaseQuantity);
+                                if (message.limitQuantity != null && Object.hasOwnProperty.call(message, "limitQuantity"))
+                                    writer.uint32(/* id 17, wireType 0 =*/136).int64(message.limitQuantity);
+                                if (message.limitValue != null && Object.hasOwnProperty.call(message, "limitValue"))
+                                    $root.google.shopping.type.Price.encode(message.limitValue, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                if (message.percentOff != null && Object.hasOwnProperty.call(message, "percentOff"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).int64(message.percentOff);
+                                if (message.moneyOffAmount != null && Object.hasOwnProperty.call(message, "moneyOffAmount"))
+                                    $root.google.shopping.type.Price.encode(message.moneyOffAmount, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                if (message.getThisQuantityDiscounted != null && Object.hasOwnProperty.call(message, "getThisQuantityDiscounted"))
+                                    writer.uint32(/* id 21, wireType 0 =*/168).int64(message.getThisQuantityDiscounted);
+                                if (message.freeGiftValue != null && Object.hasOwnProperty.call(message, "freeGiftValue"))
+                                    $root.google.shopping.type.Price.encode(message.freeGiftValue, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                if (message.freeGiftDescription != null && Object.hasOwnProperty.call(message, "freeGiftDescription"))
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.freeGiftDescription);
+                                if (message.freeGiftItemId != null && Object.hasOwnProperty.call(message, "freeGiftItemId"))
+                                    writer.uint32(/* id 24, wireType 2 =*/194).string(message.freeGiftItemId);
+                                if (message.promotionEffectiveTimePeriod != null && Object.hasOwnProperty.call(message, "promotionEffectiveTimePeriod"))
+                                    $root.google.type.Interval.encode(message.promotionEffectiveTimePeriod, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                if (message.promotionDisplayTimePeriod != null && Object.hasOwnProperty.call(message, "promotionDisplayTimePeriod"))
+                                    $root.google.type.Interval.encode(message.promotionDisplayTimePeriod, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                                if (message.storeApplicability != null && Object.hasOwnProperty.call(message, "storeApplicability"))
+                                    writer.uint32(/* id 28, wireType 0 =*/224).int32(message.storeApplicability);
+                                if (message.storeCodesInclusion != null && message.storeCodesInclusion.length)
+                                    for (var i = 0; i < message.storeCodesInclusion.length; ++i)
+                                        writer.uint32(/* id 29, wireType 2 =*/234).string(message.storeCodesInclusion[i]);
+                                if (message.storeCodesExclusion != null && message.storeCodesExclusion.length)
+                                    for (var i = 0; i < message.storeCodesExclusion.length; ++i)
+                                        writer.uint32(/* id 30, wireType 2 =*/242).string(message.storeCodesExclusion[i]);
+                                if (message.promotionUrl != null && Object.hasOwnProperty.call(message, "promotionUrl"))
+                                    writer.uint32(/* id 31, wireType 2 =*/250).string(message.promotionUrl);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Attributes message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.Attributes.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IAttributes} message Attributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Attributes.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Attributes message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.Attributes} Attributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Attributes.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.Attributes();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.productApplicability = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.offerType = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.genericRedemptionCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.longTitle = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.couponValueType = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.promotionDestinations && message.promotionDestinations.length))
+                                                message.promotionDestinations = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.promotionDestinations.push(reader.int32());
+                                            } else
+                                                message.promotionDestinations.push(reader.int32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (!(message.itemIdInclusion && message.itemIdInclusion.length))
+                                                message.itemIdInclusion = [];
+                                            message.itemIdInclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.brandInclusion && message.brandInclusion.length))
+                                                message.brandInclusion = [];
+                                            message.brandInclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.itemGroupIdInclusion && message.itemGroupIdInclusion.length))
+                                                message.itemGroupIdInclusion = [];
+                                            message.itemGroupIdInclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.productTypeInclusion && message.productTypeInclusion.length))
+                                                message.productTypeInclusion = [];
+                                            message.productTypeInclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 11: {
+                                            if (!(message.itemIdExclusion && message.itemIdExclusion.length))
+                                                message.itemIdExclusion = [];
+                                            message.itemIdExclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 12: {
+                                            if (!(message.brandExclusion && message.brandExclusion.length))
+                                                message.brandExclusion = [];
+                                            message.brandExclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (!(message.itemGroupIdExclusion && message.itemGroupIdExclusion.length))
+                                                message.itemGroupIdExclusion = [];
+                                            message.itemGroupIdExclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 14: {
+                                            if (!(message.productTypeExclusion && message.productTypeExclusion.length))
+                                                message.productTypeExclusion = [];
+                                            message.productTypeExclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.minimumPurchaseAmount = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.minimumPurchaseQuantity = reader.int64();
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.limitQuantity = reader.int64();
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.limitValue = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.percentOff = reader.int64();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.moneyOffAmount = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.getThisQuantityDiscounted = reader.int64();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.freeGiftValue = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 23: {
+                                            message.freeGiftDescription = reader.string();
+                                            break;
+                                        }
+                                    case 24: {
+                                            message.freeGiftItemId = reader.string();
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.promotionEffectiveTimePeriod = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 26: {
+                                            message.promotionDisplayTimePeriod = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 28: {
+                                            message.storeApplicability = reader.int32();
+                                            break;
+                                        }
+                                    case 29: {
+                                            if (!(message.storeCodesInclusion && message.storeCodesInclusion.length))
+                                                message.storeCodesInclusion = [];
+                                            message.storeCodesInclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 30: {
+                                            if (!(message.storeCodesExclusion && message.storeCodesExclusion.length))
+                                                message.storeCodesExclusion = [];
+                                            message.storeCodesExclusion.push(reader.string());
+                                            break;
+                                        }
+                                    case 31: {
+                                            message.promotionUrl = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Attributes message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.Attributes} Attributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Attributes.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Attributes message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Attributes.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.productApplicability != null && message.hasOwnProperty("productApplicability"))
+                                    switch (message.productApplicability) {
+                                    default:
+                                        return "productApplicability: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.offerType != null && message.hasOwnProperty("offerType"))
+                                    switch (message.offerType) {
+                                    default:
+                                        return "offerType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.genericRedemptionCode != null && message.hasOwnProperty("genericRedemptionCode"))
+                                    if (!$util.isString(message.genericRedemptionCode))
+                                        return "genericRedemptionCode: string expected";
+                                if (message.longTitle != null && message.hasOwnProperty("longTitle"))
+                                    if (!$util.isString(message.longTitle))
+                                        return "longTitle: string expected";
+                                if (message.couponValueType != null && message.hasOwnProperty("couponValueType"))
+                                    switch (message.couponValueType) {
+                                    default:
+                                        return "couponValueType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
+                                        break;
+                                    }
+                                if (message.promotionDestinations != null && message.hasOwnProperty("promotionDestinations")) {
+                                    if (!Array.isArray(message.promotionDestinations))
+                                        return "promotionDestinations: array expected";
+                                    for (var i = 0; i < message.promotionDestinations.length; ++i)
+                                        switch (message.promotionDestinations[i]) {
+                                        default:
+                                            return "promotionDestinations: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                }
+                                if (message.itemIdInclusion != null && message.hasOwnProperty("itemIdInclusion")) {
+                                    if (!Array.isArray(message.itemIdInclusion))
+                                        return "itemIdInclusion: array expected";
+                                    for (var i = 0; i < message.itemIdInclusion.length; ++i)
+                                        if (!$util.isString(message.itemIdInclusion[i]))
+                                            return "itemIdInclusion: string[] expected";
+                                }
+                                if (message.brandInclusion != null && message.hasOwnProperty("brandInclusion")) {
+                                    if (!Array.isArray(message.brandInclusion))
+                                        return "brandInclusion: array expected";
+                                    for (var i = 0; i < message.brandInclusion.length; ++i)
+                                        if (!$util.isString(message.brandInclusion[i]))
+                                            return "brandInclusion: string[] expected";
+                                }
+                                if (message.itemGroupIdInclusion != null && message.hasOwnProperty("itemGroupIdInclusion")) {
+                                    if (!Array.isArray(message.itemGroupIdInclusion))
+                                        return "itemGroupIdInclusion: array expected";
+                                    for (var i = 0; i < message.itemGroupIdInclusion.length; ++i)
+                                        if (!$util.isString(message.itemGroupIdInclusion[i]))
+                                            return "itemGroupIdInclusion: string[] expected";
+                                }
+                                if (message.productTypeInclusion != null && message.hasOwnProperty("productTypeInclusion")) {
+                                    if (!Array.isArray(message.productTypeInclusion))
+                                        return "productTypeInclusion: array expected";
+                                    for (var i = 0; i < message.productTypeInclusion.length; ++i)
+                                        if (!$util.isString(message.productTypeInclusion[i]))
+                                            return "productTypeInclusion: string[] expected";
+                                }
+                                if (message.itemIdExclusion != null && message.hasOwnProperty("itemIdExclusion")) {
+                                    if (!Array.isArray(message.itemIdExclusion))
+                                        return "itemIdExclusion: array expected";
+                                    for (var i = 0; i < message.itemIdExclusion.length; ++i)
+                                        if (!$util.isString(message.itemIdExclusion[i]))
+                                            return "itemIdExclusion: string[] expected";
+                                }
+                                if (message.brandExclusion != null && message.hasOwnProperty("brandExclusion")) {
+                                    if (!Array.isArray(message.brandExclusion))
+                                        return "brandExclusion: array expected";
+                                    for (var i = 0; i < message.brandExclusion.length; ++i)
+                                        if (!$util.isString(message.brandExclusion[i]))
+                                            return "brandExclusion: string[] expected";
+                                }
+                                if (message.itemGroupIdExclusion != null && message.hasOwnProperty("itemGroupIdExclusion")) {
+                                    if (!Array.isArray(message.itemGroupIdExclusion))
+                                        return "itemGroupIdExclusion: array expected";
+                                    for (var i = 0; i < message.itemGroupIdExclusion.length; ++i)
+                                        if (!$util.isString(message.itemGroupIdExclusion[i]))
+                                            return "itemGroupIdExclusion: string[] expected";
+                                }
+                                if (message.productTypeExclusion != null && message.hasOwnProperty("productTypeExclusion")) {
+                                    if (!Array.isArray(message.productTypeExclusion))
+                                        return "productTypeExclusion: array expected";
+                                    for (var i = 0; i < message.productTypeExclusion.length; ++i)
+                                        if (!$util.isString(message.productTypeExclusion[i]))
+                                            return "productTypeExclusion: string[] expected";
+                                }
+                                if (message.minimumPurchaseAmount != null && message.hasOwnProperty("minimumPurchaseAmount")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.minimumPurchaseAmount);
+                                    if (error)
+                                        return "minimumPurchaseAmount." + error;
+                                }
+                                if (message.minimumPurchaseQuantity != null && message.hasOwnProperty("minimumPurchaseQuantity"))
+                                    if (!$util.isInteger(message.minimumPurchaseQuantity) && !(message.minimumPurchaseQuantity && $util.isInteger(message.minimumPurchaseQuantity.low) && $util.isInteger(message.minimumPurchaseQuantity.high)))
+                                        return "minimumPurchaseQuantity: integer|Long expected";
+                                if (message.limitQuantity != null && message.hasOwnProperty("limitQuantity"))
+                                    if (!$util.isInteger(message.limitQuantity) && !(message.limitQuantity && $util.isInteger(message.limitQuantity.low) && $util.isInteger(message.limitQuantity.high)))
+                                        return "limitQuantity: integer|Long expected";
+                                if (message.limitValue != null && message.hasOwnProperty("limitValue")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.limitValue);
+                                    if (error)
+                                        return "limitValue." + error;
+                                }
+                                if (message.percentOff != null && message.hasOwnProperty("percentOff"))
+                                    if (!$util.isInteger(message.percentOff) && !(message.percentOff && $util.isInteger(message.percentOff.low) && $util.isInteger(message.percentOff.high)))
+                                        return "percentOff: integer|Long expected";
+                                if (message.moneyOffAmount != null && message.hasOwnProperty("moneyOffAmount")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.moneyOffAmount);
+                                    if (error)
+                                        return "moneyOffAmount." + error;
+                                }
+                                if (message.getThisQuantityDiscounted != null && message.hasOwnProperty("getThisQuantityDiscounted"))
+                                    if (!$util.isInteger(message.getThisQuantityDiscounted) && !(message.getThisQuantityDiscounted && $util.isInteger(message.getThisQuantityDiscounted.low) && $util.isInteger(message.getThisQuantityDiscounted.high)))
+                                        return "getThisQuantityDiscounted: integer|Long expected";
+                                if (message.freeGiftValue != null && message.hasOwnProperty("freeGiftValue")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.freeGiftValue);
+                                    if (error)
+                                        return "freeGiftValue." + error;
+                                }
+                                if (message.freeGiftDescription != null && message.hasOwnProperty("freeGiftDescription"))
+                                    if (!$util.isString(message.freeGiftDescription))
+                                        return "freeGiftDescription: string expected";
+                                if (message.freeGiftItemId != null && message.hasOwnProperty("freeGiftItemId"))
+                                    if (!$util.isString(message.freeGiftItemId))
+                                        return "freeGiftItemId: string expected";
+                                if (message.promotionEffectiveTimePeriod != null && message.hasOwnProperty("promotionEffectiveTimePeriod")) {
+                                    var error = $root.google.type.Interval.verify(message.promotionEffectiveTimePeriod);
+                                    if (error)
+                                        return "promotionEffectiveTimePeriod." + error;
+                                }
+                                if (message.promotionDisplayTimePeriod != null && message.hasOwnProperty("promotionDisplayTimePeriod")) {
+                                    var error = $root.google.type.Interval.verify(message.promotionDisplayTimePeriod);
+                                    if (error)
+                                        return "promotionDisplayTimePeriod." + error;
+                                }
+                                if (message.storeApplicability != null && message.hasOwnProperty("storeApplicability"))
+                                    switch (message.storeApplicability) {
+                                    default:
+                                        return "storeApplicability: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.storeCodesInclusion != null && message.hasOwnProperty("storeCodesInclusion")) {
+                                    if (!Array.isArray(message.storeCodesInclusion))
+                                        return "storeCodesInclusion: array expected";
+                                    for (var i = 0; i < message.storeCodesInclusion.length; ++i)
+                                        if (!$util.isString(message.storeCodesInclusion[i]))
+                                            return "storeCodesInclusion: string[] expected";
+                                }
+                                if (message.storeCodesExclusion != null && message.hasOwnProperty("storeCodesExclusion")) {
+                                    if (!Array.isArray(message.storeCodesExclusion))
+                                        return "storeCodesExclusion: array expected";
+                                    for (var i = 0; i < message.storeCodesExclusion.length; ++i)
+                                        if (!$util.isString(message.storeCodesExclusion[i]))
+                                            return "storeCodesExclusion: string[] expected";
+                                }
+                                if (message.promotionUrl != null && message.hasOwnProperty("promotionUrl"))
+                                    if (!$util.isString(message.promotionUrl))
+                                        return "promotionUrl: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Attributes message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.Attributes} Attributes
+                             */
+                            Attributes.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.Attributes)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.Attributes();
+                                switch (object.productApplicability) {
+                                default:
+                                    if (typeof object.productApplicability === "number") {
+                                        message.productApplicability = object.productApplicability;
+                                        break;
+                                    }
+                                    break;
+                                case "PRODUCT_APPLICABILITY_UNSPECIFIED":
+                                case 0:
+                                    message.productApplicability = 0;
+                                    break;
+                                case "ALL_PRODUCTS":
+                                case 1:
+                                    message.productApplicability = 1;
+                                    break;
+                                case "SPECIFIC_PRODUCTS":
+                                case 2:
+                                    message.productApplicability = 2;
+                                    break;
+                                }
+                                switch (object.offerType) {
+                                default:
+                                    if (typeof object.offerType === "number") {
+                                        message.offerType = object.offerType;
+                                        break;
+                                    }
+                                    break;
+                                case "OFFER_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.offerType = 0;
+                                    break;
+                                case "NO_CODE":
+                                case 1:
+                                    message.offerType = 1;
+                                    break;
+                                case "GENERIC_CODE":
+                                case 2:
+                                    message.offerType = 2;
+                                    break;
+                                }
+                                if (object.genericRedemptionCode != null)
+                                    message.genericRedemptionCode = String(object.genericRedemptionCode);
+                                if (object.longTitle != null)
+                                    message.longTitle = String(object.longTitle);
+                                switch (object.couponValueType) {
+                                default:
+                                    if (typeof object.couponValueType === "number") {
+                                        message.couponValueType = object.couponValueType;
+                                        break;
+                                    }
+                                    break;
+                                case "COUPON_VALUE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.couponValueType = 0;
+                                    break;
+                                case "MONEY_OFF":
+                                case 1:
+                                    message.couponValueType = 1;
+                                    break;
+                                case "PERCENT_OFF":
+                                case 2:
+                                    message.couponValueType = 2;
+                                    break;
+                                case "BUY_M_GET_N_MONEY_OFF":
+                                case 3:
+                                    message.couponValueType = 3;
+                                    break;
+                                case "BUY_M_GET_N_PERCENT_OFF":
+                                case 4:
+                                    message.couponValueType = 4;
+                                    break;
+                                case "BUY_M_GET_MONEY_OFF":
+                                case 5:
+                                    message.couponValueType = 5;
+                                    break;
+                                case "BUY_M_GET_PERCENT_OFF":
+                                case 6:
+                                    message.couponValueType = 6;
+                                    break;
+                                case "FREE_GIFT":
+                                case 7:
+                                    message.couponValueType = 7;
+                                    break;
+                                case "FREE_GIFT_WITH_VALUE":
+                                case 8:
+                                    message.couponValueType = 8;
+                                    break;
+                                case "FREE_GIFT_WITH_ITEM_ID":
+                                case 9:
+                                    message.couponValueType = 9;
+                                    break;
+                                case "FREE_SHIPPING_STANDARD":
+                                case 10:
+                                    message.couponValueType = 10;
+                                    break;
+                                case "FREE_SHIPPING_OVERNIGHT":
+                                case 11:
+                                    message.couponValueType = 11;
+                                    break;
+                                case "FREE_SHIPPING_TWO_DAY":
+                                case 12:
+                                    message.couponValueType = 12;
+                                    break;
+                                }
+                                if (object.promotionDestinations) {
+                                    if (!Array.isArray(object.promotionDestinations))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.promotionDestinations: array expected");
+                                    message.promotionDestinations = [];
+                                    for (var i = 0; i < object.promotionDestinations.length; ++i)
+                                        switch (object.promotionDestinations[i]) {
+                                        default:
+                                            if (typeof object.promotionDestinations[i] === "number") {
+                                                message.promotionDestinations[i] = object.promotionDestinations[i];
+                                                break;
+                                            }
+                                        case "DESTINATION_ENUM_UNSPECIFIED":
+                                        case 0:
+                                            message.promotionDestinations[i] = 0;
+                                            break;
+                                        case "SHOPPING_ADS":
+                                        case 1:
+                                            message.promotionDestinations[i] = 1;
+                                            break;
+                                        case "DISPLAY_ADS":
+                                        case 2:
+                                            message.promotionDestinations[i] = 2;
+                                            break;
+                                        case "LOCAL_INVENTORY_ADS":
+                                        case 3:
+                                            message.promotionDestinations[i] = 3;
+                                            break;
+                                        case "FREE_LISTINGS":
+                                        case 4:
+                                            message.promotionDestinations[i] = 4;
+                                            break;
+                                        case "FREE_LOCAL_LISTINGS":
+                                        case 5:
+                                            message.promotionDestinations[i] = 5;
+                                            break;
+                                        case "YOUTUBE_SHOPPING":
+                                        case 6:
+                                            message.promotionDestinations[i] = 6;
+                                            break;
+                                        }
+                                }
+                                if (object.itemIdInclusion) {
+                                    if (!Array.isArray(object.itemIdInclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.itemIdInclusion: array expected");
+                                    message.itemIdInclusion = [];
+                                    for (var i = 0; i < object.itemIdInclusion.length; ++i)
+                                        message.itemIdInclusion[i] = String(object.itemIdInclusion[i]);
+                                }
+                                if (object.brandInclusion) {
+                                    if (!Array.isArray(object.brandInclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.brandInclusion: array expected");
+                                    message.brandInclusion = [];
+                                    for (var i = 0; i < object.brandInclusion.length; ++i)
+                                        message.brandInclusion[i] = String(object.brandInclusion[i]);
+                                }
+                                if (object.itemGroupIdInclusion) {
+                                    if (!Array.isArray(object.itemGroupIdInclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.itemGroupIdInclusion: array expected");
+                                    message.itemGroupIdInclusion = [];
+                                    for (var i = 0; i < object.itemGroupIdInclusion.length; ++i)
+                                        message.itemGroupIdInclusion[i] = String(object.itemGroupIdInclusion[i]);
+                                }
+                                if (object.productTypeInclusion) {
+                                    if (!Array.isArray(object.productTypeInclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.productTypeInclusion: array expected");
+                                    message.productTypeInclusion = [];
+                                    for (var i = 0; i < object.productTypeInclusion.length; ++i)
+                                        message.productTypeInclusion[i] = String(object.productTypeInclusion[i]);
+                                }
+                                if (object.itemIdExclusion) {
+                                    if (!Array.isArray(object.itemIdExclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.itemIdExclusion: array expected");
+                                    message.itemIdExclusion = [];
+                                    for (var i = 0; i < object.itemIdExclusion.length; ++i)
+                                        message.itemIdExclusion[i] = String(object.itemIdExclusion[i]);
+                                }
+                                if (object.brandExclusion) {
+                                    if (!Array.isArray(object.brandExclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.brandExclusion: array expected");
+                                    message.brandExclusion = [];
+                                    for (var i = 0; i < object.brandExclusion.length; ++i)
+                                        message.brandExclusion[i] = String(object.brandExclusion[i]);
+                                }
+                                if (object.itemGroupIdExclusion) {
+                                    if (!Array.isArray(object.itemGroupIdExclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.itemGroupIdExclusion: array expected");
+                                    message.itemGroupIdExclusion = [];
+                                    for (var i = 0; i < object.itemGroupIdExclusion.length; ++i)
+                                        message.itemGroupIdExclusion[i] = String(object.itemGroupIdExclusion[i]);
+                                }
+                                if (object.productTypeExclusion) {
+                                    if (!Array.isArray(object.productTypeExclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.productTypeExclusion: array expected");
+                                    message.productTypeExclusion = [];
+                                    for (var i = 0; i < object.productTypeExclusion.length; ++i)
+                                        message.productTypeExclusion[i] = String(object.productTypeExclusion[i]);
+                                }
+                                if (object.minimumPurchaseAmount != null) {
+                                    if (typeof object.minimumPurchaseAmount !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.minimumPurchaseAmount: object expected");
+                                    message.minimumPurchaseAmount = $root.google.shopping.type.Price.fromObject(object.minimumPurchaseAmount);
+                                }
+                                if (object.minimumPurchaseQuantity != null)
+                                    if ($util.Long)
+                                        (message.minimumPurchaseQuantity = $util.Long.fromValue(object.minimumPurchaseQuantity)).unsigned = false;
+                                    else if (typeof object.minimumPurchaseQuantity === "string")
+                                        message.minimumPurchaseQuantity = parseInt(object.minimumPurchaseQuantity, 10);
+                                    else if (typeof object.minimumPurchaseQuantity === "number")
+                                        message.minimumPurchaseQuantity = object.minimumPurchaseQuantity;
+                                    else if (typeof object.minimumPurchaseQuantity === "object")
+                                        message.minimumPurchaseQuantity = new $util.LongBits(object.minimumPurchaseQuantity.low >>> 0, object.minimumPurchaseQuantity.high >>> 0).toNumber();
+                                if (object.limitQuantity != null)
+                                    if ($util.Long)
+                                        (message.limitQuantity = $util.Long.fromValue(object.limitQuantity)).unsigned = false;
+                                    else if (typeof object.limitQuantity === "string")
+                                        message.limitQuantity = parseInt(object.limitQuantity, 10);
+                                    else if (typeof object.limitQuantity === "number")
+                                        message.limitQuantity = object.limitQuantity;
+                                    else if (typeof object.limitQuantity === "object")
+                                        message.limitQuantity = new $util.LongBits(object.limitQuantity.low >>> 0, object.limitQuantity.high >>> 0).toNumber();
+                                if (object.limitValue != null) {
+                                    if (typeof object.limitValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.limitValue: object expected");
+                                    message.limitValue = $root.google.shopping.type.Price.fromObject(object.limitValue);
+                                }
+                                if (object.percentOff != null)
+                                    if ($util.Long)
+                                        (message.percentOff = $util.Long.fromValue(object.percentOff)).unsigned = false;
+                                    else if (typeof object.percentOff === "string")
+                                        message.percentOff = parseInt(object.percentOff, 10);
+                                    else if (typeof object.percentOff === "number")
+                                        message.percentOff = object.percentOff;
+                                    else if (typeof object.percentOff === "object")
+                                        message.percentOff = new $util.LongBits(object.percentOff.low >>> 0, object.percentOff.high >>> 0).toNumber();
+                                if (object.moneyOffAmount != null) {
+                                    if (typeof object.moneyOffAmount !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.moneyOffAmount: object expected");
+                                    message.moneyOffAmount = $root.google.shopping.type.Price.fromObject(object.moneyOffAmount);
+                                }
+                                if (object.getThisQuantityDiscounted != null)
+                                    if ($util.Long)
+                                        (message.getThisQuantityDiscounted = $util.Long.fromValue(object.getThisQuantityDiscounted)).unsigned = false;
+                                    else if (typeof object.getThisQuantityDiscounted === "string")
+                                        message.getThisQuantityDiscounted = parseInt(object.getThisQuantityDiscounted, 10);
+                                    else if (typeof object.getThisQuantityDiscounted === "number")
+                                        message.getThisQuantityDiscounted = object.getThisQuantityDiscounted;
+                                    else if (typeof object.getThisQuantityDiscounted === "object")
+                                        message.getThisQuantityDiscounted = new $util.LongBits(object.getThisQuantityDiscounted.low >>> 0, object.getThisQuantityDiscounted.high >>> 0).toNumber();
+                                if (object.freeGiftValue != null) {
+                                    if (typeof object.freeGiftValue !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.freeGiftValue: object expected");
+                                    message.freeGiftValue = $root.google.shopping.type.Price.fromObject(object.freeGiftValue);
+                                }
+                                if (object.freeGiftDescription != null)
+                                    message.freeGiftDescription = String(object.freeGiftDescription);
+                                if (object.freeGiftItemId != null)
+                                    message.freeGiftItemId = String(object.freeGiftItemId);
+                                if (object.promotionEffectiveTimePeriod != null) {
+                                    if (typeof object.promotionEffectiveTimePeriod !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.promotionEffectiveTimePeriod: object expected");
+                                    message.promotionEffectiveTimePeriod = $root.google.type.Interval.fromObject(object.promotionEffectiveTimePeriod);
+                                }
+                                if (object.promotionDisplayTimePeriod != null) {
+                                    if (typeof object.promotionDisplayTimePeriod !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.promotionDisplayTimePeriod: object expected");
+                                    message.promotionDisplayTimePeriod = $root.google.type.Interval.fromObject(object.promotionDisplayTimePeriod);
+                                }
+                                switch (object.storeApplicability) {
+                                default:
+                                    if (typeof object.storeApplicability === "number") {
+                                        message.storeApplicability = object.storeApplicability;
+                                        break;
+                                    }
+                                    break;
+                                case "STORE_APPLICABILITY_UNSPECIFIED":
+                                case 0:
+                                    message.storeApplicability = 0;
+                                    break;
+                                case "ALL_STORES":
+                                case 1:
+                                    message.storeApplicability = 1;
+                                    break;
+                                case "SPECIFIC_STORES":
+                                case 2:
+                                    message.storeApplicability = 2;
+                                    break;
+                                }
+                                if (object.storeCodesInclusion) {
+                                    if (!Array.isArray(object.storeCodesInclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.storeCodesInclusion: array expected");
+                                    message.storeCodesInclusion = [];
+                                    for (var i = 0; i < object.storeCodesInclusion.length; ++i)
+                                        message.storeCodesInclusion[i] = String(object.storeCodesInclusion[i]);
+                                }
+                                if (object.storeCodesExclusion) {
+                                    if (!Array.isArray(object.storeCodesExclusion))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.Attributes.storeCodesExclusion: array expected");
+                                    message.storeCodesExclusion = [];
+                                    for (var i = 0; i < object.storeCodesExclusion.length; ++i)
+                                        message.storeCodesExclusion[i] = String(object.storeCodesExclusion[i]);
+                                }
+                                if (object.promotionUrl != null)
+                                    message.promotionUrl = String(object.promotionUrl);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Attributes message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.Attributes} message Attributes
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Attributes.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.promotionDestinations = [];
+                                    object.itemIdInclusion = [];
+                                    object.brandInclusion = [];
+                                    object.itemGroupIdInclusion = [];
+                                    object.productTypeInclusion = [];
+                                    object.itemIdExclusion = [];
+                                    object.brandExclusion = [];
+                                    object.itemGroupIdExclusion = [];
+                                    object.productTypeExclusion = [];
+                                    object.storeCodesInclusion = [];
+                                    object.storeCodesExclusion = [];
+                                }
+                                if (options.defaults) {
+                                    object.productApplicability = options.enums === String ? "PRODUCT_APPLICABILITY_UNSPECIFIED" : 0;
+                                    object.offerType = options.enums === String ? "OFFER_TYPE_UNSPECIFIED" : 0;
+                                    object.genericRedemptionCode = "";
+                                    object.longTitle = "";
+                                    object.couponValueType = options.enums === String ? "COUPON_VALUE_TYPE_UNSPECIFIED" : 0;
+                                    object.minimumPurchaseAmount = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.minimumPurchaseQuantity = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.minimumPurchaseQuantity = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.limitQuantity = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.limitQuantity = options.longs === String ? "0" : 0;
+                                    object.limitValue = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.percentOff = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.percentOff = options.longs === String ? "0" : 0;
+                                    object.moneyOffAmount = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.getThisQuantityDiscounted = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.getThisQuantityDiscounted = options.longs === String ? "0" : 0;
+                                    object.freeGiftValue = null;
+                                    object.freeGiftDescription = "";
+                                    object.freeGiftItemId = "";
+                                    object.promotionEffectiveTimePeriod = null;
+                                    object.promotionDisplayTimePeriod = null;
+                                    object.storeApplicability = options.enums === String ? "STORE_APPLICABILITY_UNSPECIFIED" : 0;
+                                    object.promotionUrl = "";
+                                }
+                                if (message.productApplicability != null && message.hasOwnProperty("productApplicability"))
+                                    object.productApplicability = options.enums === String ? $root.google.shopping.merchant.promotions.v1.ProductApplicability[message.productApplicability] === undefined ? message.productApplicability : $root.google.shopping.merchant.promotions.v1.ProductApplicability[message.productApplicability] : message.productApplicability;
+                                if (message.offerType != null && message.hasOwnProperty("offerType"))
+                                    object.offerType = options.enums === String ? $root.google.shopping.merchant.promotions.v1.OfferType[message.offerType] === undefined ? message.offerType : $root.google.shopping.merchant.promotions.v1.OfferType[message.offerType] : message.offerType;
+                                if (message.genericRedemptionCode != null && message.hasOwnProperty("genericRedemptionCode"))
+                                    object.genericRedemptionCode = message.genericRedemptionCode;
+                                if (message.longTitle != null && message.hasOwnProperty("longTitle"))
+                                    object.longTitle = message.longTitle;
+                                if (message.couponValueType != null && message.hasOwnProperty("couponValueType"))
+                                    object.couponValueType = options.enums === String ? $root.google.shopping.merchant.promotions.v1.CouponValueType[message.couponValueType] === undefined ? message.couponValueType : $root.google.shopping.merchant.promotions.v1.CouponValueType[message.couponValueType] : message.couponValueType;
+                                if (message.promotionDestinations && message.promotionDestinations.length) {
+                                    object.promotionDestinations = [];
+                                    for (var j = 0; j < message.promotionDestinations.length; ++j)
+                                        object.promotionDestinations[j] = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.promotionDestinations[j]] === undefined ? message.promotionDestinations[j] : $root.google.shopping.type.Destination.DestinationEnum[message.promotionDestinations[j]] : message.promotionDestinations[j];
+                                }
+                                if (message.itemIdInclusion && message.itemIdInclusion.length) {
+                                    object.itemIdInclusion = [];
+                                    for (var j = 0; j < message.itemIdInclusion.length; ++j)
+                                        object.itemIdInclusion[j] = message.itemIdInclusion[j];
+                                }
+                                if (message.brandInclusion && message.brandInclusion.length) {
+                                    object.brandInclusion = [];
+                                    for (var j = 0; j < message.brandInclusion.length; ++j)
+                                        object.brandInclusion[j] = message.brandInclusion[j];
+                                }
+                                if (message.itemGroupIdInclusion && message.itemGroupIdInclusion.length) {
+                                    object.itemGroupIdInclusion = [];
+                                    for (var j = 0; j < message.itemGroupIdInclusion.length; ++j)
+                                        object.itemGroupIdInclusion[j] = message.itemGroupIdInclusion[j];
+                                }
+                                if (message.productTypeInclusion && message.productTypeInclusion.length) {
+                                    object.productTypeInclusion = [];
+                                    for (var j = 0; j < message.productTypeInclusion.length; ++j)
+                                        object.productTypeInclusion[j] = message.productTypeInclusion[j];
+                                }
+                                if (message.itemIdExclusion && message.itemIdExclusion.length) {
+                                    object.itemIdExclusion = [];
+                                    for (var j = 0; j < message.itemIdExclusion.length; ++j)
+                                        object.itemIdExclusion[j] = message.itemIdExclusion[j];
+                                }
+                                if (message.brandExclusion && message.brandExclusion.length) {
+                                    object.brandExclusion = [];
+                                    for (var j = 0; j < message.brandExclusion.length; ++j)
+                                        object.brandExclusion[j] = message.brandExclusion[j];
+                                }
+                                if (message.itemGroupIdExclusion && message.itemGroupIdExclusion.length) {
+                                    object.itemGroupIdExclusion = [];
+                                    for (var j = 0; j < message.itemGroupIdExclusion.length; ++j)
+                                        object.itemGroupIdExclusion[j] = message.itemGroupIdExclusion[j];
+                                }
+                                if (message.productTypeExclusion && message.productTypeExclusion.length) {
+                                    object.productTypeExclusion = [];
+                                    for (var j = 0; j < message.productTypeExclusion.length; ++j)
+                                        object.productTypeExclusion[j] = message.productTypeExclusion[j];
+                                }
+                                if (message.minimumPurchaseAmount != null && message.hasOwnProperty("minimumPurchaseAmount"))
+                                    object.minimumPurchaseAmount = $root.google.shopping.type.Price.toObject(message.minimumPurchaseAmount, options);
+                                if (message.minimumPurchaseQuantity != null && message.hasOwnProperty("minimumPurchaseQuantity"))
+                                    if (typeof message.minimumPurchaseQuantity === "number")
+                                        object.minimumPurchaseQuantity = options.longs === String ? String(message.minimumPurchaseQuantity) : message.minimumPurchaseQuantity;
+                                    else
+                                        object.minimumPurchaseQuantity = options.longs === String ? $util.Long.prototype.toString.call(message.minimumPurchaseQuantity) : options.longs === Number ? new $util.LongBits(message.minimumPurchaseQuantity.low >>> 0, message.minimumPurchaseQuantity.high >>> 0).toNumber() : message.minimumPurchaseQuantity;
+                                if (message.limitQuantity != null && message.hasOwnProperty("limitQuantity"))
+                                    if (typeof message.limitQuantity === "number")
+                                        object.limitQuantity = options.longs === String ? String(message.limitQuantity) : message.limitQuantity;
+                                    else
+                                        object.limitQuantity = options.longs === String ? $util.Long.prototype.toString.call(message.limitQuantity) : options.longs === Number ? new $util.LongBits(message.limitQuantity.low >>> 0, message.limitQuantity.high >>> 0).toNumber() : message.limitQuantity;
+                                if (message.limitValue != null && message.hasOwnProperty("limitValue"))
+                                    object.limitValue = $root.google.shopping.type.Price.toObject(message.limitValue, options);
+                                if (message.percentOff != null && message.hasOwnProperty("percentOff"))
+                                    if (typeof message.percentOff === "number")
+                                        object.percentOff = options.longs === String ? String(message.percentOff) : message.percentOff;
+                                    else
+                                        object.percentOff = options.longs === String ? $util.Long.prototype.toString.call(message.percentOff) : options.longs === Number ? new $util.LongBits(message.percentOff.low >>> 0, message.percentOff.high >>> 0).toNumber() : message.percentOff;
+                                if (message.moneyOffAmount != null && message.hasOwnProperty("moneyOffAmount"))
+                                    object.moneyOffAmount = $root.google.shopping.type.Price.toObject(message.moneyOffAmount, options);
+                                if (message.getThisQuantityDiscounted != null && message.hasOwnProperty("getThisQuantityDiscounted"))
+                                    if (typeof message.getThisQuantityDiscounted === "number")
+                                        object.getThisQuantityDiscounted = options.longs === String ? String(message.getThisQuantityDiscounted) : message.getThisQuantityDiscounted;
+                                    else
+                                        object.getThisQuantityDiscounted = options.longs === String ? $util.Long.prototype.toString.call(message.getThisQuantityDiscounted) : options.longs === Number ? new $util.LongBits(message.getThisQuantityDiscounted.low >>> 0, message.getThisQuantityDiscounted.high >>> 0).toNumber() : message.getThisQuantityDiscounted;
+                                if (message.freeGiftValue != null && message.hasOwnProperty("freeGiftValue"))
+                                    object.freeGiftValue = $root.google.shopping.type.Price.toObject(message.freeGiftValue, options);
+                                if (message.freeGiftDescription != null && message.hasOwnProperty("freeGiftDescription"))
+                                    object.freeGiftDescription = message.freeGiftDescription;
+                                if (message.freeGiftItemId != null && message.hasOwnProperty("freeGiftItemId"))
+                                    object.freeGiftItemId = message.freeGiftItemId;
+                                if (message.promotionEffectiveTimePeriod != null && message.hasOwnProperty("promotionEffectiveTimePeriod"))
+                                    object.promotionEffectiveTimePeriod = $root.google.type.Interval.toObject(message.promotionEffectiveTimePeriod, options);
+                                if (message.promotionDisplayTimePeriod != null && message.hasOwnProperty("promotionDisplayTimePeriod"))
+                                    object.promotionDisplayTimePeriod = $root.google.type.Interval.toObject(message.promotionDisplayTimePeriod, options);
+                                if (message.storeApplicability != null && message.hasOwnProperty("storeApplicability"))
+                                    object.storeApplicability = options.enums === String ? $root.google.shopping.merchant.promotions.v1.StoreApplicability[message.storeApplicability] === undefined ? message.storeApplicability : $root.google.shopping.merchant.promotions.v1.StoreApplicability[message.storeApplicability] : message.storeApplicability;
+                                if (message.storeCodesInclusion && message.storeCodesInclusion.length) {
+                                    object.storeCodesInclusion = [];
+                                    for (var j = 0; j < message.storeCodesInclusion.length; ++j)
+                                        object.storeCodesInclusion[j] = message.storeCodesInclusion[j];
+                                }
+                                if (message.storeCodesExclusion && message.storeCodesExclusion.length) {
+                                    object.storeCodesExclusion = [];
+                                    for (var j = 0; j < message.storeCodesExclusion.length; ++j)
+                                        object.storeCodesExclusion[j] = message.storeCodesExclusion[j];
+                                }
+                                if (message.promotionUrl != null && message.hasOwnProperty("promotionUrl"))
+                                    object.promotionUrl = message.promotionUrl;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Attributes to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Attributes.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Attributes
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.Attributes
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Attributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.Attributes";
+                            };
+    
+                            return Attributes;
+                        })();
+    
+                        v1.PromotionStatus = (function() {
+    
+                            /**
+                             * Properties of a PromotionStatus.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @interface IPromotionStatus
+                             * @property {Array.<google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus>|null} [destinationStatuses] PromotionStatus destinationStatuses
+                             * @property {Array.<google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue>|null} [itemLevelIssues] PromotionStatus itemLevelIssues
+                             * @property {google.protobuf.ITimestamp|null} [creationDate] PromotionStatus creationDate
+                             * @property {google.protobuf.ITimestamp|null} [lastUpdateDate] PromotionStatus lastUpdateDate
+                             */
+    
+                            /**
+                             * Constructs a new PromotionStatus.
+                             * @memberof google.shopping.merchant.promotions.v1
+                             * @classdesc Represents a PromotionStatus.
+                             * @implements IPromotionStatus
+                             * @constructor
+                             * @param {google.shopping.merchant.promotions.v1.IPromotionStatus=} [properties] Properties to set
+                             */
+                            function PromotionStatus(properties) {
+                                this.destinationStatuses = [];
+                                this.itemLevelIssues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PromotionStatus destinationStatuses.
+                             * @member {Array.<google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus>} destinationStatuses
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @instance
+                             */
+                            PromotionStatus.prototype.destinationStatuses = $util.emptyArray;
+    
+                            /**
+                             * PromotionStatus itemLevelIssues.
+                             * @member {Array.<google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue>} itemLevelIssues
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @instance
+                             */
+                            PromotionStatus.prototype.itemLevelIssues = $util.emptyArray;
+    
+                            /**
+                             * PromotionStatus creationDate.
+                             * @member {google.protobuf.ITimestamp|null|undefined} creationDate
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @instance
+                             */
+                            PromotionStatus.prototype.creationDate = null;
+    
+                            /**
+                             * PromotionStatus lastUpdateDate.
+                             * @member {google.protobuf.ITimestamp|null|undefined} lastUpdateDate
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @instance
+                             */
+                            PromotionStatus.prototype.lastUpdateDate = null;
+    
+                            /**
+                             * Creates a new PromotionStatus instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotionStatus=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.promotions.v1.PromotionStatus} PromotionStatus instance
+                             */
+                            PromotionStatus.create = function create(properties) {
+                                return new PromotionStatus(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PromotionStatus message. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotionStatus} message PromotionStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PromotionStatus.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.destinationStatuses != null && message.destinationStatuses.length)
+                                    for (var i = 0; i < message.destinationStatuses.length; ++i)
+                                        $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.encode(message.destinationStatuses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.itemLevelIssues != null && message.itemLevelIssues.length)
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i)
+                                        $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.encode(message.itemLevelIssues[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.creationDate != null && Object.hasOwnProperty.call(message, "creationDate"))
+                                    $root.google.protobuf.Timestamp.encode(message.creationDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.lastUpdateDate != null && Object.hasOwnProperty.call(message, "lastUpdateDate"))
+                                    $root.google.protobuf.Timestamp.encode(message.lastUpdateDate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PromotionStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.IPromotionStatus} message PromotionStatus message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PromotionStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PromotionStatus message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.promotions.v1.PromotionStatus} PromotionStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PromotionStatus.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.destinationStatuses && message.destinationStatuses.length))
+                                                message.destinationStatuses = [];
+                                            message.destinationStatuses.push($root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.itemLevelIssues && message.itemLevelIssues.length))
+                                                message.itemLevelIssues = [];
+                                            message.itemLevelIssues.push($root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.creationDate = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.lastUpdateDate = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PromotionStatus message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.promotions.v1.PromotionStatus} PromotionStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PromotionStatus.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PromotionStatus message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PromotionStatus.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.destinationStatuses != null && message.hasOwnProperty("destinationStatuses")) {
+                                    if (!Array.isArray(message.destinationStatuses))
+                                        return "destinationStatuses: array expected";
+                                    for (var i = 0; i < message.destinationStatuses.length; ++i) {
+                                        var error = $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.verify(message.destinationStatuses[i]);
+                                        if (error)
+                                            return "destinationStatuses." + error;
+                                    }
+                                }
+                                if (message.itemLevelIssues != null && message.hasOwnProperty("itemLevelIssues")) {
+                                    if (!Array.isArray(message.itemLevelIssues))
+                                        return "itemLevelIssues: array expected";
+                                    for (var i = 0; i < message.itemLevelIssues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.verify(message.itemLevelIssues[i]);
+                                        if (error)
+                                            return "itemLevelIssues." + error;
+                                    }
+                                }
+                                if (message.creationDate != null && message.hasOwnProperty("creationDate")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.creationDate);
+                                    if (error)
+                                        return "creationDate." + error;
+                                }
+                                if (message.lastUpdateDate != null && message.hasOwnProperty("lastUpdateDate")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.lastUpdateDate);
+                                    if (error)
+                                        return "lastUpdateDate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PromotionStatus message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.promotions.v1.PromotionStatus} PromotionStatus
+                             */
+                            PromotionStatus.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.promotions.v1.PromotionStatus)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus();
+                                if (object.destinationStatuses) {
+                                    if (!Array.isArray(object.destinationStatuses))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.destinationStatuses: array expected");
+                                    message.destinationStatuses = [];
+                                    for (var i = 0; i < object.destinationStatuses.length; ++i) {
+                                        if (typeof object.destinationStatuses[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.destinationStatuses: object expected");
+                                        message.destinationStatuses[i] = $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.fromObject(object.destinationStatuses[i]);
+                                    }
+                                }
+                                if (object.itemLevelIssues) {
+                                    if (!Array.isArray(object.itemLevelIssues))
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.itemLevelIssues: array expected");
+                                    message.itemLevelIssues = [];
+                                    for (var i = 0; i < object.itemLevelIssues.length; ++i) {
+                                        if (typeof object.itemLevelIssues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.itemLevelIssues: object expected");
+                                        message.itemLevelIssues[i] = $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.fromObject(object.itemLevelIssues[i]);
+                                    }
+                                }
+                                if (object.creationDate != null) {
+                                    if (typeof object.creationDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.creationDate: object expected");
+                                    message.creationDate = $root.google.protobuf.Timestamp.fromObject(object.creationDate);
+                                }
+                                if (object.lastUpdateDate != null) {
+                                    if (typeof object.lastUpdateDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.lastUpdateDate: object expected");
+                                    message.lastUpdateDate = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateDate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PromotionStatus message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {google.shopping.merchant.promotions.v1.PromotionStatus} message PromotionStatus
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PromotionStatus.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.destinationStatuses = [];
+                                    object.itemLevelIssues = [];
+                                }
+                                if (options.defaults) {
+                                    object.creationDate = null;
+                                    object.lastUpdateDate = null;
+                                }
+                                if (message.destinationStatuses && message.destinationStatuses.length) {
+                                    object.destinationStatuses = [];
+                                    for (var j = 0; j < message.destinationStatuses.length; ++j)
+                                        object.destinationStatuses[j] = $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.toObject(message.destinationStatuses[j], options);
+                                }
+                                if (message.itemLevelIssues && message.itemLevelIssues.length) {
+                                    object.itemLevelIssues = [];
+                                    for (var j = 0; j < message.itemLevelIssues.length; ++j)
+                                        object.itemLevelIssues[j] = $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.toObject(message.itemLevelIssues[j], options);
+                                }
+                                if (message.creationDate != null && message.hasOwnProperty("creationDate"))
+                                    object.creationDate = $root.google.protobuf.Timestamp.toObject(message.creationDate, options);
+                                if (message.lastUpdateDate != null && message.hasOwnProperty("lastUpdateDate"))
+                                    object.lastUpdateDate = $root.google.protobuf.Timestamp.toObject(message.lastUpdateDate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PromotionStatus to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PromotionStatus.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PromotionStatus
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PromotionStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.PromotionStatus";
+                            };
+    
+                            PromotionStatus.DestinationStatus = (function() {
+    
+                                /**
+                                 * Properties of a DestinationStatus.
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                                 * @interface IDestinationStatus
+                                 * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] DestinationStatus reportingContext
+                                 * @property {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.State|null} [status] DestinationStatus status
+                                 */
+    
+                                /**
+                                 * Constructs a new DestinationStatus.
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                                 * @classdesc Represents a DestinationStatus.
+                                 * @implements IDestinationStatus
+                                 * @constructor
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus=} [properties] Properties to set
+                                 */
+                                function DestinationStatus(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DestinationStatus reportingContext.
+                                 * @member {google.shopping.type.ReportingContext.ReportingContextEnum} reportingContext
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @instance
+                                 */
+                                DestinationStatus.prototype.reportingContext = 0;
+    
+                                /**
+                                 * DestinationStatus status.
+                                 * @member {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.State} status
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @instance
+                                 */
+                                DestinationStatus.prototype.status = 0;
+    
+                                /**
+                                 * Creates a new DestinationStatus instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus} DestinationStatus instance
+                                 */
+                                DestinationStatus.create = function create(properties) {
+                                    return new DestinationStatus(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DestinationStatus message. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus} message DestinationStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DestinationStatus.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reportingContext);
+                                    if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.status);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DestinationStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IDestinationStatus} message DestinationStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DestinationStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DestinationStatus message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus} DestinationStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DestinationStatus.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.reportingContext = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.status = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DestinationStatus message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus} DestinationStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DestinationStatus.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DestinationStatus message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DestinationStatus.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                        switch (message.reportingContext) {
+                                        default:
+                                            return "reportingContext: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 13:
+                                        case 14:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                            break;
+                                        }
+                                    if (message.status != null && message.hasOwnProperty("status"))
+                                        switch (message.status) {
+                                        default:
+                                            return "status: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DestinationStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus} DestinationStatus
+                                 */
+                                DestinationStatus.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus();
+                                    switch (object.reportingContext) {
+                                    default:
+                                        if (typeof object.reportingContext === "number") {
+                                            message.reportingContext = object.reportingContext;
+                                            break;
+                                        }
+                                        break;
+                                    case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                    case 0:
+                                        message.reportingContext = 0;
+                                        break;
+                                    case "SHOPPING_ADS":
+                                    case 1:
+                                        message.reportingContext = 1;
+                                        break;
+                                    case "DISCOVERY_ADS":
+                                    case 2:
+                                        message.reportingContext = 2;
+                                        break;
+                                    case "DEMAND_GEN_ADS":
+                                    case 13:
+                                        message.reportingContext = 13;
+                                        break;
+                                    case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                    case 14:
+                                        message.reportingContext = 14;
+                                        break;
+                                    case "VIDEO_ADS":
+                                    case 3:
+                                        message.reportingContext = 3;
+                                        break;
+                                    case "DISPLAY_ADS":
+                                    case 4:
+                                        message.reportingContext = 4;
+                                        break;
+                                    case "LOCAL_INVENTORY_ADS":
+                                    case 5:
+                                        message.reportingContext = 5;
+                                        break;
+                                    case "VEHICLE_INVENTORY_ADS":
+                                    case 6:
+                                        message.reportingContext = 6;
+                                        break;
+                                    case "FREE_LISTINGS":
+                                    case 7:
+                                        message.reportingContext = 7;
+                                        break;
+                                    case "FREE_LOCAL_LISTINGS":
+                                    case 8:
+                                        message.reportingContext = 8;
+                                        break;
+                                    case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_SHOPPING":
+                                    case 10:
+                                        message.reportingContext = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.reportingContext = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.reportingContext = 12;
+                                        break;
+                                    }
+                                    switch (object.status) {
+                                    default:
+                                        if (typeof object.status === "number") {
+                                            message.status = object.status;
+                                            break;
+                                        }
+                                        break;
+                                    case "STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.status = 0;
+                                        break;
+                                    case "IN_REVIEW":
+                                    case 1:
+                                        message.status = 1;
+                                        break;
+                                    case "REJECTED":
+                                    case 2:
+                                        message.status = 2;
+                                        break;
+                                    case "LIVE":
+                                    case 3:
+                                        message.status = 3;
+                                        break;
+                                    case "STOPPED":
+                                    case 4:
+                                        message.status = 4;
+                                        break;
+                                    case "EXPIRED":
+                                    case 5:
+                                        message.status = 5;
+                                        break;
+                                    case "PENDING":
+                                    case 6:
+                                        message.status = 6;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DestinationStatus message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus} message DestinationStatus
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DestinationStatus.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.reportingContext = options.enums === String ? "REPORTING_CONTEXT_ENUM_UNSPECIFIED" : 0;
+                                        object.status = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                        object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                    if (message.status != null && message.hasOwnProperty("status"))
+                                        object.status = options.enums === String ? $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.State[message.status] === undefined ? message.status : $root.google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.State[message.status] : message.status;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DestinationStatus to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DestinationStatus.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DestinationStatus
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DestinationStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus";
+                                };
+    
+                                /**
+                                 * State enum.
+                                 * @name google.shopping.merchant.promotions.v1.PromotionStatus.DestinationStatus.State
+                                 * @enum {number}
+                                 * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                                 * @property {number} IN_REVIEW=1 IN_REVIEW value
+                                 * @property {number} REJECTED=2 REJECTED value
+                                 * @property {number} LIVE=3 LIVE value
+                                 * @property {number} STOPPED=4 STOPPED value
+                                 * @property {number} EXPIRED=5 EXPIRED value
+                                 * @property {number} PENDING=6 PENDING value
+                                 */
+                                DestinationStatus.State = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "IN_REVIEW"] = 1;
+                                    values[valuesById[2] = "REJECTED"] = 2;
+                                    values[valuesById[3] = "LIVE"] = 3;
+                                    values[valuesById[4] = "STOPPED"] = 4;
+                                    values[valuesById[5] = "EXPIRED"] = 5;
+                                    values[valuesById[6] = "PENDING"] = 6;
+                                    return values;
+                                })();
+    
+                                return DestinationStatus;
+                            })();
+    
+                            PromotionStatus.ItemLevelIssue = (function() {
+    
+                                /**
+                                 * Properties of an ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                                 * @interface IItemLevelIssue
+                                 * @property {string|null} [code] ItemLevelIssue code
+                                 * @property {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.Severity|null} [severity] ItemLevelIssue severity
+                                 * @property {string|null} [resolution] ItemLevelIssue resolution
+                                 * @property {string|null} [attribute] ItemLevelIssue attribute
+                                 * @property {google.shopping.type.ReportingContext.ReportingContextEnum|null} [reportingContext] ItemLevelIssue reportingContext
+                                 * @property {string|null} [description] ItemLevelIssue description
+                                 * @property {string|null} [detail] ItemLevelIssue detail
+                                 * @property {string|null} [documentation] ItemLevelIssue documentation
+                                 * @property {Array.<string>|null} [applicableCountries] ItemLevelIssue applicableCountries
+                                 */
+    
+                                /**
+                                 * Constructs a new ItemLevelIssue.
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus
+                                 * @classdesc Represents an ItemLevelIssue.
+                                 * @implements IItemLevelIssue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue=} [properties] Properties to set
+                                 */
+                                function ItemLevelIssue(properties) {
+                                    this.applicableCountries = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ItemLevelIssue code.
+                                 * @member {string} code
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.code = "";
+    
+                                /**
+                                 * ItemLevelIssue severity.
+                                 * @member {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.Severity} severity
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.severity = 0;
+    
+                                /**
+                                 * ItemLevelIssue resolution.
+                                 * @member {string} resolution
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.resolution = "";
+    
+                                /**
+                                 * ItemLevelIssue attribute.
+                                 * @member {string} attribute
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.attribute = "";
+    
+                                /**
+                                 * ItemLevelIssue reportingContext.
+                                 * @member {google.shopping.type.ReportingContext.ReportingContextEnum} reportingContext
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.reportingContext = 0;
+    
+                                /**
+                                 * ItemLevelIssue description.
+                                 * @member {string} description
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.description = "";
+    
+                                /**
+                                 * ItemLevelIssue detail.
+                                 * @member {string} detail
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.detail = "";
+    
+                                /**
+                                 * ItemLevelIssue documentation.
+                                 * @member {string} documentation
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.documentation = "";
+    
+                                /**
+                                 * ItemLevelIssue applicableCountries.
+                                 * @member {Array.<string>} applicableCountries
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 */
+                                ItemLevelIssue.prototype.applicableCountries = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new ItemLevelIssue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue} ItemLevelIssue instance
+                                 */
+                                ItemLevelIssue.create = function create(properties) {
+                                    return new ItemLevelIssue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.severity);
+                                    if (message.resolution != null && Object.hasOwnProperty.call(message, "resolution"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.resolution);
+                                    if (message.attribute != null && Object.hasOwnProperty.call(message, "attribute"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.attribute);
+                                    if (message.reportingContext != null && Object.hasOwnProperty.call(message, "reportingContext"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.reportingContext);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                                    if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.detail);
+                                    if (message.documentation != null && Object.hasOwnProperty.call(message, "documentation"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.documentation);
+                                    if (message.applicableCountries != null && message.applicableCountries.length)
+                                        for (var i = 0; i < message.applicableCountries.length; ++i)
+                                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.applicableCountries[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemLevelIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.IItemLevelIssue} message ItemLevelIssue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemLevelIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.code = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.severity = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.resolution = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.attribute = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.reportingContext = reader.int32();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.detail = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.documentation = reader.string();
+                                                break;
+                                            }
+                                        case 9: {
+                                                if (!(message.applicableCountries && message.applicableCountries.length))
+                                                    message.applicableCountries = [];
+                                                message.applicableCountries.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ItemLevelIssue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue} ItemLevelIssue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemLevelIssue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ItemLevelIssue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ItemLevelIssue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        if (!$util.isString(message.code))
+                                            return "code: string expected";
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        switch (message.severity) {
+                                        default:
+                                            return "severity: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        if (!$util.isString(message.resolution))
+                                            return "resolution: string expected";
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        if (!$util.isString(message.attribute))
+                                            return "attribute: string expected";
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                        switch (message.reportingContext) {
+                                        default:
+                                            return "reportingContext: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 13:
+                                        case 14:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                            break;
+                                        }
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        if (!$util.isString(message.detail))
+                                            return "detail: string expected";
+                                    if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                        if (!$util.isString(message.documentation))
+                                            return "documentation: string expected";
+                                    if (message.applicableCountries != null && message.hasOwnProperty("applicableCountries")) {
+                                        if (!Array.isArray(message.applicableCountries))
+                                            return "applicableCountries: array expected";
+                                        for (var i = 0; i < message.applicableCountries.length; ++i)
+                                            if (!$util.isString(message.applicableCountries[i]))
+                                                return "applicableCountries: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ItemLevelIssue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue} ItemLevelIssue
+                                 */
+                                ItemLevelIssue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue();
+                                    if (object.code != null)
+                                        message.code = String(object.code);
+                                    switch (object.severity) {
+                                    default:
+                                        if (typeof object.severity === "number") {
+                                            message.severity = object.severity;
+                                            break;
+                                        }
+                                        break;
+                                    case "SEVERITY_UNSPECIFIED":
+                                    case 0:
+                                        message.severity = 0;
+                                        break;
+                                    case "NOT_IMPACTED":
+                                    case 1:
+                                        message.severity = 1;
+                                        break;
+                                    case "DEMOTED":
+                                    case 2:
+                                        message.severity = 2;
+                                        break;
+                                    case "DISAPPROVED":
+                                    case 3:
+                                        message.severity = 3;
+                                        break;
+                                    }
+                                    if (object.resolution != null)
+                                        message.resolution = String(object.resolution);
+                                    if (object.attribute != null)
+                                        message.attribute = String(object.attribute);
+                                    switch (object.reportingContext) {
+                                    default:
+                                        if (typeof object.reportingContext === "number") {
+                                            message.reportingContext = object.reportingContext;
+                                            break;
+                                        }
+                                        break;
+                                    case "REPORTING_CONTEXT_ENUM_UNSPECIFIED":
+                                    case 0:
+                                        message.reportingContext = 0;
+                                        break;
+                                    case "SHOPPING_ADS":
+                                    case 1:
+                                        message.reportingContext = 1;
+                                        break;
+                                    case "DISCOVERY_ADS":
+                                    case 2:
+                                        message.reportingContext = 2;
+                                        break;
+                                    case "DEMAND_GEN_ADS":
+                                    case 13:
+                                        message.reportingContext = 13;
+                                        break;
+                                    case "DEMAND_GEN_ADS_DISCOVER_SURFACE":
+                                    case 14:
+                                        message.reportingContext = 14;
+                                        break;
+                                    case "VIDEO_ADS":
+                                    case 3:
+                                        message.reportingContext = 3;
+                                        break;
+                                    case "DISPLAY_ADS":
+                                    case 4:
+                                        message.reportingContext = 4;
+                                        break;
+                                    case "LOCAL_INVENTORY_ADS":
+                                    case 5:
+                                        message.reportingContext = 5;
+                                        break;
+                                    case "VEHICLE_INVENTORY_ADS":
+                                    case 6:
+                                        message.reportingContext = 6;
+                                        break;
+                                    case "FREE_LISTINGS":
+                                    case 7:
+                                        message.reportingContext = 7;
+                                        break;
+                                    case "FREE_LOCAL_LISTINGS":
+                                    case 8:
+                                        message.reportingContext = 8;
+                                        break;
+                                    case "FREE_LOCAL_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.reportingContext = 9;
+                                        break;
+                                    case "YOUTUBE_SHOPPING":
+                                    case 10:
+                                        message.reportingContext = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.reportingContext = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.reportingContext = 12;
+                                        break;
+                                    }
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.detail != null)
+                                        message.detail = String(object.detail);
+                                    if (object.documentation != null)
+                                        message.documentation = String(object.documentation);
+                                    if (object.applicableCountries) {
+                                        if (!Array.isArray(object.applicableCountries))
+                                            throw TypeError(".google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.applicableCountries: array expected");
+                                        message.applicableCountries = [];
+                                        for (var i = 0; i < object.applicableCountries.length; ++i)
+                                            message.applicableCountries[i] = String(object.applicableCountries[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ItemLevelIssue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue} message ItemLevelIssue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ItemLevelIssue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.applicableCountries = [];
+                                    if (options.defaults) {
+                                        object.code = "";
+                                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                        object.resolution = "";
+                                        object.attribute = "";
+                                        object.reportingContext = options.enums === String ? "REPORTING_CONTEXT_ENUM_UNSPECIFIED" : 0;
+                                        object.description = "";
+                                        object.detail = "";
+                                        object.documentation = "";
+                                    }
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        object.code = message.code;
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        object.severity = options.enums === String ? $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.Severity[message.severity] : message.severity;
+                                    if (message.resolution != null && message.hasOwnProperty("resolution"))
+                                        object.resolution = message.resolution;
+                                    if (message.attribute != null && message.hasOwnProperty("attribute"))
+                                        object.attribute = message.attribute;
+                                    if (message.reportingContext != null && message.hasOwnProperty("reportingContext"))
+                                        object.reportingContext = options.enums === String ? $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] === undefined ? message.reportingContext : $root.google.shopping.type.ReportingContext.ReportingContextEnum[message.reportingContext] : message.reportingContext;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.detail != null && message.hasOwnProperty("detail"))
+                                        object.detail = message.detail;
+                                    if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                        object.documentation = message.documentation;
+                                    if (message.applicableCountries && message.applicableCountries.length) {
+                                        object.applicableCountries = [];
+                                        for (var j = 0; j < message.applicableCountries.length; ++j)
+                                            object.applicableCountries[j] = message.applicableCountries[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ItemLevelIssue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ItemLevelIssue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ItemLevelIssue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ItemLevelIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue";
+                                };
+    
+                                /**
+                                 * Severity enum.
+                                 * @name google.shopping.merchant.promotions.v1.PromotionStatus.ItemLevelIssue.Severity
+                                 * @enum {number}
+                                 * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                                 * @property {number} NOT_IMPACTED=1 NOT_IMPACTED value
+                                 * @property {number} DEMOTED=2 DEMOTED value
+                                 * @property {number} DISAPPROVED=3 DISAPPROVED value
+                                 */
+                                ItemLevelIssue.Severity = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "NOT_IMPACTED"] = 1;
+                                    values[valuesById[2] = "DEMOTED"] = 2;
+                                    values[valuesById[3] = "DISAPPROVED"] = 3;
+                                    return values;
+                                })();
+    
+                                return ItemLevelIssue;
+                            })();
+    
+                            return PromotionStatus;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     promotions.v1beta = (function() {
     
                         /**
@@ -6844,6 +11155,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -6879,6 +11191,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -6910,6 +11230,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -6959,6 +11281,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -7012,6 +11338,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -7054,6 +11385,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -7072,8 +11408,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -7081,6 +11419,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -8903,6 +13243,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -8927,6 +13268,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -8954,6 +13303,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -8992,6 +13343,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -9034,6 +13389,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -9054,6 +13414,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -9070,10 +13435,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -9102,6 +13471,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -9979,6 +14600,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -9990,6 +14612,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -10003,6 +14626,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -10030,6 +14661,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -10060,7 +14694,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -10068,6 +14702,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -10110,6 +14767,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -10130,6 +14795,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -10146,10 +14818,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -10786,6 +15466,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -11773,6 +16698,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -11787,6 +16713,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -11811,6 +16738,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -11833,6 +16761,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -11882,6 +16811,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -12004,6 +16941,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -12074,6 +17014,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -12178,6 +17124,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -12232,6 +17185,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -12283,6 +17237,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -12346,6 +17307,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -12412,6 +17377,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -12468,6 +17434,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -12516,6 +17487,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -12622,6 +17594,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -12673,6 +17653,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -12763,6 +17745,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -12878,6 +17864,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -12977,6 +17972,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -13006,6 +18021,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -13051,6 +18067,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -15095,6 +20113,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -15156,6 +20175,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -15192,6 +20219,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -15252,6 +20281,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -15322,6 +20355,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -15371,6 +20413,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -15395,6 +20457,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -15415,6 +20478,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -17733,6 +22798,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -17854,6 +22920,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -17927,6 +23001,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -18026,6 +23102,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -18162,6 +23242,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -18351,6 +23436,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -18448,6 +23538,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -18480,6 +23571,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -18752,6 +23845,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -18792,6 +23886,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -18890,6 +23988,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -19484,6 +25064,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -19528,6 +25109,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -19565,6 +25154,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -19614,6 +25205,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -19668,6 +25263,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -19701,6 +25301,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -19733,6 +25338,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -19740,6 +25346,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -21179,6 +26787,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -21245,6 +26855,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -21280,6 +26906,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -21338,6 +26968,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -21428,6 +27066,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -21569,6 +27227,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -21592,6 +27298,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -21605,6 +27313,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -21730,6 +27442,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -21916,6 +27841,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -21933,6 +27859,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -21980,6 +27907,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -22032,6 +27963,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -22141,7 +28076,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -22168,12 +28104,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -22199,10 +28143,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -22243,8 +28189,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -22287,6 +28237,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -22299,10 +28250,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -22329,6 +28285,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -22371,10 +28331,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -22393,13 +28358,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -23612,6 +29580,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {
