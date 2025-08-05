@@ -5,7 +5,7 @@
   ],
   "constraintsFiltering": "strict",
   "pinVersions": false,
-  "rebaseStalePrs": true,
+  "rebaseStalePrs": false,
   "schedule": [
     "every Monday"
   ],
