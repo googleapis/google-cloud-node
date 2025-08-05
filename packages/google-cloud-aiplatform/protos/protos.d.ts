@@ -146925,6 +146925,9 @@ export namespace google {
 
                     /** AutoscalingMetricSpec target */
                     target?: (number|null);
+
+                    /** AutoscalingMetricSpec monitoredResourceLabels */
+                    monitoredResourceLabels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an AutoscalingMetricSpec. */
@@ -146941,6 +146944,9 @@ export namespace google {
 
                     /** AutoscalingMetricSpec target. */
                     public target: number;
+
+                    /** AutoscalingMetricSpec monitoredResourceLabels. */
+                    public monitoredResourceLabels: { [k: string]: string };
 
                     /**
                      * Creates a new AutoscalingMetricSpec instance using the specified properties.

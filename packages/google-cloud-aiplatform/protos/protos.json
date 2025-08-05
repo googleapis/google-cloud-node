@@ -39191,6 +39191,14 @@
                         "target": {
                           "type": "int32",
                           "id": 2
+                        },
+                        "monitoredResourceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
