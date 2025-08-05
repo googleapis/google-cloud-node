@@ -5,6 +5,142 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5d8c58311ccb59a339ea278ea0da9cedcc5f706f",
+          "message": "[merchantapi] add datasources API client libraries for v1",
+          "issues": [
+            "6555"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "ca6818b8-8d95-4f0f-b6a6-35c9eeeae257",
+      "createTime": "2025-08-04T23:51:24.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0be6da4a57c05c196d3d63a93d1c833c5e3e786b",
+          "message": "[merchantapi] add conversions API client libraries for v1",
+          "issues": [
+            "6556"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "56ad1757-515e-4f3e-8836-fc391176a899",
+      "createTime": "2025-08-04T23:51:24.438Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dfa37220357f8294ec5e65073ccce4f6a25f62aa",
+          "message": "[merchantapi] add lfp API for v1",
+          "issues": [
+            "6558"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "46927076-d468-4a5c-b086-a0df115199ca",
+      "createTime": "2025-08-04T23:51:24.424Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "92e9a783579873f4c92ec2f643143515dfa16fe7",
+          "message": "[merchantapi] add notifications API client libraries for v1",
+          "issues": [
+            "6554"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "cca3edc0-cbd1-4376-b345-5ea7532423ac",
+      "createTime": "2025-08-04T23:51:24.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "741b41bdeb78e63021a239aa53df21a845eff5e1",
+          "message": "[merchantapi] add quota API for v1",
+          "issues": [
+            "6559"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "93ef1f02-13ce-49f3-8297-3e726c51984c",
+      "createTime": "2025-08-04T23:51:24.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "47de42b1be9f4f6d75d0351629d7bdac4a0d9a31",
+          "message": "[merchantapi] add inventories API client libraries for v1",
+          "issues": [
+            "6553"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "1d5e156e-7d08-4fb3-92a8-c9362625d3b6",
+      "createTime": "2025-08-04T23:51:24.376Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a04a1fc159d93f263b0c496193f178bb8fd1283c",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20250717",
+          "issues": [
+            "6552"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "dcb1a75a-ebaf-4072-b590-e214f7e63c2f",
+      "createTime": "2025-08-04T23:51:24.361Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f814e743ac3da1734af1ae44b091139e12747475",
+          "message": "A new value `NVIDIA_GB200` is added to enum `AcceleratorType`",
+          "issues": [
+            "6557"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d8b45e5d-b5b4-4a2f-ba31-78af4bf27c2c",
+      "createTime": "2025-08-04T23:51:24.346Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "10ef432ef35d71e59f6f2c9e6406cf9103ca1a24",
           "message": "[modelarmor] MultiLanguage Detection in Model Armor Floor Setting",
           "issues": [
@@ -61064,5 +61200,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-04T16:58:23.073Z"
+  "updateTime": "2025-08-04T23:51:24.454Z"
 }

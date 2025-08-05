@@ -26,6 +26,4192 @@ export namespace google {
             /** Namespace issueresolution. */
             namespace issueresolution {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents an AggregateProductStatusesService */
+                    class AggregateProductStatusesService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new AggregateProductStatusesService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new AggregateProductStatusesService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AggregateProductStatusesService;
+
+                        /**
+                         * Calls ListAggregateProductStatuses.
+                         * @param request ListAggregateProductStatusesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAggregateProductStatusesResponse
+                         */
+                        public listAggregateProductStatuses(request: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest, callback: google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService.ListAggregateProductStatusesCallback): void;
+
+                        /**
+                         * Calls ListAggregateProductStatuses.
+                         * @param request ListAggregateProductStatusesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAggregateProductStatuses(request: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest): Promise<google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse>;
+                    }
+
+                    namespace AggregateProductStatusesService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService|listAggregateProductStatuses}.
+                         * @param error Error, if any
+                         * @param [response] ListAggregateProductStatusesResponse
+                         */
+                        type ListAggregateProductStatusesCallback = (error: (Error|null), response?: google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse) => void;
+                    }
+
+                    /** Properties of a ListAggregateProductStatusesRequest. */
+                    interface IListAggregateProductStatusesRequest {
+
+                        /** ListAggregateProductStatusesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAggregateProductStatusesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAggregateProductStatusesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListAggregateProductStatusesRequest filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a ListAggregateProductStatusesRequest. */
+                    class ListAggregateProductStatusesRequest implements IListAggregateProductStatusesRequest {
+
+                        /**
+                         * Constructs a new ListAggregateProductStatusesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest);
+
+                        /** ListAggregateProductStatusesRequest parent. */
+                        public parent: string;
+
+                        /** ListAggregateProductStatusesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAggregateProductStatusesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListAggregateProductStatusesRequest filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new ListAggregateProductStatusesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAggregateProductStatusesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest;
+
+                        /**
+                         * Encodes the specified ListAggregateProductStatusesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest.verify|verify} messages.
+                         * @param message ListAggregateProductStatusesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAggregateProductStatusesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest.verify|verify} messages.
+                         * @param message ListAggregateProductStatusesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAggregateProductStatusesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest;
+
+                        /**
+                         * Decodes a ListAggregateProductStatusesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAggregateProductStatusesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest;
+
+                        /**
+                         * Verifies a ListAggregateProductStatusesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAggregateProductStatusesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAggregateProductStatusesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest;
+
+                        /**
+                         * Creates a plain object from a ListAggregateProductStatusesRequest message. Also converts values to other types if specified.
+                         * @param message ListAggregateProductStatusesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAggregateProductStatusesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAggregateProductStatusesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAggregateProductStatusesResponse. */
+                    interface IListAggregateProductStatusesResponse {
+
+                        /** ListAggregateProductStatusesResponse aggregateProductStatuses */
+                        aggregateProductStatuses?: (google.shopping.merchant.issueresolution.v1.IAggregateProductStatus[]|null);
+
+                        /** ListAggregateProductStatusesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAggregateProductStatusesResponse. */
+                    class ListAggregateProductStatusesResponse implements IListAggregateProductStatusesResponse {
+
+                        /**
+                         * Constructs a new ListAggregateProductStatusesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse);
+
+                        /** ListAggregateProductStatusesResponse aggregateProductStatuses. */
+                        public aggregateProductStatuses: google.shopping.merchant.issueresolution.v1.IAggregateProductStatus[];
+
+                        /** ListAggregateProductStatusesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListAggregateProductStatusesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAggregateProductStatusesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse;
+
+                        /**
+                         * Encodes the specified ListAggregateProductStatusesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.verify|verify} messages.
+                         * @param message ListAggregateProductStatusesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAggregateProductStatusesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse.verify|verify} messages.
+                         * @param message ListAggregateProductStatusesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IListAggregateProductStatusesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAggregateProductStatusesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse;
+
+                        /**
+                         * Decodes a ListAggregateProductStatusesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAggregateProductStatusesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse;
+
+                        /**
+                         * Verifies a ListAggregateProductStatusesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAggregateProductStatusesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAggregateProductStatusesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse;
+
+                        /**
+                         * Creates a plain object from a ListAggregateProductStatusesResponse message. Also converts values to other types if specified.
+                         * @param message ListAggregateProductStatusesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.ListAggregateProductStatusesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAggregateProductStatusesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAggregateProductStatusesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AggregateProductStatus. */
+                    interface IAggregateProductStatus {
+
+                        /** AggregateProductStatus name */
+                        name?: (string|null);
+
+                        /** AggregateProductStatus reportingContext */
+                        reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                        /** AggregateProductStatus country */
+                        country?: (string|null);
+
+                        /** AggregateProductStatus stats */
+                        stats?: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats|null);
+
+                        /** AggregateProductStatus itemLevelIssues */
+                        itemLevelIssues?: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue[]|null);
+                    }
+
+                    /** Represents an AggregateProductStatus. */
+                    class AggregateProductStatus implements IAggregateProductStatus {
+
+                        /**
+                         * Constructs a new AggregateProductStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IAggregateProductStatus);
+
+                        /** AggregateProductStatus name. */
+                        public name: string;
+
+                        /** AggregateProductStatus reportingContext. */
+                        public reportingContext: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum);
+
+                        /** AggregateProductStatus country. */
+                        public country: string;
+
+                        /** AggregateProductStatus stats. */
+                        public stats?: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats|null);
+
+                        /** AggregateProductStatus itemLevelIssues. */
+                        public itemLevelIssues: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue[];
+
+                        /**
+                         * Creates a new AggregateProductStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AggregateProductStatus instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IAggregateProductStatus): google.shopping.merchant.issueresolution.v1.AggregateProductStatus;
+
+                        /**
+                         * Encodes the specified AggregateProductStatus message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.verify|verify} messages.
+                         * @param message AggregateProductStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IAggregateProductStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AggregateProductStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.verify|verify} messages.
+                         * @param message AggregateProductStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IAggregateProductStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AggregateProductStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AggregateProductStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.AggregateProductStatus;
+
+                        /**
+                         * Decodes an AggregateProductStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AggregateProductStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.AggregateProductStatus;
+
+                        /**
+                         * Verifies an AggregateProductStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AggregateProductStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AggregateProductStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.AggregateProductStatus;
+
+                        /**
+                         * Creates a plain object from an AggregateProductStatus message. Also converts values to other types if specified.
+                         * @param message AggregateProductStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AggregateProductStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AggregateProductStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AggregateProductStatus {
+
+                        /** Properties of a Stats. */
+                        interface IStats {
+
+                            /** Stats activeCount */
+                            activeCount?: (number|Long|string|null);
+
+                            /** Stats pendingCount */
+                            pendingCount?: (number|Long|string|null);
+
+                            /** Stats disapprovedCount */
+                            disapprovedCount?: (number|Long|string|null);
+
+                            /** Stats expiringCount */
+                            expiringCount?: (number|Long|string|null);
+                        }
+
+                        /** Represents a Stats. */
+                        class Stats implements IStats {
+
+                            /**
+                             * Constructs a new Stats.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats);
+
+                            /** Stats activeCount. */
+                            public activeCount: (number|Long|string);
+
+                            /** Stats pendingCount. */
+                            public pendingCount: (number|Long|string);
+
+                            /** Stats disapprovedCount. */
+                            public disapprovedCount: (number|Long|string);
+
+                            /** Stats expiringCount. */
+                            public expiringCount: (number|Long|string);
+
+                            /**
+                             * Creates a new Stats instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Stats instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats;
+
+                            /**
+                             * Encodes the specified Stats message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.verify|verify} messages.
+                             * @param message Stats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Stats message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats.verify|verify} messages.
+                             * @param message Stats message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Stats message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Stats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats;
+
+                            /**
+                             * Decodes a Stats message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Stats
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats;
+
+                            /**
+                             * Verifies a Stats message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Stats message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Stats
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats;
+
+                            /**
+                             * Creates a plain object from a Stats message. Also converts values to other types if specified.
+                             * @param message Stats
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.Stats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Stats to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Stats
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an ItemLevelIssue. */
+                        interface IItemLevelIssue {
+
+                            /** ItemLevelIssue code */
+                            code?: (string|null);
+
+                            /** ItemLevelIssue severity */
+                            severity?: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity|keyof typeof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity|null);
+
+                            /** ItemLevelIssue resolution */
+                            resolution?: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution|keyof typeof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution|null);
+
+                            /** ItemLevelIssue attribute */
+                            attribute?: (string|null);
+
+                            /** ItemLevelIssue description */
+                            description?: (string|null);
+
+                            /** ItemLevelIssue detail */
+                            detail?: (string|null);
+
+                            /** ItemLevelIssue documentationUri */
+                            documentationUri?: (string|null);
+
+                            /** ItemLevelIssue productCount */
+                            productCount?: (number|Long|string|null);
+                        }
+
+                        /** Represents an ItemLevelIssue. */
+                        class ItemLevelIssue implements IItemLevelIssue {
+
+                            /**
+                             * Constructs a new ItemLevelIssue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue);
+
+                            /** ItemLevelIssue code. */
+                            public code: string;
+
+                            /** ItemLevelIssue severity. */
+                            public severity: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity|keyof typeof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Severity);
+
+                            /** ItemLevelIssue resolution. */
+                            public resolution: (google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution|keyof typeof google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.Resolution);
+
+                            /** ItemLevelIssue attribute. */
+                            public attribute: string;
+
+                            /** ItemLevelIssue description. */
+                            public description: string;
+
+                            /** ItemLevelIssue detail. */
+                            public detail: string;
+
+                            /** ItemLevelIssue documentationUri. */
+                            public documentationUri: string;
+
+                            /** ItemLevelIssue productCount. */
+                            public productCount: (number|Long|string);
+
+                            /**
+                             * Creates a new ItemLevelIssue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ItemLevelIssue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue;
+
+                            /**
+                             * Encodes the specified ItemLevelIssue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                             * @param message ItemLevelIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ItemLevelIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue.verify|verify} messages.
+                             * @param message ItemLevelIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.IItemLevelIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ItemLevelIssue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ItemLevelIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue;
+
+                            /**
+                             * Decodes an ItemLevelIssue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ItemLevelIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue;
+
+                            /**
+                             * Verifies an ItemLevelIssue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ItemLevelIssue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ItemLevelIssue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue;
+
+                            /**
+                             * Creates a plain object from an ItemLevelIssue message. Also converts values to other types if specified.
+                             * @param message ItemLevelIssue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.AggregateProductStatus.ItemLevelIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ItemLevelIssue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ItemLevelIssue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ItemLevelIssue {
+
+                            /** Severity enum. */
+                            enum Severity {
+                                SEVERITY_UNSPECIFIED = 0,
+                                NOT_IMPACTED = 1,
+                                DEMOTED = 2,
+                                DISAPPROVED = 3
+                            }
+
+                            /** Resolution enum. */
+                            enum Resolution {
+                                RESOLUTION_UNSPECIFIED = 0,
+                                MERCHANT_ACTION = 1,
+                                PENDING_PROCESSING = 2
+                            }
+                        }
+                    }
+
+                    /** Represents an IssueResolutionService */
+                    class IssueResolutionService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new IssueResolutionService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new IssueResolutionService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IssueResolutionService;
+
+                        /**
+                         * Calls RenderAccountIssues.
+                         * @param request RenderAccountIssuesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RenderAccountIssuesResponse
+                         */
+                        public renderAccountIssues(request: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest, callback: google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderAccountIssuesCallback): void;
+
+                        /**
+                         * Calls RenderAccountIssues.
+                         * @param request RenderAccountIssuesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public renderAccountIssues(request: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest): Promise<google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse>;
+
+                        /**
+                         * Calls RenderProductIssues.
+                         * @param request RenderProductIssuesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RenderProductIssuesResponse
+                         */
+                        public renderProductIssues(request: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest, callback: google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderProductIssuesCallback): void;
+
+                        /**
+                         * Calls RenderProductIssues.
+                         * @param request RenderProductIssuesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public renderProductIssues(request: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest): Promise<google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse>;
+
+                        /**
+                         * Calls TriggerAction.
+                         * @param request TriggerActionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TriggerActionResponse
+                         */
+                        public triggerAction(request: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest, callback: google.shopping.merchant.issueresolution.v1.IssueResolutionService.TriggerActionCallback): void;
+
+                        /**
+                         * Calls TriggerAction.
+                         * @param request TriggerActionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public triggerAction(request: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest): Promise<google.shopping.merchant.issueresolution.v1.TriggerActionResponse>;
+                    }
+
+                    namespace IssueResolutionService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|renderAccountIssues}.
+                         * @param error Error, if any
+                         * @param [response] RenderAccountIssuesResponse
+                         */
+                        type RenderAccountIssuesCallback = (error: (Error|null), response?: google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|renderProductIssues}.
+                         * @param error Error, if any
+                         * @param [response] RenderProductIssuesResponse
+                         */
+                        type RenderProductIssuesCallback = (error: (Error|null), response?: google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.issueresolution.v1.IssueResolutionService|triggerAction}.
+                         * @param error Error, if any
+                         * @param [response] TriggerActionResponse
+                         */
+                        type TriggerActionCallback = (error: (Error|null), response?: google.shopping.merchant.issueresolution.v1.TriggerActionResponse) => void;
+                    }
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        ERROR = 1,
+                        WARNING = 2,
+                        INFO = 3
+                    }
+
+                    /** ContentOption enum. */
+                    enum ContentOption {
+                        CONTENT_OPTION_UNSPECIFIED = 0,
+                        PRE_RENDERED_HTML = 1
+                    }
+
+                    /** UserInputActionRenderingOption enum. */
+                    enum UserInputActionRenderingOption {
+                        USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED = 0,
+                        REDIRECT_TO_MERCHANT_CENTER = 1,
+                        BUILT_IN_USER_INPUT_ACTIONS = 2
+                    }
+
+                    /** Properties of a RenderAccountIssuesResponse. */
+                    interface IRenderAccountIssuesResponse {
+
+                        /** RenderAccountIssuesResponse renderedIssues */
+                        renderedIssues?: (google.shopping.merchant.issueresolution.v1.IRenderedIssue[]|null);
+                    }
+
+                    /** Represents a RenderAccountIssuesResponse. */
+                    class RenderAccountIssuesResponse implements IRenderAccountIssuesResponse {
+
+                        /**
+                         * Constructs a new RenderAccountIssuesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse);
+
+                        /** RenderAccountIssuesResponse renderedIssues. */
+                        public renderedIssues: google.shopping.merchant.issueresolution.v1.IRenderedIssue[];
+
+                        /**
+                         * Creates a new RenderAccountIssuesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderAccountIssuesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse;
+
+                        /**
+                         * Encodes the specified RenderAccountIssuesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.verify|verify} messages.
+                         * @param message RenderAccountIssuesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderAccountIssuesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse.verify|verify} messages.
+                         * @param message RenderAccountIssuesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderAccountIssuesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderAccountIssuesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse;
+
+                        /**
+                         * Decodes a RenderAccountIssuesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderAccountIssuesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse;
+
+                        /**
+                         * Verifies a RenderAccountIssuesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderAccountIssuesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderAccountIssuesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse;
+
+                        /**
+                         * Creates a plain object from a RenderAccountIssuesResponse message. Also converts values to other types if specified.
+                         * @param message RenderAccountIssuesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderAccountIssuesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderAccountIssuesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderAccountIssuesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RenderAccountIssuesRequest. */
+                    interface IRenderAccountIssuesRequest {
+
+                        /** RenderAccountIssuesRequest name */
+                        name?: (string|null);
+
+                        /** RenderAccountIssuesRequest languageCode */
+                        languageCode?: (string|null);
+
+                        /** RenderAccountIssuesRequest timeZone */
+                        timeZone?: (string|null);
+
+                        /** RenderAccountIssuesRequest payload */
+                        payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+                    }
+
+                    /** Represents a RenderAccountIssuesRequest. */
+                    class RenderAccountIssuesRequest implements IRenderAccountIssuesRequest {
+
+                        /**
+                         * Constructs a new RenderAccountIssuesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest);
+
+                        /** RenderAccountIssuesRequest name. */
+                        public name: string;
+
+                        /** RenderAccountIssuesRequest languageCode. */
+                        public languageCode: string;
+
+                        /** RenderAccountIssuesRequest timeZone. */
+                        public timeZone: string;
+
+                        /** RenderAccountIssuesRequest payload. */
+                        public payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+
+                        /**
+                         * Creates a new RenderAccountIssuesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderAccountIssuesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest;
+
+                        /**
+                         * Encodes the specified RenderAccountIssuesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest.verify|verify} messages.
+                         * @param message RenderAccountIssuesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderAccountIssuesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest.verify|verify} messages.
+                         * @param message RenderAccountIssuesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderAccountIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderAccountIssuesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderAccountIssuesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest;
+
+                        /**
+                         * Decodes a RenderAccountIssuesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderAccountIssuesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest;
+
+                        /**
+                         * Verifies a RenderAccountIssuesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderAccountIssuesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderAccountIssuesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest;
+
+                        /**
+                         * Creates a plain object from a RenderAccountIssuesRequest message. Also converts values to other types if specified.
+                         * @param message RenderAccountIssuesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderAccountIssuesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderAccountIssuesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderAccountIssuesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RenderIssuesRequestPayload. */
+                    interface IRenderIssuesRequestPayload {
+
+                        /** RenderIssuesRequestPayload contentOption */
+                        contentOption?: (google.shopping.merchant.issueresolution.v1.ContentOption|keyof typeof google.shopping.merchant.issueresolution.v1.ContentOption|null);
+
+                        /** RenderIssuesRequestPayload userInputActionOption */
+                        userInputActionOption?: (google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|keyof typeof google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|null);
+                    }
+
+                    /** Represents a RenderIssuesRequestPayload. */
+                    class RenderIssuesRequestPayload implements IRenderIssuesRequestPayload {
+
+                        /**
+                         * Constructs a new RenderIssuesRequestPayload.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload);
+
+                        /** RenderIssuesRequestPayload contentOption. */
+                        public contentOption?: (google.shopping.merchant.issueresolution.v1.ContentOption|keyof typeof google.shopping.merchant.issueresolution.v1.ContentOption|null);
+
+                        /** RenderIssuesRequestPayload userInputActionOption. */
+                        public userInputActionOption?: (google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|keyof typeof google.shopping.merchant.issueresolution.v1.UserInputActionRenderingOption|null);
+
+                        /**
+                         * Creates a new RenderIssuesRequestPayload instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderIssuesRequestPayload instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload): google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload;
+
+                        /**
+                         * Encodes the specified RenderIssuesRequestPayload message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify|verify} messages.
+                         * @param message RenderIssuesRequestPayload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderIssuesRequestPayload message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.verify|verify} messages.
+                         * @param message RenderIssuesRequestPayload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderIssuesRequestPayload message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderIssuesRequestPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload;
+
+                        /**
+                         * Decodes a RenderIssuesRequestPayload message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderIssuesRequestPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload;
+
+                        /**
+                         * Verifies a RenderIssuesRequestPayload message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderIssuesRequestPayload message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderIssuesRequestPayload
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload;
+
+                        /**
+                         * Creates a plain object from a RenderIssuesRequestPayload message. Also converts values to other types if specified.
+                         * @param message RenderIssuesRequestPayload
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderIssuesRequestPayload to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderIssuesRequestPayload
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RenderProductIssuesResponse. */
+                    interface IRenderProductIssuesResponse {
+
+                        /** RenderProductIssuesResponse renderedIssues */
+                        renderedIssues?: (google.shopping.merchant.issueresolution.v1.IRenderedIssue[]|null);
+                    }
+
+                    /** Represents a RenderProductIssuesResponse. */
+                    class RenderProductIssuesResponse implements IRenderProductIssuesResponse {
+
+                        /**
+                         * Constructs a new RenderProductIssuesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse);
+
+                        /** RenderProductIssuesResponse renderedIssues. */
+                        public renderedIssues: google.shopping.merchant.issueresolution.v1.IRenderedIssue[];
+
+                        /**
+                         * Creates a new RenderProductIssuesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderProductIssuesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse): google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse;
+
+                        /**
+                         * Encodes the specified RenderProductIssuesResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.verify|verify} messages.
+                         * @param message RenderProductIssuesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderProductIssuesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse.verify|verify} messages.
+                         * @param message RenderProductIssuesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderProductIssuesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderProductIssuesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse;
+
+                        /**
+                         * Decodes a RenderProductIssuesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderProductIssuesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse;
+
+                        /**
+                         * Verifies a RenderProductIssuesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderProductIssuesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderProductIssuesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse;
+
+                        /**
+                         * Creates a plain object from a RenderProductIssuesResponse message. Also converts values to other types if specified.
+                         * @param message RenderProductIssuesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderProductIssuesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderProductIssuesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderProductIssuesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RenderProductIssuesRequest. */
+                    interface IRenderProductIssuesRequest {
+
+                        /** RenderProductIssuesRequest name */
+                        name?: (string|null);
+
+                        /** RenderProductIssuesRequest languageCode */
+                        languageCode?: (string|null);
+
+                        /** RenderProductIssuesRequest timeZone */
+                        timeZone?: (string|null);
+
+                        /** RenderProductIssuesRequest payload */
+                        payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+                    }
+
+                    /** Represents a RenderProductIssuesRequest. */
+                    class RenderProductIssuesRequest implements IRenderProductIssuesRequest {
+
+                        /**
+                         * Constructs a new RenderProductIssuesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest);
+
+                        /** RenderProductIssuesRequest name. */
+                        public name: string;
+
+                        /** RenderProductIssuesRequest languageCode. */
+                        public languageCode: string;
+
+                        /** RenderProductIssuesRequest timeZone. */
+                        public timeZone: string;
+
+                        /** RenderProductIssuesRequest payload. */
+                        public payload?: (google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null);
+
+                        /**
+                         * Creates a new RenderProductIssuesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderProductIssuesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest): google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest;
+
+                        /**
+                         * Encodes the specified RenderProductIssuesRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.verify|verify} messages.
+                         * @param message RenderProductIssuesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderProductIssuesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.verify|verify} messages.
+                         * @param message RenderProductIssuesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderProductIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderProductIssuesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderProductIssuesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest;
+
+                        /**
+                         * Decodes a RenderProductIssuesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderProductIssuesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest;
+
+                        /**
+                         * Verifies a RenderProductIssuesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderProductIssuesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderProductIssuesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest;
+
+                        /**
+                         * Creates a plain object from a RenderProductIssuesRequest message. Also converts values to other types if specified.
+                         * @param message RenderProductIssuesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderProductIssuesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderProductIssuesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RenderedIssue. */
+                    interface IRenderedIssue {
+
+                        /** RenderedIssue prerenderedContent */
+                        prerenderedContent?: (string|null);
+
+                        /** RenderedIssue prerenderedOutOfCourtDisputeSettlement */
+                        prerenderedOutOfCourtDisputeSettlement?: (string|null);
+
+                        /** RenderedIssue title */
+                        title?: (string|null);
+
+                        /** RenderedIssue impact */
+                        impact?: (google.shopping.merchant.issueresolution.v1.IImpact|null);
+
+                        /** RenderedIssue actions */
+                        actions?: (google.shopping.merchant.issueresolution.v1.IAction[]|null);
+                    }
+
+                    /** Represents a RenderedIssue. */
+                    class RenderedIssue implements IRenderedIssue {
+
+                        /**
+                         * Constructs a new RenderedIssue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IRenderedIssue);
+
+                        /** RenderedIssue prerenderedContent. */
+                        public prerenderedContent?: (string|null);
+
+                        /** RenderedIssue prerenderedOutOfCourtDisputeSettlement. */
+                        public prerenderedOutOfCourtDisputeSettlement?: (string|null);
+
+                        /** RenderedIssue title. */
+                        public title: string;
+
+                        /** RenderedIssue impact. */
+                        public impact?: (google.shopping.merchant.issueresolution.v1.IImpact|null);
+
+                        /** RenderedIssue actions. */
+                        public actions: google.shopping.merchant.issueresolution.v1.IAction[];
+
+                        /** RenderedIssue content. */
+                        public content?: "prerenderedContent";
+
+                        /** RenderedIssue outOfCourtDisputeSettlement. */
+                        public outOfCourtDisputeSettlement?: "prerenderedOutOfCourtDisputeSettlement";
+
+                        /**
+                         * Creates a new RenderedIssue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RenderedIssue instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IRenderedIssue): google.shopping.merchant.issueresolution.v1.RenderedIssue;
+
+                        /**
+                         * Encodes the specified RenderedIssue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderedIssue.verify|verify} messages.
+                         * @param message RenderedIssue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IRenderedIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RenderedIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.RenderedIssue.verify|verify} messages.
+                         * @param message RenderedIssue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IRenderedIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RenderedIssue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RenderedIssue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.RenderedIssue;
+
+                        /**
+                         * Decodes a RenderedIssue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RenderedIssue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.RenderedIssue;
+
+                        /**
+                         * Verifies a RenderedIssue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RenderedIssue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RenderedIssue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.RenderedIssue;
+
+                        /**
+                         * Creates a plain object from a RenderedIssue message. Also converts values to other types if specified.
+                         * @param message RenderedIssue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.RenderedIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RenderedIssue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RenderedIssue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Impact. */
+                    interface IImpact {
+
+                        /** Impact message */
+                        message?: (string|null);
+
+                        /** Impact severity */
+                        severity?: (google.shopping.merchant.issueresolution.v1.Severity|keyof typeof google.shopping.merchant.issueresolution.v1.Severity|null);
+
+                        /** Impact breakdowns */
+                        breakdowns?: (google.shopping.merchant.issueresolution.v1.IBreakdown[]|null);
+                    }
+
+                    /** Represents an Impact. */
+                    class Impact implements IImpact {
+
+                        /**
+                         * Constructs a new Impact.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IImpact);
+
+                        /** Impact message. */
+                        public message: string;
+
+                        /** Impact severity. */
+                        public severity: (google.shopping.merchant.issueresolution.v1.Severity|keyof typeof google.shopping.merchant.issueresolution.v1.Severity);
+
+                        /** Impact breakdowns. */
+                        public breakdowns: google.shopping.merchant.issueresolution.v1.IBreakdown[];
+
+                        /**
+                         * Creates a new Impact instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Impact instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IImpact): google.shopping.merchant.issueresolution.v1.Impact;
+
+                        /**
+                         * Encodes the specified Impact message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Impact.verify|verify} messages.
+                         * @param message Impact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Impact message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Impact.verify|verify} messages.
+                         * @param message Impact message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IImpact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Impact message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Impact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Impact;
+
+                        /**
+                         * Decodes an Impact message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Impact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Impact;
+
+                        /**
+                         * Verifies an Impact message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Impact message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Impact
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Impact;
+
+                        /**
+                         * Creates a plain object from an Impact message. Also converts values to other types if specified.
+                         * @param message Impact
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.Impact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Impact to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Impact
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Breakdown. */
+                    interface IBreakdown {
+
+                        /** Breakdown regions */
+                        regions?: (google.shopping.merchant.issueresolution.v1.Breakdown.IRegion[]|null);
+
+                        /** Breakdown details */
+                        details?: (string[]|null);
+                    }
+
+                    /** Represents a Breakdown. */
+                    class Breakdown implements IBreakdown {
+
+                        /**
+                         * Constructs a new Breakdown.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IBreakdown);
+
+                        /** Breakdown regions. */
+                        public regions: google.shopping.merchant.issueresolution.v1.Breakdown.IRegion[];
+
+                        /** Breakdown details. */
+                        public details: string[];
+
+                        /**
+                         * Creates a new Breakdown instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Breakdown instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IBreakdown): google.shopping.merchant.issueresolution.v1.Breakdown;
+
+                        /**
+                         * Encodes the specified Breakdown message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.verify|verify} messages.
+                         * @param message Breakdown message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IBreakdown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Breakdown message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.verify|verify} messages.
+                         * @param message Breakdown message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IBreakdown, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Breakdown message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Breakdown
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Breakdown;
+
+                        /**
+                         * Decodes a Breakdown message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Breakdown
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Breakdown;
+
+                        /**
+                         * Verifies a Breakdown message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Breakdown message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Breakdown
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Breakdown;
+
+                        /**
+                         * Creates a plain object from a Breakdown message. Also converts values to other types if specified.
+                         * @param message Breakdown
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.Breakdown, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Breakdown to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Breakdown
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Breakdown {
+
+                        /** Properties of a Region. */
+                        interface IRegion {
+
+                            /** Region code */
+                            code?: (string|null);
+
+                            /** Region name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a Region. */
+                        class Region implements IRegion {
+
+                            /**
+                             * Constructs a new Region.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.Breakdown.IRegion);
+
+                            /** Region code. */
+                            public code: string;
+
+                            /** Region name. */
+                            public name: string;
+
+                            /**
+                             * Creates a new Region instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Region instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.Breakdown.IRegion): google.shopping.merchant.issueresolution.v1.Breakdown.Region;
+
+                            /**
+                             * Encodes the specified Region message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.Region.verify|verify} messages.
+                             * @param message Region message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.Breakdown.IRegion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Region message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Breakdown.Region.verify|verify} messages.
+                             * @param message Region message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.Breakdown.IRegion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Region message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Region
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Breakdown.Region;
+
+                            /**
+                             * Decodes a Region message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Region
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Breakdown.Region;
+
+                            /**
+                             * Verifies a Region message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Region message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Region
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Breakdown.Region;
+
+                            /**
+                             * Creates a plain object from a Region message. Also converts values to other types if specified.
+                             * @param message Region
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.Breakdown.Region, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Region to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Region
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an Action. */
+                    interface IAction {
+
+                        /** Action builtinSimpleAction */
+                        builtinSimpleAction?: (google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction|null);
+
+                        /** Action externalAction */
+                        externalAction?: (google.shopping.merchant.issueresolution.v1.IExternalAction|null);
+
+                        /** Action builtinUserInputAction */
+                        builtinUserInputAction?: (google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction|null);
+
+                        /** Action buttonLabel */
+                        buttonLabel?: (string|null);
+
+                        /** Action isAvailable */
+                        isAvailable?: (boolean|null);
+
+                        /** Action reasons */
+                        reasons?: (google.shopping.merchant.issueresolution.v1.Action.IReason[]|null);
+                    }
+
+                    /** Represents an Action. */
+                    class Action implements IAction {
+
+                        /**
+                         * Constructs a new Action.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IAction);
+
+                        /** Action builtinSimpleAction. */
+                        public builtinSimpleAction?: (google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction|null);
+
+                        /** Action externalAction. */
+                        public externalAction?: (google.shopping.merchant.issueresolution.v1.IExternalAction|null);
+
+                        /** Action builtinUserInputAction. */
+                        public builtinUserInputAction?: (google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction|null);
+
+                        /** Action buttonLabel. */
+                        public buttonLabel: string;
+
+                        /** Action isAvailable. */
+                        public isAvailable: boolean;
+
+                        /** Action reasons. */
+                        public reasons: google.shopping.merchant.issueresolution.v1.Action.IReason[];
+
+                        /** Action action. */
+                        public action?: ("builtinSimpleAction"|"externalAction"|"builtinUserInputAction");
+
+                        /**
+                         * Creates a new Action instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Action instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IAction): google.shopping.merchant.issueresolution.v1.Action;
+
+                        /**
+                         * Encodes the specified Action message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.verify|verify} messages.
+                         * @param message Action message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Action message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.verify|verify} messages.
+                         * @param message Action message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Action message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Action
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Action;
+
+                        /**
+                         * Decodes an Action message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Action
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Action;
+
+                        /**
+                         * Verifies an Action message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Action message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Action
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Action;
+
+                        /**
+                         * Creates a plain object from an Action message. Also converts values to other types if specified.
+                         * @param message Action
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.Action, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Action to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Action
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Action {
+
+                        /** Properties of a Reason. */
+                        interface IReason {
+
+                            /** Reason message */
+                            message?: (string|null);
+
+                            /** Reason detail */
+                            detail?: (string|null);
+
+                            /** Reason action */
+                            action?: (google.shopping.merchant.issueresolution.v1.IAction|null);
+                        }
+
+                        /** Represents a Reason. */
+                        class Reason implements IReason {
+
+                            /**
+                             * Constructs a new Reason.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.Action.IReason);
+
+                            /** Reason message. */
+                            public message: string;
+
+                            /** Reason detail. */
+                            public detail?: (string|null);
+
+                            /** Reason action. */
+                            public action?: (google.shopping.merchant.issueresolution.v1.IAction|null);
+
+                            /**
+                             * Creates a new Reason instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Reason instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.Action.IReason): google.shopping.merchant.issueresolution.v1.Action.Reason;
+
+                            /**
+                             * Encodes the specified Reason message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.Reason.verify|verify} messages.
+                             * @param message Reason message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.Action.IReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Reason message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Action.Reason.verify|verify} messages.
+                             * @param message Reason message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.Action.IReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Reason message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Reason
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Action.Reason;
+
+                            /**
+                             * Decodes a Reason message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Reason
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Action.Reason;
+
+                            /**
+                             * Verifies a Reason message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Reason message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Reason
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Action.Reason;
+
+                            /**
+                             * Creates a plain object from a Reason message. Also converts values to other types if specified.
+                             * @param message Reason
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.Action.Reason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Reason to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Reason
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a BuiltInSimpleAction. */
+                    interface IBuiltInSimpleAction {
+
+                        /** BuiltInSimpleAction type */
+                        type?: (google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType|keyof typeof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType|null);
+
+                        /** BuiltInSimpleAction attributeCode */
+                        attributeCode?: (string|null);
+
+                        /** BuiltInSimpleAction additionalContent */
+                        additionalContent?: (google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent|null);
+                    }
+
+                    /** Represents a BuiltInSimpleAction. */
+                    class BuiltInSimpleAction implements IBuiltInSimpleAction {
+
+                        /**
+                         * Constructs a new BuiltInSimpleAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction);
+
+                        /** BuiltInSimpleAction type. */
+                        public type: (google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType|keyof typeof google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.BuiltInSimpleActionType);
+
+                        /** BuiltInSimpleAction attributeCode. */
+                        public attributeCode?: (string|null);
+
+                        /** BuiltInSimpleAction additionalContent. */
+                        public additionalContent?: (google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent|null);
+
+                        /**
+                         * Creates a new BuiltInSimpleAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BuiltInSimpleAction instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction;
+
+                        /**
+                         * Encodes the specified BuiltInSimpleAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.verify|verify} messages.
+                         * @param message BuiltInSimpleAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BuiltInSimpleAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.verify|verify} messages.
+                         * @param message BuiltInSimpleAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IBuiltInSimpleAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BuiltInSimpleAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BuiltInSimpleAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction;
+
+                        /**
+                         * Decodes a BuiltInSimpleAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BuiltInSimpleAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction;
+
+                        /**
+                         * Verifies a BuiltInSimpleAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BuiltInSimpleAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BuiltInSimpleAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction;
+
+                        /**
+                         * Creates a plain object from a BuiltInSimpleAction message. Also converts values to other types if specified.
+                         * @param message BuiltInSimpleAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BuiltInSimpleAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BuiltInSimpleAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BuiltInSimpleAction {
+
+                        /** Properties of an AdditionalContent. */
+                        interface IAdditionalContent {
+
+                            /** AdditionalContent title */
+                            title?: (string|null);
+
+                            /** AdditionalContent paragraphs */
+                            paragraphs?: (string[]|null);
+                        }
+
+                        /** Represents an AdditionalContent. */
+                        class AdditionalContent implements IAdditionalContent {
+
+                            /**
+                             * Constructs a new AdditionalContent.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent);
+
+                            /** AdditionalContent title. */
+                            public title: string;
+
+                            /** AdditionalContent paragraphs. */
+                            public paragraphs: string[];
+
+                            /**
+                             * Creates a new AdditionalContent instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AdditionalContent instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent;
+
+                            /**
+                             * Encodes the specified AdditionalContent message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.verify|verify} messages.
+                             * @param message AdditionalContent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AdditionalContent message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent.verify|verify} messages.
+                             * @param message AdditionalContent message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.IAdditionalContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AdditionalContent message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AdditionalContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent;
+
+                            /**
+                             * Decodes an AdditionalContent message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AdditionalContent
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent;
+
+                            /**
+                             * Verifies an AdditionalContent message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AdditionalContent message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AdditionalContent
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent;
+
+                            /**
+                             * Creates a plain object from an AdditionalContent message. Also converts values to other types if specified.
+                             * @param message AdditionalContent
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.BuiltInSimpleAction.AdditionalContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AdditionalContent to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AdditionalContent
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** BuiltInSimpleActionType enum. */
+                        enum BuiltInSimpleActionType {
+                            BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED = 0,
+                            VERIFY_PHONE = 1,
+                            CLAIM_WEBSITE = 2,
+                            ADD_PRODUCTS = 3,
+                            ADD_CONTACT_INFO = 4,
+                            LINK_ADS_ACCOUNT = 5,
+                            ADD_BUSINESS_REGISTRATION_NUMBER = 6,
+                            EDIT_ITEM_ATTRIBUTE = 7,
+                            FIX_ACCOUNT_ISSUE = 8,
+                            SHOW_ADDITIONAL_CONTENT = 9
+                        }
+                    }
+
+                    /** Properties of a BuiltInUserInputAction. */
+                    interface IBuiltInUserInputAction {
+
+                        /** BuiltInUserInputAction actionContext */
+                        actionContext?: (string|null);
+
+                        /** BuiltInUserInputAction flows */
+                        flows?: (google.shopping.merchant.issueresolution.v1.IActionFlow[]|null);
+                    }
+
+                    /** Represents a BuiltInUserInputAction. */
+                    class BuiltInUserInputAction implements IBuiltInUserInputAction {
+
+                        /**
+                         * Constructs a new BuiltInUserInputAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction);
+
+                        /** BuiltInUserInputAction actionContext. */
+                        public actionContext: string;
+
+                        /** BuiltInUserInputAction flows. */
+                        public flows: google.shopping.merchant.issueresolution.v1.IActionFlow[];
+
+                        /**
+                         * Creates a new BuiltInUserInputAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BuiltInUserInputAction instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction): google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction;
+
+                        /**
+                         * Encodes the specified BuiltInUserInputAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.verify|verify} messages.
+                         * @param message BuiltInUserInputAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BuiltInUserInputAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction.verify|verify} messages.
+                         * @param message BuiltInUserInputAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IBuiltInUserInputAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BuiltInUserInputAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BuiltInUserInputAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction;
+
+                        /**
+                         * Decodes a BuiltInUserInputAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BuiltInUserInputAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction;
+
+                        /**
+                         * Verifies a BuiltInUserInputAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BuiltInUserInputAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BuiltInUserInputAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction;
+
+                        /**
+                         * Creates a plain object from a BuiltInUserInputAction message. Also converts values to other types if specified.
+                         * @param message BuiltInUserInputAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.BuiltInUserInputAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BuiltInUserInputAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BuiltInUserInputAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ActionFlow. */
+                    interface IActionFlow {
+
+                        /** ActionFlow id */
+                        id?: (string|null);
+
+                        /** ActionFlow label */
+                        label?: (string|null);
+
+                        /** ActionFlow inputs */
+                        inputs?: (google.shopping.merchant.issueresolution.v1.IInputField[]|null);
+
+                        /** ActionFlow dialogTitle */
+                        dialogTitle?: (string|null);
+
+                        /** ActionFlow dialogMessage */
+                        dialogMessage?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                        /** ActionFlow dialogCallout */
+                        dialogCallout?: (google.shopping.merchant.issueresolution.v1.ICallout|null);
+
+                        /** ActionFlow dialogButtonLabel */
+                        dialogButtonLabel?: (string|null);
+                    }
+
+                    /** Represents an ActionFlow. */
+                    class ActionFlow implements IActionFlow {
+
+                        /**
+                         * Constructs a new ActionFlow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IActionFlow);
+
+                        /** ActionFlow id. */
+                        public id: string;
+
+                        /** ActionFlow label. */
+                        public label: string;
+
+                        /** ActionFlow inputs. */
+                        public inputs: google.shopping.merchant.issueresolution.v1.IInputField[];
+
+                        /** ActionFlow dialogTitle. */
+                        public dialogTitle: string;
+
+                        /** ActionFlow dialogMessage. */
+                        public dialogMessage?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                        /** ActionFlow dialogCallout. */
+                        public dialogCallout?: (google.shopping.merchant.issueresolution.v1.ICallout|null);
+
+                        /** ActionFlow dialogButtonLabel. */
+                        public dialogButtonLabel: string;
+
+                        /**
+                         * Creates a new ActionFlow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActionFlow instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IActionFlow): google.shopping.merchant.issueresolution.v1.ActionFlow;
+
+                        /**
+                         * Encodes the specified ActionFlow message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionFlow.verify|verify} messages.
+                         * @param message ActionFlow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IActionFlow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActionFlow message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionFlow.verify|verify} messages.
+                         * @param message ActionFlow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IActionFlow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActionFlow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActionFlow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.ActionFlow;
+
+                        /**
+                         * Decodes an ActionFlow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActionFlow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.ActionFlow;
+
+                        /**
+                         * Verifies an ActionFlow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActionFlow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActionFlow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.ActionFlow;
+
+                        /**
+                         * Creates a plain object from an ActionFlow message. Also converts values to other types if specified.
+                         * @param message ActionFlow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.ActionFlow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActionFlow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActionFlow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InputField. */
+                    interface IInputField {
+
+                        /** InputField textInput */
+                        textInput?: (google.shopping.merchant.issueresolution.v1.InputField.ITextInput|null);
+
+                        /** InputField choiceInput */
+                        choiceInput?: (google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput|null);
+
+                        /** InputField checkboxInput */
+                        checkboxInput?: (google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput|null);
+
+                        /** InputField id */
+                        id?: (string|null);
+
+                        /** InputField label */
+                        label?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                        /** InputField required */
+                        required?: (boolean|null);
+                    }
+
+                    /** Represents an InputField. */
+                    class InputField implements IInputField {
+
+                        /**
+                         * Constructs a new InputField.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IInputField);
+
+                        /** InputField textInput. */
+                        public textInput?: (google.shopping.merchant.issueresolution.v1.InputField.ITextInput|null);
+
+                        /** InputField choiceInput. */
+                        public choiceInput?: (google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput|null);
+
+                        /** InputField checkboxInput. */
+                        public checkboxInput?: (google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput|null);
+
+                        /** InputField id. */
+                        public id: string;
+
+                        /** InputField label. */
+                        public label?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                        /** InputField required. */
+                        public required: boolean;
+
+                        /** InputField valueInput. */
+                        public valueInput?: ("textInput"|"choiceInput"|"checkboxInput");
+
+                        /**
+                         * Creates a new InputField instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputField instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IInputField): google.shopping.merchant.issueresolution.v1.InputField;
+
+                        /**
+                         * Encodes the specified InputField message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.verify|verify} messages.
+                         * @param message InputField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IInputField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputField message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.verify|verify} messages.
+                         * @param message InputField message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IInputField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputField message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputField;
+
+                        /**
+                         * Decodes an InputField message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputField;
+
+                        /**
+                         * Verifies an InputField message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputField message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputField
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputField;
+
+                        /**
+                         * Creates a plain object from an InputField message. Also converts values to other types if specified.
+                         * @param message InputField
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.InputField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputField to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputField
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace InputField {
+
+                        /** Properties of a TextInput. */
+                        interface ITextInput {
+
+                            /** TextInput type */
+                            type?: (google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType|keyof typeof google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType|null);
+
+                            /** TextInput additionalInfo */
+                            additionalInfo?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                            /** TextInput formatInfo */
+                            formatInfo?: (string|null);
+
+                            /** TextInput ariaLabel */
+                            ariaLabel?: (string|null);
+                        }
+
+                        /** Represents a TextInput. */
+                        class TextInput implements ITextInput {
+
+                            /**
+                             * Constructs a new TextInput.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputField.ITextInput);
+
+                            /** TextInput type. */
+                            public type: (google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType|keyof typeof google.shopping.merchant.issueresolution.v1.InputField.TextInput.TextInputType);
+
+                            /** TextInput additionalInfo. */
+                            public additionalInfo?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                            /** TextInput formatInfo. */
+                            public formatInfo?: (string|null);
+
+                            /** TextInput ariaLabel. */
+                            public ariaLabel?: (string|null);
+
+                            /**
+                             * Creates a new TextInput instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TextInput instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputField.ITextInput): google.shopping.merchant.issueresolution.v1.InputField.TextInput;
+
+                            /**
+                             * Encodes the specified TextInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.TextInput.verify|verify} messages.
+                             * @param message TextInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputField.ITextInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TextInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.TextInput.verify|verify} messages.
+                             * @param message TextInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputField.ITextInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TextInput message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TextInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputField.TextInput;
+
+                            /**
+                             * Decodes a TextInput message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TextInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputField.TextInput;
+
+                            /**
+                             * Verifies a TextInput message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TextInput message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TextInput
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputField.TextInput;
+
+                            /**
+                             * Creates a plain object from a TextInput message. Also converts values to other types if specified.
+                             * @param message TextInput
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputField.TextInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TextInput to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TextInput
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TextInput {
+
+                            /** TextInputType enum. */
+                            enum TextInputType {
+                                TEXT_INPUT_TYPE_UNSPECIFIED = 0,
+                                GENERIC_SHORT_TEXT = 1,
+                                GENERIC_LONG_TEXT = 2
+                            }
+                        }
+
+                        /** Properties of a ChoiceInput. */
+                        interface IChoiceInput {
+
+                            /** ChoiceInput options */
+                            options?: (google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption[]|null);
+                        }
+
+                        /** Represents a ChoiceInput. */
+                        class ChoiceInput implements IChoiceInput {
+
+                            /**
+                             * Constructs a new ChoiceInput.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput);
+
+                            /** ChoiceInput options. */
+                            public options: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption[];
+
+                            /**
+                             * Creates a new ChoiceInput instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ChoiceInput instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput;
+
+                            /**
+                             * Encodes the specified ChoiceInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.verify|verify} messages.
+                             * @param message ChoiceInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ChoiceInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.verify|verify} messages.
+                             * @param message ChoiceInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputField.IChoiceInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ChoiceInput message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ChoiceInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput;
+
+                            /**
+                             * Decodes a ChoiceInput message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ChoiceInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput;
+
+                            /**
+                             * Verifies a ChoiceInput message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ChoiceInput message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ChoiceInput
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput;
+
+                            /**
+                             * Creates a plain object from a ChoiceInput message. Also converts values to other types if specified.
+                             * @param message ChoiceInput
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ChoiceInput to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ChoiceInput
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ChoiceInput {
+
+                            /** Properties of a ChoiceInputOption. */
+                            interface IChoiceInputOption {
+
+                                /** ChoiceInputOption id */
+                                id?: (string|null);
+
+                                /** ChoiceInputOption label */
+                                label?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                                /** ChoiceInputOption additionalInput */
+                                additionalInput?: (google.shopping.merchant.issueresolution.v1.IInputField|null);
+                            }
+
+                            /** Represents a ChoiceInputOption. */
+                            class ChoiceInputOption implements IChoiceInputOption {
+
+                                /**
+                                 * Constructs a new ChoiceInputOption.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption);
+
+                                /** ChoiceInputOption id. */
+                                public id: string;
+
+                                /** ChoiceInputOption label. */
+                                public label?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                                /** ChoiceInputOption additionalInput. */
+                                public additionalInput?: (google.shopping.merchant.issueresolution.v1.IInputField|null);
+
+                                /**
+                                 * Creates a new ChoiceInputOption instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ChoiceInputOption instance
+                                 */
+                                public static create(properties?: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption;
+
+                                /**
+                                 * Encodes the specified ChoiceInputOption message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.verify|verify} messages.
+                                 * @param message ChoiceInputOption message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ChoiceInputOption message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption.verify|verify} messages.
+                                 * @param message ChoiceInputOption message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.IChoiceInputOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ChoiceInputOption message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ChoiceInputOption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption;
+
+                                /**
+                                 * Decodes a ChoiceInputOption message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ChoiceInputOption
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption;
+
+                                /**
+                                 * Verifies a ChoiceInputOption message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ChoiceInputOption message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ChoiceInputOption
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption;
+
+                                /**
+                                 * Creates a plain object from a ChoiceInputOption message. Also converts values to other types if specified.
+                                 * @param message ChoiceInputOption
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.shopping.merchant.issueresolution.v1.InputField.ChoiceInput.ChoiceInputOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ChoiceInputOption to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ChoiceInputOption
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a CheckboxInput. */
+                        interface ICheckboxInput {
+                        }
+
+                        /** Represents a CheckboxInput. */
+                        class CheckboxInput implements ICheckboxInput {
+
+                            /**
+                             * Constructs a new CheckboxInput.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput);
+
+                            /**
+                             * Creates a new CheckboxInput instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CheckboxInput instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput): google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput;
+
+                            /**
+                             * Encodes the specified CheckboxInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.verify|verify} messages.
+                             * @param message CheckboxInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CheckboxInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput.verify|verify} messages.
+                             * @param message CheckboxInput message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputField.ICheckboxInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CheckboxInput message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CheckboxInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput;
+
+                            /**
+                             * Decodes a CheckboxInput message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CheckboxInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput;
+
+                            /**
+                             * Verifies a CheckboxInput message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CheckboxInput message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CheckboxInput
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput;
+
+                            /**
+                             * Creates a plain object from a CheckboxInput message. Also converts values to other types if specified.
+                             * @param message CheckboxInput
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputField.CheckboxInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CheckboxInput to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CheckboxInput
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a TextWithTooltip. */
+                    interface ITextWithTooltip {
+
+                        /** TextWithTooltip simpleValue */
+                        simpleValue?: (string|null);
+
+                        /** TextWithTooltip simpleTooltipValue */
+                        simpleTooltipValue?: (string|null);
+
+                        /** TextWithTooltip tooltipIconStyle */
+                        tooltipIconStyle?: (google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle|keyof typeof google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle|null);
+                    }
+
+                    /** Represents a TextWithTooltip. */
+                    class TextWithTooltip implements ITextWithTooltip {
+
+                        /**
+                         * Constructs a new TextWithTooltip.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.ITextWithTooltip);
+
+                        /** TextWithTooltip simpleValue. */
+                        public simpleValue?: (string|null);
+
+                        /** TextWithTooltip simpleTooltipValue. */
+                        public simpleTooltipValue?: (string|null);
+
+                        /** TextWithTooltip tooltipIconStyle. */
+                        public tooltipIconStyle: (google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle|keyof typeof google.shopping.merchant.issueresolution.v1.TextWithTooltip.TooltipIconStyle);
+
+                        /** TextWithTooltip value. */
+                        public value?: "simpleValue";
+
+                        /** TextWithTooltip tooltipValue. */
+                        public tooltipValue?: "simpleTooltipValue";
+
+                        /**
+                         * Creates a new TextWithTooltip instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextWithTooltip instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.ITextWithTooltip): google.shopping.merchant.issueresolution.v1.TextWithTooltip;
+
+                        /**
+                         * Encodes the specified TextWithTooltip message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify|verify} messages.
+                         * @param message TextWithTooltip message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.ITextWithTooltip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextWithTooltip message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TextWithTooltip.verify|verify} messages.
+                         * @param message TextWithTooltip message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.ITextWithTooltip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextWithTooltip message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextWithTooltip
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.TextWithTooltip;
+
+                        /**
+                         * Decodes a TextWithTooltip message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextWithTooltip
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.TextWithTooltip;
+
+                        /**
+                         * Verifies a TextWithTooltip message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextWithTooltip message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextWithTooltip
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.TextWithTooltip;
+
+                        /**
+                         * Creates a plain object from a TextWithTooltip message. Also converts values to other types if specified.
+                         * @param message TextWithTooltip
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.TextWithTooltip, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextWithTooltip to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextWithTooltip
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TextWithTooltip {
+
+                        /** TooltipIconStyle enum. */
+                        enum TooltipIconStyle {
+                            TOOLTIP_ICON_STYLE_UNSPECIFIED = 0,
+                            INFO = 1,
+                            QUESTION = 2
+                        }
+                    }
+
+                    /** Properties of a Callout. */
+                    interface ICallout {
+
+                        /** Callout styleHint */
+                        styleHint?: (google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint|keyof typeof google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint|null);
+
+                        /** Callout fullMessage */
+                        fullMessage?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+                    }
+
+                    /** Represents a Callout. */
+                    class Callout implements ICallout {
+
+                        /**
+                         * Constructs a new Callout.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.ICallout);
+
+                        /** Callout styleHint. */
+                        public styleHint: (google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint|keyof typeof google.shopping.merchant.issueresolution.v1.Callout.CalloutStyleHint);
+
+                        /** Callout fullMessage. */
+                        public fullMessage?: (google.shopping.merchant.issueresolution.v1.ITextWithTooltip|null);
+
+                        /**
+                         * Creates a new Callout instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Callout instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.ICallout): google.shopping.merchant.issueresolution.v1.Callout;
+
+                        /**
+                         * Encodes the specified Callout message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Callout.verify|verify} messages.
+                         * @param message Callout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.ICallout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Callout message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.Callout.verify|verify} messages.
+                         * @param message Callout message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.ICallout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Callout message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Callout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.Callout;
+
+                        /**
+                         * Decodes a Callout message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Callout
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.Callout;
+
+                        /**
+                         * Verifies a Callout message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Callout message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Callout
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.Callout;
+
+                        /**
+                         * Creates a plain object from a Callout message. Also converts values to other types if specified.
+                         * @param message Callout
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.Callout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Callout to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Callout
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Callout {
+
+                        /** CalloutStyleHint enum. */
+                        enum CalloutStyleHint {
+                            CALLOUT_STYLE_HINT_UNSPECIFIED = 0,
+                            ERROR = 1,
+                            WARNING = 2,
+                            INFO = 3
+                        }
+                    }
+
+                    /** Properties of an ExternalAction. */
+                    interface IExternalAction {
+
+                        /** ExternalAction type */
+                        type?: (google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType|keyof typeof google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType|null);
+
+                        /** ExternalAction uri */
+                        uri?: (string|null);
+                    }
+
+                    /** Represents an ExternalAction. */
+                    class ExternalAction implements IExternalAction {
+
+                        /**
+                         * Constructs a new ExternalAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IExternalAction);
+
+                        /** ExternalAction type. */
+                        public type: (google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType|keyof typeof google.shopping.merchant.issueresolution.v1.ExternalAction.ExternalActionType);
+
+                        /** ExternalAction uri. */
+                        public uri: string;
+
+                        /**
+                         * Creates a new ExternalAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExternalAction instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IExternalAction): google.shopping.merchant.issueresolution.v1.ExternalAction;
+
+                        /**
+                         * Encodes the specified ExternalAction message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ExternalAction.verify|verify} messages.
+                         * @param message ExternalAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IExternalAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExternalAction message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ExternalAction.verify|verify} messages.
+                         * @param message ExternalAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IExternalAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExternalAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExternalAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.ExternalAction;
+
+                        /**
+                         * Decodes an ExternalAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExternalAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.ExternalAction;
+
+                        /**
+                         * Verifies an ExternalAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExternalAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExternalAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.ExternalAction;
+
+                        /**
+                         * Creates a plain object from an ExternalAction message. Also converts values to other types if specified.
+                         * @param message ExternalAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.ExternalAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExternalAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExternalAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ExternalAction {
+
+                        /** ExternalActionType enum. */
+                        enum ExternalActionType {
+                            EXTERNAL_ACTION_TYPE_UNSPECIFIED = 0,
+                            REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER = 1,
+                            REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER = 2,
+                            LEGAL_APPEAL_IN_HELP_CENTER = 3,
+                            VERIFY_IDENTITY_IN_MERCHANT_CENTER = 4
+                        }
+                    }
+
+                    /** Properties of a TriggerActionRequest. */
+                    interface ITriggerActionRequest {
+
+                        /** TriggerActionRequest name */
+                        name?: (string|null);
+
+                        /** TriggerActionRequest payload */
+                        payload?: (google.shopping.merchant.issueresolution.v1.ITriggerActionPayload|null);
+
+                        /** TriggerActionRequest languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a TriggerActionRequest. */
+                    class TriggerActionRequest implements ITriggerActionRequest {
+
+                        /**
+                         * Constructs a new TriggerActionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest);
+
+                        /** TriggerActionRequest name. */
+                        public name: string;
+
+                        /** TriggerActionRequest payload. */
+                        public payload?: (google.shopping.merchant.issueresolution.v1.ITriggerActionPayload|null);
+
+                        /** TriggerActionRequest languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new TriggerActionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TriggerActionRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest): google.shopping.merchant.issueresolution.v1.TriggerActionRequest;
+
+                        /**
+                         * Encodes the specified TriggerActionRequest message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionRequest.verify|verify} messages.
+                         * @param message TriggerActionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TriggerActionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionRequest.verify|verify} messages.
+                         * @param message TriggerActionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.ITriggerActionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TriggerActionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TriggerActionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.TriggerActionRequest;
+
+                        /**
+                         * Decodes a TriggerActionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TriggerActionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.TriggerActionRequest;
+
+                        /**
+                         * Verifies a TriggerActionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TriggerActionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TriggerActionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.TriggerActionRequest;
+
+                        /**
+                         * Creates a plain object from a TriggerActionRequest message. Also converts values to other types if specified.
+                         * @param message TriggerActionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.TriggerActionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TriggerActionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TriggerActionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TriggerActionPayload. */
+                    interface ITriggerActionPayload {
+
+                        /** TriggerActionPayload actionContext */
+                        actionContext?: (string|null);
+
+                        /** TriggerActionPayload actionInput */
+                        actionInput?: (google.shopping.merchant.issueresolution.v1.IActionInput|null);
+                    }
+
+                    /** Represents a TriggerActionPayload. */
+                    class TriggerActionPayload implements ITriggerActionPayload {
+
+                        /**
+                         * Constructs a new TriggerActionPayload.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionPayload);
+
+                        /** TriggerActionPayload actionContext. */
+                        public actionContext: string;
+
+                        /** TriggerActionPayload actionInput. */
+                        public actionInput?: (google.shopping.merchant.issueresolution.v1.IActionInput|null);
+
+                        /**
+                         * Creates a new TriggerActionPayload instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TriggerActionPayload instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionPayload): google.shopping.merchant.issueresolution.v1.TriggerActionPayload;
+
+                        /**
+                         * Encodes the specified TriggerActionPayload message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionPayload.verify|verify} messages.
+                         * @param message TriggerActionPayload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.ITriggerActionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TriggerActionPayload message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionPayload.verify|verify} messages.
+                         * @param message TriggerActionPayload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.ITriggerActionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TriggerActionPayload message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TriggerActionPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.TriggerActionPayload;
+
+                        /**
+                         * Decodes a TriggerActionPayload message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TriggerActionPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.TriggerActionPayload;
+
+                        /**
+                         * Verifies a TriggerActionPayload message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TriggerActionPayload message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TriggerActionPayload
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.TriggerActionPayload;
+
+                        /**
+                         * Creates a plain object from a TriggerActionPayload message. Also converts values to other types if specified.
+                         * @param message TriggerActionPayload
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.TriggerActionPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TriggerActionPayload to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TriggerActionPayload
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TriggerActionResponse. */
+                    interface ITriggerActionResponse {
+
+                        /** TriggerActionResponse message */
+                        message?: (string|null);
+                    }
+
+                    /** Represents a TriggerActionResponse. */
+                    class TriggerActionResponse implements ITriggerActionResponse {
+
+                        /**
+                         * Constructs a new TriggerActionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionResponse);
+
+                        /** TriggerActionResponse message. */
+                        public message: string;
+
+                        /**
+                         * Creates a new TriggerActionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TriggerActionResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.ITriggerActionResponse): google.shopping.merchant.issueresolution.v1.TriggerActionResponse;
+
+                        /**
+                         * Encodes the specified TriggerActionResponse message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionResponse.verify|verify} messages.
+                         * @param message TriggerActionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.ITriggerActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TriggerActionResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.TriggerActionResponse.verify|verify} messages.
+                         * @param message TriggerActionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.ITriggerActionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TriggerActionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TriggerActionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.TriggerActionResponse;
+
+                        /**
+                         * Decodes a TriggerActionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TriggerActionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.TriggerActionResponse;
+
+                        /**
+                         * Verifies a TriggerActionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TriggerActionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TriggerActionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.TriggerActionResponse;
+
+                        /**
+                         * Creates a plain object from a TriggerActionResponse message. Also converts values to other types if specified.
+                         * @param message TriggerActionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.TriggerActionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TriggerActionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TriggerActionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ActionInput. */
+                    interface IActionInput {
+
+                        /** ActionInput actionFlowId */
+                        actionFlowId?: (string|null);
+
+                        /** ActionInput inputValues */
+                        inputValues?: (google.shopping.merchant.issueresolution.v1.IInputValue[]|null);
+                    }
+
+                    /** Represents an ActionInput. */
+                    class ActionInput implements IActionInput {
+
+                        /**
+                         * Constructs a new ActionInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IActionInput);
+
+                        /** ActionInput actionFlowId. */
+                        public actionFlowId: string;
+
+                        /** ActionInput inputValues. */
+                        public inputValues: google.shopping.merchant.issueresolution.v1.IInputValue[];
+
+                        /**
+                         * Creates a new ActionInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ActionInput instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IActionInput): google.shopping.merchant.issueresolution.v1.ActionInput;
+
+                        /**
+                         * Encodes the specified ActionInput message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionInput.verify|verify} messages.
+                         * @param message ActionInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IActionInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ActionInput message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.ActionInput.verify|verify} messages.
+                         * @param message ActionInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IActionInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ActionInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ActionInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.ActionInput;
+
+                        /**
+                         * Decodes an ActionInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ActionInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.ActionInput;
+
+                        /**
+                         * Verifies an ActionInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ActionInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ActionInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.ActionInput;
+
+                        /**
+                         * Creates a plain object from an ActionInput message. Also converts values to other types if specified.
+                         * @param message ActionInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.ActionInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ActionInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ActionInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InputValue. */
+                    interface IInputValue {
+
+                        /** InputValue textInputValue */
+                        textInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue|null);
+
+                        /** InputValue choiceInputValue */
+                        choiceInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue|null);
+
+                        /** InputValue checkboxInputValue */
+                        checkboxInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue|null);
+
+                        /** InputValue inputFieldId */
+                        inputFieldId?: (string|null);
+                    }
+
+                    /** Represents an InputValue. */
+                    class InputValue implements IInputValue {
+
+                        /**
+                         * Constructs a new InputValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.issueresolution.v1.IInputValue);
+
+                        /** InputValue textInputValue. */
+                        public textInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue|null);
+
+                        /** InputValue choiceInputValue. */
+                        public choiceInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue|null);
+
+                        /** InputValue checkboxInputValue. */
+                        public checkboxInputValue?: (google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue|null);
+
+                        /** InputValue inputFieldId. */
+                        public inputFieldId: string;
+
+                        /** InputValue value. */
+                        public value?: ("textInputValue"|"choiceInputValue"|"checkboxInputValue");
+
+                        /**
+                         * Creates a new InputValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputValue instance
+                         */
+                        public static create(properties?: google.shopping.merchant.issueresolution.v1.IInputValue): google.shopping.merchant.issueresolution.v1.InputValue;
+
+                        /**
+                         * Encodes the specified InputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.verify|verify} messages.
+                         * @param message InputValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.issueresolution.v1.IInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.verify|verify} messages.
+                         * @param message InputValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.IInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputValue;
+
+                        /**
+                         * Decodes an InputValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputValue;
+
+                        /**
+                         * Verifies an InputValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputValue;
+
+                        /**
+                         * Creates a plain object from an InputValue message. Also converts values to other types if specified.
+                         * @param message InputValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.issueresolution.v1.InputValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace InputValue {
+
+                        /** Properties of a TextInputValue. */
+                        interface ITextInputValue {
+
+                            /** TextInputValue value */
+                            value?: (string|null);
+                        }
+
+                        /** Represents a TextInputValue. */
+                        class TextInputValue implements ITextInputValue {
+
+                            /**
+                             * Constructs a new TextInputValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue);
+
+                            /** TextInputValue value. */
+                            public value: string;
+
+                            /**
+                             * Creates a new TextInputValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TextInputValue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue): google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue;
+
+                            /**
+                             * Encodes the specified TextInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.verify|verify} messages.
+                             * @param message TextInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TextInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue.verify|verify} messages.
+                             * @param message TextInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputValue.ITextInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TextInputValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TextInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue;
+
+                            /**
+                             * Decodes a TextInputValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TextInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue;
+
+                            /**
+                             * Verifies a TextInputValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TextInputValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TextInputValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue;
+
+                            /**
+                             * Creates a plain object from a TextInputValue message. Also converts values to other types if specified.
+                             * @param message TextInputValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputValue.TextInputValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TextInputValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TextInputValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ChoiceInputValue. */
+                        interface IChoiceInputValue {
+
+                            /** ChoiceInputValue choiceInputOptionId */
+                            choiceInputOptionId?: (string|null);
+                        }
+
+                        /** Represents a ChoiceInputValue. */
+                        class ChoiceInputValue implements IChoiceInputValue {
+
+                            /**
+                             * Constructs a new ChoiceInputValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue);
+
+                            /** ChoiceInputValue choiceInputOptionId. */
+                            public choiceInputOptionId: string;
+
+                            /**
+                             * Creates a new ChoiceInputValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ChoiceInputValue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue): google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue;
+
+                            /**
+                             * Encodes the specified ChoiceInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.verify|verify} messages.
+                             * @param message ChoiceInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ChoiceInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue.verify|verify} messages.
+                             * @param message ChoiceInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputValue.IChoiceInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ChoiceInputValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ChoiceInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue;
+
+                            /**
+                             * Decodes a ChoiceInputValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ChoiceInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue;
+
+                            /**
+                             * Verifies a ChoiceInputValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ChoiceInputValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ChoiceInputValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue;
+
+                            /**
+                             * Creates a plain object from a ChoiceInputValue message. Also converts values to other types if specified.
+                             * @param message ChoiceInputValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputValue.ChoiceInputValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ChoiceInputValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ChoiceInputValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CheckboxInputValue. */
+                        interface ICheckboxInputValue {
+
+                            /** CheckboxInputValue value */
+                            value?: (boolean|null);
+                        }
+
+                        /** Represents a CheckboxInputValue. */
+                        class CheckboxInputValue implements ICheckboxInputValue {
+
+                            /**
+                             * Constructs a new CheckboxInputValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue);
+
+                            /** CheckboxInputValue value. */
+                            public value: boolean;
+
+                            /**
+                             * Creates a new CheckboxInputValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CheckboxInputValue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue): google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue;
+
+                            /**
+                             * Encodes the specified CheckboxInputValue message. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.verify|verify} messages.
+                             * @param message CheckboxInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CheckboxInputValue message, length delimited. Does not implicitly {@link google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue.verify|verify} messages.
+                             * @param message CheckboxInputValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.issueresolution.v1.InputValue.ICheckboxInputValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CheckboxInputValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CheckboxInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue;
+
+                            /**
+                             * Decodes a CheckboxInputValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CheckboxInputValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue;
+
+                            /**
+                             * Verifies a CheckboxInputValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CheckboxInputValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CheckboxInputValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue;
+
+                            /**
+                             * Creates a plain object from a CheckboxInputValue message. Also converts values to other types if specified.
+                             * @param message CheckboxInputValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.issueresolution.v1.InputValue.CheckboxInputValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CheckboxInputValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CheckboxInputValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
@@ -5234,6 +9420,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -5250,6 +9439,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -5951,6 +10143,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -5964,6 +10159,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -6041,6 +10239,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -6369,6 +10679,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -6382,6 +10695,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -6705,6 +11021,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -7088,6 +11507,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -7117,6 +11537,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -7166,6 +11589,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -7301,6 +11727,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -7341,6 +11770,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -8189,6 +12621,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -8214,6 +12649,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -9149,6 +13587,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -9203,6 +13644,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9419,6 +13863,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -9662,6 +14221,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9683,6 +14245,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10273,6 +14838,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -10301,6 +14872,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -10424,6 +15001,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -10543,8 +15230,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -10559,8 +15249,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -11091,6 +15784,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

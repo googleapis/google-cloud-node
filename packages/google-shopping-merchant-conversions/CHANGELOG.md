@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/conversions-v0.4.0...conversions-v0.5.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add conversions API client libraries for v1 ([#6556](https://github.com/googleapis/google-cloud-node/issues/6556)) ([0be6da4](https://github.com/googleapis/google-cloud-node/commit/0be6da4a57c05c196d3d63a93d1c833c5e3e786b))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/conversions-v0.3.1...conversions-v0.4.0) (2025-07-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.2.0...aiplatform-v5.3.0) (2025-08-04)
+
+
+### Features
+
+* A new value `NVIDIA_GB200` is added to enum `AcceleratorType` ([#6557](https://github.com/googleapis/google-cloud-node/issues/6557)) ([f814e74](https://github.com/googleapis/google-cloud-node/commit/f814e743ac3da1734af1ae44b091139e12747475))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.1.0...aiplatform-v5.2.0) (2025-08-04)
 
 

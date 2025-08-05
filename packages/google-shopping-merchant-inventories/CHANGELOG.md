@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.8.0...inventories-v0.9.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add inventories API client libraries for v1 ([#6553](https://github.com/googleapis/google-cloud-node/issues/6553)) ([47de42b](https://github.com/googleapis/google-cloud-node/commit/47de42b1be9f4f6d75d0351629d7bdac4a0d9a31))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.7.1...inventories-v0.8.0) (2025-07-09)
 
 

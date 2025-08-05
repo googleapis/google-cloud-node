@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as featureonlinestoreserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -50,6 +52,15 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -445,6 +456,70 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.searchNearestEntities(request), expectedError);
+        });
+    });
+
+    describe('featureViewDirectWrite', () => {
+        it('invokes featureViewDirectWrite without error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse()
+            );
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(expectedResponse);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+
+        it('invokes featureViewDirectWrite with error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
         });
     });
     describe('getIamPolicy', () => {

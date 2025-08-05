@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.6.0...datasources-v0.7.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add datasources API client libraries for v1 ([#6555](https://github.com/googleapis/google-cloud-node/issues/6555)) ([5d8c583](https://github.com/googleapis/google-cloud-node/commit/5d8c58311ccb59a339ea278ea0da9cedcc5f706f))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.5.0...datasources-v0.6.0) (2025-07-09)
 
 

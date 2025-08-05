@@ -17,6 +17,11 @@
   * [Product_inputs_service.update_product_input](#product_inputs_service.update_product_input)
   * [Products_service.get_product](#products_service.get_product)
   * [Products_service.list_products](#products_service.list_products)
+  * [Product_inputs_service.delete_product_input](#product_inputs_service.delete_product_input)
+  * [Product_inputs_service.insert_product_input](#product_inputs_service.insert_product_input)
+  * [Product_inputs_service.update_product_input](#product_inputs_service.update_product_input)
+  * [Products_service.get_product](#products_service.get_product)
+  * [Products_service.list_products](#products_service.list_products)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -31,6 +36,91 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Product_inputs_service.delete_product_input
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.delete_product_input.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.delete_product_input.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.delete_product_input.js`
+
+
+-----
+
+
+
+
+### Product_inputs_service.insert_product_input
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.insert_product_input.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.insert_product_input.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.insert_product_input.js`
+
+
+-----
+
+
+
+
+### Product_inputs_service.update_product_input
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.update_product_input.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.update_product_input.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-products/samples/generated/v1/product_inputs_service.update_product_input.js`
+
+
+-----
+
+
+
+
+### Products_service.get_product
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/products_service.get_product.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1/products_service.get_product.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-products/samples/generated/v1/products_service.get_product.js`
+
+
+-----
+
+
+
+
+### Products_service.list_products
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1/products_service.list_products.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1/products_service.list_products.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-products/samples/generated/v1/products_service.list_products.js`
+
+
+-----
+
 
 
 
