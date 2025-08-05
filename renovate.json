@@ -15,15 +15,9 @@
     {
       "extends": "packages:linters",
       "groupName": "linters"
-    },
-    {
-      "matchUpdateTypes": [
-        "minor"
-      ],
-      "matchDepTypes": ["dependencies", "devDependencies"],
-      "allowedUpdateTypes": ["major", "patch"]
     }
   ],
+  "allowedUpdateTypes": ["major", "patch"],
   "ignoreDeps": [
     "typescript"
   ]
