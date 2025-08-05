@@ -8,6 +8,2125 @@
               "nested": {
                 "reports": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.Reports.V1",
+                        "go_package": "cloud.google.com/go/shopping/merchant/reports/apiv1/reportspb;reportspb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ReportsProto",
+                        "java_package": "com.google.shopping.merchant.reports.v1",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Reports\\V1",
+                        "ruby_package": "Google::Shopping::Merchant::Reports::V1"
+                      },
+                      "nested": {
+                        "ReportService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "Search": {
+                              "requestType": "SearchRequest",
+                              "responseType": "SearchResponse",
+                              "options": {
+                                "(google.api.http).post": "/reports/v1/{parent=accounts/*}/reports:search",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/reports/v1/{parent=accounts/*}/reports:search",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "SearchRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "query": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SearchResponse": {
+                          "fields": {
+                            "results": {
+                              "rule": "repeated",
+                              "type": "ReportRow",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ReportRow": {
+                          "fields": {
+                            "productPerformanceView": {
+                              "type": "ProductPerformanceView",
+                              "id": 1
+                            },
+                            "nonProductPerformanceView": {
+                              "type": "NonProductPerformanceView",
+                              "id": 7
+                            },
+                            "productView": {
+                              "type": "ProductView",
+                              "id": 2
+                            },
+                            "priceCompetitivenessProductView": {
+                              "type": "PriceCompetitivenessProductView",
+                              "id": 3
+                            },
+                            "priceInsightsProductView": {
+                              "type": "PriceInsightsProductView",
+                              "id": 4
+                            },
+                            "bestSellersProductClusterView": {
+                              "type": "BestSellersProductClusterView",
+                              "id": 5
+                            },
+                            "bestSellersBrandView": {
+                              "type": "BestSellersBrandView",
+                              "id": 6
+                            },
+                            "competitiveVisibilityCompetitorView": {
+                              "type": "CompetitiveVisibilityCompetitorView",
+                              "id": 8
+                            },
+                            "competitiveVisibilityTopMerchantView": {
+                              "type": "CompetitiveVisibilityTopMerchantView",
+                              "id": 9
+                            },
+                            "competitiveVisibilityBenchmarkView": {
+                              "type": "CompetitiveVisibilityBenchmarkView",
+                              "id": 10
+                            }
+                          }
+                        },
+                        "ProductPerformanceView": {
+                          "oneofs": {
+                            "_marketingMethod": {
+                              "oneof": [
+                                "marketingMethod"
+                              ]
+                            },
+                            "_customerCountryCode": {
+                              "oneof": [
+                                "customerCountryCode"
+                              ]
+                            },
+                            "_offerId": {
+                              "oneof": [
+                                "offerId"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_categoryL1": {
+                              "oneof": [
+                                "categoryL1"
+                              ]
+                            },
+                            "_categoryL2": {
+                              "oneof": [
+                                "categoryL2"
+                              ]
+                            },
+                            "_categoryL3": {
+                              "oneof": [
+                                "categoryL3"
+                              ]
+                            },
+                            "_categoryL4": {
+                              "oneof": [
+                                "categoryL4"
+                              ]
+                            },
+                            "_categoryL5": {
+                              "oneof": [
+                                "categoryL5"
+                              ]
+                            },
+                            "_productTypeL1": {
+                              "oneof": [
+                                "productTypeL1"
+                              ]
+                            },
+                            "_productTypeL2": {
+                              "oneof": [
+                                "productTypeL2"
+                              ]
+                            },
+                            "_productTypeL3": {
+                              "oneof": [
+                                "productTypeL3"
+                              ]
+                            },
+                            "_productTypeL4": {
+                              "oneof": [
+                                "productTypeL4"
+                              ]
+                            },
+                            "_productTypeL5": {
+                              "oneof": [
+                                "productTypeL5"
+                              ]
+                            },
+                            "_customLabel0": {
+                              "oneof": [
+                                "customLabel0"
+                              ]
+                            },
+                            "_customLabel1": {
+                              "oneof": [
+                                "customLabel1"
+                              ]
+                            },
+                            "_customLabel2": {
+                              "oneof": [
+                                "customLabel2"
+                              ]
+                            },
+                            "_customLabel3": {
+                              "oneof": [
+                                "customLabel3"
+                              ]
+                            },
+                            "_customLabel4": {
+                              "oneof": [
+                                "customLabel4"
+                              ]
+                            },
+                            "_clicks": {
+                              "oneof": [
+                                "clicks"
+                              ]
+                            },
+                            "_impressions": {
+                              "oneof": [
+                                "impressions"
+                              ]
+                            },
+                            "_clickThroughRate": {
+                              "oneof": [
+                                "clickThroughRate"
+                              ]
+                            },
+                            "_conversions": {
+                              "oneof": [
+                                "conversions"
+                              ]
+                            },
+                            "_conversionRate": {
+                              "oneof": [
+                                "conversionRate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "marketingMethod": {
+                              "type": "MarketingMethod.MarketingMethodEnum",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 2
+                            },
+                            "week": {
+                              "type": "google.type.Date",
+                              "id": 3
+                            },
+                            "customerCountryCode": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL1": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL2": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL3": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL4": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL5": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL1": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL2": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL3": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL4": {
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL5": {
+                              "type": "string",
+                              "id": 17,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel0": {
+                              "type": "string",
+                              "id": 18,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel1": {
+                              "type": "string",
+                              "id": 19,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel2": {
+                              "type": "string",
+                              "id": 20,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel3": {
+                              "type": "string",
+                              "id": 21,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel4": {
+                              "type": "string",
+                              "id": 22,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "clicks": {
+                              "type": "int64",
+                              "id": 23,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "impressions": {
+                              "type": "int64",
+                              "id": 24,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "clickThroughRate": {
+                              "type": "double",
+                              "id": 25,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "conversions": {
+                              "type": "double",
+                              "id": 26,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "conversionValue": {
+                              "type": "google.shopping.type.Price",
+                              "id": 27
+                            },
+                            "conversionRate": {
+                              "type": "double",
+                              "id": 28,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductView": {
+                          "oneofs": {
+                            "_id": {
+                              "oneof": [
+                                "id"
+                              ]
+                            },
+                            "_channel": {
+                              "oneof": [
+                                "channel"
+                              ]
+                            },
+                            "_languageCode": {
+                              "oneof": [
+                                "languageCode"
+                              ]
+                            },
+                            "_feedLabel": {
+                              "oneof": [
+                                "feedLabel"
+                              ]
+                            },
+                            "_offerId": {
+                              "oneof": [
+                                "offerId"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_categoryL1": {
+                              "oneof": [
+                                "categoryL1"
+                              ]
+                            },
+                            "_categoryL2": {
+                              "oneof": [
+                                "categoryL2"
+                              ]
+                            },
+                            "_categoryL3": {
+                              "oneof": [
+                                "categoryL3"
+                              ]
+                            },
+                            "_categoryL4": {
+                              "oneof": [
+                                "categoryL4"
+                              ]
+                            },
+                            "_categoryL5": {
+                              "oneof": [
+                                "categoryL5"
+                              ]
+                            },
+                            "_productTypeL1": {
+                              "oneof": [
+                                "productTypeL1"
+                              ]
+                            },
+                            "_productTypeL2": {
+                              "oneof": [
+                                "productTypeL2"
+                              ]
+                            },
+                            "_productTypeL3": {
+                              "oneof": [
+                                "productTypeL3"
+                              ]
+                            },
+                            "_productTypeL4": {
+                              "oneof": [
+                                "productTypeL4"
+                              ]
+                            },
+                            "_productTypeL5": {
+                              "oneof": [
+                                "productTypeL5"
+                              ]
+                            },
+                            "_condition": {
+                              "oneof": [
+                                "condition"
+                              ]
+                            },
+                            "_availability": {
+                              "oneof": [
+                                "availability"
+                              ]
+                            },
+                            "_shippingLabel": {
+                              "oneof": [
+                                "shippingLabel"
+                              ]
+                            },
+                            "_itemGroupId": {
+                              "oneof": [
+                                "itemGroupId"
+                              ]
+                            },
+                            "_thumbnailLink": {
+                              "oneof": [
+                                "thumbnailLink"
+                              ]
+                            },
+                            "_aggregatedReportingContextStatus": {
+                              "oneof": [
+                                "aggregatedReportingContextStatus"
+                              ]
+                            },
+                            "_clickPotentialRank": {
+                              "oneof": [
+                                "clickPotentialRank"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "channel": {
+                              "type": "google.shopping.type.Channel.ChannelEnum",
+                              "id": 28,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "feedLabel": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL1": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL2": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL3": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL4": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL5": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL1": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL2": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL3": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL4": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL5": {
+                              "type": "string",
+                              "id": 16,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 17
+                            },
+                            "condition": {
+                              "type": "string",
+                              "id": 18,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "availability": {
+                              "type": "string",
+                              "id": 19,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "shippingLabel": {
+                              "type": "string",
+                              "id": 20,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "gtin": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 21
+                            },
+                            "itemGroupId": {
+                              "type": "string",
+                              "id": 22,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "thumbnailLink": {
+                              "type": "string",
+                              "id": 23,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "creationTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 24
+                            },
+                            "expirationDate": {
+                              "type": "google.type.Date",
+                              "id": 25
+                            },
+                            "aggregatedReportingContextStatus": {
+                              "type": "AggregatedReportingContextStatus",
+                              "id": 26,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "itemIssues": {
+                              "rule": "repeated",
+                              "type": "ItemIssue",
+                              "id": 27
+                            },
+                            "clickPotential": {
+                              "type": "ClickPotential",
+                              "id": 29
+                            },
+                            "clickPotentialRank": {
+                              "type": "int64",
+                              "id": 30,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ItemIssue": {
+                              "oneofs": {
+                                "_resolution": {
+                                  "oneof": [
+                                    "resolution"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "type": {
+                                  "type": "ItemIssueType",
+                                  "id": 1
+                                },
+                                "severity": {
+                                  "type": "ItemIssueSeverity",
+                                  "id": 2
+                                },
+                                "resolution": {
+                                  "type": "ItemIssueResolution",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ItemIssueType": {
+                                  "oneofs": {
+                                    "_code": {
+                                      "oneof": [
+                                        "code"
+                                      ]
+                                    },
+                                    "_canonicalAttribute": {
+                                      "oneof": [
+                                        "canonicalAttribute"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "code": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    },
+                                    "canonicalAttribute": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  }
+                                },
+                                "ItemIssueSeverity": {
+                                  "oneofs": {
+                                    "_aggregatedSeverity": {
+                                      "oneof": [
+                                        "aggregatedSeverity"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "severityPerReportingContext": {
+                                      "rule": "repeated",
+                                      "type": "IssueSeverityPerReportingContext",
+                                      "id": 1
+                                    },
+                                    "aggregatedSeverity": {
+                                      "type": "AggregatedIssueSeverity",
+                                      "id": 2,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
+                                    }
+                                  },
+                                  "nested": {
+                                    "IssueSeverityPerReportingContext": {
+                                      "oneofs": {
+                                        "_reportingContext": {
+                                          "oneof": [
+                                            "reportingContext"
+                                          ]
+                                        }
+                                      },
+                                      "fields": {
+                                        "reportingContext": {
+                                          "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                                          "id": 1,
+                                          "options": {
+                                            "proto3_optional": true
+                                          }
+                                        },
+                                        "disapprovedCountries": {
+                                          "rule": "repeated",
+                                          "type": "string",
+                                          "id": 2
+                                        },
+                                        "demotedCountries": {
+                                          "rule": "repeated",
+                                          "type": "string",
+                                          "id": 3
+                                        }
+                                      }
+                                    },
+                                    "AggregatedIssueSeverity": {
+                                      "values": {
+                                        "AGGREGATED_ISSUE_SEVERITY_UNSPECIFIED": 0,
+                                        "DISAPPROVED": 1,
+                                        "DEMOTED": 2,
+                                        "PENDING": 3
+                                      }
+                                    }
+                                  }
+                                },
+                                "ItemIssueResolution": {
+                                  "values": {
+                                    "ITEM_ISSUE_RESOLUTION_UNSPECIFIED": 0,
+                                    "MERCHANT_ACTION": 1,
+                                    "PENDING_PROCESSING": 2
+                                  }
+                                }
+                              }
+                            },
+                            "AggregatedReportingContextStatus": {
+                              "values": {
+                                "AGGREGATED_REPORTING_CONTEXT_STATUS_UNSPECIFIED": 0,
+                                "NOT_ELIGIBLE_OR_DISAPPROVED": 1,
+                                "PENDING": 2,
+                                "ELIGIBLE_LIMITED": 3,
+                                "ELIGIBLE": 4
+                              }
+                            },
+                            "ClickPotential": {
+                              "values": {
+                                "CLICK_POTENTIAL_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
+                              }
+                            }
+                          }
+                        },
+                        "PriceCompetitivenessProductView": {
+                          "oneofs": {
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_id": {
+                              "oneof": [
+                                "id"
+                              ]
+                            },
+                            "_offerId": {
+                              "oneof": [
+                                "offerId"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_categoryL1": {
+                              "oneof": [
+                                "categoryL1"
+                              ]
+                            },
+                            "_categoryL2": {
+                              "oneof": [
+                                "categoryL2"
+                              ]
+                            },
+                            "_categoryL3": {
+                              "oneof": [
+                                "categoryL3"
+                              ]
+                            },
+                            "_categoryL4": {
+                              "oneof": [
+                                "categoryL4"
+                              ]
+                            },
+                            "_categoryL5": {
+                              "oneof": [
+                                "categoryL5"
+                              ]
+                            },
+                            "_productTypeL1": {
+                              "oneof": [
+                                "productTypeL1"
+                              ]
+                            },
+                            "_productTypeL2": {
+                              "oneof": [
+                                "productTypeL2"
+                              ]
+                            },
+                            "_productTypeL3": {
+                              "oneof": [
+                                "productTypeL3"
+                              ]
+                            },
+                            "_productTypeL4": {
+                              "oneof": [
+                                "productTypeL4"
+                              ]
+                            },
+                            "_productTypeL5": {
+                              "oneof": [
+                                "productTypeL5"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL1": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL2": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL3": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL4": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL5": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL1": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL2": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL3": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL4": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL5": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 16
+                            },
+                            "benchmarkPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 17
+                            }
+                          }
+                        },
+                        "PriceInsightsProductView": {
+                          "oneofs": {
+                            "_id": {
+                              "oneof": [
+                                "id"
+                              ]
+                            },
+                            "_offerId": {
+                              "oneof": [
+                                "offerId"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_categoryL1": {
+                              "oneof": [
+                                "categoryL1"
+                              ]
+                            },
+                            "_categoryL2": {
+                              "oneof": [
+                                "categoryL2"
+                              ]
+                            },
+                            "_categoryL3": {
+                              "oneof": [
+                                "categoryL3"
+                              ]
+                            },
+                            "_categoryL4": {
+                              "oneof": [
+                                "categoryL4"
+                              ]
+                            },
+                            "_categoryL5": {
+                              "oneof": [
+                                "categoryL5"
+                              ]
+                            },
+                            "_productTypeL1": {
+                              "oneof": [
+                                "productTypeL1"
+                              ]
+                            },
+                            "_productTypeL2": {
+                              "oneof": [
+                                "productTypeL2"
+                              ]
+                            },
+                            "_productTypeL3": {
+                              "oneof": [
+                                "productTypeL3"
+                              ]
+                            },
+                            "_productTypeL4": {
+                              "oneof": [
+                                "productTypeL4"
+                              ]
+                            },
+                            "_productTypeL5": {
+                              "oneof": [
+                                "productTypeL5"
+                              ]
+                            },
+                            "_predictedImpressionsChangeFraction": {
+                              "oneof": [
+                                "predictedImpressionsChangeFraction"
+                              ]
+                            },
+                            "_predictedClicksChangeFraction": {
+                              "oneof": [
+                                "predictedClicksChangeFraction"
+                              ]
+                            },
+                            "_predictedConversionsChangeFraction": {
+                              "oneof": [
+                                "predictedConversionsChangeFraction"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL1": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL2": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL3": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL4": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL5": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL1": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL2": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL3": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL4": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productTypeL5": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 15
+                            },
+                            "suggestedPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 16
+                            },
+                            "predictedImpressionsChangeFraction": {
+                              "type": "double",
+                              "id": 17,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "predictedClicksChangeFraction": {
+                              "type": "double",
+                              "id": 18,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "predictedConversionsChangeFraction": {
+                              "type": "double",
+                              "id": 19,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "effectiveness": {
+                              "type": "Effectiveness",
+                              "id": 22
+                            }
+                          },
+                          "nested": {
+                            "Effectiveness": {
+                              "values": {
+                                "EFFECTIVENESS_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3
+                              }
+                            }
+                          }
+                        },
+                        "BestSellersProductClusterView": {
+                          "oneofs": {
+                            "_reportGranularity": {
+                              "oneof": [
+                                "reportGranularity"
+                              ]
+                            },
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_reportCategoryId": {
+                              "oneof": [
+                                "reportCategoryId"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_categoryL1": {
+                              "oneof": [
+                                "categoryL1"
+                              ]
+                            },
+                            "_categoryL2": {
+                              "oneof": [
+                                "categoryL2"
+                              ]
+                            },
+                            "_categoryL3": {
+                              "oneof": [
+                                "categoryL3"
+                              ]
+                            },
+                            "_categoryL4": {
+                              "oneof": [
+                                "categoryL4"
+                              ]
+                            },
+                            "_categoryL5": {
+                              "oneof": [
+                                "categoryL5"
+                              ]
+                            },
+                            "_inventoryStatus": {
+                              "oneof": [
+                                "inventoryStatus"
+                              ]
+                            },
+                            "_brandInventoryStatus": {
+                              "oneof": [
+                                "brandInventoryStatus"
+                              ]
+                            },
+                            "_rank": {
+                              "oneof": [
+                                "rank"
+                              ]
+                            },
+                            "_previousRank": {
+                              "oneof": [
+                                "previousRank"
+                              ]
+                            },
+                            "_relativeDemand": {
+                              "oneof": [
+                                "relativeDemand"
+                              ]
+                            },
+                            "_previousRelativeDemand": {
+                              "oneof": [
+                                "previousRelativeDemand"
+                              ]
+                            },
+                            "_relativeDemandChange": {
+                              "oneof": [
+                                "relativeDemandChange"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "reportDate": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "reportGranularity": {
+                              "type": "ReportGranularity.ReportGranularityEnum",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCategoryId": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL1": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL2": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL3": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL4": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryL5": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "variantGtins": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 13
+                            },
+                            "inventoryStatus": {
+                              "type": "InventoryStatus",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brandInventoryStatus": {
+                              "type": "InventoryStatus",
+                              "id": 15,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "rank": {
+                              "type": "int64",
+                              "id": 16,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "previousRank": {
+                              "type": "int64",
+                              "id": 17,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "relativeDemand": {
+                              "type": "RelativeDemand.RelativeDemandEnum",
+                              "id": 18,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "previousRelativeDemand": {
+                              "type": "RelativeDemand.RelativeDemandEnum",
+                              "id": 19,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "relativeDemandChange": {
+                              "type": "RelativeDemandChangeType.RelativeDemandChangeTypeEnum",
+                              "id": 20,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "InventoryStatus": {
+                              "values": {
+                                "INVENTORY_STATUS_UNSPECIFIED": 0,
+                                "IN_STOCK": 1,
+                                "OUT_OF_STOCK": 2,
+                                "NOT_IN_INVENTORY": 3
+                              }
+                            }
+                          }
+                        },
+                        "BestSellersBrandView": {
+                          "oneofs": {
+                            "_reportGranularity": {
+                              "oneof": [
+                                "reportGranularity"
+                              ]
+                            },
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_reportCategoryId": {
+                              "oneof": [
+                                "reportCategoryId"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_rank": {
+                              "oneof": [
+                                "rank"
+                              ]
+                            },
+                            "_previousRank": {
+                              "oneof": [
+                                "previousRank"
+                              ]
+                            },
+                            "_relativeDemand": {
+                              "oneof": [
+                                "relativeDemand"
+                              ]
+                            },
+                            "_previousRelativeDemand": {
+                              "oneof": [
+                                "previousRelativeDemand"
+                              ]
+                            },
+                            "_relativeDemandChange": {
+                              "oneof": [
+                                "relativeDemandChange"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "reportDate": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "reportGranularity": {
+                              "type": "ReportGranularity.ReportGranularityEnum",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCategoryId": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "rank": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "previousRank": {
+                              "type": "int64",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "relativeDemand": {
+                              "type": "RelativeDemand.RelativeDemandEnum",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "previousRelativeDemand": {
+                              "type": "RelativeDemand.RelativeDemandEnum",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "relativeDemandChange": {
+                              "type": "RelativeDemandChangeType.RelativeDemandChangeTypeEnum",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "NonProductPerformanceView": {
+                          "oneofs": {
+                            "_clicks": {
+                              "oneof": [
+                                "clicks"
+                              ]
+                            },
+                            "_impressions": {
+                              "oneof": [
+                                "impressions"
+                              ]
+                            },
+                            "_clickThroughRate": {
+                              "oneof": [
+                                "clickThroughRate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "week": {
+                              "type": "google.type.Date",
+                              "id": 2
+                            },
+                            "clicks": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "impressions": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "clickThroughRate": {
+                              "type": "double",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "CompetitiveVisibilityCompetitorView": {
+                          "oneofs": {
+                            "_domain": {
+                              "oneof": [
+                                "domain"
+                              ]
+                            },
+                            "_isYourDomain": {
+                              "oneof": [
+                                "isYourDomain"
+                              ]
+                            },
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_reportCategoryId": {
+                              "oneof": [
+                                "reportCategoryId"
+                              ]
+                            },
+                            "_trafficSource": {
+                              "oneof": [
+                                "trafficSource"
+                              ]
+                            },
+                            "_rank": {
+                              "oneof": [
+                                "rank"
+                              ]
+                            },
+                            "_adsOrganicRatio": {
+                              "oneof": [
+                                "adsOrganicRatio"
+                              ]
+                            },
+                            "_pageOverlapRate": {
+                              "oneof": [
+                                "pageOverlapRate"
+                              ]
+                            },
+                            "_higherPositionRate": {
+                              "oneof": [
+                                "higherPositionRate"
+                              ]
+                            },
+                            "_relativeVisibility": {
+                              "oneof": [
+                                "relativeVisibility"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "domain": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "isYourDomain": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCategoryId": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trafficSource": {
+                              "type": "TrafficSource.TrafficSourceEnum",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "rank": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "adsOrganicRatio": {
+                              "type": "double",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "pageOverlapRate": {
+                              "type": "double",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "higherPositionRate": {
+                              "type": "double",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "relativeVisibility": {
+                              "type": "double",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "CompetitiveVisibilityTopMerchantView": {
+                          "oneofs": {
+                            "_domain": {
+                              "oneof": [
+                                "domain"
+                              ]
+                            },
+                            "_isYourDomain": {
+                              "oneof": [
+                                "isYourDomain"
+                              ]
+                            },
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_reportCategoryId": {
+                              "oneof": [
+                                "reportCategoryId"
+                              ]
+                            },
+                            "_trafficSource": {
+                              "oneof": [
+                                "trafficSource"
+                              ]
+                            },
+                            "_rank": {
+                              "oneof": [
+                                "rank"
+                              ]
+                            },
+                            "_adsOrganicRatio": {
+                              "oneof": [
+                                "adsOrganicRatio"
+                              ]
+                            },
+                            "_pageOverlapRate": {
+                              "oneof": [
+                                "pageOverlapRate"
+                              ]
+                            },
+                            "_higherPositionRate": {
+                              "oneof": [
+                                "higherPositionRate"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "domain": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "isYourDomain": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCategoryId": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trafficSource": {
+                              "type": "TrafficSource.TrafficSourceEnum",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "rank": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "adsOrganicRatio": {
+                              "type": "double",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "pageOverlapRate": {
+                              "type": "double",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "higherPositionRate": {
+                              "type": "double",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "CompetitiveVisibilityBenchmarkView": {
+                          "oneofs": {
+                            "_reportCountryCode": {
+                              "oneof": [
+                                "reportCountryCode"
+                              ]
+                            },
+                            "_reportCategoryId": {
+                              "oneof": [
+                                "reportCategoryId"
+                              ]
+                            },
+                            "_trafficSource": {
+                              "oneof": [
+                                "trafficSource"
+                              ]
+                            },
+                            "_yourDomainVisibilityTrend": {
+                              "oneof": [
+                                "yourDomainVisibilityTrend"
+                              ]
+                            },
+                            "_categoryBenchmarkVisibilityTrend": {
+                              "oneof": [
+                                "categoryBenchmarkVisibilityTrend"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "date": {
+                              "type": "google.type.Date",
+                              "id": 1
+                            },
+                            "reportCountryCode": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "reportCategoryId": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "trafficSource": {
+                              "type": "TrafficSource.TrafficSourceEnum",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "yourDomainVisibilityTrend": {
+                              "type": "double",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "categoryBenchmarkVisibilityTrend": {
+                              "type": "double",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "MarketingMethod": {
+                          "fields": {},
+                          "nested": {
+                            "MarketingMethodEnum": {
+                              "values": {
+                                "MARKETING_METHOD_ENUM_UNSPECIFIED": 0,
+                                "ORGANIC": 1,
+                                "ADS": 2
+                              }
+                            }
+                          }
+                        },
+                        "ReportGranularity": {
+                          "fields": {},
+                          "nested": {
+                            "ReportGranularityEnum": {
+                              "values": {
+                                "REPORT_GRANULARITY_ENUM_UNSPECIFIED": 0,
+                                "WEEKLY": 1,
+                                "MONTHLY": 2
+                              }
+                            }
+                          }
+                        },
+                        "RelativeDemand": {
+                          "fields": {},
+                          "nested": {
+                            "RelativeDemandEnum": {
+                              "values": {
+                                "RELATIVE_DEMAND_ENUM_UNSPECIFIED": 0,
+                                "VERY_LOW": 10,
+                                "LOW": 20,
+                                "MEDIUM": 30,
+                                "HIGH": 40,
+                                "VERY_HIGH": 50
+                              }
+                            }
+                          }
+                        },
+                        "RelativeDemandChangeType": {
+                          "fields": {},
+                          "nested": {
+                            "RelativeDemandChangeTypeEnum": {
+                              "values": {
+                                "RELATIVE_DEMAND_CHANGE_TYPE_ENUM_UNSPECIFIED": 0,
+                                "SINKER": 1,
+                                "FLAT": 2,
+                                "RISER": 3
+                              }
+                            }
+                          }
+                        },
+                        "TrafficSource": {
+                          "fields": {},
+                          "nested": {
+                            "TrafficSourceEnum": {
+                              "values": {
+                                "TRAFFIC_SOURCE_ENUM_UNSPECIFIED": 0,
+                                "ORGANIC": 1,
+                                "ADS": 2,
+                                "ALL": 3
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1alpha": {
                       "options": {
                         "csharp_namespace": "Google.Shopping.Merchant.Reports.V1Alpha",
