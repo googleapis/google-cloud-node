@@ -20,7 +20,8 @@
       "matchUpdateTypes": [
         "minor"
       ],
-      "enabled": false
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "allowedUpdateTypes": ["major", "patch"]
     }
   ],
   "ignoreDeps": [
