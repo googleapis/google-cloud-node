@@ -157157,6 +157157,9 @@ export namespace google {
 
                     /** Properties of a GoogleSearch. */
                     interface IGoogleSearch {
+
+                        /** GoogleSearch excludeDomains */
+                        excludeDomains?: (string[]|null);
                     }
 
                     /** Represents a GoogleSearch. */
@@ -157167,6 +157170,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IGoogleSearch);
+
+                        /** GoogleSearch excludeDomains. */
+                        public excludeDomains: string[];
 
                         /**
                          * Creates a new GoogleSearch instance using the specified properties.
@@ -159019,6 +159025,9 @@ export namespace google {
 
                 /** Properties of an EnterpriseWebSearch. */
                 interface IEnterpriseWebSearch {
+
+                    /** EnterpriseWebSearch excludeDomains */
+                    excludeDomains?: (string[]|null);
                 }
 
                 /** Represents an EnterpriseWebSearch. */
@@ -159029,6 +159038,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch);
+
+                    /** EnterpriseWebSearch excludeDomains. */
+                    public excludeDomains: string[];
 
                     /**
                      * Creates a new EnterpriseWebSearch instance using the specified properties.
