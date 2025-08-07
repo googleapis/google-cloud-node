@@ -13656,6 +13656,9 @@ export namespace google {
 
                     /** GroundingChunk retrievedContext */
                     retrievedContext?: (google.cloud.aiplatform.v1.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps */
+                    maps?: (google.cloud.aiplatform.v1.GroundingChunk.IMaps|null);
                 }
 
                 /** Represents a GroundingChunk. */
@@ -13673,8 +13676,11 @@ export namespace google {
                     /** GroundingChunk retrievedContext. */
                     public retrievedContext?: (google.cloud.aiplatform.v1.GroundingChunk.IRetrievedContext|null);
 
+                    /** GroundingChunk maps. */
+                    public maps?: (google.cloud.aiplatform.v1.GroundingChunk.IMaps|null);
+
                     /** GroundingChunk chunkType. */
-                    public chunkType?: ("web"|"retrievedContext");
+                    public chunkType?: ("web"|"retrievedContext"|"maps");
 
                     /**
                      * Creates a new GroundingChunk instance using the specified properties.
@@ -13976,6 +13982,121 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a Maps. */
+                    interface IMaps {
+
+                        /** Maps uri */
+                        uri?: (string|null);
+
+                        /** Maps title */
+                        title?: (string|null);
+
+                        /** Maps text */
+                        text?: (string|null);
+
+                        /** Maps placeId */
+                        placeId?: (string|null);
+                    }
+
+                    /** Represents a Maps. */
+                    class Maps implements IMaps {
+
+                        /**
+                         * Constructs a new Maps.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.GroundingChunk.IMaps);
+
+                        /** Maps uri. */
+                        public uri?: (string|null);
+
+                        /** Maps title. */
+                        public title?: (string|null);
+
+                        /** Maps text. */
+                        public text?: (string|null);
+
+                        /** Maps placeId. */
+                        public placeId?: (string|null);
+
+                        /**
+                         * Creates a new Maps instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Maps instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.GroundingChunk.IMaps): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Encodes the specified Maps message. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Verifies a Maps message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Maps
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                         * @param message Maps
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.GroundingChunk.Maps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Maps to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Maps
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GroundingSupport. */
@@ -14104,6 +14225,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata */
                     retrievalMetadata?: (google.cloud.aiplatform.v1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -14129,6 +14253,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata. */
                     public retrievalMetadata?: (google.cloud.aiplatform.v1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -14881,6 +15008,9 @@ export namespace google {
                     /** Tool googleSearchRetrieval */
                     googleSearchRetrieval?: (google.cloud.aiplatform.v1.IGoogleSearchRetrieval|null);
 
+                    /** Tool googleMaps */
+                    googleMaps?: (google.cloud.aiplatform.v1.IGoogleMaps|null);
+
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
 
@@ -14914,6 +15044,9 @@ export namespace google {
 
                     /** Tool googleSearchRetrieval. */
                     public googleSearchRetrieval?: (google.cloud.aiplatform.v1.IGoogleSearchRetrieval|null);
+
+                    /** Tool googleMaps. */
+                    public googleMaps?: (google.cloud.aiplatform.v1.IGoogleMaps|null);
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
@@ -16603,6 +16736,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GoogleSearchRetrieval
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleMaps. */
+                interface IGoogleMaps {
+                }
+
+                /** Represents a GoogleMaps. */
+                class GoogleMaps implements IGoogleMaps {
+
+                    /**
+                     * Constructs a new GoogleMaps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGoogleMaps);
+
+                    /**
+                     * Creates a new GoogleMaps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleMaps instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGoogleMaps): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Encodes the specified GoogleMaps message. Does not implicitly {@link google.cloud.aiplatform.v1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Verifies a GoogleMaps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleMaps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                     * @param message GoogleMaps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GoogleMaps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleMaps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleMaps
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -156352,6 +156576,9 @@ export namespace google {
 
                     /** GroundingChunk retrievedContext */
                     retrievedContext?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps */
+                    maps?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps|null);
                 }
 
                 /** Represents a GroundingChunk. */
@@ -156369,8 +156596,11 @@ export namespace google {
                     /** GroundingChunk retrievedContext. */
                     public retrievedContext?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IRetrievedContext|null);
 
+                    /** GroundingChunk maps. */
+                    public maps?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps|null);
+
                     /** GroundingChunk chunkType. */
-                    public chunkType?: ("web"|"retrievedContext");
+                    public chunkType?: ("web"|"retrievedContext"|"maps");
 
                     /**
                      * Creates a new GroundingChunk instance using the specified properties.
@@ -156672,6 +156902,121 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a Maps. */
+                    interface IMaps {
+
+                        /** Maps uri */
+                        uri?: (string|null);
+
+                        /** Maps title */
+                        title?: (string|null);
+
+                        /** Maps text */
+                        text?: (string|null);
+
+                        /** Maps placeId */
+                        placeId?: (string|null);
+                    }
+
+                    /** Represents a Maps. */
+                    class Maps implements IMaps {
+
+                        /**
+                         * Constructs a new Maps.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps);
+
+                        /** Maps uri. */
+                        public uri?: (string|null);
+
+                        /** Maps title. */
+                        public title?: (string|null);
+
+                        /** Maps text. */
+                        public text?: (string|null);
+
+                        /** Maps placeId. */
+                        public placeId?: (string|null);
+
+                        /**
+                         * Creates a new Maps instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Maps instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Encodes the specified Maps message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Verifies a Maps message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Maps
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                         * @param message Maps
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Maps to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Maps
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GroundingSupport. */
@@ -156803,6 +157148,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata */
                     retrievalMetadata?: (google.cloud.aiplatform.v1beta1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -156831,6 +157179,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata. */
                     public retrievalMetadata?: (google.cloud.aiplatform.v1beta1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -157583,6 +157934,9 @@ export namespace google {
                     /** Tool googleSearchRetrieval */
                     googleSearchRetrieval?: (google.cloud.aiplatform.v1beta1.IGoogleSearchRetrieval|null);
 
+                    /** Tool googleMaps */
+                    googleMaps?: (google.cloud.aiplatform.v1beta1.IGoogleMaps|null);
+
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
 
@@ -157616,6 +157970,9 @@ export namespace google {
 
                     /** Tool googleSearchRetrieval. */
                     public googleSearchRetrieval?: (google.cloud.aiplatform.v1beta1.IGoogleSearchRetrieval|null);
+
+                    /** Tool googleMaps. */
+                    public googleMaps?: (google.cloud.aiplatform.v1beta1.IGoogleMaps|null);
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
@@ -159571,6 +159928,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GoogleSearchRetrieval
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleMaps. */
+                interface IGoogleMaps {
+                }
+
+                /** Represents a GoogleMaps. */
+                class GoogleMaps implements IGoogleMaps {
+
+                    /**
+                     * Constructs a new GoogleMaps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGoogleMaps);
+
+                    /**
+                     * Creates a new GoogleMaps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleMaps instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGoogleMaps): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Encodes the specified GoogleMaps message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Verifies a GoogleMaps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleMaps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                     * @param message GoogleMaps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GoogleMaps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleMaps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleMaps
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
