@@ -278,7 +278,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],
@@ -322,6 +322,14 @@
                     {
                         "name": "sql_server_rdbms",
                         "type": ".google.cloud.datastream.v1.SqlServerRdbms"
+                    },
+                    {
+                        "name": "salesforce_org",
+                        "type": ".google.cloud.datastream.v1.SalesforceOrg"
+                    },
+                    {
+                        "name": "mongodb_cluster",
+                        "type": ".google.cloud.datastream.v1.MongodbCluster"
                     }
                 ],
                 "resultType": ".google.cloud.datastream.v1.DiscoverConnectionProfileResponse",
@@ -914,7 +922,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -941,6 +949,10 @@
                     },
                     {
                         "name": "force",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "validate_only",
                         "type": "TYPE_BOOL"
                     }
                 ],
