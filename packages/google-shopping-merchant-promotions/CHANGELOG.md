@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/promotions-v0.3.0...promotions-v0.4.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add promotions API client libraries for v1 ([#6571](https://github.com/googleapis/google-cloud-node/issues/6571)) ([21ff447](https://github.com/googleapis/google-cloud-node/commit/21ff44708671ae294e646a9e2604ac4da9d8a858))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/promotions-v0.2.1...promotions-v0.3.0) (2025-07-09)
 
 

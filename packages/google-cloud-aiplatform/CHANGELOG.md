@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.3.0...aiplatform-v5.4.0) (2025-08-07)
+
+
+### Features
+
+* Add FeatureViewDirectWrite API in v1 ([#6566](https://github.com/googleapis/google-cloud-node/issues/6566)) ([e80e35d](https://github.com/googleapis/google-cloud-node/commit/e80e35de2f33266dbec28487ab496e6b8e1d1699))
+* Add Grounding with Google Maps tool ([#6578](https://github.com/googleapis/google-cloud-node/issues/6578)) ([c0e8526](https://github.com/googleapis/google-cloud-node/commit/c0e8526a55692c48430190aa3f02db319e1f8d05))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.2.0...aiplatform-v5.3.0) (2025-08-04)
 
 
