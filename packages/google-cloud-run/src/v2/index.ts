@@ -22,3 +22,4 @@ export {JobsClient} from './jobs_client';
 export {RevisionsClient} from './revisions_client';
 export {ServicesClient} from './services_client';
 export {TasksClient} from './tasks_client';
+export {WorkerPoolsClient} from './worker_pools_client';
