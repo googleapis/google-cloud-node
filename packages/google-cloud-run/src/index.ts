@@ -30,8 +30,10 @@ const ServicesClient = v2.ServicesClient;
 type ServicesClient = v2.ServicesClient;
 const TasksClient = v2.TasksClient;
 type TasksClient = v2.TasksClient;
+const WorkerPoolsClient = v2.WorkerPoolsClient;
+type WorkerPoolsClient = v2.WorkerPoolsClient;
 
-export {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient};
-export default {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient};
+export {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient, WorkerPoolsClient};
+export default {v2, BuildsClient, ExecutionsClient, JobsClient, RevisionsClient, ServicesClient, TasksClient, WorkerPoolsClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -4811,6 +4811,103 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a WorkerPoolScaling. */
+                interface IWorkerPoolScaling {
+
+                    /** WorkerPoolScaling manualInstanceCount */
+                    manualInstanceCount?: (number|null);
+                }
+
+                /** Represents a WorkerPoolScaling. */
+                class WorkerPoolScaling implements IWorkerPoolScaling {
+
+                    /**
+                     * Constructs a new WorkerPoolScaling.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IWorkerPoolScaling);
+
+                    /** WorkerPoolScaling manualInstanceCount. */
+                    public manualInstanceCount?: (number|null);
+
+                    /**
+                     * Creates a new WorkerPoolScaling instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkerPoolScaling instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IWorkerPoolScaling): google.cloud.run.v2.WorkerPoolScaling;
+
+                    /**
+                     * Encodes the specified WorkerPoolScaling message. Does not implicitly {@link google.cloud.run.v2.WorkerPoolScaling.verify|verify} messages.
+                     * @param message WorkerPoolScaling message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IWorkerPoolScaling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkerPoolScaling message, length delimited. Does not implicitly {@link google.cloud.run.v2.WorkerPoolScaling.verify|verify} messages.
+                     * @param message WorkerPoolScaling message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IWorkerPoolScaling, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkerPoolScaling message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkerPoolScaling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.WorkerPoolScaling;
+
+                    /**
+                     * Decodes a WorkerPoolScaling message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkerPoolScaling
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.WorkerPoolScaling;
+
+                    /**
+                     * Verifies a WorkerPoolScaling message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkerPoolScaling message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkerPoolScaling
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.WorkerPoolScaling;
+
+                    /**
+                     * Creates a plain object from a WorkerPoolScaling message. Also converts values to other types if specified.
+                     * @param message WorkerPoolScaling
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.WorkerPoolScaling, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkerPoolScaling to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkerPoolScaling
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a NodeSelector. */
                 interface INodeSelector {
 
@@ -5195,6 +5292,231 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstanceSplit. */
+                interface IInstanceSplit {
+
+                    /** InstanceSplit type */
+                    type?: (google.cloud.run.v2.InstanceSplitAllocationType|keyof typeof google.cloud.run.v2.InstanceSplitAllocationType|null);
+
+                    /** InstanceSplit revision */
+                    revision?: (string|null);
+
+                    /** InstanceSplit percent */
+                    percent?: (number|null);
+                }
+
+                /** Represents an InstanceSplit. */
+                class InstanceSplit implements IInstanceSplit {
+
+                    /**
+                     * Constructs a new InstanceSplit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IInstanceSplit);
+
+                    /** InstanceSplit type. */
+                    public type: (google.cloud.run.v2.InstanceSplitAllocationType|keyof typeof google.cloud.run.v2.InstanceSplitAllocationType);
+
+                    /** InstanceSplit revision. */
+                    public revision: string;
+
+                    /** InstanceSplit percent. */
+                    public percent: number;
+
+                    /**
+                     * Creates a new InstanceSplit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceSplit instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IInstanceSplit): google.cloud.run.v2.InstanceSplit;
+
+                    /**
+                     * Encodes the specified InstanceSplit message. Does not implicitly {@link google.cloud.run.v2.InstanceSplit.verify|verify} messages.
+                     * @param message InstanceSplit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IInstanceSplit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceSplit message, length delimited. Does not implicitly {@link google.cloud.run.v2.InstanceSplit.verify|verify} messages.
+                     * @param message InstanceSplit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IInstanceSplit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceSplit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceSplit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.InstanceSplit;
+
+                    /**
+                     * Decodes an InstanceSplit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceSplit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.InstanceSplit;
+
+                    /**
+                     * Verifies an InstanceSplit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceSplit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceSplit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.InstanceSplit;
+
+                    /**
+                     * Creates a plain object from an InstanceSplit message. Also converts values to other types if specified.
+                     * @param message InstanceSplit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.InstanceSplit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceSplit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceSplit
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstanceSplitStatus. */
+                interface IInstanceSplitStatus {
+
+                    /** InstanceSplitStatus type */
+                    type?: (google.cloud.run.v2.InstanceSplitAllocationType|keyof typeof google.cloud.run.v2.InstanceSplitAllocationType|null);
+
+                    /** InstanceSplitStatus revision */
+                    revision?: (string|null);
+
+                    /** InstanceSplitStatus percent */
+                    percent?: (number|null);
+                }
+
+                /** Represents an InstanceSplitStatus. */
+                class InstanceSplitStatus implements IInstanceSplitStatus {
+
+                    /**
+                     * Constructs a new InstanceSplitStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IInstanceSplitStatus);
+
+                    /** InstanceSplitStatus type. */
+                    public type: (google.cloud.run.v2.InstanceSplitAllocationType|keyof typeof google.cloud.run.v2.InstanceSplitAllocationType);
+
+                    /** InstanceSplitStatus revision. */
+                    public revision: string;
+
+                    /** InstanceSplitStatus percent. */
+                    public percent: number;
+
+                    /**
+                     * Creates a new InstanceSplitStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceSplitStatus instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IInstanceSplitStatus): google.cloud.run.v2.InstanceSplitStatus;
+
+                    /**
+                     * Encodes the specified InstanceSplitStatus message. Does not implicitly {@link google.cloud.run.v2.InstanceSplitStatus.verify|verify} messages.
+                     * @param message InstanceSplitStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IInstanceSplitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceSplitStatus message, length delimited. Does not implicitly {@link google.cloud.run.v2.InstanceSplitStatus.verify|verify} messages.
+                     * @param message InstanceSplitStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IInstanceSplitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceSplitStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceSplitStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.InstanceSplitStatus;
+
+                    /**
+                     * Decodes an InstanceSplitStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceSplitStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.InstanceSplitStatus;
+
+                    /**
+                     * Verifies an InstanceSplitStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceSplitStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceSplitStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.InstanceSplitStatus;
+
+                    /**
+                     * Creates a plain object from an InstanceSplitStatus message. Also converts values to other types if specified.
+                     * @param message InstanceSplitStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.InstanceSplitStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceSplitStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceSplitStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** InstanceSplitAllocationType enum. */
+                enum InstanceSplitAllocationType {
+                    INSTANCE_SPLIT_ALLOCATION_TYPE_UNSPECIFIED = 0,
+                    INSTANCE_SPLIT_ALLOCATION_TYPE_LATEST = 1,
+                    INSTANCE_SPLIT_ALLOCATION_TYPE_REVISION = 2
                 }
 
                 /** Represents a Jobs */
@@ -10058,6 +10380,1286 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TaskAttemptResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a WorkerPools */
+                class WorkerPools extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new WorkerPools service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new WorkerPools service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): WorkerPools;
+
+                    /**
+                     * Calls CreateWorkerPool.
+                     * @param request CreateWorkerPoolRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWorkerPool(request: google.cloud.run.v2.ICreateWorkerPoolRequest, callback: google.cloud.run.v2.WorkerPools.CreateWorkerPoolCallback): void;
+
+                    /**
+                     * Calls CreateWorkerPool.
+                     * @param request CreateWorkerPoolRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWorkerPool(request: google.cloud.run.v2.ICreateWorkerPoolRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetWorkerPool.
+                     * @param request GetWorkerPoolRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and WorkerPool
+                     */
+                    public getWorkerPool(request: google.cloud.run.v2.IGetWorkerPoolRequest, callback: google.cloud.run.v2.WorkerPools.GetWorkerPoolCallback): void;
+
+                    /**
+                     * Calls GetWorkerPool.
+                     * @param request GetWorkerPoolRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkerPool(request: google.cloud.run.v2.IGetWorkerPoolRequest): Promise<google.cloud.run.v2.WorkerPool>;
+
+                    /**
+                     * Calls ListWorkerPools.
+                     * @param request ListWorkerPoolsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkerPoolsResponse
+                     */
+                    public listWorkerPools(request: google.cloud.run.v2.IListWorkerPoolsRequest, callback: google.cloud.run.v2.WorkerPools.ListWorkerPoolsCallback): void;
+
+                    /**
+                     * Calls ListWorkerPools.
+                     * @param request ListWorkerPoolsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkerPools(request: google.cloud.run.v2.IListWorkerPoolsRequest): Promise<google.cloud.run.v2.ListWorkerPoolsResponse>;
+
+                    /**
+                     * Calls UpdateWorkerPool.
+                     * @param request UpdateWorkerPoolRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateWorkerPool(request: google.cloud.run.v2.IUpdateWorkerPoolRequest, callback: google.cloud.run.v2.WorkerPools.UpdateWorkerPoolCallback): void;
+
+                    /**
+                     * Calls UpdateWorkerPool.
+                     * @param request UpdateWorkerPoolRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWorkerPool(request: google.cloud.run.v2.IUpdateWorkerPoolRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWorkerPool.
+                     * @param request DeleteWorkerPoolRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWorkerPool(request: google.cloud.run.v2.IDeleteWorkerPoolRequest, callback: google.cloud.run.v2.WorkerPools.DeleteWorkerPoolCallback): void;
+
+                    /**
+                     * Calls DeleteWorkerPool.
+                     * @param request DeleteWorkerPoolRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWorkerPool(request: google.cloud.run.v2.IDeleteWorkerPoolRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.run.v2.WorkerPools.GetIamPolicyCallback): void;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.run.v2.WorkerPools.SetIamPolicyCallback): void;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.run.v2.WorkerPools.TestIamPermissionsCallback): void;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                }
+
+                namespace WorkerPools {
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|createWorkerPool}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWorkerPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|getWorkerPool}.
+                     * @param error Error, if any
+                     * @param [response] WorkerPool
+                     */
+                    type GetWorkerPoolCallback = (error: (Error|null), response?: google.cloud.run.v2.WorkerPool) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|listWorkerPools}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkerPoolsResponse
+                     */
+                    type ListWorkerPoolsCallback = (error: (Error|null), response?: google.cloud.run.v2.ListWorkerPoolsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|updateWorkerPool}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateWorkerPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|deleteWorkerPool}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWorkerPoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|getIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|setIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.WorkerPools|testIamPermissions}.
+                     * @param error Error, if any
+                     * @param [response] TestIamPermissionsResponse
+                     */
+                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                }
+
+                /** Properties of a CreateWorkerPoolRequest. */
+                interface ICreateWorkerPoolRequest {
+
+                    /** CreateWorkerPoolRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWorkerPoolRequest workerPool */
+                    workerPool?: (google.cloud.run.v2.IWorkerPool|null);
+
+                    /** CreateWorkerPoolRequest workerPoolId */
+                    workerPoolId?: (string|null);
+
+                    /** CreateWorkerPoolRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateWorkerPoolRequest. */
+                class CreateWorkerPoolRequest implements ICreateWorkerPoolRequest {
+
+                    /**
+                     * Constructs a new CreateWorkerPoolRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ICreateWorkerPoolRequest);
+
+                    /** CreateWorkerPoolRequest parent. */
+                    public parent: string;
+
+                    /** CreateWorkerPoolRequest workerPool. */
+                    public workerPool?: (google.cloud.run.v2.IWorkerPool|null);
+
+                    /** CreateWorkerPoolRequest workerPoolId. */
+                    public workerPoolId: string;
+
+                    /** CreateWorkerPoolRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateWorkerPoolRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWorkerPoolRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ICreateWorkerPoolRequest): google.cloud.run.v2.CreateWorkerPoolRequest;
+
+                    /**
+                     * Encodes the specified CreateWorkerPoolRequest message. Does not implicitly {@link google.cloud.run.v2.CreateWorkerPoolRequest.verify|verify} messages.
+                     * @param message CreateWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ICreateWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWorkerPoolRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.CreateWorkerPoolRequest.verify|verify} messages.
+                     * @param message CreateWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ICreateWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWorkerPoolRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.CreateWorkerPoolRequest;
+
+                    /**
+                     * Decodes a CreateWorkerPoolRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.CreateWorkerPoolRequest;
+
+                    /**
+                     * Verifies a CreateWorkerPoolRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWorkerPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWorkerPoolRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.CreateWorkerPoolRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWorkerPoolRequest message. Also converts values to other types if specified.
+                     * @param message CreateWorkerPoolRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.CreateWorkerPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWorkerPoolRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWorkerPoolRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateWorkerPoolRequest. */
+                interface IUpdateWorkerPoolRequest {
+
+                    /** UpdateWorkerPoolRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkerPoolRequest workerPool */
+                    workerPool?: (google.cloud.run.v2.IWorkerPool|null);
+
+                    /** UpdateWorkerPoolRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateWorkerPoolRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateWorkerPoolRequest forceNewRevision */
+                    forceNewRevision?: (boolean|null);
+                }
+
+                /** Represents an UpdateWorkerPoolRequest. */
+                class UpdateWorkerPoolRequest implements IUpdateWorkerPoolRequest {
+
+                    /**
+                     * Constructs a new UpdateWorkerPoolRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IUpdateWorkerPoolRequest);
+
+                    /** UpdateWorkerPoolRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWorkerPoolRequest workerPool. */
+                    public workerPool?: (google.cloud.run.v2.IWorkerPool|null);
+
+                    /** UpdateWorkerPoolRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateWorkerPoolRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateWorkerPoolRequest forceNewRevision. */
+                    public forceNewRevision: boolean;
+
+                    /**
+                     * Creates a new UpdateWorkerPoolRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWorkerPoolRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IUpdateWorkerPoolRequest): google.cloud.run.v2.UpdateWorkerPoolRequest;
+
+                    /**
+                     * Encodes the specified UpdateWorkerPoolRequest message. Does not implicitly {@link google.cloud.run.v2.UpdateWorkerPoolRequest.verify|verify} messages.
+                     * @param message UpdateWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IUpdateWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWorkerPoolRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.UpdateWorkerPoolRequest.verify|verify} messages.
+                     * @param message UpdateWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IUpdateWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWorkerPoolRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.UpdateWorkerPoolRequest;
+
+                    /**
+                     * Decodes an UpdateWorkerPoolRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.UpdateWorkerPoolRequest;
+
+                    /**
+                     * Verifies an UpdateWorkerPoolRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWorkerPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWorkerPoolRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.UpdateWorkerPoolRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWorkerPoolRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWorkerPoolRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.UpdateWorkerPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWorkerPoolRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateWorkerPoolRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkerPoolsRequest. */
+                interface IListWorkerPoolsRequest {
+
+                    /** ListWorkerPoolsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkerPoolsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkerPoolsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListWorkerPoolsRequest showDeleted */
+                    showDeleted?: (boolean|null);
+                }
+
+                /** Represents a ListWorkerPoolsRequest. */
+                class ListWorkerPoolsRequest implements IListWorkerPoolsRequest {
+
+                    /**
+                     * Constructs a new ListWorkerPoolsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IListWorkerPoolsRequest);
+
+                    /** ListWorkerPoolsRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkerPoolsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkerPoolsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListWorkerPoolsRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /**
+                     * Creates a new ListWorkerPoolsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkerPoolsRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IListWorkerPoolsRequest): google.cloud.run.v2.ListWorkerPoolsRequest;
+
+                    /**
+                     * Encodes the specified ListWorkerPoolsRequest message. Does not implicitly {@link google.cloud.run.v2.ListWorkerPoolsRequest.verify|verify} messages.
+                     * @param message ListWorkerPoolsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IListWorkerPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkerPoolsRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.ListWorkerPoolsRequest.verify|verify} messages.
+                     * @param message ListWorkerPoolsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IListWorkerPoolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkerPoolsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkerPoolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ListWorkerPoolsRequest;
+
+                    /**
+                     * Decodes a ListWorkerPoolsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkerPoolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ListWorkerPoolsRequest;
+
+                    /**
+                     * Verifies a ListWorkerPoolsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkerPoolsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkerPoolsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ListWorkerPoolsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkerPoolsRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkerPoolsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ListWorkerPoolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkerPoolsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkerPoolsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkerPoolsResponse. */
+                interface IListWorkerPoolsResponse {
+
+                    /** ListWorkerPoolsResponse workerPools */
+                    workerPools?: (google.cloud.run.v2.IWorkerPool[]|null);
+
+                    /** ListWorkerPoolsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListWorkerPoolsResponse. */
+                class ListWorkerPoolsResponse implements IListWorkerPoolsResponse {
+
+                    /**
+                     * Constructs a new ListWorkerPoolsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IListWorkerPoolsResponse);
+
+                    /** ListWorkerPoolsResponse workerPools. */
+                    public workerPools: google.cloud.run.v2.IWorkerPool[];
+
+                    /** ListWorkerPoolsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListWorkerPoolsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkerPoolsResponse instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IListWorkerPoolsResponse): google.cloud.run.v2.ListWorkerPoolsResponse;
+
+                    /**
+                     * Encodes the specified ListWorkerPoolsResponse message. Does not implicitly {@link google.cloud.run.v2.ListWorkerPoolsResponse.verify|verify} messages.
+                     * @param message ListWorkerPoolsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IListWorkerPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkerPoolsResponse message, length delimited. Does not implicitly {@link google.cloud.run.v2.ListWorkerPoolsResponse.verify|verify} messages.
+                     * @param message ListWorkerPoolsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IListWorkerPoolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkerPoolsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkerPoolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ListWorkerPoolsResponse;
+
+                    /**
+                     * Decodes a ListWorkerPoolsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkerPoolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ListWorkerPoolsResponse;
+
+                    /**
+                     * Verifies a ListWorkerPoolsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkerPoolsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkerPoolsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ListWorkerPoolsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkerPoolsResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkerPoolsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ListWorkerPoolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkerPoolsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkerPoolsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWorkerPoolRequest. */
+                interface IGetWorkerPoolRequest {
+
+                    /** GetWorkerPoolRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkerPoolRequest. */
+                class GetWorkerPoolRequest implements IGetWorkerPoolRequest {
+
+                    /**
+                     * Constructs a new GetWorkerPoolRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IGetWorkerPoolRequest);
+
+                    /** GetWorkerPoolRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkerPoolRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkerPoolRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IGetWorkerPoolRequest): google.cloud.run.v2.GetWorkerPoolRequest;
+
+                    /**
+                     * Encodes the specified GetWorkerPoolRequest message. Does not implicitly {@link google.cloud.run.v2.GetWorkerPoolRequest.verify|verify} messages.
+                     * @param message GetWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IGetWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkerPoolRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.GetWorkerPoolRequest.verify|verify} messages.
+                     * @param message GetWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IGetWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkerPoolRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.GetWorkerPoolRequest;
+
+                    /**
+                     * Decodes a GetWorkerPoolRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.GetWorkerPoolRequest;
+
+                    /**
+                     * Verifies a GetWorkerPoolRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkerPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkerPoolRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.GetWorkerPoolRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkerPoolRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkerPoolRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.GetWorkerPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkerPoolRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWorkerPoolRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWorkerPoolRequest. */
+                interface IDeleteWorkerPoolRequest {
+
+                    /** DeleteWorkerPoolRequest name */
+                    name?: (string|null);
+
+                    /** DeleteWorkerPoolRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteWorkerPoolRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteWorkerPoolRequest. */
+                class DeleteWorkerPoolRequest implements IDeleteWorkerPoolRequest {
+
+                    /**
+                     * Constructs a new DeleteWorkerPoolRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IDeleteWorkerPoolRequest);
+
+                    /** DeleteWorkerPoolRequest name. */
+                    public name: string;
+
+                    /** DeleteWorkerPoolRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteWorkerPoolRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteWorkerPoolRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWorkerPoolRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IDeleteWorkerPoolRequest): google.cloud.run.v2.DeleteWorkerPoolRequest;
+
+                    /**
+                     * Encodes the specified DeleteWorkerPoolRequest message. Does not implicitly {@link google.cloud.run.v2.DeleteWorkerPoolRequest.verify|verify} messages.
+                     * @param message DeleteWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IDeleteWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWorkerPoolRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.DeleteWorkerPoolRequest.verify|verify} messages.
+                     * @param message DeleteWorkerPoolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IDeleteWorkerPoolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWorkerPoolRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.DeleteWorkerPoolRequest;
+
+                    /**
+                     * Decodes a DeleteWorkerPoolRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWorkerPoolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.DeleteWorkerPoolRequest;
+
+                    /**
+                     * Verifies a DeleteWorkerPoolRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWorkerPoolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWorkerPoolRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.DeleteWorkerPoolRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWorkerPoolRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWorkerPoolRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.DeleteWorkerPoolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWorkerPoolRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWorkerPoolRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WorkerPool. */
+                interface IWorkerPool {
+
+                    /** WorkerPool name */
+                    name?: (string|null);
+
+                    /** WorkerPool description */
+                    description?: (string|null);
+
+                    /** WorkerPool uid */
+                    uid?: (string|null);
+
+                    /** WorkerPool generation */
+                    generation?: (number|Long|string|null);
+
+                    /** WorkerPool labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WorkerPool annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** WorkerPool createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool creator */
+                    creator?: (string|null);
+
+                    /** WorkerPool lastModifier */
+                    lastModifier?: (string|null);
+
+                    /** WorkerPool client */
+                    client?: (string|null);
+
+                    /** WorkerPool clientVersion */
+                    clientVersion?: (string|null);
+
+                    /** WorkerPool launchStage */
+                    launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** WorkerPool binaryAuthorization */
+                    binaryAuthorization?: (google.cloud.run.v2.IBinaryAuthorization|null);
+
+                    /** WorkerPool template */
+                    template?: (google.cloud.run.v2.IWorkerPoolRevisionTemplate|null);
+
+                    /** WorkerPool instanceSplits */
+                    instanceSplits?: (google.cloud.run.v2.IInstanceSplit[]|null);
+
+                    /** WorkerPool scaling */
+                    scaling?: (google.cloud.run.v2.IWorkerPoolScaling|null);
+
+                    /** WorkerPool observedGeneration */
+                    observedGeneration?: (number|Long|string|null);
+
+                    /** WorkerPool terminalCondition */
+                    terminalCondition?: (google.cloud.run.v2.ICondition|null);
+
+                    /** WorkerPool conditions */
+                    conditions?: (google.cloud.run.v2.ICondition[]|null);
+
+                    /** WorkerPool latestReadyRevision */
+                    latestReadyRevision?: (string|null);
+
+                    /** WorkerPool latestCreatedRevision */
+                    latestCreatedRevision?: (string|null);
+
+                    /** WorkerPool instanceSplitStatuses */
+                    instanceSplitStatuses?: (google.cloud.run.v2.IInstanceSplitStatus[]|null);
+
+                    /** WorkerPool customAudiences */
+                    customAudiences?: (string[]|null);
+
+                    /** WorkerPool satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** WorkerPool reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** WorkerPool etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a WorkerPool. */
+                class WorkerPool implements IWorkerPool {
+
+                    /**
+                     * Constructs a new WorkerPool.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IWorkerPool);
+
+                    /** WorkerPool name. */
+                    public name: string;
+
+                    /** WorkerPool description. */
+                    public description: string;
+
+                    /** WorkerPool uid. */
+                    public uid: string;
+
+                    /** WorkerPool generation. */
+                    public generation: (number|Long|string);
+
+                    /** WorkerPool labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WorkerPool annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** WorkerPool createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkerPool creator. */
+                    public creator: string;
+
+                    /** WorkerPool lastModifier. */
+                    public lastModifier: string;
+
+                    /** WorkerPool client. */
+                    public client: string;
+
+                    /** WorkerPool clientVersion. */
+                    public clientVersion: string;
+
+                    /** WorkerPool launchStage. */
+                    public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** WorkerPool binaryAuthorization. */
+                    public binaryAuthorization?: (google.cloud.run.v2.IBinaryAuthorization|null);
+
+                    /** WorkerPool template. */
+                    public template?: (google.cloud.run.v2.IWorkerPoolRevisionTemplate|null);
+
+                    /** WorkerPool instanceSplits. */
+                    public instanceSplits: google.cloud.run.v2.IInstanceSplit[];
+
+                    /** WorkerPool scaling. */
+                    public scaling?: (google.cloud.run.v2.IWorkerPoolScaling|null);
+
+                    /** WorkerPool observedGeneration. */
+                    public observedGeneration: (number|Long|string);
+
+                    /** WorkerPool terminalCondition. */
+                    public terminalCondition?: (google.cloud.run.v2.ICondition|null);
+
+                    /** WorkerPool conditions. */
+                    public conditions: google.cloud.run.v2.ICondition[];
+
+                    /** WorkerPool latestReadyRevision. */
+                    public latestReadyRevision: string;
+
+                    /** WorkerPool latestCreatedRevision. */
+                    public latestCreatedRevision: string;
+
+                    /** WorkerPool instanceSplitStatuses. */
+                    public instanceSplitStatuses: google.cloud.run.v2.IInstanceSplitStatus[];
+
+                    /** WorkerPool customAudiences. */
+                    public customAudiences: string[];
+
+                    /** WorkerPool satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** WorkerPool reconciling. */
+                    public reconciling: boolean;
+
+                    /** WorkerPool etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new WorkerPool instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkerPool instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IWorkerPool): google.cloud.run.v2.WorkerPool;
+
+                    /**
+                     * Encodes the specified WorkerPool message. Does not implicitly {@link google.cloud.run.v2.WorkerPool.verify|verify} messages.
+                     * @param message WorkerPool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IWorkerPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkerPool message, length delimited. Does not implicitly {@link google.cloud.run.v2.WorkerPool.verify|verify} messages.
+                     * @param message WorkerPool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IWorkerPool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkerPool message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkerPool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.WorkerPool;
+
+                    /**
+                     * Decodes a WorkerPool message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkerPool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.WorkerPool;
+
+                    /**
+                     * Verifies a WorkerPool message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkerPool message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkerPool
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.WorkerPool;
+
+                    /**
+                     * Creates a plain object from a WorkerPool message. Also converts values to other types if specified.
+                     * @param message WorkerPool
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.WorkerPool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkerPool to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkerPool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WorkerPoolRevisionTemplate. */
+                interface IWorkerPoolRevisionTemplate {
+
+                    /** WorkerPoolRevisionTemplate revision */
+                    revision?: (string|null);
+
+                    /** WorkerPoolRevisionTemplate labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WorkerPoolRevisionTemplate annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** WorkerPoolRevisionTemplate vpcAccess */
+                    vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** WorkerPoolRevisionTemplate serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** WorkerPoolRevisionTemplate containers */
+                    containers?: (google.cloud.run.v2.IContainer[]|null);
+
+                    /** WorkerPoolRevisionTemplate volumes */
+                    volumes?: (google.cloud.run.v2.IVolume[]|null);
+
+                    /** WorkerPoolRevisionTemplate encryptionKey */
+                    encryptionKey?: (string|null);
+
+                    /** WorkerPoolRevisionTemplate serviceMesh */
+                    serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
+                    /** WorkerPoolRevisionTemplate encryptionKeyRevocationAction */
+                    encryptionKeyRevocationAction?: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction|null);
+
+                    /** WorkerPoolRevisionTemplate encryptionKeyShutdownDuration */
+                    encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
+                    /** WorkerPoolRevisionTemplate nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+                }
+
+                /** Represents a WorkerPoolRevisionTemplate. */
+                class WorkerPoolRevisionTemplate implements IWorkerPoolRevisionTemplate {
+
+                    /**
+                     * Constructs a new WorkerPoolRevisionTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IWorkerPoolRevisionTemplate);
+
+                    /** WorkerPoolRevisionTemplate revision. */
+                    public revision: string;
+
+                    /** WorkerPoolRevisionTemplate labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WorkerPoolRevisionTemplate annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** WorkerPoolRevisionTemplate vpcAccess. */
+                    public vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** WorkerPoolRevisionTemplate serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** WorkerPoolRevisionTemplate containers. */
+                    public containers: google.cloud.run.v2.IContainer[];
+
+                    /** WorkerPoolRevisionTemplate volumes. */
+                    public volumes: google.cloud.run.v2.IVolume[];
+
+                    /** WorkerPoolRevisionTemplate encryptionKey. */
+                    public encryptionKey: string;
+
+                    /** WorkerPoolRevisionTemplate serviceMesh. */
+                    public serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
+                    /** WorkerPoolRevisionTemplate encryptionKeyRevocationAction. */
+                    public encryptionKeyRevocationAction: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction);
+
+                    /** WorkerPoolRevisionTemplate encryptionKeyShutdownDuration. */
+                    public encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
+                    /** WorkerPoolRevisionTemplate nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /**
+                     * Creates a new WorkerPoolRevisionTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkerPoolRevisionTemplate instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IWorkerPoolRevisionTemplate): google.cloud.run.v2.WorkerPoolRevisionTemplate;
+
+                    /**
+                     * Encodes the specified WorkerPoolRevisionTemplate message. Does not implicitly {@link google.cloud.run.v2.WorkerPoolRevisionTemplate.verify|verify} messages.
+                     * @param message WorkerPoolRevisionTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IWorkerPoolRevisionTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkerPoolRevisionTemplate message, length delimited. Does not implicitly {@link google.cloud.run.v2.WorkerPoolRevisionTemplate.verify|verify} messages.
+                     * @param message WorkerPoolRevisionTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IWorkerPoolRevisionTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkerPoolRevisionTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkerPoolRevisionTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.WorkerPoolRevisionTemplate;
+
+                    /**
+                     * Decodes a WorkerPoolRevisionTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkerPoolRevisionTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.WorkerPoolRevisionTemplate;
+
+                    /**
+                     * Verifies a WorkerPoolRevisionTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkerPoolRevisionTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkerPoolRevisionTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.WorkerPoolRevisionTemplate;
+
+                    /**
+                     * Creates a plain object from a WorkerPoolRevisionTemplate message. Also converts values to other types if specified.
+                     * @param message WorkerPoolRevisionTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.WorkerPoolRevisionTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkerPoolRevisionTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkerPoolRevisionTemplate
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

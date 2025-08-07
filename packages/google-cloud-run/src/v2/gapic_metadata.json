@@ -378,6 +378,104 @@
           }
         }
       }
+    },
+    "WorkerPools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WorkerPoolsClient",
+          "rpcs": {
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WorkerPoolsClient",
+          "rpcs": {
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

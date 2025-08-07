@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as servicesModule from '../src';
+import * as workerpoolsModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -115,16 +115,16 @@ function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?
     return sinon.stub().returns(asyncIterable);
 }
 
-describe('v2.ServicesClient', () => {
+describe('v2.WorkerPoolsClient', () => {
     describe('Common methods', () => {
         it('has apiEndpoint', () => {
-            const client = new servicesModule.v2.ServicesClient();
+            const client = new workerpoolsModule.v2.WorkerPoolsClient();
             const apiEndpoint = client.apiEndpoint;
             assert.strictEqual(apiEndpoint, 'run.googleapis.com');
         });
 
         it('has universeDomain', () => {
-            const client = new servicesModule.v2.ServicesClient();
+            const client = new workerpoolsModule.v2.WorkerPoolsClient();
             const universeDomain = client.universeDomain;
             assert.strictEqual(universeDomain, "googleapis.com");
         });
@@ -132,7 +132,7 @@ describe('v2.ServicesClient', () => {
         if (typeof process === 'object' && typeof process.emitWarning === 'function') {
             it('throws DeprecationWarning if static servicePath is used', () => {
                 const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = servicesModule.v2.ServicesClient.servicePath;
+                const servicePath = workerpoolsModule.v2.WorkerPoolsClient.servicePath;
                 assert.strictEqual(servicePath, 'run.googleapis.com');
                 assert(stub.called);
                 stub.restore();
@@ -140,20 +140,20 @@ describe('v2.ServicesClient', () => {
 
             it('throws DeprecationWarning if static apiEndpoint is used', () => {
                 const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = servicesModule.v2.ServicesClient.apiEndpoint;
+                const apiEndpoint = workerpoolsModule.v2.WorkerPoolsClient.apiEndpoint;
                 assert.strictEqual(apiEndpoint, 'run.googleapis.com');
                 assert(stub.called);
                 stub.restore();
             });
         }
         it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new servicesModule.v2.ServicesClient({universeDomain: 'example.com'});
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({universeDomain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'run.example.com');
         });
 
         it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new servicesModule.v2.ServicesClient({universe_domain: 'example.com'});
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({universe_domain: 'example.com'});
             const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'run.example.com');
         });
@@ -163,7 +163,7 @@ describe('v2.ServicesClient', () => {
                 it('sets apiEndpoint from environment variable', () => {
                     const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
                     process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new servicesModule.v2.ServicesClient();
+                    const client = new workerpoolsModule.v2.WorkerPoolsClient();
                     const servicePath = client.apiEndpoint;
                     assert.strictEqual(servicePath, 'run.example.com');
                     if (saved) {
@@ -176,7 +176,7 @@ describe('v2.ServicesClient', () => {
                 it('value configured in code has priority over environment variable', () => {
                     const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
                     process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new servicesModule.v2.ServicesClient({universeDomain: 'configured.example.com'});
+                    const client = new workerpoolsModule.v2.WorkerPoolsClient({universeDomain: 'configured.example.com'});
                     const servicePath = client.apiEndpoint;
                     assert.strictEqual(servicePath, 'run.configured.example.com');
                     if (saved) {
@@ -188,55 +188,55 @@ describe('v2.ServicesClient', () => {
             });
         }
         it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new servicesModule.v2.ServicesClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+            assert.throws(() => { new workerpoolsModule.v2.WorkerPoolsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
         });
 
         it('has port', () => {
-            const port = servicesModule.v2.ServicesClient.port;
+            const port = workerpoolsModule.v2.WorkerPoolsClient.port;
             assert(port);
             assert(typeof port === 'number');
         });
 
         it('should create a client with no option', () => {
-            const client = new servicesModule.v2.ServicesClient();
+            const client = new workerpoolsModule.v2.WorkerPoolsClient();
             assert(client);
         });
 
         it('should create a client with gRPC fallback', () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 fallback: true,
             });
             assert(client);
         });
 
         it('has initialize method and supports deferred initialization', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            assert.strictEqual(client.servicesStub, undefined);
+            assert.strictEqual(client.workerPoolsStub, undefined);
             await client.initialize();
-            assert(client.servicesStub);
+            assert(client.workerPoolsStub);
         });
 
         it('has close method for the initialized client', done => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             client.initialize().catch(err => {throw err});
-            assert(client.servicesStub);
+            assert(client.workerPoolsStub);
             client.close().then(() => {
                 done();
             }).catch(err => {throw err});
         });
 
         it('has close method for the non-initialized client', done => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            assert.strictEqual(client.servicesStub, undefined);
+            assert.strictEqual(client.workerPoolsStub, undefined);
             client.close().then(() => {
                 done();
             }).catch(err => {throw err});
@@ -244,7 +244,7 @@ describe('v2.ServicesClient', () => {
 
         it('has getProjectId method', async () => {
             const fakeProjectId = 'fake-project-id';
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -256,7 +256,7 @@ describe('v2.ServicesClient', () => {
 
         it('has getProjectId method with callback', async () => {
             const fakeProjectId = 'fake-project-id';
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -275,53 +275,53 @@ describe('v2.ServicesClient', () => {
         });
     });
 
-    describe('getService', () => {
-        it('invokes getService without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+    describe('getWorkerPool', () => {
+        it('invokes getWorkerPool without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.GetServiceRequest()
+              new protos.google.cloud.run.v2.GetWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.run.v2.Service()
+              new protos.google.cloud.run.v2.WorkerPool()
             );
-            client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
-            const [response] = await client.getService(request);
+            client.innerApiCalls.getWorkerPool = stubSimpleCall(expectedResponse);
+            const [response] = await client.getWorkerPool(request);
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getService without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes getWorkerPool without error using callback', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.GetServiceRequest()
+              new protos.google.cloud.run.v2.GetWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.run.v2.Service()
+              new protos.google.cloud.run.v2.WorkerPool()
             );
-            client.innerApiCalls.getService = stubSimpleCallWithCallback(expectedResponse);
+            client.innerApiCalls.getWorkerPool = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.getService(
+                 client.getWorkerPool(
                     request,
-                    (err?: Error|null, result?: protos.google.cloud.run.v2.IService|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.run.v2.IWorkerPool|null) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -331,57 +331,57 @@ describe('v2.ServicesClient', () => {
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getService with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes getWorkerPool with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.GetServiceRequest()
+              new protos.google.cloud.run.v2.GetWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.getService = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getService(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getService as SinonStub)
+            client.innerApiCalls.getWorkerPool = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.getWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes getService with closed client', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes getWorkerPool with closed client', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.GetServiceRequest()
+              new protos.google.cloud.run.v2.GetWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
-            await assert.rejects(client.getService(request), expectedError);
+            await assert.rejects(client.getWorkerPool(request), expectedError);
         });
     });
 
     describe('getIamPolicy', () => {
         it('invokes getIamPolicy without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -408,7 +408,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes getIamPolicy without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -446,7 +446,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes getIamPolicy with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -470,7 +470,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes getIamPolicy with closed client', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -489,7 +489,7 @@ describe('v2.ServicesClient', () => {
 
     describe('setIamPolicy', () => {
         it('invokes setIamPolicy without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -516,7 +516,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes setIamPolicy without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -554,7 +554,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes setIamPolicy with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -578,7 +578,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes setIamPolicy with closed client', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -597,7 +597,7 @@ describe('v2.ServicesClient', () => {
 
     describe('testIamPermissions', () => {
         it('invokes testIamPermissions without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -624,7 +624,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes testIamPermissions without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -662,7 +662,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes testIamPermissions with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -686,7 +686,7 @@ describe('v2.ServicesClient', () => {
         });
 
         it('invokes testIamPermissions with closed client', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -703,15 +703,15 @@ describe('v2.ServicesClient', () => {
         });
     });
 
-    describe('createService', () => {
-        it('invokes createService without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+    describe('createWorkerPool', () => {
+        it('invokes createWorkerPool without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.CreateServiceRequest()
+              new protos.google.cloud.run.v2.CreateWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
@@ -719,26 +719,26 @@ describe('v2.ServicesClient', () => {
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.createService = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createService(request);
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createWorkerPool(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createService without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes createWorkerPool without error using callback', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.CreateServiceRequest()
+              new protos.google.cloud.run.v2.CreateWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
@@ -746,12 +746,12 @@ describe('v2.ServicesClient', () => {
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.createService = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.createWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.createService(
+                 client.createWorkerPool(
                     request,
                     (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>|null
+                     result?: LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>|null
                     ) => {
                         if (err) {
                             reject(err);
@@ -760,66 +760,66 @@ describe('v2.ServicesClient', () => {
                         }
                     });
             });
-            const operation = await promise as LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>;
+            const operation = await promise as LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createService with call error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes createWorkerPool with call error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.CreateServiceRequest()
+              new protos.google.cloud.run.v2.CreateWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.createService = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createService(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes createService with LRO error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes createWorkerPool with LRO error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.CreateServiceRequest()
+              new protos.google.cloud.run.v2.CreateWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.createService = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createService(request);
+            client.innerApiCalls.createWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createWorkerPool(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createService as SinonStub)
+            const actualRequest = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.createWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkCreateServiceProgress without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkCreateWorkerPoolProgress without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -832,14 +832,14 @@ describe('v2.ServicesClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateServiceProgress(expectedResponse.name);
+            const decodedOperation = await client.checkCreateWorkerPoolProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkCreateServiceProgress with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkCreateWorkerPoolProgress with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -847,63 +847,63 @@ describe('v2.ServicesClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateServiceProgress(''), expectedError);
+            await assert.rejects(client.checkCreateWorkerPoolProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('updateService', () => {
-        it('invokes updateService without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+    describe('updateWorkerPool', () => {
+        it('invokes updateWorkerPool without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.UpdateServiceRequest()
+              new protos.google.cloud.run.v2.UpdateWorkerPoolRequest()
             );
-            request.service = {};
+            request.workerPool = {};
             // path template: projects/*/locations/{location=*}/**
-            request.service.name = 'projects/value/locations/value/value';
+            request.workerPool.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.updateService = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateService(request);
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateWorkerPool(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updateService without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes updateWorkerPool without error using callback', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.UpdateServiceRequest()
+              new protos.google.cloud.run.v2.UpdateWorkerPoolRequest()
             );
-            request.service = {};
+            request.workerPool = {};
             // path template: projects/*/locations/{location=*}/**
-            request.service.name = 'projects/value/locations/value/value';
+            request.workerPool.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.updateService = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.updateService(
+                 client.updateWorkerPool(
                     request,
                     (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>|null
+                     result?: LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>|null
                     ) => {
                         if (err) {
                             reject(err);
@@ -912,68 +912,68 @@ describe('v2.ServicesClient', () => {
                         }
                     });
             });
-            const operation = await promise as LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>;
+            const operation = await promise as LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updateService with call error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes updateWorkerPool with call error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.UpdateServiceRequest()
+              new protos.google.cloud.run.v2.UpdateWorkerPoolRequest()
             );
-            request.service = {};
+            request.workerPool = {};
             // path template: projects/*/locations/{location=*}/**
-            request.service.name = 'projects/value/locations/value/value';
+            request.workerPool.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.updateService = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateService(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes updateService with LRO error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes updateWorkerPool with LRO error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.UpdateServiceRequest()
+              new protos.google.cloud.run.v2.UpdateWorkerPoolRequest()
             );
-            request.service = {};
+            request.workerPool = {};
             // path template: projects/*/locations/{location=*}/**
-            request.service.name = 'projects/value/locations/value/value';
+            request.workerPool.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.updateService = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateService(request);
+            client.innerApiCalls.updateWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateWorkerPool(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateService as SinonStub)
+            const actualRequest = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.updateWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkUpdateServiceProgress without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkUpdateWorkerPoolProgress without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -986,14 +986,14 @@ describe('v2.ServicesClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateServiceProgress(expectedResponse.name);
+            const decodedOperation = await client.checkUpdateWorkerPoolProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkUpdateServiceProgress with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkUpdateWorkerPoolProgress with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1001,21 +1001,21 @@ describe('v2.ServicesClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateServiceProgress(''), expectedError);
+            await assert.rejects(client.checkUpdateWorkerPoolProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('deleteService', () => {
-        it('invokes deleteService without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+    describe('deleteWorkerPool', () => {
+        it('invokes deleteWorkerPool without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.DeleteServiceRequest()
+              new protos.google.cloud.run.v2.DeleteWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
@@ -1023,26 +1023,26 @@ describe('v2.ServicesClient', () => {
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.deleteService = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteService(request);
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteWorkerPool(request);
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deleteService without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes deleteWorkerPool without error using callback', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.DeleteServiceRequest()
+              new protos.google.cloud.run.v2.DeleteWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
@@ -1050,12 +1050,12 @@ describe('v2.ServicesClient', () => {
             const expectedResponse = generateSampleMessage(
               new protos.google.longrunning.Operation()
             );
-            client.innerApiCalls.deleteService = stubLongRunningCallWithCallback(expectedResponse);
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.deleteService(
+                 client.deleteWorkerPool(
                     request,
                     (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>|null
+                     result?: LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>|null
                     ) => {
                         if (err) {
                             reject(err);
@@ -1064,66 +1064,66 @@ describe('v2.ServicesClient', () => {
                         }
                     });
             });
-            const operation = await promise as LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>;
+            const operation = await promise as LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>;
             const [response] = await operation.promise();
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deleteService with call error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes deleteWorkerPool with call error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.DeleteServiceRequest()
+              new protos.google.cloud.run.v2.DeleteWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.deleteService = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteService(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteWorkerPool(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes deleteService with LRO error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes deleteWorkerPool with LRO error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.DeleteServiceRequest()
+              new protos.google.cloud.run.v2.DeleteWorkerPoolRequest()
             );
             // path template: projects/*/locations/{location=*}/**
             request.name = 'projects/value/locations/value/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.deleteService = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteService(request);
+            client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteWorkerPool(request);
             await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteService as SinonStub)
+            const actualRequest = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteService as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteWorkerPool as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes checkDeleteServiceProgress without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkDeleteWorkerPoolProgress without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1136,14 +1136,14 @@ describe('v2.ServicesClient', () => {
             expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteServiceProgress(expectedResponse.name);
+            const decodedOperation = await client.checkDeleteWorkerPoolProgress(expectedResponse.name);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
         });
 
-        it('invokes checkDeleteServiceProgress with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes checkDeleteWorkerPoolProgress with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1151,61 +1151,61 @@ describe('v2.ServicesClient', () => {
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteServiceProgress(''), expectedError);
+            await assert.rejects(client.checkDeleteWorkerPoolProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
     });
 
-    describe('listServices', () => {
-        it('invokes listServices without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+    describe('listWorkerPools', () => {
+        it('invokes listWorkerPools without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
             ];
-            client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
-            const [response] = await client.listServices(request);
+            client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
+            const [response] = await client.listWorkerPools(request);
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listServices without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes listWorkerPools without error using callback', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
             ];
-            client.innerApiCalls.listServices = stubSimpleCallWithCallback(expectedResponse);
+            client.innerApiCalls.listWorkerPools = stubSimpleCallWithCallback(expectedResponse);
             const promise = new Promise((resolve, reject) => {
-                 client.listServices(
+                 client.listWorkerPools(
                     request,
-                    (err?: Error|null, result?: protos.google.cloud.run.v2.IService[]|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.run.v2.IWorkerPool[]|null) => {
                         if (err) {
                             reject(err);
                         } else {
@@ -1215,59 +1215,59 @@ describe('v2.ServicesClient', () => {
             });
             const response = await promise;
             assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listServices with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes listWorkerPools with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.innerApiCalls.listServices = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listServices(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listServices as SinonStub)
+            client.innerApiCalls.listWorkerPools = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listWorkerPools(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listServices as SinonStub)
+            const actualHeaderRequestParams = (client.innerApiCalls.listWorkerPools as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it('invokes listServicesStream without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes listWorkerPoolsStream without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
             ];
-            client.descriptors.page.listServices.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listServicesStream(request);
+            client.descriptors.page.listWorkerPools.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listWorkerPoolsStream(request);
             const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.run.v2.Service[] = [];
-                stream.on('data', (response: protos.google.cloud.run.v2.Service) => {
+                const responses: protos.google.cloud.run.v2.WorkerPool[] = [];
+                stream.on('data', (response: protos.google.cloud.run.v2.WorkerPool) => {
                     responses.push(response);
                 });
                 stream.on('end', () => {
@@ -1279,34 +1279,34 @@ describe('v2.ServicesClient', () => {
             });
             const responses = await promise;
             assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listServices.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert((client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkerPools, request));
             assert(
-                (client.descriptors.page.listServices.createStream as SinonStub)
+                (client.descriptors.page.listWorkerPools.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('invokes listServicesStream with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('invokes listWorkerPoolsStream with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.descriptors.page.listServices.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listServicesStream(request);
+            client.descriptors.page.listWorkerPools.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listWorkerPoolsStream(request);
             const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.run.v2.Service[] = [];
-                stream.on('data', (response: protos.google.cloud.run.v2.Service) => {
+                const responses: protos.google.cloud.run.v2.WorkerPool[] = [];
+                stream.on('data', (response: protos.google.cloud.run.v2.WorkerPool) => {
                     responses.push(response);
                 });
                 stream.on('end', () => {
@@ -1317,77 +1317,77 @@ describe('v2.ServicesClient', () => {
                 });
             });
             await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listServices.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listServices, request));
+            assert((client.descriptors.page.listWorkerPools.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listWorkerPools, request));
             assert(
-                (client.descriptors.page.listServices.createStream as SinonStub)
+                (client.descriptors.page.listWorkerPools.createStream as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                          expectedHeaderRequestParams
                     ) 
             );
         });
 
-        it('uses async iteration with listServices without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('uses async iteration with listWorkerPools without error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
-              generateSampleMessage(new protos.google.cloud.run.v2.Service()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
+              generateSampleMessage(new protos.google.cloud.run.v2.WorkerPool()),
             ];
-            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.run.v2.IService[] = [];
-            const iterable = client.listServicesAsync(request);
+            client.descriptors.page.listWorkerPools.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.run.v2.IWorkerPool[] = [];
+            const iterable = client.listWorkerPoolsAsync(request);
             for await (const resource of iterable) {
                 responses.push(resource!);
             }
             assert.deepStrictEqual(responses, expectedResponse);
             assert.deepStrictEqual(
-                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
             );
         });
 
-        it('uses async iteration with listServices with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+        it('uses async iteration with listWorkerPools with error', async () => {
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
             await client.initialize();
             const request = generateSampleMessage(
-              new protos.google.cloud.run.v2.ListServicesRequest()
+              new protos.google.cloud.run.v2.ListWorkerPoolsRequest()
             );
             // path template: projects/*/locations/{location=*}
             request.parent = 'projects/value/locations/value';
             const expectedHeaderRequestParams = 'location=value';
             const expectedError = new Error('expected');
-            client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listServicesAsync(request);
+            client.descriptors.page.listWorkerPools.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listWorkerPoolsAsync(request);
             await assert.rejects(async () => {
-                const responses: protos.google.cloud.run.v2.IService[] = [];
+                const responses: protos.google.cloud.run.v2.IWorkerPool[] = [];
                 for await (const resource of iterable) {
                     responses.push(resource!);
                 }
             });
             assert.deepStrictEqual(
-                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
                     .getCall(0).args[1], request);
             assert(
-                (client.descriptors.page.listServices.asyncIterate as SinonStub)
+                (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -1396,7 +1396,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1423,7 +1423,7 @@ describe('v2.ServicesClient', () => {
                 .getCall(0).calledWith(request, expectedOptions, undefined));
         });
         it('invokes getLocation without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1465,7 +1465,7 @@ describe('v2.ServicesClient', () => {
                 .getCall(0));
         });
         it('invokes getLocation with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1491,7 +1491,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('listLocationsAsync', () => {
         it('uses async iteration with listLocations without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1530,7 +1530,7 @@ describe('v2.ServicesClient', () => {
             );
         });
         it('uses async iteration with listLocations with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1562,7 +1562,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('getOperation', () => {
         it('invokes getOperation without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1581,7 +1581,7 @@ describe('v2.ServicesClient', () => {
             );
         });
         it('invokes getOperation without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1613,7 +1613,7 @@ describe('v2.ServicesClient', () => {
                 .getCall(0));
         });
         it('invokes getOperation with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1629,7 +1629,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('cancelOperation', () => {
         it('invokes cancelOperation without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1648,7 +1648,7 @@ describe('v2.ServicesClient', () => {
             );
         });
         it('invokes cancelOperation without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1680,7 +1680,7 @@ describe('v2.ServicesClient', () => {
                 .getCall(0));
         });
         it('invokes cancelOperation with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1696,7 +1696,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('deleteOperation', () => {
         it('invokes deleteOperation without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1715,7 +1715,7 @@ describe('v2.ServicesClient', () => {
             );
         });
         it('invokes deleteOperation without error using callback', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1747,7 +1747,7 @@ describe('v2.ServicesClient', () => {
                 .getCall(0));
         });
         it('invokes deleteOperation with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1763,7 +1763,7 @@ describe('v2.ServicesClient', () => {
     });
     describe('listOperationsAsync', () => {
         it('uses async iteration with listOperations without error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
@@ -1793,7 +1793,7 @@ describe('v2.ServicesClient', () => {
                     .getCall(0).args[1], request);
         });
         it('uses async iteration with listOperations with error', async () => {
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1826,7 +1826,7 @@ describe('v2.ServicesClient', () => {
                 job: "jobValue",
                 execution: "executionValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1879,7 +1879,7 @@ describe('v2.ServicesClient', () => {
                 location: "locationValue",
                 job: "jobValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1924,7 +1924,7 @@ describe('v2.ServicesClient', () => {
                 project: "projectValue",
                 location: "locationValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1961,7 +1961,7 @@ describe('v2.ServicesClient', () => {
             const expectedParameters = {
                 project: "projectValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -1994,7 +1994,7 @@ describe('v2.ServicesClient', () => {
                 service: "serviceValue",
                 revision: "revisionValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2047,7 +2047,7 @@ describe('v2.ServicesClient', () => {
                 location: "locationValue",
                 service: "serviceValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2095,7 +2095,7 @@ describe('v2.ServicesClient', () => {
                 execution: "executionValue",
                 task: "taskValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
@@ -2155,7 +2155,7 @@ describe('v2.ServicesClient', () => {
                 location: "locationValue",
                 worker_pool: "workerPoolValue",
             };
-            const client = new servicesModule.v2.ServicesClient({
+            const client = new workerpoolsModule.v2.WorkerPoolsClient({
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });

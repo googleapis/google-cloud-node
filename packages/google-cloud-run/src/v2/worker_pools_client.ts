@@ -26,18 +26,18 @@ import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v2/services_client_config.json`.
+ * `src/v2/worker_pools_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './services_client_config.json';
+import * as gapicConfig from './worker_pools_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Cloud Run Service Control Plane API
+ *  Cloud Run WorkerPool Control Plane API.
  * @class
  * @memberof v2
  */
-export class ServicesClient {
+export class WorkerPoolsClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -61,10 +61,10 @@ export class ServicesClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  servicesStub?: Promise<{[name: string]: Function}>;
+  workerPoolsStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of ServicesClient.
+   * Construct an instance of WorkerPoolsClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -99,12 +99,12 @@ export class ServicesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ServicesClient({fallback: true}, gax);
+   *     const client = new WorkerPoolsClient({fallback: true}, gax);
    *     ```
    */
   constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ServicesClient;
+    const staticMembers = this.constructor as typeof WorkerPoolsClient;
     if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
       throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
@@ -214,8 +214,8 @@ export class ServicesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services')
+      listWorkerPools:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workerPools')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -231,37 +231,37 @@ export class ServicesClient {
       lroOptions.httpRules = [{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v2/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=projects/*/locations/*}/operations',},{selector: 'google.longrunning.Operations.WaitOperation',post: '/v2/{name=projects/*/locations/*/operations/*}:wait',body: '*',}];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
-    const createServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
-    const createServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
-    const updateServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
-    const updateServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
-    const deleteServiceResponse = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
-    const deleteServiceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.run.v2.Service') as gax.protobuf.Type;
+    const createWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
+    const createWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
+    const updateWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
+    const updateWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
+    const deleteWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
+    const deleteWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.WorkerPool') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createService: new this._gaxModule.LongrunningDescriptor(
+      createWorkerPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createServiceResponse.decode.bind(createServiceResponse),
-        createServiceMetadata.decode.bind(createServiceMetadata)),
-      updateService: new this._gaxModule.LongrunningDescriptor(
+        createWorkerPoolResponse.decode.bind(createWorkerPoolResponse),
+        createWorkerPoolMetadata.decode.bind(createWorkerPoolMetadata)),
+      updateWorkerPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateServiceResponse.decode.bind(updateServiceResponse),
-        updateServiceMetadata.decode.bind(updateServiceMetadata)),
-      deleteService: new this._gaxModule.LongrunningDescriptor(
+        updateWorkerPoolResponse.decode.bind(updateWorkerPoolResponse),
+        updateWorkerPoolMetadata.decode.bind(updateWorkerPoolMetadata)),
+      deleteWorkerPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteServiceResponse.decode.bind(deleteServiceResponse),
-        deleteServiceMetadata.decode.bind(deleteServiceMetadata))
+        deleteWorkerPoolResponse.decode.bind(deleteWorkerPoolResponse),
+        deleteWorkerPoolMetadata.decode.bind(deleteWorkerPoolMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.run.v2.Services', gapicConfig as gax.ClientConfig,
+        'google.cloud.run.v2.WorkerPools', gapicConfig as gax.ClientConfig,
         opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -286,25 +286,25 @@ export class ServicesClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.servicesStub) {
-      return this.servicesStub;
+    if (this.workerPoolsStub) {
+      return this.workerPoolsStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.run.v2.Services.
-    this.servicesStub = this._gaxGrpc.createStub(
+    // google.cloud.run.v2.WorkerPools.
+    this.workerPoolsStub = this._gaxGrpc.createStub(
         this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.run.v2.Services') :
+          (this._protos as protobuf.Root).lookupService('google.cloud.run.v2.WorkerPools') :
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.run.v2.Services,
+          (this._protos as any).google.cloud.run.v2.WorkerPools,
         this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const servicesStubMethods =
-        ['createService', 'getService', 'listServices', 'updateService', 'deleteService', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
-    for (const methodName of servicesStubMethods) {
-      const callPromise = this.servicesStub.then(
+    const workerPoolsStubMethods =
+        ['createWorkerPool', 'getWorkerPool', 'listWorkerPools', 'updateWorkerPool', 'deleteWorkerPool', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions'];
+    for (const methodName of workerPoolsStubMethods) {
+      const callPromise = this.workerPoolsStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
             return Promise.reject('The client has already been closed.');
@@ -330,7 +330,7 @@ export class ServicesClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.servicesStub;
+    return this.workerPoolsStub;
   }
 
   /**
@@ -407,56 +407,57 @@ export class ServicesClient {
   // -- Service calls --
   // -------------------
 /**
- * Gets information about a Service.
+ * Gets information about a WorkerPool.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The full name of the Service.
- *   Format: projects/{project}/locations/{location}/services/{service}, where
- *   {project} can be project id or number.
+ *   Required. The full name of the WorkerPool.
+ *   Format:
+ *   `projects/{project}/locations/{location}/workerPools/{worker_pool}`, where
+ *   `{project}` can be project id or number.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.Service|Service}.
+ *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.WorkerPool|WorkerPool}.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.get_service.js</caption>
- * region_tag:run_v2_generated_Services_GetService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.get_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_GetWorkerPool_async
  */
-  getService(
-      request?: protos.google.cloud.run.v2.IGetServiceRequest,
+  getWorkerPool(
+      request?: protos.google.cloud.run.v2.IGetWorkerPoolRequest,
       options?: CallOptions):
       Promise<[
-        protos.google.cloud.run.v2.IService,
-        protos.google.cloud.run.v2.IGetServiceRequest|undefined, {}|undefined
+        protos.google.cloud.run.v2.IWorkerPool,
+        protos.google.cloud.run.v2.IGetWorkerPoolRequest|undefined, {}|undefined
       ]>;
-  getService(
-      request: protos.google.cloud.run.v2.IGetServiceRequest,
+  getWorkerPool(
+      request: protos.google.cloud.run.v2.IGetWorkerPoolRequest,
       options: CallOptions,
       callback: Callback<
-          protos.google.cloud.run.v2.IService,
-          protos.google.cloud.run.v2.IGetServiceRequest|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool,
+          protos.google.cloud.run.v2.IGetWorkerPoolRequest|null|undefined,
           {}|null|undefined>): void;
-  getService(
-      request: protos.google.cloud.run.v2.IGetServiceRequest,
+  getWorkerPool(
+      request: protos.google.cloud.run.v2.IGetWorkerPoolRequest,
       callback: Callback<
-          protos.google.cloud.run.v2.IService,
-          protos.google.cloud.run.v2.IGetServiceRequest|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool,
+          protos.google.cloud.run.v2.IGetWorkerPoolRequest|null|undefined,
           {}|null|undefined>): void;
-  getService(
-      request?: protos.google.cloud.run.v2.IGetServiceRequest,
+  getWorkerPool(
+      request?: protos.google.cloud.run.v2.IGetWorkerPoolRequest,
       optionsOrCallback?: CallOptions|Callback<
-          protos.google.cloud.run.v2.IService,
-          protos.google.cloud.run.v2.IGetServiceRequest|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool,
+          protos.google.cloud.run.v2.IGetWorkerPoolRequest|null|undefined,
           {}|null|undefined>,
       callback?: Callback<
-          protos.google.cloud.run.v2.IService,
-          protos.google.cloud.run.v2.IGetServiceRequest|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool,
+          protos.google.cloud.run.v2.IGetWorkerPoolRequest|null|undefined,
           {}|null|undefined>):
       Promise<[
-        protos.google.cloud.run.v2.IService,
-        protos.google.cloud.run.v2.IGetServiceRequest|undefined, {}|undefined
+        protos.google.cloud.run.v2.IWorkerPool,
+        protos.google.cloud.run.v2.IGetWorkerPoolRequest|undefined, {}|undefined
       ]>|void {
     request = request || {};
     let options: CallOptions;
@@ -487,23 +488,23 @@ export class ServicesClient {
       routingParameter
     );
     this.initialize().catch(err => {throw err});
-    this._log.info('getService request %j', request);
+    this._log.info('getWorkerPool request %j', request);
     const wrappedCallback: Callback<
-        protos.google.cloud.run.v2.IService,
-        protos.google.cloud.run.v2.IGetServiceRequest|null|undefined,
+        protos.google.cloud.run.v2.IWorkerPool,
+        protos.google.cloud.run.v2.IGetWorkerPoolRequest|null|undefined,
         {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getService response %j', response);
+          this._log.info('getWorkerPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getService(request, options, wrappedCallback)
+    return this.innerApiCalls.getWorkerPool(request, options, wrappedCallback)
       ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.run.v2.IService,
-        protos.google.cloud.run.v2.IGetServiceRequest|undefined,
+        protos.google.cloud.run.v2.IWorkerPool,
+        protos.google.cloud.run.v2.IGetWorkerPoolRequest|undefined,
         {}|undefined
       ]) => {
-        this._log.info('getService response %j', response);
+        this._log.info('getWorkerPool response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -515,7 +516,7 @@ export class ServicesClient {
   }
 /**
  * Gets the IAM Access Control policy currently in effect for the given
- * Cloud Run Service. This result does not include any inherited policies.
+ * Cloud Run WorkerPool. This result does not include any inherited policies.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -531,8 +532,8 @@ export class ServicesClient {
  *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.get_iam_policy.js</caption>
- * region_tag:run_v2_generated_Services_GetIamPolicy_async
+ * @example <caption>include:samples/generated/v2/worker_pools.get_iam_policy.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_GetIamPolicy_async
  */
   getIamPolicy(
       request?: protos.google.iam.v1.IGetIamPolicyRequest,
@@ -613,7 +614,7 @@ export class ServicesClient {
       });
   }
 /**
- * Sets the IAM Access control policy for the specified Service. Overwrites
+ * Sets the IAM Access control policy for the specified WorkerPool. Overwrites
  * any existing policy.
  *
  * @param {Object} request
@@ -638,8 +639,8 @@ export class ServicesClient {
  *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.set_iam_policy.js</caption>
- * region_tag:run_v2_generated_Services_SetIamPolicy_async
+ * @example <caption>include:samples/generated/v2/worker_pools.set_iam_policy.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_SetIamPolicy_async
  */
   setIamPolicy(
       request?: protos.google.iam.v1.ISetIamPolicyRequest,
@@ -740,8 +741,8 @@ export class ServicesClient {
  *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.test_iam_permissions.js</caption>
- * region_tag:run_v2_generated_Services_TestIamPermissions_async
+ * @example <caption>include:samples/generated/v2/worker_pools.test_iam_permissions.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_TestIamPermissions_async
  */
   testIamPermissions(
       request?: protos.google.iam.v1.ITestIamPermissionsRequest,
@@ -823,22 +824,24 @@ export class ServicesClient {
   }
 
 /**
- * Creates a new Service in a given project and location.
+ * Creates a new WorkerPool in a given project and location.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The location and project in which this service should be created.
- *   Format: projects/{project}/locations/{location}, where {project} can be
- *   project id or number. Only lowercase characters, digits, and hyphens.
- * @param {google.cloud.run.v2.Service} request.service
- *   Required. The Service instance to create.
- * @param {string} request.serviceId
- *   Required. The unique identifier for the Service. It must begin with letter,
- *   and cannot end with hyphen; must contain fewer than 50 characters.
- *   The name of the service becomes {parent}/services/{service_id}.
- * @param {boolean} request.validateOnly
- *   Indicates that the request should be validated and default values
+ *   Required. The location and project in which this worker pool should be
+ *   created. Format: `projects/{project}/locations/{location}`, where
+ *   `{project}` can be project id or number. Only lowercase characters, digits,
+ *   and hyphens.
+ * @param {google.cloud.run.v2.WorkerPool} request.workerPool
+ *   Required. The WorkerPool instance to create.
+ * @param {string} request.workerPoolId
+ *   Required. The unique identifier for the WorkerPool. It must begin with
+ *   letter, and cannot end with hyphen; must contain fewer than 50 characters.
+ *   The name of the worker pool becomes
+ *   `{parent}/workerPools/{worker_pool_id}`.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Indicates that the request should be validated and default values
  *   populated, without persisting the request or creating any resources.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -848,41 +851,41 @@ export class ServicesClient {
  *   you can `await` for.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.create_service.js</caption>
- * region_tag:run_v2_generated_Services_CreateService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.create_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_CreateWorkerPool_async
  */
-  createService(
-      request?: protos.google.cloud.run.v2.ICreateServiceRequest,
+  createWorkerPool(
+      request?: protos.google.cloud.run.v2.ICreateWorkerPoolRequest,
       options?: CallOptions):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>;
-  createService(
-      request: protos.google.cloud.run.v2.ICreateServiceRequest,
+  createWorkerPool(
+      request: protos.google.cloud.run.v2.ICreateWorkerPoolRequest,
       options: CallOptions,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  createService(
-      request: protos.google.cloud.run.v2.ICreateServiceRequest,
+  createWorkerPool(
+      request: protos.google.cloud.run.v2.ICreateWorkerPoolRequest,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  createService(
-      request?: protos.google.cloud.run.v2.ICreateServiceRequest,
+  createWorkerPool(
+      request?: protos.google.cloud.run.v2.ICreateWorkerPoolRequest,
       optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>,
       callback?: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>|void {
     request = request || {};
@@ -915,58 +918,67 @@ export class ServicesClient {
     );
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createService response %j', rawResponse);
+          this._log.info('createWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createService request %j', request);
-    return this.innerApiCalls.createService(request, options, wrappedCallback)
+    this._log.info('createWorkerPool request %j', request);
+    return this.innerApiCalls.createWorkerPool(request, options, wrappedCallback)
     ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+      LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
       protos.google.longrunning.IOperation|undefined, {}|undefined
     ]) => {
-      this._log.info('createService response %j', rawResponse);
+      this._log.info('createWorkerPool response %j', rawResponse);
       return [response, rawResponse, _];
     });
   }
 /**
- * Check the status of the long running operation returned by `createService()`.
+ * Check the status of the long running operation returned by `createWorkerPool()`.
  * @param {String} name
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.create_service.js</caption>
- * region_tag:run_v2_generated_Services_CreateService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.create_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_CreateWorkerPool_async
  */
-  async checkCreateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>>{
-    this._log.info('createService long-running');
+  async checkCreateWorkerPoolProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>>{
+    this._log.info('createWorkerPool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createService, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWorkerPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>;
   }
 /**
- * Updates a Service.
+ * Updates a WorkerPool.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. The list of fields to be updated.
- * @param {google.cloud.run.v2.Service} request.service
- *   Required. The Service to be updated.
- * @param {boolean} request.validateOnly
- *   Indicates that the request should be validated and default values
+ * @param {google.cloud.run.v2.WorkerPool} request.workerPool
+ *   Required. The WorkerPool to be updated.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Indicates that the request should be validated and default values
  *   populated, without persisting the request or updating any resources.
  * @param {boolean} [request.allowMissing]
- *   Optional. If set to true, and if the Service does not exist, it will create
- *   a new one. The caller must have 'run.services.create' permissions if this
- *   is set to true and the Service does not exist.
+ *   Optional. If set to true, and if the WorkerPool does not exist, it will
+ *   create a new one. The caller must have 'run.workerpools.create' permissions
+ *   if this is set to true and the WorkerPool does not exist.
+ * @param {boolean} [request.forceNewRevision]
+ *   Optional. If set to true, a new revision will be created from the template
+ *   even if the system doesn't detect any changes from the previously deployed
+ *   revision.
+ *
+ *   This may be useful for cases where the underlying resources need to be
+ *   recreated or reinitialized. For example if the image is specified by label,
+ *   but the underlying image digest has changed) or if the container performs
+ *   deployment initialization work that needs to be performed again.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -975,41 +987,41 @@ export class ServicesClient {
  *   you can `await` for.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.update_service.js</caption>
- * region_tag:run_v2_generated_Services_UpdateService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.update_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_UpdateWorkerPool_async
  */
-  updateService(
-      request?: protos.google.cloud.run.v2.IUpdateServiceRequest,
+  updateWorkerPool(
+      request?: protos.google.cloud.run.v2.IUpdateWorkerPoolRequest,
       options?: CallOptions):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>;
-  updateService(
-      request: protos.google.cloud.run.v2.IUpdateServiceRequest,
+  updateWorkerPool(
+      request: protos.google.cloud.run.v2.IUpdateWorkerPoolRequest,
       options: CallOptions,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  updateService(
-      request: protos.google.cloud.run.v2.IUpdateServiceRequest,
+  updateWorkerPool(
+      request: protos.google.cloud.run.v2.IUpdateWorkerPoolRequest,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  updateService(
-      request?: protos.google.cloud.run.v2.IUpdateServiceRequest,
+  updateWorkerPool(
+      request?: protos.google.cloud.run.v2.IUpdateWorkerPoolRequest,
       optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>,
       callback?: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>|void {
     request = request || {};
@@ -1026,7 +1038,7 @@ export class ServicesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     let routingParameter = {};
     {
-      const fieldValue = request.service?.name;
+      const fieldValue = request.workerPool?.name;
       if (fieldValue !== undefined && fieldValue !== null) {
         const match = fieldValue.toString().match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?'));
         if (match) {
@@ -1042,55 +1054,54 @@ export class ServicesClient {
     );
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateService response %j', rawResponse);
+          this._log.info('updateWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateService request %j', request);
-    return this.innerApiCalls.updateService(request, options, wrappedCallback)
+    this._log.info('updateWorkerPool request %j', request);
+    return this.innerApiCalls.updateWorkerPool(request, options, wrappedCallback)
     ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+      LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
       protos.google.longrunning.IOperation|undefined, {}|undefined
     ]) => {
-      this._log.info('updateService response %j', rawResponse);
+      this._log.info('updateWorkerPool response %j', rawResponse);
       return [response, rawResponse, _];
     });
   }
 /**
- * Check the status of the long running operation returned by `updateService()`.
+ * Check the status of the long running operation returned by `updateWorkerPool()`.
  * @param {String} name
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.update_service.js</caption>
- * region_tag:run_v2_generated_Services_UpdateService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.update_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_UpdateWorkerPool_async
  */
-  async checkUpdateServiceProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>>{
-    this._log.info('updateService long-running');
+  async checkUpdateWorkerPoolProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>>{
+    this._log.info('updateWorkerPool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateService, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWorkerPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>;
   }
 /**
- * Deletes a Service.
- * This will cause the Service to stop serving traffic and will delete all
- * revisions.
+ * Deletes a WorkerPool.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The full name of the Service.
- *   Format: projects/{project}/locations/{location}/services/{service}, where
- *   {project} can be project id or number.
- * @param {boolean} request.validateOnly
- *   Indicates that the request should be validated without actually
+ *   Required. The full name of the WorkerPool.
+ *   Format:
+ *   `projects/{project}/locations/{location}/workerPools/{worker_pool}`, where
+ *   `{project}` can be project id or number.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Indicates that the request should be validated without actually
  *   deleting any resources.
  * @param {string} request.etag
  *   A system-generated fingerprint for this version of the
@@ -1103,41 +1114,41 @@ export class ServicesClient {
  *   you can `await` for.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.delete_service.js</caption>
- * region_tag:run_v2_generated_Services_DeleteService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.delete_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_DeleteWorkerPool_async
  */
-  deleteService(
-      request?: protos.google.cloud.run.v2.IDeleteServiceRequest,
+  deleteWorkerPool(
+      request?: protos.google.cloud.run.v2.IDeleteWorkerPoolRequest,
       options?: CallOptions):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>;
-  deleteService(
-      request: protos.google.cloud.run.v2.IDeleteServiceRequest,
+  deleteWorkerPool(
+      request: protos.google.cloud.run.v2.IDeleteWorkerPoolRequest,
       options: CallOptions,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  deleteService(
-      request: protos.google.cloud.run.v2.IDeleteServiceRequest,
+  deleteWorkerPool(
+      request: protos.google.cloud.run.v2.IDeleteWorkerPoolRequest,
       callback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>): void;
-  deleteService(
-      request?: protos.google.cloud.run.v2.IDeleteServiceRequest,
+  deleteWorkerPool(
+      request?: protos.google.cloud.run.v2.IDeleteWorkerPoolRequest,
       optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>,
       callback?: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>):
       Promise<[
-        LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+        LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
         protos.google.longrunning.IOperation|undefined, {}|undefined
       ]>|void {
     request = request || {};
@@ -1170,106 +1181,106 @@ export class ServicesClient {
     );
     this.initialize().catch(err => {throw err});
     const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+          LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
           protos.google.longrunning.IOperation|null|undefined,
           {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteService response %j', rawResponse);
+          this._log.info('deleteWorkerPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteService request %j', request);
-    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
+    this._log.info('deleteWorkerPool request %j', request);
+    return this.innerApiCalls.deleteWorkerPool(request, options, wrappedCallback)
     ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.run.v2.IService, protos.google.cloud.run.v2.IService>,
+      LROperation<protos.google.cloud.run.v2.IWorkerPool, protos.google.cloud.run.v2.IWorkerPool>,
       protos.google.longrunning.IOperation|undefined, {}|undefined
     ]) => {
-      this._log.info('deleteService response %j', rawResponse);
+      this._log.info('deleteWorkerPool response %j', rawResponse);
       return [response, rawResponse, _];
     });
   }
 /**
- * Check the status of the long running operation returned by `deleteService()`.
+ * Check the status of the long running operation returned by `deleteWorkerPool()`.
  * @param {String} name
  *   The operation name that will be passed.
  * @returns {Promise} - The promise which resolves to an object.
  *   The decoded operation object has result and metadata field to get information from.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.delete_service.js</caption>
- * region_tag:run_v2_generated_Services_DeleteService_async
+ * @example <caption>include:samples/generated/v2/worker_pools.delete_worker_pool.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_DeleteWorkerPool_async
  */
-  async checkDeleteServiceProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>>{
-    this._log.info('deleteService long-running');
+  async checkDeleteWorkerPoolProgress(name: string): Promise<LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>>{
+    this._log.info('deleteWorkerPool long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteService, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.run.v2.Service, protos.google.cloud.run.v2.Service>;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWorkerPool, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.run.v2.WorkerPool, protos.google.cloud.run.v2.WorkerPool>;
   }
  /**
- * Lists Services. Results are sorted by creation time, descending.
+ * Lists WorkerPools. Results are sorted by creation time, descending.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The location and project to list resources on.
  *   Location must be a valid Google Cloud region, and cannot be the "-"
- *   wildcard. Format: projects/{project}/locations/{location}, where {project}
- *   can be project id or number.
+ *   wildcard. Format: `projects/{project}/locations/{location}`, where
+ *   `{project}` can be project id or number.
  * @param {number} request.pageSize
- *   Maximum number of Services to return in this call.
+ *   Maximum number of WorkerPools to return in this call.
  * @param {string} request.pageToken
- *   A page token received from a previous call to ListServices.
+ *   A page token received from a previous call to ListWorkerPools.
  *   All other parameters must match.
  * @param {boolean} request.showDeleted
  *   If true, returns deleted (but unexpired) resources along with active ones.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.run.v2.Service|Service}.
+ *   The first element of the array is Array of {@link protos.google.cloud.run.v2.WorkerPool|WorkerPool}.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed and will merge results from all the pages into this array.
  *   Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
+ *   We recommend using `listWorkerPoolsAsync()`
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
-  listServices(
-      request?: protos.google.cloud.run.v2.IListServicesRequest,
+  listWorkerPools(
+      request?: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       options?: CallOptions):
       Promise<[
-        protos.google.cloud.run.v2.IService[],
-        protos.google.cloud.run.v2.IListServicesRequest|null,
-        protos.google.cloud.run.v2.IListServicesResponse
+        protos.google.cloud.run.v2.IWorkerPool[],
+        protos.google.cloud.run.v2.IListWorkerPoolsRequest|null,
+        protos.google.cloud.run.v2.IListWorkerPoolsResponse
       ]>;
-  listServices(
-      request: protos.google.cloud.run.v2.IListServicesRequest,
+  listWorkerPools(
+      request: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       options: CallOptions,
       callback: PaginationCallback<
-          protos.google.cloud.run.v2.IListServicesRequest,
-          protos.google.cloud.run.v2.IListServicesResponse|null|undefined,
-          protos.google.cloud.run.v2.IService>): void;
-  listServices(
-      request: protos.google.cloud.run.v2.IListServicesRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsResponse|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool>): void;
+  listWorkerPools(
+      request: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       callback: PaginationCallback<
-          protos.google.cloud.run.v2.IListServicesRequest,
-          protos.google.cloud.run.v2.IListServicesResponse|null|undefined,
-          protos.google.cloud.run.v2.IService>): void;
-  listServices(
-      request?: protos.google.cloud.run.v2.IListServicesRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsResponse|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool>): void;
+  listWorkerPools(
+      request?: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       optionsOrCallback?: CallOptions|PaginationCallback<
-          protos.google.cloud.run.v2.IListServicesRequest,
-          protos.google.cloud.run.v2.IListServicesResponse|null|undefined,
-          protos.google.cloud.run.v2.IService>,
+          protos.google.cloud.run.v2.IListWorkerPoolsRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsResponse|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool>,
       callback?: PaginationCallback<
-          protos.google.cloud.run.v2.IListServicesRequest,
-          protos.google.cloud.run.v2.IListServicesResponse|null|undefined,
-          protos.google.cloud.run.v2.IService>):
+          protos.google.cloud.run.v2.IListWorkerPoolsRequest,
+          protos.google.cloud.run.v2.IListWorkerPoolsResponse|null|undefined,
+          protos.google.cloud.run.v2.IWorkerPool>):
       Promise<[
-        protos.google.cloud.run.v2.IService[],
-        protos.google.cloud.run.v2.IListServicesRequest|null,
-        protos.google.cloud.run.v2.IListServicesResponse
+        protos.google.cloud.run.v2.IWorkerPool[],
+        protos.google.cloud.run.v2.IListWorkerPoolsRequest|null,
+        protos.google.cloud.run.v2.IListWorkerPoolsResponse
       ]>|void {
     request = request || {};
     let options: CallOptions;
@@ -1301,56 +1312,56 @@ export class ServicesClient {
     );
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
-      protos.google.cloud.run.v2.IListServicesRequest,
-      protos.google.cloud.run.v2.IListServicesResponse|null|undefined,
-      protos.google.cloud.run.v2.IService>|undefined = callback
+      protos.google.cloud.run.v2.IListWorkerPoolsRequest,
+      protos.google.cloud.run.v2.IListWorkerPoolsResponse|null|undefined,
+      protos.google.cloud.run.v2.IWorkerPool>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listServices values %j', values);
+          this._log.info('listWorkerPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listServices request %j', request);
+    this._log.info('listWorkerPools request %j', request);
     return this.innerApiCalls
-      .listServices(request, options, wrappedCallback)
+      .listWorkerPools(request, options, wrappedCallback)
       ?.then(([response, input, output]: [
-        protos.google.cloud.run.v2.IService[],
-        protos.google.cloud.run.v2.IListServicesRequest|null,
-        protos.google.cloud.run.v2.IListServicesResponse
+        protos.google.cloud.run.v2.IWorkerPool[],
+        protos.google.cloud.run.v2.IListWorkerPoolsRequest|null,
+        protos.google.cloud.run.v2.IListWorkerPoolsResponse
       ]) => {
-        this._log.info('listServices values %j', response);
+        this._log.info('listWorkerPools values %j', response);
         return [response, input, output];
       });
   }
 
 /**
- * Equivalent to `listServices`, but returns a NodeJS Stream object.
+ * Equivalent to `listWorkerPools`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The location and project to list resources on.
  *   Location must be a valid Google Cloud region, and cannot be the "-"
- *   wildcard. Format: projects/{project}/locations/{location}, where {project}
- *   can be project id or number.
+ *   wildcard. Format: `projects/{project}/locations/{location}`, where
+ *   `{project}` can be project id or number.
  * @param {number} request.pageSize
- *   Maximum number of Services to return in this call.
+ *   Maximum number of WorkerPools to return in this call.
  * @param {string} request.pageToken
- *   A page token received from a previous call to ListServices.
+ *   A page token received from a previous call to ListWorkerPools.
  *   All other parameters must match.
  * @param {boolean} request.showDeleted
  *   If true, returns deleted (but unexpired) resources along with active ones.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.run.v2.Service|Service} on 'data' event.
+ *   An object stream which emits an object representing {@link protos.google.cloud.run.v2.WorkerPool|WorkerPool} on 'data' event.
  *   The client library will perform auto-pagination by default: it will call the API as many
  *   times as needed. Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
+ *   We recommend using `listWorkerPoolsAsync()`
  *   method described below for async iteration which you can stop as needed.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
  */
-  listServicesStream(
-      request?: protos.google.cloud.run.v2.IListServicesRequest,
+  listWorkerPoolsStream(
+      request?: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       options?: CallOptions):
     Transform{
     request = request || {};
@@ -1373,19 +1384,19 @@ export class ServicesClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    const defaultCallSettings = this._defaults['listServices'];
+    const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
-    this._log.info('listServices stream %j', request);
-    return this.descriptors.page.listServices.createStream(
-      this.innerApiCalls.listServices as GaxCall,
+    this._log.info('listWorkerPools stream %j', request);
+    return this.descriptors.page.listWorkerPools.createStream(
+      this.innerApiCalls.listWorkerPools as GaxCall,
       request,
       callSettings
     );
   }
 
 /**
- * Equivalent to `listServices`, but returns an iterable object.
+ * Equivalent to `listWorkerPools`, but returns an iterable object.
  *
  * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
  * @param {Object} request
@@ -1393,12 +1404,12 @@ export class ServicesClient {
  * @param {string} request.parent
  *   Required. The location and project to list resources on.
  *   Location must be a valid Google Cloud region, and cannot be the "-"
- *   wildcard. Format: projects/{project}/locations/{location}, where {project}
- *   can be project id or number.
+ *   wildcard. Format: `projects/{project}/locations/{location}`, where
+ *   `{project}` can be project id or number.
  * @param {number} request.pageSize
- *   Maximum number of Services to return in this call.
+ *   Maximum number of WorkerPools to return in this call.
  * @param {string} request.pageToken
- *   A page token received from a previous call to ListServices.
+ *   A page token received from a previous call to ListWorkerPools.
  *   All other parameters must match.
  * @param {boolean} request.showDeleted
  *   If true, returns deleted (but unexpired) resources along with active ones.
@@ -1407,17 +1418,17 @@ export class ServicesClient {
  * @returns {Object}
  *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
  *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.run.v2.Service|Service}. The API will be called under the hood as needed, once per the page,
+ *   {@link protos.google.cloud.run.v2.WorkerPool|WorkerPool}. The API will be called under the hood as needed, once per the page,
  *   so you can stop the iteration when you don't need more results.
  *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
  *   for more details and examples.
- * @example <caption>include:samples/generated/v2/services.list_services.js</caption>
- * region_tag:run_v2_generated_Services_ListServices_async
+ * @example <caption>include:samples/generated/v2/worker_pools.list_worker_pools.js</caption>
+ * region_tag:run_v2_generated_WorkerPools_ListWorkerPools_async
  */
-  listServicesAsync(
-      request?: protos.google.cloud.run.v2.IListServicesRequest,
+  listWorkerPoolsAsync(
+      request?: protos.google.cloud.run.v2.IListWorkerPoolsRequest,
       options?: CallOptions):
-    AsyncIterable<protos.google.cloud.run.v2.IService>{
+    AsyncIterable<protos.google.cloud.run.v2.IWorkerPool>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1438,15 +1449,15 @@ export class ServicesClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    const defaultCallSettings = this._defaults['listServices'];
+    const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch(err => {throw err});
-    this._log.info('listServices iterate %j', request);
-    return this.descriptors.page.listServices.asyncIterate(
-      this.innerApiCalls['listServices'] as GaxCall,
+    this._log.info('listWorkerPools iterate %j', request);
+    return this.descriptors.page.listWorkerPools.asyncIterate(
+      this.innerApiCalls['listWorkerPools'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.run.v2.IService>;
+    ) as AsyncIterable<protos.google.cloud.run.v2.IWorkerPool>;
   }
 /**
    * Gets information about a location.
@@ -2166,8 +2177,8 @@ export class ServicesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.servicesStub && !this._terminated) {
-      return this.servicesStub.then(stub => {
+    if (this.workerPoolsStub && !this._terminated) {
+      return this.workerPoolsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

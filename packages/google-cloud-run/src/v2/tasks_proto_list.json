@@ -3,6 +3,7 @@
   "../../protos/google/cloud/run/v2/condition.proto",
   "../../protos/google/cloud/run/v2/execution.proto",
   "../../protos/google/cloud/run/v2/execution_template.proto",
+  "../../protos/google/cloud/run/v2/instance_split.proto",
   "../../protos/google/cloud/run/v2/job.proto",
   "../../protos/google/cloud/run/v2/k8s.min.proto",
   "../../protos/google/cloud/run/v2/revision.proto",
@@ -12,5 +13,7 @@
   "../../protos/google/cloud/run/v2/task.proto",
   "../../protos/google/cloud/run/v2/task_template.proto",
   "../../protos/google/cloud/run/v2/traffic_target.proto",
-  "../../protos/google/cloud/run/v2/vendor_settings.proto"
+  "../../protos/google/cloud/run/v2/vendor_settings.proto",
+  "../../protos/google/cloud/run/v2/worker_pool.proto",
+  "../../protos/google/cloud/run/v2/worker_pool_revision_template.proto"
 ]
