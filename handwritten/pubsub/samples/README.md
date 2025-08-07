@@ -20,6 +20,7 @@ guides.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Close Subscription with Timeout](#close-subscription-with-timeout)
   * [Commit an Avro-Based Schema](#commit-an-avro-based-schema)
   * [Commit an Proto-Based Schema](#commit-an-proto-based-schema)
   * [Create an Avro based Schema](#create-an-avro-based-schema)
@@ -105,6 +106,25 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Close Subscription with Timeout
+
+Demonstrates closing a subscription with a specified timeout for graceful shutdown.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/closeSubscriptionWithTimeout.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/closeSubscriptionWithTimeout.js,samples/README.md)
+
+__Usage:__
+
+
+`node closeSubscriptionWithTimeout.js <topic-name> <subscription-name>`
+
+
+-----
+
 
 
 
