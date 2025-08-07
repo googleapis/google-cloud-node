@@ -314639,6 +314639,9 @@ export namespace google {
 
                     /** DeleteRagFileRequest name */
                     name?: (string|null);
+
+                    /** DeleteRagFileRequest forceDelete */
+                    forceDelete?: (boolean|null);
                 }
 
                 /** Represents a DeleteRagFileRequest. */
@@ -314652,6 +314655,9 @@ export namespace google {
 
                     /** DeleteRagFileRequest name. */
                     public name: string;
+
+                    /** DeleteRagFileRequest forceDelete. */
+                    public forceDelete: boolean;
 
                     /**
                      * Creates a new DeleteRagFileRequest instance using the specified properties.
