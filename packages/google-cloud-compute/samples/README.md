@@ -389,6 +389,7 @@
   * [Networks.list_peering_routes](#networks.list_peering_routes)
   * [Networks.patch](#networks.patch)
   * [Networks.remove_peering](#networks.remove_peering)
+  * [Networks.request_remove_peering](#networks.request_remove_peering)
   * [Networks.switch_to_custom_mode](#networks.switch_to_custom_mode)
   * [Networks.update_peering](#networks.update_peering)
   * [Node_groups.add_nodes](#node_groups.add_nodes)
@@ -8200,6 +8201,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/networks.remove_peering.js`
+
+
+-----
+
+
+
+
+### Networks.request_remove_peering
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/networks.request_remove_peering.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/networks.request_remove_peering.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/networks.request_remove_peering.js`
 
 
 -----

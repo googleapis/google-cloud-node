@@ -4577,6 +4577,11 @@
                 "removePeering"
               ]
             },
+            "RequestRemovePeering": {
+              "methods": [
+                "requestRemovePeering"
+              ]
+            },
             "SwitchToCustomMode": {
               "methods": [
                 "switchToCustomMode"
@@ -4639,6 +4644,11 @@
             "RemovePeering": {
               "methods": [
                 "removePeering"
+              ]
+            },
+            "RequestRemovePeering": {
+              "methods": [
+                "requestRemovePeering"
               ]
             },
             "SwitchToCustomMode": {
