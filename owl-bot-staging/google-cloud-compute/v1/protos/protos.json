@@ -8904,6 +8904,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -8989,6 +8994,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "BackendBucketParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -9295,6 +9307,15 @@
                         }
                       }
                     },
+                    "BackendBucketParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
+                        }
+                      }
+                    },
                     "BackendBucketUsedBy": {
                       "oneofs": {
                         "_reference": {
@@ -9490,6 +9511,11 @@
                         "_outlierDetection": {
                           "oneof": [
                             "outlierDetection"
+                          ]
+                        },
+                        "_params": {
+                          "oneof": [
+                            "params"
                           ]
                         },
                         "_port": {
@@ -9779,6 +9805,13 @@
                         "outlierDetection": {
                           "type": "OutlierDetection",
                           "id": 354625086,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "BackendServiceParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -10874,6 +10907,15 @@
                             "EXCLUDE_ALL_OPTIONAL": 168636099,
                             "INCLUDE_ALL_OPTIONAL": 535606965
                           }
+                        }
+                      }
+                    },
+                    "BackendServiceParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -36473,9 +36515,19 @@
                     },
                     "Interconnect": {
                       "oneofs": {
+                        "_aaiEnabled": {
+                          "oneof": [
+                            "aaiEnabled"
+                          ]
+                        },
                         "_adminEnabled": {
                           "oneof": [
                             "adminEnabled"
+                          ]
+                        },
+                        "_applicationAwareInterconnect": {
+                          "oneof": [
+                            "applicationAwareInterconnect"
                           ]
                         },
                         "_creationTimestamp": {
@@ -36595,9 +36647,23 @@
                         }
                       },
                       "fields": {
+                        "aaiEnabled": {
+                          "type": "bool",
+                          "id": 388780363,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "adminEnabled": {
                           "type": "bool",
                           "id": 445675089,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "applicationAwareInterconnect": {
+                          "type": "InterconnectApplicationAwareInterconnect",
+                          "id": 429095966,
                           "options": {
                             "proto3_optional": true
                           }
@@ -36841,6 +36907,108 @@
                           }
                         }
                       }
+                    },
+                    "InterconnectApplicationAwareInterconnect": {
+                      "oneofs": {
+                        "_bandwidthPercentagePolicy": {
+                          "oneof": [
+                            "bandwidthPercentagePolicy"
+                          ]
+                        },
+                        "_profileDescription": {
+                          "oneof": [
+                            "profileDescription"
+                          ]
+                        },
+                        "_strictPriorityPolicy": {
+                          "oneof": [
+                            "strictPriorityPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bandwidthPercentagePolicy": {
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy",
+                          "id": 187018857,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "profileDescription": {
+                          "type": "string",
+                          "id": 262813286,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shapeAveragePercentages": {
+                          "rule": "repeated",
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentage",
+                          "id": 259857497
+                        },
+                        "strictPriorityPolicy": {
+                          "type": "InterconnectApplicationAwareInterconnectStrictPriorityPolicy",
+                          "id": 145083063,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectBandwidthPercentage": {
+                      "oneofs": {
+                        "_percentage": {
+                          "oneof": [
+                            "percentage"
+                          ]
+                        },
+                        "_trafficClass": {
+                          "oneof": [
+                            "trafficClass"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "percentage": {
+                          "type": "uint32",
+                          "id": 151909018,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficClass": {
+                          "type": "string",
+                          "id": 198180022,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TrafficClass": {
+                          "values": {
+                            "UNDEFINED_TRAFFIC_CLASS": 0,
+                            "TC1": 82850,
+                            "TC2": 82851,
+                            "TC3": 82852,
+                            "TC4": 82853,
+                            "TC5": 82854,
+                            "TC6": 82855
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy": {
+                      "fields": {
+                        "bandwidthPercentages": {
+                          "rule": "repeated",
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentage",
+                          "id": 233373323
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectStrictPriorityPolicy": {
+                      "fields": {}
                     },
                     "InterconnectAttachment": {
                       "oneofs": {
@@ -54552,6 +54720,11 @@
                             "autoCreateRoutes"
                           ]
                         },
+                        "_connectionStatus": {
+                          "oneof": [
+                            "connectionStatus"
+                          ]
+                        },
                         "_exchangeSubnetRoutes": {
                           "oneof": [
                             "exchangeSubnetRoutes"
@@ -54606,12 +54779,24 @@
                           "oneof": [
                             "stateDetails"
                           ]
+                        },
+                        "_updateStrategy": {
+                          "oneof": [
+                            "updateStrategy"
+                          ]
                         }
                       },
                       "fields": {
                         "autoCreateRoutes": {
                           "type": "bool",
                           "id": 57454941,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "connectionStatus": {
+                          "type": "NetworkPeeringConnectionStatus",
+                          "id": 525629555,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54692,6 +54877,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "updateStrategy": {
+                          "type": "string",
+                          "id": 6123049,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -54707,6 +54899,191 @@
                             "UNDEFINED_STATE": 0,
                             "ACTIVE": 314733318,
                             "INACTIVE": 270421099
+                          }
+                        },
+                        "UpdateStrategy": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STRATEGY": 0,
+                            "CONSENSUS": 203373655,
+                            "INDEPENDENT": 127011674,
+                            "UNSPECIFIED": 526786327
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatus": {
+                      "oneofs": {
+                        "_consensusState": {
+                          "oneof": [
+                            "consensusState"
+                          ]
+                        },
+                        "_trafficConfiguration": {
+                          "oneof": [
+                            "trafficConfiguration"
+                          ]
+                        },
+                        "_updateStrategy": {
+                          "oneof": [
+                            "updateStrategy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "consensusState": {
+                          "type": "NetworkPeeringConnectionStatusConsensusState",
+                          "id": 379772617,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficConfiguration": {
+                          "type": "NetworkPeeringConnectionStatusTrafficConfiguration",
+                          "id": 133016116,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateStrategy": {
+                          "type": "string",
+                          "id": 6123049,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UpdateStrategy": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STRATEGY": 0,
+                            "CONSENSUS": 203373655,
+                            "INDEPENDENT": 127011674,
+                            "UNSPECIFIED": 526786327
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatusConsensusState": {
+                      "oneofs": {
+                        "_deleteStatus": {
+                          "oneof": [
+                            "deleteStatus"
+                          ]
+                        },
+                        "_updateStatus": {
+                          "oneof": [
+                            "updateStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "deleteStatus": {
+                          "type": "string",
+                          "id": 483434758,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateStatus": {
+                          "type": "string",
+                          "id": 265998376,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DeleteStatus": {
+                          "values": {
+                            "UNDEFINED_DELETE_STATUS": 0,
+                            "DELETE_ACKNOWLEDGED": 325293916,
+                            "DELETE_STATUS_UNSPECIFIED": 395396446,
+                            "LOCAL_DELETE_REQUESTED": 227335214,
+                            "PEER_DELETE_REQUESTED": 197847799
+                          }
+                        },
+                        "UpdateStatus": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STATUS": 0,
+                            "IN_SYNC": 2273653,
+                            "PENDING_LOCAL_ACKNOWLEDMENT": 229926592,
+                            "PENDING_PEER_ACKNOWLEDGEMENT": 420185797,
+                            "UPDATE_STATUS_UNSPECIFIED": 120836480
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatusTrafficConfiguration": {
+                      "oneofs": {
+                        "_exportCustomRoutesToPeer": {
+                          "oneof": [
+                            "exportCustomRoutesToPeer"
+                          ]
+                        },
+                        "_exportSubnetRoutesWithPublicIpToPeer": {
+                          "oneof": [
+                            "exportSubnetRoutesWithPublicIpToPeer"
+                          ]
+                        },
+                        "_importCustomRoutesFromPeer": {
+                          "oneof": [
+                            "importCustomRoutesFromPeer"
+                          ]
+                        },
+                        "_importSubnetRoutesWithPublicIpFromPeer": {
+                          "oneof": [
+                            "importSubnetRoutesWithPublicIpFromPeer"
+                          ]
+                        },
+                        "_stackType": {
+                          "oneof": [
+                            "stackType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exportCustomRoutesToPeer": {
+                          "type": "bool",
+                          "id": 286428404,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exportSubnetRoutesWithPublicIpToPeer": {
+                          "type": "bool",
+                          "id": 8358601,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "importCustomRoutesFromPeer": {
+                          "type": "bool",
+                          "id": 398584470,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "importSubnetRoutesWithPublicIpFromPeer": {
+                          "type": "bool",
+                          "id": 234712361,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "stackType": {
+                          "type": "string",
+                          "id": 425908881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StackType": {
+                          "values": {
+                            "UNDEFINED_STACK_TYPE": 0,
+                            "IPV4_IPV6": 22197249,
+                            "IPV4_ONLY": 22373798
                           }
                         }
                       }
@@ -55768,6 +56145,24 @@
                       }
                     },
                     "NetworksRemovePeeringRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworksRequestRemovePeeringRequest": {
                       "oneofs": {
                         "_name": {
                           "oneof": [
@@ -65933,8 +66328,53 @@
                         }
                       }
                     },
+                    "RequestRemovePeeringNetworkRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 232872494,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networksRequestRemovePeeringRequestResource": {
+                          "type": "NetworksRequestRemovePeeringRequest",
+                          "id": 150860366,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Reservation": {
                       "oneofs": {
+                        "_advancedDeploymentControl": {
+                          "oneof": [
+                            "advancedDeploymentControl"
+                          ]
+                        },
                         "_aggregateReservation": {
                           "oneof": [
                             "aggregateReservation"
@@ -66042,6 +66482,13 @@
                         }
                       },
                       "fields": {
+                        "advancedDeploymentControl": {
+                          "type": "ReservationAdvancedDeploymentControl",
+                          "id": 410618144,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "aggregateReservation": {
                           "type": "AllocationAggregateReservation",
                           "id": 291567948,
@@ -66224,6 +66671,34 @@
                             "INVALID": 530283991,
                             "READY": 77848963,
                             "UPDATING": 494614342
+                          }
+                        }
+                      }
+                    },
+                    "ReservationAdvancedDeploymentControl": {
+                      "oneofs": {
+                        "_reservationOperationalMode": {
+                          "oneof": [
+                            "reservationOperationalMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "reservationOperationalMode": {
+                          "type": "string",
+                          "id": 499978755,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReservationOperationalMode": {
+                          "values": {
+                            "UNDEFINED_RESERVATION_OPERATIONAL_MODE": 0,
+                            "ALL_CAPACITY": 500029880,
+                            "HIGHLY_AVAILABLE_CAPACITY": 110861600,
+                            "RESERVATION_OPERATIONAL_MODE_UNSPECIFIED": 194296603
                           }
                         }
                       }
@@ -99550,6 +100025,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,network,networks_remove_peering_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "RequestRemovePeering": {
+                          "requestType": "RequestRemovePeeringNetworkRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "networks_request_remove_peering_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/networks/{network}/requestRemovePeering",
+                            "(google.api.method_signature)": "project,network,networks_request_remove_peering_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "networks_request_remove_peering_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/networks/{network}/requestRemovePeering"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,network,networks_request_remove_peering_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"

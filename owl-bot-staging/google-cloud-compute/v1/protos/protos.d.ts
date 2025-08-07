@@ -15324,6 +15324,9 @@ export namespace google {
                     /** BackendBucket name */
                     name?: (string|null);
 
+                    /** BackendBucket params */
+                    params?: (google.cloud.compute.v1.IBackendBucketParams|null);
+
                     /** BackendBucket selfLink */
                     selfLink?: (string|null);
 
@@ -15375,6 +15378,9 @@ export namespace google {
 
                     /** BackendBucket name. */
                     public name?: (string|null);
+
+                    /** BackendBucket params. */
+                    public params?: (google.cloud.compute.v1.IBackendBucketParams|null);
 
                     /** BackendBucket selfLink. */
                     public selfLink?: (string|null);
@@ -16081,6 +16087,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BackendBucketParams. */
+                interface IBackendBucketParams {
+
+                    /** BackendBucketParams resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a BackendBucketParams. */
+                class BackendBucketParams implements IBackendBucketParams {
+
+                    /**
+                     * Constructs a new BackendBucketParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IBackendBucketParams);
+
+                    /** BackendBucketParams resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
+
+                    /**
+                     * Creates a new BackendBucketParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackendBucketParams instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IBackendBucketParams): google.cloud.compute.v1.BackendBucketParams;
+
+                    /**
+                     * Encodes the specified BackendBucketParams message. Does not implicitly {@link google.cloud.compute.v1.BackendBucketParams.verify|verify} messages.
+                     * @param message BackendBucketParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IBackendBucketParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackendBucketParams message, length delimited. Does not implicitly {@link google.cloud.compute.v1.BackendBucketParams.verify|verify} messages.
+                     * @param message BackendBucketParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IBackendBucketParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackendBucketParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackendBucketParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.BackendBucketParams;
+
+                    /**
+                     * Decodes a BackendBucketParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackendBucketParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.BackendBucketParams;
+
+                    /**
+                     * Verifies a BackendBucketParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackendBucketParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackendBucketParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.BackendBucketParams;
+
+                    /**
+                     * Creates a plain object from a BackendBucketParams message. Also converts values to other types if specified.
+                     * @param message BackendBucketParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.BackendBucketParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackendBucketParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackendBucketParams
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BackendBucketUsedBy. */
                 interface IBackendBucketUsedBy {
 
@@ -16392,6 +16495,9 @@ export namespace google {
                     /** BackendService outlierDetection */
                     outlierDetection?: (google.cloud.compute.v1.IOutlierDetection|null);
 
+                    /** BackendService params */
+                    params?: (google.cloud.compute.v1.IBackendServiceParams|null);
+
                     /** BackendService port */
                     port?: (number|null);
 
@@ -16548,6 +16654,9 @@ export namespace google {
 
                     /** BackendService outlierDetection. */
                     public outlierDetection?: (google.cloud.compute.v1.IOutlierDetection|null);
+
+                    /** BackendService params. */
+                    public params?: (google.cloud.compute.v1.IBackendServiceParams|null);
 
                     /** BackendService port. */
                     public port?: (number|null);
@@ -18950,6 +19059,103 @@ export namespace google {
                         EXCLUDE_ALL_OPTIONAL = 168636099,
                         INCLUDE_ALL_OPTIONAL = 535606965
                     }
+                }
+
+                /** Properties of a BackendServiceParams. */
+                interface IBackendServiceParams {
+
+                    /** BackendServiceParams resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a BackendServiceParams. */
+                class BackendServiceParams implements IBackendServiceParams {
+
+                    /**
+                     * Constructs a new BackendServiceParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IBackendServiceParams);
+
+                    /** BackendServiceParams resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
+
+                    /**
+                     * Creates a new BackendServiceParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackendServiceParams instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IBackendServiceParams): google.cloud.compute.v1.BackendServiceParams;
+
+                    /**
+                     * Encodes the specified BackendServiceParams message. Does not implicitly {@link google.cloud.compute.v1.BackendServiceParams.verify|verify} messages.
+                     * @param message BackendServiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IBackendServiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackendServiceParams message, length delimited. Does not implicitly {@link google.cloud.compute.v1.BackendServiceParams.verify|verify} messages.
+                     * @param message BackendServiceParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IBackendServiceParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackendServiceParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackendServiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.BackendServiceParams;
+
+                    /**
+                     * Decodes a BackendServiceParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackendServiceParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.BackendServiceParams;
+
+                    /**
+                     * Verifies a BackendServiceParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackendServiceParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackendServiceParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.BackendServiceParams;
+
+                    /**
+                     * Creates a plain object from a BackendServiceParams message. Also converts values to other types if specified.
+                     * @param message BackendServiceParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.BackendServiceParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackendServiceParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackendServiceParams
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BackendServiceReference. */
@@ -86683,8 +86889,14 @@ export namespace google {
                 /** Properties of an Interconnect. */
                 interface IInterconnect {
 
+                    /** Interconnect aaiEnabled */
+                    aaiEnabled?: (boolean|null);
+
                     /** Interconnect adminEnabled */
                     adminEnabled?: (boolean|null);
+
+                    /** Interconnect applicationAwareInterconnect */
+                    applicationAwareInterconnect?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect|null);
 
                     /** Interconnect availableFeatures */
                     availableFeatures?: (string[]|null);
@@ -86786,8 +86998,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.compute.v1.IInterconnect);
 
+                    /** Interconnect aaiEnabled. */
+                    public aaiEnabled?: (boolean|null);
+
                     /** Interconnect adminEnabled. */
                     public adminEnabled?: (boolean|null);
+
+                    /** Interconnect applicationAwareInterconnect. */
+                    public applicationAwareInterconnect?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect|null);
 
                     /** Interconnect availableFeatures. */
                     public availableFeatures: string[];
@@ -86998,6 +87216,426 @@ export namespace google {
                         ACTIVE = 314733318,
                         UNPROVISIONED = 517333979
                     }
+                }
+
+                /** Properties of an InterconnectApplicationAwareInterconnect. */
+                interface IInterconnectApplicationAwareInterconnect {
+
+                    /** InterconnectApplicationAwareInterconnect bandwidthPercentagePolicy */
+                    bandwidthPercentagePolicy?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy|null);
+
+                    /** InterconnectApplicationAwareInterconnect profileDescription */
+                    profileDescription?: (string|null);
+
+                    /** InterconnectApplicationAwareInterconnect shapeAveragePercentages */
+                    shapeAveragePercentages?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage[]|null);
+
+                    /** InterconnectApplicationAwareInterconnect strictPriorityPolicy */
+                    strictPriorityPolicy?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy|null);
+                }
+
+                /** Represents an InterconnectApplicationAwareInterconnect. */
+                class InterconnectApplicationAwareInterconnect implements IInterconnectApplicationAwareInterconnect {
+
+                    /**
+                     * Constructs a new InterconnectApplicationAwareInterconnect.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect);
+
+                    /** InterconnectApplicationAwareInterconnect bandwidthPercentagePolicy. */
+                    public bandwidthPercentagePolicy?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy|null);
+
+                    /** InterconnectApplicationAwareInterconnect profileDescription. */
+                    public profileDescription?: (string|null);
+
+                    /** InterconnectApplicationAwareInterconnect shapeAveragePercentages. */
+                    public shapeAveragePercentages: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage[];
+
+                    /** InterconnectApplicationAwareInterconnect strictPriorityPolicy. */
+                    public strictPriorityPolicy?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy|null);
+
+                    /**
+                     * Creates a new InterconnectApplicationAwareInterconnect instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectApplicationAwareInterconnect instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect): google.cloud.compute.v1.InterconnectApplicationAwareInterconnect;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnect message. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnect.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnect message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnect message, length delimited. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnect.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnect message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnect message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectApplicationAwareInterconnect
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.InterconnectApplicationAwareInterconnect;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnect message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectApplicationAwareInterconnect
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.InterconnectApplicationAwareInterconnect;
+
+                    /**
+                     * Verifies an InterconnectApplicationAwareInterconnect message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectApplicationAwareInterconnect message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectApplicationAwareInterconnect
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.InterconnectApplicationAwareInterconnect;
+
+                    /**
+                     * Creates a plain object from an InterconnectApplicationAwareInterconnect message. Also converts values to other types if specified.
+                     * @param message InterconnectApplicationAwareInterconnect
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.InterconnectApplicationAwareInterconnect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectApplicationAwareInterconnect to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectApplicationAwareInterconnect
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InterconnectApplicationAwareInterconnectBandwidthPercentage. */
+                interface IInterconnectApplicationAwareInterconnectBandwidthPercentage {
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentage percentage */
+                    percentage?: (number|null);
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentage trafficClass */
+                    trafficClass?: (string|null);
+                }
+
+                /** Represents an InterconnectApplicationAwareInterconnectBandwidthPercentage. */
+                class InterconnectApplicationAwareInterconnectBandwidthPercentage implements IInterconnectApplicationAwareInterconnectBandwidthPercentage {
+
+                    /**
+                     * Constructs a new InterconnectApplicationAwareInterconnectBandwidthPercentage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage);
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentage percentage. */
+                    public percentage?: (number|null);
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentage trafficClass. */
+                    public trafficClass?: (string|null);
+
+                    /**
+                     * Creates a new InterconnectApplicationAwareInterconnectBandwidthPercentage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentage instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectBandwidthPercentage message. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectBandwidthPercentage message, length delimited. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectBandwidthPercentage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectBandwidthPercentage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage;
+
+                    /**
+                     * Verifies an InterconnectApplicationAwareInterconnectBandwidthPercentage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectApplicationAwareInterconnectBandwidthPercentage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage;
+
+                    /**
+                     * Creates a plain object from an InterconnectApplicationAwareInterconnectBandwidthPercentage message. Also converts values to other types if specified.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectApplicationAwareInterconnectBandwidthPercentage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectApplicationAwareInterconnectBandwidthPercentage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InterconnectApplicationAwareInterconnectBandwidthPercentage {
+
+                    /** TrafficClass enum. */
+                    enum TrafficClass {
+                        UNDEFINED_TRAFFIC_CLASS = 0,
+                        TC1 = 82850,
+                        TC2 = 82851,
+                        TC3 = 82852,
+                        TC4 = 82853,
+                        TC5 = 82854,
+                        TC6 = 82855
+                    }
+                }
+
+                /** Properties of an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy. */
+                interface IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy {
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy bandwidthPercentages */
+                    bandwidthPercentages?: (google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage[]|null);
+                }
+
+                /** Represents an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy. */
+                class InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy implements IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy {
+
+                    /**
+                     * Constructs a new InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy);
+
+                    /** InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy bandwidthPercentages. */
+                    public bandwidthPercentages: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentage[];
+
+                    /**
+                     * Creates a new InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message, length delimited. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectBandwidthPercentagePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy;
+
+                    /**
+                     * Verifies an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy;
+
+                    /**
+                     * Creates a plain object from an InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy message. Also converts values to other types if specified.
+                     * @param message InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InterconnectApplicationAwareInterconnectStrictPriorityPolicy. */
+                interface IInterconnectApplicationAwareInterconnectStrictPriorityPolicy {
+                }
+
+                /** Represents an InterconnectApplicationAwareInterconnectStrictPriorityPolicy. */
+                class InterconnectApplicationAwareInterconnectStrictPriorityPolicy implements IInterconnectApplicationAwareInterconnectStrictPriorityPolicy {
+
+                    /**
+                     * Constructs a new InterconnectApplicationAwareInterconnectStrictPriorityPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy);
+
+                    /**
+                     * Creates a new InterconnectApplicationAwareInterconnectStrictPriorityPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectApplicationAwareInterconnectStrictPriorityPolicy instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectStrictPriorityPolicy message. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectStrictPriorityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectApplicationAwareInterconnectStrictPriorityPolicy message, length delimited. Does not implicitly {@link google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy.verify|verify} messages.
+                     * @param message InterconnectApplicationAwareInterconnectStrictPriorityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IInterconnectApplicationAwareInterconnectStrictPriorityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectStrictPriorityPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy;
+
+                    /**
+                     * Decodes an InterconnectApplicationAwareInterconnectStrictPriorityPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy;
+
+                    /**
+                     * Verifies an InterconnectApplicationAwareInterconnectStrictPriorityPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectApplicationAwareInterconnectStrictPriorityPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy;
+
+                    /**
+                     * Creates a plain object from an InterconnectApplicationAwareInterconnectStrictPriorityPolicy message. Also converts values to other types if specified.
+                     * @param message InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.InterconnectApplicationAwareInterconnectStrictPriorityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectApplicationAwareInterconnectStrictPriorityPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an InterconnectAttachment. */
@@ -119001,6 +119639,9 @@ export namespace google {
                     /** NetworkPeering autoCreateRoutes */
                     autoCreateRoutes?: (boolean|null);
 
+                    /** NetworkPeering connectionStatus */
+                    connectionStatus?: (google.cloud.compute.v1.INetworkPeeringConnectionStatus|null);
+
                     /** NetworkPeering exchangeSubnetRoutes */
                     exchangeSubnetRoutes?: (boolean|null);
 
@@ -119033,6 +119674,9 @@ export namespace google {
 
                     /** NetworkPeering stateDetails */
                     stateDetails?: (string|null);
+
+                    /** NetworkPeering updateStrategy */
+                    updateStrategy?: (string|null);
                 }
 
                 /** Represents a NetworkPeering. */
@@ -119046,6 +119690,9 @@ export namespace google {
 
                     /** NetworkPeering autoCreateRoutes. */
                     public autoCreateRoutes?: (boolean|null);
+
+                    /** NetworkPeering connectionStatus. */
+                    public connectionStatus?: (google.cloud.compute.v1.INetworkPeeringConnectionStatus|null);
 
                     /** NetworkPeering exchangeSubnetRoutes. */
                     public exchangeSubnetRoutes?: (boolean|null);
@@ -119079,6 +119726,9 @@ export namespace google {
 
                     /** NetworkPeering stateDetails. */
                     public stateDetails?: (string|null);
+
+                    /** NetworkPeering updateStrategy. */
+                    public updateStrategy?: (string|null);
 
                     /**
                      * Creates a new NetworkPeering instance using the specified properties.
@@ -119172,6 +119822,389 @@ export namespace google {
                         UNDEFINED_STATE = 0,
                         ACTIVE = 314733318,
                         INACTIVE = 270421099
+                    }
+
+                    /** UpdateStrategy enum. */
+                    enum UpdateStrategy {
+                        UNDEFINED_UPDATE_STRATEGY = 0,
+                        CONSENSUS = 203373655,
+                        INDEPENDENT = 127011674,
+                        UNSPECIFIED = 526786327
+                    }
+                }
+
+                /** Properties of a NetworkPeeringConnectionStatus. */
+                interface INetworkPeeringConnectionStatus {
+
+                    /** NetworkPeeringConnectionStatus consensusState */
+                    consensusState?: (google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState|null);
+
+                    /** NetworkPeeringConnectionStatus trafficConfiguration */
+                    trafficConfiguration?: (google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration|null);
+
+                    /** NetworkPeeringConnectionStatus updateStrategy */
+                    updateStrategy?: (string|null);
+                }
+
+                /** Represents a NetworkPeeringConnectionStatus. */
+                class NetworkPeeringConnectionStatus implements INetworkPeeringConnectionStatus {
+
+                    /**
+                     * Constructs a new NetworkPeeringConnectionStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatus);
+
+                    /** NetworkPeeringConnectionStatus consensusState. */
+                    public consensusState?: (google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState|null);
+
+                    /** NetworkPeeringConnectionStatus trafficConfiguration. */
+                    public trafficConfiguration?: (google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration|null);
+
+                    /** NetworkPeeringConnectionStatus updateStrategy. */
+                    public updateStrategy?: (string|null);
+
+                    /**
+                     * Creates a new NetworkPeeringConnectionStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkPeeringConnectionStatus instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatus): google.cloud.compute.v1.NetworkPeeringConnectionStatus;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatus message. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatus.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.INetworkPeeringConnectionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatus message, length delimited. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatus.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.INetworkPeeringConnectionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkPeeringConnectionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.NetworkPeeringConnectionStatus;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkPeeringConnectionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.NetworkPeeringConnectionStatus;
+
+                    /**
+                     * Verifies a NetworkPeeringConnectionStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkPeeringConnectionStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkPeeringConnectionStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.NetworkPeeringConnectionStatus;
+
+                    /**
+                     * Creates a plain object from a NetworkPeeringConnectionStatus message. Also converts values to other types if specified.
+                     * @param message NetworkPeeringConnectionStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.NetworkPeeringConnectionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkPeeringConnectionStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkPeeringConnectionStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkPeeringConnectionStatus {
+
+                    /** UpdateStrategy enum. */
+                    enum UpdateStrategy {
+                        UNDEFINED_UPDATE_STRATEGY = 0,
+                        CONSENSUS = 203373655,
+                        INDEPENDENT = 127011674,
+                        UNSPECIFIED = 526786327
+                    }
+                }
+
+                /** Properties of a NetworkPeeringConnectionStatusConsensusState. */
+                interface INetworkPeeringConnectionStatusConsensusState {
+
+                    /** NetworkPeeringConnectionStatusConsensusState deleteStatus */
+                    deleteStatus?: (string|null);
+
+                    /** NetworkPeeringConnectionStatusConsensusState updateStatus */
+                    updateStatus?: (string|null);
+                }
+
+                /** Represents a NetworkPeeringConnectionStatusConsensusState. */
+                class NetworkPeeringConnectionStatusConsensusState implements INetworkPeeringConnectionStatusConsensusState {
+
+                    /**
+                     * Constructs a new NetworkPeeringConnectionStatusConsensusState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState);
+
+                    /** NetworkPeeringConnectionStatusConsensusState deleteStatus. */
+                    public deleteStatus?: (string|null);
+
+                    /** NetworkPeeringConnectionStatusConsensusState updateStatus. */
+                    public updateStatus?: (string|null);
+
+                    /**
+                     * Creates a new NetworkPeeringConnectionStatusConsensusState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkPeeringConnectionStatusConsensusState instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState): google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatusConsensusState message. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatusConsensusState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatusConsensusState message, length delimited. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatusConsensusState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.INetworkPeeringConnectionStatusConsensusState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatusConsensusState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkPeeringConnectionStatusConsensusState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatusConsensusState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkPeeringConnectionStatusConsensusState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState;
+
+                    /**
+                     * Verifies a NetworkPeeringConnectionStatusConsensusState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkPeeringConnectionStatusConsensusState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkPeeringConnectionStatusConsensusState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState;
+
+                    /**
+                     * Creates a plain object from a NetworkPeeringConnectionStatusConsensusState message. Also converts values to other types if specified.
+                     * @param message NetworkPeeringConnectionStatusConsensusState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkPeeringConnectionStatusConsensusState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkPeeringConnectionStatusConsensusState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkPeeringConnectionStatusConsensusState {
+
+                    /** DeleteStatus enum. */
+                    enum DeleteStatus {
+                        UNDEFINED_DELETE_STATUS = 0,
+                        DELETE_ACKNOWLEDGED = 325293916,
+                        DELETE_STATUS_UNSPECIFIED = 395396446,
+                        LOCAL_DELETE_REQUESTED = 227335214,
+                        PEER_DELETE_REQUESTED = 197847799
+                    }
+
+                    /** UpdateStatus enum. */
+                    enum UpdateStatus {
+                        UNDEFINED_UPDATE_STATUS = 0,
+                        IN_SYNC = 2273653,
+                        PENDING_LOCAL_ACKNOWLEDMENT = 229926592,
+                        PENDING_PEER_ACKNOWLEDGEMENT = 420185797,
+                        UPDATE_STATUS_UNSPECIFIED = 120836480
+                    }
+                }
+
+                /** Properties of a NetworkPeeringConnectionStatusTrafficConfiguration. */
+                interface INetworkPeeringConnectionStatusTrafficConfiguration {
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration exportCustomRoutesToPeer */
+                    exportCustomRoutesToPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration exportSubnetRoutesWithPublicIpToPeer */
+                    exportSubnetRoutesWithPublicIpToPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration importCustomRoutesFromPeer */
+                    importCustomRoutesFromPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration importSubnetRoutesWithPublicIpFromPeer */
+                    importSubnetRoutesWithPublicIpFromPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration stackType */
+                    stackType?: (string|null);
+                }
+
+                /** Represents a NetworkPeeringConnectionStatusTrafficConfiguration. */
+                class NetworkPeeringConnectionStatusTrafficConfiguration implements INetworkPeeringConnectionStatusTrafficConfiguration {
+
+                    /**
+                     * Constructs a new NetworkPeeringConnectionStatusTrafficConfiguration.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration exportCustomRoutesToPeer. */
+                    public exportCustomRoutesToPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration exportSubnetRoutesWithPublicIpToPeer. */
+                    public exportSubnetRoutesWithPublicIpToPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration importCustomRoutesFromPeer. */
+                    public importCustomRoutesFromPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration importSubnetRoutesWithPublicIpFromPeer. */
+                    public importSubnetRoutesWithPublicIpFromPeer?: (boolean|null);
+
+                    /** NetworkPeeringConnectionStatusTrafficConfiguration stackType. */
+                    public stackType?: (string|null);
+
+                    /**
+                     * Creates a new NetworkPeeringConnectionStatusTrafficConfiguration instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkPeeringConnectionStatusTrafficConfiguration instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration): google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatusTrafficConfiguration message. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatusTrafficConfiguration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkPeeringConnectionStatusTrafficConfiguration message, length delimited. Does not implicitly {@link google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration.verify|verify} messages.
+                     * @param message NetworkPeeringConnectionStatusTrafficConfiguration message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.INetworkPeeringConnectionStatusTrafficConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatusTrafficConfiguration message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkPeeringConnectionStatusTrafficConfiguration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration;
+
+                    /**
+                     * Decodes a NetworkPeeringConnectionStatusTrafficConfiguration message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkPeeringConnectionStatusTrafficConfiguration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration;
+
+                    /**
+                     * Verifies a NetworkPeeringConnectionStatusTrafficConfiguration message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkPeeringConnectionStatusTrafficConfiguration message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkPeeringConnectionStatusTrafficConfiguration
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration;
+
+                    /**
+                     * Creates a plain object from a NetworkPeeringConnectionStatusTrafficConfiguration message. Also converts values to other types if specified.
+                     * @param message NetworkPeeringConnectionStatusTrafficConfiguration
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.NetworkPeeringConnectionStatusTrafficConfiguration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkPeeringConnectionStatusTrafficConfiguration to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkPeeringConnectionStatusTrafficConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkPeeringConnectionStatusTrafficConfiguration {
+
+                    /** StackType enum. */
+                    enum StackType {
+                        UNDEFINED_STACK_TYPE = 0,
+                        IPV4_IPV6 = 22197249,
+                        IPV4_ONLY = 22373798
                     }
                 }
 
@@ -120770,6 +121803,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for NetworksRemovePeeringRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NetworksRequestRemovePeeringRequest. */
+                interface INetworksRequestRemovePeeringRequest {
+
+                    /** NetworksRequestRemovePeeringRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a NetworksRequestRemovePeeringRequest. */
+                class NetworksRequestRemovePeeringRequest implements INetworksRequestRemovePeeringRequest {
+
+                    /**
+                     * Constructs a new NetworksRequestRemovePeeringRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.INetworksRequestRemovePeeringRequest);
+
+                    /** NetworksRequestRemovePeeringRequest name. */
+                    public name?: (string|null);
+
+                    /**
+                     * Creates a new NetworksRequestRemovePeeringRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworksRequestRemovePeeringRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.INetworksRequestRemovePeeringRequest): google.cloud.compute.v1.NetworksRequestRemovePeeringRequest;
+
+                    /**
+                     * Encodes the specified NetworksRequestRemovePeeringRequest message. Does not implicitly {@link google.cloud.compute.v1.NetworksRequestRemovePeeringRequest.verify|verify} messages.
+                     * @param message NetworksRequestRemovePeeringRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.INetworksRequestRemovePeeringRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworksRequestRemovePeeringRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.NetworksRequestRemovePeeringRequest.verify|verify} messages.
+                     * @param message NetworksRequestRemovePeeringRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.INetworksRequestRemovePeeringRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworksRequestRemovePeeringRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworksRequestRemovePeeringRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.NetworksRequestRemovePeeringRequest;
+
+                    /**
+                     * Decodes a NetworksRequestRemovePeeringRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworksRequestRemovePeeringRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.NetworksRequestRemovePeeringRequest;
+
+                    /**
+                     * Verifies a NetworksRequestRemovePeeringRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworksRequestRemovePeeringRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworksRequestRemovePeeringRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.NetworksRequestRemovePeeringRequest;
+
+                    /**
+                     * Creates a plain object from a NetworksRequestRemovePeeringRequest message. Also converts values to other types if specified.
+                     * @param message NetworksRequestRemovePeeringRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.NetworksRequestRemovePeeringRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworksRequestRemovePeeringRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworksRequestRemovePeeringRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -143838,8 +144968,126 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RequestRemovePeeringNetworkRequest. */
+                interface IRequestRemovePeeringNetworkRequest {
+
+                    /** RequestRemovePeeringNetworkRequest network */
+                    network?: (string|null);
+
+                    /** RequestRemovePeeringNetworkRequest networksRequestRemovePeeringRequestResource */
+                    networksRequestRemovePeeringRequestResource?: (google.cloud.compute.v1.INetworksRequestRemovePeeringRequest|null);
+
+                    /** RequestRemovePeeringNetworkRequest project */
+                    project?: (string|null);
+
+                    /** RequestRemovePeeringNetworkRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RequestRemovePeeringNetworkRequest. */
+                class RequestRemovePeeringNetworkRequest implements IRequestRemovePeeringNetworkRequest {
+
+                    /**
+                     * Constructs a new RequestRemovePeeringNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest);
+
+                    /** RequestRemovePeeringNetworkRequest network. */
+                    public network: string;
+
+                    /** RequestRemovePeeringNetworkRequest networksRequestRemovePeeringRequestResource. */
+                    public networksRequestRemovePeeringRequestResource?: (google.cloud.compute.v1.INetworksRequestRemovePeeringRequest|null);
+
+                    /** RequestRemovePeeringNetworkRequest project. */
+                    public project: string;
+
+                    /** RequestRemovePeeringNetworkRequest requestId. */
+                    public requestId?: (string|null);
+
+                    /**
+                     * Creates a new RequestRemovePeeringNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RequestRemovePeeringNetworkRequest instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest): google.cloud.compute.v1.RequestRemovePeeringNetworkRequest;
+
+                    /**
+                     * Encodes the specified RequestRemovePeeringNetworkRequest message. Does not implicitly {@link google.cloud.compute.v1.RequestRemovePeeringNetworkRequest.verify|verify} messages.
+                     * @param message RequestRemovePeeringNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RequestRemovePeeringNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.compute.v1.RequestRemovePeeringNetworkRequest.verify|verify} messages.
+                     * @param message RequestRemovePeeringNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RequestRemovePeeringNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RequestRemovePeeringNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.RequestRemovePeeringNetworkRequest;
+
+                    /**
+                     * Decodes a RequestRemovePeeringNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RequestRemovePeeringNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.RequestRemovePeeringNetworkRequest;
+
+                    /**
+                     * Verifies a RequestRemovePeeringNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RequestRemovePeeringNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RequestRemovePeeringNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.RequestRemovePeeringNetworkRequest;
+
+                    /**
+                     * Creates a plain object from a RequestRemovePeeringNetworkRequest message. Also converts values to other types if specified.
+                     * @param message RequestRemovePeeringNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.RequestRemovePeeringNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RequestRemovePeeringNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RequestRemovePeeringNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Reservation. */
                 interface IReservation {
+
+                    /** Reservation advancedDeploymentControl */
+                    advancedDeploymentControl?: (google.cloud.compute.v1.IReservationAdvancedDeploymentControl|null);
 
                     /** Reservation aggregateReservation */
                     aggregateReservation?: (google.cloud.compute.v1.IAllocationAggregateReservation|null);
@@ -143919,6 +145167,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.compute.v1.IReservation);
+
+                    /** Reservation advancedDeploymentControl. */
+                    public advancedDeploymentControl?: (google.cloud.compute.v1.IReservationAdvancedDeploymentControl|null);
 
                     /** Reservation aggregateReservation. */
                     public aggregateReservation?: (google.cloud.compute.v1.IAllocationAggregateReservation|null);
@@ -144092,6 +145343,114 @@ export namespace google {
                         INVALID = 530283991,
                         READY = 77848963,
                         UPDATING = 494614342
+                    }
+                }
+
+                /** Properties of a ReservationAdvancedDeploymentControl. */
+                interface IReservationAdvancedDeploymentControl {
+
+                    /** ReservationAdvancedDeploymentControl reservationOperationalMode */
+                    reservationOperationalMode?: (string|null);
+                }
+
+                /** Represents a ReservationAdvancedDeploymentControl. */
+                class ReservationAdvancedDeploymentControl implements IReservationAdvancedDeploymentControl {
+
+                    /**
+                     * Constructs a new ReservationAdvancedDeploymentControl.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1.IReservationAdvancedDeploymentControl);
+
+                    /** ReservationAdvancedDeploymentControl reservationOperationalMode. */
+                    public reservationOperationalMode?: (string|null);
+
+                    /**
+                     * Creates a new ReservationAdvancedDeploymentControl instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReservationAdvancedDeploymentControl instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1.IReservationAdvancedDeploymentControl): google.cloud.compute.v1.ReservationAdvancedDeploymentControl;
+
+                    /**
+                     * Encodes the specified ReservationAdvancedDeploymentControl message. Does not implicitly {@link google.cloud.compute.v1.ReservationAdvancedDeploymentControl.verify|verify} messages.
+                     * @param message ReservationAdvancedDeploymentControl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1.IReservationAdvancedDeploymentControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReservationAdvancedDeploymentControl message, length delimited. Does not implicitly {@link google.cloud.compute.v1.ReservationAdvancedDeploymentControl.verify|verify} messages.
+                     * @param message ReservationAdvancedDeploymentControl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1.IReservationAdvancedDeploymentControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReservationAdvancedDeploymentControl message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReservationAdvancedDeploymentControl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1.ReservationAdvancedDeploymentControl;
+
+                    /**
+                     * Decodes a ReservationAdvancedDeploymentControl message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReservationAdvancedDeploymentControl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1.ReservationAdvancedDeploymentControl;
+
+                    /**
+                     * Verifies a ReservationAdvancedDeploymentControl message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReservationAdvancedDeploymentControl message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReservationAdvancedDeploymentControl
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1.ReservationAdvancedDeploymentControl;
+
+                    /**
+                     * Creates a plain object from a ReservationAdvancedDeploymentControl message. Also converts values to other types if specified.
+                     * @param message ReservationAdvancedDeploymentControl
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1.ReservationAdvancedDeploymentControl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReservationAdvancedDeploymentControl to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReservationAdvancedDeploymentControl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReservationAdvancedDeploymentControl {
+
+                    /** ReservationOperationalMode enum. */
+                    enum ReservationOperationalMode {
+                        UNDEFINED_RESERVATION_OPERATIONAL_MODE = 0,
+                        ALL_CAPACITY = 500029880,
+                        HIGHLY_AVAILABLE_CAPACITY = 110861600,
+                        RESERVATION_OPERATIONAL_MODE_UNSPECIFIED = 194296603
                     }
                 }
 
@@ -209605,6 +210964,20 @@ export namespace google {
                     public removePeering(request: google.cloud.compute.v1.IRemovePeeringNetworkRequest): Promise<google.cloud.compute.v1.Operation>;
 
                     /**
+                     * Calls RequestRemovePeering.
+                     * @param request RequestRemovePeeringNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public requestRemovePeering(request: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest, callback: google.cloud.compute.v1.Networks.RequestRemovePeeringCallback): void;
+
+                    /**
+                     * Calls RequestRemovePeering.
+                     * @param request RequestRemovePeeringNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public requestRemovePeering(request: google.cloud.compute.v1.IRequestRemovePeeringNetworkRequest): Promise<google.cloud.compute.v1.Operation>;
+
+                    /**
                      * Calls SwitchToCustomMode.
                      * @param request SwitchToCustomModeNetworkRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -209697,6 +211070,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RemovePeeringCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.compute.v1.Networks|requestRemovePeering}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RequestRemovePeeringCallback = (error: (Error|null), response?: google.cloud.compute.v1.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.compute.v1.Networks|switchToCustomMode}.
