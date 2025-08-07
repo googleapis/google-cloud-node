@@ -3673,7 +3673,8 @@
                         "chunkType": {
                           "oneof": [
                             "web",
-                            "retrievedContext"
+                            "retrievedContext",
+                            "maps"
                           ]
                         }
                       },
@@ -3685,6 +3686,10 @@
                         "retrievedContext": {
                           "type": "RetrievedContext",
                           "id": 2
+                        },
+                        "maps": {
+                          "type": "Maps",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -3768,6 +3773,60 @@
                               }
                             }
                           }
+                        },
+                        "Maps": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_text": {
+                              "oneof": [
+                                "text"
+                              ]
+                            },
+                            "_placeId": {
+                              "oneof": [
+                                "placeId"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "placeId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3810,6 +3869,11 @@
                           "oneof": [
                             "retrievalMetadata"
                           ]
+                        },
+                        "_googleMapsWidgetContextToken": {
+                          "oneof": [
+                            "googleMapsWidgetContextToken"
+                          ]
                         }
                       },
                       "fields": {
@@ -3845,6 +3909,14 @@
                         "retrievalMetadata": {
                           "type": "RetrievalMetadata",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "googleMapsWidgetContextToken": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -4136,6 +4208,13 @@
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "googleMaps": {
+                          "type": "GoogleMaps",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4505,6 +4584,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "GoogleMaps": {
+                      "fields": {}
                     },
                     "EnterpriseWebSearch": {
                       "fields": {
@@ -41824,7 +41906,8 @@
                         "chunkType": {
                           "oneof": [
                             "web",
-                            "retrievedContext"
+                            "retrievedContext",
+                            "maps"
                           ]
                         }
                       },
@@ -41836,6 +41919,10 @@
                         "retrievedContext": {
                           "type": "RetrievedContext",
                           "id": 2
+                        },
+                        "maps": {
+                          "type": "Maps",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -41919,6 +42006,60 @@
                               }
                             }
                           }
+                        },
+                        "Maps": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_text": {
+                              "oneof": [
+                                "text"
+                              ]
+                            },
+                            "_placeId": {
+                              "oneof": [
+                                "placeId"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "placeId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -41960,6 +42101,11 @@
                         "_retrievalMetadata": {
                           "oneof": [
                             "retrievalMetadata"
+                          ]
+                        },
+                        "_googleMapsWidgetContextToken": {
+                          "oneof": [
+                            "googleMapsWidgetContextToken"
                           ]
                         }
                       },
@@ -42004,6 +42150,14 @@
                         "retrievalMetadata": {
                           "type": "RetrievalMetadata",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "googleMapsWidgetContextToken": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -42295,6 +42449,13 @@
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "googleMaps": {
+                          "type": "GoogleMaps",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -42761,6 +42922,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "GoogleMaps": {
+                      "fields": {}
                     },
                     "EnterpriseWebSearch": {
                       "fields": {
@@ -83378,6 +83542,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/RagFile"
+                          }
+                        },
+                        "forceDelete": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
