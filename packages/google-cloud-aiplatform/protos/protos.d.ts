@@ -116018,6 +116018,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv */
                         secretEnv?: (google.cloud.aiplatform.v1.ISecretEnvVar[]|null);
+
+                        /** DeploymentSpec pscInterfaceConfig */
+                        pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances */
+                        minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances */
+                        maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits */
+                        resourceLimits?: ({ [k: string]: string }|null);
+
+                        /** DeploymentSpec containerConcurrency */
+                        containerConcurrency?: (number|null);
                     }
 
                     /** Represents a DeploymentSpec. */
@@ -116034,6 +116049,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv. */
                         public secretEnv: google.cloud.aiplatform.v1.ISecretEnvVar[];
+
+                        /** DeploymentSpec pscInterfaceConfig. */
+                        public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances. */
+                        public minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances. */
+                        public maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits. */
+                        public resourceLimits: { [k: string]: string };
+
+                        /** DeploymentSpec containerConcurrency. */
+                        public containerConcurrency?: (number|null);
 
                         /**
                          * Creates a new DeploymentSpec instance using the specified properties.
@@ -116137,6 +116167,9 @@ export namespace google {
 
                     /** ReasoningEngine etag */
                     etag?: (string|null);
+
+                    /** ReasoningEngine encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -116168,6 +116201,9 @@ export namespace google {
 
                     /** ReasoningEngine etag. */
                     public etag: string;
+
+                    /** ReasoningEngine encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.

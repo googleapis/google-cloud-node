@@ -31710,6 +31710,23 @@
                           }
                         },
                         "DeploymentSpec": {
+                          "oneofs": {
+                            "_minInstances": {
+                              "oneof": [
+                                "minInstances"
+                              ]
+                            },
+                            "_maxInstances": {
+                              "oneof": [
+                                "maxInstances"
+                              ]
+                            },
+                            "_containerConcurrency": {
+                              "oneof": [
+                                "containerConcurrency"
+                              ]
+                            }
+                          },
                           "fields": {
                             "env": {
                               "rule": "repeated",
@@ -31725,6 +31742,45 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscInterfaceConfig": {
+                              "type": "PscInterfaceConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minInstances": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxInstances": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "resourceLimits": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "containerConcurrency": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -31787,6 +31843,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11
                         }
                       }
                     },
