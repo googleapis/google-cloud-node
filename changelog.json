@@ -5,6 +5,170 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ac22f87a6ac7fe4af0873bfd15e76e7781037296",
+          "message": "[merchantapi] add ordertracking API client libraries for v1",
+          "issues": [
+            "6570"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "7b986fc1-ff3b-4081-8bd7-e479b42b5284",
+      "createTime": "2025-08-07T22:48:01.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2e570f25797f2a30fc0d3092688ce02f5d0a701d",
+          "message": "[merchantapi] add issueresolution API client libraries for v1",
+          "issues": [
+            "6568"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "fa4d3936-6339-44ba-8526-3bc693441dc9",
+      "createTime": "2025-08-07T22:48:01.586Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3cdfa4762673343395c4d27879d5244d522b7fc5",
+          "message": "[merchantapi] add accounts API client libraries for v1",
+          "issues": [
+            "6573"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "dc992ff8-cee1-45e3-9e80-e4a626e21af9",
+      "createTime": "2025-08-07T22:48:01.556Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57f22a05e39ad20866b3d5270e55f5660fd727ff",
+          "message": "[merchantapi] add products API client libraries for v1",
+          "issues": [
+            "6569"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "386673e8-915a-4843-ac07-f8e7e19fa1a1",
+      "createTime": "2025-08-07T22:48:01.531Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "21ff44708671ae294e646a9e2604ac4da9d8a858",
+          "message": "[merchantapi] add promotions API client libraries for v1",
+          "issues": [
+            "6571"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "984aa02a-51cf-4d28-859f-62e2e63938b3",
+      "createTime": "2025-08-07T22:48:01.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "46bee29bfe10579f2fb20fdd079370de60d9a578",
+          "message": "[merchantapi] add reports API client libraries for v1beta",
+          "issues": [
+            "6572"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "f73f14a7-06cc-4481-a1ab-119482bab862",
+      "createTime": "2025-08-07T22:48:01.476Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "82026b2792602640080619b123cf1108d128c08b",
+          "message": "A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.SubmitBuildRequest` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`",
+          "issues": [],
+          "breakingChangeNote": "A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.SubmitBuildRequest` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`"
+        },
+        {
+          "type": "fix",
+          "sha": "82026b2792602640080619b123cf1108d128c08b",
+          "message": "A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.BuildConfig` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`",
+          "issues": [],
+          "breakingChangeNote": "A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.BuildConfig` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`"
+        },
+        {
+          "type": "fix",
+          "sha": "82026b2792602640080619b123cf1108d128c08b",
+          "message": "[run] An existing resource_definition `cloudbuild.googleapis.com/WorkerPool` is removed",
+          "issues": [
+            "6581"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "82026b2792602640080619b123cf1108d128c08b",
+          "message": "Adding new resource tpye run.googleapis.com/WorkerPool.",
+          "issues": []
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "3e07cbdf-7f26-49f5-95de-b898f59ddb6d",
+      "createTime": "2025-08-07T22:48:01.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0e8526a55692c48430190aa3f02db319e1f8d05",
+          "message": "Add Grounding with Google Maps tool",
+          "issues": [
+            "6578"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e80e35de2f33266dbec28487ab496e6b8e1d1699",
+          "message": "Add FeatureViewDirectWrite API in v1",
+          "issues": [
+            "6566"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0329901f-9537-4f9e-ab0c-3369205452ef",
+      "createTime": "2025-08-07T22:48:01.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5d8c58311ccb59a339ea278ea0da9cedcc5f706f",
           "message": "[merchantapi] add datasources API client libraries for v1",
           "issues": [
@@ -61200,5 +61364,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-04T23:51:24.454Z"
+  "updateTime": "2025-08-07T22:48:01.617Z"
 }

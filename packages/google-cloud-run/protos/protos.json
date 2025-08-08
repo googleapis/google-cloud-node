@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "cloud.google.com/go/run/apiv2/runpb;runpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TaskProto",
+                    "java_outer_classname": "WorkerPoolRevisionTemplateProto",
                     "java_package": "com.google.cloud.run.v2",
                     "(google.api.resource_definition).type": "cloudbuild.googleapis.com/Build",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/builds/{build}"
@@ -96,7 +96,7 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/BuildWorkerPool"
                           }
                         },
                         "tags": {
@@ -1440,6 +1440,25 @@
                         }
                       }
                     },
+                    "WorkerPoolScaling": {
+                      "oneofs": {
+                        "_manualInstanceCount": {
+                          "oneof": [
+                            "manualInstanceCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "manualInstanceCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "NodeSelector": {
                       "fields": {
                         "accelerator": {
@@ -1498,7 +1517,7 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/BuildWorkerPool"
                           }
                         },
                         "environmentVariables": {
@@ -1571,6 +1590,51 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
+                      }
+                    },
+                    "InstanceSplit": {
+                      "fields": {
+                        "type": {
+                          "type": "InstanceSplitAllocationType",
+                          "id": 1
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "run.googleapis.com/Revision"
+                          }
+                        },
+                        "percent": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "InstanceSplitStatus": {
+                      "fields": {
+                        "type": {
+                          "type": "InstanceSplitAllocationType",
+                          "id": 1
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "run.googleapis.com/Revision"
+                          }
+                        },
+                        "percent": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "InstanceSplitAllocationType": {
+                      "values": {
+                        "INSTANCE_SPLIT_ALLOCATION_TYPE_UNSPECIFIED": 0,
+                        "INSTANCE_SPLIT_ALLOCATION_TYPE_LATEST": 1,
+                        "INSTANCE_SPLIT_ALLOCATION_TYPE_REVISION": 2
                       }
                     },
                     "Jobs": {
@@ -2255,6 +2319,7 @@
                           "responseType": "Revision",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/locations/*/services/*/revisions/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/workerPools/*/revisions/*}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "name"
@@ -2262,7 +2327,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=projects/*/locations/*/services/*/revisions/*}"
+                                "get": "/v2/{name=projects/*/locations/*/services/*/revisions/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/workerPools/*/revisions/*}"
+                                }
                               }
                             },
                             {
@@ -2283,6 +2351,7 @@
                           "responseType": "ListRevisionsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/locations/*/services/*}/revisions",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*/workerPools/*}/revisions",
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "parent"
@@ -2290,7 +2359,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/locations/*/services/*}/revisions"
+                                "get": "/v2/{parent=projects/*/locations/*/services/*}/revisions",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*/workerPools/*}/revisions"
+                                }
                               }
                             },
                             {
@@ -2311,6 +2383,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/locations/*/services/*/revisions/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/workerPools/*/revisions/*}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "name",
@@ -2320,7 +2393,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=projects/*/locations/*/services/*/revisions/*}"
+                                "delete": "/v2/{name=projects/*/locations/*/services/*/revisions/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/workerPools/*/revisions/*}"
+                                }
                               }
                             },
                             {
@@ -3797,6 +3873,672 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "WorkerPools": {
+                      "options": {
+                        "(google.api.default_host)": "run.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateWorkerPool": {
+                          "requestType": "CreateWorkerPoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/workerPools",
+                            "(google.api.http).body": "worker_pool",
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
+                            "(google.api.method_signature)": "parent,worker_pool,worker_pool_id",
+                            "(google.longrunning.operation_info).response_type": "WorkerPool",
+                            "(google.longrunning.operation_info).metadata_type": "WorkerPool"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*}/workerPools",
+                                "body": "worker_pool"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "projects/*/locations/{location=*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,worker_pool,worker_pool_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkerPool",
+                                "metadata_type": "WorkerPool"
+                              }
+                            }
+                          ]
+                        },
+                        "GetWorkerPool": {
+                          "requestType": "GetWorkerPoolRequest",
+                          "responseType": "WorkerPool",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/workerPools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListWorkerPools": {
+                          "requestType": "ListWorkerPoolsRequest",
+                          "responseType": "ListWorkerPoolsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/workerPools",
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*}/workerPools"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "projects/*/locations/{location=*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateWorkerPool": {
+                          "requestType": "UpdateWorkerPoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{worker_pool.name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.http).body": "worker_pool",
+                            "(google.api.routing).routing_parameters.field": "worker_pool.name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
+                            "(google.api.method_signature)": "worker_pool,update_mask",
+                            "(google.longrunning.operation_info).response_type": "WorkerPool",
+                            "(google.longrunning.operation_info).metadata_type": "WorkerPool"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{worker_pool.name=projects/*/locations/*/workerPools/*}",
+                                "body": "worker_pool"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "worker_pool.name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "worker_pool"
+                            },
+                            {
+                              "(google.api.method_signature)": "worker_pool,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkerPool",
+                                "metadata_type": "WorkerPool"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteWorkerPool": {
+                          "requestType": "DeleteWorkerPoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "WorkerPool",
+                            "(google.longrunning.operation_info).metadata_type": "WorkerPool"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/locations/*/workerPools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkerPool",
+                                "metadata_type": "WorkerPool"
+                              }
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).get": "/v2/{resource=projects/*/locations/*/workerPools/*}:getIamPolicy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{resource=projects/*/locations/*/workerPools/*}:getIamPolicy"
+                              }
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/workerPools/*}:setIamPolicy",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/workerPools/*}:setIamPolicy",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{resource=projects/*/locations/*/workerPools/*}:testIamPermissions",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{resource=projects/*/locations/*/workerPools/*}:testIamPermissions",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateWorkerPoolRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "workerPool": {
+                          "type": "WorkerPool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workerPoolId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateWorkerPoolRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workerPool": {
+                          "type": "WorkerPool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "forceNewRevision": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListWorkerPoolsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "run.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListWorkerPoolsResponse": {
+                      "fields": {
+                        "workerPools": {
+                          "rule": "repeated",
+                          "type": "WorkerPool",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetWorkerPoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/WorkerPool"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteWorkerPoolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "WorkerPool": {
+                      "options": {
+                        "(google.api.resource).type": "run.googleapis.com/WorkerPool",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/workerPools/{worker_pool}",
+                        "(google.api.resource).plural": "workerPools",
+                        "(google.api.resource).singular": "workerPool",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "creator": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastModifier": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "client": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "clientVersion": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "launchStage": {
+                          "type": "google.api.LaunchStage",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "binaryAuthorization": {
+                          "type": "BinaryAuthorization",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "template": {
+                          "type": "WorkerPoolRevisionTemplate",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceSplits": {
+                          "rule": "repeated",
+                          "type": "InstanceSplit",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scaling": {
+                          "type": "WorkerPoolScaling",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "observedGeneration": {
+                          "type": "int64",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "terminalCondition": {
+                          "type": "Condition",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "conditions": {
+                          "rule": "repeated",
+                          "type": "Condition",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "latestReadyRevision": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Revision"
+                          }
+                        },
+                        "latestCreatedRevision": {
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Revision"
+                          }
+                        },
+                        "instanceSplitStatuses": {
+                          "rule": "repeated",
+                          "type": "InstanceSplitStatus",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customAudiences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 37
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 98,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 99,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "WorkerPoolRevisionTemplate": {
+                      "fields": {
+                        "revision": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Revision"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vpcAccess": {
+                          "type": "VpcAccess",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "containers": {
+                          "rule": "repeated",
+                          "type": "Container",
+                          "id": 6
+                        },
+                        "volumes": {
+                          "rule": "repeated",
+                          "type": "Volume",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKey": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "serviceMesh": {
+                          "type": "ServiceMesh",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKeyRevocationAction": {
+                          "type": "EncryptionKeyRevocationAction",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionKeyShutdownDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nodeSelector": {
+                          "type": "NodeSelector",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

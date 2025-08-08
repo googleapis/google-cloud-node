@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/ordertracking-v0.1.0...ordertracking-v0.2.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add ordertracking API client libraries for v1 ([#6570](https://github.com/googleapis/google-cloud-node/issues/6570)) ([ac22f87](https://github.com/googleapis/google-cloud-node/commit/ac22f87a6ac7fe4af0873bfd15e76e7781037296))
+
 ## 0.1.0 (2025-07-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.11.0...reports-v0.12.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add reports API client libraries for v1beta ([#6572](https://github.com/googleapis/google-cloud-node/issues/6572)) ([46bee29](https://github.com/googleapis/google-cloud-node/commit/46bee29bfe10579f2fb20fdd079370de60d9a578))
+
 ## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.10.0...reports-v0.11.0) (2025-08-04)
 
 

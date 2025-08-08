@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/run-v2.3.0...run-v3.0.0) (2025-08-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.SubmitBuildRequest` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`
+* A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.BuildConfig` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool`
+
+### Features
+
+* Adding new resource tpye run.googleapis.com/WorkerPool. ([82026b2](https://github.com/googleapis/google-cloud-node/commit/82026b2792602640080619b123cf1108d128c08b))
+
+
+### Bug Fixes
+
+* [run] An existing resource_definition `cloudbuild.googleapis.com/WorkerPool` is removed ([#6581](https://github.com/googleapis/google-cloud-node/issues/6581)) ([82026b2](https://github.com/googleapis/google-cloud-node/commit/82026b2792602640080619b123cf1108d128c08b))
+* A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.BuildConfig` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool` ([82026b2](https://github.com/googleapis/google-cloud-node/commit/82026b2792602640080619b123cf1108d128c08b))
+* A type of an existing resource_reference option of the field `worker_pool` in message `.google.cloud.run.v2.SubmitBuildRequest` is changed from `cloudbuild.googleapis.com/WorkerPool` to `cloudbuild.googleapis.com/BuildWorkerPool` ([82026b2](https://github.com/googleapis/google-cloud-node/commit/82026b2792602640080619b123cf1108d128c08b))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/run-v2.2.0...run-v2.3.0) (2025-07-22)
 
 
