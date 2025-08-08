@@ -7,7 +7,7 @@
   "pinVersions": false,
   "rebaseStalePrs": false,
   "schedule": [
-    "0 9 * * 1"
+    "* 9 * * 1"
   ],
   "prCreation": "not-recreate",
   "gitAuthor": null,
@@ -15,9 +15,12 @@
     {
       "extends": "packages:linters",
       "groupName": "linters"
+    },
+    {
+    "matchPackageNames": "*",
+     "matchUpdateTypes": ["major", "patch"]
     }
   ],
-  "allowedUpdateTypes": ["major", "patch"],
   "ignoreDeps": [
     "typescript"
   ]
