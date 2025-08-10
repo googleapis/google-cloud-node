@@ -1900,6 +1900,7 @@
                              * @memberof google.cloud.networkmanagement.v1.Endpoint
                              * @interface ICloudRunRevisionEndpoint
                              * @property {string|null} [uri] CloudRunRevisionEndpoint uri
+                             * @property {string|null} [serviceUri] CloudRunRevisionEndpoint serviceUri
                              */
     
                             /**
@@ -1924,6 +1925,14 @@
                              * @instance
                              */
                             CloudRunRevisionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * CloudRunRevisionEndpoint serviceUri.
+                             * @member {string} serviceUri
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             */
+                            CloudRunRevisionEndpoint.prototype.serviceUri = "";
     
                             /**
                              * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
@@ -1951,6 +1960,8 @@
                                     writer = $Writer.create();
                                 if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUri);
                                 return writer;
                             };
     
@@ -1991,6 +2002,10 @@
                                             message.uri = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.serviceUri = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2029,6 +2044,9 @@
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     if (!$util.isString(message.uri))
                                         return "uri: string expected";
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    if (!$util.isString(message.serviceUri))
+                                        return "serviceUri: string expected";
                                 return null;
                             };
     
@@ -2046,6 +2064,8 @@
                                 var message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint();
                                 if (object.uri != null)
                                     message.uri = String(object.uri);
+                                if (object.serviceUri != null)
+                                    message.serviceUri = String(object.serviceUri);
                                 return message;
                             };
     
@@ -2062,10 +2082,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.uri = "";
+                                    object.serviceUri = "";
+                                }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     object.uri = message.uri;
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    object.serviceUri = message.serviceUri;
                                 return object;
                             };
     

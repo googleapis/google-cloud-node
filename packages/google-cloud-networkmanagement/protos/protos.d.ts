@@ -623,6 +623,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri */
                         uri?: (string|null);
+
+                        /** CloudRunRevisionEndpoint serviceUri */
+                        serviceUri?: (string|null);
                     }
 
                     /** Represents a CloudRunRevisionEndpoint. */
@@ -636,6 +639,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri. */
                         public uri: string;
+
+                        /** CloudRunRevisionEndpoint serviceUri. */
+                        public serviceUri: string;
 
                         /**
                          * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
