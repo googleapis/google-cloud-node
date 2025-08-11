@@ -1371,6 +1371,13 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1477,6 +1484,13 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1532,6 +1546,13 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

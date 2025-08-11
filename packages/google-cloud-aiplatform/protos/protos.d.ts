@@ -13879,6 +13879,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -13901,6 +13904,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
@@ -116018,6 +116024,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv */
                         secretEnv?: (google.cloud.aiplatform.v1.ISecretEnvVar[]|null);
+
+                        /** DeploymentSpec pscInterfaceConfig */
+                        pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances */
+                        minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances */
+                        maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits */
+                        resourceLimits?: ({ [k: string]: string }|null);
+
+                        /** DeploymentSpec containerConcurrency */
+                        containerConcurrency?: (number|null);
                     }
 
                     /** Represents a DeploymentSpec. */
@@ -116034,6 +116055,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv. */
                         public secretEnv: google.cloud.aiplatform.v1.ISecretEnvVar[];
+
+                        /** DeploymentSpec pscInterfaceConfig. */
+                        public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances. */
+                        public minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances. */
+                        public maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits. */
+                        public resourceLimits: { [k: string]: string };
+
+                        /** DeploymentSpec containerConcurrency. */
+                        public containerConcurrency?: (number|null);
 
                         /**
                          * Creates a new DeploymentSpec instance using the specified properties.
@@ -116137,6 +116173,9 @@ export namespace google {
 
                     /** ReasoningEngine etag */
                     etag?: (string|null);
+
+                    /** ReasoningEngine encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -116168,6 +116207,9 @@ export namespace google {
 
                     /** ReasoningEngine etag. */
                     public etag: string;
+
+                    /** ReasoningEngine encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
@@ -156799,6 +156841,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -156821,6 +156866,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
@@ -246835,6 +246883,12 @@ export namespace google {
                 /** Properties of a Memory. */
                 interface IMemory {
 
+                    /** Memory expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
                     /** Memory name */
                     name?: (string|null);
 
@@ -246866,6 +246920,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IMemory);
 
+                    /** Memory expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
                     /** Memory name. */
                     public name: string;
 
@@ -246886,6 +246946,9 @@ export namespace google {
 
                     /** Memory scope. */
                     public scope: { [k: string]: string };
+
+                    /** Memory expiration. */
+                    public expiration?: ("expireTime"|"ttl");
 
                     /**
                      * Creates a new Memory instance using the specified properties.
@@ -248054,6 +248117,9 @@ export namespace google {
                     /** GenerateMemoriesRequest directContentsSource */
                     directContentsSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectContentsSource|null);
 
+                    /** GenerateMemoriesRequest directMemoriesSource */
+                    directMemoriesSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource|null);
+
                     /** GenerateMemoriesRequest parent */
                     parent?: (string|null);
 
@@ -248079,6 +248145,9 @@ export namespace google {
                     /** GenerateMemoriesRequest directContentsSource. */
                     public directContentsSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectContentsSource|null);
 
+                    /** GenerateMemoriesRequest directMemoriesSource. */
+                    public directMemoriesSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource|null);
+
                     /** GenerateMemoriesRequest parent. */
                     public parent: string;
 
@@ -248089,7 +248158,7 @@ export namespace google {
                     public scope: { [k: string]: string };
 
                     /** GenerateMemoriesRequest source. */
-                    public source?: ("vertexSessionSource"|"directContentsSource");
+                    public source?: ("vertexSessionSource"|"directContentsSource"|"directMemoriesSource");
 
                     /**
                      * Creates a new GenerateMemoriesRequest instance using the specified properties.
@@ -248470,6 +248539,203 @@ export namespace google {
 
                             /**
                              * Gets the default type url for Event
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DirectMemoriesSource. */
+                    interface IDirectMemoriesSource {
+
+                        /** DirectMemoriesSource directMemories */
+                        directMemories?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory[]|null);
+                    }
+
+                    /** Represents a DirectMemoriesSource. */
+                    class DirectMemoriesSource implements IDirectMemoriesSource {
+
+                        /**
+                         * Constructs a new DirectMemoriesSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource);
+
+                        /** DirectMemoriesSource directMemories. */
+                        public directMemories: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory[];
+
+                        /**
+                         * Creates a new DirectMemoriesSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DirectMemoriesSource instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Encodes the specified DirectMemoriesSource message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.verify|verify} messages.
+                         * @param message DirectMemoriesSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DirectMemoriesSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.verify|verify} messages.
+                         * @param message DirectMemoriesSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DirectMemoriesSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DirectMemoriesSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Decodes a DirectMemoriesSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DirectMemoriesSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Verifies a DirectMemoriesSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DirectMemoriesSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DirectMemoriesSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Creates a plain object from a DirectMemoriesSource message. Also converts values to other types if specified.
+                         * @param message DirectMemoriesSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DirectMemoriesSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DirectMemoriesSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DirectMemoriesSource {
+
+                        /** Properties of a DirectMemory. */
+                        interface IDirectMemory {
+
+                            /** DirectMemory fact */
+                            fact?: (string|null);
+                        }
+
+                        /** Represents a DirectMemory. */
+                        class DirectMemory implements IDirectMemory {
+
+                            /**
+                             * Constructs a new DirectMemory.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory);
+
+                            /** DirectMemory fact. */
+                            public fact: string;
+
+                            /**
+                             * Creates a new DirectMemory instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DirectMemory instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Encodes the specified DirectMemory message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory.verify|verify} messages.
+                             * @param message DirectMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DirectMemory message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory.verify|verify} messages.
+                             * @param message DirectMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DirectMemory message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DirectMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Decodes a DirectMemory message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DirectMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Verifies a DirectMemory message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DirectMemory message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DirectMemory
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Creates a plain object from a DirectMemory message. Also converts values to other types if specified.
+                             * @param message DirectMemory
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DirectMemory to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DirectMemory
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -289465,6 +289731,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv */
                         secretEnv?: (google.cloud.aiplatform.v1beta1.ISecretEnvVar[]|null);
+
+                        /** DeploymentSpec pscInterfaceConfig */
+                        pscInterfaceConfig?: (google.cloud.aiplatform.v1beta1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances */
+                        minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances */
+                        maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits */
+                        resourceLimits?: ({ [k: string]: string }|null);
+
+                        /** DeploymentSpec containerConcurrency */
+                        containerConcurrency?: (number|null);
                     }
 
                     /** Represents a DeploymentSpec. */
@@ -289481,6 +289762,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv. */
                         public secretEnv: google.cloud.aiplatform.v1beta1.ISecretEnvVar[];
+
+                        /** DeploymentSpec pscInterfaceConfig. */
+                        public pscInterfaceConfig?: (google.cloud.aiplatform.v1beta1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances. */
+                        public minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances. */
+                        public maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits. */
+                        public resourceLimits: { [k: string]: string };
+
+                        /** DeploymentSpec containerConcurrency. */
+                        public containerConcurrency?: (number|null);
 
                         /**
                          * Creates a new DeploymentSpec instance using the specified properties.
@@ -289813,6 +290109,9 @@ export namespace google {
 
                         /** MemoryBankConfig similaritySearchConfig */
                         similaritySearchConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ISimilaritySearchConfig|null);
+
+                        /** MemoryBankConfig ttlConfig */
+                        ttlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig|null);
                     }
 
                     /** Represents a MemoryBankConfig. */
@@ -289829,6 +290128,9 @@ export namespace google {
 
                         /** MemoryBankConfig similaritySearchConfig. */
                         public similaritySearchConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ISimilaritySearchConfig|null);
+
+                        /** MemoryBankConfig ttlConfig. */
+                        public ttlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig|null);
 
                         /**
                          * Creates a new MemoryBankConfig instance using the specified properties.
@@ -289909,6 +290211,224 @@ export namespace google {
                     }
 
                     namespace MemoryBankConfig {
+
+                        /** Properties of a TtlConfig. */
+                        interface ITtlConfig {
+
+                            /** TtlConfig defaultTtl */
+                            defaultTtl?: (google.protobuf.IDuration|null);
+
+                            /** TtlConfig granularTtlConfig */
+                            granularTtlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig|null);
+                        }
+
+                        /** Represents a TtlConfig. */
+                        class TtlConfig implements ITtlConfig {
+
+                            /**
+                             * Constructs a new TtlConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig);
+
+                            /** TtlConfig defaultTtl. */
+                            public defaultTtl?: (google.protobuf.IDuration|null);
+
+                            /** TtlConfig granularTtlConfig. */
+                            public granularTtlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig|null);
+
+                            /** TtlConfig ttl. */
+                            public ttl?: ("defaultTtl"|"granularTtlConfig");
+
+                            /**
+                             * Creates a new TtlConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TtlConfig instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Encodes the specified TtlConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.verify|verify} messages.
+                             * @param message TtlConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TtlConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.verify|verify} messages.
+                             * @param message TtlConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TtlConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TtlConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Decodes a TtlConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TtlConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Verifies a TtlConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TtlConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TtlConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Creates a plain object from a TtlConfig message. Also converts values to other types if specified.
+                             * @param message TtlConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TtlConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TtlConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TtlConfig {
+
+                            /** Properties of a GranularTtlConfig. */
+                            interface IGranularTtlConfig {
+
+                                /** GranularTtlConfig createTtl */
+                                createTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateCreatedTtl */
+                                generateCreatedTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateUpdatedTtl */
+                                generateUpdatedTtl?: (google.protobuf.IDuration|null);
+                            }
+
+                            /** Represents a GranularTtlConfig. */
+                            class GranularTtlConfig implements IGranularTtlConfig {
+
+                                /**
+                                 * Constructs a new GranularTtlConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig);
+
+                                /** GranularTtlConfig createTtl. */
+                                public createTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateCreatedTtl. */
+                                public generateCreatedTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateUpdatedTtl. */
+                                public generateUpdatedTtl?: (google.protobuf.IDuration|null);
+
+                                /**
+                                 * Creates a new GranularTtlConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GranularTtlConfig instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Encodes the specified GranularTtlConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig.verify|verify} messages.
+                                 * @param message GranularTtlConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GranularTtlConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig.verify|verify} messages.
+                                 * @param message GranularTtlConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GranularTtlConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GranularTtlConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Decodes a GranularTtlConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GranularTtlConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Verifies a GranularTtlConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GranularTtlConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GranularTtlConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Creates a plain object from a GranularTtlConfig message. Also converts values to other types if specified.
+                                 * @param message GranularTtlConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GranularTtlConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GranularTtlConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
 
                         /** Properties of a GenerationConfig. */
                         interface IGenerationConfig {
@@ -303693,6 +304213,12 @@ export namespace google {
                 /** Properties of a Session. */
                 interface ISession {
 
+                    /** Session expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
                     /** Session name */
                     name?: (string|null);
 
@@ -303721,6 +304247,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.ISession);
 
+                    /** Session expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
                     /** Session name. */
                     public name: string;
 
@@ -303738,6 +304270,9 @@ export namespace google {
 
                     /** Session userId. */
                     public userId: string;
+
+                    /** Session expiration. */
+                    public expiration?: ("expireTime"|"ttl");
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -303982,6 +304517,9 @@ export namespace google {
 
                     /** EventMetadata branch */
                     branch?: (string|null);
+
+                    /** EventMetadata customMetadata */
+                    customMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an EventMetadata. */
@@ -304010,6 +304548,9 @@ export namespace google {
 
                     /** EventMetadata branch. */
                     public branch: string;
+
+                    /** EventMetadata customMetadata. */
+                    public customMetadata?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new EventMetadata instance using the specified properties.
@@ -305125,6 +305666,9 @@ export namespace google {
 
                     /** ListEventsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListEventsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListEventsRequest. */
@@ -305144,6 +305688,9 @@ export namespace google {
 
                     /** ListEventsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListEventsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListEventsRequest instance using the specified properties.

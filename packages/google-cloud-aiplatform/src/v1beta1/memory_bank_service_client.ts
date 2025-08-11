@@ -1142,6 +1142,10 @@ export class MemoryBankServiceClient {
  * @param {google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectContentsSource} request.directContentsSource
  *   Defines a direct source of content as the source content from which to
  *   generate memories.
+ * @param {google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource} request.directMemoriesSource
+ *   Defines a direct source of memories that should be uploaded to Memory
+ *   Bank. This is similar to `CreateMemory`, but it allows for consolidation
+ *   between these new memories and existing memories for the same scope.
  * @param {string} request.parent
  *   Required. The resource name of the ReasoningEngine to generate memories
  *   for. Format:

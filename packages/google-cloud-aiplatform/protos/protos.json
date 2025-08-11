@@ -3744,6 +3744,11 @@
                               "oneof": [
                                 "text"
                               ]
+                            },
+                            "_documentName": {
+                              "oneof": [
+                                "documentName"
+                              ]
                             }
                           },
                           "fields": {
@@ -3769,6 +3774,14 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "documentName": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
                               }
                             }
@@ -31710,6 +31723,23 @@
                           }
                         },
                         "DeploymentSpec": {
+                          "oneofs": {
+                            "_minInstances": {
+                              "oneof": [
+                                "minInstances"
+                              ]
+                            },
+                            "_maxInstances": {
+                              "oneof": [
+                                "maxInstances"
+                              ]
+                            },
+                            "_containerConcurrency": {
+                              "oneof": [
+                                "containerConcurrency"
+                              ]
+                            }
+                          },
                           "fields": {
                             "env": {
                               "rule": "repeated",
@@ -31725,6 +31755,45 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscInterfaceConfig": {
+                              "type": "PscInterfaceConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minInstances": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxInstances": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "resourceLimits": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "containerConcurrency": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -31787,6 +31856,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 11
                         }
                       }
                     },
@@ -41977,6 +42050,11 @@
                               "oneof": [
                                 "text"
                               ]
+                            },
+                            "_documentName": {
+                              "oneof": [
+                                "documentName"
+                              ]
                             }
                           },
                           "fields": {
@@ -42002,6 +42080,14 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "documentName": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
                               }
                             }
@@ -66037,7 +66123,29 @@
                         "(google.api.resource).plural": "memories",
                         "(google.api.resource).singular": "memory"
                       },
+                      "oneofs": {
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -66432,7 +66540,8 @@
                         "source": {
                           "oneof": [
                             "vertexSessionSource",
-                            "directContentsSource"
+                            "directContentsSource",
+                            "directMemoriesSource"
                           ]
                         }
                       },
@@ -66444,6 +66553,10 @@
                         "directContentsSource": {
                           "type": "DirectContentsSource",
                           "id": 3
+                        },
+                        "directMemoriesSource": {
+                          "type": "DirectMemoriesSource",
+                          "id": 9
                         },
                         "parent": {
                           "type": "string",
@@ -66512,6 +66625,31 @@
                               "fields": {
                                 "content": {
                                   "type": "Content",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DirectMemoriesSource": {
+                          "fields": {
+                            "directMemories": {
+                              "rule": "repeated",
+                              "type": "DirectMemory",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DirectMemory": {
+                              "fields": {
+                                "fact": {
+                                  "type": "string",
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
@@ -77610,6 +77748,23 @@
                           }
                         },
                         "DeploymentSpec": {
+                          "oneofs": {
+                            "_minInstances": {
+                              "oneof": [
+                                "minInstances"
+                              ]
+                            },
+                            "_maxInstances": {
+                              "oneof": [
+                                "maxInstances"
+                              ]
+                            },
+                            "_containerConcurrency": {
+                              "oneof": [
+                                "containerConcurrency"
+                              ]
+                            }
+                          },
                           "fields": {
                             "env": {
                               "rule": "repeated",
@@ -77625,6 +77780,45 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pscInterfaceConfig": {
+                              "type": "PscInterfaceConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minInstances": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxInstances": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "resourceLimits": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "containerConcurrency": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -77727,9 +77921,69 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "ttlConfig": {
+                              "type": "TtlConfig",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
+                            "TtlConfig": {
+                              "oneofs": {
+                                "ttl": {
+                                  "oneof": [
+                                    "defaultTtl",
+                                    "granularTtlConfig"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "defaultTtl": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "granularTtlConfig": {
+                                  "type": "GranularTtlConfig",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "GranularTtlConfig": {
+                                  "fields": {
+                                    "createTtl": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "generateCreatedTtl": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "generateUpdatedTtl": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
                             "GenerationConfig": {
                               "fields": {
                                 "model": {
@@ -80347,7 +80601,29 @@
                         "(google.api.resource).plural": "sessions",
                         "(google.api.resource).singular": "session"
                       },
+                      "oneofs": {
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
                         "name": {
                           "type": "string",
                           "id": 1,
@@ -80509,6 +80785,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "customMetadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7
                         }
                       }
                     },
@@ -80898,6 +81178,13 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
