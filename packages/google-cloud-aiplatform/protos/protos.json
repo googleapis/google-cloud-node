@@ -3744,6 +3744,11 @@
                               "oneof": [
                                 "text"
                               ]
+                            },
+                            "_documentName": {
+                              "oneof": [
+                                "documentName"
+                              ]
                             }
                           },
                           "fields": {
@@ -3769,6 +3774,14 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "documentName": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
                               }
                             }
@@ -42037,6 +42050,11 @@
                               "oneof": [
                                 "text"
                               ]
+                            },
+                            "_documentName": {
+                              "oneof": [
+                                "documentName"
+                              ]
                             }
                           },
                           "fields": {
@@ -42062,6 +42080,14 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "documentName": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "proto3_optional": true
                               }
                             }

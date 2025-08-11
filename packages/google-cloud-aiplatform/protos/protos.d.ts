@@ -13879,6 +13879,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -13901,6 +13904,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
@@ -156835,6 +156841,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -156857,6 +156866,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
