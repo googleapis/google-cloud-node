@@ -1098,6 +1098,126 @@ describe('v1.NetworksClient', () => {
         });
     });
 
+    describe('requestRemovePeering', () => {
+        it('invokes requestRemovePeering without error', async () => {
+            const client = new networksModule.v1.NetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['network']);
+            request.network = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&network=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.requestRemovePeering = stubSimpleCall(expectedResponse);
+            const [response] = await client.requestRemovePeering(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestRemovePeering without error using callback', async () => {
+            const client = new networksModule.v1.NetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['network']);
+            request.network = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&network=${defaultValue2 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.requestRemovePeering = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.requestRemovePeering(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestRemovePeering with error', async () => {
+            const client = new networksModule.v1.NetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['network']);
+            request.network = defaultValue2;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&network=${defaultValue2 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.requestRemovePeering = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.requestRemovePeering(request), expectedError);
+            const actualRequest = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.requestRemovePeering as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes requestRemovePeering with closed client', async () => {
+            const client = new networksModule.v1.NetworksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.RequestRemovePeeringNetworkRequest', ['network']);
+            request.network = defaultValue2;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.requestRemovePeering(request), expectedError);
+        });
+    });
+
     describe('switchToCustomMode', () => {
         it('invokes switchToCustomMode without error', async () => {
             const client = new networksModule.v1.NetworksClient({

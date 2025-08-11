@@ -602,6 +602,10 @@ export class DatastreamClient {
  *   PostgreSQL RDBMS to enrich with child data objects and metadata.
  * @param {google.cloud.datastream.v1.SqlServerRdbms} request.sqlServerRdbms
  *   SQLServer RDBMS to enrich with child data objects and metadata.
+ * @param {google.cloud.datastream.v1.SalesforceOrg} request.salesforceOrg
+ *   Salesforce organization to enrich with child data objects and metadata.
+ * @param {google.cloud.datastream.v1.MongodbCluster} request.mongodbCluster
+ *   MongoDB cluster to enrich with child data objects and metadata.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2259,6 +2263,10 @@ export class DatastreamClient {
  *   not supported (00000000-0000-0000-0000-000000000000).
  * @param {boolean} [request.force]
  *   Optional. If set to true, will skip validations.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. When supplied with PSC Interface config, will get/create the
+ *   tenant project required for the customer to allow list and won't actually
+ *   create the private connection.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -4825,12 +4833,8 @@ export class DatastreamClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {
-          throw err;
-        });
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.iamClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

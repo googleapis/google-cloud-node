@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-compute",
-        "version": "6.0.0",
+        "version": "6.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -20124,6 +20124,58 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Networks_RequestRemovePeering_async",
+            "title": "AcceleratorTypes requestRemovePeering Sample",
+            "origin": "API_DEFINITION",
+            "description": " Requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.",
+            "canonical": true,
+            "file": "networks.request_remove_peering.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RequestRemovePeering",
+                "fullName": "google.cloud.compute.v1.Networks.RequestRemovePeering",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "network",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "networks_request_remove_peering_request_resource",
+                        "type": ".google.cloud.compute.v1.NetworksRequestRemovePeeringRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworksClient",
+                    "fullName": "google.cloud.compute.v1.NetworksClient"
+                },
+                "method": {
+                    "shortName": "RequestRemovePeering",
+                    "fullName": "google.cloud.compute.v1.Networks.RequestRemovePeering",
+                    "service": {
+                        "shortName": "Networks",
+                        "fullName": "google.cloud.compute.v1.Networks"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Networks_SwitchToCustomMode_async",
             "title": "AcceleratorTypes switchToCustomMode Sample",
             "origin": "API_DEFINITION",
@@ -39098,7 +39150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 75,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -39130,6 +39182,10 @@
                     {
                         "name": "return_partial_success",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.compute.v1.UsableSubnetworksAggregatedList",
