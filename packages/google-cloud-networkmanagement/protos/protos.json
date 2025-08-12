@@ -256,6 +256,13 @@
                             "uri": {
                               "type": "string",
                               "id": 1
+                            },
+                            "serviceUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
