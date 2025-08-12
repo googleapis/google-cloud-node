@@ -60,6 +60,46 @@
             }
         },
         {
+            "regionTag": "cloudsupport_v2beta_generated_CaseAttachmentService_GetAttachment_async",
+            "title": "CaseAttachmentService getAttachment Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve an attachment.",
+            "canonical": true,
+            "file": "case_attachment_service.get_attachment.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAttachment",
+                "fullName": "google.cloud.support.v2beta.CaseAttachmentService.GetAttachment",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.support.v2beta.Attachment",
+                "client": {
+                    "shortName": "CaseAttachmentServiceClient",
+                    "fullName": "google.cloud.support.v2beta.CaseAttachmentServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAttachment",
+                    "fullName": "google.cloud.support.v2beta.CaseAttachmentService.GetAttachment",
+                    "service": {
+                        "shortName": "CaseAttachmentService",
+                        "fullName": "google.cloud.support.v2beta.CaseAttachmentService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "cloudsupport_v2beta_generated_CaseService_GetCase_async",
             "title": "CaseAttachmentService getCase Sample",
             "origin": "API_DEFINITION",
@@ -516,6 +556,46 @@
                 "method": {
                     "shortName": "CreateComment",
                     "fullName": "google.cloud.support.v2beta.CommentService.CreateComment",
+                    "service": {
+                        "shortName": "CommentService",
+                        "fullName": "google.cloud.support.v2beta.CommentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudsupport_v2beta_generated_CommentService_GetComment_async",
+            "title": "CaseAttachmentService getComment Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve a comment.",
+            "canonical": true,
+            "file": "comment_service.get_comment.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetComment",
+                "fullName": "google.cloud.support.v2beta.CommentService.GetComment",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.support.v2beta.Comment",
+                "client": {
+                    "shortName": "CommentServiceClient",
+                    "fullName": "google.cloud.support.v2beta.CommentServiceClient"
+                },
+                "method": {
+                    "shortName": "GetComment",
+                    "fullName": "google.cloud.support.v2beta.CommentService.GetComment",
                     "service": {
                         "shortName": "CommentService",
                         "fullName": "google.cloud.support.v2beta.CommentService"
