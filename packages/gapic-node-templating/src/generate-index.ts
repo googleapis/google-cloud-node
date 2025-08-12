@@ -71,35 +71,23 @@ export async function generateIndexTs(currentLibrary: string, defaultVersion?: s
     // Render index.ts
     const variables = {versions, defaultClientAndVersions}
 
-    
+    // Create a new Nunjucks environment configured to load from the templateDirectory
+    // This is necessary due to occurring in a Bazel environment or locally
+    const env = new nj.Environment(
+        new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
+        { autoescape: false } // Disable autoescaping for code generation
+    );
 
-    let compiledTemplate: string; // Declare compiledTemplate outside the try block
-
-    try {
-        // --- THE CRITICAL FIX: Configure Nunjucks with a FileSystemLoader ---
-        // Create a new Nunjucks environment configured to load from the templateDirectory
-        const env = new nj.Environment(
-            new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
-            { autoescape: false } // Disable autoescaping for code generation
-        );
-
-        // Now, render using the template's filename, and Nunjucks will find it
-        // within the configured templateDirectory.
-        compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
-        console.log('Nunjucks template rendered successfully.');
-        // console.log('Compiled Template Output (first 200 chars):', compiledTemplate.substring(0, 200)); // Optional: peek at output
-    } catch (nunjucksRenderError) {
-        console.error('FATAL ERROR: Nunjucks template rendering failed!');
-        console.error(nunjucksRenderError);
-        process.exit(1); // Exit with error if rendering fails
-    }
-    
+    const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
+  
     const outputPath = path.join(currentLibrary, SRC_PATH, INDEX_PATH);
-    console.log(`Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`) // Use JSON.stringify for variables
+    console.log(`Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`)
     await fs.writeFile(outputPath, compiledTemplate);
     console.log(`Successfully wrote: ${outputPath}`);
 }
 
+// In case a default version isn't provided, this function should
+// offer a default version
 function getHighestVersionWithPrecedence(versions: string[]) {
     if (!versions || versions.length === 0) {
         throw new Error ('No versions found in library; cannot generate index.ts');

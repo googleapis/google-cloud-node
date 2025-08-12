@@ -16,12 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const AdaptationClient = v1.AdaptationClient;
-type AdaptationClient = v1.AdaptationClient;
-const SpeechClient = v1.SpeechClient;
-type SpeechClient = v1.SpeechClient;
-export {v1, AdaptationClient, SpeechClient};
-export default {v1, AdaptationClient, SpeechClient};
+import * as v1p1beta1 from './v1p1beta1';
+const AdaptationClient = v1p1beta1.AdaptationClient;
+type AdaptationClient = v1p1beta1.AdaptationClient;
+const SpeechClient = v1p1beta1.SpeechClient;
+type SpeechClient = v1p1beta1.SpeechClient;
+export {v1p1beta1, AdaptationClient, SpeechClient};
+export default {v1p1beta1, AdaptationClient, SpeechClient};
 import * as protos from '../protos/protos';
 export {protos}

@@ -143,17 +143,12 @@ async function createDirectoryAndWriteFiles(
     const fullFilePath = path.join(baseOutputDir, fileData.filePath);
     console.log(`Processing: ${fullFilePath}`);
 
-    try {
-      // 1. Ensure all parent directories for the current file exist
-      await ensureDirectoryExists(path.join(baseOutputDir,fileData.filePath));
-      // await fs.mkdir(path.dirname(fileData.filePath), {recursive: true});
+    // 1. Ensure all parent directories for the current file exist
+    await ensureDirectoryExists(path.join(baseOutputDir,fileData.filePath));
+    // await fs.mkdir(path.dirname(fileData.filePath), {recursive: true});
 
-      // 2. Write the file with its content
-      await fs.writeFile(fullFilePath, fileData.content, 'utf8');
-    } catch (error) {
-      console.error(`Failed to write file ${fullFilePath}:`, error);
-      throw error; // Re-throw to indicate overall failure
-    }
+    // 2. Write the file with its content
+    await fs.writeFile(fullFilePath, fileData.content, 'utf8');
   });
 
   // Wait for all file writing operations to complete

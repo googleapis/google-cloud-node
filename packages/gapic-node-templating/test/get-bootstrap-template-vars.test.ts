@@ -28,7 +28,7 @@ import {
   API_ID,
   DESTINATION_FOLDER,
   MONO_REPO_NAME,
-} from './bootstrap-library.test';
+} from './bootstrap-library-command.test';
 // eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
 // eslint-disable-next-line node/no-unpublished-import

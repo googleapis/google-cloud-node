@@ -16,12 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const AdaptationClient = v1.AdaptationClient;
-type AdaptationClient = v1.AdaptationClient;
-const SpeechClient = v1.SpeechClient;
-type SpeechClient = v1.SpeechClient;
-export {v1, AdaptationClient, SpeechClient};
-export default {v1, AdaptationClient, SpeechClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {AdaptationClient, SpeechClient} from '@google-cloud/speech';
+
+// check that the client class type name can be used
+function doStuffWithAdaptationClient(client: AdaptationClient) {
+  client.close();
+}
+function doStuffWithSpeechClient(client: SpeechClient) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const adaptationClient = new AdaptationClient();
+  doStuffWithAdaptationClient(adaptationClient);
+  // check that the client instance can be created
+  const speechClient = new SpeechClient();
+  doStuffWithSpeechClient(speechClient);
+}
+
+main();
