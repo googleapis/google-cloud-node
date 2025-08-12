@@ -136,7 +136,11 @@ async function createDirectoryAndWriteFiles(
 
   // first, remove any existing files; this ensures
   // we're overwriting the existing file
-  await fs.rm(baseOutputDir, { recursive: true, force: true });
+  try {
+    await fs.rm(baseOutputDir, { recursive: true, force: true });
+  } catch (err) {
+    `${baseOutputDir} not found; could not be deleted`
+  } 
   await ensureDirectoryExists(baseOutputDir);
 
   const writePromises = files.map(async fileData => {
