@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/saasservicemgmt",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "SaaS Runtime API client for Node.js",
   "repository": {
     "type": "git",

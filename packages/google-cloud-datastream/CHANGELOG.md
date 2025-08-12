@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.2.0...datastream-v4.3.0) (2025-08-12)
+
+
+### Features
+
+* [datastream] Add new field `salesforce_org` to message `DiscoverConnectionProfileRequest` ([#6580](https://github.com/googleapis/google-cloud-node/issues/6580)) ([57f8500](https://github.com/googleapis/google-cloud-node/commit/57f85000900bd7b7bf4f4d8470ef599202f8c541))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.1.0...datastream-v4.2.0) (2025-07-09)
 
 

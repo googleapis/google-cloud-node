@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.0.0...network-management-v5.1.0) (2025-08-12)
+
+
+### Features
+
+* [networkmanagement] add `service_uri` field to CloudRunRevisionEndpoint ([#6590](https://github.com/googleapis/google-cloud-node/issues/6590)) ([ab4ac46](https://github.com/googleapis/google-cloud-node/commit/ab4ac467126ebc0891e01b035213438a2d2d22ce))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v4.3.0...network-management-v5.0.0) (2025-07-28)
 
 

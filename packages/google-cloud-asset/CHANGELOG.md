@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/asset-v6.2.1...asset-v6.3.0) (2025-08-12)
+
+
+### Features
+
+* [asset] Add highest_upgradable_cve_severity field to Vulnerability report ([#6589](https://github.com/googleapis/google-cloud-node/issues/6589)) ([830c73a](https://github.com/googleapis/google-cloud-node/commit/830c73ae048261074491bcab29a1d2ebeaf1c5f2))
+
 ## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/asset-v6.2.0...asset-v6.2.1) (2025-08-04)
 
 

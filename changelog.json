@@ -5,6 +5,252 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a49143ea7b0b694d9b7c01a576413146dc0db241",
+          "message": "Add initial files for google.cloud.saasplatform.saasservicemgmt.v1beta1",
+          "issues": [
+            "6582"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "32a9fe2f-3476-49c1-99a1-f90e645463c8",
+      "createTime": "2025-08-12T15:48:40.697Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "c036b84c-a04b-4899-b3d1-53a43d327edc",
+      "createTime": "2025-08-12T15:48:40.673Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "6217e43d-c3f0-40ad-852b-b233bd7dd718",
+      "createTime": "2025-08-12T15:48:40.651Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "8b45346f-70e4-497b-9a81-159ddd4ba4ee",
+      "createTime": "2025-08-12T15:48:40.626Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "1a02ef79-e47e-4d7e-81d6-bca62ba9a1a4",
+      "createTime": "2025-08-12T15:48:40.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "10f59236-3105-4749-ae50-9f56c2463d7a",
+      "createTime": "2025-08-12T15:48:40.579Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "c0295f41-e362-42ff-82f5-a12959669f6a",
+      "createTime": "2025-08-12T15:48:40.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "470fa86edc902a058b2c0a7abeea4754dca4ae07",
+          "message": "[cloudsupport] A new message `GetAttachmentRequest` and `GetComment` is added",
+          "issues": [
+            "6587"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "919c6a80-90de-4540-b233-66f56caab4fd",
+      "createTime": "2025-08-12T15:48:40.530Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ebdb88097ad08834b188e624078db97534f82e11",
+          "message": "[osconfig] Add highest_upgradable_cve_severity field to Vulnerability report",
+          "issues": [
+            "6588"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "077dffa9-fd70-438e-aa4c-1802d38bf28a",
+      "createTime": "2025-08-12T15:48:40.498Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ab4ac467126ebc0891e01b035213438a2d2d22ce",
+          "message": "[networkmanagement] add `service_uri` field to CloudRunRevisionEndpoint",
+          "issues": [
+            "6590"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "2f40d474-73a8-49de-97a9-e3ba147dd1ff",
+      "createTime": "2025-08-12T15:48:40.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "57f85000900bd7b7bf4f4d8470ef599202f8c541",
+          "message": "[datastream] Add new field `salesforce_org` to message `DiscoverConnectionProfileRequest`",
+          "issues": [
+            "6580"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "2cc06f7e-4d53-4c71-a9f3-aeec24df210c",
+      "createTime": "2025-08-12T15:48:40.440Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0cbf8ac3e6697d92428f21010beb1c776e5e86fd",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250729 (#1085)",
+          "issues": [
+            "6579"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "d4c6c8b5-d993-4f01-bdfe-3b5e3a59a657",
+      "createTime": "2025-08-12T15:48:40.382Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "830c73ae048261074491bcab29a1d2ebeaf1c5f2",
+          "message": "[asset] Add highest_upgradable_cve_severity field to Vulnerability report",
+          "issues": [
+            "6589"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "75438714-485c-4fd8-8adc-2163dcdc706a",
+      "createTime": "2025-08-12T15:48:40.349Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ace3695ff8200040fd4dfe93c7950a08d13a5ee2",
+          "message": "Expose RecommendSpecs api to vertex python SDK for Custom Weights Model deployment",
+          "issues": [
+            "6593"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "dd3f406707562e375d0978a57a5cc1537032421b",
+          "message": "Added document_name for vertex ai search as part of retrieved context from grounding chunk",
+          "issues": [
+            "6586"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "25a08917-5f4d-4809-a884-09dbb5d0903c",
+      "createTime": "2025-08-12T15:48:40.310Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ac22f87a6ac7fe4af0873bfd15e76e7781037296",
           "message": "[merchantapi] add ordertracking API client libraries for v1",
           "issues": [
@@ -61364,5 +61610,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-07T22:48:01.617Z"
+  "updateTime": "2025-08-12T15:48:40.697Z"
 }

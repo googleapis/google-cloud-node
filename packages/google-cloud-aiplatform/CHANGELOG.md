@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.4.0...aiplatform-v5.5.0) (2025-08-12)
+
+
+### Features
+
+* Added document_name for vertex ai search as part of retrieved context from grounding chunk ([#6586](https://github.com/googleapis/google-cloud-node/issues/6586)) ([dd3f406](https://github.com/googleapis/google-cloud-node/commit/dd3f406707562e375d0978a57a5cc1537032421b))
+* Expose RecommendSpecs api to vertex python SDK for Custom Weights Model deployment ([#6593](https://github.com/googleapis/google-cloud-node/issues/6593)) ([ace3695](https://github.com/googleapis/google-cloud-node/commit/ace3695ff8200040fd4dfe93c7950a08d13a5ee2))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.3.0...aiplatform-v5.4.0) (2025-08-07)
 
 
