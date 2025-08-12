@@ -39262,6 +39262,13 @@
                           "type": "int32",
                           "id": 3
                         },
+                        "gpuPartitionSize": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "tpuTopology": {
                           "type": "string",
                           "id": 4,

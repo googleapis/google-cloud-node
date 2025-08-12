@@ -146865,6 +146865,9 @@ export namespace google {
                     /** MachineSpec acceleratorCount */
                     acceleratorCount?: (number|null);
 
+                    /** MachineSpec gpuPartitionSize */
+                    gpuPartitionSize?: (string|null);
+
                     /** MachineSpec tpuTopology */
                     tpuTopology?: (string|null);
 
@@ -146892,6 +146895,9 @@ export namespace google {
 
                     /** MachineSpec acceleratorCount. */
                     public acceleratorCount: number;
+
+                    /** MachineSpec gpuPartitionSize. */
+                    public gpuPartitionSize: string;
 
                     /** MachineSpec tpuTopology. */
                     public tpuTopology: string;
