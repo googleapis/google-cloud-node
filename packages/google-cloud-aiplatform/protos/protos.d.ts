@@ -227451,6 +227451,9 @@ export namespace google {
 
                     /** TuningJob outputUri */
                     outputUri?: (string|null);
+
+                    /** TuningJob evaluateDatasetRuns */
+                    evaluateDatasetRuns?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[]|null);
                 }
 
                 /** Represents a TuningJob. */
@@ -227530,6 +227533,9 @@ export namespace google {
 
                     /** TuningJob outputUri. */
                     public outputUri: string;
+
+                    /** TuningJob evaluateDatasetRuns. */
+                    public evaluateDatasetRuns: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[];
 
                     /** TuningJob sourceModel. */
                     public sourceModel?: "baseModel";
@@ -228887,6 +228893,9 @@ export namespace google {
                     /** SupervisedTuningSpec exportLastCheckpointOnly */
                     exportLastCheckpointOnly?: (boolean|null);
 
+                    /** SupervisedTuningSpec evaluationConfig */
+                    evaluationConfig?: (google.cloud.aiplatform.v1beta1.IEvaluationConfig|null);
+
                     /** SupervisedTuningSpec tuningMode */
                     tuningMode?: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|null);
                 }
@@ -228911,6 +228920,9 @@ export namespace google {
 
                     /** SupervisedTuningSpec exportLastCheckpointOnly. */
                     public exportLastCheckpointOnly: boolean;
+
+                    /** SupervisedTuningSpec evaluationConfig. */
+                    public evaluationConfig?: (google.cloud.aiplatform.v1beta1.IEvaluationConfig|null);
 
                     /** SupervisedTuningSpec tuningMode. */
                     public tuningMode: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode);
@@ -229691,6 +229703,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for VeoTuningSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluationConfig. */
+                interface IEvaluationConfig {
+
+                    /** EvaluationConfig metrics */
+                    metrics?: (google.cloud.aiplatform.v1beta1.IMetric[]|null);
+
+                    /** EvaluationConfig outputConfig */
+                    outputConfig?: (google.cloud.aiplatform.v1beta1.IOutputConfig|null);
+
+                    /** EvaluationConfig autoraterConfig */
+                    autoraterConfig?: (google.cloud.aiplatform.v1beta1.IAutoraterConfig|null);
+                }
+
+                /** Represents an EvaluationConfig. */
+                class EvaluationConfig implements IEvaluationConfig {
+
+                    /**
+                     * Constructs a new EvaluationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IEvaluationConfig);
+
+                    /** EvaluationConfig metrics. */
+                    public metrics: google.cloud.aiplatform.v1beta1.IMetric[];
+
+                    /** EvaluationConfig outputConfig. */
+                    public outputConfig?: (google.cloud.aiplatform.v1beta1.IOutputConfig|null);
+
+                    /** EvaluationConfig autoraterConfig. */
+                    public autoraterConfig?: (google.cloud.aiplatform.v1beta1.IAutoraterConfig|null);
+
+                    /**
+                     * Creates a new EvaluationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluationConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IEvaluationConfig): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Verifies an EvaluationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Creates a plain object from an EvaluationConfig message. Also converts values to other types if specified.
+                     * @param message EvaluationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.EvaluationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluateDatasetRun. */
+                interface IEvaluateDatasetRun {
+
+                    /** EvaluateDatasetRun operationName */
+                    operationName?: (string|null);
+
+                    /** EvaluateDatasetRun checkpointId */
+                    checkpointId?: (string|null);
+
+                    /** EvaluateDatasetRun error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an EvaluateDatasetRun. */
+                class EvaluateDatasetRun implements IEvaluateDatasetRun {
+
+                    /**
+                     * Constructs a new EvaluateDatasetRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun);
+
+                    /** EvaluateDatasetRun operationName. */
+                    public operationName: string;
+
+                    /** EvaluateDatasetRun checkpointId. */
+                    public checkpointId: string;
+
+                    /** EvaluateDatasetRun error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new EvaluateDatasetRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluateDatasetRun instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Encodes the specified EvaluateDatasetRun message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluateDatasetRun.verify|verify} messages.
+                     * @param message EvaluateDatasetRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluateDatasetRun message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluateDatasetRun.verify|verify} messages.
+                     * @param message EvaluateDatasetRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluateDatasetRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluateDatasetRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Decodes an EvaluateDatasetRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluateDatasetRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Verifies an EvaluateDatasetRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluateDatasetRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluateDatasetRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Creates a plain object from an EvaluateDatasetRun message. Also converts values to other types if specified.
+                     * @param message EvaluateDatasetRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.EvaluateDatasetRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluateDatasetRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluateDatasetRun
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
