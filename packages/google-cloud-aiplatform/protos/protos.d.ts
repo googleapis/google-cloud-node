@@ -97714,6 +97714,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec */
                         containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId */
+                        modelUserId?: (string|null);
                     }
 
                     /** Represents a ModelConfig. */
@@ -97739,6 +97742,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec. */
                         public containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId. */
+                        public modelUserId: string;
 
                         /**
                          * Creates a new ModelConfig instance using the specified properties.
@@ -97826,6 +97832,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled */
                         dedicatedEndpointEnabled?: (boolean|null);
+
+                        /** EndpointConfig dedicatedEndpointDisabled */
+                        dedicatedEndpointDisabled?: (boolean|null);
+
+                        /** EndpointConfig endpointUserId */
+                        endpointUserId?: (string|null);
                     }
 
                     /** Represents an EndpointConfig. */
@@ -97842,6 +97854,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled. */
                         public dedicatedEndpointEnabled: boolean;
+
+                        /** EndpointConfig dedicatedEndpointDisabled. */
+                        public dedicatedEndpointDisabled: boolean;
+
+                        /** EndpointConfig endpointUserId. */
+                        public endpointUserId: string;
 
                         /**
                          * Creates a new EndpointConfig instance using the specified properties.
