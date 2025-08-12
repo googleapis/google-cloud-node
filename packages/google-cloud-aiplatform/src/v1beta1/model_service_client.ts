@@ -518,7 +518,7 @@ export class ModelServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const modelServiceStubMethods =
-        ['uploadModel', 'getModel', 'listModels', 'listModelVersions', 'listModelVersionCheckpoints', 'updateModel', 'updateExplanationDataset', 'deleteModel', 'deleteModelVersion', 'mergeVersionAliases', 'exportModel', 'copyModel', 'importModelEvaluation', 'batchImportModelEvaluationSlices', 'batchImportEvaluatedAnnotations', 'getModelEvaluation', 'listModelEvaluations', 'getModelEvaluationSlice', 'listModelEvaluationSlices'];
+        ['uploadModel', 'getModel', 'listModels', 'listModelVersions', 'listModelVersionCheckpoints', 'updateModel', 'updateExplanationDataset', 'deleteModel', 'deleteModelVersion', 'mergeVersionAliases', 'exportModel', 'copyModel', 'importModelEvaluation', 'batchImportModelEvaluationSlices', 'batchImportEvaluatedAnnotations', 'getModelEvaluation', 'listModelEvaluations', 'getModelEvaluationSlice', 'listModelEvaluationSlices', 'recommendSpec'];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1428,6 +1428,113 @@ export class ModelServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getModelEvaluationSlice response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a Model's spec recommendations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location from which to recommend specs.
+ *   The users must have permission to make a call in the project.
+ *   Format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {string} request.gcsUri
+ *   Required. The Google Cloud Storage URI of the custom model, storing weights
+ *   and config files (which can be used to infer the base model).
+ * @param {boolean} [request.checkMachineAvailability]
+ *   Optional. If true, check machine availability for the recommended regions.
+ *   Only return the machine spec in regions where the machine is available.
+ * @param {boolean} [request.checkUserQuota]
+ *   Optional. If true, check user quota for the recommended regions.
+ *   Returns all the machine spec in regions they are available, and also the
+ *   user quota state for each machine type in each region.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.RecommendSpecResponse|RecommendSpecResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/model_service.recommend_spec.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_ModelService_RecommendSpec_async
+ */
+  recommendSpec(
+      request?: protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|undefined, {}|undefined
+      ]>;
+  recommendSpec(
+      request: protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|null|undefined,
+          {}|null|undefined>): void;
+  recommendSpec(
+      request: protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|null|undefined,
+          {}|null|undefined>): void;
+  recommendSpec(
+      request?: protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+          protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('recommendSpec request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('recommendSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.recommendSpec(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecResponse,
+        protos.google.cloud.aiplatform.v1beta1.IRecommendSpecRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('recommendSpec response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

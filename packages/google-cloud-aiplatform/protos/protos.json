@@ -72208,6 +72208,22 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "RecommendSpec": {
+                          "requestType": "RecommendSpecRequest",
+                          "responseType": "RecommendSpecResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}:recommendSpec",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}:recommendSpec",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -72852,6 +72868,117 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "RecommendSpecRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "checkMachineAvailability": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "checkUserQuota": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RecommendSpecResponse": {
+                      "fields": {
+                        "baseModel": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "recommendations": {
+                          "rule": "repeated",
+                          "type": "Recommendation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "specs": {
+                          "rule": "repeated",
+                          "type": "MachineAndModelContainerSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MachineAndModelContainerSpec": {
+                          "fields": {
+                            "machineSpec": {
+                              "type": "MachineSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "containerSpec": {
+                              "type": "ModelContainerSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Recommendation": {
+                          "fields": {
+                            "region": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "spec": {
+                              "type": "MachineAndModelContainerSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "userQuotaState": {
+                              "type": "QuotaState",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "QuotaState": {
+                              "values": {
+                                "QUOTA_STATE_UNSPECIFIED": 0,
+                                "QUOTA_STATE_USER_HAS_QUOTA": 1,
+                                "QUOTA_STATE_NO_USER_QUOTA": 2
+                              }
+                            }
+                          }
                         }
                       }
                     },

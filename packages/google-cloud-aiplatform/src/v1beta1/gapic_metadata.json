@@ -2949,6 +2949,11 @@
                 "getModelEvaluationSlice"
               ]
             },
+            "RecommendSpec": {
+              "methods": [
+                "recommendSpec"
+              ]
+            },
             "UploadModel": {
               "methods": [
                 "uploadModel"
@@ -3057,6 +3062,11 @@
             "GetModelEvaluationSlice": {
               "methods": [
                 "getModelEvaluationSlice"
+              ]
+            },
+            "RecommendSpec": {
+              "methods": [
+                "recommendSpec"
               ]
             },
             "UploadModel": {

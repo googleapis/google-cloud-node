@@ -12296,6 +12296,58 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_ModelService_RecommendSpec_async",
+            "title": "DatasetService recommendSpec Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Model's spec recommendations.",
+            "canonical": true,
+            "file": "model_service.recommend_spec.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RecommendSpec",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelService.RecommendSpec",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gcs_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "check_machine_availability",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "check_user_quota",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RecommendSpecResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "RecommendSpec",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelService.RecommendSpec",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_NotebookService_CreateNotebookRuntimeTemplate_async",
             "title": "DatasetService createNotebookRuntimeTemplate Sample",
             "origin": "API_DEFINITION",

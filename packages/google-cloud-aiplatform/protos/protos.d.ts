@@ -269219,6 +269219,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listModelEvaluationSlices(request: google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest): Promise<google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse>;
+
+                    /**
+                     * Calls RecommendSpec.
+                     * @param request RecommendSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RecommendSpecResponse
+                     */
+                    public recommendSpec(request: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, callback: google.cloud.aiplatform.v1beta1.ModelService.RecommendSpecCallback): void;
+
+                    /**
+                     * Calls RecommendSpec.
+                     * @param request RecommendSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public recommendSpec(request: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest): Promise<google.cloud.aiplatform.v1beta1.RecommendSpecResponse>;
                 }
 
                 namespace ModelService {
@@ -269355,6 +269369,13 @@ export namespace google {
                      * @param [response] ListModelEvaluationSlicesResponse
                      */
                     type ListModelEvaluationSlicesCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ModelService|recommendSpec}.
+                     * @param error Error, if any
+                     * @param [response] RecommendSpecResponse
+                     */
+                    type RecommendSpecCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse) => void;
                 }
 
                 /** Properties of an UploadModelRequest. */
@@ -273223,6 +273244,455 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RecommendSpecRequest. */
+                interface IRecommendSpecRequest {
+
+                    /** RecommendSpecRequest parent */
+                    parent?: (string|null);
+
+                    /** RecommendSpecRequest gcsUri */
+                    gcsUri?: (string|null);
+
+                    /** RecommendSpecRequest checkMachineAvailability */
+                    checkMachineAvailability?: (boolean|null);
+
+                    /** RecommendSpecRequest checkUserQuota */
+                    checkUserQuota?: (boolean|null);
+                }
+
+                /** Represents a RecommendSpecRequest. */
+                class RecommendSpecRequest implements IRecommendSpecRequest {
+
+                    /**
+                     * Constructs a new RecommendSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest);
+
+                    /** RecommendSpecRequest parent. */
+                    public parent: string;
+
+                    /** RecommendSpecRequest gcsUri. */
+                    public gcsUri: string;
+
+                    /** RecommendSpecRequest checkMachineAvailability. */
+                    public checkMachineAvailability: boolean;
+
+                    /** RecommendSpecRequest checkUserQuota. */
+                    public checkUserQuota: boolean;
+
+                    /**
+                     * Creates a new RecommendSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecommendSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Encodes the specified RecommendSpecRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecRequest.verify|verify} messages.
+                     * @param message RecommendSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecommendSpecRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecRequest.verify|verify} messages.
+                     * @param message RecommendSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecommendSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecommendSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Decodes a RecommendSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecommendSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Verifies a RecommendSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecommendSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecommendSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Creates a plain object from a RecommendSpecRequest message. Also converts values to other types if specified.
+                     * @param message RecommendSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecommendSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecommendSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RecommendSpecResponse. */
+                interface IRecommendSpecResponse {
+
+                    /** RecommendSpecResponse baseModel */
+                    baseModel?: (string|null);
+
+                    /** RecommendSpecResponse recommendations */
+                    recommendations?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation[]|null);
+
+                    /** RecommendSpecResponse specs */
+                    specs?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec[]|null);
+                }
+
+                /** Represents a RecommendSpecResponse. */
+                class RecommendSpecResponse implements IRecommendSpecResponse {
+
+                    /**
+                     * Constructs a new RecommendSpecResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse);
+
+                    /** RecommendSpecResponse baseModel. */
+                    public baseModel: string;
+
+                    /** RecommendSpecResponse recommendations. */
+                    public recommendations: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation[];
+
+                    /** RecommendSpecResponse specs. */
+                    public specs: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec[];
+
+                    /**
+                     * Creates a new RecommendSpecResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecommendSpecResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Encodes the specified RecommendSpecResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.verify|verify} messages.
+                     * @param message RecommendSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecommendSpecResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.verify|verify} messages.
+                     * @param message RecommendSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecommendSpecResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecommendSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Decodes a RecommendSpecResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecommendSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Verifies a RecommendSpecResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecommendSpecResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecommendSpecResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Creates a plain object from a RecommendSpecResponse message. Also converts values to other types if specified.
+                     * @param message RecommendSpecResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecommendSpecResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecommendSpecResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RecommendSpecResponse {
+
+                    /** Properties of a MachineAndModelContainerSpec. */
+                    interface IMachineAndModelContainerSpec {
+
+                        /** MachineAndModelContainerSpec machineSpec */
+                        machineSpec?: (google.cloud.aiplatform.v1beta1.IMachineSpec|null);
+
+                        /** MachineAndModelContainerSpec containerSpec */
+                        containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+                    }
+
+                    /** Represents a MachineAndModelContainerSpec. */
+                    class MachineAndModelContainerSpec implements IMachineAndModelContainerSpec {
+
+                        /**
+                         * Constructs a new MachineAndModelContainerSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec);
+
+                        /** MachineAndModelContainerSpec machineSpec. */
+                        public machineSpec?: (google.cloud.aiplatform.v1beta1.IMachineSpec|null);
+
+                        /** MachineAndModelContainerSpec containerSpec. */
+                        public containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /**
+                         * Creates a new MachineAndModelContainerSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MachineAndModelContainerSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Encodes the specified MachineAndModelContainerSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec.verify|verify} messages.
+                         * @param message MachineAndModelContainerSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MachineAndModelContainerSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec.verify|verify} messages.
+                         * @param message MachineAndModelContainerSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MachineAndModelContainerSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MachineAndModelContainerSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Decodes a MachineAndModelContainerSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MachineAndModelContainerSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Verifies a MachineAndModelContainerSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MachineAndModelContainerSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MachineAndModelContainerSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Creates a plain object from a MachineAndModelContainerSpec message. Also converts values to other types if specified.
+                         * @param message MachineAndModelContainerSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MachineAndModelContainerSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MachineAndModelContainerSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Recommendation. */
+                    interface IRecommendation {
+
+                        /** Recommendation region */
+                        region?: (string|null);
+
+                        /** Recommendation spec */
+                        spec?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec|null);
+
+                        /** Recommendation userQuotaState */
+                        userQuotaState?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|keyof typeof google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|null);
+                    }
+
+                    /** Represents a Recommendation. */
+                    class Recommendation implements IRecommendation {
+
+                        /**
+                         * Constructs a new Recommendation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation);
+
+                        /** Recommendation region. */
+                        public region: string;
+
+                        /** Recommendation spec. */
+                        public spec?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec|null);
+
+                        /** Recommendation userQuotaState. */
+                        public userQuotaState: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|keyof typeof google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState);
+
+                        /**
+                         * Creates a new Recommendation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Recommendation instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Encodes the specified Recommendation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.verify|verify} messages.
+                         * @param message Recommendation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Recommendation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.verify|verify} messages.
+                         * @param message Recommendation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Recommendation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Recommendation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Decodes a Recommendation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Recommendation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Verifies a Recommendation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Recommendation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Recommendation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Creates a plain object from a Recommendation message. Also converts values to other types if specified.
+                         * @param message Recommendation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Recommendation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Recommendation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Recommendation {
+
+                        /** QuotaState enum. */
+                        enum QuotaState {
+                            QUOTA_STATE_UNSPECIFIED = 0,
+                            QUOTA_STATE_USER_HAS_QUOTA = 1,
+                            QUOTA_STATE_NO_USER_QUOTA = 2
+                        }
+                    }
                 }
 
                 /** Properties of a NetworkSpec. */
