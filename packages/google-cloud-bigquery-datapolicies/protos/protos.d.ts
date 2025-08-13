@@ -2277,6 +2277,2694 @@ export namespace google {
                         }
                     }
                 }
+
+                /** Namespace v2. */
+                namespace v2 {
+
+                    /** Represents a DataPolicyService */
+                    class DataPolicyService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new DataPolicyService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new DataPolicyService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataPolicyService;
+
+                        /**
+                         * Calls CreateDataPolicy.
+                         * @param request CreateDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public createDataPolicy(request: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.CreateDataPolicyCallback): void;
+
+                        /**
+                         * Calls CreateDataPolicy.
+                         * @param request CreateDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createDataPolicy(request: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>;
+
+                        /**
+                         * Calls AddGrantees.
+                         * @param request AddGranteesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public addGrantees(request: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.AddGranteesCallback): void;
+
+                        /**
+                         * Calls AddGrantees.
+                         * @param request AddGranteesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addGrantees(request: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest): Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>;
+
+                        /**
+                         * Calls RemoveGrantees.
+                         * @param request RemoveGranteesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public removeGrantees(request: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.RemoveGranteesCallback): void;
+
+                        /**
+                         * Calls RemoveGrantees.
+                         * @param request RemoveGranteesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public removeGrantees(request: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest): Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>;
+
+                        /**
+                         * Calls UpdateDataPolicy.
+                         * @param request UpdateDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public updateDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.UpdateDataPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateDataPolicy.
+                         * @param request UpdateDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>;
+
+                        /**
+                         * Calls DeleteDataPolicy.
+                         * @param request DeleteDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.DeleteDataPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteDataPolicy.
+                         * @param request DeleteDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls GetDataPolicy.
+                         * @param request GetDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public getDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.GetDataPolicyCallback): void;
+
+                        /**
+                         * Calls GetDataPolicy.
+                         * @param request GetDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getDataPolicy(request: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>;
+
+                        /**
+                         * Calls ListDataPolicies.
+                         * @param request ListDataPoliciesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListDataPoliciesResponse
+                         */
+                        public listDataPolicies(request: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.ListDataPoliciesCallback): void;
+
+                        /**
+                         * Calls ListDataPolicies.
+                         * @param request ListDataPoliciesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listDataPolicies(request: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest): Promise<google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse>;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.GetIamPolicyCallback): void;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.SetIamPolicyCallback): void;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.bigquery.datapolicies.v2.DataPolicyService.TestIamPermissionsCallback): void;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                    }
+
+                    namespace DataPolicyService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|createDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type CreateDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|addGrantees}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type AddGranteesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|removeGrantees}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type RemoveGranteesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|updateDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type UpdateDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|deleteDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteDataPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|getDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type GetDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|listDataPolicies}.
+                         * @param error Error, if any
+                         * @param [response] ListDataPoliciesResponse
+                         */
+                        type ListDataPoliciesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|getIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|setIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|testIamPermissions}.
+                         * @param error Error, if any
+                         * @param [response] TestIamPermissionsResponse
+                         */
+                        type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                    }
+
+                    /** Properties of a CreateDataPolicyRequest. */
+                    interface ICreateDataPolicyRequest {
+
+                        /** CreateDataPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateDataPolicyRequest dataPolicyId */
+                        dataPolicyId?: (string|null);
+
+                        /** CreateDataPolicyRequest dataPolicy */
+                        dataPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataPolicy|null);
+                    }
+
+                    /** Represents a CreateDataPolicyRequest. */
+                    class CreateDataPolicyRequest implements ICreateDataPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest);
+
+                        /** CreateDataPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateDataPolicyRequest dataPolicyId. */
+                        public dataPolicyId: string;
+
+                        /** CreateDataPolicyRequest dataPolicy. */
+                        public dataPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataPolicy|null);
+
+                        /**
+                         * Creates a new CreateDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest): google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest.verify|verify} messages.
+                         * @param message CreateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest.verify|verify} messages.
+                         * @param message CreateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest;
+
+                        /**
+                         * Decodes a CreateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest;
+
+                        /**
+                         * Verifies a CreateDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateDataPolicyRequest. */
+                    interface IUpdateDataPolicyRequest {
+
+                        /** UpdateDataPolicyRequest dataPolicy */
+                        dataPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataPolicy|null);
+
+                        /** UpdateDataPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateDataPolicyRequest allowMissing */
+                        allowMissing?: (boolean|null);
+                    }
+
+                    /** Represents an UpdateDataPolicyRequest. */
+                    class UpdateDataPolicyRequest implements IUpdateDataPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest);
+
+                        /** UpdateDataPolicyRequest dataPolicy. */
+                        public dataPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataPolicy|null);
+
+                        /** UpdateDataPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateDataPolicyRequest allowMissing. */
+                        public allowMissing: boolean;
+
+                        /**
+                         * Creates a new UpdateDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest): google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.verify|verify} messages.
+                         * @param message UpdateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.verify|verify} messages.
+                         * @param message UpdateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddGranteesRequest. */
+                    interface IAddGranteesRequest {
+
+                        /** AddGranteesRequest dataPolicy */
+                        dataPolicy?: (string|null);
+
+                        /** AddGranteesRequest grantees */
+                        grantees?: (string[]|null);
+                    }
+
+                    /** Represents an AddGranteesRequest. */
+                    class AddGranteesRequest implements IAddGranteesRequest {
+
+                        /**
+                         * Constructs a new AddGranteesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest);
+
+                        /** AddGranteesRequest dataPolicy. */
+                        public dataPolicy: string;
+
+                        /** AddGranteesRequest grantees. */
+                        public grantees: string[];
+
+                        /**
+                         * Creates a new AddGranteesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddGranteesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest): google.cloud.bigquery.datapolicies.v2.AddGranteesRequest;
+
+                        /**
+                         * Encodes the specified AddGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.AddGranteesRequest.verify|verify} messages.
+                         * @param message AddGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.AddGranteesRequest.verify|verify} messages.
+                         * @param message AddGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddGranteesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.AddGranteesRequest;
+
+                        /**
+                         * Decodes an AddGranteesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.AddGranteesRequest;
+
+                        /**
+                         * Verifies an AddGranteesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddGranteesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.AddGranteesRequest;
+
+                        /**
+                         * Creates a plain object from an AddGranteesRequest message. Also converts values to other types if specified.
+                         * @param message AddGranteesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.AddGranteesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddGranteesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddGranteesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoveGranteesRequest. */
+                    interface IRemoveGranteesRequest {
+
+                        /** RemoveGranteesRequest dataPolicy */
+                        dataPolicy?: (string|null);
+
+                        /** RemoveGranteesRequest grantees */
+                        grantees?: (string[]|null);
+                    }
+
+                    /** Represents a RemoveGranteesRequest. */
+                    class RemoveGranteesRequest implements IRemoveGranteesRequest {
+
+                        /**
+                         * Constructs a new RemoveGranteesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest);
+
+                        /** RemoveGranteesRequest dataPolicy. */
+                        public dataPolicy: string;
+
+                        /** RemoveGranteesRequest grantees. */
+                        public grantees: string[];
+
+                        /**
+                         * Creates a new RemoveGranteesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoveGranteesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest): google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest;
+
+                        /**
+                         * Encodes the specified RemoveGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest.verify|verify} messages.
+                         * @param message RemoveGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoveGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest.verify|verify} messages.
+                         * @param message RemoveGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoveGranteesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoveGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest;
+
+                        /**
+                         * Decodes a RemoveGranteesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoveGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest;
+
+                        /**
+                         * Verifies a RemoveGranteesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoveGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoveGranteesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest;
+
+                        /**
+                         * Creates a plain object from a RemoveGranteesRequest message. Also converts values to other types if specified.
+                         * @param message RemoveGranteesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoveGranteesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoveGranteesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteDataPolicyRequest. */
+                    interface IDeleteDataPolicyRequest {
+
+                        /** DeleteDataPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteDataPolicyRequest. */
+                    class DeleteDataPolicyRequest implements IDeleteDataPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest);
+
+                        /** DeleteDataPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest): google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest.verify|verify} messages.
+                         * @param message DeleteDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest.verify|verify} messages.
+                         * @param message DeleteDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetDataPolicyRequest. */
+                    interface IGetDataPolicyRequest {
+
+                        /** GetDataPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetDataPolicyRequest. */
+                    class GetDataPolicyRequest implements IGetDataPolicyRequest {
+
+                        /**
+                         * Constructs a new GetDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest);
+
+                        /** GetDataPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest): google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified GetDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest.verify|verify} messages.
+                         * @param message GetDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest.verify|verify} messages.
+                         * @param message GetDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest;
+
+                        /**
+                         * Decodes a GetDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest;
+
+                        /**
+                         * Verifies a GetDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a GetDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message GetDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataPoliciesRequest. */
+                    interface IListDataPoliciesRequest {
+
+                        /** ListDataPoliciesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListDataPoliciesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListDataPoliciesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListDataPoliciesRequest filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a ListDataPoliciesRequest. */
+                    class ListDataPoliciesRequest implements IListDataPoliciesRequest {
+
+                        /**
+                         * Constructs a new ListDataPoliciesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest);
+
+                        /** ListDataPoliciesRequest parent. */
+                        public parent: string;
+
+                        /** ListDataPoliciesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListDataPoliciesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListDataPoliciesRequest filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new ListDataPoliciesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataPoliciesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest.verify|verify} messages.
+                         * @param message ListDataPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest.verify|verify} messages.
+                         * @param message ListDataPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataPoliciesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest;
+
+                        /**
+                         * Decodes a ListDataPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest;
+
+                        /**
+                         * Verifies a ListDataPoliciesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataPoliciesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest;
+
+                        /**
+                         * Creates a plain object from a ListDataPoliciesRequest message. Also converts values to other types if specified.
+                         * @param message ListDataPoliciesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataPoliciesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataPoliciesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataPoliciesResponse. */
+                    interface IListDataPoliciesResponse {
+
+                        /** ListDataPoliciesResponse dataPolicies */
+                        dataPolicies?: (google.cloud.bigquery.datapolicies.v2.IDataPolicy[]|null);
+
+                        /** ListDataPoliciesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListDataPoliciesResponse. */
+                    class ListDataPoliciesResponse implements IListDataPoliciesResponse {
+
+                        /**
+                         * Constructs a new ListDataPoliciesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse);
+
+                        /** ListDataPoliciesResponse dataPolicies. */
+                        public dataPolicies: google.cloud.bigquery.datapolicies.v2.IDataPolicy[];
+
+                        /** ListDataPoliciesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListDataPoliciesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataPoliciesResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesResponse message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.verify|verify} messages.
+                         * @param message ListDataPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.verify|verify} messages.
+                         * @param message ListDataPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataPoliciesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse;
+
+                        /**
+                         * Decodes a ListDataPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse;
+
+                        /**
+                         * Verifies a ListDataPoliciesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataPoliciesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse;
+
+                        /**
+                         * Creates a plain object from a ListDataPoliciesResponse message. Also converts values to other types if specified.
+                         * @param message ListDataPoliciesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataPoliciesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataPoliciesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataPolicy. */
+                    interface IDataPolicy {
+
+                        /** DataPolicy dataMaskingPolicy */
+                        dataMaskingPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy|null);
+
+                        /** DataPolicy name */
+                        name?: (string|null);
+
+                        /** DataPolicy dataPolicyId */
+                        dataPolicyId?: (string|null);
+
+                        /** DataPolicy etag */
+                        etag?: (string|null);
+
+                        /** DataPolicy dataPolicyType */
+                        dataPolicyType?: (google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType|keyof typeof google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType|null);
+
+                        /** DataPolicy policyTag */
+                        policyTag?: (string|null);
+
+                        /** DataPolicy grantees */
+                        grantees?: (string[]|null);
+
+                        /** DataPolicy version */
+                        version?: (google.cloud.bigquery.datapolicies.v2.DataPolicy.Version|keyof typeof google.cloud.bigquery.datapolicies.v2.DataPolicy.Version|null);
+                    }
+
+                    /** Represents a DataPolicy. */
+                    class DataPolicy implements IDataPolicy {
+
+                        /**
+                         * Constructs a new DataPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IDataPolicy);
+
+                        /** DataPolicy dataMaskingPolicy. */
+                        public dataMaskingPolicy?: (google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy|null);
+
+                        /** DataPolicy name. */
+                        public name: string;
+
+                        /** DataPolicy dataPolicyId. */
+                        public dataPolicyId: string;
+
+                        /** DataPolicy etag. */
+                        public etag?: (string|null);
+
+                        /** DataPolicy dataPolicyType. */
+                        public dataPolicyType: (google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType|keyof typeof google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType);
+
+                        /** DataPolicy policyTag. */
+                        public policyTag: string;
+
+                        /** DataPolicy grantees. */
+                        public grantees: string[];
+
+                        /** DataPolicy version. */
+                        public version: (google.cloud.bigquery.datapolicies.v2.DataPolicy.Version|keyof typeof google.cloud.bigquery.datapolicies.v2.DataPolicy.Version);
+
+                        /** DataPolicy policy. */
+                        public policy?: "dataMaskingPolicy";
+
+                        /**
+                         * Creates a new DataPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IDataPolicy): google.cloud.bigquery.datapolicies.v2.DataPolicy;
+
+                        /**
+                         * Encodes the specified DataPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataPolicy.verify|verify} messages.
+                         * @param message DataPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IDataPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataPolicy.verify|verify} messages.
+                         * @param message DataPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IDataPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.DataPolicy;
+
+                        /**
+                         * Decodes a DataPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.DataPolicy;
+
+                        /**
+                         * Verifies a DataPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.DataPolicy;
+
+                        /**
+                         * Creates a plain object from a DataPolicy message. Also converts values to other types if specified.
+                         * @param message DataPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.DataPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataPolicy {
+
+                        /** DataPolicyType enum. */
+                        enum DataPolicyType {
+                            DATA_POLICY_TYPE_UNSPECIFIED = 0,
+                            DATA_MASKING_POLICY = 1,
+                            RAW_DATA_ACCESS_POLICY = 2,
+                            COLUMN_LEVEL_SECURITY_POLICY = 3
+                        }
+
+                        /** Version enum. */
+                        enum Version {
+                            VERSION_UNSPECIFIED = 0,
+                            V1 = 1,
+                            V2 = 2
+                        }
+                    }
+
+                    /** Properties of a DataMaskingPolicy. */
+                    interface IDataMaskingPolicy {
+
+                        /** DataMaskingPolicy predefinedExpression */
+                        predefinedExpression?: (google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|null);
+
+                        /** DataMaskingPolicy routine */
+                        routine?: (string|null);
+                    }
+
+                    /** Represents a DataMaskingPolicy. */
+                    class DataMaskingPolicy implements IDataMaskingPolicy {
+
+                        /**
+                         * Constructs a new DataMaskingPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy);
+
+                        /** DataMaskingPolicy predefinedExpression. */
+                        public predefinedExpression?: (google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|null);
+
+                        /** DataMaskingPolicy routine. */
+                        public routine?: (string|null);
+
+                        /** DataMaskingPolicy maskingExpression. */
+                        public maskingExpression?: ("predefinedExpression"|"routine");
+
+                        /**
+                         * Creates a new DataMaskingPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataMaskingPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy): google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+
+                        /**
+                         * Encodes the specified DataMaskingPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.verify|verify} messages.
+                         * @param message DataMaskingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataMaskingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.verify|verify} messages.
+                         * @param message DataMaskingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataMaskingPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataMaskingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+
+                        /**
+                         * Decodes a DataMaskingPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataMaskingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+
+                        /**
+                         * Verifies a DataMaskingPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataMaskingPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataMaskingPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+
+                        /**
+                         * Creates a plain object from a DataMaskingPolicy message. Also converts values to other types if specified.
+                         * @param message DataMaskingPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataMaskingPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataMaskingPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataMaskingPolicy {
+
+                        /** PredefinedExpression enum. */
+                        enum PredefinedExpression {
+                            PREDEFINED_EXPRESSION_UNSPECIFIED = 0,
+                            SHA256 = 1,
+                            ALWAYS_NULL = 2,
+                            DEFAULT_MASKING_VALUE = 3,
+                            LAST_FOUR_CHARACTERS = 4,
+                            FIRST_FOUR_CHARACTERS = 5,
+                            EMAIL_MASK = 6,
+                            DATE_YEAR_MASK = 7,
+                            RANDOM_HASH = 8
+                        }
+                    }
+                }
+
+                /** Namespace v2beta1. */
+                namespace v2beta1 {
+
+                    /** Represents a DataPolicyService */
+                    class DataPolicyService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new DataPolicyService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new DataPolicyService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataPolicyService;
+
+                        /**
+                         * Calls CreateDataPolicy.
+                         * @param request CreateDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public createDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.CreateDataPolicyCallback): void;
+
+                        /**
+                         * Calls CreateDataPolicy.
+                         * @param request CreateDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>;
+
+                        /**
+                         * Calls AddGrantees.
+                         * @param request AddGranteesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public addGrantees(request: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.AddGranteesCallback): void;
+
+                        /**
+                         * Calls AddGrantees.
+                         * @param request AddGranteesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addGrantees(request: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>;
+
+                        /**
+                         * Calls RemoveGrantees.
+                         * @param request RemoveGranteesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public removeGrantees(request: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.RemoveGranteesCallback): void;
+
+                        /**
+                         * Calls RemoveGrantees.
+                         * @param request RemoveGranteesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public removeGrantees(request: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>;
+
+                        /**
+                         * Calls UpdateDataPolicy.
+                         * @param request UpdateDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public updateDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.UpdateDataPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateDataPolicy.
+                         * @param request UpdateDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>;
+
+                        /**
+                         * Calls DeleteDataPolicy.
+                         * @param request DeleteDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.DeleteDataPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteDataPolicy.
+                         * @param request DeleteDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls GetDataPolicy.
+                         * @param request GetDataPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and DataPolicy
+                         */
+                        public getDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.GetDataPolicyCallback): void;
+
+                        /**
+                         * Calls GetDataPolicy.
+                         * @param request GetDataPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getDataPolicy(request: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>;
+
+                        /**
+                         * Calls ListDataPolicies.
+                         * @param request ListDataPoliciesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListDataPoliciesResponse
+                         */
+                        public listDataPolicies(request: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.ListDataPoliciesCallback): void;
+
+                        /**
+                         * Calls ListDataPolicies.
+                         * @param request ListDataPoliciesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listDataPolicies(request: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest): Promise<google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse>;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.GetIamPolicyCallback): void;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.SetIamPolicyCallback): void;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.TestIamPermissionsCallback): void;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                    }
+
+                    namespace DataPolicyService {
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|createDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type CreateDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|addGrantees}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type AddGranteesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|removeGrantees}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type RemoveGranteesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|updateDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type UpdateDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|deleteDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteDataPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|getDataPolicy}.
+                         * @param error Error, if any
+                         * @param [response] DataPolicy
+                         */
+                        type GetDataPolicyCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|listDataPolicies}.
+                         * @param error Error, if any
+                         * @param [response] ListDataPoliciesResponse
+                         */
+                        type ListDataPoliciesCallback = (error: (Error|null), response?: google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|getIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|setIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|testIamPermissions}.
+                         * @param error Error, if any
+                         * @param [response] TestIamPermissionsResponse
+                         */
+                        type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                    }
+
+                    /** Properties of a CreateDataPolicyRequest. */
+                    interface ICreateDataPolicyRequest {
+
+                        /** CreateDataPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateDataPolicyRequest dataPolicyId */
+                        dataPolicyId?: (string|null);
+
+                        /** CreateDataPolicyRequest dataPolicy */
+                        dataPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null);
+                    }
+
+                    /** Represents a CreateDataPolicyRequest. */
+                    class CreateDataPolicyRequest implements ICreateDataPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest);
+
+                        /** CreateDataPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateDataPolicyRequest dataPolicyId. */
+                        public dataPolicyId: string;
+
+                        /** CreateDataPolicyRequest dataPolicy. */
+                        public dataPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null);
+
+                        /**
+                         * Creates a new CreateDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest): google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest.verify|verify} messages.
+                         * @param message CreateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest.verify|verify} messages.
+                         * @param message CreateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest;
+
+                        /**
+                         * Decodes a CreateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest;
+
+                        /**
+                         * Verifies a CreateDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateDataPolicyRequest. */
+                    interface IUpdateDataPolicyRequest {
+
+                        /** UpdateDataPolicyRequest dataPolicy */
+                        dataPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null);
+
+                        /** UpdateDataPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateDataPolicyRequest. */
+                    class UpdateDataPolicyRequest implements IUpdateDataPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest);
+
+                        /** UpdateDataPolicyRequest dataPolicy. */
+                        public dataPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null);
+
+                        /** UpdateDataPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest): google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.verify|verify} messages.
+                         * @param message UpdateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.verify|verify} messages.
+                         * @param message UpdateDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddGranteesRequest. */
+                    interface IAddGranteesRequest {
+
+                        /** AddGranteesRequest dataPolicy */
+                        dataPolicy?: (string|null);
+
+                        /** AddGranteesRequest grantees */
+                        grantees?: (string[]|null);
+                    }
+
+                    /** Represents an AddGranteesRequest. */
+                    class AddGranteesRequest implements IAddGranteesRequest {
+
+                        /**
+                         * Constructs a new AddGranteesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest);
+
+                        /** AddGranteesRequest dataPolicy. */
+                        public dataPolicy: string;
+
+                        /** AddGranteesRequest grantees. */
+                        public grantees: string[];
+
+                        /**
+                         * Creates a new AddGranteesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddGranteesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest): google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest;
+
+                        /**
+                         * Encodes the specified AddGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest.verify|verify} messages.
+                         * @param message AddGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest.verify|verify} messages.
+                         * @param message AddGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddGranteesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest;
+
+                        /**
+                         * Decodes an AddGranteesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest;
+
+                        /**
+                         * Verifies an AddGranteesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddGranteesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest;
+
+                        /**
+                         * Creates a plain object from an AddGranteesRequest message. Also converts values to other types if specified.
+                         * @param message AddGranteesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddGranteesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddGranteesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoveGranteesRequest. */
+                    interface IRemoveGranteesRequest {
+
+                        /** RemoveGranteesRequest dataPolicy */
+                        dataPolicy?: (string|null);
+
+                        /** RemoveGranteesRequest grantees */
+                        grantees?: (string[]|null);
+                    }
+
+                    /** Represents a RemoveGranteesRequest. */
+                    class RemoveGranteesRequest implements IRemoveGranteesRequest {
+
+                        /**
+                         * Constructs a new RemoveGranteesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest);
+
+                        /** RemoveGranteesRequest dataPolicy. */
+                        public dataPolicy: string;
+
+                        /** RemoveGranteesRequest grantees. */
+                        public grantees: string[];
+
+                        /**
+                         * Creates a new RemoveGranteesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoveGranteesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest): google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest;
+
+                        /**
+                         * Encodes the specified RemoveGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest.verify|verify} messages.
+                         * @param message RemoveGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoveGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest.verify|verify} messages.
+                         * @param message RemoveGranteesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoveGranteesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoveGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest;
+
+                        /**
+                         * Decodes a RemoveGranteesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoveGranteesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest;
+
+                        /**
+                         * Verifies a RemoveGranteesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoveGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoveGranteesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest;
+
+                        /**
+                         * Creates a plain object from a RemoveGranteesRequest message. Also converts values to other types if specified.
+                         * @param message RemoveGranteesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoveGranteesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoveGranteesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteDataPolicyRequest. */
+                    interface IDeleteDataPolicyRequest {
+
+                        /** DeleteDataPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteDataPolicyRequest. */
+                    class DeleteDataPolicyRequest implements IDeleteDataPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest);
+
+                        /** DeleteDataPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest): google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest.verify|verify} messages.
+                         * @param message DeleteDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest.verify|verify} messages.
+                         * @param message DeleteDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetDataPolicyRequest. */
+                    interface IGetDataPolicyRequest {
+
+                        /** GetDataPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetDataPolicyRequest. */
+                    class GetDataPolicyRequest implements IGetDataPolicyRequest {
+
+                        /**
+                         * Constructs a new GetDataPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest);
+
+                        /** GetDataPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetDataPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetDataPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest): google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest;
+
+                        /**
+                         * Encodes the specified GetDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest.verify|verify} messages.
+                         * @param message GetDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest.verify|verify} messages.
+                         * @param message GetDataPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetDataPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest;
+
+                        /**
+                         * Decodes a GetDataPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetDataPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest;
+
+                        /**
+                         * Verifies a GetDataPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetDataPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a GetDataPolicyRequest message. Also converts values to other types if specified.
+                         * @param message GetDataPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetDataPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetDataPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataPoliciesRequest. */
+                    interface IListDataPoliciesRequest {
+
+                        /** ListDataPoliciesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListDataPoliciesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListDataPoliciesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListDataPoliciesRequest. */
+                    class ListDataPoliciesRequest implements IListDataPoliciesRequest {
+
+                        /**
+                         * Constructs a new ListDataPoliciesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest);
+
+                        /** ListDataPoliciesRequest parent. */
+                        public parent: string;
+
+                        /** ListDataPoliciesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListDataPoliciesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListDataPoliciesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataPoliciesRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest.verify|verify} messages.
+                         * @param message ListDataPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest.verify|verify} messages.
+                         * @param message ListDataPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataPoliciesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest;
+
+                        /**
+                         * Decodes a ListDataPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest;
+
+                        /**
+                         * Verifies a ListDataPoliciesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataPoliciesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest;
+
+                        /**
+                         * Creates a plain object from a ListDataPoliciesRequest message. Also converts values to other types if specified.
+                         * @param message ListDataPoliciesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataPoliciesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataPoliciesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListDataPoliciesResponse. */
+                    interface IListDataPoliciesResponse {
+
+                        /** ListDataPoliciesResponse dataPolicies */
+                        dataPolicies?: (google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy[]|null);
+
+                        /** ListDataPoliciesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListDataPoliciesResponse. */
+                    class ListDataPoliciesResponse implements IListDataPoliciesResponse {
+
+                        /**
+                         * Constructs a new ListDataPoliciesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse);
+
+                        /** ListDataPoliciesResponse dataPolicies. */
+                        public dataPolicies: google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy[];
+
+                        /** ListDataPoliciesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListDataPoliciesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListDataPoliciesResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesResponse message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.verify|verify} messages.
+                         * @param message ListDataPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListDataPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.verify|verify} messages.
+                         * @param message ListDataPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListDataPoliciesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListDataPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse;
+
+                        /**
+                         * Decodes a ListDataPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListDataPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse;
+
+                        /**
+                         * Verifies a ListDataPoliciesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListDataPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListDataPoliciesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse;
+
+                        /**
+                         * Creates a plain object from a ListDataPoliciesResponse message. Also converts values to other types if specified.
+                         * @param message ListDataPoliciesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListDataPoliciesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListDataPoliciesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataPolicy. */
+                    interface IDataPolicy {
+
+                        /** DataPolicy dataMaskingPolicy */
+                        dataMaskingPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy|null);
+
+                        /** DataPolicy name */
+                        name?: (string|null);
+
+                        /** DataPolicy dataPolicyId */
+                        dataPolicyId?: (string|null);
+
+                        /** DataPolicy etag */
+                        etag?: (string|null);
+
+                        /** DataPolicy dataPolicyType */
+                        dataPolicyType?: (google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType|null);
+
+                        /** DataPolicy policyTag */
+                        policyTag?: (string|null);
+
+                        /** DataPolicy grantees */
+                        grantees?: (string[]|null);
+
+                        /** DataPolicy version */
+                        version?: (google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version|null);
+                    }
+
+                    /** Represents a DataPolicy. */
+                    class DataPolicy implements IDataPolicy {
+
+                        /**
+                         * Constructs a new DataPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy);
+
+                        /** DataPolicy dataMaskingPolicy. */
+                        public dataMaskingPolicy?: (google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy|null);
+
+                        /** DataPolicy name. */
+                        public name: string;
+
+                        /** DataPolicy dataPolicyId. */
+                        public dataPolicyId: string;
+
+                        /** DataPolicy etag. */
+                        public etag?: (string|null);
+
+                        /** DataPolicy dataPolicyType. */
+                        public dataPolicyType: (google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType);
+
+                        /** DataPolicy policyTag. */
+                        public policyTag: string;
+
+                        /** DataPolicy grantees. */
+                        public grantees: string[];
+
+                        /** DataPolicy version. */
+                        public version: (google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version);
+
+                        /** DataPolicy policy. */
+                        public policy?: "dataMaskingPolicy";
+
+                        /**
+                         * Creates a new DataPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy): google.cloud.bigquery.datapolicies.v2beta1.DataPolicy;
+
+                        /**
+                         * Encodes the specified DataPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify|verify} messages.
+                         * @param message DataPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify|verify} messages.
+                         * @param message DataPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.DataPolicy;
+
+                        /**
+                         * Decodes a DataPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.DataPolicy;
+
+                        /**
+                         * Verifies a DataPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.DataPolicy;
+
+                        /**
+                         * Creates a plain object from a DataPolicy message. Also converts values to other types if specified.
+                         * @param message DataPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataPolicy {
+
+                        /** DataPolicyType enum. */
+                        enum DataPolicyType {
+                            DATA_POLICY_TYPE_UNSPECIFIED = 0,
+                            DATA_MASKING_POLICY = 1,
+                            RAW_DATA_ACCESS_POLICY = 2
+                        }
+
+                        /** Version enum. */
+                        enum Version {
+                            VERSION_UNSPECIFIED = 0,
+                            V1 = 1,
+                            V2 = 2
+                        }
+                    }
+
+                    /** Properties of a DataMaskingPolicy. */
+                    interface IDataMaskingPolicy {
+
+                        /** DataMaskingPolicy predefinedExpression */
+                        predefinedExpression?: (google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|null);
+                    }
+
+                    /** Represents a DataMaskingPolicy. */
+                    class DataMaskingPolicy implements IDataMaskingPolicy {
+
+                        /**
+                         * Constructs a new DataMaskingPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy);
+
+                        /** DataMaskingPolicy predefinedExpression. */
+                        public predefinedExpression?: (google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|null);
+
+                        /** DataMaskingPolicy maskingExpression. */
+                        public maskingExpression?: "predefinedExpression";
+
+                        /**
+                         * Creates a new DataMaskingPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataMaskingPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy): google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy;
+
+                        /**
+                         * Encodes the specified DataMaskingPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.verify|verify} messages.
+                         * @param message DataMaskingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataMaskingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.verify|verify} messages.
+                         * @param message DataMaskingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataMaskingPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataMaskingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy;
+
+                        /**
+                         * Decodes a DataMaskingPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataMaskingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy;
+
+                        /**
+                         * Verifies a DataMaskingPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataMaskingPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataMaskingPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy;
+
+                        /**
+                         * Creates a plain object from a DataMaskingPolicy message. Also converts values to other types if specified.
+                         * @param message DataMaskingPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataMaskingPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataMaskingPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataMaskingPolicy {
+
+                        /** PredefinedExpression enum. */
+                        enum PredefinedExpression {
+                            PREDEFINED_EXPRESSION_UNSPECIFIED = 0,
+                            SHA256 = 1,
+                            ALWAYS_NULL = 2,
+                            DEFAULT_MASKING_VALUE = 3
+                        }
+                    }
+                }
             }
         }
     }
@@ -2652,6 +5340,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -2668,6 +5359,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -3369,6 +6063,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -3382,6 +6079,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -3459,6 +6159,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -3787,6 +6599,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -3800,6 +6615,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -4123,6 +6941,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -4506,6 +7427,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -4535,6 +7457,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -4584,6 +7509,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -4719,6 +7647,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -4759,6 +7690,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -5607,6 +8541,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -5632,6 +8569,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -6567,6 +9507,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6621,6 +9564,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6837,6 +9783,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -7080,6 +10141,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -7101,6 +10165,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7691,6 +10758,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -7719,6 +10792,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -7842,6 +10921,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7961,8 +11150,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7977,8 +11169,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -8509,6 +11704,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

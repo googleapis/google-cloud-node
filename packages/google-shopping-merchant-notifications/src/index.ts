@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const NotificationsApiServiceClient = v1beta.NotificationsApiServiceClient;
 type NotificationsApiServiceClient = v1beta.NotificationsApiServiceClient;
 
-export {v1beta, NotificationsApiServiceClient};
-export default {v1beta, NotificationsApiServiceClient};
+export {v1, v1beta, NotificationsApiServiceClient};
+export default {v1, v1beta, NotificationsApiServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

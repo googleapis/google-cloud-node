@@ -16,14 +16,20 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {SimulatorClient} from '@google-cloud/policysimulator';
+import {OrgPolicyViolationsPreviewServiceClient, SimulatorClient} from '@google-cloud/policysimulator';
 
 // check that the client class type name can be used
+function doStuffWithOrgPolicyViolationsPreviewServiceClient(client: OrgPolicyViolationsPreviewServiceClient) {
+  client.close();
+}
 function doStuffWithSimulatorClient(client: SimulatorClient) {
   client.close();
 }
 
 function main() {
+  // check that the client instance can be created
+  const orgPolicyViolationsPreviewServiceClient = new OrgPolicyViolationsPreviewServiceClient();
+  doStuffWithOrgPolicyViolationsPreviewServiceClient(orgPolicyViolationsPreviewServiceClient);
   // check that the client instance can be created
   const simulatorClient = new SimulatorClient();
   doStuffWithSimulatorClient(simulatorClient);

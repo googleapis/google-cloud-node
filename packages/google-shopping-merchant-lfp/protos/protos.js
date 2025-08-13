@@ -66,6 +66,5400 @@
                      */
                     var lfp = {};
     
+                    lfp.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.lfp
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.LfpInventoryService = (function() {
+    
+                            /**
+                             * Constructs a new LfpInventoryService service.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpInventoryService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LfpInventoryService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LfpInventoryService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LfpInventoryService;
+    
+                            /**
+                             * Creates new LfpInventoryService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventoryService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LfpInventoryService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LfpInventoryService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpInventoryService|insertLfpInventory}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventoryService
+                             * @typedef InsertLfpInventoryCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.LfpInventory} [response] LfpInventory
+                             */
+    
+                            /**
+                             * Calls InsertLfpInventory.
+                             * @function insertLfpInventory
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest} request InsertLfpInventoryRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpInventoryService.InsertLfpInventoryCallback} callback Node-style callback called with the error, if any, and LfpInventory
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpInventoryService.prototype.insertLfpInventory = function insertLfpInventory(request, callback) {
+                                return this.rpcCall(insertLfpInventory, $root.google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest, $root.google.shopping.merchant.lfp.v1.LfpInventory, request, callback);
+                            }, "name", { value: "InsertLfpInventory" });
+    
+                            /**
+                             * Calls InsertLfpInventory.
+                             * @function insertLfpInventory
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest} request InsertLfpInventoryRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.LfpInventory>} Promise
+                             * @variation 2
+                             */
+    
+                            return LfpInventoryService;
+                        })();
+    
+                        v1.LfpInventory = (function() {
+    
+                            /**
+                             * Properties of a LfpInventory.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface ILfpInventory
+                             * @property {string|null} [name] LfpInventory name
+                             * @property {number|Long|null} [targetAccount] LfpInventory targetAccount
+                             * @property {string|null} [storeCode] LfpInventory storeCode
+                             * @property {string|null} [offerId] LfpInventory offerId
+                             * @property {string|null} [regionCode] LfpInventory regionCode
+                             * @property {string|null} [contentLanguage] LfpInventory contentLanguage
+                             * @property {string|null} [gtin] LfpInventory gtin
+                             * @property {google.shopping.type.IPrice|null} [price] LfpInventory price
+                             * @property {string|null} [availability] LfpInventory availability
+                             * @property {number|Long|null} [quantity] LfpInventory quantity
+                             * @property {google.protobuf.ITimestamp|null} [collectionTime] LfpInventory collectionTime
+                             * @property {string|null} [pickupMethod] LfpInventory pickupMethod
+                             * @property {string|null} [pickupSla] LfpInventory pickupSla
+                             * @property {string|null} [feedLabel] LfpInventory feedLabel
+                             */
+    
+                            /**
+                             * Constructs a new LfpInventory.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpInventory.
+                             * @implements ILfpInventory
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.ILfpInventory=} [properties] Properties to set
+                             */
+                            function LfpInventory(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpInventory name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.name = "";
+    
+                            /**
+                             * LfpInventory targetAccount.
+                             * @member {number|Long} targetAccount
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.targetAccount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LfpInventory storeCode.
+                             * @member {string} storeCode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.storeCode = "";
+    
+                            /**
+                             * LfpInventory offerId.
+                             * @member {string} offerId
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.offerId = "";
+    
+                            /**
+                             * LfpInventory regionCode.
+                             * @member {string} regionCode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.regionCode = "";
+    
+                            /**
+                             * LfpInventory contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.contentLanguage = "";
+    
+                            /**
+                             * LfpInventory gtin.
+                             * @member {string|null|undefined} gtin
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.gtin = null;
+    
+                            /**
+                             * LfpInventory price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.price = null;
+    
+                            /**
+                             * LfpInventory availability.
+                             * @member {string} availability
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.availability = "";
+    
+                            /**
+                             * LfpInventory quantity.
+                             * @member {number|Long|null|undefined} quantity
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.quantity = null;
+    
+                            /**
+                             * LfpInventory collectionTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} collectionTime
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.collectionTime = null;
+    
+                            /**
+                             * LfpInventory pickupMethod.
+                             * @member {string|null|undefined} pickupMethod
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.pickupMethod = null;
+    
+                            /**
+                             * LfpInventory pickupSla.
+                             * @member {string|null|undefined} pickupSla
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.pickupSla = null;
+    
+                            /**
+                             * LfpInventory feedLabel.
+                             * @member {string|null|undefined} feedLabel
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             */
+                            LfpInventory.prototype.feedLabel = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpInventory.prototype, "_gtin", {
+                                get: $util.oneOfGetter($oneOfFields = ["gtin"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpInventory.prototype, "_quantity", {
+                                get: $util.oneOfGetter($oneOfFields = ["quantity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpInventory.prototype, "_pickupMethod", {
+                                get: $util.oneOfGetter($oneOfFields = ["pickupMethod"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpInventory.prototype, "_pickupSla", {
+                                get: $util.oneOfGetter($oneOfFields = ["pickupSla"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpInventory.prototype, "_feedLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LfpInventory instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpInventory=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.LfpInventory} LfpInventory instance
+                             */
+                            LfpInventory.create = function create(properties) {
+                                return new LfpInventory(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpInventory message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpInventory.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpInventory} message LfpInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpInventory.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.targetAccount != null && Object.hasOwnProperty.call(message, "targetAccount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.targetAccount);
+                                if (message.storeCode != null && Object.hasOwnProperty.call(message, "storeCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.storeCode);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.offerId);
+                                if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.regionCode);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.contentLanguage);
+                                if (message.gtin != null && Object.hasOwnProperty.call(message, "gtin"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.gtin);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.availability);
+                                if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int64(message.quantity);
+                                if (message.collectionTime != null && Object.hasOwnProperty.call(message, "collectionTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.collectionTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.pickupMethod != null && Object.hasOwnProperty.call(message, "pickupMethod"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.pickupMethod);
+                                if (message.pickupSla != null && Object.hasOwnProperty.call(message, "pickupSla"))
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.pickupSla);
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.feedLabel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpInventory message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpInventory.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpInventory} message LfpInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpInventory.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpInventory message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.LfpInventory} LfpInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpInventory.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpInventory();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetAccount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.storeCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.regionCode = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.gtin = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.availability = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.quantity = reader.int64();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.collectionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.pickupMethod = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.pickupSla = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpInventory message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.LfpInventory} LfpInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpInventory.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpInventory message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpInventory.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (!$util.isInteger(message.targetAccount) && !(message.targetAccount && $util.isInteger(message.targetAccount.low) && $util.isInteger(message.targetAccount.high)))
+                                        return "targetAccount: integer|Long expected";
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    if (!$util.isString(message.storeCode))
+                                        return "storeCode: string expected";
+                                if (message.offerId != null && message.hasOwnProperty("offerId"))
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    if (!$util.isString(message.regionCode))
+                                        return "regionCode: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                if (message.gtin != null && message.hasOwnProperty("gtin")) {
+                                    properties._gtin = 1;
+                                    if (!$util.isString(message.gtin))
+                                        return "gtin: string expected";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.availability != null && message.hasOwnProperty("availability"))
+                                    if (!$util.isString(message.availability))
+                                        return "availability: string expected";
+                                if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                    properties._quantity = 1;
+                                    if (!$util.isInteger(message.quantity) && !(message.quantity && $util.isInteger(message.quantity.low) && $util.isInteger(message.quantity.high)))
+                                        return "quantity: integer|Long expected";
+                                }
+                                if (message.collectionTime != null && message.hasOwnProperty("collectionTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.collectionTime);
+                                    if (error)
+                                        return "collectionTime." + error;
+                                }
+                                if (message.pickupMethod != null && message.hasOwnProperty("pickupMethod")) {
+                                    properties._pickupMethod = 1;
+                                    if (!$util.isString(message.pickupMethod))
+                                        return "pickupMethod: string expected";
+                                }
+                                if (message.pickupSla != null && message.hasOwnProperty("pickupSla")) {
+                                    properties._pickupSla = 1;
+                                    if (!$util.isString(message.pickupSla))
+                                        return "pickupSla: string expected";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    properties._feedLabel = 1;
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpInventory message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.LfpInventory} LfpInventory
+                             */
+                            LfpInventory.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpInventory)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.LfpInventory();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.targetAccount != null)
+                                    if ($util.Long)
+                                        (message.targetAccount = $util.Long.fromValue(object.targetAccount)).unsigned = false;
+                                    else if (typeof object.targetAccount === "string")
+                                        message.targetAccount = parseInt(object.targetAccount, 10);
+                                    else if (typeof object.targetAccount === "number")
+                                        message.targetAccount = object.targetAccount;
+                                    else if (typeof object.targetAccount === "object")
+                                        message.targetAccount = new $util.LongBits(object.targetAccount.low >>> 0, object.targetAccount.high >>> 0).toNumber();
+                                if (object.storeCode != null)
+                                    message.storeCode = String(object.storeCode);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.regionCode != null)
+                                    message.regionCode = String(object.regionCode);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                if (object.gtin != null)
+                                    message.gtin = String(object.gtin);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpInventory.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.availability != null)
+                                    message.availability = String(object.availability);
+                                if (object.quantity != null)
+                                    if ($util.Long)
+                                        (message.quantity = $util.Long.fromValue(object.quantity)).unsigned = false;
+                                    else if (typeof object.quantity === "string")
+                                        message.quantity = parseInt(object.quantity, 10);
+                                    else if (typeof object.quantity === "number")
+                                        message.quantity = object.quantity;
+                                    else if (typeof object.quantity === "object")
+                                        message.quantity = new $util.LongBits(object.quantity.low >>> 0, object.quantity.high >>> 0).toNumber();
+                                if (object.collectionTime != null) {
+                                    if (typeof object.collectionTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpInventory.collectionTime: object expected");
+                                    message.collectionTime = $root.google.protobuf.Timestamp.fromObject(object.collectionTime);
+                                }
+                                if (object.pickupMethod != null)
+                                    message.pickupMethod = String(object.pickupMethod);
+                                if (object.pickupSla != null)
+                                    message.pickupSla = String(object.pickupSla);
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpInventory message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.LfpInventory} message LfpInventory
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpInventory.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.targetAccount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.targetAccount = options.longs === String ? "0" : 0;
+                                    object.storeCode = "";
+                                    object.offerId = "";
+                                    object.regionCode = "";
+                                    object.contentLanguage = "";
+                                    object.price = null;
+                                    object.availability = "";
+                                    object.collectionTime = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (typeof message.targetAccount === "number")
+                                        object.targetAccount = options.longs === String ? String(message.targetAccount) : message.targetAccount;
+                                    else
+                                        object.targetAccount = options.longs === String ? $util.Long.prototype.toString.call(message.targetAccount) : options.longs === Number ? new $util.LongBits(message.targetAccount.low >>> 0, message.targetAccount.high >>> 0).toNumber() : message.targetAccount;
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    object.storeCode = message.storeCode;
+                                if (message.offerId != null && message.hasOwnProperty("offerId"))
+                                    object.offerId = message.offerId;
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    object.regionCode = message.regionCode;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                if (message.gtin != null && message.hasOwnProperty("gtin")) {
+                                    object.gtin = message.gtin;
+                                    if (options.oneofs)
+                                        object._gtin = "gtin";
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.availability != null && message.hasOwnProperty("availability"))
+                                    object.availability = message.availability;
+                                if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                    if (typeof message.quantity === "number")
+                                        object.quantity = options.longs === String ? String(message.quantity) : message.quantity;
+                                    else
+                                        object.quantity = options.longs === String ? $util.Long.prototype.toString.call(message.quantity) : options.longs === Number ? new $util.LongBits(message.quantity.low >>> 0, message.quantity.high >>> 0).toNumber() : message.quantity;
+                                    if (options.oneofs)
+                                        object._quantity = "quantity";
+                                }
+                                if (message.collectionTime != null && message.hasOwnProperty("collectionTime"))
+                                    object.collectionTime = $root.google.protobuf.Timestamp.toObject(message.collectionTime, options);
+                                if (message.pickupMethod != null && message.hasOwnProperty("pickupMethod")) {
+                                    object.pickupMethod = message.pickupMethod;
+                                    if (options.oneofs)
+                                        object._pickupMethod = "pickupMethod";
+                                }
+                                if (message.pickupSla != null && message.hasOwnProperty("pickupSla")) {
+                                    object.pickupSla = message.pickupSla;
+                                    if (options.oneofs)
+                                        object._pickupSla = "pickupSla";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    object.feedLabel = message.feedLabel;
+                                    if (options.oneofs)
+                                        object._feedLabel = "feedLabel";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpInventory to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpInventory.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpInventory
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.LfpInventory
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpInventory.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpInventory";
+                            };
+    
+                            return LfpInventory;
+                        })();
+    
+                        v1.InsertLfpInventoryRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertLfpInventoryRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IInsertLfpInventoryRequest
+                             * @property {string|null} [parent] InsertLfpInventoryRequest parent
+                             * @property {google.shopping.merchant.lfp.v1.ILfpInventory|null} [lfpInventory] InsertLfpInventoryRequest lfpInventory
+                             */
+    
+                            /**
+                             * Constructs a new InsertLfpInventoryRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents an InsertLfpInventoryRequest.
+                             * @implements IInsertLfpInventoryRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest=} [properties] Properties to set
+                             */
+                            function InsertLfpInventoryRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertLfpInventoryRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @instance
+                             */
+                            InsertLfpInventoryRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertLfpInventoryRequest lfpInventory.
+                             * @member {google.shopping.merchant.lfp.v1.ILfpInventory|null|undefined} lfpInventory
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @instance
+                             */
+                            InsertLfpInventoryRequest.prototype.lfpInventory = null;
+    
+                            /**
+                             * Creates a new InsertLfpInventoryRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest} InsertLfpInventoryRequest instance
+                             */
+                            InsertLfpInventoryRequest.create = function create(properties) {
+                                return new InsertLfpInventoryRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpInventoryRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest} message InsertLfpInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpInventoryRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.lfpInventory != null && Object.hasOwnProperty.call(message, "lfpInventory"))
+                                    $root.google.shopping.merchant.lfp.v1.LfpInventory.encode(message.lfpInventory, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpInventoryRequest} message InsertLfpInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpInventoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpInventoryRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest} InsertLfpInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpInventoryRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.lfpInventory = $root.google.shopping.merchant.lfp.v1.LfpInventory.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpInventoryRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest} InsertLfpInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpInventoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertLfpInventoryRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertLfpInventoryRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.lfpInventory != null && message.hasOwnProperty("lfpInventory")) {
+                                    var error = $root.google.shopping.merchant.lfp.v1.LfpInventory.verify(message.lfpInventory);
+                                    if (error)
+                                        return "lfpInventory." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertLfpInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest} InsertLfpInventoryRequest
+                             */
+                            InsertLfpInventoryRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.lfpInventory != null) {
+                                    if (typeof object.lfpInventory !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest.lfpInventory: object expected");
+                                    message.lfpInventory = $root.google.shopping.merchant.lfp.v1.LfpInventory.fromObject(object.lfpInventory);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertLfpInventoryRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest} message InsertLfpInventoryRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertLfpInventoryRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.lfpInventory = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.lfpInventory != null && message.hasOwnProperty("lfpInventory"))
+                                    object.lfpInventory = $root.google.shopping.merchant.lfp.v1.LfpInventory.toObject(message.lfpInventory, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertLfpInventoryRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertLfpInventoryRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertLfpInventoryRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertLfpInventoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.InsertLfpInventoryRequest";
+                            };
+    
+                            return InsertLfpInventoryRequest;
+                        })();
+    
+                        v1.LfpMerchantStateService = (function() {
+    
+                            /**
+                             * Constructs a new LfpMerchantStateService service.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpMerchantStateService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LfpMerchantStateService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LfpMerchantStateService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LfpMerchantStateService;
+    
+                            /**
+                             * Creates new LfpMerchantStateService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantStateService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LfpMerchantStateService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LfpMerchantStateService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpMerchantStateService|getLfpMerchantState}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantStateService
+                             * @typedef GetLfpMerchantStateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.LfpMerchantState} [response] LfpMerchantState
+                             */
+    
+                            /**
+                             * Calls GetLfpMerchantState.
+                             * @function getLfpMerchantState
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantStateService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest} request GetLfpMerchantStateRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpMerchantStateService.GetLfpMerchantStateCallback} callback Node-style callback called with the error, if any, and LfpMerchantState
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpMerchantStateService.prototype.getLfpMerchantState = function getLfpMerchantState(request, callback) {
+                                return this.rpcCall(getLfpMerchantState, $root.google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest, $root.google.shopping.merchant.lfp.v1.LfpMerchantState, request, callback);
+                            }, "name", { value: "GetLfpMerchantState" });
+    
+                            /**
+                             * Calls GetLfpMerchantState.
+                             * @function getLfpMerchantState
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantStateService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest} request GetLfpMerchantStateRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.LfpMerchantState>} Promise
+                             * @variation 2
+                             */
+    
+                            return LfpMerchantStateService;
+                        })();
+    
+                        v1.LfpMerchantState = (function() {
+    
+                            /**
+                             * Properties of a LfpMerchantState.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface ILfpMerchantState
+                             * @property {string|null} [name] LfpMerchantState name
+                             * @property {number|Long|null} [linkedGbps] LfpMerchantState linkedGbps
+                             * @property {Array.<google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState>|null} [storeStates] LfpMerchantState storeStates
+                             * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats|null} [inventoryStats] LfpMerchantState inventoryStats
+                             * @property {Array.<google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings>|null} [countrySettings] LfpMerchantState countrySettings
+                             */
+    
+                            /**
+                             * Constructs a new LfpMerchantState.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpMerchantState.
+                             * @implements ILfpMerchantState
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.ILfpMerchantState=} [properties] Properties to set
+                             */
+                            function LfpMerchantState(properties) {
+                                this.storeStates = [];
+                                this.countrySettings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpMerchantState name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             */
+                            LfpMerchantState.prototype.name = "";
+    
+                            /**
+                             * LfpMerchantState linkedGbps.
+                             * @member {number|Long} linkedGbps
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             */
+                            LfpMerchantState.prototype.linkedGbps = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LfpMerchantState storeStates.
+                             * @member {Array.<google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState>} storeStates
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             */
+                            LfpMerchantState.prototype.storeStates = $util.emptyArray;
+    
+                            /**
+                             * LfpMerchantState inventoryStats.
+                             * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats|null|undefined} inventoryStats
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             */
+                            LfpMerchantState.prototype.inventoryStats = null;
+    
+                            /**
+                             * LfpMerchantState countrySettings.
+                             * @member {Array.<google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings>} countrySettings
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             */
+                            LfpMerchantState.prototype.countrySettings = $util.emptyArray;
+    
+                            /**
+                             * Creates a new LfpMerchantState instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpMerchantState=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState} LfpMerchantState instance
+                             */
+                            LfpMerchantState.create = function create(properties) {
+                                return new LfpMerchantState(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpMerchantState message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpMerchantState} message LfpMerchantState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpMerchantState.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.linkedGbps != null && Object.hasOwnProperty.call(message, "linkedGbps"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.linkedGbps);
+                                if (message.storeStates != null && message.storeStates.length)
+                                    for (var i = 0; i < message.storeStates.length; ++i)
+                                        $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.encode(message.storeStates[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.inventoryStats != null && Object.hasOwnProperty.call(message, "inventoryStats"))
+                                    $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.encode(message.inventoryStats, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.countrySettings != null && message.countrySettings.length)
+                                    for (var i = 0; i < message.countrySettings.length; ++i)
+                                        $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.encode(message.countrySettings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpMerchantState message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpMerchantState} message LfpMerchantState message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpMerchantState.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpMerchantState message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState} LfpMerchantState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpMerchantState.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.linkedGbps = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.storeStates && message.storeStates.length))
+                                                message.storeStates = [];
+                                            message.storeStates.push($root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.inventoryStats = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.countrySettings && message.countrySettings.length))
+                                                message.countrySettings = [];
+                                            message.countrySettings.push($root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpMerchantState message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState} LfpMerchantState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpMerchantState.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpMerchantState message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpMerchantState.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.linkedGbps != null && message.hasOwnProperty("linkedGbps"))
+                                    if (!$util.isInteger(message.linkedGbps) && !(message.linkedGbps && $util.isInteger(message.linkedGbps.low) && $util.isInteger(message.linkedGbps.high)))
+                                        return "linkedGbps: integer|Long expected";
+                                if (message.storeStates != null && message.hasOwnProperty("storeStates")) {
+                                    if (!Array.isArray(message.storeStates))
+                                        return "storeStates: array expected";
+                                    for (var i = 0; i < message.storeStates.length; ++i) {
+                                        var error = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.verify(message.storeStates[i]);
+                                        if (error)
+                                            return "storeStates." + error;
+                                    }
+                                }
+                                if (message.inventoryStats != null && message.hasOwnProperty("inventoryStats")) {
+                                    var error = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.verify(message.inventoryStats);
+                                    if (error)
+                                        return "inventoryStats." + error;
+                                }
+                                if (message.countrySettings != null && message.hasOwnProperty("countrySettings")) {
+                                    if (!Array.isArray(message.countrySettings))
+                                        return "countrySettings: array expected";
+                                    for (var i = 0; i < message.countrySettings.length; ++i) {
+                                        var error = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.verify(message.countrySettings[i]);
+                                        if (error)
+                                            return "countrySettings." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpMerchantState message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState} LfpMerchantState
+                             */
+                            LfpMerchantState.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpMerchantState)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.linkedGbps != null)
+                                    if ($util.Long)
+                                        (message.linkedGbps = $util.Long.fromValue(object.linkedGbps)).unsigned = false;
+                                    else if (typeof object.linkedGbps === "string")
+                                        message.linkedGbps = parseInt(object.linkedGbps, 10);
+                                    else if (typeof object.linkedGbps === "number")
+                                        message.linkedGbps = object.linkedGbps;
+                                    else if (typeof object.linkedGbps === "object")
+                                        message.linkedGbps = new $util.LongBits(object.linkedGbps.low >>> 0, object.linkedGbps.high >>> 0).toNumber();
+                                if (object.storeStates) {
+                                    if (!Array.isArray(object.storeStates))
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpMerchantState.storeStates: array expected");
+                                    message.storeStates = [];
+                                    for (var i = 0; i < object.storeStates.length; ++i) {
+                                        if (typeof object.storeStates[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.lfp.v1.LfpMerchantState.storeStates: object expected");
+                                        message.storeStates[i] = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.fromObject(object.storeStates[i]);
+                                    }
+                                }
+                                if (object.inventoryStats != null) {
+                                    if (typeof object.inventoryStats !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpMerchantState.inventoryStats: object expected");
+                                    message.inventoryStats = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.fromObject(object.inventoryStats);
+                                }
+                                if (object.countrySettings) {
+                                    if (!Array.isArray(object.countrySettings))
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpMerchantState.countrySettings: array expected");
+                                    message.countrySettings = [];
+                                    for (var i = 0; i < object.countrySettings.length; ++i) {
+                                        if (typeof object.countrySettings[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.lfp.v1.LfpMerchantState.countrySettings: object expected");
+                                        message.countrySettings[i] = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.fromObject(object.countrySettings[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpMerchantState message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.LfpMerchantState} message LfpMerchantState
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpMerchantState.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.storeStates = [];
+                                    object.countrySettings = [];
+                                }
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.linkedGbps = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.linkedGbps = options.longs === String ? "0" : 0;
+                                    object.inventoryStats = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.linkedGbps != null && message.hasOwnProperty("linkedGbps"))
+                                    if (typeof message.linkedGbps === "number")
+                                        object.linkedGbps = options.longs === String ? String(message.linkedGbps) : message.linkedGbps;
+                                    else
+                                        object.linkedGbps = options.longs === String ? $util.Long.prototype.toString.call(message.linkedGbps) : options.longs === Number ? new $util.LongBits(message.linkedGbps.low >>> 0, message.linkedGbps.high >>> 0).toNumber() : message.linkedGbps;
+                                if (message.storeStates && message.storeStates.length) {
+                                    object.storeStates = [];
+                                    for (var j = 0; j < message.storeStates.length; ++j)
+                                        object.storeStates[j] = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.toObject(message.storeStates[j], options);
+                                }
+                                if (message.inventoryStats != null && message.hasOwnProperty("inventoryStats"))
+                                    object.inventoryStats = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.toObject(message.inventoryStats, options);
+                                if (message.countrySettings && message.countrySettings.length) {
+                                    object.countrySettings = [];
+                                    for (var j = 0; j < message.countrySettings.length; ++j)
+                                        object.countrySettings[j] = $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.toObject(message.countrySettings[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpMerchantState to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpMerchantState.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpMerchantState
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpMerchantState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpMerchantState";
+                            };
+    
+                            LfpMerchantState.LfpStoreState = (function() {
+    
+                                /**
+                                 * Properties of a LfpStoreState.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @interface ILfpStoreState
+                                 * @property {string|null} [storeCode] LfpStoreState storeCode
+                                 * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.StoreMatchingState|null} [matchingState] LfpStoreState matchingState
+                                 * @property {string|null} [matchingStateHint] LfpStoreState matchingStateHint
+                                 */
+    
+                                /**
+                                 * Constructs a new LfpStoreState.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @classdesc Represents a LfpStoreState.
+                                 * @implements ILfpStoreState
+                                 * @constructor
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState=} [properties] Properties to set
+                                 */
+                                function LfpStoreState(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LfpStoreState storeCode.
+                                 * @member {string} storeCode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @instance
+                                 */
+                                LfpStoreState.prototype.storeCode = "";
+    
+                                /**
+                                 * LfpStoreState matchingState.
+                                 * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.StoreMatchingState} matchingState
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @instance
+                                 */
+                                LfpStoreState.prototype.matchingState = 0;
+    
+                                /**
+                                 * LfpStoreState matchingStateHint.
+                                 * @member {string} matchingStateHint
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @instance
+                                 */
+                                LfpStoreState.prototype.matchingStateHint = "";
+    
+                                /**
+                                 * Creates a new LfpStoreState instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState} LfpStoreState instance
+                                 */
+                                LfpStoreState.create = function create(properties) {
+                                    return new LfpStoreState(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LfpStoreState message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState} message LfpStoreState message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LfpStoreState.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.storeCode != null && Object.hasOwnProperty.call(message, "storeCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.storeCode);
+                                    if (message.matchingState != null && Object.hasOwnProperty.call(message, "matchingState"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.matchingState);
+                                    if (message.matchingStateHint != null && Object.hasOwnProperty.call(message, "matchingStateHint"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.matchingStateHint);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LfpStoreState message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ILfpStoreState} message LfpStoreState message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LfpStoreState.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LfpStoreState message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState} LfpStoreState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LfpStoreState.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.storeCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.matchingState = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.matchingStateHint = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LfpStoreState message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState} LfpStoreState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LfpStoreState.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LfpStoreState message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LfpStoreState.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                        if (!$util.isString(message.storeCode))
+                                            return "storeCode: string expected";
+                                    if (message.matchingState != null && message.hasOwnProperty("matchingState"))
+                                        switch (message.matchingState) {
+                                        default:
+                                            return "matchingState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.matchingStateHint != null && message.hasOwnProperty("matchingStateHint"))
+                                        if (!$util.isString(message.matchingStateHint))
+                                            return "matchingStateHint: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LfpStoreState message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState} LfpStoreState
+                                 */
+                                LfpStoreState.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState();
+                                    if (object.storeCode != null)
+                                        message.storeCode = String(object.storeCode);
+                                    switch (object.matchingState) {
+                                    default:
+                                        if (typeof object.matchingState === "number") {
+                                            message.matchingState = object.matchingState;
+                                            break;
+                                        }
+                                        break;
+                                    case "STORE_MATCHING_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.matchingState = 0;
+                                        break;
+                                    case "STORE_MATCHING_STATE_MATCHED":
+                                    case 1:
+                                        message.matchingState = 1;
+                                        break;
+                                    case "STORE_MATCHING_STATE_FAILED":
+                                    case 2:
+                                        message.matchingState = 2;
+                                        break;
+                                    }
+                                    if (object.matchingStateHint != null)
+                                        message.matchingStateHint = String(object.matchingStateHint);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LfpStoreState message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState} message LfpStoreState
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LfpStoreState.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.storeCode = "";
+                                        object.matchingState = options.enums === String ? "STORE_MATCHING_STATE_UNSPECIFIED" : 0;
+                                        object.matchingStateHint = "";
+                                    }
+                                    if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                        object.storeCode = message.storeCode;
+                                    if (message.matchingState != null && message.hasOwnProperty("matchingState"))
+                                        object.matchingState = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.StoreMatchingState[message.matchingState] === undefined ? message.matchingState : $root.google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.StoreMatchingState[message.matchingState] : message.matchingState;
+                                    if (message.matchingStateHint != null && message.hasOwnProperty("matchingStateHint"))
+                                        object.matchingStateHint = message.matchingStateHint;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LfpStoreState to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LfpStoreState.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LfpStoreState
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LfpStoreState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState";
+                                };
+    
+                                /**
+                                 * StoreMatchingState enum.
+                                 * @name google.shopping.merchant.lfp.v1.LfpMerchantState.LfpStoreState.StoreMatchingState
+                                 * @enum {number}
+                                 * @property {number} STORE_MATCHING_STATE_UNSPECIFIED=0 STORE_MATCHING_STATE_UNSPECIFIED value
+                                 * @property {number} STORE_MATCHING_STATE_MATCHED=1 STORE_MATCHING_STATE_MATCHED value
+                                 * @property {number} STORE_MATCHING_STATE_FAILED=2 STORE_MATCHING_STATE_FAILED value
+                                 */
+                                LfpStoreState.StoreMatchingState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "STORE_MATCHING_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "STORE_MATCHING_STATE_MATCHED"] = 1;
+                                    values[valuesById[2] = "STORE_MATCHING_STATE_FAILED"] = 2;
+                                    return values;
+                                })();
+    
+                                return LfpStoreState;
+                            })();
+    
+                            LfpMerchantState.InventoryStats = (function() {
+    
+                                /**
+                                 * Properties of an InventoryStats.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @interface IInventoryStats
+                                 * @property {number|Long|null} [submittedEntries] InventoryStats submittedEntries
+                                 * @property {number|Long|null} [submittedInStockEntries] InventoryStats submittedInStockEntries
+                                 * @property {number|Long|null} [unsubmittedEntries] InventoryStats unsubmittedEntries
+                                 * @property {number|Long|null} [submittedProducts] InventoryStats submittedProducts
+                                 */
+    
+                                /**
+                                 * Constructs a new InventoryStats.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @classdesc Represents an InventoryStats.
+                                 * @implements IInventoryStats
+                                 * @constructor
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats=} [properties] Properties to set
+                                 */
+                                function InventoryStats(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * InventoryStats submittedEntries.
+                                 * @member {number|Long} submittedEntries
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @instance
+                                 */
+                                InventoryStats.prototype.submittedEntries = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * InventoryStats submittedInStockEntries.
+                                 * @member {number|Long} submittedInStockEntries
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @instance
+                                 */
+                                InventoryStats.prototype.submittedInStockEntries = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * InventoryStats unsubmittedEntries.
+                                 * @member {number|Long} unsubmittedEntries
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @instance
+                                 */
+                                InventoryStats.prototype.unsubmittedEntries = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * InventoryStats submittedProducts.
+                                 * @member {number|Long} submittedProducts
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @instance
+                                 */
+                                InventoryStats.prototype.submittedProducts = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new InventoryStats instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats} InventoryStats instance
+                                 */
+                                InventoryStats.create = function create(properties) {
+                                    return new InventoryStats(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified InventoryStats message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats} message InventoryStats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                InventoryStats.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.submittedEntries != null && Object.hasOwnProperty.call(message, "submittedEntries"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.submittedEntries);
+                                    if (message.submittedInStockEntries != null && Object.hasOwnProperty.call(message, "submittedInStockEntries"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.submittedInStockEntries);
+                                    if (message.unsubmittedEntries != null && Object.hasOwnProperty.call(message, "unsubmittedEntries"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.unsubmittedEntries);
+                                    if (message.submittedProducts != null && Object.hasOwnProperty.call(message, "submittedProducts"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.submittedProducts);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified InventoryStats message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.IInventoryStats} message InventoryStats message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                InventoryStats.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an InventoryStats message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats} InventoryStats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                InventoryStats.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.submittedEntries = reader.int64();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.submittedInStockEntries = reader.int64();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.unsubmittedEntries = reader.int64();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.submittedProducts = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an InventoryStats message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats} InventoryStats
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                InventoryStats.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an InventoryStats message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                InventoryStats.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.submittedEntries != null && message.hasOwnProperty("submittedEntries"))
+                                        if (!$util.isInteger(message.submittedEntries) && !(message.submittedEntries && $util.isInteger(message.submittedEntries.low) && $util.isInteger(message.submittedEntries.high)))
+                                            return "submittedEntries: integer|Long expected";
+                                    if (message.submittedInStockEntries != null && message.hasOwnProperty("submittedInStockEntries"))
+                                        if (!$util.isInteger(message.submittedInStockEntries) && !(message.submittedInStockEntries && $util.isInteger(message.submittedInStockEntries.low) && $util.isInteger(message.submittedInStockEntries.high)))
+                                            return "submittedInStockEntries: integer|Long expected";
+                                    if (message.unsubmittedEntries != null && message.hasOwnProperty("unsubmittedEntries"))
+                                        if (!$util.isInteger(message.unsubmittedEntries) && !(message.unsubmittedEntries && $util.isInteger(message.unsubmittedEntries.low) && $util.isInteger(message.unsubmittedEntries.high)))
+                                            return "unsubmittedEntries: integer|Long expected";
+                                    if (message.submittedProducts != null && message.hasOwnProperty("submittedProducts"))
+                                        if (!$util.isInteger(message.submittedProducts) && !(message.submittedProducts && $util.isInteger(message.submittedProducts.low) && $util.isInteger(message.submittedProducts.high)))
+                                            return "submittedProducts: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an InventoryStats message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats} InventoryStats
+                                 */
+                                InventoryStats.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats();
+                                    if (object.submittedEntries != null)
+                                        if ($util.Long)
+                                            (message.submittedEntries = $util.Long.fromValue(object.submittedEntries)).unsigned = false;
+                                        else if (typeof object.submittedEntries === "string")
+                                            message.submittedEntries = parseInt(object.submittedEntries, 10);
+                                        else if (typeof object.submittedEntries === "number")
+                                            message.submittedEntries = object.submittedEntries;
+                                        else if (typeof object.submittedEntries === "object")
+                                            message.submittedEntries = new $util.LongBits(object.submittedEntries.low >>> 0, object.submittedEntries.high >>> 0).toNumber();
+                                    if (object.submittedInStockEntries != null)
+                                        if ($util.Long)
+                                            (message.submittedInStockEntries = $util.Long.fromValue(object.submittedInStockEntries)).unsigned = false;
+                                        else if (typeof object.submittedInStockEntries === "string")
+                                            message.submittedInStockEntries = parseInt(object.submittedInStockEntries, 10);
+                                        else if (typeof object.submittedInStockEntries === "number")
+                                            message.submittedInStockEntries = object.submittedInStockEntries;
+                                        else if (typeof object.submittedInStockEntries === "object")
+                                            message.submittedInStockEntries = new $util.LongBits(object.submittedInStockEntries.low >>> 0, object.submittedInStockEntries.high >>> 0).toNumber();
+                                    if (object.unsubmittedEntries != null)
+                                        if ($util.Long)
+                                            (message.unsubmittedEntries = $util.Long.fromValue(object.unsubmittedEntries)).unsigned = false;
+                                        else if (typeof object.unsubmittedEntries === "string")
+                                            message.unsubmittedEntries = parseInt(object.unsubmittedEntries, 10);
+                                        else if (typeof object.unsubmittedEntries === "number")
+                                            message.unsubmittedEntries = object.unsubmittedEntries;
+                                        else if (typeof object.unsubmittedEntries === "object")
+                                            message.unsubmittedEntries = new $util.LongBits(object.unsubmittedEntries.low >>> 0, object.unsubmittedEntries.high >>> 0).toNumber();
+                                    if (object.submittedProducts != null)
+                                        if ($util.Long)
+                                            (message.submittedProducts = $util.Long.fromValue(object.submittedProducts)).unsigned = false;
+                                        else if (typeof object.submittedProducts === "string")
+                                            message.submittedProducts = parseInt(object.submittedProducts, 10);
+                                        else if (typeof object.submittedProducts === "number")
+                                            message.submittedProducts = object.submittedProducts;
+                                        else if (typeof object.submittedProducts === "object")
+                                            message.submittedProducts = new $util.LongBits(object.submittedProducts.low >>> 0, object.submittedProducts.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an InventoryStats message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats} message InventoryStats
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                InventoryStats.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.submittedEntries = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.submittedEntries = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.submittedInStockEntries = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.submittedInStockEntries = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.unsubmittedEntries = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.unsubmittedEntries = options.longs === String ? "0" : 0;
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.submittedProducts = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.submittedProducts = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.submittedEntries != null && message.hasOwnProperty("submittedEntries"))
+                                        if (typeof message.submittedEntries === "number")
+                                            object.submittedEntries = options.longs === String ? String(message.submittedEntries) : message.submittedEntries;
+                                        else
+                                            object.submittedEntries = options.longs === String ? $util.Long.prototype.toString.call(message.submittedEntries) : options.longs === Number ? new $util.LongBits(message.submittedEntries.low >>> 0, message.submittedEntries.high >>> 0).toNumber() : message.submittedEntries;
+                                    if (message.submittedInStockEntries != null && message.hasOwnProperty("submittedInStockEntries"))
+                                        if (typeof message.submittedInStockEntries === "number")
+                                            object.submittedInStockEntries = options.longs === String ? String(message.submittedInStockEntries) : message.submittedInStockEntries;
+                                        else
+                                            object.submittedInStockEntries = options.longs === String ? $util.Long.prototype.toString.call(message.submittedInStockEntries) : options.longs === Number ? new $util.LongBits(message.submittedInStockEntries.low >>> 0, message.submittedInStockEntries.high >>> 0).toNumber() : message.submittedInStockEntries;
+                                    if (message.unsubmittedEntries != null && message.hasOwnProperty("unsubmittedEntries"))
+                                        if (typeof message.unsubmittedEntries === "number")
+                                            object.unsubmittedEntries = options.longs === String ? String(message.unsubmittedEntries) : message.unsubmittedEntries;
+                                        else
+                                            object.unsubmittedEntries = options.longs === String ? $util.Long.prototype.toString.call(message.unsubmittedEntries) : options.longs === Number ? new $util.LongBits(message.unsubmittedEntries.low >>> 0, message.unsubmittedEntries.high >>> 0).toNumber() : message.unsubmittedEntries;
+                                    if (message.submittedProducts != null && message.hasOwnProperty("submittedProducts"))
+                                        if (typeof message.submittedProducts === "number")
+                                            object.submittedProducts = options.longs === String ? String(message.submittedProducts) : message.submittedProducts;
+                                        else
+                                            object.submittedProducts = options.longs === String ? $util.Long.prototype.toString.call(message.submittedProducts) : options.longs === Number ? new $util.LongBits(message.submittedProducts.low >>> 0, message.submittedProducts.high >>> 0).toNumber() : message.submittedProducts;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this InventoryStats to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                InventoryStats.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for InventoryStats
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                InventoryStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpMerchantState.InventoryStats";
+                                };
+    
+                                return InventoryStats;
+                            })();
+    
+                            LfpMerchantState.CountrySettings = (function() {
+    
+                                /**
+                                 * Properties of a CountrySettings.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @interface ICountrySettings
+                                 * @property {string|null} [regionCode] CountrySettings regionCode
+                                 * @property {boolean|null} [freeLocalListingsEnabled] CountrySettings freeLocalListingsEnabled
+                                 * @property {boolean|null} [localInventoryAdsEnabled] CountrySettings localInventoryAdsEnabled
+                                 * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState|null} [inventoryVerificationState] CountrySettings inventoryVerificationState
+                                 * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.ProductPageType|null} [productPageType] CountrySettings productPageType
+                                 * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState|null} [instockServingVerificationState] CountrySettings instockServingVerificationState
+                                 * @property {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState|null} [pickupServingVerificationState] CountrySettings pickupServingVerificationState
+                                 */
+    
+                                /**
+                                 * Constructs a new CountrySettings.
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState
+                                 * @classdesc Represents a CountrySettings.
+                                 * @implements ICountrySettings
+                                 * @constructor
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings=} [properties] Properties to set
+                                 */
+                                function CountrySettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CountrySettings regionCode.
+                                 * @member {string} regionCode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.regionCode = "";
+    
+                                /**
+                                 * CountrySettings freeLocalListingsEnabled.
+                                 * @member {boolean} freeLocalListingsEnabled
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.freeLocalListingsEnabled = false;
+    
+                                /**
+                                 * CountrySettings localInventoryAdsEnabled.
+                                 * @member {boolean} localInventoryAdsEnabled
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.localInventoryAdsEnabled = false;
+    
+                                /**
+                                 * CountrySettings inventoryVerificationState.
+                                 * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState} inventoryVerificationState
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.inventoryVerificationState = 0;
+    
+                                /**
+                                 * CountrySettings productPageType.
+                                 * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.ProductPageType} productPageType
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.productPageType = 0;
+    
+                                /**
+                                 * CountrySettings instockServingVerificationState.
+                                 * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState} instockServingVerificationState
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.instockServingVerificationState = 0;
+    
+                                /**
+                                 * CountrySettings pickupServingVerificationState.
+                                 * @member {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState} pickupServingVerificationState
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 */
+                                CountrySettings.prototype.pickupServingVerificationState = 0;
+    
+                                /**
+                                 * Creates a new CountrySettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings} CountrySettings instance
+                                 */
+                                CountrySettings.create = function create(properties) {
+                                    return new CountrySettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CountrySettings message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings} message CountrySettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CountrySettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.regionCode);
+                                    if (message.freeLocalListingsEnabled != null && Object.hasOwnProperty.call(message, "freeLocalListingsEnabled"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.freeLocalListingsEnabled);
+                                    if (message.localInventoryAdsEnabled != null && Object.hasOwnProperty.call(message, "localInventoryAdsEnabled"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.localInventoryAdsEnabled);
+                                    if (message.inventoryVerificationState != null && Object.hasOwnProperty.call(message, "inventoryVerificationState"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.inventoryVerificationState);
+                                    if (message.productPageType != null && Object.hasOwnProperty.call(message, "productPageType"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.productPageType);
+                                    if (message.instockServingVerificationState != null && Object.hasOwnProperty.call(message, "instockServingVerificationState"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.instockServingVerificationState);
+                                    if (message.pickupServingVerificationState != null && Object.hasOwnProperty.call(message, "pickupServingVerificationState"))
+                                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pickupServingVerificationState);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CountrySettings message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.ICountrySettings} message CountrySettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CountrySettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CountrySettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings} CountrySettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CountrySettings.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.regionCode = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.freeLocalListingsEnabled = reader.bool();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.localInventoryAdsEnabled = reader.bool();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.inventoryVerificationState = reader.int32();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.productPageType = reader.int32();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.instockServingVerificationState = reader.int32();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.pickupServingVerificationState = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CountrySettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings} CountrySettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CountrySettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CountrySettings message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CountrySettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                        if (!$util.isString(message.regionCode))
+                                            return "regionCode: string expected";
+                                    if (message.freeLocalListingsEnabled != null && message.hasOwnProperty("freeLocalListingsEnabled"))
+                                        if (typeof message.freeLocalListingsEnabled !== "boolean")
+                                            return "freeLocalListingsEnabled: boolean expected";
+                                    if (message.localInventoryAdsEnabled != null && message.hasOwnProperty("localInventoryAdsEnabled"))
+                                        if (typeof message.localInventoryAdsEnabled !== "boolean")
+                                            return "localInventoryAdsEnabled: boolean expected";
+                                    if (message.inventoryVerificationState != null && message.hasOwnProperty("inventoryVerificationState"))
+                                        switch (message.inventoryVerificationState) {
+                                        default:
+                                            return "inventoryVerificationState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.productPageType != null && message.hasOwnProperty("productPageType"))
+                                        switch (message.productPageType) {
+                                        default:
+                                            return "productPageType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.instockServingVerificationState != null && message.hasOwnProperty("instockServingVerificationState"))
+                                        switch (message.instockServingVerificationState) {
+                                        default:
+                                            return "instockServingVerificationState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.pickupServingVerificationState != null && message.hasOwnProperty("pickupServingVerificationState"))
+                                        switch (message.pickupServingVerificationState) {
+                                        default:
+                                            return "pickupServingVerificationState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CountrySettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings} CountrySettings
+                                 */
+                                CountrySettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings();
+                                    if (object.regionCode != null)
+                                        message.regionCode = String(object.regionCode);
+                                    if (object.freeLocalListingsEnabled != null)
+                                        message.freeLocalListingsEnabled = Boolean(object.freeLocalListingsEnabled);
+                                    if (object.localInventoryAdsEnabled != null)
+                                        message.localInventoryAdsEnabled = Boolean(object.localInventoryAdsEnabled);
+                                    switch (object.inventoryVerificationState) {
+                                    default:
+                                        if (typeof object.inventoryVerificationState === "number") {
+                                            message.inventoryVerificationState = object.inventoryVerificationState;
+                                            break;
+                                        }
+                                        break;
+                                    case "VERIFICATION_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.inventoryVerificationState = 0;
+                                        break;
+                                    case "VERIFICATION_STATE_NOT_APPROVED":
+                                    case 1:
+                                        message.inventoryVerificationState = 1;
+                                        break;
+                                    case "VERIFICATION_STATE_IN_PROGRESS":
+                                    case 2:
+                                        message.inventoryVerificationState = 2;
+                                        break;
+                                    case "VERIFICATION_STATE_APPROVED":
+                                    case 3:
+                                        message.inventoryVerificationState = 3;
+                                        break;
+                                    }
+                                    switch (object.productPageType) {
+                                    default:
+                                        if (typeof object.productPageType === "number") {
+                                            message.productPageType = object.productPageType;
+                                            break;
+                                        }
+                                        break;
+                                    case "PRODUCT_PAGE_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.productPageType = 0;
+                                        break;
+                                    case "GOOGLE_HOSTED":
+                                    case 1:
+                                        message.productPageType = 1;
+                                        break;
+                                    case "MERCHANT_HOSTED":
+                                    case 2:
+                                        message.productPageType = 2;
+                                        break;
+                                    case "MERCHANT_HOSTED_STORE_SPECIFIC":
+                                    case 3:
+                                        message.productPageType = 3;
+                                        break;
+                                    }
+                                    switch (object.instockServingVerificationState) {
+                                    default:
+                                        if (typeof object.instockServingVerificationState === "number") {
+                                            message.instockServingVerificationState = object.instockServingVerificationState;
+                                            break;
+                                        }
+                                        break;
+                                    case "VERIFICATION_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.instockServingVerificationState = 0;
+                                        break;
+                                    case "VERIFICATION_STATE_NOT_APPROVED":
+                                    case 1:
+                                        message.instockServingVerificationState = 1;
+                                        break;
+                                    case "VERIFICATION_STATE_IN_PROGRESS":
+                                    case 2:
+                                        message.instockServingVerificationState = 2;
+                                        break;
+                                    case "VERIFICATION_STATE_APPROVED":
+                                    case 3:
+                                        message.instockServingVerificationState = 3;
+                                        break;
+                                    }
+                                    switch (object.pickupServingVerificationState) {
+                                    default:
+                                        if (typeof object.pickupServingVerificationState === "number") {
+                                            message.pickupServingVerificationState = object.pickupServingVerificationState;
+                                            break;
+                                        }
+                                        break;
+                                    case "VERIFICATION_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.pickupServingVerificationState = 0;
+                                        break;
+                                    case "VERIFICATION_STATE_NOT_APPROVED":
+                                    case 1:
+                                        message.pickupServingVerificationState = 1;
+                                        break;
+                                    case "VERIFICATION_STATE_IN_PROGRESS":
+                                    case 2:
+                                        message.pickupServingVerificationState = 2;
+                                        break;
+                                    case "VERIFICATION_STATE_APPROVED":
+                                    case 3:
+                                        message.pickupServingVerificationState = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CountrySettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings} message CountrySettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CountrySettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.regionCode = "";
+                                        object.freeLocalListingsEnabled = false;
+                                        object.localInventoryAdsEnabled = false;
+                                        object.inventoryVerificationState = options.enums === String ? "VERIFICATION_STATE_UNSPECIFIED" : 0;
+                                        object.productPageType = options.enums === String ? "PRODUCT_PAGE_TYPE_UNSPECIFIED" : 0;
+                                        object.instockServingVerificationState = options.enums === String ? "VERIFICATION_STATE_UNSPECIFIED" : 0;
+                                        object.pickupServingVerificationState = options.enums === String ? "VERIFICATION_STATE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                        object.regionCode = message.regionCode;
+                                    if (message.freeLocalListingsEnabled != null && message.hasOwnProperty("freeLocalListingsEnabled"))
+                                        object.freeLocalListingsEnabled = message.freeLocalListingsEnabled;
+                                    if (message.localInventoryAdsEnabled != null && message.hasOwnProperty("localInventoryAdsEnabled"))
+                                        object.localInventoryAdsEnabled = message.localInventoryAdsEnabled;
+                                    if (message.inventoryVerificationState != null && message.hasOwnProperty("inventoryVerificationState"))
+                                        object.inventoryVerificationState = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.inventoryVerificationState] === undefined ? message.inventoryVerificationState : $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.inventoryVerificationState] : message.inventoryVerificationState;
+                                    if (message.productPageType != null && message.hasOwnProperty("productPageType"))
+                                        object.productPageType = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.ProductPageType[message.productPageType] === undefined ? message.productPageType : $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.ProductPageType[message.productPageType] : message.productPageType;
+                                    if (message.instockServingVerificationState != null && message.hasOwnProperty("instockServingVerificationState"))
+                                        object.instockServingVerificationState = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.instockServingVerificationState] === undefined ? message.instockServingVerificationState : $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.instockServingVerificationState] : message.instockServingVerificationState;
+                                    if (message.pickupServingVerificationState != null && message.hasOwnProperty("pickupServingVerificationState"))
+                                        object.pickupServingVerificationState = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.pickupServingVerificationState] === undefined ? message.pickupServingVerificationState : $root.google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState[message.pickupServingVerificationState] : message.pickupServingVerificationState;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CountrySettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CountrySettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CountrySettings
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CountrySettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings";
+                                };
+    
+                                /**
+                                 * VerificationState enum.
+                                 * @name google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.VerificationState
+                                 * @enum {number}
+                                 * @property {number} VERIFICATION_STATE_UNSPECIFIED=0 VERIFICATION_STATE_UNSPECIFIED value
+                                 * @property {number} VERIFICATION_STATE_NOT_APPROVED=1 VERIFICATION_STATE_NOT_APPROVED value
+                                 * @property {number} VERIFICATION_STATE_IN_PROGRESS=2 VERIFICATION_STATE_IN_PROGRESS value
+                                 * @property {number} VERIFICATION_STATE_APPROVED=3 VERIFICATION_STATE_APPROVED value
+                                 */
+                                CountrySettings.VerificationState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "VERIFICATION_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "VERIFICATION_STATE_NOT_APPROVED"] = 1;
+                                    values[valuesById[2] = "VERIFICATION_STATE_IN_PROGRESS"] = 2;
+                                    values[valuesById[3] = "VERIFICATION_STATE_APPROVED"] = 3;
+                                    return values;
+                                })();
+    
+                                /**
+                                 * ProductPageType enum.
+                                 * @name google.shopping.merchant.lfp.v1.LfpMerchantState.CountrySettings.ProductPageType
+                                 * @enum {number}
+                                 * @property {number} PRODUCT_PAGE_TYPE_UNSPECIFIED=0 PRODUCT_PAGE_TYPE_UNSPECIFIED value
+                                 * @property {number} GOOGLE_HOSTED=1 GOOGLE_HOSTED value
+                                 * @property {number} MERCHANT_HOSTED=2 MERCHANT_HOSTED value
+                                 * @property {number} MERCHANT_HOSTED_STORE_SPECIFIC=3 MERCHANT_HOSTED_STORE_SPECIFIC value
+                                 */
+                                CountrySettings.ProductPageType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "PRODUCT_PAGE_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "GOOGLE_HOSTED"] = 1;
+                                    values[valuesById[2] = "MERCHANT_HOSTED"] = 2;
+                                    values[valuesById[3] = "MERCHANT_HOSTED_STORE_SPECIFIC"] = 3;
+                                    return values;
+                                })();
+    
+                                return CountrySettings;
+                            })();
+    
+                            return LfpMerchantState;
+                        })();
+    
+                        v1.GetLfpMerchantStateRequest = (function() {
+    
+                            /**
+                             * Properties of a GetLfpMerchantStateRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IGetLfpMerchantStateRequest
+                             * @property {string|null} [name] GetLfpMerchantStateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetLfpMerchantStateRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a GetLfpMerchantStateRequest.
+                             * @implements IGetLfpMerchantStateRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest=} [properties] Properties to set
+                             */
+                            function GetLfpMerchantStateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetLfpMerchantStateRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @instance
+                             */
+                            GetLfpMerchantStateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetLfpMerchantStateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest} GetLfpMerchantStateRequest instance
+                             */
+                            GetLfpMerchantStateRequest.create = function create(properties) {
+                                return new GetLfpMerchantStateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetLfpMerchantStateRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest} message GetLfpMerchantStateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLfpMerchantStateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetLfpMerchantStateRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpMerchantStateRequest} message GetLfpMerchantStateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLfpMerchantStateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetLfpMerchantStateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest} GetLfpMerchantStateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLfpMerchantStateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetLfpMerchantStateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest} GetLfpMerchantStateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLfpMerchantStateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetLfpMerchantStateRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetLfpMerchantStateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetLfpMerchantStateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest} GetLfpMerchantStateRequest
+                             */
+                            GetLfpMerchantStateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetLfpMerchantStateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest} message GetLfpMerchantStateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetLfpMerchantStateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetLfpMerchantStateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetLfpMerchantStateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetLfpMerchantStateRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetLfpMerchantStateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.GetLfpMerchantStateRequest";
+                            };
+    
+                            return GetLfpMerchantStateRequest;
+                        })();
+    
+                        v1.LfpSaleService = (function() {
+    
+                            /**
+                             * Constructs a new LfpSaleService service.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpSaleService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LfpSaleService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LfpSaleService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LfpSaleService;
+    
+                            /**
+                             * Creates new LfpSaleService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSaleService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LfpSaleService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LfpSaleService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpSaleService|insertLfpSale}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSaleService
+                             * @typedef InsertLfpSaleCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.LfpSale} [response] LfpSale
+                             */
+    
+                            /**
+                             * Calls InsertLfpSale.
+                             * @function insertLfpSale
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSaleService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest} request InsertLfpSaleRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpSaleService.InsertLfpSaleCallback} callback Node-style callback called with the error, if any, and LfpSale
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpSaleService.prototype.insertLfpSale = function insertLfpSale(request, callback) {
+                                return this.rpcCall(insertLfpSale, $root.google.shopping.merchant.lfp.v1.InsertLfpSaleRequest, $root.google.shopping.merchant.lfp.v1.LfpSale, request, callback);
+                            }, "name", { value: "InsertLfpSale" });
+    
+                            /**
+                             * Calls InsertLfpSale.
+                             * @function insertLfpSale
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSaleService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest} request InsertLfpSaleRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.LfpSale>} Promise
+                             * @variation 2
+                             */
+    
+                            return LfpSaleService;
+                        })();
+    
+                        v1.LfpSale = (function() {
+    
+                            /**
+                             * Properties of a LfpSale.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface ILfpSale
+                             * @property {string|null} [name] LfpSale name
+                             * @property {number|Long|null} [targetAccount] LfpSale targetAccount
+                             * @property {string|null} [storeCode] LfpSale storeCode
+                             * @property {string|null} [offerId] LfpSale offerId
+                             * @property {string|null} [regionCode] LfpSale regionCode
+                             * @property {string|null} [contentLanguage] LfpSale contentLanguage
+                             * @property {string|null} [gtin] LfpSale gtin
+                             * @property {google.shopping.type.IPrice|null} [price] LfpSale price
+                             * @property {number|Long|null} [quantity] LfpSale quantity
+                             * @property {google.protobuf.ITimestamp|null} [saleTime] LfpSale saleTime
+                             * @property {string|null} [uid] LfpSale uid
+                             * @property {string|null} [feedLabel] LfpSale feedLabel
+                             */
+    
+                            /**
+                             * Constructs a new LfpSale.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpSale.
+                             * @implements ILfpSale
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.ILfpSale=} [properties] Properties to set
+                             */
+                            function LfpSale(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpSale name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.name = "";
+    
+                            /**
+                             * LfpSale targetAccount.
+                             * @member {number|Long} targetAccount
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.targetAccount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LfpSale storeCode.
+                             * @member {string} storeCode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.storeCode = "";
+    
+                            /**
+                             * LfpSale offerId.
+                             * @member {string} offerId
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.offerId = "";
+    
+                            /**
+                             * LfpSale regionCode.
+                             * @member {string} regionCode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.regionCode = "";
+    
+                            /**
+                             * LfpSale contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.contentLanguage = "";
+    
+                            /**
+                             * LfpSale gtin.
+                             * @member {string} gtin
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.gtin = "";
+    
+                            /**
+                             * LfpSale price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.price = null;
+    
+                            /**
+                             * LfpSale quantity.
+                             * @member {number|Long} quantity
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.quantity = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LfpSale saleTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} saleTime
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.saleTime = null;
+    
+                            /**
+                             * LfpSale uid.
+                             * @member {string|null|undefined} uid
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.uid = null;
+    
+                            /**
+                             * LfpSale feedLabel.
+                             * @member {string|null|undefined} feedLabel
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             */
+                            LfpSale.prototype.feedLabel = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpSale.prototype, "_uid", {
+                                get: $util.oneOfGetter($oneOfFields = ["uid"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpSale.prototype, "_feedLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LfpSale instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpSale=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.LfpSale} LfpSale instance
+                             */
+                            LfpSale.create = function create(properties) {
+                                return new LfpSale(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpSale message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpSale.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpSale} message LfpSale message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpSale.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.targetAccount != null && Object.hasOwnProperty.call(message, "targetAccount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.targetAccount);
+                                if (message.storeCode != null && Object.hasOwnProperty.call(message, "storeCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.storeCode);
+                                if (message.offerId != null && Object.hasOwnProperty.call(message, "offerId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.offerId);
+                                if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.regionCode);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.contentLanguage);
+                                if (message.gtin != null && Object.hasOwnProperty.call(message, "gtin"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.gtin);
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int64(message.quantity);
+                                if (message.saleTime != null && Object.hasOwnProperty.call(message, "saleTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.saleTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.uid);
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.feedLabel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpSale message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpSale.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpSale} message LfpSale message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpSale.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpSale message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.LfpSale} LfpSale
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpSale.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpSale();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetAccount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.storeCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.offerId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.regionCode = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.gtin = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.quantity = reader.int64();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.saleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.uid = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpSale message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.LfpSale} LfpSale
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpSale.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpSale message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpSale.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (!$util.isInteger(message.targetAccount) && !(message.targetAccount && $util.isInteger(message.targetAccount.low) && $util.isInteger(message.targetAccount.high)))
+                                        return "targetAccount: integer|Long expected";
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    if (!$util.isString(message.storeCode))
+                                        return "storeCode: string expected";
+                                if (message.offerId != null && message.hasOwnProperty("offerId"))
+                                    if (!$util.isString(message.offerId))
+                                        return "offerId: string expected";
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    if (!$util.isString(message.regionCode))
+                                        return "regionCode: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                if (message.gtin != null && message.hasOwnProperty("gtin"))
+                                    if (!$util.isString(message.gtin))
+                                        return "gtin: string expected";
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                    if (!$util.isInteger(message.quantity) && !(message.quantity && $util.isInteger(message.quantity.low) && $util.isInteger(message.quantity.high)))
+                                        return "quantity: integer|Long expected";
+                                if (message.saleTime != null && message.hasOwnProperty("saleTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.saleTime);
+                                    if (error)
+                                        return "saleTime." + error;
+                                }
+                                if (message.uid != null && message.hasOwnProperty("uid")) {
+                                    properties._uid = 1;
+                                    if (!$util.isString(message.uid))
+                                        return "uid: string expected";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    properties._feedLabel = 1;
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpSale message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.LfpSale} LfpSale
+                             */
+                            LfpSale.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpSale)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.LfpSale();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.targetAccount != null)
+                                    if ($util.Long)
+                                        (message.targetAccount = $util.Long.fromValue(object.targetAccount)).unsigned = false;
+                                    else if (typeof object.targetAccount === "string")
+                                        message.targetAccount = parseInt(object.targetAccount, 10);
+                                    else if (typeof object.targetAccount === "number")
+                                        message.targetAccount = object.targetAccount;
+                                    else if (typeof object.targetAccount === "object")
+                                        message.targetAccount = new $util.LongBits(object.targetAccount.low >>> 0, object.targetAccount.high >>> 0).toNumber();
+                                if (object.storeCode != null)
+                                    message.storeCode = String(object.storeCode);
+                                if (object.offerId != null)
+                                    message.offerId = String(object.offerId);
+                                if (object.regionCode != null)
+                                    message.regionCode = String(object.regionCode);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                if (object.gtin != null)
+                                    message.gtin = String(object.gtin);
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpSale.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.quantity != null)
+                                    if ($util.Long)
+                                        (message.quantity = $util.Long.fromValue(object.quantity)).unsigned = false;
+                                    else if (typeof object.quantity === "string")
+                                        message.quantity = parseInt(object.quantity, 10);
+                                    else if (typeof object.quantity === "number")
+                                        message.quantity = object.quantity;
+                                    else if (typeof object.quantity === "object")
+                                        message.quantity = new $util.LongBits(object.quantity.low >>> 0, object.quantity.high >>> 0).toNumber();
+                                if (object.saleTime != null) {
+                                    if (typeof object.saleTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpSale.saleTime: object expected");
+                                    message.saleTime = $root.google.protobuf.Timestamp.fromObject(object.saleTime);
+                                }
+                                if (object.uid != null)
+                                    message.uid = String(object.uid);
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpSale message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.LfpSale} message LfpSale
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpSale.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.targetAccount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.targetAccount = options.longs === String ? "0" : 0;
+                                    object.storeCode = "";
+                                    object.offerId = "";
+                                    object.regionCode = "";
+                                    object.contentLanguage = "";
+                                    object.gtin = "";
+                                    object.price = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.quantity = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.quantity = options.longs === String ? "0" : 0;
+                                    object.saleTime = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (typeof message.targetAccount === "number")
+                                        object.targetAccount = options.longs === String ? String(message.targetAccount) : message.targetAccount;
+                                    else
+                                        object.targetAccount = options.longs === String ? $util.Long.prototype.toString.call(message.targetAccount) : options.longs === Number ? new $util.LongBits(message.targetAccount.low >>> 0, message.targetAccount.high >>> 0).toNumber() : message.targetAccount;
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    object.storeCode = message.storeCode;
+                                if (message.offerId != null && message.hasOwnProperty("offerId"))
+                                    object.offerId = message.offerId;
+                                if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                    object.regionCode = message.regionCode;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                if (message.gtin != null && message.hasOwnProperty("gtin"))
+                                    object.gtin = message.gtin;
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                    if (typeof message.quantity === "number")
+                                        object.quantity = options.longs === String ? String(message.quantity) : message.quantity;
+                                    else
+                                        object.quantity = options.longs === String ? $util.Long.prototype.toString.call(message.quantity) : options.longs === Number ? new $util.LongBits(message.quantity.low >>> 0, message.quantity.high >>> 0).toNumber() : message.quantity;
+                                if (message.saleTime != null && message.hasOwnProperty("saleTime"))
+                                    object.saleTime = $root.google.protobuf.Timestamp.toObject(message.saleTime, options);
+                                if (message.uid != null && message.hasOwnProperty("uid")) {
+                                    object.uid = message.uid;
+                                    if (options.oneofs)
+                                        object._uid = "uid";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    object.feedLabel = message.feedLabel;
+                                    if (options.oneofs)
+                                        object._feedLabel = "feedLabel";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpSale to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpSale.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpSale
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.LfpSale
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpSale.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpSale";
+                            };
+    
+                            return LfpSale;
+                        })();
+    
+                        v1.InsertLfpSaleRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertLfpSaleRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IInsertLfpSaleRequest
+                             * @property {string|null} [parent] InsertLfpSaleRequest parent
+                             * @property {google.shopping.merchant.lfp.v1.ILfpSale|null} [lfpSale] InsertLfpSaleRequest lfpSale
+                             */
+    
+                            /**
+                             * Constructs a new InsertLfpSaleRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents an InsertLfpSaleRequest.
+                             * @implements IInsertLfpSaleRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest=} [properties] Properties to set
+                             */
+                            function InsertLfpSaleRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertLfpSaleRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @instance
+                             */
+                            InsertLfpSaleRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertLfpSaleRequest lfpSale.
+                             * @member {google.shopping.merchant.lfp.v1.ILfpSale|null|undefined} lfpSale
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @instance
+                             */
+                            InsertLfpSaleRequest.prototype.lfpSale = null;
+    
+                            /**
+                             * Creates a new InsertLfpSaleRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpSaleRequest} InsertLfpSaleRequest instance
+                             */
+                            InsertLfpSaleRequest.create = function create(properties) {
+                                return new InsertLfpSaleRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpSaleRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpSaleRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest} message InsertLfpSaleRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpSaleRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.lfpSale != null && Object.hasOwnProperty.call(message, "lfpSale"))
+                                    $root.google.shopping.merchant.lfp.v1.LfpSale.encode(message.lfpSale, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpSaleRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpSaleRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpSaleRequest} message InsertLfpSaleRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpSaleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpSaleRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpSaleRequest} InsertLfpSaleRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpSaleRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.InsertLfpSaleRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.lfpSale = $root.google.shopping.merchant.lfp.v1.LfpSale.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpSaleRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpSaleRequest} InsertLfpSaleRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpSaleRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertLfpSaleRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertLfpSaleRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.lfpSale != null && message.hasOwnProperty("lfpSale")) {
+                                    var error = $root.google.shopping.merchant.lfp.v1.LfpSale.verify(message.lfpSale);
+                                    if (error)
+                                        return "lfpSale." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertLfpSaleRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpSaleRequest} InsertLfpSaleRequest
+                             */
+                            InsertLfpSaleRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.InsertLfpSaleRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.InsertLfpSaleRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.lfpSale != null) {
+                                    if (typeof object.lfpSale !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.InsertLfpSaleRequest.lfpSale: object expected");
+                                    message.lfpSale = $root.google.shopping.merchant.lfp.v1.LfpSale.fromObject(object.lfpSale);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertLfpSaleRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.InsertLfpSaleRequest} message InsertLfpSaleRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertLfpSaleRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.lfpSale = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.lfpSale != null && message.hasOwnProperty("lfpSale"))
+                                    object.lfpSale = $root.google.shopping.merchant.lfp.v1.LfpSale.toObject(message.lfpSale, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertLfpSaleRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertLfpSaleRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertLfpSaleRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpSaleRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertLfpSaleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.InsertLfpSaleRequest";
+                            };
+    
+                            return InsertLfpSaleRequest;
+                        })();
+    
+                        v1.LfpStoreService = (function() {
+    
+                            /**
+                             * Constructs a new LfpStoreService service.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpStoreService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LfpStoreService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LfpStoreService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LfpStoreService;
+    
+                            /**
+                             * Creates new LfpStoreService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LfpStoreService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LfpStoreService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpStoreService|getLfpStore}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @typedef GetLfpStoreCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.LfpStore} [response] LfpStore
+                             */
+    
+                            /**
+                             * Calls GetLfpStore.
+                             * @function getLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest} request GetLfpStoreRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpStoreService.GetLfpStoreCallback} callback Node-style callback called with the error, if any, and LfpStore
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpStoreService.prototype.getLfpStore = function getLfpStore(request, callback) {
+                                return this.rpcCall(getLfpStore, $root.google.shopping.merchant.lfp.v1.GetLfpStoreRequest, $root.google.shopping.merchant.lfp.v1.LfpStore, request, callback);
+                            }, "name", { value: "GetLfpStore" });
+    
+                            /**
+                             * Calls GetLfpStore.
+                             * @function getLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest} request GetLfpStoreRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.LfpStore>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpStoreService|insertLfpStore}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @typedef InsertLfpStoreCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.LfpStore} [response] LfpStore
+                             */
+    
+                            /**
+                             * Calls InsertLfpStore.
+                             * @function insertLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest} request InsertLfpStoreRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpStoreService.InsertLfpStoreCallback} callback Node-style callback called with the error, if any, and LfpStore
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpStoreService.prototype.insertLfpStore = function insertLfpStore(request, callback) {
+                                return this.rpcCall(insertLfpStore, $root.google.shopping.merchant.lfp.v1.InsertLfpStoreRequest, $root.google.shopping.merchant.lfp.v1.LfpStore, request, callback);
+                            }, "name", { value: "InsertLfpStore" });
+    
+                            /**
+                             * Calls InsertLfpStore.
+                             * @function insertLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest} request InsertLfpStoreRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.LfpStore>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpStoreService|deleteLfpStore}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @typedef DeleteLfpStoreCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteLfpStore.
+                             * @function deleteLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest} request DeleteLfpStoreRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpStoreService.DeleteLfpStoreCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpStoreService.prototype.deleteLfpStore = function deleteLfpStore(request, callback) {
+                                return this.rpcCall(deleteLfpStore, $root.google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteLfpStore" });
+    
+                            /**
+                             * Calls DeleteLfpStore.
+                             * @function deleteLfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest} request DeleteLfpStoreRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.lfp.v1.LfpStoreService|listLfpStores}.
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @typedef ListLfpStoresCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} [response] ListLfpStoresResponse
+                             */
+    
+                            /**
+                             * Calls ListLfpStores.
+                             * @function listLfpStores
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest} request ListLfpStoresRequest message or plain object
+                             * @param {google.shopping.merchant.lfp.v1.LfpStoreService.ListLfpStoresCallback} callback Node-style callback called with the error, if any, and ListLfpStoresResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LfpStoreService.prototype.listLfpStores = function listLfpStores(request, callback) {
+                                return this.rpcCall(listLfpStores, $root.google.shopping.merchant.lfp.v1.ListLfpStoresRequest, $root.google.shopping.merchant.lfp.v1.ListLfpStoresResponse, request, callback);
+                            }, "name", { value: "ListLfpStores" });
+    
+                            /**
+                             * Calls ListLfpStores.
+                             * @function listLfpStores
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStoreService
+                             * @instance
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest} request ListLfpStoresRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.lfp.v1.ListLfpStoresResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return LfpStoreService;
+                        })();
+    
+                        v1.LfpStore = (function() {
+    
+                            /**
+                             * Properties of a LfpStore.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface ILfpStore
+                             * @property {string|null} [name] LfpStore name
+                             * @property {number|Long|null} [targetAccount] LfpStore targetAccount
+                             * @property {string|null} [storeCode] LfpStore storeCode
+                             * @property {string|null} [storeAddress] LfpStore storeAddress
+                             * @property {string|null} [storeName] LfpStore storeName
+                             * @property {string|null} [phoneNumber] LfpStore phoneNumber
+                             * @property {string|null} [websiteUri] LfpStore websiteUri
+                             * @property {Array.<string>|null} [gcidCategory] LfpStore gcidCategory
+                             * @property {string|null} [placeId] LfpStore placeId
+                             * @property {google.shopping.merchant.lfp.v1.LfpStore.StoreMatchingState|null} [matchingState] LfpStore matchingState
+                             * @property {string|null} [matchingStateHint] LfpStore matchingStateHint
+                             */
+    
+                            /**
+                             * Constructs a new LfpStore.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a LfpStore.
+                             * @implements ILfpStore
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.ILfpStore=} [properties] Properties to set
+                             */
+                            function LfpStore(properties) {
+                                this.gcidCategory = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LfpStore name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.name = "";
+    
+                            /**
+                             * LfpStore targetAccount.
+                             * @member {number|Long} targetAccount
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.targetAccount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LfpStore storeCode.
+                             * @member {string} storeCode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.storeCode = "";
+    
+                            /**
+                             * LfpStore storeAddress.
+                             * @member {string} storeAddress
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.storeAddress = "";
+    
+                            /**
+                             * LfpStore storeName.
+                             * @member {string|null|undefined} storeName
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.storeName = null;
+    
+                            /**
+                             * LfpStore phoneNumber.
+                             * @member {string|null|undefined} phoneNumber
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.phoneNumber = null;
+    
+                            /**
+                             * LfpStore websiteUri.
+                             * @member {string|null|undefined} websiteUri
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.websiteUri = null;
+    
+                            /**
+                             * LfpStore gcidCategory.
+                             * @member {Array.<string>} gcidCategory
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.gcidCategory = $util.emptyArray;
+    
+                            /**
+                             * LfpStore placeId.
+                             * @member {string|null|undefined} placeId
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.placeId = null;
+    
+                            /**
+                             * LfpStore matchingState.
+                             * @member {google.shopping.merchant.lfp.v1.LfpStore.StoreMatchingState} matchingState
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.matchingState = 0;
+    
+                            /**
+                             * LfpStore matchingStateHint.
+                             * @member {string|null|undefined} matchingStateHint
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             */
+                            LfpStore.prototype.matchingStateHint = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpStore.prototype, "_storeName", {
+                                get: $util.oneOfGetter($oneOfFields = ["storeName"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpStore.prototype, "_phoneNumber", {
+                                get: $util.oneOfGetter($oneOfFields = ["phoneNumber"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpStore.prototype, "_websiteUri", {
+                                get: $util.oneOfGetter($oneOfFields = ["websiteUri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpStore.prototype, "_placeId", {
+                                get: $util.oneOfGetter($oneOfFields = ["placeId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LfpStore.prototype, "_matchingStateHint", {
+                                get: $util.oneOfGetter($oneOfFields = ["matchingStateHint"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LfpStore instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpStore=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.LfpStore} LfpStore instance
+                             */
+                            LfpStore.create = function create(properties) {
+                                return new LfpStore(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LfpStore message. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpStore.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpStore} message LfpStore message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpStore.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.targetAccount != null && Object.hasOwnProperty.call(message, "targetAccount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.targetAccount);
+                                if (message.storeCode != null && Object.hasOwnProperty.call(message, "storeCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.storeCode);
+                                if (message.storeAddress != null && Object.hasOwnProperty.call(message, "storeAddress"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.storeAddress);
+                                if (message.storeName != null && Object.hasOwnProperty.call(message, "storeName"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.storeName);
+                                if (message.phoneNumber != null && Object.hasOwnProperty.call(message, "phoneNumber"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.phoneNumber);
+                                if (message.websiteUri != null && Object.hasOwnProperty.call(message, "websiteUri"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.websiteUri);
+                                if (message.gcidCategory != null && message.gcidCategory.length)
+                                    for (var i = 0; i < message.gcidCategory.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.gcidCategory[i]);
+                                if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.placeId);
+                                if (message.matchingState != null && Object.hasOwnProperty.call(message, "matchingState"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.matchingState);
+                                if (message.matchingStateHint != null && Object.hasOwnProperty.call(message, "matchingStateHint"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.matchingStateHint);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LfpStore message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.LfpStore.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ILfpStore} message LfpStore message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LfpStore.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LfpStore message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.LfpStore} LfpStore
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpStore.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.LfpStore();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetAccount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.storeCode = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.storeAddress = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.storeName = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.phoneNumber = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.websiteUri = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.gcidCategory && message.gcidCategory.length))
+                                                message.gcidCategory = [];
+                                            message.gcidCategory.push(reader.string());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.placeId = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.matchingState = reader.int32();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.matchingStateHint = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LfpStore message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.LfpStore} LfpStore
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LfpStore.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LfpStore message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LfpStore.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (!$util.isInteger(message.targetAccount) && !(message.targetAccount && $util.isInteger(message.targetAccount.low) && $util.isInteger(message.targetAccount.high)))
+                                        return "targetAccount: integer|Long expected";
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    if (!$util.isString(message.storeCode))
+                                        return "storeCode: string expected";
+                                if (message.storeAddress != null && message.hasOwnProperty("storeAddress"))
+                                    if (!$util.isString(message.storeAddress))
+                                        return "storeAddress: string expected";
+                                if (message.storeName != null && message.hasOwnProperty("storeName")) {
+                                    properties._storeName = 1;
+                                    if (!$util.isString(message.storeName))
+                                        return "storeName: string expected";
+                                }
+                                if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
+                                    properties._phoneNumber = 1;
+                                    if (!$util.isString(message.phoneNumber))
+                                        return "phoneNumber: string expected";
+                                }
+                                if (message.websiteUri != null && message.hasOwnProperty("websiteUri")) {
+                                    properties._websiteUri = 1;
+                                    if (!$util.isString(message.websiteUri))
+                                        return "websiteUri: string expected";
+                                }
+                                if (message.gcidCategory != null && message.hasOwnProperty("gcidCategory")) {
+                                    if (!Array.isArray(message.gcidCategory))
+                                        return "gcidCategory: array expected";
+                                    for (var i = 0; i < message.gcidCategory.length; ++i)
+                                        if (!$util.isString(message.gcidCategory[i]))
+                                            return "gcidCategory: string[] expected";
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    properties._placeId = 1;
+                                    if (!$util.isString(message.placeId))
+                                        return "placeId: string expected";
+                                }
+                                if (message.matchingState != null && message.hasOwnProperty("matchingState"))
+                                    switch (message.matchingState) {
+                                    default:
+                                        return "matchingState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.matchingStateHint != null && message.hasOwnProperty("matchingStateHint")) {
+                                    properties._matchingStateHint = 1;
+                                    if (!$util.isString(message.matchingStateHint))
+                                        return "matchingStateHint: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LfpStore message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.LfpStore} LfpStore
+                             */
+                            LfpStore.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.LfpStore)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.LfpStore();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.targetAccount != null)
+                                    if ($util.Long)
+                                        (message.targetAccount = $util.Long.fromValue(object.targetAccount)).unsigned = false;
+                                    else if (typeof object.targetAccount === "string")
+                                        message.targetAccount = parseInt(object.targetAccount, 10);
+                                    else if (typeof object.targetAccount === "number")
+                                        message.targetAccount = object.targetAccount;
+                                    else if (typeof object.targetAccount === "object")
+                                        message.targetAccount = new $util.LongBits(object.targetAccount.low >>> 0, object.targetAccount.high >>> 0).toNumber();
+                                if (object.storeCode != null)
+                                    message.storeCode = String(object.storeCode);
+                                if (object.storeAddress != null)
+                                    message.storeAddress = String(object.storeAddress);
+                                if (object.storeName != null)
+                                    message.storeName = String(object.storeName);
+                                if (object.phoneNumber != null)
+                                    message.phoneNumber = String(object.phoneNumber);
+                                if (object.websiteUri != null)
+                                    message.websiteUri = String(object.websiteUri);
+                                if (object.gcidCategory) {
+                                    if (!Array.isArray(object.gcidCategory))
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.LfpStore.gcidCategory: array expected");
+                                    message.gcidCategory = [];
+                                    for (var i = 0; i < object.gcidCategory.length; ++i)
+                                        message.gcidCategory[i] = String(object.gcidCategory[i]);
+                                }
+                                if (object.placeId != null)
+                                    message.placeId = String(object.placeId);
+                                switch (object.matchingState) {
+                                default:
+                                    if (typeof object.matchingState === "number") {
+                                        message.matchingState = object.matchingState;
+                                        break;
+                                    }
+                                    break;
+                                case "STORE_MATCHING_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.matchingState = 0;
+                                    break;
+                                case "STORE_MATCHING_STATE_MATCHED":
+                                case 1:
+                                    message.matchingState = 1;
+                                    break;
+                                case "STORE_MATCHING_STATE_FAILED":
+                                case 2:
+                                    message.matchingState = 2;
+                                    break;
+                                }
+                                if (object.matchingStateHint != null)
+                                    message.matchingStateHint = String(object.matchingStateHint);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LfpStore message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.LfpStore} message LfpStore
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LfpStore.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.gcidCategory = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.targetAccount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.targetAccount = options.longs === String ? "0" : 0;
+                                    object.storeCode = "";
+                                    object.storeAddress = "";
+                                    object.matchingState = options.enums === String ? "STORE_MATCHING_STATE_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (typeof message.targetAccount === "number")
+                                        object.targetAccount = options.longs === String ? String(message.targetAccount) : message.targetAccount;
+                                    else
+                                        object.targetAccount = options.longs === String ? $util.Long.prototype.toString.call(message.targetAccount) : options.longs === Number ? new $util.LongBits(message.targetAccount.low >>> 0, message.targetAccount.high >>> 0).toNumber() : message.targetAccount;
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    object.storeCode = message.storeCode;
+                                if (message.storeAddress != null && message.hasOwnProperty("storeAddress"))
+                                    object.storeAddress = message.storeAddress;
+                                if (message.storeName != null && message.hasOwnProperty("storeName")) {
+                                    object.storeName = message.storeName;
+                                    if (options.oneofs)
+                                        object._storeName = "storeName";
+                                }
+                                if (message.phoneNumber != null && message.hasOwnProperty("phoneNumber")) {
+                                    object.phoneNumber = message.phoneNumber;
+                                    if (options.oneofs)
+                                        object._phoneNumber = "phoneNumber";
+                                }
+                                if (message.websiteUri != null && message.hasOwnProperty("websiteUri")) {
+                                    object.websiteUri = message.websiteUri;
+                                    if (options.oneofs)
+                                        object._websiteUri = "websiteUri";
+                                }
+                                if (message.gcidCategory && message.gcidCategory.length) {
+                                    object.gcidCategory = [];
+                                    for (var j = 0; j < message.gcidCategory.length; ++j)
+                                        object.gcidCategory[j] = message.gcidCategory[j];
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    object.placeId = message.placeId;
+                                    if (options.oneofs)
+                                        object._placeId = "placeId";
+                                }
+                                if (message.matchingState != null && message.hasOwnProperty("matchingState"))
+                                    object.matchingState = options.enums === String ? $root.google.shopping.merchant.lfp.v1.LfpStore.StoreMatchingState[message.matchingState] === undefined ? message.matchingState : $root.google.shopping.merchant.lfp.v1.LfpStore.StoreMatchingState[message.matchingState] : message.matchingState;
+                                if (message.matchingStateHint != null && message.hasOwnProperty("matchingStateHint")) {
+                                    object.matchingStateHint = message.matchingStateHint;
+                                    if (options.oneofs)
+                                        object._matchingStateHint = "matchingStateHint";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LfpStore to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LfpStore.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LfpStore
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.LfpStore
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LfpStore.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.LfpStore";
+                            };
+    
+                            /**
+                             * StoreMatchingState enum.
+                             * @name google.shopping.merchant.lfp.v1.LfpStore.StoreMatchingState
+                             * @enum {number}
+                             * @property {number} STORE_MATCHING_STATE_UNSPECIFIED=0 STORE_MATCHING_STATE_UNSPECIFIED value
+                             * @property {number} STORE_MATCHING_STATE_MATCHED=1 STORE_MATCHING_STATE_MATCHED value
+                             * @property {number} STORE_MATCHING_STATE_FAILED=2 STORE_MATCHING_STATE_FAILED value
+                             */
+                            LfpStore.StoreMatchingState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STORE_MATCHING_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "STORE_MATCHING_STATE_MATCHED"] = 1;
+                                values[valuesById[2] = "STORE_MATCHING_STATE_FAILED"] = 2;
+                                return values;
+                            })();
+    
+                            return LfpStore;
+                        })();
+    
+                        v1.GetLfpStoreRequest = (function() {
+    
+                            /**
+                             * Properties of a GetLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IGetLfpStoreRequest
+                             * @property {string|null} [name] GetLfpStoreRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a GetLfpStoreRequest.
+                             * @implements IGetLfpStoreRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest=} [properties] Properties to set
+                             */
+                            function GetLfpStoreRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetLfpStoreRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @instance
+                             */
+                            GetLfpStoreRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetLfpStoreRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpStoreRequest} GetLfpStoreRequest instance
+                             */
+                            GetLfpStoreRequest.create = function create(properties) {
+                                return new GetLfpStoreRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetLfpStoreRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.GetLfpStoreRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest} message GetLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLfpStoreRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetLfpStoreRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.GetLfpStoreRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IGetLfpStoreRequest} message GetLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetLfpStoreRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetLfpStoreRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpStoreRequest} GetLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLfpStoreRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.GetLfpStoreRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetLfpStoreRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpStoreRequest} GetLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetLfpStoreRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetLfpStoreRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetLfpStoreRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetLfpStoreRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.GetLfpStoreRequest} GetLfpStoreRequest
+                             */
+                            GetLfpStoreRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.GetLfpStoreRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.GetLfpStoreRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetLfpStoreRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.GetLfpStoreRequest} message GetLfpStoreRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetLfpStoreRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetLfpStoreRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetLfpStoreRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetLfpStoreRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.GetLfpStoreRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetLfpStoreRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.GetLfpStoreRequest";
+                            };
+    
+                            return GetLfpStoreRequest;
+                        })();
+    
+                        v1.InsertLfpStoreRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IInsertLfpStoreRequest
+                             * @property {string|null} [parent] InsertLfpStoreRequest parent
+                             * @property {google.shopping.merchant.lfp.v1.ILfpStore|null} [lfpStore] InsertLfpStoreRequest lfpStore
+                             */
+    
+                            /**
+                             * Constructs a new InsertLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents an InsertLfpStoreRequest.
+                             * @implements IInsertLfpStoreRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest=} [properties] Properties to set
+                             */
+                            function InsertLfpStoreRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertLfpStoreRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @instance
+                             */
+                            InsertLfpStoreRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertLfpStoreRequest lfpStore.
+                             * @member {google.shopping.merchant.lfp.v1.ILfpStore|null|undefined} lfpStore
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @instance
+                             */
+                            InsertLfpStoreRequest.prototype.lfpStore = null;
+    
+                            /**
+                             * Creates a new InsertLfpStoreRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpStoreRequest} InsertLfpStoreRequest instance
+                             */
+                            InsertLfpStoreRequest.create = function create(properties) {
+                                return new InsertLfpStoreRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpStoreRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpStoreRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest} message InsertLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpStoreRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.lfpStore != null && Object.hasOwnProperty.call(message, "lfpStore"))
+                                    $root.google.shopping.merchant.lfp.v1.LfpStore.encode(message.lfpStore, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLfpStoreRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.InsertLfpStoreRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IInsertLfpStoreRequest} message InsertLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLfpStoreRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpStoreRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpStoreRequest} InsertLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpStoreRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.InsertLfpStoreRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.lfpStore = $root.google.shopping.merchant.lfp.v1.LfpStore.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertLfpStoreRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpStoreRequest} InsertLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLfpStoreRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertLfpStoreRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertLfpStoreRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.lfpStore != null && message.hasOwnProperty("lfpStore")) {
+                                    var error = $root.google.shopping.merchant.lfp.v1.LfpStore.verify(message.lfpStore);
+                                    if (error)
+                                        return "lfpStore." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertLfpStoreRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.InsertLfpStoreRequest} InsertLfpStoreRequest
+                             */
+                            InsertLfpStoreRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.InsertLfpStoreRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.InsertLfpStoreRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.lfpStore != null) {
+                                    if (typeof object.lfpStore !== "object")
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.InsertLfpStoreRequest.lfpStore: object expected");
+                                    message.lfpStore = $root.google.shopping.merchant.lfp.v1.LfpStore.fromObject(object.lfpStore);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertLfpStoreRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.InsertLfpStoreRequest} message InsertLfpStoreRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertLfpStoreRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.lfpStore = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.lfpStore != null && message.hasOwnProperty("lfpStore"))
+                                    object.lfpStore = $root.google.shopping.merchant.lfp.v1.LfpStore.toObject(message.lfpStore, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertLfpStoreRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertLfpStoreRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertLfpStoreRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.InsertLfpStoreRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertLfpStoreRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.InsertLfpStoreRequest";
+                            };
+    
+                            return InsertLfpStoreRequest;
+                        })();
+    
+                        v1.DeleteLfpStoreRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IDeleteLfpStoreRequest
+                             * @property {string|null} [name] DeleteLfpStoreRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteLfpStoreRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a DeleteLfpStoreRequest.
+                             * @implements IDeleteLfpStoreRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest=} [properties] Properties to set
+                             */
+                            function DeleteLfpStoreRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteLfpStoreRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @instance
+                             */
+                            DeleteLfpStoreRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteLfpStoreRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest} DeleteLfpStoreRequest instance
+                             */
+                            DeleteLfpStoreRequest.create = function create(properties) {
+                                return new DeleteLfpStoreRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLfpStoreRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest} message DeleteLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLfpStoreRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLfpStoreRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IDeleteLfpStoreRequest} message DeleteLfpStoreRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLfpStoreRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteLfpStoreRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest} DeleteLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLfpStoreRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteLfpStoreRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest} DeleteLfpStoreRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLfpStoreRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteLfpStoreRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteLfpStoreRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteLfpStoreRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest} DeleteLfpStoreRequest
+                             */
+                            DeleteLfpStoreRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteLfpStoreRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest} message DeleteLfpStoreRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteLfpStoreRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteLfpStoreRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteLfpStoreRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteLfpStoreRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteLfpStoreRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.DeleteLfpStoreRequest";
+                            };
+    
+                            return DeleteLfpStoreRequest;
+                        })();
+    
+                        v1.ListLfpStoresRequest = (function() {
+    
+                            /**
+                             * Properties of a ListLfpStoresRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IListLfpStoresRequest
+                             * @property {string|null} [parent] ListLfpStoresRequest parent
+                             * @property {number|Long|null} [targetAccount] ListLfpStoresRequest targetAccount
+                             * @property {number|null} [pageSize] ListLfpStoresRequest pageSize
+                             * @property {string|null} [pageToken] ListLfpStoresRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListLfpStoresRequest.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a ListLfpStoresRequest.
+                             * @implements IListLfpStoresRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest=} [properties] Properties to set
+                             */
+                            function ListLfpStoresRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLfpStoresRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @instance
+                             */
+                            ListLfpStoresRequest.prototype.parent = "";
+    
+                            /**
+                             * ListLfpStoresRequest targetAccount.
+                             * @member {number|Long} targetAccount
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @instance
+                             */
+                            ListLfpStoresRequest.prototype.targetAccount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * ListLfpStoresRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @instance
+                             */
+                            ListLfpStoresRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListLfpStoresRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @instance
+                             */
+                            ListLfpStoresRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListLfpStoresRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresRequest} ListLfpStoresRequest instance
+                             */
+                            ListLfpStoresRequest.create = function create(properties) {
+                                return new ListLfpStoresRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLfpStoresRequest message. Does not implicitly {@link google.shopping.merchant.lfp.v1.ListLfpStoresRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest} message ListLfpStoresRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLfpStoresRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.targetAccount != null && Object.hasOwnProperty.call(message, "targetAccount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.targetAccount);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLfpStoresRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.ListLfpStoresRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresRequest} message ListLfpStoresRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLfpStoresRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLfpStoresRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresRequest} ListLfpStoresRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLfpStoresRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.ListLfpStoresRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetAccount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLfpStoresRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresRequest} ListLfpStoresRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLfpStoresRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLfpStoresRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLfpStoresRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (!$util.isInteger(message.targetAccount) && !(message.targetAccount && $util.isInteger(message.targetAccount.low) && $util.isInteger(message.targetAccount.high)))
+                                        return "targetAccount: integer|Long expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLfpStoresRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresRequest} ListLfpStoresRequest
+                             */
+                            ListLfpStoresRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.ListLfpStoresRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.ListLfpStoresRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.targetAccount != null)
+                                    if ($util.Long)
+                                        (message.targetAccount = $util.Long.fromValue(object.targetAccount)).unsigned = false;
+                                    else if (typeof object.targetAccount === "string")
+                                        message.targetAccount = parseInt(object.targetAccount, 10);
+                                    else if (typeof object.targetAccount === "number")
+                                        message.targetAccount = object.targetAccount;
+                                    else if (typeof object.targetAccount === "object")
+                                        message.targetAccount = new $util.LongBits(object.targetAccount.low >>> 0, object.targetAccount.high >>> 0).toNumber();
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLfpStoresRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ListLfpStoresRequest} message ListLfpStoresRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLfpStoresRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.targetAccount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.targetAccount = options.longs === String ? "0" : 0;
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount"))
+                                    if (typeof message.targetAccount === "number")
+                                        object.targetAccount = options.longs === String ? String(message.targetAccount) : message.targetAccount;
+                                    else
+                                        object.targetAccount = options.longs === String ? $util.Long.prototype.toString.call(message.targetAccount) : options.longs === Number ? new $util.LongBits(message.targetAccount.low >>> 0, message.targetAccount.high >>> 0).toNumber() : message.targetAccount;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLfpStoresRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLfpStoresRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLfpStoresRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLfpStoresRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.ListLfpStoresRequest";
+                            };
+    
+                            return ListLfpStoresRequest;
+                        })();
+    
+                        v1.ListLfpStoresResponse = (function() {
+    
+                            /**
+                             * Properties of a ListLfpStoresResponse.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @interface IListLfpStoresResponse
+                             * @property {Array.<google.shopping.merchant.lfp.v1.ILfpStore>|null} [lfpStores] ListLfpStoresResponse lfpStores
+                             * @property {string|null} [nextPageToken] ListLfpStoresResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListLfpStoresResponse.
+                             * @memberof google.shopping.merchant.lfp.v1
+                             * @classdesc Represents a ListLfpStoresResponse.
+                             * @implements IListLfpStoresResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresResponse=} [properties] Properties to set
+                             */
+                            function ListLfpStoresResponse(properties) {
+                                this.lfpStores = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLfpStoresResponse lfpStores.
+                             * @member {Array.<google.shopping.merchant.lfp.v1.ILfpStore>} lfpStores
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @instance
+                             */
+                            ListLfpStoresResponse.prototype.lfpStores = $util.emptyArray;
+    
+                            /**
+                             * ListLfpStoresResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @instance
+                             */
+                            ListLfpStoresResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListLfpStoresResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} ListLfpStoresResponse instance
+                             */
+                            ListLfpStoresResponse.create = function create(properties) {
+                                return new ListLfpStoresResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLfpStoresResponse message. Does not implicitly {@link google.shopping.merchant.lfp.v1.ListLfpStoresResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresResponse} message ListLfpStoresResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLfpStoresResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lfpStores != null && message.lfpStores.length)
+                                    for (var i = 0; i < message.lfpStores.length; ++i)
+                                        $root.google.shopping.merchant.lfp.v1.LfpStore.encode(message.lfpStores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLfpStoresResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.lfp.v1.ListLfpStoresResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.IListLfpStoresResponse} message ListLfpStoresResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLfpStoresResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLfpStoresResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} ListLfpStoresResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLfpStoresResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.lfp.v1.ListLfpStoresResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.lfpStores && message.lfpStores.length))
+                                                message.lfpStores = [];
+                                            message.lfpStores.push($root.google.shopping.merchant.lfp.v1.LfpStore.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLfpStoresResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} ListLfpStoresResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLfpStoresResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLfpStoresResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLfpStoresResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lfpStores != null && message.hasOwnProperty("lfpStores")) {
+                                    if (!Array.isArray(message.lfpStores))
+                                        return "lfpStores: array expected";
+                                    for (var i = 0; i < message.lfpStores.length; ++i) {
+                                        var error = $root.google.shopping.merchant.lfp.v1.LfpStore.verify(message.lfpStores[i]);
+                                        if (error)
+                                            return "lfpStores." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLfpStoresResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} ListLfpStoresResponse
+                             */
+                            ListLfpStoresResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.lfp.v1.ListLfpStoresResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.lfp.v1.ListLfpStoresResponse();
+                                if (object.lfpStores) {
+                                    if (!Array.isArray(object.lfpStores))
+                                        throw TypeError(".google.shopping.merchant.lfp.v1.ListLfpStoresResponse.lfpStores: array expected");
+                                    message.lfpStores = [];
+                                    for (var i = 0; i < object.lfpStores.length; ++i) {
+                                        if (typeof object.lfpStores[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.lfp.v1.ListLfpStoresResponse.lfpStores: object expected");
+                                        message.lfpStores[i] = $root.google.shopping.merchant.lfp.v1.LfpStore.fromObject(object.lfpStores[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLfpStoresResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {google.shopping.merchant.lfp.v1.ListLfpStoresResponse} message ListLfpStoresResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLfpStoresResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.lfpStores = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.lfpStores && message.lfpStores.length) {
+                                    object.lfpStores = [];
+                                    for (var j = 0; j < message.lfpStores.length; ++j)
+                                        object.lfpStores[j] = $root.google.shopping.merchant.lfp.v1.LfpStore.toObject(message.lfpStores[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLfpStoresResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLfpStoresResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLfpStoresResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.lfp.v1.ListLfpStoresResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLfpStoresResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.lfp.v1.ListLfpStoresResponse";
+                            };
+    
+                            return ListLfpStoresResponse;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     lfp.v1beta = (function() {
     
                         /**
@@ -7927,6 +13321,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -7962,6 +13357,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -7993,6 +13396,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -8042,6 +13447,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -8095,6 +13504,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -8137,6 +13551,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -8155,8 +13574,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -8164,6 +13585,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -9986,6 +15409,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -10010,6 +15434,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -10037,6 +15469,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -10075,6 +15509,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -10117,6 +15555,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -10137,6 +15580,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -10153,10 +15601,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -10185,6 +15637,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -11062,6 +16766,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -11073,6 +16778,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -11086,6 +16792,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -11113,6 +16827,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -11143,7 +16860,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -11151,6 +16868,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -11193,6 +16933,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -11213,6 +16961,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -11229,10 +16984,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -11869,6 +17632,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -12620,6 +18628,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -12631,6 +18640,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -12644,6 +18654,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -12671,6 +18689,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -12709,6 +18730,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -12757,6 +18784,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -12800,6 +18836,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -12816,10 +18862,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -12870,6 +18923,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             return api;
@@ -13115,6 +19373,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -13129,6 +19388,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -13153,6 +19413,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -13175,6 +19436,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -13224,6 +19486,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -13346,6 +19616,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -13416,6 +19689,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -13520,6 +19799,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -13574,6 +19860,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -13625,6 +19912,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -13688,6 +19982,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -13754,6 +20052,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -13810,6 +20109,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -13858,6 +20162,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -13964,6 +20269,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -14015,6 +20328,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -14105,6 +20420,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -14220,6 +20539,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -14319,6 +20647,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -14348,6 +20696,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -14393,6 +20742,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -16437,6 +22788,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -16498,6 +22850,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -16534,6 +22894,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -16594,6 +22956,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -16664,6 +23030,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -16713,6 +23088,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -16737,6 +23132,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -16757,6 +23153,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -19075,6 +25473,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -19197,6 +25596,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -19278,6 +25685,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -19379,6 +25788,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -19519,6 +25932,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -19713,6 +26131,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -19815,6 +26238,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -19848,6 +26272,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -20122,6 +26548,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -20162,6 +26589,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -20260,6 +26691,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -20854,6 +27767,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -20898,6 +27812,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -20935,6 +27857,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -20984,6 +27908,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -21038,6 +27966,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -21071,6 +28004,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -21103,6 +28041,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -21110,6 +28049,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -22549,6 +29490,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -22615,6 +29558,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -22650,6 +29609,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -22708,6 +29671,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -22798,6 +29769,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -22939,6 +29930,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -22962,6 +30001,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -22975,6 +30016,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -23100,6 +30145,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -23286,6 +30544,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -23303,6 +30562,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -23350,6 +30610,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -23402,6 +30666,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -23511,7 +30779,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -23538,12 +30807,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -23569,10 +30846,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -23613,8 +30892,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -23657,6 +30940,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -23669,10 +30953,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -23699,6 +30988,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -23741,10 +31034,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -23763,13 +31061,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -24982,6 +32283,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

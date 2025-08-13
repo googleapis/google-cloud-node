@@ -65,6 +65,11 @@ function main(name, query) {
    *  `name` is located.
    */
   // const scope = 'abc123'
+  /**
+   *  Optional. Specifies whether the search should understand the meaning and
+   *  intent behind the query, rather than just matching keywords.
+   */
+  // const semanticSearch = true
 
   // Imports the Dataplex library
   const {CatalogServiceClient} = require('@google-cloud/dataplex').v1;

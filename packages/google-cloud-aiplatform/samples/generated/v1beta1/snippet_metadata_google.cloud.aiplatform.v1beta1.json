@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "4.2.0",
+        "version": "5.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -966,7 +966,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -990,14 +990,6 @@
                     {
                         "name": "batch_prediction_resource_usage_assessment_config",
                         "type": ".google.cloud.aiplatform.v1beta1.AssessDataRequest.BatchPredictionResourceUsageAssessmentConfig"
-                    },
-                    {
-                        "name": "gemini_template_config",
-                        "type": ".google.cloud.aiplatform.v1beta1.GeminiTemplateConfig"
-                    },
-                    {
-                        "name": "request_column_name",
-                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "name",
@@ -1034,7 +1026,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],
@@ -1043,14 +1035,6 @@
                 "fullName": "google.cloud.aiplatform.v1beta1.DatasetService.AssembleData",
                 "async": true,
                 "parameters": [
-                    {
-                        "name": "gemini_template_config",
-                        "type": ".google.cloud.aiplatform.v1beta1.GeminiTemplateConfig"
-                    },
-                    {
-                        "name": "request_column_name",
-                        "type": "TYPE_STRING"
-                    },
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
@@ -1711,14 +1695,14 @@
             "regionTag": "aiplatform_v1beta1_generated_EndpointService_MutateDeployedModel_async",
             "title": "DatasetService mutateDeployedModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
+            "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `required_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
             "canonical": true,
             "file": "endpoint_service.mutate_deployed_model.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -8806,7 +8790,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -8822,6 +8806,10 @@
                     {
                         "name": "direct_contents_source",
                         "type": ".google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectContentsSource"
+                    },
+                    {
+                        "name": "direct_memories_source",
+                        "type": ".google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource"
                     },
                     {
                         "name": "parent",
@@ -10622,7 +10610,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -10638,6 +10626,10 @@
                     {
                         "name": "hugging_face_model_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "custom_model",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel"
                     },
                     {
                         "name": "destination",
@@ -12296,6 +12288,58 @@
                 "method": {
                     "shortName": "ListModelEvaluationSlices",
                     "fullName": "google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ModelService_RecommendSpec_async",
+            "title": "DatasetService recommendSpec Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a Model's spec recommendations.",
+            "canonical": true,
+            "file": "model_service.recommend_spec.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RecommendSpec",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelService.RecommendSpec",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gcs_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "check_machine_availability",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "check_user_quota",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RecommendSpecResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "RecommendSpec",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelService.RecommendSpec",
                     "service": {
                         "shortName": "ModelService",
                         "fullName": "google.cloud.aiplatform.v1beta1.ModelService"
@@ -14442,7 +14486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 116,
                     "type": "FULL"
                 }
             ],
@@ -14484,6 +14528,10 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelArmorConfig"
+                    },
+                    {
                         "name": "generation_config",
                         "type": ".google.cloud.aiplatform.v1beta1.GenerationConfig"
                     }
@@ -14514,7 +14562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 113,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -14554,6 +14602,10 @@
                     {
                         "name": "safety_settings",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model_armor_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ModelArmorConfig"
                     },
                     {
                         "name": "generation_config",
@@ -15482,7 +15534,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -15501,6 +15553,10 @@
                     },
                     {
                         "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -17566,7 +17622,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],
@@ -17578,6 +17634,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force_delete",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

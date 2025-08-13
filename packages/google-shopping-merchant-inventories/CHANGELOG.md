@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.9.0...inventories-v0.10.0) (2025-08-12)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250729 ([#1085](https://github.com/googleapis/google-cloud-node/issues/1085)) ([#6579](https://github.com/googleapis/google-cloud-node/issues/6579)) ([0cbf8ac](https://github.com/googleapis/google-cloud-node/commit/0cbf8ac3e6697d92428f21010beb1c776e5e86fd))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.8.0...inventories-v0.9.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add inventories API client libraries for v1 ([#6553](https://github.com/googleapis/google-cloud-node/issues/6553)) ([47de42b](https://github.com/googleapis/google-cloud-node/commit/47de42b1be9f4f6d75d0351629d7bdac4a0d9a31))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.7.1...inventories-v0.8.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.7.0...inventories-v0.7.1) (2025-03-21)
 
 

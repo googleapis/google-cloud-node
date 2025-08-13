@@ -29,6 +29,26 @@
   * [Data_policy_service.set_iam_policy](#data_policy_service.set_iam_policy)
   * [Data_policy_service.test_iam_permissions](#data_policy_service.test_iam_permissions)
   * [Data_policy_service.update_data_policy](#data_policy_service.update_data_policy)
+  * [Data_policy_service.add_grantees](#data_policy_service.add_grantees)
+  * [Data_policy_service.create_data_policy](#data_policy_service.create_data_policy)
+  * [Data_policy_service.delete_data_policy](#data_policy_service.delete_data_policy)
+  * [Data_policy_service.get_data_policy](#data_policy_service.get_data_policy)
+  * [Data_policy_service.get_iam_policy](#data_policy_service.get_iam_policy)
+  * [Data_policy_service.list_data_policies](#data_policy_service.list_data_policies)
+  * [Data_policy_service.remove_grantees](#data_policy_service.remove_grantees)
+  * [Data_policy_service.set_iam_policy](#data_policy_service.set_iam_policy)
+  * [Data_policy_service.test_iam_permissions](#data_policy_service.test_iam_permissions)
+  * [Data_policy_service.update_data_policy](#data_policy_service.update_data_policy)
+  * [Data_policy_service.add_grantees](#data_policy_service.add_grantees)
+  * [Data_policy_service.create_data_policy](#data_policy_service.create_data_policy)
+  * [Data_policy_service.delete_data_policy](#data_policy_service.delete_data_policy)
+  * [Data_policy_service.get_data_policy](#data_policy_service.get_data_policy)
+  * [Data_policy_service.get_iam_policy](#data_policy_service.get_iam_policy)
+  * [Data_policy_service.list_data_policies](#data_policy_service.list_data_policies)
+  * [Data_policy_service.remove_grantees](#data_policy_service.remove_grantees)
+  * [Data_policy_service.set_iam_policy](#data_policy_service.set_iam_policy)
+  * [Data_policy_service.test_iam_permissions](#data_policy_service.test_iam_permissions)
+  * [Data_policy_service.update_data_policy](#data_policy_service.update_data_policy)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -328,6 +348,346 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.add_grantees
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.add_grantees.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.add_grantees.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.add_grantees.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.create_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.create_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.create_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.create_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.delete_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.delete_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.delete_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.delete_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.get_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.list_data_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.list_data_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.list_data_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.list_data_policies.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.remove_grantees
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.remove_grantees.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.remove_grantees.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.remove_grantees.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.update_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.update_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.update_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.update_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.add_grantees
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.add_grantees.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.add_grantees.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.add_grantees.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.create_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.create_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.create_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.create_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.delete_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.delete_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.delete_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.delete_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.get_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_data_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.get_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.get_iam_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.list_data_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.list_data_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.list_data_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.list_data_policies.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.remove_grantees
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.remove_grantees.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.remove_grantees.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.remove_grantees.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.set_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.set_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.set_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.set_iam_policy.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.test_iam_permissions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.test_iam_permissions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.test_iam_permissions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.test_iam_permissions.js`
+
+
+-----
+
+
+
+
+### Data_policy_service.update_data_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.update_data_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.update_data_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.update_data_policy.js`
 
 
 -----

@@ -26,6 +26,1474 @@ export namespace google {
             /** Namespace conversions. */
             namespace conversions {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a ConversionSourcesService */
+                    class ConversionSourcesService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new ConversionSourcesService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new ConversionSourcesService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversionSourcesService;
+
+                        /**
+                         * Calls CreateConversionSource.
+                         * @param request CreateConversionSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ConversionSource
+                         */
+                        public createConversionSource(request: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.CreateConversionSourceCallback): void;
+
+                        /**
+                         * Calls CreateConversionSource.
+                         * @param request CreateConversionSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createConversionSource(request: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest): Promise<google.shopping.merchant.conversions.v1.ConversionSource>;
+
+                        /**
+                         * Calls UpdateConversionSource.
+                         * @param request UpdateConversionSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ConversionSource
+                         */
+                        public updateConversionSource(request: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.UpdateConversionSourceCallback): void;
+
+                        /**
+                         * Calls UpdateConversionSource.
+                         * @param request UpdateConversionSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateConversionSource(request: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest): Promise<google.shopping.merchant.conversions.v1.ConversionSource>;
+
+                        /**
+                         * Calls DeleteConversionSource.
+                         * @param request DeleteConversionSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteConversionSource(request: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.DeleteConversionSourceCallback): void;
+
+                        /**
+                         * Calls DeleteConversionSource.
+                         * @param request DeleteConversionSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteConversionSource(request: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls UndeleteConversionSource.
+                         * @param request UndeleteConversionSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ConversionSource
+                         */
+                        public undeleteConversionSource(request: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.UndeleteConversionSourceCallback): void;
+
+                        /**
+                         * Calls UndeleteConversionSource.
+                         * @param request UndeleteConversionSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public undeleteConversionSource(request: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest): Promise<google.shopping.merchant.conversions.v1.ConversionSource>;
+
+                        /**
+                         * Calls GetConversionSource.
+                         * @param request GetConversionSourceRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ConversionSource
+                         */
+                        public getConversionSource(request: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.GetConversionSourceCallback): void;
+
+                        /**
+                         * Calls GetConversionSource.
+                         * @param request GetConversionSourceRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getConversionSource(request: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest): Promise<google.shopping.merchant.conversions.v1.ConversionSource>;
+
+                        /**
+                         * Calls ListConversionSources.
+                         * @param request ListConversionSourcesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListConversionSourcesResponse
+                         */
+                        public listConversionSources(request: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest, callback: google.shopping.merchant.conversions.v1.ConversionSourcesService.ListConversionSourcesCallback): void;
+
+                        /**
+                         * Calls ListConversionSources.
+                         * @param request ListConversionSourcesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listConversionSources(request: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest): Promise<google.shopping.merchant.conversions.v1.ListConversionSourcesResponse>;
+                    }
+
+                    namespace ConversionSourcesService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|createConversionSource}.
+                         * @param error Error, if any
+                         * @param [response] ConversionSource
+                         */
+                        type CreateConversionSourceCallback = (error: (Error|null), response?: google.shopping.merchant.conversions.v1.ConversionSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|updateConversionSource}.
+                         * @param error Error, if any
+                         * @param [response] ConversionSource
+                         */
+                        type UpdateConversionSourceCallback = (error: (Error|null), response?: google.shopping.merchant.conversions.v1.ConversionSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|deleteConversionSource}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteConversionSourceCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|undeleteConversionSource}.
+                         * @param error Error, if any
+                         * @param [response] ConversionSource
+                         */
+                        type UndeleteConversionSourceCallback = (error: (Error|null), response?: google.shopping.merchant.conversions.v1.ConversionSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|getConversionSource}.
+                         * @param error Error, if any
+                         * @param [response] ConversionSource
+                         */
+                        type GetConversionSourceCallback = (error: (Error|null), response?: google.shopping.merchant.conversions.v1.ConversionSource) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|listConversionSources}.
+                         * @param error Error, if any
+                         * @param [response] ListConversionSourcesResponse
+                         */
+                        type ListConversionSourcesCallback = (error: (Error|null), response?: google.shopping.merchant.conversions.v1.ListConversionSourcesResponse) => void;
+                    }
+
+                    /** Properties of a ConversionSource. */
+                    interface IConversionSource {
+
+                        /** ConversionSource googleAnalyticsLink */
+                        googleAnalyticsLink?: (google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink|null);
+
+                        /** ConversionSource merchantCenterDestination */
+                        merchantCenterDestination?: (google.shopping.merchant.conversions.v1.IMerchantCenterDestination|null);
+
+                        /** ConversionSource name */
+                        name?: (string|null);
+
+                        /** ConversionSource state */
+                        state?: (google.shopping.merchant.conversions.v1.ConversionSource.State|keyof typeof google.shopping.merchant.conversions.v1.ConversionSource.State|null);
+
+                        /** ConversionSource expireTime */
+                        expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ConversionSource controller */
+                        controller?: (google.shopping.merchant.conversions.v1.ConversionSource.Controller|keyof typeof google.shopping.merchant.conversions.v1.ConversionSource.Controller|null);
+                    }
+
+                    /** Represents a ConversionSource. */
+                    class ConversionSource implements IConversionSource {
+
+                        /**
+                         * Constructs a new ConversionSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IConversionSource);
+
+                        /** ConversionSource googleAnalyticsLink. */
+                        public googleAnalyticsLink?: (google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink|null);
+
+                        /** ConversionSource merchantCenterDestination. */
+                        public merchantCenterDestination?: (google.shopping.merchant.conversions.v1.IMerchantCenterDestination|null);
+
+                        /** ConversionSource name. */
+                        public name: string;
+
+                        /** ConversionSource state. */
+                        public state: (google.shopping.merchant.conversions.v1.ConversionSource.State|keyof typeof google.shopping.merchant.conversions.v1.ConversionSource.State);
+
+                        /** ConversionSource expireTime. */
+                        public expireTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ConversionSource controller. */
+                        public controller: (google.shopping.merchant.conversions.v1.ConversionSource.Controller|keyof typeof google.shopping.merchant.conversions.v1.ConversionSource.Controller);
+
+                        /** ConversionSource sourceData. */
+                        public sourceData?: ("googleAnalyticsLink"|"merchantCenterDestination");
+
+                        /**
+                         * Creates a new ConversionSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConversionSource instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IConversionSource): google.shopping.merchant.conversions.v1.ConversionSource;
+
+                        /**
+                         * Encodes the specified ConversionSource message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ConversionSource.verify|verify} messages.
+                         * @param message ConversionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IConversionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConversionSource message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ConversionSource.verify|verify} messages.
+                         * @param message ConversionSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IConversionSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConversionSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConversionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.ConversionSource;
+
+                        /**
+                         * Decodes a ConversionSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConversionSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.ConversionSource;
+
+                        /**
+                         * Verifies a ConversionSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConversionSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConversionSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.ConversionSource;
+
+                        /**
+                         * Creates a plain object from a ConversionSource message. Also converts values to other types if specified.
+                         * @param message ConversionSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.ConversionSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConversionSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConversionSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConversionSource {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            ARCHIVED = 2,
+                            PENDING = 3
+                        }
+
+                        /** Controller enum. */
+                        enum Controller {
+                            CONTROLLER_UNSPECIFIED = 0,
+                            MERCHANT = 1,
+                            YOUTUBE_AFFILIATES = 2
+                        }
+                    }
+
+                    /** Properties of an AttributionSettings. */
+                    interface IAttributionSettings {
+
+                        /** AttributionSettings attributionLookbackWindowDays */
+                        attributionLookbackWindowDays?: (number|null);
+
+                        /** AttributionSettings attributionModel */
+                        attributionModel?: (google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel|keyof typeof google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel|null);
+
+                        /** AttributionSettings conversionType */
+                        conversionType?: (google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType[]|null);
+                    }
+
+                    /** Represents an AttributionSettings. */
+                    class AttributionSettings implements IAttributionSettings {
+
+                        /**
+                         * Constructs a new AttributionSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IAttributionSettings);
+
+                        /** AttributionSettings attributionLookbackWindowDays. */
+                        public attributionLookbackWindowDays: number;
+
+                        /** AttributionSettings attributionModel. */
+                        public attributionModel: (google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel|keyof typeof google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel);
+
+                        /** AttributionSettings conversionType. */
+                        public conversionType: google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType[];
+
+                        /**
+                         * Creates a new AttributionSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AttributionSettings instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IAttributionSettings): google.shopping.merchant.conversions.v1.AttributionSettings;
+
+                        /**
+                         * Encodes the specified AttributionSettings message. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.verify|verify} messages.
+                         * @param message AttributionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IAttributionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AttributionSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.verify|verify} messages.
+                         * @param message AttributionSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IAttributionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AttributionSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AttributionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.AttributionSettings;
+
+                        /**
+                         * Decodes an AttributionSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AttributionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.AttributionSettings;
+
+                        /**
+                         * Verifies an AttributionSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AttributionSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AttributionSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.AttributionSettings;
+
+                        /**
+                         * Creates a plain object from an AttributionSettings message. Also converts values to other types if specified.
+                         * @param message AttributionSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.AttributionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AttributionSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AttributionSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AttributionSettings {
+
+                        /** Properties of a ConversionType. */
+                        interface IConversionType {
+
+                            /** ConversionType name */
+                            name?: (string|null);
+
+                            /** ConversionType report */
+                            report?: (boolean|null);
+                        }
+
+                        /** Represents a ConversionType. */
+                        class ConversionType implements IConversionType {
+
+                            /**
+                             * Constructs a new ConversionType.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType);
+
+                            /** ConversionType name. */
+                            public name: string;
+
+                            /** ConversionType report. */
+                            public report: boolean;
+
+                            /**
+                             * Creates a new ConversionType instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConversionType instance
+                             */
+                            public static create(properties?: google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType): google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType;
+
+                            /**
+                             * Encodes the specified ConversionType message. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.verify|verify} messages.
+                             * @param message ConversionType message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConversionType message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.verify|verify} messages.
+                             * @param message ConversionType message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConversionType message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConversionType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType;
+
+                            /**
+                             * Decodes a ConversionType message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConversionType
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType;
+
+                            /**
+                             * Verifies a ConversionType message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConversionType message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConversionType
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType;
+
+                            /**
+                             * Creates a plain object from a ConversionType message. Also converts values to other types if specified.
+                             * @param message ConversionType
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConversionType to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConversionType
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** AttributionModel enum. */
+                        enum AttributionModel {
+                            ATTRIBUTION_MODEL_UNSPECIFIED = 0,
+                            CROSS_CHANNEL_LAST_CLICK = 1,
+                            ADS_PREFERRED_LAST_CLICK = 2,
+                            CROSS_CHANNEL_DATA_DRIVEN = 5,
+                            CROSS_CHANNEL_FIRST_CLICK = 6,
+                            CROSS_CHANNEL_LINEAR = 7,
+                            CROSS_CHANNEL_POSITION_BASED = 8,
+                            CROSS_CHANNEL_TIME_DECAY = 9
+                        }
+                    }
+
+                    /** Properties of a GoogleAnalyticsLink. */
+                    interface IGoogleAnalyticsLink {
+
+                        /** GoogleAnalyticsLink propertyId */
+                        propertyId?: (number|Long|string|null);
+
+                        /** GoogleAnalyticsLink attributionSettings */
+                        attributionSettings?: (google.shopping.merchant.conversions.v1.IAttributionSettings|null);
+
+                        /** GoogleAnalyticsLink property */
+                        property?: (string|null);
+                    }
+
+                    /** Represents a GoogleAnalyticsLink. */
+                    class GoogleAnalyticsLink implements IGoogleAnalyticsLink {
+
+                        /**
+                         * Constructs a new GoogleAnalyticsLink.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink);
+
+                        /** GoogleAnalyticsLink propertyId. */
+                        public propertyId: (number|Long|string);
+
+                        /** GoogleAnalyticsLink attributionSettings. */
+                        public attributionSettings?: (google.shopping.merchant.conversions.v1.IAttributionSettings|null);
+
+                        /** GoogleAnalyticsLink property. */
+                        public property: string;
+
+                        /**
+                         * Creates a new GoogleAnalyticsLink instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleAnalyticsLink instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink): google.shopping.merchant.conversions.v1.GoogleAnalyticsLink;
+
+                        /**
+                         * Encodes the specified GoogleAnalyticsLink message. Does not implicitly {@link google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.verify|verify} messages.
+                         * @param message GoogleAnalyticsLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleAnalyticsLink message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.verify|verify} messages.
+                         * @param message GoogleAnalyticsLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleAnalyticsLink message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleAnalyticsLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.GoogleAnalyticsLink;
+
+                        /**
+                         * Decodes a GoogleAnalyticsLink message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleAnalyticsLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.GoogleAnalyticsLink;
+
+                        /**
+                         * Verifies a GoogleAnalyticsLink message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleAnalyticsLink message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleAnalyticsLink
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.GoogleAnalyticsLink;
+
+                        /**
+                         * Creates a plain object from a GoogleAnalyticsLink message. Also converts values to other types if specified.
+                         * @param message GoogleAnalyticsLink
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.GoogleAnalyticsLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleAnalyticsLink to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleAnalyticsLink
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MerchantCenterDestination. */
+                    interface IMerchantCenterDestination {
+
+                        /** MerchantCenterDestination destination */
+                        destination?: (string|null);
+
+                        /** MerchantCenterDestination attributionSettings */
+                        attributionSettings?: (google.shopping.merchant.conversions.v1.IAttributionSettings|null);
+
+                        /** MerchantCenterDestination displayName */
+                        displayName?: (string|null);
+
+                        /** MerchantCenterDestination currencyCode */
+                        currencyCode?: (string|null);
+                    }
+
+                    /** Represents a MerchantCenterDestination. */
+                    class MerchantCenterDestination implements IMerchantCenterDestination {
+
+                        /**
+                         * Constructs a new MerchantCenterDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IMerchantCenterDestination);
+
+                        /** MerchantCenterDestination destination. */
+                        public destination: string;
+
+                        /** MerchantCenterDestination attributionSettings. */
+                        public attributionSettings?: (google.shopping.merchant.conversions.v1.IAttributionSettings|null);
+
+                        /** MerchantCenterDestination displayName. */
+                        public displayName: string;
+
+                        /** MerchantCenterDestination currencyCode. */
+                        public currencyCode: string;
+
+                        /**
+                         * Creates a new MerchantCenterDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MerchantCenterDestination instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IMerchantCenterDestination): google.shopping.merchant.conversions.v1.MerchantCenterDestination;
+
+                        /**
+                         * Encodes the specified MerchantCenterDestination message. Does not implicitly {@link google.shopping.merchant.conversions.v1.MerchantCenterDestination.verify|verify} messages.
+                         * @param message MerchantCenterDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IMerchantCenterDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MerchantCenterDestination message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.MerchantCenterDestination.verify|verify} messages.
+                         * @param message MerchantCenterDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IMerchantCenterDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MerchantCenterDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MerchantCenterDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.MerchantCenterDestination;
+
+                        /**
+                         * Decodes a MerchantCenterDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MerchantCenterDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.MerchantCenterDestination;
+
+                        /**
+                         * Verifies a MerchantCenterDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MerchantCenterDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MerchantCenterDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.MerchantCenterDestination;
+
+                        /**
+                         * Creates a plain object from a MerchantCenterDestination message. Also converts values to other types if specified.
+                         * @param message MerchantCenterDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.MerchantCenterDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MerchantCenterDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MerchantCenterDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateConversionSourceRequest. */
+                    interface ICreateConversionSourceRequest {
+
+                        /** CreateConversionSourceRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateConversionSourceRequest conversionSource */
+                        conversionSource?: (google.shopping.merchant.conversions.v1.IConversionSource|null);
+                    }
+
+                    /** Represents a CreateConversionSourceRequest. */
+                    class CreateConversionSourceRequest implements ICreateConversionSourceRequest {
+
+                        /**
+                         * Constructs a new CreateConversionSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest);
+
+                        /** CreateConversionSourceRequest parent. */
+                        public parent: string;
+
+                        /** CreateConversionSourceRequest conversionSource. */
+                        public conversionSource?: (google.shopping.merchant.conversions.v1.IConversionSource|null);
+
+                        /**
+                         * Creates a new CreateConversionSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateConversionSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest): google.shopping.merchant.conversions.v1.CreateConversionSourceRequest;
+
+                        /**
+                         * Encodes the specified CreateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.CreateConversionSourceRequest.verify|verify} messages.
+                         * @param message CreateConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.CreateConversionSourceRequest.verify|verify} messages.
+                         * @param message CreateConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateConversionSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.CreateConversionSourceRequest;
+
+                        /**
+                         * Decodes a CreateConversionSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.CreateConversionSourceRequest;
+
+                        /**
+                         * Verifies a CreateConversionSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateConversionSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.CreateConversionSourceRequest;
+
+                        /**
+                         * Creates a plain object from a CreateConversionSourceRequest message. Also converts values to other types if specified.
+                         * @param message CreateConversionSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.CreateConversionSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateConversionSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateConversionSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateConversionSourceRequest. */
+                    interface IUpdateConversionSourceRequest {
+
+                        /** UpdateConversionSourceRequest conversionSource */
+                        conversionSource?: (google.shopping.merchant.conversions.v1.IConversionSource|null);
+
+                        /** UpdateConversionSourceRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateConversionSourceRequest. */
+                    class UpdateConversionSourceRequest implements IUpdateConversionSourceRequest {
+
+                        /**
+                         * Constructs a new UpdateConversionSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest);
+
+                        /** UpdateConversionSourceRequest conversionSource. */
+                        public conversionSource?: (google.shopping.merchant.conversions.v1.IConversionSource|null);
+
+                        /** UpdateConversionSourceRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateConversionSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateConversionSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest): google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest;
+
+                        /**
+                         * Encodes the specified UpdateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.verify|verify} messages.
+                         * @param message UpdateConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.verify|verify} messages.
+                         * @param message UpdateConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest;
+
+                        /**
+                         * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest;
+
+                        /**
+                         * Verifies an UpdateConversionSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateConversionSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateConversionSourceRequest message. Also converts values to other types if specified.
+                         * @param message UpdateConversionSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateConversionSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateConversionSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteConversionSourceRequest. */
+                    interface IDeleteConversionSourceRequest {
+
+                        /** DeleteConversionSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteConversionSourceRequest. */
+                    class DeleteConversionSourceRequest implements IDeleteConversionSourceRequest {
+
+                        /**
+                         * Constructs a new DeleteConversionSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest);
+
+                        /** DeleteConversionSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteConversionSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteConversionSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest): google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest;
+
+                        /**
+                         * Encodes the specified DeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest.verify|verify} messages.
+                         * @param message DeleteConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest.verify|verify} messages.
+                         * @param message DeleteConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest;
+
+                        /**
+                         * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest;
+
+                        /**
+                         * Verifies a DeleteConversionSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteConversionSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteConversionSourceRequest message. Also converts values to other types if specified.
+                         * @param message DeleteConversionSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteConversionSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteConversionSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UndeleteConversionSourceRequest. */
+                    interface IUndeleteConversionSourceRequest {
+
+                        /** UndeleteConversionSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents an UndeleteConversionSourceRequest. */
+                    class UndeleteConversionSourceRequest implements IUndeleteConversionSourceRequest {
+
+                        /**
+                         * Constructs a new UndeleteConversionSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest);
+
+                        /** UndeleteConversionSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new UndeleteConversionSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UndeleteConversionSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest): google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest;
+
+                        /**
+                         * Encodes the specified UndeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest.verify|verify} messages.
+                         * @param message UndeleteConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UndeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest.verify|verify} messages.
+                         * @param message UndeleteConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UndeleteConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest;
+
+                        /**
+                         * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UndeleteConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest;
+
+                        /**
+                         * Verifies an UndeleteConversionSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UndeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UndeleteConversionSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest;
+
+                        /**
+                         * Creates a plain object from an UndeleteConversionSourceRequest message. Also converts values to other types if specified.
+                         * @param message UndeleteConversionSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UndeleteConversionSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UndeleteConversionSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetConversionSourceRequest. */
+                    interface IGetConversionSourceRequest {
+
+                        /** GetConversionSourceRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetConversionSourceRequest. */
+                    class GetConversionSourceRequest implements IGetConversionSourceRequest {
+
+                        /**
+                         * Constructs a new GetConversionSourceRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest);
+
+                        /** GetConversionSourceRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetConversionSourceRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetConversionSourceRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest): google.shopping.merchant.conversions.v1.GetConversionSourceRequest;
+
+                        /**
+                         * Encodes the specified GetConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.GetConversionSourceRequest.verify|verify} messages.
+                         * @param message GetConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.GetConversionSourceRequest.verify|verify} messages.
+                         * @param message GetConversionSourceRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IGetConversionSourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetConversionSourceRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.GetConversionSourceRequest;
+
+                        /**
+                         * Decodes a GetConversionSourceRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetConversionSourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.GetConversionSourceRequest;
+
+                        /**
+                         * Verifies a GetConversionSourceRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetConversionSourceRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.GetConversionSourceRequest;
+
+                        /**
+                         * Creates a plain object from a GetConversionSourceRequest message. Also converts values to other types if specified.
+                         * @param message GetConversionSourceRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.GetConversionSourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetConversionSourceRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetConversionSourceRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListConversionSourcesRequest. */
+                    interface IListConversionSourcesRequest {
+
+                        /** ListConversionSourcesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListConversionSourcesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListConversionSourcesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListConversionSourcesRequest showDeleted */
+                        showDeleted?: (boolean|null);
+                    }
+
+                    /** Represents a ListConversionSourcesRequest. */
+                    class ListConversionSourcesRequest implements IListConversionSourcesRequest {
+
+                        /**
+                         * Constructs a new ListConversionSourcesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest);
+
+                        /** ListConversionSourcesRequest parent. */
+                        public parent: string;
+
+                        /** ListConversionSourcesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListConversionSourcesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListConversionSourcesRequest showDeleted. */
+                        public showDeleted: boolean;
+
+                        /**
+                         * Creates a new ListConversionSourcesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListConversionSourcesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest): google.shopping.merchant.conversions.v1.ListConversionSourcesRequest;
+
+                        /**
+                         * Encodes the specified ListConversionSourcesRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesRequest.verify|verify} messages.
+                         * @param message ListConversionSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListConversionSourcesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesRequest.verify|verify} messages.
+                         * @param message ListConversionSourcesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IListConversionSourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListConversionSourcesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListConversionSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.ListConversionSourcesRequest;
+
+                        /**
+                         * Decodes a ListConversionSourcesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListConversionSourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.ListConversionSourcesRequest;
+
+                        /**
+                         * Verifies a ListConversionSourcesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListConversionSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListConversionSourcesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.ListConversionSourcesRequest;
+
+                        /**
+                         * Creates a plain object from a ListConversionSourcesRequest message. Also converts values to other types if specified.
+                         * @param message ListConversionSourcesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.ListConversionSourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListConversionSourcesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListConversionSourcesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListConversionSourcesResponse. */
+                    interface IListConversionSourcesResponse {
+
+                        /** ListConversionSourcesResponse conversionSources */
+                        conversionSources?: (google.shopping.merchant.conversions.v1.IConversionSource[]|null);
+
+                        /** ListConversionSourcesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListConversionSourcesResponse. */
+                    class ListConversionSourcesResponse implements IListConversionSourcesResponse {
+
+                        /**
+                         * Constructs a new ListConversionSourcesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.conversions.v1.IListConversionSourcesResponse);
+
+                        /** ListConversionSourcesResponse conversionSources. */
+                        public conversionSources: google.shopping.merchant.conversions.v1.IConversionSource[];
+
+                        /** ListConversionSourcesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListConversionSourcesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListConversionSourcesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.conversions.v1.IListConversionSourcesResponse): google.shopping.merchant.conversions.v1.ListConversionSourcesResponse;
+
+                        /**
+                         * Encodes the specified ListConversionSourcesResponse message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.verify|verify} messages.
+                         * @param message ListConversionSourcesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.conversions.v1.IListConversionSourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListConversionSourcesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.verify|verify} messages.
+                         * @param message ListConversionSourcesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.conversions.v1.IListConversionSourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListConversionSourcesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListConversionSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.conversions.v1.ListConversionSourcesResponse;
+
+                        /**
+                         * Decodes a ListConversionSourcesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListConversionSourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.conversions.v1.ListConversionSourcesResponse;
+
+                        /**
+                         * Verifies a ListConversionSourcesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListConversionSourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListConversionSourcesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.conversions.v1.ListConversionSourcesResponse;
+
+                        /**
+                         * Creates a plain object from a ListConversionSourcesResponse message. Also converts values to other types if specified.
+                         * @param message ListConversionSourcesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.conversions.v1.ListConversionSourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListConversionSourcesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListConversionSourcesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
@@ -1868,6 +3336,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -1884,6 +3355,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -2585,6 +4059,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -2598,6 +4075,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -2675,6 +4155,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -3003,6 +4595,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -3016,6 +4611,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -3339,6 +4937,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -3722,6 +5423,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -3751,6 +5453,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -3800,6 +5505,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -3935,6 +5643,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -3975,6 +5686,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -4823,6 +6537,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -4848,6 +6565,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -5783,6 +7503,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -5837,6 +7560,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6053,6 +7779,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -6296,6 +8137,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6317,6 +8161,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6907,6 +8754,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -6935,6 +8788,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -7058,6 +8917,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7177,8 +9146,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7193,8 +9165,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -7725,6 +9700,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

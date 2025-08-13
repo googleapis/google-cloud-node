@@ -26,6 +26,727 @@ export namespace google {
             /** Namespace ordertracking. */
             namespace ordertracking {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents an OrderTrackingSignalsService */
+                    class OrderTrackingSignalsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new OrderTrackingSignalsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new OrderTrackingSignalsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrderTrackingSignalsService;
+
+                        /**
+                         * Calls CreateOrderTrackingSignal.
+                         * @param request CreateOrderTrackingSignalRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OrderTrackingSignal
+                         */
+                        public createOrderTrackingSignal(request: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, callback: google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService.CreateOrderTrackingSignalCallback): void;
+
+                        /**
+                         * Calls CreateOrderTrackingSignal.
+                         * @param request CreateOrderTrackingSignalRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createOrderTrackingSignal(request: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest): Promise<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal>;
+                    }
+
+                    namespace OrderTrackingSignalsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService|createOrderTrackingSignal}.
+                         * @param error Error, if any
+                         * @param [response] OrderTrackingSignal
+                         */
+                        type CreateOrderTrackingSignalCallback = (error: (Error|null), response?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal) => void;
+                    }
+
+                    /** Properties of a CreateOrderTrackingSignalRequest. */
+                    interface ICreateOrderTrackingSignalRequest {
+
+                        /** CreateOrderTrackingSignalRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignalId */
+                        orderTrackingSignalId?: (string|null);
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignal */
+                        orderTrackingSignal?: (google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null);
+                    }
+
+                    /** Represents a CreateOrderTrackingSignalRequest. */
+                    class CreateOrderTrackingSignalRequest implements ICreateOrderTrackingSignalRequest {
+
+                        /**
+                         * Constructs a new CreateOrderTrackingSignalRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest);
+
+                        /** CreateOrderTrackingSignalRequest parent. */
+                        public parent: string;
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignalId. */
+                        public orderTrackingSignalId: string;
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignal. */
+                        public orderTrackingSignal?: (google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null);
+
+                        /**
+                         * Creates a new CreateOrderTrackingSignalRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateOrderTrackingSignalRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Encodes the specified CreateOrderTrackingSignalRequest message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                         * @param message CreateOrderTrackingSignalRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateOrderTrackingSignalRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                         * @param message CreateOrderTrackingSignalRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateOrderTrackingSignalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateOrderTrackingSignalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Verifies a CreateOrderTrackingSignalRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateOrderTrackingSignalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateOrderTrackingSignalRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Creates a plain object from a CreateOrderTrackingSignalRequest message. Also converts values to other types if specified.
+                         * @param message CreateOrderTrackingSignalRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateOrderTrackingSignalRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateOrderTrackingSignalRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OrderTrackingSignal. */
+                    interface IOrderTrackingSignal {
+
+                        /** OrderTrackingSignal orderTrackingSignalId */
+                        orderTrackingSignalId?: (number|Long|string|null);
+
+                        /** OrderTrackingSignal merchantId */
+                        merchantId?: (number|Long|string|null);
+
+                        /** OrderTrackingSignal orderCreatedTime */
+                        orderCreatedTime?: (google.type.IDateTime|null);
+
+                        /** OrderTrackingSignal orderId */
+                        orderId?: (string|null);
+
+                        /** OrderTrackingSignal shippingInfo */
+                        shippingInfo?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo[]|null);
+
+                        /** OrderTrackingSignal lineItems */
+                        lineItems?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails[]|null);
+
+                        /** OrderTrackingSignal shipmentLineItemMapping */
+                        shipmentLineItemMapping?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping[]|null);
+
+                        /** OrderTrackingSignal customerShippingFee */
+                        customerShippingFee?: (google.shopping.type.IPrice|null);
+
+                        /** OrderTrackingSignal deliveryPostalCode */
+                        deliveryPostalCode?: (string|null);
+
+                        /** OrderTrackingSignal deliveryRegionCode */
+                        deliveryRegionCode?: (string|null);
+                    }
+
+                    /** Represents an OrderTrackingSignal. */
+                    class OrderTrackingSignal implements IOrderTrackingSignal {
+
+                        /**
+                         * Constructs a new OrderTrackingSignal.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal);
+
+                        /** OrderTrackingSignal orderTrackingSignalId. */
+                        public orderTrackingSignalId: (number|Long|string);
+
+                        /** OrderTrackingSignal merchantId. */
+                        public merchantId: (number|Long|string);
+
+                        /** OrderTrackingSignal orderCreatedTime. */
+                        public orderCreatedTime?: (google.type.IDateTime|null);
+
+                        /** OrderTrackingSignal orderId. */
+                        public orderId: string;
+
+                        /** OrderTrackingSignal shippingInfo. */
+                        public shippingInfo: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo[];
+
+                        /** OrderTrackingSignal lineItems. */
+                        public lineItems: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails[];
+
+                        /** OrderTrackingSignal shipmentLineItemMapping. */
+                        public shipmentLineItemMapping: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping[];
+
+                        /** OrderTrackingSignal customerShippingFee. */
+                        public customerShippingFee?: (google.shopping.type.IPrice|null);
+
+                        /** OrderTrackingSignal deliveryPostalCode. */
+                        public deliveryPostalCode: string;
+
+                        /** OrderTrackingSignal deliveryRegionCode. */
+                        public deliveryRegionCode: string;
+
+                        /**
+                         * Creates a new OrderTrackingSignal instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OrderTrackingSignal instance
+                         */
+                        public static create(properties?: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Encodes the specified OrderTrackingSignal message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                         * @param message OrderTrackingSignal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OrderTrackingSignal message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                         * @param message OrderTrackingSignal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OrderTrackingSignal message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OrderTrackingSignal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Decodes an OrderTrackingSignal message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OrderTrackingSignal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Verifies an OrderTrackingSignal message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OrderTrackingSignal message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OrderTrackingSignal
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Creates a plain object from an OrderTrackingSignal message. Also converts values to other types if specified.
+                         * @param message OrderTrackingSignal
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OrderTrackingSignal to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OrderTrackingSignal
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace OrderTrackingSignal {
+
+                        /** Properties of a ShippingInfo. */
+                        interface IShippingInfo {
+
+                            /** ShippingInfo shipmentId */
+                            shipmentId?: (string|null);
+
+                            /** ShippingInfo trackingId */
+                            trackingId?: (string|null);
+
+                            /** ShippingInfo carrier */
+                            carrier?: (string|null);
+
+                            /** ShippingInfo carrierService */
+                            carrierService?: (string|null);
+
+                            /** ShippingInfo shippedTime */
+                            shippedTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo earliestDeliveryPromiseTime */
+                            earliestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo latestDeliveryPromiseTime */
+                            latestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo actualDeliveryTime */
+                            actualDeliveryTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo shippingStatus */
+                            shippingStatus?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|keyof typeof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|null);
+
+                            /** ShippingInfo originPostalCode */
+                            originPostalCode?: (string|null);
+
+                            /** ShippingInfo originRegionCode */
+                            originRegionCode?: (string|null);
+                        }
+
+                        /** Represents a ShippingInfo. */
+                        class ShippingInfo implements IShippingInfo {
+
+                            /**
+                             * Constructs a new ShippingInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo);
+
+                            /** ShippingInfo shipmentId. */
+                            public shipmentId: string;
+
+                            /** ShippingInfo trackingId. */
+                            public trackingId: string;
+
+                            /** ShippingInfo carrier. */
+                            public carrier: string;
+
+                            /** ShippingInfo carrierService. */
+                            public carrierService: string;
+
+                            /** ShippingInfo shippedTime. */
+                            public shippedTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo earliestDeliveryPromiseTime. */
+                            public earliestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo latestDeliveryPromiseTime. */
+                            public latestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo actualDeliveryTime. */
+                            public actualDeliveryTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo shippingStatus. */
+                            public shippingStatus: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|keyof typeof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState);
+
+                            /** ShippingInfo originPostalCode. */
+                            public originPostalCode: string;
+
+                            /** ShippingInfo originRegionCode. */
+                            public originRegionCode: string;
+
+                            /**
+                             * Creates a new ShippingInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShippingInfo instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Encodes the specified ShippingInfo message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                             * @param message ShippingInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShippingInfo message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                             * @param message ShippingInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShippingInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShippingInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Decodes a ShippingInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShippingInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Verifies a ShippingInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShippingInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShippingInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Creates a plain object from a ShippingInfo message. Also converts values to other types if specified.
+                             * @param message ShippingInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShippingInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShippingInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ShippingInfo {
+
+                            /** ShippingState enum. */
+                            enum ShippingState {
+                                SHIPPING_STATE_UNSPECIFIED = 0,
+                                SHIPPED = 1,
+                                DELIVERED = 2
+                            }
+                        }
+
+                        /** Properties of a LineItemDetails. */
+                        interface ILineItemDetails {
+
+                            /** LineItemDetails lineItemId */
+                            lineItemId?: (string|null);
+
+                            /** LineItemDetails productId */
+                            productId?: (string|null);
+
+                            /** LineItemDetails gtins */
+                            gtins?: (string[]|null);
+
+                            /** LineItemDetails mpn */
+                            mpn?: (string|null);
+
+                            /** LineItemDetails productTitle */
+                            productTitle?: (string|null);
+
+                            /** LineItemDetails brand */
+                            brand?: (string|null);
+
+                            /** LineItemDetails quantity */
+                            quantity?: (number|Long|string|null);
+                        }
+
+                        /** Represents a LineItemDetails. */
+                        class LineItemDetails implements ILineItemDetails {
+
+                            /**
+                             * Constructs a new LineItemDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails);
+
+                            /** LineItemDetails lineItemId. */
+                            public lineItemId: string;
+
+                            /** LineItemDetails productId. */
+                            public productId: string;
+
+                            /** LineItemDetails gtins. */
+                            public gtins: string[];
+
+                            /** LineItemDetails mpn. */
+                            public mpn: string;
+
+                            /** LineItemDetails productTitle. */
+                            public productTitle?: (string|null);
+
+                            /** LineItemDetails brand. */
+                            public brand?: (string|null);
+
+                            /** LineItemDetails quantity. */
+                            public quantity: (number|Long|string);
+
+                            /**
+                             * Creates a new LineItemDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LineItemDetails instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Encodes the specified LineItemDetails message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                             * @param message LineItemDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LineItemDetails message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                             * @param message LineItemDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LineItemDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LineItemDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Decodes a LineItemDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LineItemDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Verifies a LineItemDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LineItemDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LineItemDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Creates a plain object from a LineItemDetails message. Also converts values to other types if specified.
+                             * @param message LineItemDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LineItemDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LineItemDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ShipmentLineItemMapping. */
+                        interface IShipmentLineItemMapping {
+
+                            /** ShipmentLineItemMapping shipmentId */
+                            shipmentId?: (string|null);
+
+                            /** ShipmentLineItemMapping lineItemId */
+                            lineItemId?: (string|null);
+
+                            /** ShipmentLineItemMapping quantity */
+                            quantity?: (number|Long|string|null);
+                        }
+
+                        /** Represents a ShipmentLineItemMapping. */
+                        class ShipmentLineItemMapping implements IShipmentLineItemMapping {
+
+                            /**
+                             * Constructs a new ShipmentLineItemMapping.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping);
+
+                            /** ShipmentLineItemMapping shipmentId. */
+                            public shipmentId: string;
+
+                            /** ShipmentLineItemMapping lineItemId. */
+                            public lineItemId: string;
+
+                            /** ShipmentLineItemMapping quantity. */
+                            public quantity: (number|Long|string);
+
+                            /**
+                             * Creates a new ShipmentLineItemMapping instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShipmentLineItemMapping instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Encodes the specified ShipmentLineItemMapping message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                             * @param message ShipmentLineItemMapping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShipmentLineItemMapping message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                             * @param message ShipmentLineItemMapping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShipmentLineItemMapping message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShipmentLineItemMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Decodes a ShipmentLineItemMapping message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShipmentLineItemMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Verifies a ShipmentLineItemMapping message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShipmentLineItemMapping message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShipmentLineItemMapping
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Creates a plain object from a ShipmentLineItemMapping message. Also converts values to other types if specified.
+                             * @param message ShipmentLineItemMapping
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShipmentLineItemMapping to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShipmentLineItemMapping
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
@@ -1769,6 +2490,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -1785,6 +2509,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -2486,6 +3213,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -2499,6 +3229,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -2576,6 +3309,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -2904,6 +3749,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -2917,6 +3765,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -3240,6 +4091,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -3623,6 +4577,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -3652,6 +4607,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -3701,6 +4659,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -3836,6 +4797,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -3876,6 +4840,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -4724,6 +5691,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -4749,6 +5719,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -5684,6 +6657,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -5738,6 +6714,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -5954,6 +6933,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -6197,6 +7291,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6218,6 +7315,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6808,6 +7908,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -6836,6 +7942,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -6959,6 +8071,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7078,8 +8300,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7094,8 +8319,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -7626,6 +8854,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

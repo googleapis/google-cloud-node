@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-datasources",
-        "version": "0.5.0",
+        "version": "0.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

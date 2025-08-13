@@ -895,6 +895,8 @@
                              * @property {string|null} [customLlmResponseSafetyErrorMessage] TemplateMetadata customLlmResponseSafetyErrorMessage
                              * @property {boolean|null} [logTemplateOperations] TemplateMetadata logTemplateOperations
                              * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
+                             * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|null} [enforcementType] TemplateMetadata enforcementType
+                             * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] TemplateMetadata multiLanguageDetection
                              */
     
                             /**
@@ -969,6 +971,22 @@
                             TemplateMetadata.prototype.logSanitizeOperations = false;
     
                             /**
+                             * TemplateMetadata enforcementType.
+                             * @member {google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType} enforcementType
+                             * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.enforcementType = 0;
+    
+                            /**
+                             * TemplateMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
                              * Creates a new TemplateMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
@@ -1006,6 +1024,10 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.logTemplateOperations);
                                 if (message.logSanitizeOperations != null && Object.hasOwnProperty.call(message, "logSanitizeOperations"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.logSanitizeOperations);
+                                if (message.enforcementType != null && Object.hasOwnProperty.call(message, "enforcementType"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.enforcementType);
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1070,6 +1092,14 @@
                                             message.logSanitizeOperations = reader.bool();
                                             break;
                                         }
+                                    case 8: {
+                                            message.enforcementType = reader.int32();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1126,6 +1156,20 @@
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     if (typeof message.logSanitizeOperations !== "boolean")
                                         return "logSanitizeOperations: boolean expected";
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    switch (message.enforcementType) {
+                                    default:
+                                        return "enforcementType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
                                 return null;
                             };
     
@@ -1155,6 +1199,31 @@
                                     message.logTemplateOperations = Boolean(object.logTemplateOperations);
                                 if (object.logSanitizeOperations != null)
                                     message.logSanitizeOperations = Boolean(object.logSanitizeOperations);
+                                switch (object.enforcementType) {
+                                default:
+                                    if (typeof object.enforcementType === "number") {
+                                        message.enforcementType = object.enforcementType;
+                                        break;
+                                    }
+                                    break;
+                                case "ENFORCEMENT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.enforcementType = 0;
+                                    break;
+                                case "INSPECT_ONLY":
+                                case 1:
+                                    message.enforcementType = 1;
+                                    break;
+                                case "INSPECT_AND_BLOCK":
+                                case 2:
+                                    message.enforcementType = 2;
+                                    break;
+                                }
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.Template.TemplateMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
                                 return message;
                             };
     
@@ -1179,6 +1248,8 @@
                                     object.customLlmResponseSafetyErrorMessage = "";
                                     object.logTemplateOperations = false;
                                     object.logSanitizeOperations = false;
+                                    object.enforcementType = options.enums === String ? "ENFORCEMENT_TYPE_UNSPECIFIED" : 0;
+                                    object.multiLanguageDetection = null;
                                 }
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
@@ -1194,6 +1265,10 @@
                                     object.logTemplateOperations = message.logTemplateOperations;
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     object.logSanitizeOperations = message.logSanitizeOperations;
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    object.enforcementType = options.enums === String ? $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] === undefined ? message.enforcementType : $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] : message.enforcementType;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
                                 return object;
                             };
     
@@ -1223,6 +1298,227 @@
                                 return typeUrlPrefix + "/google.cloud.modelarmor.v1.Template.TemplateMetadata";
                             };
     
+                            TemplateMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            /**
+                             * EnforcementType enum.
+                             * @name google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType
+                             * @enum {number}
+                             * @property {number} ENFORCEMENT_TYPE_UNSPECIFIED=0 ENFORCEMENT_TYPE_UNSPECIFIED value
+                             * @property {number} INSPECT_ONLY=1 INSPECT_ONLY value
+                             * @property {number} INSPECT_AND_BLOCK=2 INSPECT_AND_BLOCK value
+                             */
+                            TemplateMetadata.EnforcementType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENFORCEMENT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSPECT_ONLY"] = 1;
+                                values[valuesById[2] = "INSPECT_AND_BLOCK"] = 2;
+                                return values;
+                            })();
+    
                             return TemplateMetadata;
                         })();
     
@@ -1240,6 +1536,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FloorSetting updateTime
                          * @property {google.cloud.modelarmor.v1.IFilterConfig|null} [filterConfig] FloorSetting filterConfig
                          * @property {boolean|null} [enableFloorSettingEnforcement] FloorSetting enableFloorSettingEnforcement
+                         * @property {Array.<google.cloud.modelarmor.v1.FloorSetting.IntegratedService>|null} [integratedServices] FloorSetting integratedServices
+                         * @property {google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null} [aiPlatformFloorSetting] FloorSetting aiPlatformFloorSetting
+                         * @property {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null} [floorSettingMetadata] FloorSetting floorSettingMetadata
                          */
     
                         /**
@@ -1251,6 +1550,7 @@
                          * @param {google.cloud.modelarmor.v1.IFloorSetting=} [properties] Properties to set
                          */
                         function FloorSetting(properties) {
+                            this.integratedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1297,12 +1597,42 @@
                          */
                         FloorSetting.prototype.enableFloorSettingEnforcement = null;
     
+                        /**
+                         * FloorSetting integratedServices.
+                         * @member {Array.<google.cloud.modelarmor.v1.FloorSetting.IntegratedService>} integratedServices
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.integratedServices = $util.emptyArray;
+    
+                        /**
+                         * FloorSetting aiPlatformFloorSetting.
+                         * @member {google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null|undefined} aiPlatformFloorSetting
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.aiPlatformFloorSetting = null;
+    
+                        /**
+                         * FloorSetting floorSettingMetadata.
+                         * @member {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null|undefined} floorSettingMetadata
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.floorSettingMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FloorSetting.prototype, "_enableFloorSettingEnforcement", {
                             get: $util.oneOfGetter($oneOfFields = ["enableFloorSettingEnforcement"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorSetting.prototype, "_aiPlatformFloorSetting", {
+                            get: $util.oneOfGetter($oneOfFields = ["aiPlatformFloorSetting"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1340,6 +1670,16 @@
                                 $root.google.cloud.modelarmor.v1.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.enableFloorSettingEnforcement != null && Object.hasOwnProperty.call(message, "enableFloorSettingEnforcement"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableFloorSettingEnforcement);
+                            if (message.integratedServices != null && message.integratedServices.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    writer.int32(message.integratedServices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.aiPlatformFloorSetting != null && Object.hasOwnProperty.call(message, "aiPlatformFloorSetting"))
+                                $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.encode(message.aiPlatformFloorSetting, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.floorSettingMetadata != null && Object.hasOwnProperty.call(message, "floorSettingMetadata"))
+                                $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.encode(message.floorSettingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -1394,6 +1734,25 @@
                                     }
                                 case 5: {
                                         message.enableFloorSettingEnforcement = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.integratedServices && message.integratedServices.length))
+                                            message.integratedServices = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.integratedServices.push(reader.int32());
+                                        } else
+                                            message.integratedServices.push(reader.int32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1455,6 +1814,31 @@
                                 if (typeof message.enableFloorSettingEnforcement !== "boolean")
                                     return "enableFloorSettingEnforcement: boolean expected";
                             }
+                            if (message.integratedServices != null && message.hasOwnProperty("integratedServices")) {
+                                if (!Array.isArray(message.integratedServices))
+                                    return "integratedServices: array expected";
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    switch (message.integratedServices[i]) {
+                                    default:
+                                        return "integratedServices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                properties._aiPlatformFloorSetting = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify(message.aiPlatformFloorSetting);
+                                    if (error)
+                                        return "aiPlatformFloorSetting." + error;
+                                }
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify(message.floorSettingMetadata);
+                                if (error)
+                                    return "floorSettingMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -1489,6 +1873,37 @@
                             }
                             if (object.enableFloorSettingEnforcement != null)
                                 message.enableFloorSettingEnforcement = Boolean(object.enableFloorSettingEnforcement);
+                            if (object.integratedServices) {
+                                if (!Array.isArray(object.integratedServices))
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.integratedServices: array expected");
+                                message.integratedServices = [];
+                                for (var i = 0; i < object.integratedServices.length; ++i)
+                                    switch (object.integratedServices[i]) {
+                                    default:
+                                        if (typeof object.integratedServices[i] === "number") {
+                                            message.integratedServices[i] = object.integratedServices[i];
+                                            break;
+                                        }
+                                    case "INTEGRATED_SERVICE_UNSPECIFIED":
+                                    case 0:
+                                        message.integratedServices[i] = 0;
+                                        break;
+                                    case "AI_PLATFORM":
+                                    case 1:
+                                        message.integratedServices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.aiPlatformFloorSetting != null) {
+                                if (typeof object.aiPlatformFloorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.aiPlatformFloorSetting: object expected");
+                                message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.fromObject(object.aiPlatformFloorSetting);
+                            }
+                            if (object.floorSettingMetadata != null) {
+                                if (typeof object.floorSettingMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.floorSettingMetadata: object expected");
+                                message.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.fromObject(object.floorSettingMetadata);
+                            }
                             return message;
                         };
     
@@ -1505,11 +1920,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.integratedServices = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.filterConfig = null;
+                                object.floorSettingMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1524,6 +1942,18 @@
                                 if (options.oneofs)
                                     object._enableFloorSettingEnforcement = "enableFloorSettingEnforcement";
                             }
+                            if (message.integratedServices && message.integratedServices.length) {
+                                object.integratedServices = [];
+                                for (var j = 0; j < message.integratedServices.length; ++j)
+                                    object.integratedServices[j] = options.enums === String ? $root.google.cloud.modelarmor.v1.FloorSetting.IntegratedService[message.integratedServices[j]] === undefined ? message.integratedServices[j] : $root.google.cloud.modelarmor.v1.FloorSetting.IntegratedService[message.integratedServices[j]] : message.integratedServices[j];
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                object.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.toObject(message.aiPlatformFloorSetting, options);
+                                if (options.oneofs)
+                                    object._aiPlatformFloorSetting = "aiPlatformFloorSetting";
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata"))
+                                object.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.toObject(message.floorSettingMetadata, options);
                             return object;
                         };
     
@@ -1553,7 +1983,712 @@
                             return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting";
                         };
     
+                        FloorSetting.FloorSettingMetadata = (function() {
+    
+                            /**
+                             * Properties of a FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting
+                             * @interface IFloorSettingMetadata
+                             * @property {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] FloorSettingMetadata multiLanguageDetection
+                             */
+    
+                            /**
+                             * Constructs a new FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting
+                             * @classdesc Represents a FloorSettingMetadata.
+                             * @implements IFloorSettingMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             */
+                            function FloorSettingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FloorSettingMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             */
+                            FloorSettingMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
+                             * Creates a new FloorSettingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata instance
+                             */
+                            FloorSettingMetadata.create = function create(properties) {
+                                return new FloorSettingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FloorSettingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FloorSettingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             */
+                            FloorSettingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata();
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} message FloorSettingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FloorSettingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.multiLanguageDetection = null;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FloorSettingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FloorSettingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FloorSettingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FloorSettingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata";
+                            };
+    
+                            FloorSettingMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            return FloorSettingMetadata;
+                        })();
+    
+                        /**
+                         * IntegratedService enum.
+                         * @name google.cloud.modelarmor.v1.FloorSetting.IntegratedService
+                         * @enum {number}
+                         * @property {number} INTEGRATED_SERVICE_UNSPECIFIED=0 INTEGRATED_SERVICE_UNSPECIFIED value
+                         * @property {number} AI_PLATFORM=1 AI_PLATFORM value
+                         */
+                        FloorSetting.IntegratedService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTEGRATED_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI_PLATFORM"] = 1;
+                            return values;
+                        })();
+    
                         return FloorSetting;
+                    })();
+    
+                    v1.AiPlatformFloorSetting = (function() {
+    
+                        /**
+                         * Properties of an AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface IAiPlatformFloorSetting
+                         * @property {boolean|null} [inspectOnly] AiPlatformFloorSetting inspectOnly
+                         * @property {boolean|null} [inspectAndBlock] AiPlatformFloorSetting inspectAndBlock
+                         * @property {boolean|null} [enableCloudLogging] AiPlatformFloorSetting enableCloudLogging
+                         */
+    
+                        /**
+                         * Constructs a new AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents an AiPlatformFloorSetting.
+                         * @implements IAiPlatformFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting=} [properties] Properties to set
+                         */
+                        function AiPlatformFloorSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AiPlatformFloorSetting inspectOnly.
+                         * @member {boolean|null|undefined} inspectOnly
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectOnly = null;
+    
+                        /**
+                         * AiPlatformFloorSetting inspectAndBlock.
+                         * @member {boolean|null|undefined} inspectAndBlock
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectAndBlock = null;
+    
+                        /**
+                         * AiPlatformFloorSetting enableCloudLogging.
+                         * @member {boolean} enableCloudLogging
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.enableCloudLogging = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AiPlatformFloorSetting enforcementType.
+                         * @member {"inspectOnly"|"inspectAndBlock"|undefined} enforcementType
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(AiPlatformFloorSetting.prototype, "enforcementType", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectOnly", "inspectAndBlock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting instance
+                         */
+                        AiPlatformFloorSetting.create = function create(properties) {
+                            return new AiPlatformFloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectOnly != null && Object.hasOwnProperty.call(message, "inspectOnly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.inspectOnly);
+                            if (message.inspectAndBlock != null && Object.hasOwnProperty.call(message, "inspectAndBlock"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inspectAndBlock);
+                            if (message.enableCloudLogging != null && Object.hasOwnProperty.call(message, "enableCloudLogging"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableCloudLogging);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectOnly = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectAndBlock = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableCloudLogging = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AiPlatformFloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AiPlatformFloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectOnly !== "boolean")
+                                    return "inspectOnly: boolean expected";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                if (properties.enforcementType === 1)
+                                    return "enforcementType: multiple values";
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectAndBlock !== "boolean")
+                                    return "inspectAndBlock: boolean expected";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                if (typeof message.enableCloudLogging !== "boolean")
+                                    return "enableCloudLogging: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         */
+                        AiPlatformFloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting();
+                            if (object.inspectOnly != null)
+                                message.inspectOnly = Boolean(object.inspectOnly);
+                            if (object.inspectAndBlock != null)
+                                message.inspectAndBlock = Boolean(object.inspectAndBlock);
+                            if (object.enableCloudLogging != null)
+                                message.enableCloudLogging = Boolean(object.enableCloudLogging);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.AiPlatformFloorSetting} message AiPlatformFloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AiPlatformFloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableCloudLogging = false;
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                object.inspectOnly = message.inspectOnly;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectOnly";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                object.inspectAndBlock = message.inspectAndBlock;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectAndBlock";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                object.enableCloudLogging = message.enableCloudLogging;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AiPlatformFloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AiPlatformFloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AiPlatformFloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AiPlatformFloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.AiPlatformFloorSetting";
+                        };
+    
+                        return AiPlatformFloorSetting;
                     })();
     
                     v1.ListTemplatesRequest = (function() {
@@ -5666,6 +6801,7 @@
                          * @interface ISanitizeUserPromptRequest
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
+                         * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -5700,6 +6836,14 @@
                         SanitizeUserPromptRequest.prototype.userPromptData = null;
     
                         /**
+                         * SanitizeUserPromptRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
@@ -5727,6 +6871,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.userPromptData != null && Object.hasOwnProperty.call(message, "userPromptData"))
                                 $root.google.cloud.modelarmor.v1.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -5769,6 +6915,10 @@
                                     }
                                 case 2: {
                                         message.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5814,6 +6964,11 @@
                                 if (error)
                                     return "userPromptData." + error;
                             }
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -5836,6 +6991,11 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.SanitizeUserPromptRequest.userPromptData: object expected");
                                 message.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.fromObject(object.userPromptData);
                             }
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -5855,11 +7015,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.userPromptData = null;
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.userPromptData != null && message.hasOwnProperty("userPromptData"))
                                 object.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.userPromptData, options);
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -5901,6 +7064,7 @@
                          * @property {string|null} [name] SanitizeModelResponseRequest name
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [modelResponseData] SanitizeModelResponseRequest modelResponseData
                          * @property {string|null} [userPrompt] SanitizeModelResponseRequest userPrompt
+                         * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeModelResponseRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -5943,6 +7107,14 @@
                         SanitizeModelResponseRequest.prototype.userPrompt = "";
     
                         /**
+                         * SanitizeModelResponseRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeModelResponseRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
@@ -5972,6 +7144,8 @@
                                 $root.google.cloud.modelarmor.v1.DataItem.encode(message.modelResponseData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.userPrompt != null && Object.hasOwnProperty.call(message, "userPrompt"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPrompt);
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -6020,6 +7194,10 @@
                                         message.userPrompt = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6066,6 +7244,11 @@
                             if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
                                 if (!$util.isString(message.userPrompt))
                                     return "userPrompt: string expected";
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -6090,6 +7273,11 @@
                             }
                             if (object.userPrompt != null)
                                 message.userPrompt = String(object.userPrompt);
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SanitizeModelResponseRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -6110,6 +7298,7 @@
                                 object.name = "";
                                 object.modelResponseData = null;
                                 object.userPrompt = "";
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6117,6 +7306,8 @@
                                 object.modelResponseData = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.modelResponseData, options);
                             if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
                                 object.userPrompt = message.userPrompt;
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -7209,6 +8400,235 @@
                         })();
     
                         return SanitizationResult;
+                    })();
+    
+                    v1.MultiLanguageDetectionMetadata = (function() {
+    
+                        /**
+                         * Properties of a MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface IMultiLanguageDetectionMetadata
+                         * @property {string|null} [sourceLanguage] MultiLanguageDetectionMetadata sourceLanguage
+                         * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetectionMetadata enableMultiLanguageDetection
+                         */
+    
+                        /**
+                         * Constructs a new MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents a MultiLanguageDetectionMetadata.
+                         * @implements IMultiLanguageDetectionMetadata
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         */
+                        function MultiLanguageDetectionMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiLanguageDetectionMetadata sourceLanguage.
+                         * @member {string} sourceLanguage
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.sourceLanguage = "";
+    
+                        /**
+                         * MultiLanguageDetectionMetadata enableMultiLanguageDetection.
+                         * @member {boolean} enableMultiLanguageDetection
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.enableMultiLanguageDetection = false;
+    
+                        /**
+                         * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata instance
+                         */
+                        MultiLanguageDetectionMetadata.create = function create(properties) {
+                            return new MultiLanguageDetectionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceLanguage != null && Object.hasOwnProperty.call(message, "sourceLanguage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceLanguage);
+                            if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableMultiLanguageDetection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceLanguage = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableMultiLanguageDetection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiLanguageDetectionMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiLanguageDetectionMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                if (!$util.isString(message.sourceLanguage))
+                                    return "sourceLanguage: string expected";
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                    return "enableMultiLanguageDetection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiLanguageDetectionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         */
+                        MultiLanguageDetectionMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata();
+                            if (object.sourceLanguage != null)
+                                message.sourceLanguage = String(object.sourceLanguage);
+                            if (object.enableMultiLanguageDetection != null)
+                                message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiLanguageDetectionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiLanguageDetectionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceLanguage = "";
+                                object.enableMultiLanguageDetection = false;
+                            }
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                object.sourceLanguage = message.sourceLanguage;
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiLanguageDetectionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiLanguageDetectionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiLanguageDetectionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiLanguageDetectionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata";
+                        };
+    
+                        return MultiLanguageDetectionMetadata;
                     })();
     
                     v1.FilterResult = (function() {
@@ -9412,6 +10832,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
@@ -9462,6 +10884,14 @@
                             case "POWERPOINT_DOCUMENT":
                             case 5:
                                 message.byteDataType = 5;
+                                break;
+                            case "TXT":
+                            case 6:
+                                message.byteDataType = 6;
+                                break;
+                            case "CSV":
+                            case 7:
+                                message.byteDataType = 7;
                                 break;
                             }
                             if (object.byteData != null)
@@ -9538,6 +10968,8 @@
                          * @property {number} WORD_DOCUMENT=3 WORD_DOCUMENT value
                          * @property {number} EXCEL_DOCUMENT=4 EXCEL_DOCUMENT value
                          * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
+                         * @property {number} TXT=6 TXT value
+                         * @property {number} CSV=7 CSV value
                          */
                         ByteDataItem.ByteItemType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9547,6 +10979,8 @@
                             values[valuesById[3] = "WORD_DOCUMENT"] = 3;
                             values[valuesById[4] = "EXCEL_DOCUMENT"] = 4;
                             values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
+                            values[valuesById[6] = "TXT"] = 6;
+                            values[valuesById[7] = "CSV"] = 7;
                             return values;
                         })();
     
@@ -14030,6 +15464,8 @@
                              * @property {string|null} [customLlmResponseSafetyErrorMessage] TemplateMetadata customLlmResponseSafetyErrorMessage
                              * @property {boolean|null} [logTemplateOperations] TemplateMetadata logTemplateOperations
                              * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
+                             * @property {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|null} [enforcementType] TemplateMetadata enforcementType
+                             * @property {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] TemplateMetadata multiLanguageDetection
                              */
     
                             /**
@@ -14104,6 +15540,22 @@
                             TemplateMetadata.prototype.logSanitizeOperations = false;
     
                             /**
+                             * TemplateMetadata enforcementType.
+                             * @member {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType} enforcementType
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.enforcementType = 0;
+    
+                            /**
+                             * TemplateMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
                              * Creates a new TemplateMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
@@ -14141,6 +15593,10 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.logTemplateOperations);
                                 if (message.logSanitizeOperations != null && Object.hasOwnProperty.call(message, "logSanitizeOperations"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.logSanitizeOperations);
+                                if (message.enforcementType != null && Object.hasOwnProperty.call(message, "enforcementType"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.enforcementType);
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -14205,6 +15661,14 @@
                                             message.logSanitizeOperations = reader.bool();
                                             break;
                                         }
+                                    case 8: {
+                                            message.enforcementType = reader.int32();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14261,6 +15725,20 @@
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     if (typeof message.logSanitizeOperations !== "boolean")
                                         return "logSanitizeOperations: boolean expected";
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    switch (message.enforcementType) {
+                                    default:
+                                        return "enforcementType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
                                 return null;
                             };
     
@@ -14290,6 +15768,31 @@
                                     message.logTemplateOperations = Boolean(object.logTemplateOperations);
                                 if (object.logSanitizeOperations != null)
                                     message.logSanitizeOperations = Boolean(object.logSanitizeOperations);
+                                switch (object.enforcementType) {
+                                default:
+                                    if (typeof object.enforcementType === "number") {
+                                        message.enforcementType = object.enforcementType;
+                                        break;
+                                    }
+                                    break;
+                                case "ENFORCEMENT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.enforcementType = 0;
+                                    break;
+                                case "INSPECT_ONLY":
+                                case 1:
+                                    message.enforcementType = 1;
+                                    break;
+                                case "INSPECT_AND_BLOCK":
+                                case 2:
+                                    message.enforcementType = 2;
+                                    break;
+                                }
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.Template.TemplateMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
                                 return message;
                             };
     
@@ -14314,6 +15817,8 @@
                                     object.customLlmResponseSafetyErrorMessage = "";
                                     object.logTemplateOperations = false;
                                     object.logSanitizeOperations = false;
+                                    object.enforcementType = options.enums === String ? "ENFORCEMENT_TYPE_UNSPECIFIED" : 0;
+                                    object.multiLanguageDetection = null;
                                 }
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
@@ -14329,6 +15834,10 @@
                                     object.logTemplateOperations = message.logTemplateOperations;
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     object.logSanitizeOperations = message.logSanitizeOperations;
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    object.enforcementType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType[message.enforcementType] === undefined ? message.enforcementType : $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType[message.enforcementType] : message.enforcementType;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
                                 return object;
                             };
     
@@ -14358,6 +15867,227 @@
                                 return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template.TemplateMetadata";
                             };
     
+                            TemplateMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            /**
+                             * EnforcementType enum.
+                             * @name google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType
+                             * @enum {number}
+                             * @property {number} ENFORCEMENT_TYPE_UNSPECIFIED=0 ENFORCEMENT_TYPE_UNSPECIFIED value
+                             * @property {number} INSPECT_ONLY=1 INSPECT_ONLY value
+                             * @property {number} INSPECT_AND_BLOCK=2 INSPECT_AND_BLOCK value
+                             */
+                            TemplateMetadata.EnforcementType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENFORCEMENT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSPECT_ONLY"] = 1;
+                                values[valuesById[2] = "INSPECT_AND_BLOCK"] = 2;
+                                return values;
+                            })();
+    
                             return TemplateMetadata;
                         })();
     
@@ -14375,6 +16105,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FloorSetting updateTime
                          * @property {google.cloud.modelarmor.v1beta.IFilterConfig|null} [filterConfig] FloorSetting filterConfig
                          * @property {boolean|null} [enableFloorSettingEnforcement] FloorSetting enableFloorSettingEnforcement
+                         * @property {Array.<google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService>|null} [integratedServices] FloorSetting integratedServices
+                         * @property {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null} [aiPlatformFloorSetting] FloorSetting aiPlatformFloorSetting
+                         * @property {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null} [floorSettingMetadata] FloorSetting floorSettingMetadata
                          */
     
                         /**
@@ -14386,6 +16119,7 @@
                          * @param {google.cloud.modelarmor.v1beta.IFloorSetting=} [properties] Properties to set
                          */
                         function FloorSetting(properties) {
+                            this.integratedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14432,12 +16166,42 @@
                          */
                         FloorSetting.prototype.enableFloorSettingEnforcement = null;
     
+                        /**
+                         * FloorSetting integratedServices.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService>} integratedServices
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.integratedServices = $util.emptyArray;
+    
+                        /**
+                         * FloorSetting aiPlatformFloorSetting.
+                         * @member {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null|undefined} aiPlatformFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.aiPlatformFloorSetting = null;
+    
+                        /**
+                         * FloorSetting floorSettingMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null|undefined} floorSettingMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.floorSettingMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FloorSetting.prototype, "_enableFloorSettingEnforcement", {
                             get: $util.oneOfGetter($oneOfFields = ["enableFloorSettingEnforcement"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorSetting.prototype, "_aiPlatformFloorSetting", {
+                            get: $util.oneOfGetter($oneOfFields = ["aiPlatformFloorSetting"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -14475,6 +16239,16 @@
                                 $root.google.cloud.modelarmor.v1beta.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.enableFloorSettingEnforcement != null && Object.hasOwnProperty.call(message, "enableFloorSettingEnforcement"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableFloorSettingEnforcement);
+                            if (message.integratedServices != null && message.integratedServices.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    writer.int32(message.integratedServices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.aiPlatformFloorSetting != null && Object.hasOwnProperty.call(message, "aiPlatformFloorSetting"))
+                                $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.encode(message.aiPlatformFloorSetting, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.floorSettingMetadata != null && Object.hasOwnProperty.call(message, "floorSettingMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.encode(message.floorSettingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -14529,6 +16303,25 @@
                                     }
                                 case 5: {
                                         message.enableFloorSettingEnforcement = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.integratedServices && message.integratedServices.length))
+                                            message.integratedServices = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.integratedServices.push(reader.int32());
+                                        } else
+                                            message.integratedServices.push(reader.int32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -14590,6 +16383,31 @@
                                 if (typeof message.enableFloorSettingEnforcement !== "boolean")
                                     return "enableFloorSettingEnforcement: boolean expected";
                             }
+                            if (message.integratedServices != null && message.hasOwnProperty("integratedServices")) {
+                                if (!Array.isArray(message.integratedServices))
+                                    return "integratedServices: array expected";
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    switch (message.integratedServices[i]) {
+                                    default:
+                                        return "integratedServices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                properties._aiPlatformFloorSetting = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify(message.aiPlatformFloorSetting);
+                                    if (error)
+                                        return "aiPlatformFloorSetting." + error;
+                                }
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify(message.floorSettingMetadata);
+                                if (error)
+                                    return "floorSettingMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -14624,6 +16442,37 @@
                             }
                             if (object.enableFloorSettingEnforcement != null)
                                 message.enableFloorSettingEnforcement = Boolean(object.enableFloorSettingEnforcement);
+                            if (object.integratedServices) {
+                                if (!Array.isArray(object.integratedServices))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.integratedServices: array expected");
+                                message.integratedServices = [];
+                                for (var i = 0; i < object.integratedServices.length; ++i)
+                                    switch (object.integratedServices[i]) {
+                                    default:
+                                        if (typeof object.integratedServices[i] === "number") {
+                                            message.integratedServices[i] = object.integratedServices[i];
+                                            break;
+                                        }
+                                    case "INTEGRATED_SERVICE_UNSPECIFIED":
+                                    case 0:
+                                        message.integratedServices[i] = 0;
+                                        break;
+                                    case "AI_PLATFORM":
+                                    case 1:
+                                        message.integratedServices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.aiPlatformFloorSetting != null) {
+                                if (typeof object.aiPlatformFloorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.aiPlatformFloorSetting: object expected");
+                                message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.fromObject(object.aiPlatformFloorSetting);
+                            }
+                            if (object.floorSettingMetadata != null) {
+                                if (typeof object.floorSettingMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.floorSettingMetadata: object expected");
+                                message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.fromObject(object.floorSettingMetadata);
+                            }
                             return message;
                         };
     
@@ -14640,11 +16489,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.integratedServices = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.filterConfig = null;
+                                object.floorSettingMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14659,6 +16511,18 @@
                                 if (options.oneofs)
                                     object._enableFloorSettingEnforcement = "enableFloorSettingEnforcement";
                             }
+                            if (message.integratedServices && message.integratedServices.length) {
+                                object.integratedServices = [];
+                                for (var j = 0; j < message.integratedServices.length; ++j)
+                                    object.integratedServices[j] = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[message.integratedServices[j]] === undefined ? message.integratedServices[j] : $root.google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[message.integratedServices[j]] : message.integratedServices[j];
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                object.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.toObject(message.aiPlatformFloorSetting, options);
+                                if (options.oneofs)
+                                    object._aiPlatformFloorSetting = "aiPlatformFloorSetting";
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata"))
+                                object.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.toObject(message.floorSettingMetadata, options);
                             return object;
                         };
     
@@ -14688,7 +16552,712 @@
                             return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting";
                         };
     
+                        FloorSetting.FloorSettingMetadata = (function() {
+    
+                            /**
+                             * Properties of a FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                             * @interface IFloorSettingMetadata
+                             * @property {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] FloorSettingMetadata multiLanguageDetection
+                             */
+    
+                            /**
+                             * Constructs a new FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                             * @classdesc Represents a FloorSettingMetadata.
+                             * @implements IFloorSettingMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             */
+                            function FloorSettingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FloorSettingMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             */
+                            FloorSettingMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
+                             * Creates a new FloorSettingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata instance
+                             */
+                            FloorSettingMetadata.create = function create(properties) {
+                                return new FloorSettingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FloorSettingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FloorSettingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             */
+                            FloorSettingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata();
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} message FloorSettingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FloorSettingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.multiLanguageDetection = null;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FloorSettingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FloorSettingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FloorSettingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FloorSettingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata";
+                            };
+    
+                            FloorSettingMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            return FloorSettingMetadata;
+                        })();
+    
+                        /**
+                         * IntegratedService enum.
+                         * @name google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService
+                         * @enum {number}
+                         * @property {number} INTEGRATED_SERVICE_UNSPECIFIED=0 INTEGRATED_SERVICE_UNSPECIFIED value
+                         * @property {number} AI_PLATFORM=1 AI_PLATFORM value
+                         */
+                        FloorSetting.IntegratedService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTEGRATED_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI_PLATFORM"] = 1;
+                            return values;
+                        })();
+    
                         return FloorSetting;
+                    })();
+    
+                    v1beta.AiPlatformFloorSetting = (function() {
+    
+                        /**
+                         * Properties of an AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IAiPlatformFloorSetting
+                         * @property {boolean|null} [inspectOnly] AiPlatformFloorSetting inspectOnly
+                         * @property {boolean|null} [inspectAndBlock] AiPlatformFloorSetting inspectAndBlock
+                         * @property {boolean|null} [enableCloudLogging] AiPlatformFloorSetting enableCloudLogging
+                         */
+    
+                        /**
+                         * Constructs a new AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents an AiPlatformFloorSetting.
+                         * @implements IAiPlatformFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting=} [properties] Properties to set
+                         */
+                        function AiPlatformFloorSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AiPlatformFloorSetting inspectOnly.
+                         * @member {boolean|null|undefined} inspectOnly
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectOnly = null;
+    
+                        /**
+                         * AiPlatformFloorSetting inspectAndBlock.
+                         * @member {boolean|null|undefined} inspectAndBlock
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectAndBlock = null;
+    
+                        /**
+                         * AiPlatformFloorSetting enableCloudLogging.
+                         * @member {boolean} enableCloudLogging
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.enableCloudLogging = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AiPlatformFloorSetting enforcementType.
+                         * @member {"inspectOnly"|"inspectAndBlock"|undefined} enforcementType
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(AiPlatformFloorSetting.prototype, "enforcementType", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectOnly", "inspectAndBlock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting instance
+                         */
+                        AiPlatformFloorSetting.create = function create(properties) {
+                            return new AiPlatformFloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectOnly != null && Object.hasOwnProperty.call(message, "inspectOnly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.inspectOnly);
+                            if (message.inspectAndBlock != null && Object.hasOwnProperty.call(message, "inspectAndBlock"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inspectAndBlock);
+                            if (message.enableCloudLogging != null && Object.hasOwnProperty.call(message, "enableCloudLogging"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableCloudLogging);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectOnly = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectAndBlock = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableCloudLogging = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AiPlatformFloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AiPlatformFloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectOnly !== "boolean")
+                                    return "inspectOnly: boolean expected";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                if (properties.enforcementType === 1)
+                                    return "enforcementType: multiple values";
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectAndBlock !== "boolean")
+                                    return "inspectAndBlock: boolean expected";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                if (typeof message.enableCloudLogging !== "boolean")
+                                    return "enableCloudLogging: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         */
+                        AiPlatformFloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting();
+                            if (object.inspectOnly != null)
+                                message.inspectOnly = Boolean(object.inspectOnly);
+                            if (object.inspectAndBlock != null)
+                                message.inspectAndBlock = Boolean(object.inspectAndBlock);
+                            if (object.enableCloudLogging != null)
+                                message.enableCloudLogging = Boolean(object.enableCloudLogging);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} message AiPlatformFloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AiPlatformFloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableCloudLogging = false;
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                object.inspectOnly = message.inspectOnly;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectOnly";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                object.inspectAndBlock = message.inspectAndBlock;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectAndBlock";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                object.enableCloudLogging = message.enableCloudLogging;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AiPlatformFloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AiPlatformFloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AiPlatformFloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AiPlatformFloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.AiPlatformFloorSetting";
+                        };
+    
+                        return AiPlatformFloorSetting;
                     })();
     
                     v1beta.ListTemplatesRequest = (function() {
@@ -18801,6 +21370,7 @@
                          * @interface ISanitizeUserPromptRequest
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
+                         * @property {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -18835,6 +21405,14 @@
                         SanitizeUserPromptRequest.prototype.userPromptData = null;
     
                         /**
+                         * SanitizeUserPromptRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
@@ -18862,6 +21440,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.userPromptData != null && Object.hasOwnProperty.call(message, "userPromptData"))
                                 $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -18904,6 +21484,10 @@
                                     }
                                 case 2: {
                                         message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18949,6 +21533,11 @@
                                 if (error)
                                     return "userPromptData." + error;
                             }
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -18971,6 +21560,11 @@
                                     throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.userPromptData: object expected");
                                 message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.fromObject(object.userPromptData);
                             }
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -18990,11 +21584,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.userPromptData = null;
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.userPromptData != null && message.hasOwnProperty("userPromptData"))
                                 object.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.userPromptData, options);
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -20380,6 +22977,8 @@
                          * Properties of a MultiLanguageDetectionMetadata.
                          * @memberof google.cloud.modelarmor.v1beta
                          * @interface IMultiLanguageDetectionMetadata
+                         * @property {string|null} [sourceLanguage] MultiLanguageDetectionMetadata sourceLanguage
+                         * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetectionMetadata enableMultiLanguageDetection
                          */
     
                         /**
@@ -20396,6 +22995,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * MultiLanguageDetectionMetadata sourceLanguage.
+                         * @member {string} sourceLanguage
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.sourceLanguage = "";
+    
+                        /**
+                         * MultiLanguageDetectionMetadata enableMultiLanguageDetection.
+                         * @member {boolean} enableMultiLanguageDetection
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.enableMultiLanguageDetection = false;
     
                         /**
                          * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
@@ -20421,6 +23036,10 @@
                         MultiLanguageDetectionMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.sourceLanguage != null && Object.hasOwnProperty.call(message, "sourceLanguage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceLanguage);
+                            if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableMultiLanguageDetection);
                             return writer;
                         };
     
@@ -20457,6 +23076,14 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceLanguage = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableMultiLanguageDetection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20492,6 +23119,12 @@
                         MultiLanguageDetectionMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                if (!$util.isString(message.sourceLanguage))
+                                    return "sourceLanguage: string expected";
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                    return "enableMultiLanguageDetection: boolean expected";
                             return null;
                         };
     
@@ -20506,7 +23139,12 @@
                         MultiLanguageDetectionMetadata.fromObject = function fromObject(object) {
                             if (object instanceof $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata)
                                 return object;
-                            return new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                            var message = new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                            if (object.sourceLanguage != null)
+                                message.sourceLanguage = String(object.sourceLanguage);
+                            if (object.enableMultiLanguageDetection != null)
+                                message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                            return message;
                         };
     
                         /**
@@ -20518,8 +23156,19 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        MultiLanguageDetectionMetadata.toObject = function toObject() {
-                            return {};
+                        MultiLanguageDetectionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceLanguage = "";
+                                object.enableMultiLanguageDetection = false;
+                            }
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                object.sourceLanguage = message.sourceLanguage;
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                            return object;
                         };
     
                         /**
@@ -27538,6 +30187,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -27573,6 +30223,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -27604,6 +30262,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -27653,6 +30313,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -27706,6 +30370,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -27748,6 +30417,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -27766,8 +30440,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -27775,6 +30451,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -29597,6 +32275,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -29621,6 +32300,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -29648,6 +32335,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -29686,6 +32375,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -29728,6 +32421,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -29748,6 +32446,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -29764,10 +32467,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -29796,6 +32503,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -30673,6 +33632,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -30684,6 +33644,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -30697,6 +33658,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -30724,6 +33693,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -30754,7 +33726,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -30762,6 +33734,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -30804,6 +33799,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -30824,6 +33827,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -30840,10 +33850,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -31482,6 +34500,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -31543,6 +34806,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -31554,6 +34818,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -31567,6 +34832,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -31594,6 +34867,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -31632,6 +34908,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -31680,6 +34962,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -31723,6 +35014,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -31739,10 +35040,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -31793,6 +35101,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -32726,6 +36239,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -32740,6 +36254,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -32764,6 +36279,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -32786,6 +36302,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -32835,6 +36352,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -32957,6 +36482,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -33027,6 +36555,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -33131,6 +36665,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -33185,6 +36726,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -33236,6 +36778,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -33299,6 +36848,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -33365,6 +36918,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -33421,6 +36975,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -33469,6 +37028,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -33575,6 +37135,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -33626,6 +37194,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -33716,6 +37286,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -33831,6 +37405,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -33930,6 +37513,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -33959,6 +37562,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -34004,6 +37608,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -36048,6 +39654,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -36109,6 +39716,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -36145,6 +39760,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -36205,6 +39822,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -36275,6 +39896,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -36324,6 +39954,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -36348,6 +39998,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -36368,6 +40019,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -38686,6 +42339,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
@@ -38808,6 +42462,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -38889,6 +42551,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -38990,6 +42654,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -39130,6 +42798,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -39324,6 +42997,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -39426,6 +43104,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -39459,6 +43138,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -39733,6 +43414,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -39773,6 +43455,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -39871,6 +43557,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -40465,6 +44633,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -40509,6 +44678,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -40546,6 +44723,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -40595,6 +44774,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -40649,6 +44832,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -40682,6 +44870,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -40714,6 +44907,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -40721,6 +44915,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42160,6 +46356,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -42226,6 +46424,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -42261,6 +46475,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -42319,6 +46537,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -42409,6 +46635,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -42550,6 +46796,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -42573,6 +46867,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -42586,6 +46882,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -42711,6 +47011,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -42897,6 +47410,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -42914,6 +47428,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -42961,6 +47476,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -43013,6 +47532,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -43122,7 +47645,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -43149,12 +47673,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -43180,10 +47712,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -43224,8 +47758,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -43268,6 +47806,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -43280,10 +47819,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -43310,6 +47854,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -43352,10 +47900,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -43374,13 +47927,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -44593,6 +49149,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

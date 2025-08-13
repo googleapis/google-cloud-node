@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'Simulator',
-    filename: './simulator.js',
+    library: 'OrgPolicy',
+    filename: './org-policy.js',
   },
   node: {
     child_process: 'empty',

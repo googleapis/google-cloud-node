@@ -222,6 +222,18 @@ export namespace maps {
                     /** DeliveryVehicleLocation rawLocationAccuracy */
                     rawLocationAccuracy?: (google.protobuf.IDoubleValue|null);
 
+                    /** DeliveryVehicleLocation flpLocation */
+                    flpLocation?: (google.type.ILatLng|null);
+
+                    /** DeliveryVehicleLocation flpUpdateTime */
+                    flpUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeliveryVehicleLocation flpLatlngAccuracyMeters */
+                    flpLatlngAccuracyMeters?: (google.protobuf.IDoubleValue|null);
+
+                    /** DeliveryVehicleLocation flpHeadingDegrees */
+                    flpHeadingDegrees?: (google.protobuf.IInt32Value|null);
+
                     /** DeliveryVehicleLocation supplementalLocation */
                     supplementalLocation?: (google.type.ILatLng|null);
 
@@ -315,6 +327,18 @@ export namespace maps {
 
                     /** DeliveryVehicleLocation rawLocationAccuracy. */
                     public rawLocationAccuracy?: (google.protobuf.IDoubleValue|null);
+
+                    /** DeliveryVehicleLocation flpLocation. */
+                    public flpLocation?: (google.type.ILatLng|null);
+
+                    /** DeliveryVehicleLocation flpUpdateTime. */
+                    public flpUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeliveryVehicleLocation flpLatlngAccuracyMeters. */
+                    public flpLatlngAccuracyMeters?: (google.protobuf.IDoubleValue|null);
+
+                    /** DeliveryVehicleLocation flpHeadingDegrees. */
+                    public flpHeadingDegrees?: (google.protobuf.IInt32Value|null);
 
                     /** DeliveryVehicleLocation supplementalLocation. */
                     public supplementalLocation?: (google.type.ILatLng|null);

@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.7.0...securesourcemanager-v0.8.0) (2025-08-04)
+
+
+### Features
+
+* Add a FooBar API ([c7a6447](https://github.com/googleapis/google-cloud-node/commit/c7a644781448f2cc6c56549b30f1fe5c1fd69a70))
+* Add the VeoTuningSpec ([c7a6447](https://github.com/googleapis/google-cloud-node/commit/c7a644781448f2cc6c56549b30f1fe5c1fd69a70))
+* Remove private preview label from Model Armor protos ([c7a6447](https://github.com/googleapis/google-cloud-node/commit/c7a644781448f2cc6c56549b30f1fe5c1fd69a70))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.6.0...securesourcemanager-v0.7.0) (2025-07-28)
+
+
+### Features
+
+* [securesourcemanager] add support for new API resources: Issues, IssueComments, PullRequests, PullRequestComments, Blobs ([#6529](https://github.com/googleapis/google-cloud-node/issues/6529)) ([ce2c32f](https://github.com/googleapis/google-cloud-node/commit/ce2c32f00e6cbc6dd6b5a8aa585568e85f919af9))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.5.1...securesourcemanager-v0.6.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6423](https://github.com/googleapis/google-cloud-node/issues/6423)) ([df9184f](https://github.com/googleapis/google-cloud-node/commit/df9184fe9fb00013ef519f093c4de5fd54ec2ce9))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.5.0...securesourcemanager-v0.5.1) (2025-03-19)
 
 

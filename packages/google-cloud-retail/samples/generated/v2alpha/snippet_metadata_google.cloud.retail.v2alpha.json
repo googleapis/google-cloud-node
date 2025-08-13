@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-retail",
-        "version": "4.0.1",
+        "version": "4.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1034,7 +1034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 120,
+                    "end": 143,
                     "type": "FULL"
                 }
             ],
@@ -1078,6 +1078,14 @@
                     {
                         "name": "conversational_filtering_spec",
                         "type": ".google.cloud.retail.v2alpha.ConversationalSearchRequest.ConversationalFilteringSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "safety_settings",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.retail.v2alpha.ConversationalSearchResponse",
@@ -2858,7 +2866,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 378,
+                    "end": 382,
                     "type": "FULL"
                 }
             ],
@@ -2934,6 +2942,10 @@
                     {
                         "name": "variant_rollup_keys",
                         "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "experiment_id",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "page_categories",

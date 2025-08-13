@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-modelarmor",
-        "version": "0.1.1",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -346,7 +346,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -362,6 +362,10 @@
                     {
                         "name": "user_prompt_data",
                         "type": ".google.cloud.modelarmor.v1.DataItem"
+                    },
+                    {
+                        "name": "multi_language_detection_metadata",
+                        "type": ".google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata"
                     }
                 ],
                 "resultType": ".google.cloud.modelarmor.v1.SanitizeUserPromptResponse",
@@ -390,7 +394,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -410,6 +414,10 @@
                     {
                         "name": "user_prompt",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "multi_language_detection_metadata",
+                        "type": ".google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata"
                     }
                 ],
                 "resultType": ".google.cloud.modelarmor.v1.SanitizeModelResponseResponse",

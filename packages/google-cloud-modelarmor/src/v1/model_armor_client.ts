@@ -992,6 +992,8 @@ export class ModelArmorClient {
  *   e.g. name=projects/sample-project/locations/us-central1/templates/templ01
  * @param {google.cloud.modelarmor.v1.DataItem} request.userPromptData
  *   Required. User prompt data to sanitize.
+ * @param {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} [request.multiLanguageDetectionMetadata]
+ *   Optional. Metadata related to Multi Language Detection.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1091,6 +1093,8 @@ export class ModelArmorClient {
  *   Required. Model response data to sanitize.
  * @param {string} [request.userPrompt]
  *   Optional. User Prompt associated with Model response.
+ * @param {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} [request.multiLanguageDetectionMetadata]
+ *   Optional. Metadata related for multi language detection.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

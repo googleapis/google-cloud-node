@@ -338,6 +338,9 @@ export class ReservationBlocksClient {
  *   The name of the reservation. Name should conform to RFC1035 or be a resource ID.
  * @param {string} request.reservationBlock
  *   The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+ * @param {string} request.view
+ *   View of the Block.
+ *   Check the View enum for the list of possible values.
  * @param {string} request.zone
  *   Name of the zone for this request. Zone name should conform to RFC1035.
  * @param {object} [options]

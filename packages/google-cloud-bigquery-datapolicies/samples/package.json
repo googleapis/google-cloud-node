@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/bigquery-datapolicies": "^2.0.1"
+    "@google-cloud/bigquery-datapolicies": "^2.3.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

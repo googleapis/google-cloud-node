@@ -1,5 +1,28 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.1.0...retail-v4.2.0) (2025-07-28)
+
+
+### Features
+
+* [retail] add experiment_id in the SearchRequest proto ([#6519](https://github.com/googleapis/google-cloud-node/issues/6519)) ([6ab93f6](https://github.com/googleapis/google-cloud-node/commit/6ab93f6acc75210bffe3455ecbf1b4dbcb57cc7e))
+* [retail] add new fields in conversational search public SDK ([#6537](https://github.com/googleapis/google-cloud-node/issues/6537)) ([ec9102c](https://github.com/googleapis/google-cloud-node/commit/ec9102c5b3417b8d461e8ee9bca271c62a95ccf7))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.0.1...retail-v4.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [retail] add a user_attributes field in SearchRequest that can be used for personalization ([#6446](https://github.com/googleapis/google-cloud-node/issues/6446)) ([82e7310](https://github.com/googleapis/google-cloud-node/commit/82e7310b1869eec39c317d828363af96af7c9d84))
+* [retail] add methods from gax to cache proto root and process custom error details ([#6286](https://github.com/googleapis/google-cloud-node/issues/6286)) ([f5cbc58](https://github.com/googleapis/google-cloud-node/commit/f5cbc58dc80d8ca52b4cfe71c254eece9a9ca9c9))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/bigquery to v8 ([#6317](https://github.com/googleapis/google-cloud-node/issues/6317)) ([f5763b2](https://github.com/googleapis/google-cloud-node/commit/f5763b2e5febc387fe4157052d5c9f17b235addf))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/retail-v4.0.0...retail-v4.0.1) (2025-03-19)
 
 

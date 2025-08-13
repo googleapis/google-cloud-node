@@ -1304,6 +1304,9 @@ export class PredictionServiceClient {
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
+ * @param {google.cloud.aiplatform.v1beta1.ModelArmorConfig} [request.modelArmorConfig]
+ *   Optional. Settings for prompt and response sanitization using the Model
+ *   Armor service. If supplied, safety_settings must not be supplied.
  * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
  *   Optional. Generation config.
  * @param {object} [options]
@@ -1615,6 +1618,9 @@ export class PredictionServiceClient {
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
+ * @param {google.cloud.aiplatform.v1beta1.ModelArmorConfig} [request.modelArmorConfig]
+ *   Optional. Settings for prompt and response sanitization using the Model
+ *   Armor service. If supplied, safety_settings must not be supplied.
  * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
  *   Optional. Generation config.
  * @param {object} [options]

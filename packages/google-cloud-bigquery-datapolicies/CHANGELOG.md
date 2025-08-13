@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.2.0...bigquery-datapolicies-v2.3.0) (2025-07-22)
+
+
+### Features
+
+* [bigquery-datapolicies] Add client libraries for V2 Data Policy api ([#6503](https://github.com/googleapis/google-cloud-node/issues/6503)) ([67792d8](https://github.com/googleapis/google-cloud-node/commit/67792d85893a9f5ae5de70998c012bf92c789313))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.1.0...bigquery-datapolicies-v2.2.0) (2025-07-17)
+
+
+### Features
+
+* [bigquery-datapolicies] Release v2beta1 version containing Data Policy on Column ([#6480](https://github.com/googleapis/google-cloud-node/issues/6480)) ([e30eb7c](https://github.com/googleapis/google-cloud-node/commit/e30eb7c9ca1a668d02aa46e7197ac21414e8250f))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.0.1...bigquery-datapolicies-v2.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6418](https://github.com/googleapis/google-cloud-node/issues/6418)) ([fcfb2c0](https://github.com/googleapis/google-cloud-node/commit/fcfb2c018539983a8ce32205a2ea9e99ef28e88a))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.0.0...bigquery-datapolicies-v2.0.1) (2025-03-19)
 
 

@@ -52,9 +52,21 @@ function main(name) {
    */
   // const computeInstanceTargetEnvironment = {}
   /**
+   *  Disk target environment to be used during restore.
+   */
+  // const diskTargetEnvironment = {}
+  /**
+   *  Region disk target environment to be used during restore.
+   */
+  // const regionDiskTargetEnvironment = {}
+  /**
    *  Compute Engine instance properties to be overridden during restore.
    */
   // const computeInstanceRestoreProperties = {}
+  /**
+   *  Disk properties to be overridden during restore.
+   */
+  // const diskRestoreProperties = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

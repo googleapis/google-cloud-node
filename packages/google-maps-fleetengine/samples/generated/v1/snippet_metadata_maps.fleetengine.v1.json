@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-fleetengine",
-        "version": "0.6.1",
+        "version": "0.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -74,7 +74,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 102,
+                    "end": 95,
                     "type": "FULL"
                 }
             ],

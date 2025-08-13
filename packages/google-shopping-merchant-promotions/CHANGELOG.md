@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/promotions-v0.3.0...promotions-v0.4.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add promotions API client libraries for v1 ([#6571](https://github.com/googleapis/google-cloud-node/issues/6571)) ([21ff447](https://github.com/googleapis/google-cloud-node/commit/21ff44708671ae294e646a9e2604ac4da9d8a858))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/promotions-v0.2.1...promotions-v0.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/promotions-v0.2.0...promotions-v0.2.1) (2025-03-21)
 
 

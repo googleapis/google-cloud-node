@@ -16,12 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
+import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 
 const ReportServiceClient = v1beta.ReportServiceClient;
 type ReportServiceClient = v1beta.ReportServiceClient;
 
-export {v1beta, ReportServiceClient};
-export default {v1beta, ReportServiceClient};
+export {v1, v1alpha, v1beta, ReportServiceClient};
+export default {v1, v1alpha, v1beta, ReportServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
