@@ -11327,16 +11327,16 @@ export namespace google {
                     public codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
                     /** Part thought. */
-                    public thought?: (boolean|null);
+                    public thought: boolean;
 
                     /** Part thoughtSignature. */
-                    public thoughtSignature?: (Uint8Array|Buffer|string|null);
+                    public thoughtSignature: (Uint8Array|Buffer|string);
 
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
 
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult"|"thought"|"thoughtSignature");
+                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
 
                     /** Part metadata. */
                     public metadata?: "videoMetadata";

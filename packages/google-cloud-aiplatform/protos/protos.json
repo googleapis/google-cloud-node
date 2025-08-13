@@ -2824,9 +2824,7 @@
                             "functionCall",
                             "functionResponse",
                             "executableCode",
-                            "codeExecutionResult",
-                            "thought",
-                            "thoughtSignature"
+                            "codeExecutionResult"
                           ]
                         },
                         "metadata": {
