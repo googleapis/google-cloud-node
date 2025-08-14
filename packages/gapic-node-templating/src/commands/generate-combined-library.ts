@@ -47,7 +47,7 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       `Combining libraries in ${argv['library-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`,
     );
     try {
-      await combineLibraries(argv['library-path'], argv['destination-path']);
+      await combineLibraries(argv['library-path'], writeDestination);
     } catch (err) {
       if (!(err as any).message.includes('Unexpected library format')) {
         throw err;
@@ -60,6 +60,5 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       writeDestination,
       argv['default-version'],
     );
-    console.log('abot to generate readme')
   },
 };

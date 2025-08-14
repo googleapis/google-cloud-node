@@ -18,34 +18,27 @@ import {generateCombinedLibraries} from '../src/commands/generate-combined-libra
 import {describe, it} from 'mocha';
 // eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
-import * as vars from '../src/get-bootstrap-template-vars';
+import * as combineLibraries from '../src/combine-libraries';
+import * as generateIndexTs from '../src/generate-index';
 import * as templates from '../src/templating';
 import path from 'path';
-
-export const API_ID = 'google.cloud.kms.v1';
-export const DESTINATION_FOLDER = './temp';
-export const MONO_REPO_NAME = 'google-cloud-node';
-export const GITHUB_TOKEN = 'ghs_1234';
-export const FOLDER_NAME = 'google-cloud-kms';
+import { TEST_FIXTURES_PATH } from './combine-libraries.test';
 
 describe('tests running build trigger', () => {
-//   let compileVarsStub: sinon.SinonStub;
-//   let compileTemplatesStub: sinon.SinonStub;
-//   let getDistributionNameStub: sinon.SinonStub;
-//   beforeEach(() => {
-//     compileVarsStub = sinon.stub(vars, 'compileVars');
-//     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
-//     getDistributionNameStub = sinon.stub(vars, 'getDistributionName');
-//   });
+  let combineLibrariesStub: sinon.SinonStub;
+  let generateIndexTsStub: sinon.SinonStub;
+  beforeEach(() => {
+    combineLibrariesStub = sinon.stub(combineLibraries, 'combineLibraries');
+    generateIndexTsStub = sinon.stub(generateIndexTs, 'generateIndexTs');
+  });
 
-//   afterEach(() => {
-//     compileVarsStub.restore();
-//     compileTemplatesStub.restore();
-//     getDistributionNameStub.restore();
-//   });
-const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
+  afterEach(() => {
+    combineLibrariesStub.restore();
+    generateIndexTsStub.restore();
+  });
 
-  it('it should generate a full library', async () => {
+
+  it('it should generate a full library with only a single library argument', async () => {
     await generateCombinedLibraries.handler({
       'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
@@ -53,8 +46,50 @@ const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
       $0: 'foo',
     });
 
-    // assert.ok(getDistributionNameStub.calledOnce);
-    // assert.ok(compileVarsStub.calledOnce);
-    // assert.ok(compileTemplatesStub.calledOnce);
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
+    assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), undefined));
+  });
+
+  it('it should generate a full library at a different destination path if provided', async () => {
+    await generateCombinedLibraries.handler({
+      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'destination-path': 'different-path',
+      destinationPath: 'different-path',
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'different-path'));
+    assert.ok(generateIndexTsStub.calledOnceWithExactly('different-path', undefined));
+  });
+
+  it('it should generate a full library with a default version', async () => {
+    await generateCombinedLibraries.handler({
+      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'default-version': 'v1',
+      defaultVersion: 'v1',
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
+    assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'v1'));
+  });
+
+  it('it should bubble up an error if the library is not in expected format', async () => {
+    await generateCombinedLibraries.handler({
+      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'default-version': 'v1',
+      defaultVersion: 'v1',
+      _: [],
+      $0: 'foo',
+    });
+
+    await assert.rejects(() => combineLibrariesStub.throws(new Error('Unexpected library format')))
+    // assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
+    // assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'v1'));
   });
 });

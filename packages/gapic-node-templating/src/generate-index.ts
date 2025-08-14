@@ -26,6 +26,7 @@ export const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
   __dirname,
   '../../templates/post-processing-templates'
 );
+
 // This regex is safe because we are basically just decomposing the code in
 // the generator
 /*
@@ -35,7 +36,16 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 */
 const regex = /export\s*{\s*(\w+Client)\s*}/g;
 export async function extractVersions(currentPath: string) {
-  const allItemsInSrc = await fs.readdir(path.join(currentPath, SRC_PATH),{ withFileTypes: true });
+    let allItemsInSrc: Dirent[] = [];
+    try {
+        allItemsInSrc = await fs.readdir(path.join(currentPath, SRC_PATH),{ withFileTypes: true });
+    } catch (err) {
+        // If this fails, it means that the library is not
+        // in the format we expect. This could happen if we
+        // are rerunning the command on a well-formed library
+        // or its otherwise unexpected. In this case, fail early
+        throw new Error('Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.')
+    }
   const justVersionDirectories = allItemsInSrc.filter((x: Dirent) => x.isDirectory()).map((x: Dirent) => x.name);
   return justVersionDirectories;
 };
@@ -88,7 +98,7 @@ export async function generateIndexTs(currentLibrary: string, defaultVersion?: s
 
 // In case a default version isn't provided, this function should
 // offer a default version
-function getHighestVersionWithPrecedence(versions: string[]) {
+export function getHighestVersionWithPrecedence(versions: string[]) {
     if (!versions || versions.length === 0) {
         throw new Error ('No versions found in library; cannot generate index.ts');
     }

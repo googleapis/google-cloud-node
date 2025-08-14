@@ -104,7 +104,7 @@ async function ensureDirectoryExists(filePath: string) {
 
 export async function combineLibraries(
   readDirectory: string,
-  writeDirectory?: string,
+  writeDirectory: string,
 ) {
   writeDirectory = writeDirectory || readDirectory;
   console.log(`Generating all unique paths in all library versions from ${readDirectory} to ${writeDirectory}`);
@@ -123,7 +123,7 @@ export async function combineLibraries(
  * - {string} content: The full content to write to the file.
  * @returns {Promise<void>} A promise that resolves when all files are written.
  */
-async function createDirectoryAndWriteFiles(
+export async function createDirectoryAndWriteFiles(
   baseOutputDir: string,
   files: {filePath: string; content: string}[],
 ) {
