@@ -15,7 +15,6 @@
 import {traverseDirectory} from './combine-libraries';
 import * as nj from 'nunjucks';
 import {POST_PROCESSING_TEMPLATES_PATH} from './generate-index';
-import { release } from 'os';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
@@ -34,9 +33,24 @@ backwards-incompatible changes at any time.`;
 
 const DEFAULT_RELEASE_LEVEL = 'preview';
 
-export async function getSamplesMetadata(currentLibrary: string): Promise<{ filePath: string; content: string; title: string; }[]> {
+/**
+ * Retrieves metadata for all generated samples within a given library path.
+ *
+ * This function traverses the `samples/generated` directory within a specified library,
+ * processes each sample to get its title, and returns a list of objects containing
+ * the file path, content, and title for each sample.
+ *
+ * @param {string} currentLibrary - The path to the library's root directory.
+ * @returns {Promise<{filePath: string; content: string; title: string}[]>} A promise that resolves to an array of sample metadata objects.
+ */
+export async function getSamplesMetadata(
+  currentLibrary: string,
+): Promise<{filePath: string; content: string; title: string}[]> {
   // Let's remove the main library from the samples paths
-  const stringToRemove = currentLibrary.split('/').slice(0, currentLibrary.split('/').length-1).join('/');
+  const stringToRemove = currentLibrary
+    .split('/')
+    .slice(0, currentLibrary.split('/').length - 1)
+    .join('/');
   let samples = await traverseDirectory(
     path.join(currentLibrary, SAMPLES_PATH),
     [],
@@ -48,7 +62,11 @@ export async function getSamplesMetadata(currentLibrary: string): Promise<{ file
   });
   samples = cleanNodejsFromLibraryPath(samples);
   // Since we later assign the title property, it should exist
-  return samples as unknown as { filePath: string; content: string; title: string; }[];
+  return samples as unknown as {
+    filePath: string;
+    content: string;
+    title: string;
+  }[];
 }
 
 // This function is somewhat of a hacky helper. Essentially, while we are still using
@@ -57,14 +75,29 @@ export async function getSamplesMetadata(currentLibrary: string): Promise<{ file
 // file paths won't match what exists in google-cloud-node, i.e.,
 // https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data-nodejs/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js
 // does not exist, we need to remove the *-nodejs from the path. This does that.
-function cleanNodejsFromLibraryPath(samples: {filePath: string, content: string}[]) {
+function cleanNodejsFromLibraryPath(
+  samples: {filePath: string; content: string}[],
+) {
   samples.forEach(sample => {
     sample.filePath = sample.filePath.replace('-nodejs', '');
-  })
+  });
   return samples;
 }
 
-export function getSampleName(sample: { filePath: string; content: string; }): string {
+/**
+ * Extracts and formats a human-readable name from a sample's file path.
+ *
+ * The function takes a sample object and attempts to derive a clean name by
+ * stripping the file extension, API version, and replacing underscores with spaces.
+ * If the path is not in the expected format, it logs an error and returns the original path.
+ *
+ * @param {{filePath: string; content: string}} sample - The sample object containing the file path.
+ * @returns {string} The formatted name of the sample.
+ */
+export function getSampleName(sample: {
+  filePath: string;
+  content: string;
+}): string {
   // Get just the sample name from the path
   let sampleName = sample.filePath;
   try {
@@ -76,7 +109,9 @@ export function getSampleName(sample: { filePath: string; content: string; }): s
     // Remove the underscores
     sampleName = sampleName.replace(/_/g, ' ');
   } catch (err) {
-    console.log(`${sample.filePath} was not in correct format; transformations could not be completed`)
+    console.log(
+      `${sample.filePath} was not in correct format; transformations could not be completed`,
+    );
     // Reset if there was an error
     sampleName = sample.filePath;
   }
@@ -85,10 +120,32 @@ export function getSampleName(sample: { filePath: string; content: string; }): s
 
 // We have two readme generations because the initial generation step
 // will be a little different than what's available during post-processing
-export async function initialGenerateReadMe(args: {currentLibrary: string, stringToReplaceForSampleTable: string, stringToReplaceForReleaseLevel: string, writeLibrary: string, releaseLevel?: string}) {
+/**
+ * Generates the initial README file for a library by compiling templates and replacing placeholders.
+ *
+ * This function uses Nunjucks to render a sample table based on the found samples
+ * and injects it along with the appropriate release level message into the README.md
+ * template.
+ *
+ * @param {{currentLibrary: string; stringToReplaceForSampleTable: string; stringToReplaceForReleaseLevel: string; writeLibrary: string; releaseLevel?: string;}} args - An object containing the arguments for the function.
+ * @param {string} args.currentLibrary - The path to the library's root directory.
+ * @param {string} args.stringToReplaceForSampleTable - The placeholder string to be replaced with the samples table.
+ * @param {string} args.stringToReplaceForReleaseLevel - The placeholder string to be replaced with the release level message.
+ * @param {string} args.writeLibrary - The path where the final README.md will be written.
+ * @param {string} [args.releaseLevel] - The release level of the library (e.g., 'stable', 'preview'). Defaults to 'preview'.
+ */
+export async function initialGenerateReadMe(args: {
+  currentLibrary: string;
+  stringToReplaceForSampleTable: string;
+  stringToReplaceForReleaseLevel: string;
+  writeLibrary: string;
+  releaseLevel?: string;
+}) {
   const samplesMetadata = await getSamplesMetadata(args.currentLibrary);
   const releaseLevel = args.releaseLevel || DEFAULT_RELEASE_LEVEL;
-  const releaseLevelMessage = (/stable/i).test(releaseLevel) ? RELEASE_LEVEL_STABLE : RELEASE_LEVEL_PREVIEW;
+  const releaseLevelMessage = /stable/i.test(releaseLevel)
+    ? RELEASE_LEVEL_STABLE
+    : RELEASE_LEVEL_PREVIEW;
 
   console.log(
     `Configuring Nunjucks with FileSystemLoader for directory: ${POST_PROCESSING_TEMPLATES_PATH}`,
@@ -111,28 +168,47 @@ export async function initialGenerateReadMe(args: {currentLibrary: string, strin
   // README will replace eventually.
   // stringToReplaceForSampleTable should be '[//]: # "samples"'
   // stringToReplaceForReleaseLevel should be '[//]: # "releaseLevel"'
-  // Since this regex could change, we 
-  await readAndWriteToReadme(args.currentLibrary, args.stringToReplaceForSampleTable, compiledTemplate, args.writeLibrary);
-  await readAndWriteToReadme(args.currentLibrary, args.stringToReplaceForReleaseLevel, releaseLevelMessage, args.writeLibrary)
+  // Since this regex could change, we
+  await readAndWriteToReadme(
+    args.currentLibrary,
+    args.stringToReplaceForSampleTable,
+    compiledTemplate,
+    args.writeLibrary,
+  );
+  await readAndWriteToReadme(
+    args.currentLibrary,
+    args.stringToReplaceForReleaseLevel,
+    releaseLevelMessage,
+    args.writeLibrary,
+  );
   console.log('Nunjucks template rendered successfully.');
 }
 
-// Gets the current README contents
-// Searches for the string to replace
-// Replaces with replacement string
-// Writes to a README in a new folder
-export async function readAndWriteToReadme(currentLibrary: string, stringToReplace: string, replacementString: string, writeLibrary: string) {
+/**
+ * Reads the content of a README.md file, replaces a specified string, and writes the modified content to a new README.md file.
+ *
+ * @param {string} currentLibrary - The path to the current library.
+ * @param {string} stringToReplace - The string to replace in the README.md file.
+ * @param {string} replacementString - The string to replace with.
+ * @param {string} writeLibrary - The path to the directory where the new README.md file will be written.
+ */
+export async function readAndWriteToReadme(
+  currentLibrary: string,
+  stringToReplace: string,
+  replacementString: string,
+  writeLibrary: string,
+) {
   const readmePath = path.join(currentLibrary, README_PATH);
   const writeFilePath = path.join(writeLibrary, README_PATH);
   let contents;
   try {
-    contents = await fs.readFile(
-      readmePath,
-      'utf8',
-    );
+    contents = await fs.readFile(readmePath, 'utf8');
   } catch (err) {
-    throw new Error(`${readmePath} does not exist; cannot write to ${writeFilePath}`)
+    throw new Error(
+      `${readmePath} does not exist; cannot write to ${writeFilePath}`,
+    );
   }
   contents = contents.replace(stringToReplace, replacementString);
+  console.log(`Writing ${contents} to ${writeFilePath}`);
   await fs.writeFile(writeFilePath, contents);
 }

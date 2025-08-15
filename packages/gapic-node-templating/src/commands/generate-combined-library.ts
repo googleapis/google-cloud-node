@@ -15,12 +15,17 @@
 import yargs = require('yargs');
 import {combineLibraries} from '../combine-libraries';
 import {generateIndexTs} from '../generate-index';
-import {initialGenerateReadMe} from '../generate-readme';
 export interface CliArgs {
   'library-path': string;
   'default-version'?: string;
-  'destination-path'?: string; 
+  'destination-path'?: string;
 }
+/**
+ * Command module for bootstrapping a library.
+ *
+ * This module defines a yargs command to combine a library when all individual
+ * libraries are generated
+ */
 export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
   command: 'combine-library',
   describe: 'Combines the versions for a given API into a single library',
@@ -39,8 +44,17 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         describe:
           'what is the default version of the library (default is highest)',
         type: 'string',
-      })
+      });
   },
+
+  /**
+   * Yargs command handler for generating a combined library.
+   *
+   * @param {CliArgs} argv - The command line arguments
+   * library-path: path in which a pre-combined library lives
+   * destination-path: path where to copy over the library
+   * default-version: what is the default version of the library (default is highest)
+   */
   async handler(argv: CliArgs) {
     const writeDestination = argv['destination-path'] || argv['library-path'];
     console.log(
@@ -53,12 +67,7 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         throw err;
       }
     }
-    console.log(
-      `Generating index.ts in ${writeDestination}`,
-    );
-    await generateIndexTs(
-      writeDestination,
-      argv['default-version'],
-    );
+    console.log(`Generating index.ts in ${writeDestination}`);
+    await generateIndexTs(writeDestination, argv['default-version']);
   },
 };

@@ -138,6 +138,12 @@ export function getApiPathWithDashes(apiId: string) {
   return apiId.replace(/\.v[0-9].*/, '').replace(/\./g, '-');
 }
 
+/**
+ * Gets the version from the API ID.
+ *
+ * @param {string} apiId - The API ID.
+ * @returns {string} The version.
+ */
 export function getVersion(apiId: string) {
   return apiId.split('.')[apiId.split('.').length - 1];
 }

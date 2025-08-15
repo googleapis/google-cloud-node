@@ -77,6 +77,11 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
         demand: true,
       });
   },
+  /**
+   * Yargs command handler for bootstrapping a library.
+   *
+   * @param {CliArgs} argv - The command line arguments.
+   */
   async handler(argv: CliArgs) {
     const octokit = new Octokit();
     const distributionName = await getDistributionName(
@@ -98,7 +103,7 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
     await compileTemplates(
       BOOTSTRAP_TEMPLATES_PATH,
       argv['destination-folder'],
-      bootstrapVars
+      bootstrapVars,
     );
   },
 };

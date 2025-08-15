@@ -13,48 +13,193 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {generateCombinedLibraries} from '../src/commands/generate-combined-library';
-// eslint-disable-next-line node/no-unpublished-import
+import {generateReadme} from '../src/commands/generate-readme';
 import {describe, it} from 'mocha';
-// eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
-import * as vars from '../src/get-bootstrap-template-vars';
-import * as templates from '../src/templating';
+import * as generateReadMe from '../src/generate-readme';
 import path from 'path';
 
-export const API_ID = 'google.cloud.kms.v1';
-export const DESTINATION_FOLDER = './temp';
-export const MONO_REPO_NAME = 'google-cloud-node';
-export const GITHUB_TOKEN = 'ghs_1234';
-export const FOLDER_NAME = 'google-cloud-kms';
+const TEST_FIXTURES_PATH = path.join(__dirname, 'fixtures', 'combined-library');
 
-describe('tests running build trigger', () => {
-//   let compileVarsStub: sinon.SinonStub;
-//   let compileTemplatesStub: sinon.SinonStub;
-//   let getDistributionNameStub: sinon.SinonStub;
-//   beforeEach(() => {
-//     compileVarsStub = sinon.stub(vars, 'compileVars');
-//     compileTemplatesStub = sinon.stub(templates, 'compileTemplates');
-//     getDistributionNameStub = sinon.stub(vars, 'getDistributionName');
-//   });
+describe('tests running generate-readme command', () => {
+  let initialGenerateReadMeStub: sinon.SinonStub;
+  let readAndWriteToReadmeStub: sinon.SinonStub;
 
-//   afterEach(() => {
-//     compileVarsStub.restore();
-//     compileTemplatesStub.restore();
-//     getDistributionNameStub.restore();
-//   });
-const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
+  beforeEach(() => {
+    initialGenerateReadMeStub = sinon.stub(
+      generateReadMe,
+      'initialGenerateReadMe',
+    );
+    readAndWriteToReadmeStub = sinon.stub(
+      generateReadMe,
+      'readAndWriteToReadme',
+    );
+  });
 
-  it('it should generate a full library', async () => {
-    await generateCombinedLibraries.handler({
-      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-      libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+  afterEach(() => {
+    initialGenerateReadMeStub.restore();
+    readAndWriteToReadmeStub.restore();
+  });
+
+  it('it should run initial generation if initial-generation flag is true', async () => {
+    await generateReadme.handler({
+      'library-path': 'path',
+      libraryPath: 'path',
+      'initial-generation': true,
+      initialGeneration: true,
+      'replacement-string-samples': '//samples',
+      replacementStringSamples: '//samples',
+      'replacement-string-release-level': '//releaseLevel',
+      replacementStringReleaseLevel: '//releaseLevel',
+      'release-level': 'stable',
+      releaseLevel: 'stable',
+      'destination-path': 'destination-path',
+      destinationPath: 'destination-path',
       _: [],
       $0: 'foo',
     });
 
-    // assert.ok(getDistributionNameStub.calledOnce);
-    // assert.ok(compileVarsStub.calledOnce);
-    // assert.ok(compileTemplatesStub.calledOnce);
+    assert.ok(
+      initialGenerateReadMeStub.calledOnceWithExactly({
+        currentLibrary: 'path',
+        stringToReplaceForSampleTable: '//samples',
+        stringToReplaceForReleaseLevel: '//releaseLevel',
+        releaseLevel: 'stable',
+        writeLibrary: 'destination-path',
+      }),
+    );
+    assert.ok(readAndWriteToReadmeStub.notCalled);
+  });
+
+  it('it should run post-initial generation if initial-generation flag is not provided', async () => {
+    await generateReadme.handler({
+      'library-path': 'path',
+      libraryPath: 'path',
+      'string-to-replace': 'old',
+      stringToReplace: 'old',
+      'replacement-string': 'new',
+      replacementString: 'new',
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(
+      readAndWriteToReadmeStub.calledOnceWithExactly(
+        'path',
+        'old',
+        'new',
+        'path',
+      ),
+    );
+    assert.ok(initialGenerateReadMeStub.notCalled);
+  });
+
+  it('it should use default values for replacement strings if they are not provided during initial generation', async () => {
+    const consoleStub = sinon.stub(console, 'log');
+
+    await generateReadme.handler({
+      'library-path': 'path',
+      libraryPath: 'path',
+      'initial-generation': true,
+      initialGeneration: true,
+      _: [],
+      $0: 'foo',
+    });
+
+    // Assert that the console log message is displayed for the missing replacement strings
+    assert.ok(
+      consoleStub.calledWith(
+        'Initial readme generation was selected, but no string to replace the samples table and/or the release level was given' +
+          'Will use [//]: # "samples"',
+      ),
+    );
+    assert.ok(
+      consoleStub.calledWith(
+        'Initial readme generation was selected, but no string to replace the samples table and/or the release level was given' +
+          'Will use [//]: # "releaseLevel"',
+      ),
+    );
+
+    // Assert that initialGenerateReadMeStub was called once with the default values
+    assert.ok(
+      initialGenerateReadMeStub.calledOnceWithExactly({
+        currentLibrary: 'path',
+        stringToReplaceForSampleTable: '[//]: # "samples"',
+        stringToReplaceForReleaseLevel: '[//]: # "releaseLevel"',
+        releaseLevel: undefined,
+        writeLibrary: 'path',
+      }),
+    );
+    assert.ok(readAndWriteToReadmeStub.notCalled);
+
+    consoleStub.restore();
+  });
+
+  it('it should bubble up an error if post-initial generation is selected without replacement strings', async () => {
+    await assert.rejects(
+      async () =>
+        generateReadme.handler({
+          'library-path': 'path',
+          libraryPath: 'path',
+          _: [],
+          $0: 'foo',
+        }),
+      {
+        message:
+          'Post-initial generate readme was selected, but no string to replace/replacement was given',
+      },
+    );
+    assert.ok(initialGenerateReadMeStub.notCalled);
+    assert.ok(readAndWriteToReadmeStub.notCalled);
+  });
+
+  it('it should set writeDestination to libraryPath if destinationPath is not provided', async () => {
+    await generateReadme.handler({
+      'library-path': 'path',
+      libraryPath: 'path',
+      'string-to-replace': 'old',
+      stringToReplace: 'old',
+      'replacement-string': 'new',
+      replacementString: 'new',
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(
+      readAndWriteToReadmeStub.calledOnceWithExactly(
+        'path',
+        'old',
+        'new',
+        'path', // Asserting that the writeDestination is the same as the libraryPath
+      ),
+    );
+  });
+
+  it('it should continue generation and log a message if no release level is given during initial generation', async () => {
+    const consoleStub = sinon.stub(console, 'log');
+
+    await generateReadme.handler({
+      'library-path': 'path',
+      libraryPath: 'path',
+      'initial-generation': true,
+      initialGeneration: true,
+      'replacement-string-samples': 'samples',
+      replacementStringSamples: 'samples',
+      'replacement-string-release-level': 'beta',
+      replacementStringReleaseLevel: 'beta',
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(
+      consoleStub.calledWith(
+        'No release level was selected for initial generation; will generate with preview',
+      ),
+    );
+
+    // Make sure the main function was still called after the log
+    assert.ok(initialGenerateReadMeStub.calledOnce);
+
+    consoleStub.restore(); // Clean up the stub
   });
 });

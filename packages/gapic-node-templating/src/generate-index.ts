@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Dirent } from "fs";
+import {Dirent} from 'fs';
 import * as nj from 'nunjucks';
 
 const fs = require('fs/promises'); // For async file system operations
@@ -24,10 +24,10 @@ const TEMPLATE_FILE_NAME = 'index.ts.njk';
 
 export const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
   __dirname,
-  '../../templates/post-processing-templates'
+  '../../templates/post-processing-templates',
 );
 
-// This regex is safe because we are basically just decomposing the code in
+// This regex is safe because we are basically just searching for the code in
 // the generator
 /*
 {% for service in api.services -%}
@@ -35,114 +35,182 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 {% endfor -%}
 */
 const regex = /export\s*{\s*(\w+Client)\s*}/g;
-export async function extractVersions(currentPath: string) {
-    let allItemsInSrc: Dirent[] = [];
-    try {
-        allItemsInSrc = await fs.readdir(path.join(currentPath, SRC_PATH),{ withFileTypes: true });
-    } catch (err) {
-        // If this fails, it means that the library is not
-        // in the format we expect. This could happen if we
-        // are rerunning the command on a well-formed library
-        // or its otherwise unexpected. In this case, fail early
-        throw new Error('Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.')
-    }
-  const justVersionDirectories = allItemsInSrc.filter((x: Dirent) => x.isDirectory()).map((x: Dirent) => x.name);
-  return justVersionDirectories;
-};
 
-export async function extractClients(currentPath: string) {
-    const directories = await extractVersions(currentPath);
-    let clientsAndVersions: {version: string, clients: string[]}[] = [];
-    for (const directory of directories) {
-        const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
-        if (await fs.stat(indexFile)) {
-            const clientsRegexMatch = [...(await fs.readFile(indexFile, 'utf8')).matchAll(regex)];
-            clientsAndVersions.push({version: directory, clients: clientsRegexMatch.map((x: any) => x[1])});
-        }
-    }
-    return clientsAndVersions;
+/**
+ * Asynchronously extracts all version directories from a library's `src` folder.
+ *
+ * This function reads the contents of a specified library's `src` directory and
+ * filters the entries to return an array of names for all subdirectories. It
+ * throws an error if the directory structure is not as expected.
+ *
+ * @param {string} currentPath - The path to the library's root directory.
+ * @returns {Promise<string[]>} A promise that resolves to an array of version directory names (e.g., ['v1', 'v2beta1']).
+ * @throws {Error} Throws an error if the `src` directory does not exist or has an unexpected format.
+ */
+export async function extractVersions(currentPath: string) {
+  let allItemsInSrc: Dirent[] = [];
+  try {
+    allItemsInSrc = await fs.readdir(path.join(currentPath, SRC_PATH), {
+      withFileTypes: true,
+    });
+  } catch (err) {
+    // If this fails, it means that the library is not
+    // in the format we expect. This could happen if we
+    // are rerunning the command on a well-formed library
+    // or its otherwise unexpected. In this case, fail early
+    throw new Error(
+      'Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.',
+    );
+  }
+  const justVersionDirectories = allItemsInSrc
+    .filter((x: Dirent) => x.isDirectory())
+    .map((x: Dirent) => x.name);
+  return justVersionDirectories;
 }
 
-export async function generateIndexTs(currentLibrary: string, defaultVersion?: string) {
+/**
+ * Asynchronously extracts all client names and their corresponding versions from a library.
+ *
+ * This function first gets a list of version directories. For each version, it reads the
+ * `index.ts` file, uses a regular expression to find all exported client classes,
+ * and compiles them into a structured array.
+ *
+ * @param {string} currentPath - The path to the library's root directory.
+ * @returns {Promise<{version: string; clients: string[]}[]>} A promise that resolves to an array of objects, each containing a version string and an array of client names.
+ */
+export async function extractClients(currentPath: string) {
+  const directories = await extractVersions(currentPath);
+  const clientsAndVersions: {version: string; clients: string[]}[] = [];
+  for (const directory of directories) {
+    const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
+    if (await fs.stat(indexFile)) {
+      const clientsRegexMatch = [
+        ...(await fs.readFile(indexFile, 'utf8')).matchAll(regex),
+      ];
+      clientsAndVersions.push({
+        version: directory,
+        clients: clientsRegexMatch.map((x: any) => x[1]),
+      });
+    }
+  }
+  return clientsAndVersions;
+}
 
-    // Get all the versions
-    const versions = await extractVersions(currentLibrary);
-    console.log(`All versions in ${currentLibrary}: ${versions}`)
+/**
+ * Generates an `index.ts` file for a combined library.
+ *
+ * This function orchestrates the generation of a new `index.ts` file that re-exports
+ * all clients from their versioned subdirectories. It automatically determines
+ * the highest-precedence version to set as the default, unless a specific default
+ * version is provided.
+ *
+ * @param {string} currentLibrary - The path to the library's root directory.
+ * @param {string} [defaultVersion] - An optional version string to explicitly set as the default.
+ */
+export async function generateIndexTs(
+  currentLibrary: string,
+  defaultVersion?: string,
+) {
+  // Get all the versions
+  const versions = await extractVersions(currentLibrary);
+  console.log(`All versions in ${currentLibrary}: ${versions}`);
 
-    // Get all the clients in each specific version
-    const clientsAndVersions = await extractClients(currentLibrary);
-    console.log(`All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`)
-        
-    defaultVersion = defaultVersion || getHighestVersionWithPrecedence(versions);
-    // Get the default versions' clients
-    const defaultClientAndVersions = clientsAndVersions.find(x => x.version === defaultVersion);
-    console.log(`The default version is ${JSON.stringify(defaultClientAndVersions, null, 2)}`)
-    
-    // Render index.ts
-    const variables = {versions, defaultClientAndVersions}
+  // Get all the clients in each specific version
+  const clientsAndVersions = await extractClients(currentLibrary);
+  console.log(
+    `All clients and their versions in ${currentLibrary}: ${JSON.stringify(clientsAndVersions, null, 2)}`,
+  );
+  defaultVersion = defaultVersion || getHighestVersionWithPrecedence(versions);
+  // Get the default versions' clients
+  const defaultClientAndVersions = clientsAndVersions.find(
+    x => x.version === defaultVersion,
+  );
+  console.log(
+    `The default version is ${JSON.stringify(defaultClientAndVersions, null, 2)}`,
+  );
 
-    // Create a new Nunjucks environment configured to load from the templateDirectory
-    // This is necessary due to occurring in a Bazel environment or locally
-    const env = new nj.Environment(
-        new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
-        { autoescape: false } // Disable autoescaping for code generation
-    );
+  // Render index.ts
+  const variables = {versions, defaultClientAndVersions};
 
-    const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
-  
-    const outputPath = path.join(currentLibrary, SRC_PATH, INDEX_PATH);
-    console.log(`Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`)
-    await fs.writeFile(outputPath, compiledTemplate);
-    console.log(`Successfully wrote: ${outputPath}`);
+  // Create a new Nunjucks environment configured to load from the templateDirectory
+  // This is necessary due to occurring in a Bazel environment or locally
+  const env = new nj.Environment(
+    new nj.FileSystemLoader(POST_PROCESSING_TEMPLATES_PATH),
+    {autoescape: false}, // Disable autoescaping for code generation
+  );
+
+  const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
+
+  const outputPath = path.join(currentLibrary, SRC_PATH, INDEX_PATH);
+  console.log(
+    `Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`,
+  );
+  await fs.writeFile(outputPath, compiledTemplate);
+  console.log(`Successfully wrote: ${outputPath}`);
 }
 
 // In case a default version isn't provided, this function should
 // offer a default version
+/**
+ * Gets the highest version with precedence from a list of versions.
+ * Precedence is defined as: stable > beta > alpha.
+ * If two versions have the same precedence, the one with the higher major version is chosen.
+ * If two versions have the same precedence and major version, the one with the higher pre-release qualifier is chosen (e.g., beta2 > beta1).
+ *
+ * @param {string[]} versions - An array of version strings.
+ * @returns {string} The highest version with precedence.
+ */
 export function getHighestVersionWithPrecedence(versions: string[]) {
-    if (!versions || versions.length === 0) {
-        throw new Error ('No versions found in library; cannot generate index.ts');
+  if (!versions || versions.length === 0) {
+    throw new Error('No versions found in library; cannot generate index.ts');
+  }
+
+  // Define the precedence of pre-release types
+  const precedence = {
+    '': 3, // Stable (no suffix) is highest precedence
+    beta: 2,
+    alpha: 1,
+  };
+
+  let bestVersion = versions[0]; // Stores the "best" version found so far
+  let bestMajor = -1;
+  let bestPrecedence = -1;
+  let bestPreReleaseQualifier = -1; // For e.g., beta1 vs beta2
+
+  for (const version of versions) {
+    const match = version.match(/^v(\d+)(alpha|beta(\d*))?$/);
+
+    if (match) {
+      const majorVersion = parseInt(match[1], 10);
+      const preReleaseType = match[2]
+        ? match[2].startsWith('beta')
+          ? 'beta'
+          : 'alpha'
+        : '';
+      const preReleaseQualifier = match[3] ? parseInt(match[3], 10) : 0; // For beta1, beta2 etc.
+
+      const currentPrecedence = precedence[preReleaseType];
+
+      // Comparison Logic:
+      // 1. Higher Precedence (Stable > Beta > Alpha)
+      // 2. Higher Major Version
+      // 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
+      // 4. If everything else is equal, the current one is just as good
+      if (
+        bestVersion === null || // No best version yet
+        currentPrecedence > bestPrecedence || // Current version has higher precedence (e.g., stable over beta)
+        (currentPrecedence === bestPrecedence && majorVersion > bestMajor) || // Same precedence, but higher major version
+        (currentPrecedence === bestPrecedence &&
+          majorVersion === bestMajor &&
+          preReleaseQualifier > bestPreReleaseQualifier) // Same precedence & major, but higher qualifier (e.g., beta2 vs beta1)
+      ) {
+        bestVersion = version;
+        bestMajor = majorVersion;
+        bestPrecedence = currentPrecedence;
+        bestPreReleaseQualifier = preReleaseQualifier;
+      }
     }
+  }
 
-    // Define the precedence of pre-release types
-    const precedence = {
-        '': 3,       // Stable (no suffix) is highest precedence
-        'beta': 2,
-        'alpha': 1,
-    };
-
-    let bestVersion = versions[0]; // Stores the "best" version found so far
-    let bestMajor = -1;
-    let bestPrecedence = -1;
-    let bestPreReleaseQualifier = -1; // For e.g., beta1 vs beta2
-
-    for (const version of versions) {
-        const match = version.match(/^v(\d+)(alpha|beta(\d*))?$/);
-
-        if (match) {
-            const majorVersion = parseInt(match[1], 10);
-            const preReleaseType = match[2] ? (match[2].startsWith('beta') ? 'beta' : 'alpha') : '';
-            const preReleaseQualifier = match[3] ? parseInt(match[3], 10) : 0; // For beta1, beta2 etc.
-
-            const currentPrecedence = precedence[preReleaseType];
-
-            // Comparison Logic:
-            // 1. Higher Precedence (Stable > Beta > Alpha)
-            // 2. Higher Major Version
-            // 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
-            // 4. If everything else is equal, the current one is just as good
-            if (
-                bestVersion === null || // No best version yet
-                currentPrecedence > bestPrecedence || // Current version has higher precedence (e.g., stable over beta)
-                (currentPrecedence === bestPrecedence && majorVersion > bestMajor) || // Same precedence, but higher major version
-                (currentPrecedence === bestPrecedence && majorVersion === bestMajor && preReleaseQualifier > bestPreReleaseQualifier) // Same precedence & major, but higher qualifier (e.g., beta2 vs beta1)
-            ) {
-                bestVersion = version;
-                bestMajor = majorVersion;
-                bestPrecedence = currentPrecedence;
-                bestPreReleaseQualifier = preReleaseQualifier;
-            }
-        }
-    }
-
-    return bestVersion;
+  return bestVersion;
 }

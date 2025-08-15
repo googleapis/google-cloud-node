@@ -14,15 +14,13 @@
 
 import * as assert from 'assert';
 import {generateCombinedLibraries} from '../src/commands/generate-combined-library';
-// eslint-disable-next-line node/no-unpublished-import
 import {describe, it} from 'mocha';
-// eslint-disable-next-line node/no-unpublished-import
 import * as sinon from 'sinon';
 import * as combineLibraries from '../src/combine-libraries';
 import * as generateIndexTs from '../src/generate-index';
 import * as templates from '../src/templating';
 import path from 'path';
-import { TEST_FIXTURES_PATH } from './combine-libraries.test';
+import {TEST_FIXTURES_PATH} from './combine-libraries.test';
 
 describe('tests running build trigger', () => {
   let combineLibrariesStub: sinon.SinonStub;
@@ -37,22 +35,37 @@ describe('tests running build trigger', () => {
     generateIndexTsStub.restore();
   });
 
-
   it('it should generate a full library with only a single library argument', async () => {
     await generateCombinedLibraries.handler({
-      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'library-path': path.join(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
       libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       _: [],
       $0: 'foo',
     });
 
-    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
-    assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), undefined));
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      ),
+    );
+    assert.ok(
+      generateIndexTsStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        undefined,
+      ),
+    );
   });
 
   it('it should generate a full library at a different destination path if provided', async () => {
     await generateCombinedLibraries.handler({
-      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'library-path': path.join(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
       libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       'destination-path': 'different-path',
       destinationPath: 'different-path',
@@ -60,13 +73,23 @@ describe('tests running build trigger', () => {
       $0: 'foo',
     });
 
-    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'different-path'));
-    assert.ok(generateIndexTsStub.calledOnceWithExactly('different-path', undefined));
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        'different-path',
+      ),
+    );
+    assert.ok(
+      generateIndexTsStub.calledOnceWithExactly('different-path', undefined),
+    );
   });
 
   it('it should generate a full library with a default version', async () => {
     await generateCombinedLibraries.handler({
-      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'library-path': path.join(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
       libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       'default-version': 'v1',
       defaultVersion: 'v1',
@@ -74,22 +97,78 @@ describe('tests running build trigger', () => {
       $0: 'foo',
     });
 
-    assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
-    assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'v1'));
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      ),
+    );
+    assert.ok(
+      generateIndexTsStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        'v1',
+      ),
+    );
   });
 
-  it('it should bubble up an error if the library is not in expected format', async () => {
-    await generateCombinedLibraries.handler({
-      'library-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-      libraryPath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-      'default-version': 'v1',
-      defaultVersion: 'v1',
-      _: [],
-      $0: 'foo',
-    });
+  it('it should not bubble up an error if the library is in an expected format', async () => {
+    // Stub the function to reject with the specific error message.
+    combineLibrariesStub.rejects(new Error('Unexpected library format'));
 
-    await assert.rejects(() => combineLibrariesStub.throws(new Error('Unexpected library format')))
-    // assert.ok(combineLibrariesStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')));
-    // assert.ok(generateIndexTsStub.calledOnceWithExactly(path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'), 'v1'));
+    // We expect the handler to NOT reject, as the error is handled internally.
+    await assert.doesNotReject(async () =>
+      generateCombinedLibraries.handler({
+        'library-path': path.join(
+          TEST_FIXTURES_PATH,
+          'google-cloud-speech-nodejs',
+        ),
+        libraryPath: path.join(
+          TEST_FIXTURES_PATH,
+          'google-cloud-speech-nodejs',
+        ),
+        _: [],
+        $0: 'foo',
+      }),
+    );
+    // Assertions to prove the code continued executing after the handled error.
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      ),
+    );
+    assert.ok(generateIndexTsStub.calledOnce);
+  });
+
+  // Add a new test for when a different error occurs.
+  it('it should bubble up an error if a different error occurs', async () => {
+    // Stub the function to reject with a DIFFERENT error message.
+    combineLibrariesStub.rejects(new Error('A different kind of error'));
+
+    // We expect the handler to REJECT, as the if condition in the catch block will pass.
+    await assert.rejects(
+      async () =>
+        generateCombinedLibraries.handler({
+          'library-path': path.join(
+            TEST_FIXTURES_PATH,
+            'google-cloud-speech-nodejs',
+          ),
+          libraryPath: path.join(
+            TEST_FIXTURES_PATH,
+            'google-cloud-speech-nodejs',
+          ),
+          _: [],
+          $0: 'foo',
+        }),
+      /A different kind of error/, // Use a regex to match the error message.
+    );
+    // Assertions to prove the code stopped executing.
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      ),
+    );
+    assert.ok(generateIndexTsStub.notCalled);
   });
 });

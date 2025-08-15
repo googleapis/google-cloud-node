@@ -17,6 +17,13 @@ import * as fs from 'fs';
 import * as nj from 'nunjucks';
 import * as path from 'path';
 
+/**
+ * Compiles templates in a directory and writes them to another directory.
+ *
+ * @param {string} dirNameReadAbsolute - The absolute path to the directory to read templates from.
+ * @param {string} dirNameWriteAbsolute - The absolute path to the directory to write compiled templates to.
+ * @param {TemplateVars} vars - The variables to use when compiling the templates.
+ */
 export async function compileTemplates(
   dirNameReadAbsolute: string,
   dirNameWriteAbsolute: string,

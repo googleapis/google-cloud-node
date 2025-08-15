@@ -19,7 +19,9 @@ const path = require('path');
  * Recursive helper function to traverse the directory.
  *
  * @param {string} currentPath The current path being processed.
- * @param {Set<string>} accumulator A Set to accumulate unique paths.
+ * @param {Array} accumulator An array to accumulate objects with unique paths and their content.
+ * @param {string} stringToRemove a regular expression to remove from the item paths while saving
+ * stringToRemove is useful tos ave only the relative file paths of a directory
  */
 export async function traverseDirectory(
   currentPath: string,
@@ -34,7 +36,9 @@ export async function traverseDirectory(
     // in the format we expect. This could happen if we
     // are rerunning the command on a well-formed library
     // or its otherwise unexpected. In this case, fail early
-    throw new Error('Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.')
+    throw new Error(
+      'Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.',
+    );
   }
 
   for (const item of items) {
@@ -55,6 +59,16 @@ export async function traverseDirectory(
   return accumulator;
 }
 
+/**
+ * Asynchronously traverses a directory to find all unique file paths and their content from multiple subdirectories.
+ *
+ * This function reads all top-level directories within a given path. It then
+ * recursively traverses each subdirectory to get a list of all files. Finally,
+ * it deduplicates the list to ensure each unique file path is represented only once.
+ *
+ * @param {string} currentPath - The path to the root directory containing all library versions.
+ * @returns {Promise<Array<{filePath: string; content: string}>>} A promise that resolves to an array of objects, each containing a unique file path and its content.
+ */
 export async function generateFinalDirectoryPath(currentPath: string) {
   // Get a full list of all the file paths in all the libraries
   let fullPathsAndContent: {filePath: string; content: string}[] = [];
@@ -92,35 +106,51 @@ export async function generateFinalDirectoryPath(currentPath: string) {
 async function ensureDirectoryExists(filePath: string) {
   const dirPath = path.dirname(filePath);
   try {
-    await fs.mkdir(dirPath, { recursive: true });
+    await fs.mkdir(dirPath, {recursive: true});
     // console.log(`Ensured directory exists for: ${dirPath}`); // Optional: for debugging
   } catch (error) {
-    if ((error as any).code !== 'EEXIST') { // EEXIST means it already exists, which is fine
+    if ((error as any).code !== 'EEXIST') {
+      // EEXIST means it already exists, which is fine
       console.error(`Error ensuring directory ${dirPath} exists:`, error);
       throw error;
     }
   }
 }
 
+/**
+ * Combines multiple library versions into a single, unified directory.
+ *
+ * This function reads files from all subdirectories of a `readDirectory`,
+ * removes duplicates, and then writes the unique set of files to a new
+ * `writeDirectory`. This process is used to merge multiple versioned
+ * libraries into one.
+ *
+ * @param {string} readDirectory - The source directory containing the individual library versions.
+ * @param {string} writeDirectory - The destination directory where the combined library will be created.
+ * @returns {Promise<void>} A promise that resolves when all files have been combined and written.
+ */
 export async function combineLibraries(
   readDirectory: string,
   writeDirectory: string,
 ) {
   writeDirectory = writeDirectory || readDirectory;
-  console.log(`Generating all unique paths in all library versions from ${readDirectory} to ${writeDirectory}`);
+  console.log(
+    `Generating all unique paths in all library versions from ${readDirectory} to ${writeDirectory}`,
+  );
   const uniquefullPathAndContent =
     await generateFinalDirectoryPath(readDirectory);
 
-  console.log(`Creating new library in ${writeDirectory} with ${uniquefullPathAndContent.length} items`);
+  console.log(
+    `Creating new library in ${writeDirectory} with ${uniquefullPathAndContent.length} items`,
+  );
   await createDirectoryAndWriteFiles(writeDirectory, uniquefullPathAndContent);
 }
+
 /**
  * Creates a new directory and writes files with their full content.
  *
  * @param {string} baseOutputDir The root directory where files should be written.
- * @param {Array<object>} files An array of objects, where each object has:
- * - {string} filePath: The relative path to the file from the baseOutputDir.
- * - {string} content: The full content to write to the file.
+ * @param {Array<{filePath: string; content: string}>} files An array of objects, where each object has a file path and its content.
  * @returns {Promise<void>} A promise that resolves when all files are written.
  */
 export async function createDirectoryAndWriteFiles(
@@ -137,10 +167,10 @@ export async function createDirectoryAndWriteFiles(
   // first, remove any existing files; this ensures
   // we're overwriting the existing file
   try {
-    await fs.rm(baseOutputDir, { recursive: true, force: true });
+    await fs.rm(baseOutputDir, {recursive: true, force: true});
   } catch (err) {
-    `${baseOutputDir} not found; could not be deleted`
-  } 
+    `${baseOutputDir} not found; could not be deleted`;
+  }
   await ensureDirectoryExists(baseOutputDir);
 
   const writePromises = files.map(async fileData => {
@@ -148,7 +178,7 @@ export async function createDirectoryAndWriteFiles(
     console.log(`Processing: ${fullFilePath}`);
 
     // 1. Ensure all parent directories for the current file exist
-    await ensureDirectoryExists(path.join(baseOutputDir,fileData.filePath));
+    await ensureDirectoryExists(path.join(baseOutputDir, fileData.filePath));
     // await fs.mkdir(path.dirname(fileData.filePath), {recursive: true});
 
     // 2. Write the file with its content
