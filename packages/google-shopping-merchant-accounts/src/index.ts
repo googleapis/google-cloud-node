@@ -19,12 +19,10 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const AccountIssueServiceClient = v1beta.AccountIssueServiceClient;
-type AccountIssueServiceClient = v1beta.AccountIssueServiceClient;
-const AccountsServiceClient = v1beta.AccountsServiceClient;
-type AccountsServiceClient = v1beta.AccountsServiceClient;
-const AccountTaxServiceClient = v1beta.AccountTaxServiceClient;
-type AccountTaxServiceClient = v1beta.AccountTaxServiceClient;
+const AccountIssueServiceClient = v1.AccountIssueServiceClient;
+type AccountIssueServiceClient = v1.AccountIssueServiceClient;
+const AccountsServiceClient = v1.AccountsServiceClient;
+type AccountsServiceClient = v1.AccountsServiceClient;
 const AutofeedSettingsServiceClient = v1beta.AutofeedSettingsServiceClient;
 type AutofeedSettingsServiceClient = v1beta.AutofeedSettingsServiceClient;
 const AutomaticImprovementsServiceClient = v1beta.AutomaticImprovementsServiceClient;
@@ -60,7 +58,7 @@ type TermsOfServiceServiceClient = v1beta.TermsOfServiceServiceClient;
 const UserServiceClient = v1beta.UserServiceClient;
 type UserServiceClient = v1beta.UserServiceClient;
 
-export {v1, v1beta, AccountIssueServiceClient, AccountsServiceClient, AccountTaxServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient};
-export default {v1, v1beta, AccountIssueServiceClient, AccountsServiceClient, AccountTaxServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient};
+export {v1, v1beta, AccountIssueServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient};
+export default {v1, v1beta, AccountIssueServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
