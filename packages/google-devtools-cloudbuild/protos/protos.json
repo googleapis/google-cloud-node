@@ -2965,14 +2965,32 @@
                       },
                       "nested": {
                         "WorkerConfig": {
+                          "oneofs": {
+                            "_enableNestedVirtualization": {
+                              "oneof": [
+                                "enableNestedVirtualization"
+                              ]
+                            }
+                          },
                           "fields": {
                             "machineType": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "diskSizeGb": {
                               "type": "int64",
                               "id": 2
+                            },
+                            "enableNestedVirtualization": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },

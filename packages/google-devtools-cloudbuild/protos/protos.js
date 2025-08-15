@@ -23860,6 +23860,7 @@
                              * @interface IWorkerConfig
                              * @property {string|null} [machineType] WorkerConfig machineType
                              * @property {number|Long|null} [diskSizeGb] WorkerConfig diskSizeGb
+                             * @property {boolean|null} [enableNestedVirtualization] WorkerConfig enableNestedVirtualization
                              */
     
                             /**
@@ -23894,6 +23895,23 @@
                             WorkerConfig.prototype.diskSizeGb = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * WorkerConfig enableNestedVirtualization.
+                             * @member {boolean|null|undefined} enableNestedVirtualization
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig
+                             * @instance
+                             */
+                            WorkerConfig.prototype.enableNestedVirtualization = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(WorkerConfig.prototype, "_enableNestedVirtualization", {
+                                get: $util.oneOfGetter($oneOfFields = ["enableNestedVirtualization"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new WorkerConfig instance using the specified properties.
                              * @function create
                              * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig
@@ -23921,6 +23939,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
                                 if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.diskSizeGb);
+                                if (message.enableNestedVirtualization != null && Object.hasOwnProperty.call(message, "enableNestedVirtualization"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableNestedVirtualization);
                                 return writer;
                             };
     
@@ -23965,6 +23985,10 @@
                                             message.diskSizeGb = reader.int64();
                                             break;
                                         }
+                                    case 3: {
+                                            message.enableNestedVirtualization = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -24000,12 +24024,18 @@
                             WorkerConfig.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     if (!$util.isString(message.machineType))
                                         return "machineType: string expected";
                                 if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
                                     if (!$util.isInteger(message.diskSizeGb) && !(message.diskSizeGb && $util.isInteger(message.diskSizeGb.low) && $util.isInteger(message.diskSizeGb.high)))
                                         return "diskSizeGb: integer|Long expected";
+                                if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization")) {
+                                    properties._enableNestedVirtualization = 1;
+                                    if (typeof message.enableNestedVirtualization !== "boolean")
+                                        return "enableNestedVirtualization: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -24032,6 +24062,8 @@
                                         message.diskSizeGb = object.diskSizeGb;
                                     else if (typeof object.diskSizeGb === "object")
                                         message.diskSizeGb = new $util.LongBits(object.diskSizeGb.low >>> 0, object.diskSizeGb.high >>> 0).toNumber();
+                                if (object.enableNestedVirtualization != null)
+                                    message.enableNestedVirtualization = Boolean(object.enableNestedVirtualization);
                                 return message;
                             };
     
@@ -24063,6 +24095,11 @@
                                         object.diskSizeGb = options.longs === String ? String(message.diskSizeGb) : message.diskSizeGb;
                                     else
                                         object.diskSizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.diskSizeGb) : options.longs === Number ? new $util.LongBits(message.diskSizeGb.low >>> 0, message.diskSizeGb.high >>> 0).toNumber() : message.diskSizeGb;
+                                if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization")) {
+                                    object.enableNestedVirtualization = message.enableNestedVirtualization;
+                                    if (options.oneofs)
+                                        object._enableNestedVirtualization = "enableNestedVirtualization";
+                                }
                                 return object;
                             };
     
