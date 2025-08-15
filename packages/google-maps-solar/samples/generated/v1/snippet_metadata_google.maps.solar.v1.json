@@ -15,14 +15,14 @@
             "regionTag": "solar_v1_generated_Solar_FindClosestBuildingInsights_async",
             "title": "Solar findClosestBuildingInsights Sample",
             "origin": "API_DEFINITION",
-            "description": " Locates the closest building to a query point. Returns an error with code `NOT_FOUND` if there are no buildings within approximately 50m of the query point.",
+            "description": " Locates the building whose centroid is closest to a query point. Returns an error with code `NOT_FOUND` if there are no buildings within approximately 50m of the query point.",
             "canonical": true,
             "file": "solar.find_closest_building_insights.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -42,6 +42,10 @@
                     {
                         "name": "exact_quality_required",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "experiments",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.solar.v1.BuildingInsights",
@@ -70,7 +74,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 95,
+                    "end": 99,
                     "type": "FULL"
                 }
             ],
@@ -102,6 +106,10 @@
                     {
                         "name": "exact_quality_required",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "experiments",
+                        "type": "TYPE_ENUM[]"
                     }
                 ],
                 "resultType": ".google.maps.solar.v1.DataLayers",
