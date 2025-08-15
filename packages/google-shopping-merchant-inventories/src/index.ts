@@ -19,10 +19,10 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const LocalInventoryServiceClient = v1beta.LocalInventoryServiceClient;
-type LocalInventoryServiceClient = v1beta.LocalInventoryServiceClient;
-const RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
-type RegionalInventoryServiceClient = v1beta.RegionalInventoryServiceClient;
+const LocalInventoryServiceClient = v1.LocalInventoryServiceClient;
+type LocalInventoryServiceClient = v1.LocalInventoryServiceClient;
+const RegionalInventoryServiceClient = v1.RegionalInventoryServiceClient;
+type RegionalInventoryServiceClient = v1.RegionalInventoryServiceClient;
 
 export {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};
 export default {v1, v1beta, LocalInventoryServiceClient, RegionalInventoryServiceClient};

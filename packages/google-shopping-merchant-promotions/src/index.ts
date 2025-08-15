@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const PromotionsServiceClient = v1beta.PromotionsServiceClient;
-type PromotionsServiceClient = v1beta.PromotionsServiceClient;
+const PromotionsServiceClient = v1.PromotionsServiceClient;
+type PromotionsServiceClient = v1.PromotionsServiceClient;
 
 export {v1, v1beta, PromotionsServiceClient};
 export default {v1, v1beta, PromotionsServiceClient};
