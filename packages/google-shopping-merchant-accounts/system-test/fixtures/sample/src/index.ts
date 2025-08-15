@@ -25,9 +25,6 @@ function doStuffWithAccountIssueServiceClient(client: AccountIssueServiceClient)
 function doStuffWithAccountsServiceClient(client: AccountsServiceClient) {
   client.close();
 }
-function doStuffWithAccountTaxServiceClient(client: AccountTaxServiceClient) {
-  client.close();
-}
 function doStuffWithAutofeedSettingsServiceClient(client: AutofeedSettingsServiceClient) {
   client.close();
 }
