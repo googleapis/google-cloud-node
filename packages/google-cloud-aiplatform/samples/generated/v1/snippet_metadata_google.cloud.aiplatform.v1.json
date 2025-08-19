@@ -12,8 +12,64 @@
     },
     "snippets": [
         {
+            "regionTag": "aiplatform_v1_generated_DataFoundryService_GenerateSyntheticData_async",
+            "title": "DataFoundryService generateSyntheticData Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates synthetic data based on the provided configuration.",
+            "canonical": true,
+            "file": "data_foundry_service.generate_synthetic_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateSyntheticData",
+                "fullName": "google.cloud.aiplatform.v1.DataFoundryService.GenerateSyntheticData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "task_description",
+                        "type": ".google.cloud.aiplatform.v1.TaskDescriptionStrategy"
+                    },
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "count",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "output_field_specs",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "examples",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.GenerateSyntheticDataResponse",
+                "client": {
+                    "shortName": "DataFoundryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DataFoundryServiceClient"
+                },
+                "method": {
+                    "shortName": "GenerateSyntheticData",
+                    "fullName": "google.cloud.aiplatform.v1.DataFoundryService.GenerateSyntheticData",
+                    "service": {
+                        "shortName": "DataFoundryService",
+                        "fullName": "google.cloud.aiplatform.v1.DataFoundryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DatasetService_CreateDataset_async",
-            "title": "DatasetService createDataset Sample",
+            "title": "DataFoundryService createDataset Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Dataset.",
             "canonical": true,
@@ -57,7 +113,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetDataset_async",
-            "title": "DatasetService getDataset Sample",
+            "title": "DataFoundryService getDataset Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Dataset.",
             "canonical": true,
@@ -101,7 +157,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_UpdateDataset_async",
-            "title": "DatasetService updateDataset Sample",
+            "title": "DataFoundryService updateDataset Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Dataset.",
             "canonical": true,
@@ -145,7 +201,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ListDatasets_async",
-            "title": "DatasetService listDatasets Sample",
+            "title": "DataFoundryService listDatasets Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Datasets in a Location.",
             "canonical": true,
@@ -205,7 +261,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_DeleteDataset_async",
-            "title": "DatasetService deleteDataset Sample",
+            "title": "DataFoundryService deleteDataset Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Dataset.",
             "canonical": true,
@@ -245,7 +301,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ImportData_async",
-            "title": "DatasetService importData Sample",
+            "title": "DataFoundryService importData Sample",
             "origin": "API_DEFINITION",
             "description": " Imports data into a Dataset.",
             "canonical": true,
@@ -289,7 +345,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ExportData_async",
-            "title": "DatasetService exportData Sample",
+            "title": "DataFoundryService exportData Sample",
             "origin": "API_DEFINITION",
             "description": " Exports data from a Dataset.",
             "canonical": true,
@@ -333,7 +389,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_CreateDatasetVersion_async",
-            "title": "DatasetService createDatasetVersion Sample",
+            "title": "DataFoundryService createDatasetVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Create a version from a Dataset.",
             "canonical": true,
@@ -377,7 +433,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_UpdateDatasetVersion_async",
-            "title": "DatasetService updateDatasetVersion Sample",
+            "title": "DataFoundryService updateDatasetVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a DatasetVersion.",
             "canonical": true,
@@ -421,7 +477,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_DeleteDatasetVersion_async",
-            "title": "DatasetService deleteDatasetVersion Sample",
+            "title": "DataFoundryService deleteDatasetVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Dataset version.",
             "canonical": true,
@@ -461,7 +517,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetDatasetVersion_async",
-            "title": "DatasetService getDatasetVersion Sample",
+            "title": "DataFoundryService getDatasetVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Dataset version.",
             "canonical": true,
@@ -505,7 +561,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ListDatasetVersions_async",
-            "title": "DatasetService listDatasetVersions Sample",
+            "title": "DataFoundryService listDatasetVersions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DatasetVersions in a Dataset.",
             "canonical": true,
@@ -565,7 +621,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_RestoreDatasetVersion_async",
-            "title": "DatasetService restoreDatasetVersion Sample",
+            "title": "DataFoundryService restoreDatasetVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Restores a dataset version.",
             "canonical": true,
@@ -605,7 +661,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ListDataItems_async",
-            "title": "DatasetService listDataItems Sample",
+            "title": "DataFoundryService listDataItems Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataItems in a Dataset.",
             "canonical": true,
@@ -665,7 +721,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_SearchDataItems_async",
-            "title": "DatasetService searchDataItems Sample",
+            "title": "DataFoundryService searchDataItems Sample",
             "origin": "API_DEFINITION",
             "description": " Searches DataItems in a Dataset.",
             "canonical": true,
@@ -753,7 +809,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ListSavedQueries_async",
-            "title": "DatasetService listSavedQueries Sample",
+            "title": "DataFoundryService listSavedQueries Sample",
             "origin": "API_DEFINITION",
             "description": " Lists SavedQueries in a Dataset.",
             "canonical": true,
@@ -813,7 +869,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_DeleteSavedQuery_async",
-            "title": "DatasetService deleteSavedQuery Sample",
+            "title": "DataFoundryService deleteSavedQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a SavedQuery.",
             "canonical": true,
@@ -853,7 +909,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_async",
-            "title": "DatasetService getAnnotationSpec Sample",
+            "title": "DataFoundryService getAnnotationSpec Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an AnnotationSpec.",
             "canonical": true,
@@ -897,7 +953,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DatasetService_ListAnnotations_async",
-            "title": "DatasetService listAnnotations Sample",
+            "title": "DataFoundryService listAnnotations Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Annotations belongs to a dataitem This RPC is only available in InternalDatasetService. It is only used for exporting conversation data to CCAI Insights.",
             "canonical": true,
@@ -957,7 +1013,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_CreateDeploymentResourcePool_async",
-            "title": "DatasetService createDeploymentResourcePool Sample",
+            "title": "DataFoundryService createDeploymentResourcePool Sample",
             "origin": "API_DEFINITION",
             "description": " Create a DeploymentResourcePool.",
             "canonical": true,
@@ -1005,7 +1061,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_GetDeploymentResourcePool_async",
-            "title": "DatasetService getDeploymentResourcePool Sample",
+            "title": "DataFoundryService getDeploymentResourcePool Sample",
             "origin": "API_DEFINITION",
             "description": " Get a DeploymentResourcePool.",
             "canonical": true,
@@ -1045,7 +1101,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_ListDeploymentResourcePools_async",
-            "title": "DatasetService listDeploymentResourcePools Sample",
+            "title": "DataFoundryService listDeploymentResourcePools Sample",
             "origin": "API_DEFINITION",
             "description": " List DeploymentResourcePools in a location.",
             "canonical": true,
@@ -1093,7 +1149,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async",
-            "title": "DatasetService updateDeploymentResourcePool Sample",
+            "title": "DataFoundryService updateDeploymentResourcePool Sample",
             "origin": "API_DEFINITION",
             "description": " Update a DeploymentResourcePool.",
             "canonical": true,
@@ -1137,7 +1193,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_async",
-            "title": "DatasetService deleteDeploymentResourcePool Sample",
+            "title": "DataFoundryService deleteDeploymentResourcePool Sample",
             "origin": "API_DEFINITION",
             "description": " Delete a DeploymentResourcePool.",
             "canonical": true,
@@ -1177,7 +1233,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_QueryDeployedModels_async",
-            "title": "DatasetService queryDeployedModels Sample",
+            "title": "DataFoundryService queryDeployedModels Sample",
             "origin": "API_DEFINITION",
             "description": " List DeployedModels that have been deployed on this DeploymentResourcePool.",
             "canonical": true,
@@ -1225,7 +1281,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_CreateEndpoint_async",
-            "title": "DatasetService createEndpoint Sample",
+            "title": "DataFoundryService createEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an Endpoint.",
             "canonical": true,
@@ -1273,7 +1329,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_GetEndpoint_async",
-            "title": "DatasetService getEndpoint Sample",
+            "title": "DataFoundryService getEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an Endpoint.",
             "canonical": true,
@@ -1313,7 +1369,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_ListEndpoints_async",
-            "title": "DatasetService listEndpoints Sample",
+            "title": "DataFoundryService listEndpoints Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Endpoints in a Location.",
             "canonical": true,
@@ -1373,7 +1429,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_UpdateEndpoint_async",
-            "title": "DatasetService updateEndpoint Sample",
+            "title": "DataFoundryService updateEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an Endpoint.",
             "canonical": true,
@@ -1417,7 +1473,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_UpdateEndpointLongRunning_async",
-            "title": "DatasetService updateEndpointLongRunning Sample",
+            "title": "DataFoundryService updateEndpointLongRunning Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an Endpoint with a long running operation.",
             "canonical": true,
@@ -1457,7 +1513,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_DeleteEndpoint_async",
-            "title": "DatasetService deleteEndpoint Sample",
+            "title": "DataFoundryService deleteEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Endpoint.",
             "canonical": true,
@@ -1497,7 +1553,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_DeployModel_async",
-            "title": "DatasetService deployModel Sample",
+            "title": "DataFoundryService deployModel Sample",
             "origin": "API_DEFINITION",
             "description": " Deploys a Model into this Endpoint, creating a DeployedModel within it.",
             "canonical": true,
@@ -1545,7 +1601,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_UndeployModel_async",
-            "title": "DatasetService undeployModel Sample",
+            "title": "DataFoundryService undeployModel Sample",
             "origin": "API_DEFINITION",
             "description": " Undeploys a Model from an Endpoint, removing a DeployedModel from it, and freeing all resources it's using.",
             "canonical": true,
@@ -1593,7 +1649,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EndpointService_MutateDeployedModel_async",
-            "title": "DatasetService mutateDeployedModel Sample",
+            "title": "DataFoundryService mutateDeployedModel Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an existing deployed model. Updatable fields include `min_replica_count`, `max_replica_count`, `required_replica_count`, `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and `enable_container_logging` (v1beta1 only).",
             "canonical": true,
@@ -1641,7 +1697,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_EvaluationService_EvaluateInstances_async",
-            "title": "DatasetService evaluateInstances Sample",
+            "title": "DataFoundryService evaluateInstances Sample",
             "origin": "API_DEFINITION",
             "description": " Evaluates instances based on a given metric.",
             "canonical": true,
@@ -1781,7 +1837,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_async",
-            "title": "DatasetService createFeatureOnlineStore Sample",
+            "title": "DataFoundryService createFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new FeatureOnlineStore in a given project and location.",
             "canonical": true,
@@ -1829,7 +1885,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureOnlineStore_async",
-            "title": "DatasetService getFeatureOnlineStore Sample",
+            "title": "DataFoundryService getFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single FeatureOnlineStore.",
             "canonical": true,
@@ -1869,7 +1925,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureOnlineStores_async",
-            "title": "DatasetService listFeatureOnlineStores Sample",
+            "title": "DataFoundryService listFeatureOnlineStores Sample",
             "origin": "API_DEFINITION",
             "description": " Lists FeatureOnlineStores in a given project and location.",
             "canonical": true,
@@ -1925,7 +1981,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_UpdateFeatureOnlineStore_async",
-            "title": "DatasetService updateFeatureOnlineStore Sample",
+            "title": "DataFoundryService updateFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single FeatureOnlineStore.",
             "canonical": true,
@@ -1969,7 +2025,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_DeleteFeatureOnlineStore_async",
-            "title": "DatasetService deleteFeatureOnlineStore Sample",
+            "title": "DataFoundryService deleteFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single FeatureOnlineStore. The FeatureOnlineStore must not contain any FeatureViews.",
             "canonical": true,
@@ -2013,7 +2069,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_CreateFeatureView_async",
-            "title": "DatasetService createFeatureView Sample",
+            "title": "DataFoundryService createFeatureView Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new FeatureView in a given FeatureOnlineStore.",
             "canonical": true,
@@ -2065,7 +2121,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureView_async",
-            "title": "DatasetService getFeatureView Sample",
+            "title": "DataFoundryService getFeatureView Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single FeatureView.",
             "canonical": true,
@@ -2105,7 +2161,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureViews_async",
-            "title": "DatasetService listFeatureViews Sample",
+            "title": "DataFoundryService listFeatureViews Sample",
             "origin": "API_DEFINITION",
             "description": " Lists FeatureViews in a given FeatureOnlineStore.",
             "canonical": true,
@@ -2161,7 +2217,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_UpdateFeatureView_async",
-            "title": "DatasetService updateFeatureView Sample",
+            "title": "DataFoundryService updateFeatureView Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single FeatureView.",
             "canonical": true,
@@ -2205,7 +2261,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_DeleteFeatureView_async",
-            "title": "DatasetService deleteFeatureView Sample",
+            "title": "DataFoundryService deleteFeatureView Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single FeatureView.",
             "canonical": true,
@@ -2245,7 +2301,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_SyncFeatureView_async",
-            "title": "DatasetService syncFeatureView Sample",
+            "title": "DataFoundryService syncFeatureView Sample",
             "origin": "API_DEFINITION",
             "description": " Triggers on-demand sync for the FeatureView.",
             "canonical": true,
@@ -2285,7 +2341,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_GetFeatureViewSync_async",
-            "title": "DatasetService getFeatureViewSync Sample",
+            "title": "DataFoundryService getFeatureViewSync Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single FeatureViewSync.",
             "canonical": true,
@@ -2325,7 +2381,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreAdminService_ListFeatureViewSyncs_async",
-            "title": "DatasetService listFeatureViewSyncs Sample",
+            "title": "DataFoundryService listFeatureViewSyncs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists FeatureViewSyncs in a given FeatureView.",
             "canonical": true,
@@ -2381,7 +2437,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_FetchFeatureValues_async",
-            "title": "DatasetService fetchFeatureValues Sample",
+            "title": "DataFoundryService fetchFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Fetch feature values under a FeatureView.",
             "canonical": true,
@@ -2429,7 +2485,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_SearchNearestEntities_async",
-            "title": "DatasetService searchNearestEntities Sample",
+            "title": "DataFoundryService searchNearestEntities Sample",
             "origin": "API_DEFINITION",
             "description": " Search the nearest entities under a FeatureView. Search only works for indexable feature view; if a feature view isn't indexable, returns Invalid argument response.",
             "canonical": true,
@@ -2477,7 +2533,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_FeatureViewDirectWrite_async",
-            "title": "DatasetService featureViewDirectWrite Sample",
+            "title": "DataFoundryService featureViewDirectWrite Sample",
             "origin": "API_DEFINITION",
             "description": " Bidirectional streaming RPC to directly write to feature values in a feature view. Requests may not have a one-to-one mapping to responses and responses may be returned out-of-order to reduce latency.",
             "canonical": true,
@@ -2521,7 +2577,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeatureGroup_async",
-            "title": "DatasetService createFeatureGroup Sample",
+            "title": "DataFoundryService createFeatureGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new FeatureGroup in a given project and location.",
             "canonical": true,
@@ -2569,7 +2625,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_GetFeatureGroup_async",
-            "title": "DatasetService getFeatureGroup Sample",
+            "title": "DataFoundryService getFeatureGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single FeatureGroup.",
             "canonical": true,
@@ -2609,7 +2665,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_ListFeatureGroups_async",
-            "title": "DatasetService listFeatureGroups Sample",
+            "title": "DataFoundryService listFeatureGroups Sample",
             "origin": "API_DEFINITION",
             "description": " Lists FeatureGroups in a given project and location.",
             "canonical": true,
@@ -2665,7 +2721,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_UpdateFeatureGroup_async",
-            "title": "DatasetService updateFeatureGroup Sample",
+            "title": "DataFoundryService updateFeatureGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single FeatureGroup.",
             "canonical": true,
@@ -2709,7 +2765,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_DeleteFeatureGroup_async",
-            "title": "DatasetService deleteFeatureGroup Sample",
+            "title": "DataFoundryService deleteFeatureGroup Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single FeatureGroup.",
             "canonical": true,
@@ -2753,7 +2809,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeature_async",
-            "title": "DatasetService createFeature Sample",
+            "title": "DataFoundryService createFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Feature in a given FeatureGroup.",
             "canonical": true,
@@ -2801,7 +2857,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_BatchCreateFeatures_async",
-            "title": "DatasetService batchCreateFeatures Sample",
+            "title": "DataFoundryService batchCreateFeatures Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a batch of Features in a given FeatureGroup.",
             "canonical": true,
@@ -2845,7 +2901,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_GetFeature_async",
-            "title": "DatasetService getFeature Sample",
+            "title": "DataFoundryService getFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single Feature.",
             "canonical": true,
@@ -2885,7 +2941,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_ListFeatures_async",
-            "title": "DatasetService listFeatures Sample",
+            "title": "DataFoundryService listFeatures Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Features in a given FeatureGroup.",
             "canonical": true,
@@ -2949,7 +3005,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_UpdateFeature_async",
-            "title": "DatasetService updateFeature Sample",
+            "title": "DataFoundryService updateFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single Feature.",
             "canonical": true,
@@ -2993,7 +3049,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_DeleteFeature_async",
-            "title": "DatasetService deleteFeature Sample",
+            "title": "DataFoundryService deleteFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single Feature.",
             "canonical": true,
@@ -3033,7 +3089,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_async",
-            "title": "DatasetService readFeatureValues Sample",
+            "title": "DataFoundryService readFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Reads Feature values of a specific entity of an EntityType. For reading feature values of multiple entities of an EntityType, please use StreamingReadFeatureValues.",
             "canonical": true,
@@ -3081,7 +3137,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreOnlineServingService_StreamingReadFeatureValues_async",
-            "title": "DatasetService streamingReadFeatureValues Sample",
+            "title": "DataFoundryService streamingReadFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Reads Feature values for multiple entities. Depending on their size, data for different entities may be broken up across multiple responses.",
             "canonical": true,
@@ -3129,7 +3185,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_async",
-            "title": "DatasetService writeFeatureValues Sample",
+            "title": "DataFoundryService writeFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Writes Feature values of one or more entities of an EntityType. The Feature values are merged into existing entities if any. The Feature values to be written must have timestamp within the online storage retention.",
             "canonical": true,
@@ -3173,7 +3229,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_CreateFeaturestore_async",
-            "title": "DatasetService createFeaturestore Sample",
+            "title": "DataFoundryService createFeaturestore Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Featurestore in a given project and location.",
             "canonical": true,
@@ -3221,7 +3277,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_GetFeaturestore_async",
-            "title": "DatasetService getFeaturestore Sample",
+            "title": "DataFoundryService getFeaturestore Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single Featurestore.",
             "canonical": true,
@@ -3261,7 +3317,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_ListFeaturestores_async",
-            "title": "DatasetService listFeaturestores Sample",
+            "title": "DataFoundryService listFeaturestores Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Featurestores in a given project and location.",
             "canonical": true,
@@ -3321,7 +3377,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_UpdateFeaturestore_async",
-            "title": "DatasetService updateFeaturestore Sample",
+            "title": "DataFoundryService updateFeaturestore Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single Featurestore.",
             "canonical": true,
@@ -3365,7 +3421,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_DeleteFeaturestore_async",
-            "title": "DatasetService deleteFeaturestore Sample",
+            "title": "DataFoundryService deleteFeaturestore Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single Featurestore. The Featurestore must not contain any EntityTypes or `force` must be set to true for the request to succeed.",
             "canonical": true,
@@ -3409,7 +3465,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_CreateEntityType_async",
-            "title": "DatasetService createEntityType Sample",
+            "title": "DataFoundryService createEntityType Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new EntityType in a given Featurestore.",
             "canonical": true,
@@ -3457,7 +3513,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_GetEntityType_async",
-            "title": "DatasetService getEntityType Sample",
+            "title": "DataFoundryService getEntityType Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single EntityType.",
             "canonical": true,
@@ -3497,7 +3553,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_ListEntityTypes_async",
-            "title": "DatasetService listEntityTypes Sample",
+            "title": "DataFoundryService listEntityTypes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists EntityTypes in a given Featurestore.",
             "canonical": true,
@@ -3557,7 +3613,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_UpdateEntityType_async",
-            "title": "DatasetService updateEntityType Sample",
+            "title": "DataFoundryService updateEntityType Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single EntityType.",
             "canonical": true,
@@ -3601,7 +3657,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_DeleteEntityType_async",
-            "title": "DatasetService deleteEntityType Sample",
+            "title": "DataFoundryService deleteEntityType Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single EntityType. The EntityType must not have any Features or `force` must be set to true for the request to succeed.",
             "canonical": true,
@@ -3645,7 +3701,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_CreateFeature_async",
-            "title": "DatasetService createFeature Sample",
+            "title": "DataFoundryService createFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Feature in a given EntityType.",
             "canonical": true,
@@ -3693,7 +3749,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_BatchCreateFeatures_async",
-            "title": "DatasetService batchCreateFeatures Sample",
+            "title": "DataFoundryService batchCreateFeatures Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a batch of Features in a given EntityType.",
             "canonical": true,
@@ -3737,7 +3793,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_GetFeature_async",
-            "title": "DatasetService getFeature Sample",
+            "title": "DataFoundryService getFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Gets details of a single Feature.",
             "canonical": true,
@@ -3777,7 +3833,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_ListFeatures_async",
-            "title": "DatasetService listFeatures Sample",
+            "title": "DataFoundryService listFeatures Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Features in a given EntityType.",
             "canonical": true,
@@ -3841,7 +3897,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_UpdateFeature_async",
-            "title": "DatasetService updateFeature Sample",
+            "title": "DataFoundryService updateFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the parameters of a single Feature.",
             "canonical": true,
@@ -3885,7 +3941,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_DeleteFeature_async",
-            "title": "DatasetService deleteFeature Sample",
+            "title": "DataFoundryService deleteFeature Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single Feature.",
             "canonical": true,
@@ -3925,7 +3981,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_ImportFeatureValues_async",
-            "title": "DatasetService importFeatureValues Sample",
+            "title": "DataFoundryService importFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Imports Feature values into the Featurestore from a source storage. The progress of the import is tracked by the returned operation. The imported features are guaranteed to be visible to subsequent read operations after the operation is marked as successfully done. If an import operation fails, the Feature values returned from reads and exports may be inconsistent. If consistency is required, the caller must retry the same import request again and wait till the new operation returned is marked as successfully done. There are also scenarios where the caller can cause inconsistency.  - Source data for import contains multiple distinct Feature values for    the same entity ID and timestamp.  - Source is modified during an import. This includes adding, updating, or  removing source data and/or metadata. Examples of updating metadata  include but are not limited to changing storage location, storage class,  or retention policy.  - Online serving cluster is under-provisioned.",
             "canonical": true,
@@ -4005,7 +4061,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_BatchReadFeatureValues_async",
-            "title": "DatasetService batchReadFeatureValues Sample",
+            "title": "DataFoundryService batchReadFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Batch reads Feature values from a Featurestore. This API enables batch reading Feature values, where each read instance in the batch may read Feature values of entities from one or more EntityTypes. Point-in-time correctness is guaranteed for Feature values of each read instance as of each instance's read timestamp.",
             "canonical": true,
@@ -4069,7 +4125,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_ExportFeatureValues_async",
-            "title": "DatasetService exportFeatureValues Sample",
+            "title": "DataFoundryService exportFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Exports Feature values from all the entities of a target EntityType.",
             "canonical": true,
@@ -4129,7 +4185,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_DeleteFeatureValues_async",
-            "title": "DatasetService deleteFeatureValues Sample",
+            "title": "DataFoundryService deleteFeatureValues Sample",
             "origin": "API_DEFINITION",
             "description": " Delete Feature values from Featurestore. The progress of the deletion is tracked by the returned operation. The deleted feature values are guaranteed to be invisible to subsequent read operations after the operation is marked as successfully done. If a delete feature values operation fails, the feature values returned from reads and exports may be inconsistent. If consistency is required, the caller must retry the same delete request again and wait till the new operation returned is marked as successfully done.",
             "canonical": true,
@@ -4177,7 +4233,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_FeaturestoreService_SearchFeatures_async",
-            "title": "DatasetService searchFeatures Sample",
+            "title": "DataFoundryService searchFeatures Sample",
             "origin": "API_DEFINITION",
             "description": " Searches Features matching a query in a given project.",
             "canonical": true,
@@ -4229,7 +4285,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiCacheService_CreateCachedContent_async",
-            "title": "DatasetService createCachedContent Sample",
+            "title": "DataFoundryService createCachedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Creates cached content, this call will initialize the cached content in the data storage, and users need to pay for the cache data storage.",
             "canonical": true,
@@ -4273,7 +4329,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiCacheService_GetCachedContent_async",
-            "title": "DatasetService getCachedContent Sample",
+            "title": "DataFoundryService getCachedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Gets cached content configurations",
             "canonical": true,
@@ -4313,7 +4369,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiCacheService_UpdateCachedContent_async",
-            "title": "DatasetService updateCachedContent Sample",
+            "title": "DataFoundryService updateCachedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Updates cached content configurations",
             "canonical": true,
@@ -4357,7 +4413,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiCacheService_DeleteCachedContent_async",
-            "title": "DatasetService deleteCachedContent Sample",
+            "title": "DataFoundryService deleteCachedContent Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes cached content",
             "canonical": true,
@@ -4397,7 +4453,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiCacheService_ListCachedContents_async",
-            "title": "DatasetService listCachedContents Sample",
+            "title": "DataFoundryService listCachedContents Sample",
             "origin": "API_DEFINITION",
             "description": " Lists cached contents in a project",
             "canonical": true,
@@ -4445,7 +4501,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_CreateTuningJob_async",
-            "title": "DatasetService createTuningJob Sample",
+            "title": "DataFoundryService createTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a TuningJob. A created TuningJob right away will be attempted to be run.",
             "canonical": true,
@@ -4489,7 +4545,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_GetTuningJob_async",
-            "title": "DatasetService getTuningJob Sample",
+            "title": "DataFoundryService getTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a TuningJob.",
             "canonical": true,
@@ -4529,7 +4585,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_ListTuningJobs_async",
-            "title": "DatasetService listTuningJobs Sample",
+            "title": "DataFoundryService listTuningJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists TuningJobs in a Location.",
             "canonical": true,
@@ -4581,7 +4637,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_CancelTuningJob_async",
-            "title": "DatasetService cancelTuningJob Sample",
+            "title": "DataFoundryService cancelTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a TuningJob. Starts asynchronous cancellation on the TuningJob. The server makes a best effort to cancel the job, but success is not guaranteed. Clients can use [GenAiTuningService.GetTuningJob][google.cloud.aiplatform.v1.GenAiTuningService.GetTuningJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On successful cancellation, the TuningJob is not deleted; instead it becomes a job with a [TuningJob.error][google.cloud.aiplatform.v1.TuningJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [TuningJob.state][google.cloud.aiplatform.v1.TuningJob.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -4621,7 +4677,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_GenAiTuningService_RebaseTunedModel_async",
-            "title": "DatasetService rebaseTunedModel Sample",
+            "title": "DataFoundryService rebaseTunedModel Sample",
             "origin": "API_DEFINITION",
             "description": " Rebase a TunedModel.",
             "canonical": true,
@@ -4677,7 +4733,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async",
-            "title": "DatasetService createIndexEndpoint Sample",
+            "title": "DataFoundryService createIndexEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an IndexEndpoint.",
             "canonical": true,
@@ -4721,7 +4777,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_GetIndexEndpoint_async",
-            "title": "DatasetService getIndexEndpoint Sample",
+            "title": "DataFoundryService getIndexEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an IndexEndpoint.",
             "canonical": true,
@@ -4761,7 +4817,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_ListIndexEndpoints_async",
-            "title": "DatasetService listIndexEndpoints Sample",
+            "title": "DataFoundryService listIndexEndpoints Sample",
             "origin": "API_DEFINITION",
             "description": " Lists IndexEndpoints in a Location.",
             "canonical": true,
@@ -4817,7 +4873,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_UpdateIndexEndpoint_async",
-            "title": "DatasetService updateIndexEndpoint Sample",
+            "title": "DataFoundryService updateIndexEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an IndexEndpoint.",
             "canonical": true,
@@ -4861,7 +4917,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async",
-            "title": "DatasetService deleteIndexEndpoint Sample",
+            "title": "DataFoundryService deleteIndexEndpoint Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an IndexEndpoint.",
             "canonical": true,
@@ -4901,7 +4957,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_DeployIndex_async",
-            "title": "DatasetService deployIndex Sample",
+            "title": "DataFoundryService deployIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Deploys an Index into this IndexEndpoint, creating a DeployedIndex within it. Only non-empty Indexes can be deployed.",
             "canonical": true,
@@ -4945,7 +5001,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async",
-            "title": "DatasetService undeployIndex Sample",
+            "title": "DataFoundryService undeployIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Undeploys an Index from an IndexEndpoint, removing a DeployedIndex from it, and freeing all resources it's using.",
             "canonical": true,
@@ -4989,7 +5045,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_MutateDeployedIndex_async",
-            "title": "DatasetService mutateDeployedIndex Sample",
+            "title": "DataFoundryService mutateDeployedIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Update an existing DeployedIndex under an IndexEndpoint.",
             "canonical": true,
@@ -5033,7 +5089,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_CreateIndex_async",
-            "title": "DatasetService createIndex Sample",
+            "title": "DataFoundryService createIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an Index.",
             "canonical": true,
@@ -5077,7 +5133,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_GetIndex_async",
-            "title": "DatasetService getIndex Sample",
+            "title": "DataFoundryService getIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an Index.",
             "canonical": true,
@@ -5117,7 +5173,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_ListIndexes_async",
-            "title": "DatasetService listIndexes Sample",
+            "title": "DataFoundryService listIndexes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Indexes in a Location.",
             "canonical": true,
@@ -5173,7 +5229,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_UpdateIndex_async",
-            "title": "DatasetService updateIndex Sample",
+            "title": "DataFoundryService updateIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an Index.",
             "canonical": true,
@@ -5217,7 +5273,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_DeleteIndex_async",
-            "title": "DatasetService deleteIndex Sample",
+            "title": "DataFoundryService deleteIndex Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Index. An Index can only be deleted when all its [DeployedIndexes][google.cloud.aiplatform.v1.Index.deployed_indexes] had been undeployed.",
             "canonical": true,
@@ -5257,7 +5313,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_UpsertDatapoints_async",
-            "title": "DatasetService upsertDatapoints Sample",
+            "title": "DataFoundryService upsertDatapoints Sample",
             "origin": "API_DEFINITION",
             "description": " Add/update Datapoints into an Index.",
             "canonical": true,
@@ -5305,7 +5361,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_IndexService_RemoveDatapoints_async",
-            "title": "DatasetService removeDatapoints Sample",
+            "title": "DataFoundryService removeDatapoints Sample",
             "origin": "API_DEFINITION",
             "description": " Remove Datapoints from an Index.",
             "canonical": true,
@@ -5349,7 +5405,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateCustomJob_async",
-            "title": "DatasetService createCustomJob Sample",
+            "title": "DataFoundryService createCustomJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a CustomJob. A created CustomJob right away will be attempted to be run.",
             "canonical": true,
@@ -5393,7 +5449,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetCustomJob_async",
-            "title": "DatasetService getCustomJob Sample",
+            "title": "DataFoundryService getCustomJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a CustomJob.",
             "canonical": true,
@@ -5433,7 +5489,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListCustomJobs_async",
-            "title": "DatasetService listCustomJobs Sample",
+            "title": "DataFoundryService listCustomJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists CustomJobs in a Location.",
             "canonical": true,
@@ -5489,7 +5545,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteCustomJob_async",
-            "title": "DatasetService deleteCustomJob Sample",
+            "title": "DataFoundryService deleteCustomJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a CustomJob.",
             "canonical": true,
@@ -5529,7 +5585,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CancelCustomJob_async",
-            "title": "DatasetService cancelCustomJob Sample",
+            "title": "DataFoundryService cancelCustomJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a CustomJob. Starts asynchronous cancellation on the CustomJob. The server makes a best effort to cancel the job, but success is not guaranteed. Clients can use [JobService.GetCustomJob][google.cloud.aiplatform.v1.JobService.GetCustomJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On successful cancellation, the CustomJob is not deleted; instead it becomes a job with a [CustomJob.error][google.cloud.aiplatform.v1.CustomJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [CustomJob.state][google.cloud.aiplatform.v1.CustomJob.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -5569,7 +5625,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateDataLabelingJob_async",
-            "title": "DatasetService createDataLabelingJob Sample",
+            "title": "DataFoundryService createDataLabelingJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a DataLabelingJob.",
             "canonical": true,
@@ -5613,7 +5669,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetDataLabelingJob_async",
-            "title": "DatasetService getDataLabelingJob Sample",
+            "title": "DataFoundryService getDataLabelingJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a DataLabelingJob.",
             "canonical": true,
@@ -5653,7 +5709,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListDataLabelingJobs_async",
-            "title": "DatasetService listDataLabelingJobs Sample",
+            "title": "DataFoundryService listDataLabelingJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists DataLabelingJobs in a Location.",
             "canonical": true,
@@ -5713,7 +5769,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteDataLabelingJob_async",
-            "title": "DatasetService deleteDataLabelingJob Sample",
+            "title": "DataFoundryService deleteDataLabelingJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a DataLabelingJob.",
             "canonical": true,
@@ -5753,7 +5809,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CancelDataLabelingJob_async",
-            "title": "DatasetService cancelDataLabelingJob Sample",
+            "title": "DataFoundryService cancelDataLabelingJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a DataLabelingJob. Success of cancellation is not guaranteed.",
             "canonical": true,
@@ -5793,7 +5849,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateHyperparameterTuningJob_async",
-            "title": "DatasetService createHyperparameterTuningJob Sample",
+            "title": "DataFoundryService createHyperparameterTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a HyperparameterTuningJob",
             "canonical": true,
@@ -5837,7 +5893,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetHyperparameterTuningJob_async",
-            "title": "DatasetService getHyperparameterTuningJob Sample",
+            "title": "DataFoundryService getHyperparameterTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a HyperparameterTuningJob",
             "canonical": true,
@@ -5877,7 +5933,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListHyperparameterTuningJobs_async",
-            "title": "DatasetService listHyperparameterTuningJobs Sample",
+            "title": "DataFoundryService listHyperparameterTuningJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists HyperparameterTuningJobs in a Location.",
             "canonical": true,
@@ -5933,7 +5989,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteHyperparameterTuningJob_async",
-            "title": "DatasetService deleteHyperparameterTuningJob Sample",
+            "title": "DataFoundryService deleteHyperparameterTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a HyperparameterTuningJob.",
             "canonical": true,
@@ -5973,7 +6029,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CancelHyperparameterTuningJob_async",
-            "title": "DatasetService cancelHyperparameterTuningJob Sample",
+            "title": "DataFoundryService cancelHyperparameterTuningJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a HyperparameterTuningJob. Starts asynchronous cancellation on the HyperparameterTuningJob. The server makes a best effort to cancel the job, but success is not guaranteed. Clients can use [JobService.GetHyperparameterTuningJob][google.cloud.aiplatform.v1.JobService.GetHyperparameterTuningJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On successful cancellation, the HyperparameterTuningJob is not deleted; instead it becomes a job with a [HyperparameterTuningJob.error][google.cloud.aiplatform.v1.HyperparameterTuningJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [HyperparameterTuningJob.state][google.cloud.aiplatform.v1.HyperparameterTuningJob.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -6013,7 +6069,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateNasJob_async",
-            "title": "DatasetService createNasJob Sample",
+            "title": "DataFoundryService createNasJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a NasJob",
             "canonical": true,
@@ -6057,7 +6113,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetNasJob_async",
-            "title": "DatasetService getNasJob Sample",
+            "title": "DataFoundryService getNasJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a NasJob",
             "canonical": true,
@@ -6097,7 +6153,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListNasJobs_async",
-            "title": "DatasetService listNasJobs Sample",
+            "title": "DataFoundryService listNasJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists NasJobs in a Location.",
             "canonical": true,
@@ -6153,7 +6209,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteNasJob_async",
-            "title": "DatasetService deleteNasJob Sample",
+            "title": "DataFoundryService deleteNasJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a NasJob.",
             "canonical": true,
@@ -6193,7 +6249,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CancelNasJob_async",
-            "title": "DatasetService cancelNasJob Sample",
+            "title": "DataFoundryService cancelNasJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a NasJob. Starts asynchronous cancellation on the NasJob. The server makes a best effort to cancel the job, but success is not guaranteed. Clients can use [JobService.GetNasJob][google.cloud.aiplatform.v1.JobService.GetNasJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On successful cancellation, the NasJob is not deleted; instead it becomes a job with a [NasJob.error][google.cloud.aiplatform.v1.NasJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [NasJob.state][google.cloud.aiplatform.v1.NasJob.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -6233,7 +6289,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetNasTrialDetail_async",
-            "title": "DatasetService getNasTrialDetail Sample",
+            "title": "DataFoundryService getNasTrialDetail Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a NasTrialDetail.",
             "canonical": true,
@@ -6273,7 +6329,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListNasTrialDetails_async",
-            "title": "DatasetService listNasTrialDetails Sample",
+            "title": "DataFoundryService listNasTrialDetails Sample",
             "origin": "API_DEFINITION",
             "description": " List top NasTrialDetails of a NasJob.",
             "canonical": true,
@@ -6321,7 +6377,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateBatchPredictionJob_async",
-            "title": "DatasetService createBatchPredictionJob Sample",
+            "title": "DataFoundryService createBatchPredictionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a BatchPredictionJob. A BatchPredictionJob once created will right away be attempted to start.",
             "canonical": true,
@@ -6365,7 +6421,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetBatchPredictionJob_async",
-            "title": "DatasetService getBatchPredictionJob Sample",
+            "title": "DataFoundryService getBatchPredictionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a BatchPredictionJob",
             "canonical": true,
@@ -6405,7 +6461,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListBatchPredictionJobs_async",
-            "title": "DatasetService listBatchPredictionJobs Sample",
+            "title": "DataFoundryService listBatchPredictionJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists BatchPredictionJobs in a Location.",
             "canonical": true,
@@ -6461,7 +6517,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteBatchPredictionJob_async",
-            "title": "DatasetService deleteBatchPredictionJob Sample",
+            "title": "DataFoundryService deleteBatchPredictionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a BatchPredictionJob. Can only be called on jobs that already finished.",
             "canonical": true,
@@ -6501,7 +6557,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CancelBatchPredictionJob_async",
-            "title": "DatasetService cancelBatchPredictionJob Sample",
+            "title": "DataFoundryService cancelBatchPredictionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a BatchPredictionJob. Starts asynchronous cancellation on the BatchPredictionJob. The server makes the best effort to cancel the job, but success is not guaranteed. Clients can use [JobService.GetBatchPredictionJob][google.cloud.aiplatform.v1.JobService.GetBatchPredictionJob] or other methods to check whether the cancellation succeeded or whether the job completed despite cancellation. On a successful cancellation, the BatchPredictionJob is not deleted;instead its [BatchPredictionJob.state][google.cloud.aiplatform.v1.BatchPredictionJob.state] is set to `CANCELLED`. Any files already outputted by the job are not deleted.",
             "canonical": true,
@@ -6541,7 +6597,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_CreateModelDeploymentMonitoringJob_async",
-            "title": "DatasetService createModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService createModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a ModelDeploymentMonitoringJob. It will run periodically on a configured interval.",
             "canonical": true,
@@ -6585,7 +6641,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_SearchModelDeploymentMonitoringStatsAnomalies_async",
-            "title": "DatasetService searchModelDeploymentMonitoringStatsAnomalies Sample",
+            "title": "DataFoundryService searchModelDeploymentMonitoringStatsAnomalies Sample",
             "origin": "API_DEFINITION",
             "description": " Searches Model Monitoring Statistics generated within a given time window.",
             "canonical": true,
@@ -6653,7 +6709,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_GetModelDeploymentMonitoringJob_async",
-            "title": "DatasetService getModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService getModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a ModelDeploymentMonitoringJob.",
             "canonical": true,
@@ -6693,7 +6749,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ListModelDeploymentMonitoringJobs_async",
-            "title": "DatasetService listModelDeploymentMonitoringJobs Sample",
+            "title": "DataFoundryService listModelDeploymentMonitoringJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists ModelDeploymentMonitoringJobs in a Location.",
             "canonical": true,
@@ -6749,7 +6805,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_UpdateModelDeploymentMonitoringJob_async",
-            "title": "DatasetService updateModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService updateModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a ModelDeploymentMonitoringJob.",
             "canonical": true,
@@ -6793,7 +6849,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_DeleteModelDeploymentMonitoringJob_async",
-            "title": "DatasetService deleteModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService deleteModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a ModelDeploymentMonitoringJob.",
             "canonical": true,
@@ -6833,7 +6889,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_PauseModelDeploymentMonitoringJob_async",
-            "title": "DatasetService pauseModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService pauseModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Pauses a ModelDeploymentMonitoringJob. If the job is running, the server makes a best effort to cancel the job. Will mark [ModelDeploymentMonitoringJob.state][google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state] to 'PAUSED'.",
             "canonical": true,
@@ -6873,7 +6929,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_JobService_ResumeModelDeploymentMonitoringJob_async",
-            "title": "DatasetService resumeModelDeploymentMonitoringJob Sample",
+            "title": "DataFoundryService resumeModelDeploymentMonitoringJob Sample",
             "origin": "API_DEFINITION",
             "description": " Resumes a paused ModelDeploymentMonitoringJob. It will start to run from next scheduled time. A deleted ModelDeploymentMonitoringJob can't be resumed.",
             "canonical": true,
@@ -6913,7 +6969,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_LlmUtilityService_CountTokens_async",
-            "title": "DatasetService countTokens Sample",
+            "title": "DataFoundryService countTokens Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a token counting.",
             "canonical": true,
@@ -6977,7 +7033,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_LlmUtilityService_ComputeTokens_async",
-            "title": "DatasetService computeTokens Sample",
+            "title": "DataFoundryService computeTokens Sample",
             "origin": "API_DEFINITION",
             "description": " Return a list of tokens based on the input text.",
             "canonical": true,
@@ -7029,7 +7085,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MatchService_FindNeighbors_async",
-            "title": "DatasetService findNeighbors Sample",
+            "title": "DataFoundryService findNeighbors Sample",
             "origin": "API_DEFINITION",
             "description": " Finds the nearest neighbors of each vector within the request.",
             "canonical": true,
@@ -7081,7 +7137,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MatchService_ReadIndexDatapoints_async",
-            "title": "DatasetService readIndexDatapoints Sample",
+            "title": "DataFoundryService readIndexDatapoints Sample",
             "origin": "API_DEFINITION",
             "description": " Reads the datapoints/vectors of the given IDs. A maximum of 1000 datapoints can be retrieved in a batch.",
             "canonical": true,
@@ -7129,7 +7185,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateMetadataStore_async",
-            "title": "DatasetService createMetadataStore Sample",
+            "title": "DataFoundryService createMetadataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Initializes a MetadataStore, including allocation of resources.",
             "canonical": true,
@@ -7177,7 +7233,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_GetMetadataStore_async",
-            "title": "DatasetService getMetadataStore Sample",
+            "title": "DataFoundryService getMetadataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a specific MetadataStore.",
             "canonical": true,
@@ -7217,7 +7273,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_ListMetadataStores_async",
-            "title": "DatasetService listMetadataStores Sample",
+            "title": "DataFoundryService listMetadataStores Sample",
             "origin": "API_DEFINITION",
             "description": " Lists MetadataStores for a Location.",
             "canonical": true,
@@ -7265,7 +7321,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_DeleteMetadataStore_async",
-            "title": "DatasetService deleteMetadataStore Sample",
+            "title": "DataFoundryService deleteMetadataStore Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a single MetadataStore and all its child resources (Artifacts, Executions, and Contexts).",
             "canonical": true,
@@ -7309,7 +7365,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateArtifact_async",
-            "title": "DatasetService createArtifact Sample",
+            "title": "DataFoundryService createArtifact Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an Artifact associated with a MetadataStore.",
             "canonical": true,
@@ -7357,7 +7413,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_GetArtifact_async",
-            "title": "DatasetService getArtifact Sample",
+            "title": "DataFoundryService getArtifact Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a specific Artifact.",
             "canonical": true,
@@ -7397,7 +7453,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_ListArtifacts_async",
-            "title": "DatasetService listArtifacts Sample",
+            "title": "DataFoundryService listArtifacts Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Artifacts in the MetadataStore.",
             "canonical": true,
@@ -7453,7 +7509,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_UpdateArtifact_async",
-            "title": "DatasetService updateArtifact Sample",
+            "title": "DataFoundryService updateArtifact Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a stored Artifact.",
             "canonical": true,
@@ -7501,7 +7557,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_DeleteArtifact_async",
-            "title": "DatasetService deleteArtifact Sample",
+            "title": "DataFoundryService deleteArtifact Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Artifact.",
             "canonical": true,
@@ -7545,7 +7601,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_PurgeArtifacts_async",
-            "title": "DatasetService purgeArtifacts Sample",
+            "title": "DataFoundryService purgeArtifacts Sample",
             "origin": "API_DEFINITION",
             "description": " Purges Artifacts.",
             "canonical": true,
@@ -7593,7 +7649,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateContext_async",
-            "title": "DatasetService createContext Sample",
+            "title": "DataFoundryService createContext Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Context associated with a MetadataStore.",
             "canonical": true,
@@ -7641,7 +7697,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_GetContext_async",
-            "title": "DatasetService getContext Sample",
+            "title": "DataFoundryService getContext Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a specific Context.",
             "canonical": true,
@@ -7681,7 +7737,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_ListContexts_async",
-            "title": "DatasetService listContexts Sample",
+            "title": "DataFoundryService listContexts Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Contexts on the MetadataStore.",
             "canonical": true,
@@ -7737,7 +7793,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_UpdateContext_async",
-            "title": "DatasetService updateContext Sample",
+            "title": "DataFoundryService updateContext Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a stored Context.",
             "canonical": true,
@@ -7785,7 +7841,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_DeleteContext_async",
-            "title": "DatasetService deleteContext Sample",
+            "title": "DataFoundryService deleteContext Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a stored Context.",
             "canonical": true,
@@ -7833,7 +7889,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_PurgeContexts_async",
-            "title": "DatasetService purgeContexts Sample",
+            "title": "DataFoundryService purgeContexts Sample",
             "origin": "API_DEFINITION",
             "description": " Purges Contexts.",
             "canonical": true,
@@ -7881,7 +7937,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_AddContextArtifactsAndExecutions_async",
-            "title": "DatasetService addContextArtifactsAndExecutions Sample",
+            "title": "DataFoundryService addContextArtifactsAndExecutions Sample",
             "origin": "API_DEFINITION",
             "description": " Adds a set of Artifacts and Executions to a Context. If any of the Artifacts or Executions have already been added to a Context, they are simply skipped.",
             "canonical": true,
@@ -7929,7 +7985,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_AddContextChildren_async",
-            "title": "DatasetService addContextChildren Sample",
+            "title": "DataFoundryService addContextChildren Sample",
             "origin": "API_DEFINITION",
             "description": " Adds a set of Contexts as children to a parent Context. If any of the child Contexts have already been added to the parent Context, they are simply skipped. If this call would create a cycle or cause any Context to have more than 10 parents, the request will fail with an INVALID_ARGUMENT error.",
             "canonical": true,
@@ -7973,7 +8029,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_RemoveContextChildren_async",
-            "title": "DatasetService removeContextChildren Sample",
+            "title": "DataFoundryService removeContextChildren Sample",
             "origin": "API_DEFINITION",
             "description": " Remove a set of children contexts from a parent Context. If any of the child Contexts were NOT added to the parent Context, they are simply skipped.",
             "canonical": true,
@@ -8017,7 +8073,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_QueryContextLineageSubgraph_async",
-            "title": "DatasetService queryContextLineageSubgraph Sample",
+            "title": "DataFoundryService queryContextLineageSubgraph Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves Artifacts and Executions within the specified Context, connected by Event edges and returned as a LineageSubgraph.",
             "canonical": true,
@@ -8057,7 +8113,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateExecution_async",
-            "title": "DatasetService createExecution Sample",
+            "title": "DataFoundryService createExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Creates an Execution associated with a MetadataStore.",
             "canonical": true,
@@ -8105,7 +8161,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_GetExecution_async",
-            "title": "DatasetService getExecution Sample",
+            "title": "DataFoundryService getExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a specific Execution.",
             "canonical": true,
@@ -8145,7 +8201,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_ListExecutions_async",
-            "title": "DatasetService listExecutions Sample",
+            "title": "DataFoundryService listExecutions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Executions in the MetadataStore.",
             "canonical": true,
@@ -8201,7 +8257,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_UpdateExecution_async",
-            "title": "DatasetService updateExecution Sample",
+            "title": "DataFoundryService updateExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a stored Execution.",
             "canonical": true,
@@ -8249,7 +8305,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_DeleteExecution_async",
-            "title": "DatasetService deleteExecution Sample",
+            "title": "DataFoundryService deleteExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Execution.",
             "canonical": true,
@@ -8293,7 +8349,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_PurgeExecutions_async",
-            "title": "DatasetService purgeExecutions Sample",
+            "title": "DataFoundryService purgeExecutions Sample",
             "origin": "API_DEFINITION",
             "description": " Purges Executions.",
             "canonical": true,
@@ -8341,7 +8397,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_AddExecutionEvents_async",
-            "title": "DatasetService addExecutionEvents Sample",
+            "title": "DataFoundryService addExecutionEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Adds Events to the specified Execution. An Event indicates whether an Artifact was used as an input or output for an Execution. If an Event already exists between the Execution and the Artifact, the Event is skipped.",
             "canonical": true,
@@ -8385,7 +8441,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_QueryExecutionInputsAndOutputs_async",
-            "title": "DatasetService queryExecutionInputsAndOutputs Sample",
+            "title": "DataFoundryService queryExecutionInputsAndOutputs Sample",
             "origin": "API_DEFINITION",
             "description": " Obtains the set of input and output Artifacts for this Execution, in the form of LineageSubgraph that also contains the Execution and connecting Events.",
             "canonical": true,
@@ -8425,7 +8481,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_CreateMetadataSchema_async",
-            "title": "DatasetService createMetadataSchema Sample",
+            "title": "DataFoundryService createMetadataSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a MetadataSchema.",
             "canonical": true,
@@ -8473,7 +8529,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_GetMetadataSchema_async",
-            "title": "DatasetService getMetadataSchema Sample",
+            "title": "DataFoundryService getMetadataSchema Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves a specific MetadataSchema.",
             "canonical": true,
@@ -8513,7 +8569,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_ListMetadataSchemas_async",
-            "title": "DatasetService listMetadataSchemas Sample",
+            "title": "DataFoundryService listMetadataSchemas Sample",
             "origin": "API_DEFINITION",
             "description": " Lists MetadataSchemas.",
             "canonical": true,
@@ -8565,7 +8621,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MetadataService_QueryArtifactLineageSubgraph_async",
-            "title": "DatasetService queryArtifactLineageSubgraph Sample",
+            "title": "DataFoundryService queryArtifactLineageSubgraph Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves lineage of an Artifact represented through Artifacts and Executions connected by Event edges and returned as a LineageSubgraph.",
             "canonical": true,
@@ -8613,7 +8669,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MigrationService_SearchMigratableResources_async",
-            "title": "DatasetService searchMigratableResources Sample",
+            "title": "DataFoundryService searchMigratableResources Sample",
             "origin": "API_DEFINITION",
             "description": " Searches all of the resources in automl.googleapis.com, datalabeling.googleapis.com and ml.googleapis.com that can be migrated to Vertex AI's given location.",
             "canonical": true,
@@ -8665,7 +8721,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_MigrationService_BatchMigrateResources_async",
-            "title": "DatasetService batchMigrateResources Sample",
+            "title": "DataFoundryService batchMigrateResources Sample",
             "origin": "API_DEFINITION",
             "description": " Batch migrates resources from ml.googleapis.com, automl.googleapis.com, and datalabeling.googleapis.com to Vertex AI.",
             "canonical": true,
@@ -8709,7 +8765,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelGardenService_GetPublisherModel_async",
-            "title": "DatasetService getPublisherModel Sample",
+            "title": "DataFoundryService getPublisherModel Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Model Garden publisher model.",
             "canonical": true,
@@ -8765,7 +8821,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelGardenService_Deploy_async",
-            "title": "DatasetService deploy Sample",
+            "title": "DataFoundryService deploy Sample",
             "origin": "API_DEFINITION",
             "description": " Deploys a model to a new endpoint.",
             "canonical": true,
@@ -8825,7 +8881,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_UploadModel_async",
-            "title": "DatasetService uploadModel Sample",
+            "title": "DataFoundryService uploadModel Sample",
             "origin": "API_DEFINITION",
             "description": " Uploads a Model artifact into Vertex AI.",
             "canonical": true,
@@ -8881,7 +8937,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_GetModel_async",
-            "title": "DatasetService getModel Sample",
+            "title": "DataFoundryService getModel Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Model.",
             "canonical": true,
@@ -8921,7 +8977,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ListModels_async",
-            "title": "DatasetService listModels Sample",
+            "title": "DataFoundryService listModels Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Models in a Location.",
             "canonical": true,
@@ -8981,7 +9037,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ListModelVersions_async",
-            "title": "DatasetService listModelVersions Sample",
+            "title": "DataFoundryService listModelVersions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists versions of the specified model.",
             "canonical": true,
@@ -9041,7 +9097,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ListModelVersionCheckpoints_async",
-            "title": "DatasetService listModelVersionCheckpoints Sample",
+            "title": "DataFoundryService listModelVersionCheckpoints Sample",
             "origin": "API_DEFINITION",
             "description": " Lists checkpoints of the specified model version.",
             "canonical": true,
@@ -9089,7 +9145,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_UpdateModel_async",
-            "title": "DatasetService updateModel Sample",
+            "title": "DataFoundryService updateModel Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Model.",
             "canonical": true,
@@ -9133,7 +9189,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_UpdateExplanationDataset_async",
-            "title": "DatasetService updateExplanationDataset Sample",
+            "title": "DataFoundryService updateExplanationDataset Sample",
             "origin": "API_DEFINITION",
             "description": " Incrementally update the dataset used for an examples model.",
             "canonical": true,
@@ -9177,7 +9233,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_DeleteModel_async",
-            "title": "DatasetService deleteModel Sample",
+            "title": "DataFoundryService deleteModel Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Model. A model cannot be deleted if any [Endpoint][google.cloud.aiplatform.v1.Endpoint] resource has a [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] based on the model in its [deployed_models][google.cloud.aiplatform.v1.Endpoint.deployed_models] field.",
             "canonical": true,
@@ -9217,7 +9273,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_DeleteModelVersion_async",
-            "title": "DatasetService deleteModelVersion Sample",
+            "title": "DataFoundryService deleteModelVersion Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Model version. Model version can only be deleted if there are no [DeployedModels][google.cloud.aiplatform.v1.DeployedModel] created from it. Deleting the only version in the Model is not allowed. Use [DeleteModel][google.cloud.aiplatform.v1.ModelService.DeleteModel] for deleting the Model instead.",
             "canonical": true,
@@ -9257,7 +9313,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_MergeVersionAliases_async",
-            "title": "DatasetService mergeVersionAliases Sample",
+            "title": "DataFoundryService mergeVersionAliases Sample",
             "origin": "API_DEFINITION",
             "description": " Merges a set of aliases for a Model version.",
             "canonical": true,
@@ -9301,7 +9357,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ExportModel_async",
-            "title": "DatasetService exportModel Sample",
+            "title": "DataFoundryService exportModel Sample",
             "origin": "API_DEFINITION",
             "description": " Exports a trained, exportable Model to a location specified by the user. A Model is considered to be exportable if it has at least one [supported export format][google.cloud.aiplatform.v1.Model.supported_export_formats].",
             "canonical": true,
@@ -9345,7 +9401,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_CopyModel_async",
-            "title": "DatasetService copyModel Sample",
+            "title": "DataFoundryService copyModel Sample",
             "origin": "API_DEFINITION",
             "description": " Copies an already existing Vertex AI Model into the specified Location. The source Model must exist in the same Project. When copying custom Models, the users themselves are responsible for [Model.metadata][google.cloud.aiplatform.v1.Model.metadata] content to be region-agnostic, as well as making sure that any resources (e.g. files) it depends on remain accessible.",
             "canonical": true,
@@ -9401,7 +9457,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ImportModelEvaluation_async",
-            "title": "DatasetService importModelEvaluation Sample",
+            "title": "DataFoundryService importModelEvaluation Sample",
             "origin": "API_DEFINITION",
             "description": " Imports an externally generated ModelEvaluation.",
             "canonical": true,
@@ -9445,7 +9501,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_async",
-            "title": "DatasetService batchImportModelEvaluationSlices Sample",
+            "title": "DataFoundryService batchImportModelEvaluationSlices Sample",
             "origin": "API_DEFINITION",
             "description": " Imports a list of externally generated ModelEvaluationSlice.",
             "canonical": true,
@@ -9489,7 +9545,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_BatchImportEvaluatedAnnotations_async",
-            "title": "DatasetService batchImportEvaluatedAnnotations Sample",
+            "title": "DataFoundryService batchImportEvaluatedAnnotations Sample",
             "origin": "API_DEFINITION",
             "description": " Imports a list of externally generated EvaluatedAnnotations.",
             "canonical": true,
@@ -9533,7 +9589,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_GetModelEvaluation_async",
-            "title": "DatasetService getModelEvaluation Sample",
+            "title": "DataFoundryService getModelEvaluation Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a ModelEvaluation.",
             "canonical": true,
@@ -9573,7 +9629,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ListModelEvaluations_async",
-            "title": "DatasetService listModelEvaluations Sample",
+            "title": "DataFoundryService listModelEvaluations Sample",
             "origin": "API_DEFINITION",
             "description": " Lists ModelEvaluations in a Model.",
             "canonical": true,
@@ -9629,7 +9685,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_GetModelEvaluationSlice_async",
-            "title": "DatasetService getModelEvaluationSlice Sample",
+            "title": "DataFoundryService getModelEvaluationSlice Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a ModelEvaluationSlice.",
             "canonical": true,
@@ -9669,7 +9725,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ModelService_ListModelEvaluationSlices_async",
-            "title": "DatasetService listModelEvaluationSlices Sample",
+            "title": "DataFoundryService listModelEvaluationSlices Sample",
             "origin": "API_DEFINITION",
             "description": " Lists ModelEvaluationSlices in a ModelEvaluation.",
             "canonical": true,
@@ -9725,7 +9781,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_CreateNotebookRuntimeTemplate_async",
-            "title": "DatasetService createNotebookRuntimeTemplate Sample",
+            "title": "DataFoundryService createNotebookRuntimeTemplate Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a NotebookRuntimeTemplate.",
             "canonical": true,
@@ -9773,7 +9829,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_GetNotebookRuntimeTemplate_async",
-            "title": "DatasetService getNotebookRuntimeTemplate Sample",
+            "title": "DataFoundryService getNotebookRuntimeTemplate Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a NotebookRuntimeTemplate.",
             "canonical": true,
@@ -9813,7 +9869,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_ListNotebookRuntimeTemplates_async",
-            "title": "DatasetService listNotebookRuntimeTemplates Sample",
+            "title": "DataFoundryService listNotebookRuntimeTemplates Sample",
             "origin": "API_DEFINITION",
             "description": " Lists NotebookRuntimeTemplates in a Location.",
             "canonical": true,
@@ -9873,7 +9929,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_DeleteNotebookRuntimeTemplate_async",
-            "title": "DatasetService deleteNotebookRuntimeTemplate Sample",
+            "title": "DataFoundryService deleteNotebookRuntimeTemplate Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a NotebookRuntimeTemplate.",
             "canonical": true,
@@ -9913,7 +9969,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_UpdateNotebookRuntimeTemplate_async",
-            "title": "DatasetService updateNotebookRuntimeTemplate Sample",
+            "title": "DataFoundryService updateNotebookRuntimeTemplate Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a NotebookRuntimeTemplate.",
             "canonical": true,
@@ -9957,7 +10013,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_AssignNotebookRuntime_async",
-            "title": "DatasetService assignNotebookRuntime Sample",
+            "title": "DataFoundryService assignNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Assigns a NotebookRuntime to a user for a particular Notebook file. This method will either returns an existing assignment or generates a new one.",
             "canonical": true,
@@ -10009,7 +10065,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_GetNotebookRuntime_async",
-            "title": "DatasetService getNotebookRuntime Sample",
+            "title": "DataFoundryService getNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a NotebookRuntime.",
             "canonical": true,
@@ -10049,7 +10105,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_ListNotebookRuntimes_async",
-            "title": "DatasetService listNotebookRuntimes Sample",
+            "title": "DataFoundryService listNotebookRuntimes Sample",
             "origin": "API_DEFINITION",
             "description": " Lists NotebookRuntimes in a Location.",
             "canonical": true,
@@ -10109,7 +10165,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_DeleteNotebookRuntime_async",
-            "title": "DatasetService deleteNotebookRuntime Sample",
+            "title": "DataFoundryService deleteNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a NotebookRuntime.",
             "canonical": true,
@@ -10149,7 +10205,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_UpgradeNotebookRuntime_async",
-            "title": "DatasetService upgradeNotebookRuntime Sample",
+            "title": "DataFoundryService upgradeNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Upgrades a NotebookRuntime.",
             "canonical": true,
@@ -10189,7 +10245,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_StartNotebookRuntime_async",
-            "title": "DatasetService startNotebookRuntime Sample",
+            "title": "DataFoundryService startNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Starts a NotebookRuntime.",
             "canonical": true,
@@ -10229,7 +10285,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_StopNotebookRuntime_async",
-            "title": "DatasetService stopNotebookRuntime Sample",
+            "title": "DataFoundryService stopNotebookRuntime Sample",
             "origin": "API_DEFINITION",
             "description": " Stops a NotebookRuntime.",
             "canonical": true,
@@ -10269,7 +10325,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_CreateNotebookExecutionJob_async",
-            "title": "DatasetService createNotebookExecutionJob Sample",
+            "title": "DataFoundryService createNotebookExecutionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a NotebookExecutionJob.",
             "canonical": true,
@@ -10317,7 +10373,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_GetNotebookExecutionJob_async",
-            "title": "DatasetService getNotebookExecutionJob Sample",
+            "title": "DataFoundryService getNotebookExecutionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a NotebookExecutionJob.",
             "canonical": true,
@@ -10361,7 +10417,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_ListNotebookExecutionJobs_async",
-            "title": "DatasetService listNotebookExecutionJobs Sample",
+            "title": "DataFoundryService listNotebookExecutionJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists NotebookExecutionJobs in a Location.",
             "canonical": true,
@@ -10421,7 +10477,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_NotebookService_DeleteNotebookExecutionJob_async",
-            "title": "DatasetService deleteNotebookExecutionJob Sample",
+            "title": "DataFoundryService deleteNotebookExecutionJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a NotebookExecutionJob.",
             "canonical": true,
@@ -10461,7 +10517,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_CreatePersistentResource_async",
-            "title": "DatasetService createPersistentResource Sample",
+            "title": "DataFoundryService createPersistentResource Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a PersistentResource.",
             "canonical": true,
@@ -10509,7 +10565,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_GetPersistentResource_async",
-            "title": "DatasetService getPersistentResource Sample",
+            "title": "DataFoundryService getPersistentResource Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a PersistentResource.",
             "canonical": true,
@@ -10549,7 +10605,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_ListPersistentResources_async",
-            "title": "DatasetService listPersistentResources Sample",
+            "title": "DataFoundryService listPersistentResources Sample",
             "origin": "API_DEFINITION",
             "description": " Lists PersistentResources in a Location.",
             "canonical": true,
@@ -10597,7 +10653,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_DeletePersistentResource_async",
-            "title": "DatasetService deletePersistentResource Sample",
+            "title": "DataFoundryService deletePersistentResource Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a PersistentResource.",
             "canonical": true,
@@ -10637,7 +10693,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_UpdatePersistentResource_async",
-            "title": "DatasetService updatePersistentResource Sample",
+            "title": "DataFoundryService updatePersistentResource Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a PersistentResource.",
             "canonical": true,
@@ -10681,7 +10737,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PersistentResourceService_RebootPersistentResource_async",
-            "title": "DatasetService rebootPersistentResource Sample",
+            "title": "DataFoundryService rebootPersistentResource Sample",
             "origin": "API_DEFINITION",
             "description": " Reboots a PersistentResource.",
             "canonical": true,
@@ -10721,7 +10777,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_CreateTrainingPipeline_async",
-            "title": "DatasetService createTrainingPipeline Sample",
+            "title": "DataFoundryService createTrainingPipeline Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a TrainingPipeline. A created TrainingPipeline right away will be attempted to be run.",
             "canonical": true,
@@ -10765,7 +10821,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_GetTrainingPipeline_async",
-            "title": "DatasetService getTrainingPipeline Sample",
+            "title": "DataFoundryService getTrainingPipeline Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a TrainingPipeline.",
             "canonical": true,
@@ -10805,7 +10861,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_ListTrainingPipelines_async",
-            "title": "DatasetService listTrainingPipelines Sample",
+            "title": "DataFoundryService listTrainingPipelines Sample",
             "origin": "API_DEFINITION",
             "description": " Lists TrainingPipelines in a Location.",
             "canonical": true,
@@ -10861,7 +10917,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_DeleteTrainingPipeline_async",
-            "title": "DatasetService deleteTrainingPipeline Sample",
+            "title": "DataFoundryService deleteTrainingPipeline Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a TrainingPipeline.",
             "canonical": true,
@@ -10901,7 +10957,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_CancelTrainingPipeline_async",
-            "title": "DatasetService cancelTrainingPipeline Sample",
+            "title": "DataFoundryService cancelTrainingPipeline Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a TrainingPipeline. Starts asynchronous cancellation on the TrainingPipeline. The server makes a best effort to cancel the pipeline, but success is not guaranteed. Clients can use [PipelineService.GetTrainingPipeline][google.cloud.aiplatform.v1.PipelineService.GetTrainingPipeline] or other methods to check whether the cancellation succeeded or whether the pipeline completed despite cancellation. On successful cancellation, the TrainingPipeline is not deleted; instead it becomes a pipeline with a [TrainingPipeline.error][google.cloud.aiplatform.v1.TrainingPipeline.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [TrainingPipeline.state][google.cloud.aiplatform.v1.TrainingPipeline.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -10941,7 +10997,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_CreatePipelineJob_async",
-            "title": "DatasetService createPipelineJob Sample",
+            "title": "DataFoundryService createPipelineJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a PipelineJob. A PipelineJob will run immediately when created.",
             "canonical": true,
@@ -10989,7 +11045,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_GetPipelineJob_async",
-            "title": "DatasetService getPipelineJob Sample",
+            "title": "DataFoundryService getPipelineJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a PipelineJob.",
             "canonical": true,
@@ -11029,7 +11085,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_ListPipelineJobs_async",
-            "title": "DatasetService listPipelineJobs Sample",
+            "title": "DataFoundryService listPipelineJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists PipelineJobs in a Location.",
             "canonical": true,
@@ -11089,7 +11145,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_DeletePipelineJob_async",
-            "title": "DatasetService deletePipelineJob Sample",
+            "title": "DataFoundryService deletePipelineJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a PipelineJob.",
             "canonical": true,
@@ -11129,7 +11185,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_BatchDeletePipelineJobs_async",
-            "title": "DatasetService batchDeletePipelineJobs Sample",
+            "title": "DataFoundryService batchDeletePipelineJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Batch deletes PipelineJobs The Operation is atomic. If it fails, none of the PipelineJobs are deleted. If it succeeds, all of the PipelineJobs are deleted.",
             "canonical": true,
@@ -11173,7 +11229,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_CancelPipelineJob_async",
-            "title": "DatasetService cancelPipelineJob Sample",
+            "title": "DataFoundryService cancelPipelineJob Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels a PipelineJob. Starts asynchronous cancellation on the PipelineJob. The server makes a best effort to cancel the pipeline, but success is not guaranteed. Clients can use [PipelineService.GetPipelineJob][google.cloud.aiplatform.v1.PipelineService.GetPipelineJob] or other methods to check whether the cancellation succeeded or whether the pipeline completed despite cancellation. On successful cancellation, the PipelineJob is not deleted; instead it becomes a pipeline with a [PipelineJob.error][google.cloud.aiplatform.v1.PipelineJob.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`, and [PipelineJob.state][google.cloud.aiplatform.v1.PipelineJob.state] is set to `CANCELLED`.",
             "canonical": true,
@@ -11213,7 +11269,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PipelineService_BatchCancelPipelineJobs_async",
-            "title": "DatasetService batchCancelPipelineJobs Sample",
+            "title": "DataFoundryService batchCancelPipelineJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Batch cancel PipelineJobs. Firstly the server will check if all the jobs are in non-terminal states, and skip the jobs that are already terminated. If the operation failed, none of the pipeline jobs are cancelled. The server will poll the states of all the pipeline jobs periodically to check the cancellation status. This operation will return an LRO.",
             "canonical": true,
@@ -11257,7 +11313,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_Predict_async",
-            "title": "DatasetService predict Sample",
+            "title": "DataFoundryService predict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform an online prediction.",
             "canonical": true,
@@ -11305,7 +11361,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_RawPredict_async",
-            "title": "DatasetService rawPredict Sample",
+            "title": "DataFoundryService rawPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform an online prediction with an arbitrary HTTP payload. The response includes the following HTTP headers: * `X-Vertex-AI-Endpoint-Id`: ID of the [Endpoint][google.cloud.aiplatform.v1.Endpoint] that served this prediction. * `X-Vertex-AI-Deployed-Model-Id`: ID of the Endpoint's [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] that served this prediction.",
             "canonical": true,
@@ -11349,7 +11405,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamRawPredict_async",
-            "title": "DatasetService streamRawPredict Sample",
+            "title": "DataFoundryService streamRawPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a streaming online prediction with an arbitrary HTTP payload.",
             "canonical": true,
@@ -11393,7 +11449,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_DirectPredict_async",
-            "title": "DatasetService directPredict Sample",
+            "title": "DataFoundryService directPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform an unary online prediction request to a gRPC model server for Vertex first-party products and frameworks.",
             "canonical": true,
@@ -11441,7 +11497,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_DirectRawPredict_async",
-            "title": "DatasetService directRawPredict Sample",
+            "title": "DataFoundryService directRawPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform an unary online prediction request to a gRPC model server for custom containers.",
             "canonical": true,
@@ -11489,7 +11545,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamDirectPredict_async",
-            "title": "DatasetService streamDirectPredict Sample",
+            "title": "DataFoundryService streamDirectPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a streaming online prediction request to a gRPC model server for Vertex first-party products and frameworks.",
             "canonical": true,
@@ -11537,7 +11593,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamDirectRawPredict_async",
-            "title": "DatasetService streamDirectRawPredict Sample",
+            "title": "DataFoundryService streamDirectRawPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a streaming online prediction request to a gRPC model server for custom containers.",
             "canonical": true,
@@ -11585,7 +11641,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamingPredict_async",
-            "title": "DatasetService streamingPredict Sample",
+            "title": "DataFoundryService streamingPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a streaming online prediction request for Vertex first-party products and frameworks.",
             "canonical": true,
@@ -11633,7 +11689,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_ServerStreamingPredict_async",
-            "title": "DatasetService serverStreamingPredict Sample",
+            "title": "DataFoundryService serverStreamingPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a server-side streaming online prediction request for Vertex LLM streaming.",
             "canonical": true,
@@ -11681,7 +11737,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamingRawPredict_async",
-            "title": "DatasetService streamingRawPredict Sample",
+            "title": "DataFoundryService streamingRawPredict Sample",
             "origin": "API_DEFINITION",
             "description": " Perform a streaming online prediction request through gRPC.",
             "canonical": true,
@@ -11729,7 +11785,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_Explain_async",
-            "title": "DatasetService explain Sample",
+            "title": "DataFoundryService explain Sample",
             "origin": "API_DEFINITION",
             "description": " Perform an online explanation. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is specified, the corresponding DeployModel must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated. If [deployed_model_id][google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id] is not specified, all DeployedModels must have [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec] populated.",
             "canonical": true,
@@ -11785,7 +11841,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_GenerateContent_async",
-            "title": "DatasetService generateContent Sample",
+            "title": "DataFoundryService generateContent Sample",
             "origin": "API_DEFINITION",
             "description": " Generate content with multimodal inputs.",
             "canonical": true,
@@ -11861,7 +11917,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_PredictionService_StreamGenerateContent_async",
-            "title": "DatasetService streamGenerateContent Sample",
+            "title": "DataFoundryService streamGenerateContent Sample",
             "origin": "API_DEFINITION",
             "description": " Generate content with multimodal inputs with streaming support.",
             "canonical": true,
@@ -11937,7 +11993,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_async",
-            "title": "DatasetService queryReasoningEngine Sample",
+            "title": "DataFoundryService queryReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Queries using a reasoning engine.",
             "canonical": true,
@@ -11985,7 +12041,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineExecutionService_StreamQueryReasoningEngine_async",
-            "title": "DatasetService streamQueryReasoningEngine Sample",
+            "title": "DataFoundryService streamQueryReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Streams queries using a reasoning engine.",
             "canonical": true,
@@ -12033,7 +12089,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineService_CreateReasoningEngine_async",
-            "title": "DatasetService createReasoningEngine Sample",
+            "title": "DataFoundryService createReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a reasoning engine.",
             "canonical": true,
@@ -12077,7 +12133,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineService_GetReasoningEngine_async",
-            "title": "DatasetService getReasoningEngine Sample",
+            "title": "DataFoundryService getReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a reasoning engine.",
             "canonical": true,
@@ -12117,7 +12173,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineService_ListReasoningEngines_async",
-            "title": "DatasetService listReasoningEngines Sample",
+            "title": "DataFoundryService listReasoningEngines Sample",
             "origin": "API_DEFINITION",
             "description": " Lists reasoning engines in a location.",
             "canonical": true,
@@ -12169,7 +12225,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineService_UpdateReasoningEngine_async",
-            "title": "DatasetService updateReasoningEngine Sample",
+            "title": "DataFoundryService updateReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a reasoning engine.",
             "canonical": true,
@@ -12213,7 +12269,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ReasoningEngineService_DeleteReasoningEngine_async",
-            "title": "DatasetService deleteReasoningEngine Sample",
+            "title": "DataFoundryService deleteReasoningEngine Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a reasoning engine.",
             "canonical": true,
@@ -12257,7 +12313,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_CreateSchedule_async",
-            "title": "DatasetService createSchedule Sample",
+            "title": "DataFoundryService createSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Schedule.",
             "canonical": true,
@@ -12301,7 +12357,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_DeleteSchedule_async",
-            "title": "DatasetService deleteSchedule Sample",
+            "title": "DataFoundryService deleteSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Schedule.",
             "canonical": true,
@@ -12341,7 +12397,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_GetSchedule_async",
-            "title": "DatasetService getSchedule Sample",
+            "title": "DataFoundryService getSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Schedule.",
             "canonical": true,
@@ -12381,7 +12437,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_ListSchedules_async",
-            "title": "DatasetService listSchedules Sample",
+            "title": "DataFoundryService listSchedules Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Schedules in a Location.",
             "canonical": true,
@@ -12437,7 +12493,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_PauseSchedule_async",
-            "title": "DatasetService pauseSchedule Sample",
+            "title": "DataFoundryService pauseSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Pauses a Schedule. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'PAUSED'. If the schedule is paused, no new runs will be created. Already created runs will NOT be paused or canceled.",
             "canonical": true,
@@ -12477,7 +12533,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_ResumeSchedule_async",
-            "title": "DatasetService resumeSchedule Sample",
+            "title": "DataFoundryService resumeSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Resumes a paused Schedule to start scheduling new runs. Will mark [Schedule.state][google.cloud.aiplatform.v1.Schedule.state] to 'ACTIVE'. Only paused Schedule can be resumed. When the Schedule is resumed, new runs will be scheduled starting from the next execution time after the current time based on the time_specification in the Schedule. If [Schedule.catch_up][google.cloud.aiplatform.v1.Schedule.catch_up] is set up true, all missed runs will be scheduled for backfill first.",
             "canonical": true,
@@ -12521,7 +12577,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_ScheduleService_UpdateSchedule_async",
-            "title": "DatasetService updateSchedule Sample",
+            "title": "DataFoundryService updateSchedule Sample",
             "origin": "API_DEFINITION",
             "description": " Updates an active or paused Schedule. When the Schedule is updated, new runs will be scheduled starting from the updated next execution time after the update time based on the time_specification in the updated Schedule. All unstarted runs before the update time will be skipped while already created runs will NOT be paused or canceled.",
             "canonical": true,
@@ -12565,7 +12621,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_SpecialistPoolService_CreateSpecialistPool_async",
-            "title": "DatasetService createSpecialistPool Sample",
+            "title": "DataFoundryService createSpecialistPool Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a SpecialistPool.",
             "canonical": true,
@@ -12609,7 +12665,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_SpecialistPoolService_GetSpecialistPool_async",
-            "title": "DatasetService getSpecialistPool Sample",
+            "title": "DataFoundryService getSpecialistPool Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a SpecialistPool.",
             "canonical": true,
@@ -12649,7 +12705,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_SpecialistPoolService_ListSpecialistPools_async",
-            "title": "DatasetService listSpecialistPools Sample",
+            "title": "DataFoundryService listSpecialistPools Sample",
             "origin": "API_DEFINITION",
             "description": " Lists SpecialistPools in a Location.",
             "canonical": true,
@@ -12701,7 +12757,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_SpecialistPoolService_DeleteSpecialistPool_async",
-            "title": "DatasetService deleteSpecialistPool Sample",
+            "title": "DataFoundryService deleteSpecialistPool Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a SpecialistPool as well as all Specialists in the pool.",
             "canonical": true,
@@ -12745,7 +12801,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_SpecialistPoolService_UpdateSpecialistPool_async",
-            "title": "DatasetService updateSpecialistPool Sample",
+            "title": "DataFoundryService updateSpecialistPool Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a SpecialistPool.",
             "canonical": true,
@@ -12789,7 +12845,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_CreateTensorboard_async",
-            "title": "DatasetService createTensorboard Sample",
+            "title": "DataFoundryService createTensorboard Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Tensorboard.",
             "canonical": true,
@@ -12833,7 +12889,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_GetTensorboard_async",
-            "title": "DatasetService getTensorboard Sample",
+            "title": "DataFoundryService getTensorboard Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Tensorboard.",
             "canonical": true,
@@ -12873,7 +12929,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboard_async",
-            "title": "DatasetService updateTensorboard Sample",
+            "title": "DataFoundryService updateTensorboard Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Tensorboard.",
             "canonical": true,
@@ -12917,7 +12973,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ListTensorboards_async",
-            "title": "DatasetService listTensorboards Sample",
+            "title": "DataFoundryService listTensorboards Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Tensorboards in a Location.",
             "canonical": true,
@@ -12977,7 +13033,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_DeleteTensorboard_async",
-            "title": "DatasetService deleteTensorboard Sample",
+            "title": "DataFoundryService deleteTensorboard Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Tensorboard.",
             "canonical": true,
@@ -13017,7 +13073,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async",
-            "title": "DatasetService readTensorboardUsage Sample",
+            "title": "DataFoundryService readTensorboardUsage Sample",
             "origin": "API_DEFINITION",
             "description": " Returns a list of monthly active users for a given TensorBoard instance.",
             "canonical": true,
@@ -13057,7 +13113,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_async",
-            "title": "DatasetService readTensorboardSize Sample",
+            "title": "DataFoundryService readTensorboardSize Sample",
             "origin": "API_DEFINITION",
             "description": " Returns the storage size for a given TensorBoard instance.",
             "canonical": true,
@@ -13097,7 +13153,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_CreateTensorboardExperiment_async",
-            "title": "DatasetService createTensorboardExperiment Sample",
+            "title": "DataFoundryService createTensorboardExperiment Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a TensorboardExperiment.",
             "canonical": true,
@@ -13145,7 +13201,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_GetTensorboardExperiment_async",
-            "title": "DatasetService getTensorboardExperiment Sample",
+            "title": "DataFoundryService getTensorboardExperiment Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a TensorboardExperiment.",
             "canonical": true,
@@ -13185,7 +13241,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboardExperiment_async",
-            "title": "DatasetService updateTensorboardExperiment Sample",
+            "title": "DataFoundryService updateTensorboardExperiment Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a TensorboardExperiment.",
             "canonical": true,
@@ -13229,7 +13285,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ListTensorboardExperiments_async",
-            "title": "DatasetService listTensorboardExperiments Sample",
+            "title": "DataFoundryService listTensorboardExperiments Sample",
             "origin": "API_DEFINITION",
             "description": " Lists TensorboardExperiments in a Location.",
             "canonical": true,
@@ -13289,7 +13345,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_DeleteTensorboardExperiment_async",
-            "title": "DatasetService deleteTensorboardExperiment Sample",
+            "title": "DataFoundryService deleteTensorboardExperiment Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a TensorboardExperiment.",
             "canonical": true,
@@ -13329,7 +13385,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_CreateTensorboardRun_async",
-            "title": "DatasetService createTensorboardRun Sample",
+            "title": "DataFoundryService createTensorboardRun Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a TensorboardRun.",
             "canonical": true,
@@ -13377,7 +13433,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_BatchCreateTensorboardRuns_async",
-            "title": "DatasetService batchCreateTensorboardRuns Sample",
+            "title": "DataFoundryService batchCreateTensorboardRuns Sample",
             "origin": "API_DEFINITION",
             "description": " Batch create TensorboardRuns.",
             "canonical": true,
@@ -13421,7 +13477,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_GetTensorboardRun_async",
-            "title": "DatasetService getTensorboardRun Sample",
+            "title": "DataFoundryService getTensorboardRun Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a TensorboardRun.",
             "canonical": true,
@@ -13461,7 +13517,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboardRun_async",
-            "title": "DatasetService updateTensorboardRun Sample",
+            "title": "DataFoundryService updateTensorboardRun Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a TensorboardRun.",
             "canonical": true,
@@ -13505,7 +13561,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ListTensorboardRuns_async",
-            "title": "DatasetService listTensorboardRuns Sample",
+            "title": "DataFoundryService listTensorboardRuns Sample",
             "origin": "API_DEFINITION",
             "description": " Lists TensorboardRuns in a Location.",
             "canonical": true,
@@ -13565,7 +13621,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_DeleteTensorboardRun_async",
-            "title": "DatasetService deleteTensorboardRun Sample",
+            "title": "DataFoundryService deleteTensorboardRun Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a TensorboardRun.",
             "canonical": true,
@@ -13605,7 +13661,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_BatchCreateTensorboardTimeSeries_async",
-            "title": "DatasetService batchCreateTensorboardTimeSeries Sample",
+            "title": "DataFoundryService batchCreateTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.",
             "canonical": true,
@@ -13649,7 +13705,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_CreateTensorboardTimeSeries_async",
-            "title": "DatasetService createTensorboardTimeSeries Sample",
+            "title": "DataFoundryService createTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a TensorboardTimeSeries.",
             "canonical": true,
@@ -13697,7 +13753,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_GetTensorboardTimeSeries_async",
-            "title": "DatasetService getTensorboardTimeSeries Sample",
+            "title": "DataFoundryService getTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a TensorboardTimeSeries.",
             "canonical": true,
@@ -13737,7 +13793,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboardTimeSeries_async",
-            "title": "DatasetService updateTensorboardTimeSeries Sample",
+            "title": "DataFoundryService updateTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a TensorboardTimeSeries.",
             "canonical": true,
@@ -13781,7 +13837,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ListTensorboardTimeSeries_async",
-            "title": "DatasetService listTensorboardTimeSeries Sample",
+            "title": "DataFoundryService listTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Lists TensorboardTimeSeries in a Location.",
             "canonical": true,
@@ -13841,7 +13897,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_DeleteTensorboardTimeSeries_async",
-            "title": "DatasetService deleteTensorboardTimeSeries Sample",
+            "title": "DataFoundryService deleteTensorboardTimeSeries Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a TensorboardTimeSeries.",
             "canonical": true,
@@ -13881,7 +13937,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_BatchReadTensorboardTimeSeriesData_async",
-            "title": "DatasetService batchReadTensorboardTimeSeriesData Sample",
+            "title": "DataFoundryService batchReadTensorboardTimeSeriesData Sample",
             "origin": "API_DEFINITION",
             "description": " Reads multiple TensorboardTimeSeries' data. The data point number limit is 1000 for scalars, 100 for tensors and blob references. If the number of data points stored is less than the limit, all data is returned. Otherwise, the number limit of data points is randomly selected from this time series and returned.",
             "canonical": true,
@@ -13925,7 +13981,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardTimeSeriesData_async",
-            "title": "DatasetService readTensorboardTimeSeriesData Sample",
+            "title": "DataFoundryService readTensorboardTimeSeriesData Sample",
             "origin": "API_DEFINITION",
             "description": " Reads a TensorboardTimeSeries' data. By default, if the number of data points stored is less than 1000, all data is returned. Otherwise, 1000 data points is randomly selected from this time series and returned. This value can be changed by changing max_data_points, which can't be greater than 10k.",
             "canonical": true,
@@ -13973,7 +14029,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardBlobData_async",
-            "title": "DatasetService readTensorboardBlobData Sample",
+            "title": "DataFoundryService readTensorboardBlobData Sample",
             "origin": "API_DEFINITION",
             "description": " Gets bytes of TensorboardBlobs. This is to allow reading blob data stored in consumer project's Cloud Storage bucket without users having to obtain Cloud Storage access permission.",
             "canonical": true,
@@ -14017,7 +14073,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_WriteTensorboardExperimentData_async",
-            "title": "DatasetService writeTensorboardExperimentData Sample",
+            "title": "DataFoundryService writeTensorboardExperimentData Sample",
             "origin": "API_DEFINITION",
             "description": " Write time series data points of multiple TensorboardTimeSeries in multiple TensorboardRun's. If any data fail to be ingested, an error is returned.",
             "canonical": true,
@@ -14061,7 +14117,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_WriteTensorboardRunData_async",
-            "title": "DatasetService writeTensorboardRunData Sample",
+            "title": "DataFoundryService writeTensorboardRunData Sample",
             "origin": "API_DEFINITION",
             "description": " Write time series data points into multiple TensorboardTimeSeries under a TensorboardRun. If any data fail to be ingested, an error is returned.",
             "canonical": true,
@@ -14105,7 +14161,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_TensorboardService_ExportTensorboardTimeSeriesData_async",
-            "title": "DatasetService exportTensorboardTimeSeriesData Sample",
+            "title": "DataFoundryService exportTensorboardTimeSeriesData Sample",
             "origin": "API_DEFINITION",
             "description": " Exports a TensorboardTimeSeries' data. Data is returned in paginated responses.",
             "canonical": true,
@@ -14161,7 +14217,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_CreateRagCorpus_async",
-            "title": "DatasetService createRagCorpus Sample",
+            "title": "DataFoundryService createRagCorpus Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a RagCorpus.",
             "canonical": true,
@@ -14205,7 +14261,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagCorpus_async",
-            "title": "DatasetService updateRagCorpus Sample",
+            "title": "DataFoundryService updateRagCorpus Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a RagCorpus.",
             "canonical": true,
@@ -14245,7 +14301,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagCorpus_async",
-            "title": "DatasetService getRagCorpus Sample",
+            "title": "DataFoundryService getRagCorpus Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a RagCorpus.",
             "canonical": true,
@@ -14285,7 +14341,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_ListRagCorpora_async",
-            "title": "DatasetService listRagCorpora Sample",
+            "title": "DataFoundryService listRagCorpora Sample",
             "origin": "API_DEFINITION",
             "description": " Lists RagCorpora in a Location.",
             "canonical": true,
@@ -14333,7 +14389,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagCorpus_async",
-            "title": "DatasetService deleteRagCorpus Sample",
+            "title": "DataFoundryService deleteRagCorpus Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a RagCorpus.",
             "canonical": true,
@@ -14377,7 +14433,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_UploadRagFile_async",
-            "title": "DatasetService uploadRagFile Sample",
+            "title": "DataFoundryService uploadRagFile Sample",
             "origin": "API_DEFINITION",
             "description": " Upload a file into a RagCorpus.",
             "canonical": true,
@@ -14425,7 +14481,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_ImportRagFiles_async",
-            "title": "DatasetService importRagFiles Sample",
+            "title": "DataFoundryService importRagFiles Sample",
             "origin": "API_DEFINITION",
             "description": " Import files from Google Cloud Storage or Google Drive into a RagCorpus.",
             "canonical": true,
@@ -14469,7 +14525,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagFile_async",
-            "title": "DatasetService getRagFile Sample",
+            "title": "DataFoundryService getRagFile Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a RagFile.",
             "canonical": true,
@@ -14509,7 +14565,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_ListRagFiles_async",
-            "title": "DatasetService listRagFiles Sample",
+            "title": "DataFoundryService listRagFiles Sample",
             "origin": "API_DEFINITION",
             "description": " Lists RagFiles in a RagCorpus.",
             "canonical": true,
@@ -14557,7 +14613,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagFile_async",
-            "title": "DatasetService deleteRagFile Sample",
+            "title": "DataFoundryService deleteRagFile Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a RagFile.",
             "canonical": true,
@@ -14597,7 +14653,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagEngineConfig_async",
-            "title": "DatasetService updateRagEngineConfig Sample",
+            "title": "DataFoundryService updateRagEngineConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a RagEngineConfig.",
             "canonical": true,
@@ -14637,7 +14693,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagEngineConfig_async",
-            "title": "DatasetService getRagEngineConfig Sample",
+            "title": "DataFoundryService getRagEngineConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a RagEngineConfig.",
             "canonical": true,
@@ -14677,7 +14733,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagService_RetrieveContexts_async",
-            "title": "DatasetService retrieveContexts Sample",
+            "title": "DataFoundryService retrieveContexts Sample",
             "origin": "API_DEFINITION",
             "description": " Retrieves relevant contexts for a query.",
             "canonical": true,
@@ -14725,7 +14781,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagService_AugmentPrompt_async",
-            "title": "DatasetService augmentPrompt Sample",
+            "title": "DataFoundryService augmentPrompt Sample",
             "origin": "API_DEFINITION",
             "description": " Given an input prompt, it returns augmented prompt from vertex rag store  to guide LLM towards generating grounded responses.",
             "canonical": true,
@@ -14777,7 +14833,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VertexRagService_CorroborateContent_async",
-            "title": "DatasetService corroborateContent Sample",
+            "title": "DataFoundryService corroborateContent Sample",
             "origin": "API_DEFINITION",
             "description": " Given an input text, it returns a score that evaluates the factuality of the text. It also extracts and returns claims from the text and provides supporting facts.",
             "canonical": true,
@@ -14829,7 +14885,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_CreateStudy_async",
-            "title": "DatasetService createStudy Sample",
+            "title": "DataFoundryService createStudy Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Study. A resource name will be generated after creation of the Study.",
             "canonical": true,
@@ -14873,7 +14929,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_GetStudy_async",
-            "title": "DatasetService getStudy Sample",
+            "title": "DataFoundryService getStudy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Study by name.",
             "canonical": true,
@@ -14913,7 +14969,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_ListStudies_async",
-            "title": "DatasetService listStudies Sample",
+            "title": "DataFoundryService listStudies Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the studies in a region for an associated project.",
             "canonical": true,
@@ -14961,7 +15017,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_DeleteStudy_async",
-            "title": "DatasetService deleteStudy Sample",
+            "title": "DataFoundryService deleteStudy Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Study.",
             "canonical": true,
@@ -15001,7 +15057,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_LookupStudy_async",
-            "title": "DatasetService lookupStudy Sample",
+            "title": "DataFoundryService lookupStudy Sample",
             "origin": "API_DEFINITION",
             "description": " Looks a study up using the user-defined display_name field instead of the fully qualified resource name.",
             "canonical": true,
@@ -15045,7 +15101,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_SuggestTrials_async",
-            "title": "DatasetService suggestTrials Sample",
+            "title": "DataFoundryService suggestTrials Sample",
             "origin": "API_DEFINITION",
             "description": " Adds one or more Trials to a Study, with parameter values suggested by Vertex AI Vizier. Returns a long-running operation associated with the generation of Trial suggestions. When this long-running operation succeeds, it will contain a [SuggestTrialsResponse][google.cloud.aiplatform.v1.SuggestTrialsResponse].",
             "canonical": true,
@@ -15097,7 +15153,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_CreateTrial_async",
-            "title": "DatasetService createTrial Sample",
+            "title": "DataFoundryService createTrial Sample",
             "origin": "API_DEFINITION",
             "description": " Adds a user provided Trial to a Study.",
             "canonical": true,
@@ -15141,7 +15197,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_GetTrial_async",
-            "title": "DatasetService getTrial Sample",
+            "title": "DataFoundryService getTrial Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Trial.",
             "canonical": true,
@@ -15181,7 +15237,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_ListTrials_async",
-            "title": "DatasetService listTrials Sample",
+            "title": "DataFoundryService listTrials Sample",
             "origin": "API_DEFINITION",
             "description": " Lists the Trials associated with a Study.",
             "canonical": true,
@@ -15229,7 +15285,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_AddTrialMeasurement_async",
-            "title": "DatasetService addTrialMeasurement Sample",
+            "title": "DataFoundryService addTrialMeasurement Sample",
             "origin": "API_DEFINITION",
             "description": " Adds a measurement of the objective metrics to a Trial. This measurement is assumed to have been taken before the Trial is complete.",
             "canonical": true,
@@ -15273,7 +15329,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_CompleteTrial_async",
-            "title": "DatasetService completeTrial Sample",
+            "title": "DataFoundryService completeTrial Sample",
             "origin": "API_DEFINITION",
             "description": " Marks a Trial as complete.",
             "canonical": true,
@@ -15325,7 +15381,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_DeleteTrial_async",
-            "title": "DatasetService deleteTrial Sample",
+            "title": "DataFoundryService deleteTrial Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Trial.",
             "canonical": true,
@@ -15365,7 +15421,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_CheckTrialEarlyStoppingState_async",
-            "title": "DatasetService checkTrialEarlyStoppingState Sample",
+            "title": "DataFoundryService checkTrialEarlyStoppingState Sample",
             "origin": "API_DEFINITION",
             "description": " Checks  whether a Trial should stop or not. Returns a long-running operation. When the operation is successful, it will contain a [CheckTrialEarlyStoppingStateResponse][google.cloud.aiplatform.v1.CheckTrialEarlyStoppingStateResponse].",
             "canonical": true,
@@ -15405,7 +15461,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_StopTrial_async",
-            "title": "DatasetService stopTrial Sample",
+            "title": "DataFoundryService stopTrial Sample",
             "origin": "API_DEFINITION",
             "description": " Stops a Trial.",
             "canonical": true,
@@ -15445,7 +15501,7 @@
         },
         {
             "regionTag": "aiplatform_v1_generated_VizierService_ListOptimalTrials_async",
-            "title": "DatasetService listOptimalTrials Sample",
+            "title": "DataFoundryService listOptimalTrials Sample",
             "origin": "API_DEFINITION",
             "description": " Lists the pareto-optimal Trials for multi-objective Study or the optimal Trials for single-objective Study. The definition of pareto-optimal can be checked in wiki page. https://en.wikipedia.org/wiki/Pareto_efficiency",
             "canonical": true,
