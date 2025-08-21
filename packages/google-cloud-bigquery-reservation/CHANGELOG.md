@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.1.0...bigquery-reservation-v4.2.0) (2025-08-21)
+
+
+### Features
+
+* [bigquery-reservation] Add Reservation.max_slots field to Reservation proto, indicating the total max number of slots this reservation can use up to ([#6606](https://github.com/googleapis/google-cloud-node/issues/6606)) ([d3237dc](https://github.com/googleapis/google-cloud-node/commit/d3237dcc125079b0f08dc454686ebcdc73a7d236))
+* Add Reservation.scaling_mode field and its corresponding enum message ScalingMode. This field should be used together with Reservation.max_slots ([d3237dc](https://github.com/googleapis/google-cloud-node/commit/d3237dcc125079b0f08dc454686ebcdc73a7d236))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.0.1...bigquery-reservation-v4.1.0) (2025-07-09)
 
 

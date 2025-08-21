@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/issueresolution",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",

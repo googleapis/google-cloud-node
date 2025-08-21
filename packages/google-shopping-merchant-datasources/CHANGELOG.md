@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.8.0...datasources-v0.9.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.7.0...datasources-v0.8.0) (2025-08-12)
 
 

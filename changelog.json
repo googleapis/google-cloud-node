@@ -4,6 +4,356 @@
     {
       "changes": [
         {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "47ac6499-7408-4025-acb0-4d9557b7343a",
+      "createTime": "2025-08-21T17:57:52.785Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "e5b1f624-3628-4e3e-a49f-17172c1da887",
+      "createTime": "2025-08-21T17:57:52.758Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "3352ac98-b254-45ec-9f0f-7d4b4f38b3d0",
+      "createTime": "2025-08-21T17:57:52.731Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "3dbaeb06-a14a-479b-ac8a-270c9b06b076",
+      "createTime": "2025-08-21T17:57:52.706Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "7b264f05-5c97-4a7e-bb7e-662a376d7a9b",
+      "createTime": "2025-08-21T17:57:52.686Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "28dea597-f2a9-4e58-8530-76e9f022c23f",
+      "createTime": "2025-08-21T17:57:52.642Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c932e46ea7dded17f830abc4a205e9c8f4f2d268",
+          "message": "[solar] Add `experiments` param to endpoints for access to pre-GA features",
+          "issues": [
+            "6605"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "14573cb7-f108-46cb-a637-7a376214bc05",
+      "createTime": "2025-08-21T17:57:52.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "6aeb0a0f-b911-46b3-a8cb-6f17d5361476",
+      "createTime": "2025-08-21T17:57:52.572Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "f96f9737-4d18-4bcc-ae79-870873f6a76d",
+      "createTime": "2025-08-21T17:57:52.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "614d9807-5b79-49a1-8337-b8e4d200e597",
+      "createTime": "2025-08-21T17:57:52.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "625524c9-292a-4149-917a-37488272da34",
+      "createTime": "2025-08-21T17:57:52.506Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "dafd6746-d505-4817-8343-f531782fc3e4",
+      "createTime": "2025-08-21T17:57:52.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "deb5255541602defd05896fc0093adca05f30440",
+          "message": "Release stable version of libraries",
+          "issues": [
+            "6602"
+          ],
+          "breakingChangeNote": "release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))"
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "47685158-b465-4af7-bfef-d12710b913b7",
+      "createTime": "2025-08-21T17:57:52.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6ee97b10f310e91b403bafdb65b6e4ebabc2cfe",
+          "message": "[cloudbuild] Add option to enable nested virtualization if available",
+          "issues": [
+            "6603"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "c970e6c3-a13b-4d14-b46b-7a8daa30532a",
+      "createTime": "2025-08-21T17:57:52.444Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6c132f36ebf611a13fd1c4e1b44920d4334a1a7b",
+          "message": "[documentai] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability)",
+          "issues": [
+            "6607"
+          ]
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "dd0e40af-5dce-4cf8-a383-23c243b67894",
+      "createTime": "2025-08-21T17:57:52.420Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dab8cb9a0b0b9629a899c95c2699c276c23a2c93",
+          "message": "[contentwarehouse] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability)",
+          "issues": [
+            "6608"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "f1957825-166c-47c8-a58a-99e9556f0530",
+      "createTime": "2025-08-21T17:57:52.389Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d3237dcc125079b0f08dc454686ebcdc73a7d236",
+          "message": "[bigquery-reservation] Add Reservation.max_slots field to Reservation proto, indicating the total max number of slots this reservation can use up to",
+          "issues": [
+            "6606"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d3237dcc125079b0f08dc454686ebcdc73a7d236",
+          "message": "Add Reservation.scaling_mode field and its corresponding enum message ScalingMode. This field should be used together with Reservation.max_slots",
+          "issues": []
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "be5691c1-a1bd-4419-88b5-d704ce94e633",
+      "createTime": "2025-08-21T17:57:52.367Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "11f87fa265c5b83214838c6179e007ad9e6bf590",
+          "message": "Add option EndpointUserId and ModelUserId fields",
+          "issues": [
+            "6600"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "de966d3992725acf05932096ff09d0b6741a6c1f",
+          "message": "Add `gpu_partition_size` to `MachineSpec`",
+          "issues": [
+            "6595"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "5c6f34d1-71c1-4647-8074-a700ea665838",
+      "createTime": "2025-08-21T17:57:52.335Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cdd0d85a7213734befbb4e95a971d8351af79f23",
+          "message": "[analytics-admin] remove the `SetAutomatedGa4ConfigurationOptOut` method",
+          "issues": [
+            "6613"
+          ],
+          "breakingChangeNote": "[analytics-admin] remove the `SetAutomatedGa4ConfigurationOptOut` method ([#6613](https://github.com/googleapis/google-cloud-node/issues/6613))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "ef50205a-fe85-4020-95a6-e2c2062c81d0",
+      "createTime": "2025-08-21T17:57:52.309Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "a49143ea7b0b694d9b7c01a576413146dc0db241",
           "message": "Add initial files for google.cloud.saasplatform.saasservicemgmt.v1beta1",
@@ -61610,5 +61960,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-12T15:48:40.697Z"
+  "updateTime": "2025-08-21T17:57:52.785Z"
 }

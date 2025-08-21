@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/reports",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",

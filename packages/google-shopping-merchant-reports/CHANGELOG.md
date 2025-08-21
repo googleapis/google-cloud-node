@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.12.0...reports-v0.13.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.11.0...reports-v0.12.0) (2025-08-07)
 
 

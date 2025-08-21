@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/promotions",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",
