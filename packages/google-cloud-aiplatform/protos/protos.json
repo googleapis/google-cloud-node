@@ -47803,6 +47803,10 @@
                           "type": "bool",
                           "id": 12
                         },
+                        "disableContainerLogging": {
+                          "type": "bool",
+                          "id": 15
+                        },
                         "enableAccessLogging": {
                           "type": "bool",
                           "id": 13

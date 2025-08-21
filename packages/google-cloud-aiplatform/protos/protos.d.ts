@@ -177201,6 +177201,9 @@ export namespace google {
                     /** DeployedModel enableContainerLogging */
                     enableContainerLogging?: (boolean|null);
 
+                    /** DeployedModel disableContainerLogging */
+                    disableContainerLogging?: (boolean|null);
+
                     /** DeployedModel enableAccessLogging */
                     enableAccessLogging?: (boolean|null);
 
@@ -177270,6 +177273,9 @@ export namespace google {
 
                     /** DeployedModel enableContainerLogging. */
                     public enableContainerLogging: boolean;
+
+                    /** DeployedModel disableContainerLogging. */
+                    public disableContainerLogging: boolean;
 
                     /** DeployedModel enableAccessLogging. */
                     public enableAccessLogging: boolean;
