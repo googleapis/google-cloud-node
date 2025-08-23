@@ -192571,6 +192571,7 @@ export namespace google {
                         FAILURE_MEMORY = 440132982,
                         FAILURE_NETWORK = 42811449,
                         FAILURE_NVLINK = 484426295,
+                        FAILURE_REDUNDANT_HARDWARE_FAULT = 31000530,
                         INFRASTRUCTURE_RELOCATION = 359845636,
                         MAINTENANCE_REASON_UNKNOWN = 50570235,
                         PLANNED_NETWORK_UPDATE = 135494677,
