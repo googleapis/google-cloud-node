@@ -522,6 +522,9 @@ export namespace google {
 
                         /** Input preprocessingConfig */
                         preprocessingConfig?: (google.cloud.video.transcoder.v1.IPreprocessingConfig|null);
+
+                        /** Input attributes */
+                        attributes?: (google.cloud.video.transcoder.v1.IInputAttributes|null);
                     }
 
                     /** Represents an Input. */
@@ -541,6 +544,9 @@ export namespace google {
 
                         /** Input preprocessingConfig. */
                         public preprocessingConfig?: (google.cloud.video.transcoder.v1.IPreprocessingConfig|null);
+
+                        /** Input attributes. */
+                        public attributes?: (google.cloud.video.transcoder.v1.IInputAttributes|null);
 
                         /**
                          * Creates a new Input instance using the specified properties.
@@ -3648,6 +3654,218 @@ export namespace google {
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
                         }
+                    }
+
+                    /** Properties of a TrackDefinition. */
+                    interface ITrackDefinition {
+
+                        /** TrackDefinition inputTrack */
+                        inputTrack?: (number|null);
+
+                        /** TrackDefinition languages */
+                        languages?: (string[]|null);
+
+                        /** TrackDefinition detectLanguages */
+                        detectLanguages?: (boolean|null);
+
+                        /** TrackDefinition detectedLanguages */
+                        detectedLanguages?: (string[]|null);
+                    }
+
+                    /** Represents a TrackDefinition. */
+                    class TrackDefinition implements ITrackDefinition {
+
+                        /**
+                         * Constructs a new TrackDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.transcoder.v1.ITrackDefinition);
+
+                        /** TrackDefinition inputTrack. */
+                        public inputTrack?: (number|null);
+
+                        /** TrackDefinition languages. */
+                        public languages: string[];
+
+                        /** TrackDefinition detectLanguages. */
+                        public detectLanguages: boolean;
+
+                        /** TrackDefinition detectedLanguages. */
+                        public detectedLanguages: string[];
+
+                        /**
+                         * Creates a new TrackDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrackDefinition instance
+                         */
+                        public static create(properties?: google.cloud.video.transcoder.v1.ITrackDefinition): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Encodes the specified TrackDefinition message. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                         * @param message TrackDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.transcoder.v1.ITrackDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrackDefinition message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                         * @param message TrackDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.ITrackDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrackDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrackDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Decodes a TrackDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrackDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Verifies a TrackDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrackDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrackDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Creates a plain object from a TrackDefinition message. Also converts values to other types if specified.
+                         * @param message TrackDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.transcoder.v1.TrackDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrackDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrackDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InputAttributes. */
+                    interface IInputAttributes {
+
+                        /** InputAttributes trackDefinitions */
+                        trackDefinitions?: (google.cloud.video.transcoder.v1.ITrackDefinition[]|null);
+                    }
+
+                    /** Represents an InputAttributes. */
+                    class InputAttributes implements IInputAttributes {
+
+                        /**
+                         * Constructs a new InputAttributes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.transcoder.v1.IInputAttributes);
+
+                        /** InputAttributes trackDefinitions. */
+                        public trackDefinitions: google.cloud.video.transcoder.v1.ITrackDefinition[];
+
+                        /**
+                         * Creates a new InputAttributes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputAttributes instance
+                         */
+                        public static create(properties?: google.cloud.video.transcoder.v1.IInputAttributes): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Encodes the specified InputAttributes message. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                         * @param message InputAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.transcoder.v1.IInputAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputAttributes message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                         * @param message InputAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.IInputAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputAttributes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Decodes an InputAttributes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Verifies an InputAttributes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputAttributes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Creates a plain object from an InputAttributes message. Also converts values to other types if specified.
+                         * @param message InputAttributes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.transcoder.v1.InputAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputAttributes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputAttributes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a VideoStream. */
