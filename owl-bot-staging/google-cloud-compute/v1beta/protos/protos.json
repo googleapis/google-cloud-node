@@ -58478,6 +58478,11 @@
                           "oneof": [
                             "selfLink"
                           ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
                         }
                       },
                       "fields": {
@@ -58536,6 +58541,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "status": {
+                          "type": "MultiMigStatus",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -58551,6 +58563,100 @@
                         "workloadPolicy": {
                           "type": "string",
                           "id": 114721530,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigStatus": {
+                      "fields": {
+                        "appliedAcceleratorTopologies": {
+                          "rule": "repeated",
+                          "type": "MultiMigStatusAcceleratorTopology",
+                          "id": 481392547
+                        }
+                      }
+                    },
+                    "MultiMigStatusAcceleratorTopology": {
+                      "oneofs": {
+                        "_acceleratorTopology": {
+                          "oneof": [
+                            "acceleratorTopology"
+                          ]
+                        },
+                        "_acceleratorTopologyState": {
+                          "oneof": [
+                            "acceleratorTopologyState"
+                          ]
+                        },
+                        "_acceleratorTopologyStateLastCheck": {
+                          "oneof": [
+                            "acceleratorTopologyStateLastCheck"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "acceleratorTopology": {
+                          "type": "string",
+                          "id": 389323203,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "acceleratorTopologyState": {
+                          "type": "string",
+                          "id": 228860693,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "acceleratorTopologyStateLastCheck": {
+                          "type": "MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck",
+                          "id": 386725257,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AcceleratorTopologyState": {
+                          "values": {
+                            "UNDEFINED_ACCELERATOR_TOPOLOGY_STATE": 0,
+                            "ACTIVATING": 378825968,
+                            "ACTIVE": 314733318,
+                            "ACTIVE_DEGRADED": 471128135,
+                            "DEACTIVATING": 57182257,
+                            "FAILED": 455706685,
+                            "INCOMPLETE": 11941214
+                          }
+                        }
+                      }
+                    },
+                    "MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck": {
+                      "oneofs": {
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        },
+                        "_timestamp": {
+                          "oneof": [
+                            "timestamp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "error": {
+                          "type": "Error",
+                          "id": 96784904,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "id": 55126294,
                           "options": {
                             "proto3_optional": true
                           }
@@ -97857,6 +97963,7 @@
                             "FAILURE_MEMORY": 440132982,
                             "FAILURE_NETWORK": 42811449,
                             "FAILURE_NVLINK": 484426295,
+                            "FAILURE_REDUNDANT_HARDWARE_FAULT": 31000530,
                             "INFRASTRUCTURE_RELOCATION": 359845636,
                             "MAINTENANCE_REASON_UNKNOWN": 50570235,
                             "PLANNED_NETWORK_UPDATE": 135494677,

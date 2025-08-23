@@ -128952,6 +128952,9 @@ export namespace google {
 
                     /** MultiMig selfLink */
                     selfLink?: (string|null);
+
+                    /** MultiMig status */
+                    status?: (google.cloud.compute.v1beta.IMultiMigStatus|null);
                 }
 
                 /** Represents a MultiMig. */
@@ -128986,6 +128989,9 @@ export namespace google {
 
                     /** MultiMig selfLink. */
                     public selfLink?: (string|null);
+
+                    /** MultiMig status. */
+                    public status?: (google.cloud.compute.v1beta.IMultiMigStatus|null);
 
                     /**
                      * Creates a new MultiMig instance using the specified properties.
@@ -129156,6 +129162,329 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MultiMigResourcePolicies
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MultiMigStatus. */
+                interface IMultiMigStatus {
+
+                    /** MultiMigStatus appliedAcceleratorTopologies */
+                    appliedAcceleratorTopologies?: (google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology[]|null);
+                }
+
+                /** Represents a MultiMigStatus. */
+                class MultiMigStatus implements IMultiMigStatus {
+
+                    /**
+                     * Constructs a new MultiMigStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IMultiMigStatus);
+
+                    /** MultiMigStatus appliedAcceleratorTopologies. */
+                    public appliedAcceleratorTopologies: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology[];
+
+                    /**
+                     * Creates a new MultiMigStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiMigStatus instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IMultiMigStatus): google.cloud.compute.v1beta.MultiMigStatus;
+
+                    /**
+                     * Encodes the specified MultiMigStatus message. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatus.verify|verify} messages.
+                     * @param message MultiMigStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IMultiMigStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiMigStatus message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatus.verify|verify} messages.
+                     * @param message MultiMigStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IMultiMigStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiMigStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiMigStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.MultiMigStatus;
+
+                    /**
+                     * Decodes a MultiMigStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiMigStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.MultiMigStatus;
+
+                    /**
+                     * Verifies a MultiMigStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiMigStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiMigStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.MultiMigStatus;
+
+                    /**
+                     * Creates a plain object from a MultiMigStatus message. Also converts values to other types if specified.
+                     * @param message MultiMigStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.MultiMigStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiMigStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiMigStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MultiMigStatusAcceleratorTopology. */
+                interface IMultiMigStatusAcceleratorTopology {
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopology */
+                    acceleratorTopology?: (string|null);
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopologyState */
+                    acceleratorTopologyState?: (string|null);
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopologyStateLastCheck */
+                    acceleratorTopologyStateLastCheck?: (google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck|null);
+                }
+
+                /** Represents a MultiMigStatusAcceleratorTopology. */
+                class MultiMigStatusAcceleratorTopology implements IMultiMigStatusAcceleratorTopology {
+
+                    /**
+                     * Constructs a new MultiMigStatusAcceleratorTopology.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology);
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopology. */
+                    public acceleratorTopology?: (string|null);
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopologyState. */
+                    public acceleratorTopologyState?: (string|null);
+
+                    /** MultiMigStatusAcceleratorTopology acceleratorTopologyStateLastCheck. */
+                    public acceleratorTopologyStateLastCheck?: (google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck|null);
+
+                    /**
+                     * Creates a new MultiMigStatusAcceleratorTopology instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiMigStatusAcceleratorTopology instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology;
+
+                    /**
+                     * Encodes the specified MultiMigStatusAcceleratorTopology message. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology.verify|verify} messages.
+                     * @param message MultiMigStatusAcceleratorTopology message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiMigStatusAcceleratorTopology message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology.verify|verify} messages.
+                     * @param message MultiMigStatusAcceleratorTopology message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopology, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiMigStatusAcceleratorTopology message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiMigStatusAcceleratorTopology
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology;
+
+                    /**
+                     * Decodes a MultiMigStatusAcceleratorTopology message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiMigStatusAcceleratorTopology
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology;
+
+                    /**
+                     * Verifies a MultiMigStatusAcceleratorTopology message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiMigStatusAcceleratorTopology message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiMigStatusAcceleratorTopology
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology;
+
+                    /**
+                     * Creates a plain object from a MultiMigStatusAcceleratorTopology message. Also converts values to other types if specified.
+                     * @param message MultiMigStatusAcceleratorTopology
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopology, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiMigStatusAcceleratorTopology to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiMigStatusAcceleratorTopology
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MultiMigStatusAcceleratorTopology {
+
+                    /** AcceleratorTopologyState enum. */
+                    enum AcceleratorTopologyState {
+                        UNDEFINED_ACCELERATOR_TOPOLOGY_STATE = 0,
+                        ACTIVATING = 378825968,
+                        ACTIVE = 314733318,
+                        ACTIVE_DEGRADED = 471128135,
+                        DEACTIVATING = 57182257,
+                        FAILED = 455706685,
+                        INCOMPLETE = 11941214
+                    }
+                }
+
+                /** Properties of a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck. */
+                interface IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck {
+
+                    /** MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck error */
+                    error?: (google.cloud.compute.v1beta.IError|null);
+
+                    /** MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck timestamp */
+                    timestamp?: (string|null);
+                }
+
+                /** Represents a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck. */
+                class MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck implements IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck {
+
+                    /**
+                     * Constructs a new MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck);
+
+                    /** MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck error. */
+                    public error?: (google.cloud.compute.v1beta.IError|null);
+
+                    /** MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck timestamp. */
+                    public timestamp?: (string|null);
+
+                    /**
+                     * Creates a new MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck instance
+                     */
+                    public static create(properties?: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck;
+
+                    /**
+                     * Encodes the specified MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck.verify|verify} messages.
+                     * @param message MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message, length delimited. Does not implicitly {@link google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck.verify|verify} messages.
+                     * @param message MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.compute.v1beta.IMultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck;
+
+                    /**
+                     * Decodes a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck;
+
+                    /**
+                     * Verifies a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck;
+
+                    /**
+                     * Creates a plain object from a MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck message. Also converts values to other types if specified.
+                     * @param message MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.compute.v1beta.MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiMigStatusAcceleratorTopologyAcceleratorTopologyStateLastCheck
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -217886,6 +218215,7 @@ export namespace google {
                         FAILURE_MEMORY = 440132982,
                         FAILURE_NETWORK = 42811449,
                         FAILURE_NVLINK = 484426295,
+                        FAILURE_REDUNDANT_HARDWARE_FAULT = 31000530,
                         INFRASTRUCTURE_RELOCATION = 359845636,
                         MAINTENANCE_REASON_UNKNOWN = 50570235,
                         PLANNED_NETWORK_UPDATE = 135494677,
