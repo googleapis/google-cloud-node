@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v4.3.0...video-transcoder-v4.4.0) (2025-08-25)
+
+
+### Features
+
+* [video-transcoder] add support for automatically generating subtitle for input videos ([#6614](https://github.com/googleapis/google-cloud-node/issues/6614)) ([6caf062](https://github.com/googleapis/google-cloud-node/commit/6caf062a9899f410ff8421202c696fbf9b50f4e3))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v4.2.0...video-transcoder-v4.3.0) (2025-07-22)
 
 
