@@ -129,7 +129,8 @@ export namespace google {
                     OGG_OPUS = 3,
                     MULAW = 5,
                     ALAW = 6,
-                    PCM = 7
+                    PCM = 7,
+                    M4A = 8
                 }
 
                 /** Properties of a ListVoicesRequest. */
@@ -1215,6 +1216,9 @@ export namespace google {
 
                     /** VoiceSelectionParams voiceClone */
                     voiceClone?: (google.cloud.texttospeech.v1.IVoiceCloneParams|null);
+
+                    /** VoiceSelectionParams modelName */
+                    modelName?: (string|null);
                 }
 
                 /** Represents a VoiceSelectionParams. */
@@ -1240,6 +1244,9 @@ export namespace google {
 
                     /** VoiceSelectionParams voiceClone. */
                     public voiceClone?: (google.cloud.texttospeech.v1.IVoiceCloneParams|null);
+
+                    /** VoiceSelectionParams modelName. */
+                    public modelName: string;
 
                     /**
                      * Creates a new VoiceSelectionParams instance using the specified properties.
@@ -1979,6 +1986,9 @@ export namespace google {
 
                     /** StreamingSynthesisInput markup */
                     markup?: (string|null);
+
+                    /** StreamingSynthesisInput prompt */
+                    prompt?: (string|null);
                 }
 
                 /** Represents a StreamingSynthesisInput. */
@@ -1995,6 +2005,9 @@ export namespace google {
 
                     /** StreamingSynthesisInput markup. */
                     public markup?: (string|null);
+
+                    /** StreamingSynthesisInput prompt. */
+                    public prompt?: (string|null);
 
                     /** StreamingSynthesisInput inputSource. */
                     public inputSource?: ("text"|"markup");

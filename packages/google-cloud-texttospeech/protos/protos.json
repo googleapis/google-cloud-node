@@ -88,7 +88,8 @@
                         "OGG_OPUS": 3,
                         "MULAW": 5,
                         "ALAW": 6,
-                        "PCM": 7
+                        "PCM": 7,
+                        "M4A": 8
                       }
                     },
                     "ListVoicesRequest": {
@@ -347,6 +348,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "modelName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -502,6 +510,11 @@
                             "text",
                             "markup"
                           ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
+                          ]
                         }
                       },
                       "fields": {
@@ -512,6 +525,13 @@
                         "markup": {
                           "type": "string",
                           "id": 5
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },

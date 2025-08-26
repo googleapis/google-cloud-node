@@ -229,6 +229,7 @@
                      * @property {number} MULAW=5 MULAW value
                      * @property {number} ALAW=6 ALAW value
                      * @property {number} PCM=7 PCM value
+                     * @property {number} M4A=8 M4A value
                      */
                     v1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -239,6 +240,7 @@
                         values[valuesById[5] = "MULAW"] = 5;
                         values[valuesById[6] = "ALAW"] = 6;
                         values[valuesById[7] = "PCM"] = 7;
+                        values[valuesById[8] = "M4A"] = 8;
                         return values;
                     })();
     
@@ -2897,6 +2899,7 @@
                          * @property {google.cloud.texttospeech.v1.SsmlVoiceGender|null} [ssmlGender] VoiceSelectionParams ssmlGender
                          * @property {google.cloud.texttospeech.v1.ICustomVoiceParams|null} [customVoice] VoiceSelectionParams customVoice
                          * @property {google.cloud.texttospeech.v1.IVoiceCloneParams|null} [voiceClone] VoiceSelectionParams voiceClone
+                         * @property {string|null} [modelName] VoiceSelectionParams modelName
                          */
     
                         /**
@@ -2955,6 +2958,14 @@
                         VoiceSelectionParams.prototype.voiceClone = null;
     
                         /**
+                         * VoiceSelectionParams modelName.
+                         * @member {string} modelName
+                         * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.modelName = "";
+    
+                        /**
                          * Creates a new VoiceSelectionParams instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
@@ -2988,6 +2999,8 @@
                                 $root.google.cloud.texttospeech.v1.CustomVoiceParams.encode(message.customVoice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.voiceClone != null && Object.hasOwnProperty.call(message, "voiceClone"))
                                 $root.google.cloud.texttospeech.v1.VoiceCloneParams.encode(message.voiceClone, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.modelName != null && Object.hasOwnProperty.call(message, "modelName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.modelName);
                             return writer;
                         };
     
@@ -3042,6 +3055,10 @@
                                     }
                                 case 5: {
                                         message.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.modelName = reader.string();
                                         break;
                                     }
                                 default:
@@ -3105,6 +3122,9 @@
                                 if (error)
                                     return "voiceClone." + error;
                             }
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                if (!$util.isString(message.modelName))
+                                    return "modelName: string expected";
                             return null;
                         };
     
@@ -3158,6 +3178,8 @@
                                     throw TypeError(".google.cloud.texttospeech.v1.VoiceSelectionParams.voiceClone: object expected");
                                 message.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.fromObject(object.voiceClone);
                             }
+                            if (object.modelName != null)
+                                message.modelName = String(object.modelName);
                             return message;
                         };
     
@@ -3180,6 +3202,7 @@
                                 object.ssmlGender = options.enums === String ? "SSML_VOICE_GENDER_UNSPECIFIED" : 0;
                                 object.customVoice = null;
                                 object.voiceClone = null;
+                                object.modelName = "";
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -3191,6 +3214,8 @@
                                 object.customVoice = $root.google.cloud.texttospeech.v1.CustomVoiceParams.toObject(message.customVoice, options);
                             if (message.voiceClone != null && message.hasOwnProperty("voiceClone"))
                                 object.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.toObject(message.voiceClone, options);
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                object.modelName = message.modelName;
                             return object;
                         };
     
@@ -3446,6 +3471,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -3516,6 +3542,10 @@
                             case "PCM":
                             case 7:
                                 message.audioEncoding = 7;
+                                break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
                                 break;
                             }
                             if (object.speakingRate != null)
@@ -4467,6 +4497,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
@@ -4524,6 +4555,10 @@
                             case "PCM":
                             case 7:
                                 message.audioEncoding = 7;
+                                break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
                                 break;
                             }
                             if (object.sampleRateHertz != null)
@@ -4864,6 +4899,7 @@
                          * @interface IStreamingSynthesisInput
                          * @property {string|null} [text] StreamingSynthesisInput text
                          * @property {string|null} [markup] StreamingSynthesisInput markup
+                         * @property {string|null} [prompt] StreamingSynthesisInput prompt
                          */
     
                         /**
@@ -4897,6 +4933,14 @@
                          */
                         StreamingSynthesisInput.prototype.markup = null;
     
+                        /**
+                         * StreamingSynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.prompt = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4908,6 +4952,12 @@
                          */
                         Object.defineProperty(StreamingSynthesisInput.prototype, "inputSource", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "markup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StreamingSynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4939,6 +4989,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
                             if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
                             return writer;
                         };
     
@@ -4981,6 +5033,10 @@
                                     }
                                 case 5: {
                                         message.markup = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 default:
@@ -5031,6 +5087,11 @@
                                 if (!$util.isString(message.markup))
                                     return "markup: string expected";
                             }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             return null;
                         };
     
@@ -5050,6 +5111,8 @@
                                 message.text = String(object.text);
                             if (object.markup != null)
                                 message.markup = String(object.markup);
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             return message;
                         };
     
@@ -5075,6 +5138,11 @@
                                 object.markup = message.markup;
                                 if (options.oneofs)
                                     object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
                             }
                             return object;
                         };
