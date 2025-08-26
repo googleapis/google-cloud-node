@@ -726,6 +726,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|updateBackupPlan}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef UpdateBackupPlanCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBackupPlan.
+                         * @function updateBackupPlan
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest} request UpdateBackupPlanRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.UpdateBackupPlanCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.updateBackupPlan = function updateBackupPlan(request, callback) {
+                            return this.rpcCall(updateBackupPlan, $root.google.cloud.backupdr.v1.UpdateBackupPlanRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBackupPlan" });
+    
+                        /**
+                         * Calls UpdateBackupPlan.
+                         * @function updateBackupPlan
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest} request UpdateBackupPlanRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getBackupPlan}.
                          * @memberof google.cloud.backupdr.v1.BackupDR
                          * @typedef GetBackupPlanCallback
@@ -825,6 +858,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getBackupPlanRevision}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef GetBackupPlanRevisionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.BackupPlanRevision} [response] BackupPlanRevision
+                         */
+    
+                        /**
+                         * Calls GetBackupPlanRevision.
+                         * @function getBackupPlanRevision
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest} request GetBackupPlanRevisionRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.GetBackupPlanRevisionCallback} callback Node-style callback called with the error, if any, and BackupPlanRevision
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.getBackupPlanRevision = function getBackupPlanRevision(request, callback) {
+                            return this.rpcCall(getBackupPlanRevision, $root.google.cloud.backupdr.v1.GetBackupPlanRevisionRequest, $root.google.cloud.backupdr.v1.BackupPlanRevision, request, callback);
+                        }, "name", { value: "GetBackupPlanRevision" });
+    
+                        /**
+                         * Calls GetBackupPlanRevision.
+                         * @function getBackupPlanRevision
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest} request GetBackupPlanRevisionRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.BackupPlanRevision>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listBackupPlanRevisions}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef ListBackupPlanRevisionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} [response] ListBackupPlanRevisionsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackupPlanRevisions.
+                         * @function listBackupPlanRevisions
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest} request ListBackupPlanRevisionsRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.ListBackupPlanRevisionsCallback} callback Node-style callback called with the error, if any, and ListBackupPlanRevisionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.listBackupPlanRevisions = function listBackupPlanRevisions(request, callback) {
+                            return this.rpcCall(listBackupPlanRevisions, $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest, $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse, request, callback);
+                        }, "name", { value: "ListBackupPlanRevisions" });
+    
+                        /**
+                         * Calls ListBackupPlanRevisions.
+                         * @function listBackupPlanRevisions
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest} request ListBackupPlanRevisionsRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|createBackupPlanAssociation}.
                          * @memberof google.cloud.backupdr.v1.BackupDR
                          * @typedef CreateBackupPlanAssociationCallback
@@ -853,6 +952,39 @@
                          * @memberof google.cloud.backupdr.v1.BackupDR
                          * @instance
                          * @param {google.cloud.backupdr.v1.ICreateBackupPlanAssociationRequest} request CreateBackupPlanAssociationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|updateBackupPlanAssociation}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef UpdateBackupPlanAssociationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBackupPlanAssociation.
+                         * @function updateBackupPlanAssociation
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest} request UpdateBackupPlanAssociationRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.UpdateBackupPlanAssociationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.updateBackupPlanAssociation = function updateBackupPlanAssociation(request, callback) {
+                            return this.rpcCall(updateBackupPlanAssociation, $root.google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBackupPlanAssociation" });
+    
+                        /**
+                         * Calls UpdateBackupPlanAssociation.
+                         * @function updateBackupPlanAssociation
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest} request UpdateBackupPlanAssociationRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -924,6 +1056,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|fetchBackupPlanAssociationsForResourceType}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef FetchBackupPlanAssociationsForResourceTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} [response] FetchBackupPlanAssociationsForResourceTypeResponse
+                         */
+    
+                        /**
+                         * Calls FetchBackupPlanAssociationsForResourceType.
+                         * @function fetchBackupPlanAssociationsForResourceType
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest} request FetchBackupPlanAssociationsForResourceTypeRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.FetchBackupPlanAssociationsForResourceTypeCallback} callback Node-style callback called with the error, if any, and FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.fetchBackupPlanAssociationsForResourceType = function fetchBackupPlanAssociationsForResourceType(request, callback) {
+                            return this.rpcCall(fetchBackupPlanAssociationsForResourceType, $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest, $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse, request, callback);
+                        }, "name", { value: "FetchBackupPlanAssociationsForResourceType" });
+    
+                        /**
+                         * Calls FetchBackupPlanAssociationsForResourceType.
+                         * @function fetchBackupPlanAssociationsForResourceType
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest} request FetchBackupPlanAssociationsForResourceTypeRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|deleteBackupPlanAssociation}.
                          * @memberof google.cloud.backupdr.v1.BackupDR
                          * @typedef DeleteBackupPlanAssociationCallback
@@ -986,6 +1151,72 @@
                          * @instance
                          * @param {google.cloud.backupdr.v1.ITriggerBackupRequest} request TriggerBackupRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getDataSourceReference}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef GetDataSourceReferenceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.DataSourceReference} [response] DataSourceReference
+                         */
+    
+                        /**
+                         * Calls GetDataSourceReference.
+                         * @function getDataSourceReference
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest} request GetDataSourceReferenceRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.GetDataSourceReferenceCallback} callback Node-style callback called with the error, if any, and DataSourceReference
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.getDataSourceReference = function getDataSourceReference(request, callback) {
+                            return this.rpcCall(getDataSourceReference, $root.google.cloud.backupdr.v1.GetDataSourceReferenceRequest, $root.google.cloud.backupdr.v1.DataSourceReference, request, callback);
+                        }, "name", { value: "GetDataSourceReference" });
+    
+                        /**
+                         * Calls GetDataSourceReference.
+                         * @function getDataSourceReference
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest} request GetDataSourceReferenceRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.DataSourceReference>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|fetchDataSourceReferencesForResourceType}.
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @typedef FetchDataSourceReferencesForResourceTypeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} [response] FetchDataSourceReferencesForResourceTypeResponse
+                         */
+    
+                        /**
+                         * Calls FetchDataSourceReferencesForResourceType.
+                         * @function fetchDataSourceReferencesForResourceType
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest} request FetchDataSourceReferencesForResourceTypeRequest message or plain object
+                         * @param {google.cloud.backupdr.v1.BackupDR.FetchDataSourceReferencesForResourceTypeCallback} callback Node-style callback called with the error, if any, and FetchDataSourceReferencesForResourceTypeResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BackupDR.prototype.fetchDataSourceReferencesForResourceType = function fetchDataSourceReferencesForResourceType(request, callback) {
+                            return this.rpcCall(fetchDataSourceReferencesForResourceType, $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest, $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse, request, callback);
+                        }, "name", { value: "FetchDataSourceReferencesForResourceType" });
+    
+                        /**
+                         * Calls FetchDataSourceReferencesForResourceType.
+                         * @function fetchDataSourceReferencesForResourceType
+                         * @memberof google.cloud.backupdr.v1.BackupDR
+                         * @instance
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest} request FetchDataSourceReferencesForResourceTypeRequest message or plain object
+                         * @returns {Promise<google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse>} Promise
                          * @variation 2
                          */
     
@@ -4073,6 +4304,7 @@
                          * @property {string|null} [name] InitializeServiceRequest name
                          * @property {string|null} [resourceType] InitializeServiceRequest resourceType
                          * @property {string|null} [requestId] InitializeServiceRequest requestId
+                         * @property {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig|null} [cloudSqlInstanceInitializationConfig] InitializeServiceRequest cloudSqlInstanceInitializationConfig
                          */
     
                         /**
@@ -4115,6 +4347,28 @@
                         InitializeServiceRequest.prototype.requestId = "";
     
                         /**
+                         * InitializeServiceRequest cloudSqlInstanceInitializationConfig.
+                         * @member {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig|null|undefined} cloudSqlInstanceInitializationConfig
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         */
+                        InitializeServiceRequest.prototype.cloudSqlInstanceInitializationConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * InitializeServiceRequest initializationConfig.
+                         * @member {"cloudSqlInstanceInitializationConfig"|undefined} initializationConfig
+                         * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
+                         * @instance
+                         */
+                        Object.defineProperty(InitializeServiceRequest.prototype, "initializationConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudSqlInstanceInitializationConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new InitializeServiceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.InitializeServiceRequest
@@ -4144,6 +4398,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceType);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.cloudSqlInstanceInitializationConfig != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceInitializationConfig"))
+                                $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.encode(message.cloudSqlInstanceInitializationConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -4192,6 +4448,10 @@
                                         message.requestId = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.cloudSqlInstanceInitializationConfig = $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4227,6 +4487,7 @@
                         InitializeServiceRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -4236,6 +4497,14 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.cloudSqlInstanceInitializationConfig != null && message.hasOwnProperty("cloudSqlInstanceInitializationConfig")) {
+                                properties.initializationConfig = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.verify(message.cloudSqlInstanceInitializationConfig);
+                                    if (error)
+                                        return "cloudSqlInstanceInitializationConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4257,6 +4526,11 @@
                                 message.resourceType = String(object.resourceType);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.cloudSqlInstanceInitializationConfig != null) {
+                                if (typeof object.cloudSqlInstanceInitializationConfig !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.InitializeServiceRequest.cloudSqlInstanceInitializationConfig: object expected");
+                                message.cloudSqlInstanceInitializationConfig = $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.fromObject(object.cloudSqlInstanceInitializationConfig);
+                            }
                             return message;
                         };
     
@@ -4284,6 +4558,11 @@
                                 object.resourceType = message.resourceType;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.cloudSqlInstanceInitializationConfig != null && message.hasOwnProperty("cloudSqlInstanceInitializationConfig")) {
+                                object.cloudSqlInstanceInitializationConfig = $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.toObject(message.cloudSqlInstanceInitializationConfig, options);
+                                if (options.oneofs)
+                                    object.initializationConfig = "cloudSqlInstanceInitializationConfig";
+                            }
                             return object;
                         };
     
@@ -4975,6 +5254,10 @@
                          * @property {string|null} [etag] BackupPlan etag
                          * @property {string|null} [backupVault] BackupPlan backupVault
                          * @property {string|null} [backupVaultServiceAccount] BackupPlan backupVaultServiceAccount
+                         * @property {number|Long|null} [logRetentionDays] BackupPlan logRetentionDays
+                         * @property {Array.<string>|null} [supportedResourceTypes] BackupPlan supportedResourceTypes
+                         * @property {string|null} [revisionId] BackupPlan revisionId
+                         * @property {string|null} [revisionName] BackupPlan revisionName
                          */
     
                         /**
@@ -4988,6 +5271,7 @@
                         function BackupPlan(properties) {
                             this.labels = {};
                             this.backupRules = [];
+                            this.supportedResourceTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5083,6 +5367,38 @@
                         BackupPlan.prototype.backupVaultServiceAccount = "";
     
                         /**
+                         * BackupPlan logRetentionDays.
+                         * @member {number|Long} logRetentionDays
+                         * @memberof google.cloud.backupdr.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.logRetentionDays = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BackupPlan supportedResourceTypes.
+                         * @member {Array.<string>} supportedResourceTypes
+                         * @memberof google.cloud.backupdr.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.supportedResourceTypes = $util.emptyArray;
+    
+                        /**
+                         * BackupPlan revisionId.
+                         * @member {string} revisionId
+                         * @memberof google.cloud.backupdr.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.revisionId = "";
+    
+                        /**
+                         * BackupPlan revisionName.
+                         * @member {string} revisionName
+                         * @memberof google.cloud.backupdr.v1.BackupPlan
+                         * @instance
+                         */
+                        BackupPlan.prototype.revisionName = "";
+    
+                        /**
                          * Creates a new BackupPlan instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.BackupPlan
@@ -5130,6 +5446,15 @@
                                 writer.uint32(/* id 10, wireType 2 =*/82).string(message.backupVault);
                             if (message.backupVaultServiceAccount != null && Object.hasOwnProperty.call(message, "backupVaultServiceAccount"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.backupVaultServiceAccount);
+                            if (message.logRetentionDays != null && Object.hasOwnProperty.call(message, "logRetentionDays"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int64(message.logRetentionDays);
+                            if (message.supportedResourceTypes != null && message.supportedResourceTypes.length)
+                                for (var i = 0; i < message.supportedResourceTypes.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.supportedResourceTypes[i]);
+                            if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.revisionId);
+                            if (message.revisionName != null && Object.hasOwnProperty.call(message, "revisionName"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.revisionName);
                             return writer;
                         };
     
@@ -5231,6 +5556,24 @@
                                         message.backupVaultServiceAccount = reader.string();
                                         break;
                                     }
+                                case 12: {
+                                        message.logRetentionDays = reader.int64();
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.supportedResourceTypes && message.supportedResourceTypes.length))
+                                            message.supportedResourceTypes = [];
+                                        message.supportedResourceTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.revisionId = reader.string();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.revisionName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5308,6 +5651,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.resourceType != null && message.hasOwnProperty("resourceType"))
@@ -5322,6 +5666,22 @@
                             if (message.backupVaultServiceAccount != null && message.hasOwnProperty("backupVaultServiceAccount"))
                                 if (!$util.isString(message.backupVaultServiceAccount))
                                     return "backupVaultServiceAccount: string expected";
+                            if (message.logRetentionDays != null && message.hasOwnProperty("logRetentionDays"))
+                                if (!$util.isInteger(message.logRetentionDays) && !(message.logRetentionDays && $util.isInteger(message.logRetentionDays.low) && $util.isInteger(message.logRetentionDays.high)))
+                                    return "logRetentionDays: integer|Long expected";
+                            if (message.supportedResourceTypes != null && message.hasOwnProperty("supportedResourceTypes")) {
+                                if (!Array.isArray(message.supportedResourceTypes))
+                                    return "supportedResourceTypes: array expected";
+                                for (var i = 0; i < message.supportedResourceTypes.length; ++i)
+                                    if (!$util.isString(message.supportedResourceTypes[i]))
+                                        return "supportedResourceTypes: string[] expected";
+                            }
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                if (!$util.isString(message.revisionId))
+                                    return "revisionId: string expected";
+                            if (message.revisionName != null && message.hasOwnProperty("revisionName"))
+                                if (!$util.isString(message.revisionName))
+                                    return "revisionName: string expected";
                             return null;
                         };
     
@@ -5395,6 +5755,10 @@
                             case 4:
                                 message.state = 4;
                                 break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
+                                break;
                             }
                             if (object.resourceType != null)
                                 message.resourceType = String(object.resourceType);
@@ -5404,6 +5768,26 @@
                                 message.backupVault = String(object.backupVault);
                             if (object.backupVaultServiceAccount != null)
                                 message.backupVaultServiceAccount = String(object.backupVaultServiceAccount);
+                            if (object.logRetentionDays != null)
+                                if ($util.Long)
+                                    (message.logRetentionDays = $util.Long.fromValue(object.logRetentionDays)).unsigned = false;
+                                else if (typeof object.logRetentionDays === "string")
+                                    message.logRetentionDays = parseInt(object.logRetentionDays, 10);
+                                else if (typeof object.logRetentionDays === "number")
+                                    message.logRetentionDays = object.logRetentionDays;
+                                else if (typeof object.logRetentionDays === "object")
+                                    message.logRetentionDays = new $util.LongBits(object.logRetentionDays.low >>> 0, object.logRetentionDays.high >>> 0).toNumber();
+                            if (object.supportedResourceTypes) {
+                                if (!Array.isArray(object.supportedResourceTypes))
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupPlan.supportedResourceTypes: array expected");
+                                message.supportedResourceTypes = [];
+                                for (var i = 0; i < object.supportedResourceTypes.length; ++i)
+                                    message.supportedResourceTypes[i] = String(object.supportedResourceTypes[i]);
+                            }
+                            if (object.revisionId != null)
+                                message.revisionId = String(object.revisionId);
+                            if (object.revisionName != null)
+                                message.revisionName = String(object.revisionName);
                             return message;
                         };
     
@@ -5420,8 +5804,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.backupRules = [];
+                                object.supportedResourceTypes = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -5434,6 +5820,13 @@
                                 object.etag = "";
                                 object.backupVault = "";
                                 object.backupVaultServiceAccount = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.logRetentionDays = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.logRetentionDays = options.longs === String ? "0" : 0;
+                                object.revisionId = "";
+                                object.revisionName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5464,6 +5857,20 @@
                                 object.backupVault = message.backupVault;
                             if (message.backupVaultServiceAccount != null && message.hasOwnProperty("backupVaultServiceAccount"))
                                 object.backupVaultServiceAccount = message.backupVaultServiceAccount;
+                            if (message.logRetentionDays != null && message.hasOwnProperty("logRetentionDays"))
+                                if (typeof message.logRetentionDays === "number")
+                                    object.logRetentionDays = options.longs === String ? String(message.logRetentionDays) : message.logRetentionDays;
+                                else
+                                    object.logRetentionDays = options.longs === String ? $util.Long.prototype.toString.call(message.logRetentionDays) : options.longs === Number ? new $util.LongBits(message.logRetentionDays.low >>> 0, message.logRetentionDays.high >>> 0).toNumber() : message.logRetentionDays;
+                            if (message.supportedResourceTypes && message.supportedResourceTypes.length) {
+                                object.supportedResourceTypes = [];
+                                for (var j = 0; j < message.supportedResourceTypes.length; ++j)
+                                    object.supportedResourceTypes[j] = message.supportedResourceTypes[j];
+                            }
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                object.revisionId = message.revisionId;
+                            if (message.revisionName != null && message.hasOwnProperty("revisionName"))
+                                object.revisionName = message.revisionName;
                             return object;
                         };
     
@@ -5502,6 +5909,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} INACTIVE=4 INACTIVE value
+                         * @property {number} UPDATING=5 UPDATING value
                          */
                         BackupPlan.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5510,6 +5918,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "INACTIVE"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
                             return values;
                         })();
     
@@ -8298,6 +8707,1377 @@
                         return DeleteBackupPlanRequest;
                     })();
     
+                    v1.UpdateBackupPlanRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBackupPlanRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IUpdateBackupPlanRequest
+                         * @property {google.cloud.backupdr.v1.IBackupPlan|null} [backupPlan] UpdateBackupPlanRequest backupPlan
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBackupPlanRequest updateMask
+                         * @property {string|null} [requestId] UpdateBackupPlanRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBackupPlanRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an UpdateBackupPlanRequest.
+                         * @implements IUpdateBackupPlanRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest=} [properties] Properties to set
+                         */
+                        function UpdateBackupPlanRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBackupPlanRequest backupPlan.
+                         * @member {google.cloud.backupdr.v1.IBackupPlan|null|undefined} backupPlan
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanRequest.prototype.backupPlan = null;
+    
+                        /**
+                         * UpdateBackupPlanRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateBackupPlanRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateBackupPlanRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanRequest} UpdateBackupPlanRequest instance
+                         */
+                        UpdateBackupPlanRequest.create = function create(properties) {
+                            return new UpdateBackupPlanRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPlanRequest message. Does not implicitly {@link google.cloud.backupdr.v1.UpdateBackupPlanRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest} message UpdateBackupPlanRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPlanRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPlan != null && Object.hasOwnProperty.call(message, "backupPlan"))
+                                $root.google.cloud.backupdr.v1.BackupPlan.encode(message.backupPlan, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPlanRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.UpdateBackupPlanRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanRequest} message UpdateBackupPlanRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPlanRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPlanRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanRequest} UpdateBackupPlanRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPlanRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.UpdateBackupPlanRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.backupPlan = $root.google.cloud.backupdr.v1.BackupPlan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPlanRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanRequest} UpdateBackupPlanRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPlanRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBackupPlanRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBackupPlanRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupPlan != null && message.hasOwnProperty("backupPlan")) {
+                                var error = $root.google.cloud.backupdr.v1.BackupPlan.verify(message.backupPlan);
+                                if (error)
+                                    return "backupPlan." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBackupPlanRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanRequest} UpdateBackupPlanRequest
+                         */
+                        UpdateBackupPlanRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.UpdateBackupPlanRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.UpdateBackupPlanRequest();
+                            if (object.backupPlan != null) {
+                                if (typeof object.backupPlan !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.UpdateBackupPlanRequest.backupPlan: object expected");
+                                message.backupPlan = $root.google.cloud.backupdr.v1.BackupPlan.fromObject(object.backupPlan);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.UpdateBackupPlanRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBackupPlanRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.UpdateBackupPlanRequest} message UpdateBackupPlanRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBackupPlanRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.backupPlan = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.backupPlan != null && message.hasOwnProperty("backupPlan"))
+                                object.backupPlan = $root.google.cloud.backupdr.v1.BackupPlan.toObject(message.backupPlan, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBackupPlanRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBackupPlanRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBackupPlanRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBackupPlanRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.UpdateBackupPlanRequest";
+                        };
+    
+                        return UpdateBackupPlanRequest;
+                    })();
+    
+                    v1.BackupPlanRevision = (function() {
+    
+                        /**
+                         * Properties of a BackupPlanRevision.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IBackupPlanRevision
+                         * @property {string|null} [name] BackupPlanRevision name
+                         * @property {string|null} [revisionId] BackupPlanRevision revisionId
+                         * @property {google.cloud.backupdr.v1.BackupPlanRevision.State|null} [state] BackupPlanRevision state
+                         * @property {google.cloud.backupdr.v1.IBackupPlan|null} [backupPlanSnapshot] BackupPlanRevision backupPlanSnapshot
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BackupPlanRevision createTime
+                         */
+    
+                        /**
+                         * Constructs a new BackupPlanRevision.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a BackupPlanRevision.
+                         * @implements IBackupPlanRevision
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IBackupPlanRevision=} [properties] Properties to set
+                         */
+                        function BackupPlanRevision(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupPlanRevision name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         */
+                        BackupPlanRevision.prototype.name = "";
+    
+                        /**
+                         * BackupPlanRevision revisionId.
+                         * @member {string} revisionId
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         */
+                        BackupPlanRevision.prototype.revisionId = "";
+    
+                        /**
+                         * BackupPlanRevision state.
+                         * @member {google.cloud.backupdr.v1.BackupPlanRevision.State} state
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         */
+                        BackupPlanRevision.prototype.state = 0;
+    
+                        /**
+                         * BackupPlanRevision backupPlanSnapshot.
+                         * @member {google.cloud.backupdr.v1.IBackupPlan|null|undefined} backupPlanSnapshot
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         */
+                        BackupPlanRevision.prototype.backupPlanSnapshot = null;
+    
+                        /**
+                         * BackupPlanRevision createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         */
+                        BackupPlanRevision.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new BackupPlanRevision instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupPlanRevision=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.BackupPlanRevision} BackupPlanRevision instance
+                         */
+                        BackupPlanRevision.create = function create(properties) {
+                            return new BackupPlanRevision(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupPlanRevision message. Does not implicitly {@link google.cloud.backupdr.v1.BackupPlanRevision.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupPlanRevision} message BackupPlanRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupPlanRevision.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.revisionId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.backupPlanSnapshot != null && Object.hasOwnProperty.call(message, "backupPlanSnapshot"))
+                                $root.google.cloud.backupdr.v1.BackupPlan.encode(message.backupPlanSnapshot, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupPlanRevision message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupPlanRevision.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IBackupPlanRevision} message BackupPlanRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupPlanRevision.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupPlanRevision message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.BackupPlanRevision} BackupPlanRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupPlanRevision.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.BackupPlanRevision();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.revisionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.backupPlanSnapshot = $root.google.cloud.backupdr.v1.BackupPlan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupPlanRevision message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.BackupPlanRevision} BackupPlanRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupPlanRevision.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupPlanRevision message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupPlanRevision.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                if (!$util.isString(message.revisionId))
+                                    return "revisionId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.backupPlanSnapshot != null && message.hasOwnProperty("backupPlanSnapshot")) {
+                                var error = $root.google.cloud.backupdr.v1.BackupPlan.verify(message.backupPlanSnapshot);
+                                if (error)
+                                    return "backupPlanSnapshot." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupPlanRevision message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.BackupPlanRevision} BackupPlanRevision
+                         */
+                        BackupPlanRevision.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.BackupPlanRevision)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.BackupPlanRevision();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.revisionId != null)
+                                message.revisionId = String(object.revisionId);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "INACTIVE":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.backupPlanSnapshot != null) {
+                                if (typeof object.backupPlanSnapshot !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupPlanRevision.backupPlanSnapshot: object expected");
+                                message.backupPlanSnapshot = $root.google.cloud.backupdr.v1.BackupPlan.fromObject(object.backupPlanSnapshot);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupPlanRevision.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupPlanRevision message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {google.cloud.backupdr.v1.BackupPlanRevision} message BackupPlanRevision
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupPlanRevision.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.revisionId = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.backupPlanSnapshot = null;
+                                object.createTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                object.revisionId = message.revisionId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.backupdr.v1.BackupPlanRevision.State[message.state] === undefined ? message.state : $root.google.cloud.backupdr.v1.BackupPlanRevision.State[message.state] : message.state;
+                            if (message.backupPlanSnapshot != null && message.hasOwnProperty("backupPlanSnapshot"))
+                                object.backupPlanSnapshot = $root.google.cloud.backupdr.v1.BackupPlan.toObject(message.backupPlanSnapshot, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupPlanRevision to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupPlanRevision.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupPlanRevision
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.BackupPlanRevision
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupPlanRevision.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.BackupPlanRevision";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.backupdr.v1.BackupPlanRevision.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} INACTIVE=4 INACTIVE value
+                         */
+                        BackupPlanRevision.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "INACTIVE"] = 4;
+                            return values;
+                        })();
+    
+                        return BackupPlanRevision;
+                    })();
+    
+                    v1.GetBackupPlanRevisionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupPlanRevisionRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IGetBackupPlanRevisionRequest
+                         * @property {string|null} [name] GetBackupPlanRevisionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupPlanRevisionRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a GetBackupPlanRevisionRequest.
+                         * @implements IGetBackupPlanRevisionRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest=} [properties] Properties to set
+                         */
+                        function GetBackupPlanRevisionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupPlanRevisionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @instance
+                         */
+                        GetBackupPlanRevisionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupPlanRevisionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.GetBackupPlanRevisionRequest} GetBackupPlanRevisionRequest instance
+                         */
+                        GetBackupPlanRevisionRequest.create = function create(properties) {
+                            return new GetBackupPlanRevisionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupPlanRevisionRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetBackupPlanRevisionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest} message GetBackupPlanRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupPlanRevisionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupPlanRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetBackupPlanRevisionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetBackupPlanRevisionRequest} message GetBackupPlanRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupPlanRevisionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupPlanRevisionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.GetBackupPlanRevisionRequest} GetBackupPlanRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupPlanRevisionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.GetBackupPlanRevisionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupPlanRevisionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.GetBackupPlanRevisionRequest} GetBackupPlanRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupPlanRevisionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupPlanRevisionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupPlanRevisionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupPlanRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.GetBackupPlanRevisionRequest} GetBackupPlanRevisionRequest
+                         */
+                        GetBackupPlanRevisionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.GetBackupPlanRevisionRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.GetBackupPlanRevisionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupPlanRevisionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.GetBackupPlanRevisionRequest} message GetBackupPlanRevisionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupPlanRevisionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupPlanRevisionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupPlanRevisionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupPlanRevisionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.GetBackupPlanRevisionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupPlanRevisionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.GetBackupPlanRevisionRequest";
+                        };
+    
+                        return GetBackupPlanRevisionRequest;
+                    })();
+    
+                    v1.ListBackupPlanRevisionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupPlanRevisionsRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IListBackupPlanRevisionsRequest
+                         * @property {string|null} [parent] ListBackupPlanRevisionsRequest parent
+                         * @property {number|null} [pageSize] ListBackupPlanRevisionsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupPlanRevisionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupPlanRevisionsRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a ListBackupPlanRevisionsRequest.
+                         * @implements IListBackupPlanRevisionsRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupPlanRevisionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupPlanRevisionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupPlanRevisionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupPlanRevisionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListBackupPlanRevisionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest} ListBackupPlanRevisionsRequest instance
+                         */
+                        ListBackupPlanRevisionsRequest.create = function create(properties) {
+                            return new ListBackupPlanRevisionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPlanRevisionsRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest} message ListBackupPlanRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPlanRevisionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPlanRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsRequest} message ListBackupPlanRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPlanRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPlanRevisionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest} ListBackupPlanRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPlanRevisionsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPlanRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest} ListBackupPlanRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPlanRevisionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupPlanRevisionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupPlanRevisionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupPlanRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest} ListBackupPlanRevisionsRequest
+                         */
+                        ListBackupPlanRevisionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupPlanRevisionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest} message ListBackupPlanRevisionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupPlanRevisionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupPlanRevisionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupPlanRevisionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupPlanRevisionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupPlanRevisionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.ListBackupPlanRevisionsRequest";
+                        };
+    
+                        return ListBackupPlanRevisionsRequest;
+                    })();
+    
+                    v1.ListBackupPlanRevisionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupPlanRevisionsResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IListBackupPlanRevisionsResponse
+                         * @property {Array.<google.cloud.backupdr.v1.IBackupPlanRevision>|null} [backupPlanRevisions] ListBackupPlanRevisionsResponse backupPlanRevisions
+                         * @property {string|null} [nextPageToken] ListBackupPlanRevisionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupPlanRevisionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupPlanRevisionsResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a ListBackupPlanRevisionsResponse.
+                         * @implements IListBackupPlanRevisionsResponse
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupPlanRevisionsResponse(properties) {
+                            this.backupPlanRevisions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupPlanRevisionsResponse backupPlanRevisions.
+                         * @member {Array.<google.cloud.backupdr.v1.IBackupPlanRevision>} backupPlanRevisions
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsResponse.prototype.backupPlanRevisions = $util.emptyArray;
+    
+                        /**
+                         * ListBackupPlanRevisionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupPlanRevisionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @instance
+                         */
+                        ListBackupPlanRevisionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupPlanRevisionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} ListBackupPlanRevisionsResponse instance
+                         */
+                        ListBackupPlanRevisionsResponse.create = function create(properties) {
+                            return new ListBackupPlanRevisionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPlanRevisionsResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsResponse} message ListBackupPlanRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPlanRevisionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPlanRevisions != null && message.backupPlanRevisions.length)
+                                for (var i = 0; i < message.backupPlanRevisions.length; ++i)
+                                    $root.google.cloud.backupdr.v1.BackupPlanRevision.encode(message.backupPlanRevisions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPlanRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IListBackupPlanRevisionsResponse} message ListBackupPlanRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPlanRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPlanRevisionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} ListBackupPlanRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPlanRevisionsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupPlanRevisions && message.backupPlanRevisions.length))
+                                            message.backupPlanRevisions = [];
+                                        message.backupPlanRevisions.push($root.google.cloud.backupdr.v1.BackupPlanRevision.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPlanRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} ListBackupPlanRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPlanRevisionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupPlanRevisionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupPlanRevisionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupPlanRevisions != null && message.hasOwnProperty("backupPlanRevisions")) {
+                                if (!Array.isArray(message.backupPlanRevisions))
+                                    return "backupPlanRevisions: array expected";
+                                for (var i = 0; i < message.backupPlanRevisions.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.BackupPlanRevision.verify(message.backupPlanRevisions[i]);
+                                    if (error)
+                                        return "backupPlanRevisions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupPlanRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} ListBackupPlanRevisionsResponse
+                         */
+                        ListBackupPlanRevisionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse();
+                            if (object.backupPlanRevisions) {
+                                if (!Array.isArray(object.backupPlanRevisions))
+                                    throw TypeError(".google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse.backupPlanRevisions: array expected");
+                                message.backupPlanRevisions = [];
+                                for (var i = 0; i < object.backupPlanRevisions.length; ++i) {
+                                    if (typeof object.backupPlanRevisions[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse.backupPlanRevisions: object expected");
+                                    message.backupPlanRevisions[i] = $root.google.cloud.backupdr.v1.BackupPlanRevision.fromObject(object.backupPlanRevisions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupPlanRevisionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse} message ListBackupPlanRevisionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupPlanRevisionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backupPlanRevisions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backupPlanRevisions && message.backupPlanRevisions.length) {
+                                object.backupPlanRevisions = [];
+                                for (var j = 0; j < message.backupPlanRevisions.length; ++j)
+                                    object.backupPlanRevisions[j] = $root.google.cloud.backupdr.v1.BackupPlanRevision.toObject(message.backupPlanRevisions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupPlanRevisionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupPlanRevisionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupPlanRevisionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupPlanRevisionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.ListBackupPlanRevisionsResponse";
+                        };
+    
+                        return ListBackupPlanRevisionsResponse;
+                    })();
+    
                     v1.BackupPlanAssociation = (function() {
     
                         /**
@@ -8313,6 +10093,9 @@
                          * @property {google.cloud.backupdr.v1.BackupPlanAssociation.State|null} [state] BackupPlanAssociation state
                          * @property {Array.<google.cloud.backupdr.v1.IRuleConfigInfo>|null} [rulesConfigInfo] BackupPlanAssociation rulesConfigInfo
                          * @property {string|null} [dataSource] BackupPlanAssociation dataSource
+                         * @property {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties|null} [cloudSqlInstanceBackupPlanAssociationProperties] BackupPlanAssociation cloudSqlInstanceBackupPlanAssociationProperties
+                         * @property {string|null} [backupPlanRevisionId] BackupPlanAssociation backupPlanRevisionId
+                         * @property {string|null} [backupPlanRevisionName] BackupPlanAssociation backupPlanRevisionName
                          */
     
                         /**
@@ -8404,6 +10187,44 @@
                         BackupPlanAssociation.prototype.dataSource = "";
     
                         /**
+                         * BackupPlanAssociation cloudSqlInstanceBackupPlanAssociationProperties.
+                         * @member {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties|null|undefined} cloudSqlInstanceBackupPlanAssociationProperties
+                         * @memberof google.cloud.backupdr.v1.BackupPlanAssociation
+                         * @instance
+                         */
+                        BackupPlanAssociation.prototype.cloudSqlInstanceBackupPlanAssociationProperties = null;
+    
+                        /**
+                         * BackupPlanAssociation backupPlanRevisionId.
+                         * @member {string} backupPlanRevisionId
+                         * @memberof google.cloud.backupdr.v1.BackupPlanAssociation
+                         * @instance
+                         */
+                        BackupPlanAssociation.prototype.backupPlanRevisionId = "";
+    
+                        /**
+                         * BackupPlanAssociation backupPlanRevisionName.
+                         * @member {string} backupPlanRevisionName
+                         * @memberof google.cloud.backupdr.v1.BackupPlanAssociation
+                         * @instance
+                         */
+                        BackupPlanAssociation.prototype.backupPlanRevisionName = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BackupPlanAssociation resourceProperties.
+                         * @member {"cloudSqlInstanceBackupPlanAssociationProperties"|undefined} resourceProperties
+                         * @memberof google.cloud.backupdr.v1.BackupPlanAssociation
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPlanAssociation.prototype, "resourceProperties", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudSqlInstanceBackupPlanAssociationProperties"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new BackupPlanAssociation instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.BackupPlanAssociation
@@ -8446,6 +10267,12 @@
                                     $root.google.cloud.backupdr.v1.RuleConfigInfo.encode(message.rulesConfigInfo[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.dataSource);
+                            if (message.cloudSqlInstanceBackupPlanAssociationProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceBackupPlanAssociationProperties"))
+                                $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.encode(message.cloudSqlInstanceBackupPlanAssociationProperties, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.backupPlanRevisionId != null && Object.hasOwnProperty.call(message, "backupPlanRevisionId"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.backupPlanRevisionId);
+                            if (message.backupPlanRevisionName != null && Object.hasOwnProperty.call(message, "backupPlanRevisionName"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.backupPlanRevisionName);
                             return writer;
                         };
     
@@ -8520,6 +10347,18 @@
                                         message.dataSource = reader.string();
                                         break;
                                     }
+                                case 10: {
+                                        message.cloudSqlInstanceBackupPlanAssociationProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.backupPlanRevisionId = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.backupPlanRevisionName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8555,6 +10394,7 @@
                         BackupPlanAssociation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -8586,6 +10426,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.rulesConfigInfo != null && message.hasOwnProperty("rulesConfigInfo")) {
@@ -8600,6 +10441,20 @@
                             if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                 if (!$util.isString(message.dataSource))
                                     return "dataSource: string expected";
+                            if (message.cloudSqlInstanceBackupPlanAssociationProperties != null && message.hasOwnProperty("cloudSqlInstanceBackupPlanAssociationProperties")) {
+                                properties.resourceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.verify(message.cloudSqlInstanceBackupPlanAssociationProperties);
+                                    if (error)
+                                        return "cloudSqlInstanceBackupPlanAssociationProperties." + error;
+                                }
+                            }
+                            if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                if (!$util.isString(message.backupPlanRevisionId))
+                                    return "backupPlanRevisionId: string expected";
+                            if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                if (!$util.isString(message.backupPlanRevisionName))
+                                    return "backupPlanRevisionName: string expected";
                             return null;
                         };
     
@@ -8660,6 +10515,10 @@
                             case 4:
                                 message.state = 4;
                                 break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
+                                break;
                             }
                             if (object.rulesConfigInfo) {
                                 if (!Array.isArray(object.rulesConfigInfo))
@@ -8673,6 +10532,15 @@
                             }
                             if (object.dataSource != null)
                                 message.dataSource = String(object.dataSource);
+                            if (object.cloudSqlInstanceBackupPlanAssociationProperties != null) {
+                                if (typeof object.cloudSqlInstanceBackupPlanAssociationProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.BackupPlanAssociation.cloudSqlInstanceBackupPlanAssociationProperties: object expected");
+                                message.cloudSqlInstanceBackupPlanAssociationProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.fromObject(object.cloudSqlInstanceBackupPlanAssociationProperties);
+                            }
+                            if (object.backupPlanRevisionId != null)
+                                message.backupPlanRevisionId = String(object.backupPlanRevisionId);
+                            if (object.backupPlanRevisionName != null)
+                                message.backupPlanRevisionName = String(object.backupPlanRevisionName);
                             return message;
                         };
     
@@ -8700,6 +10568,8 @@
                                 object.updateTime = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.dataSource = "";
+                                object.backupPlanRevisionId = "";
+                                object.backupPlanRevisionName = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8722,6 +10592,15 @@
                             }
                             if (message.dataSource != null && message.hasOwnProperty("dataSource"))
                                 object.dataSource = message.dataSource;
+                            if (message.cloudSqlInstanceBackupPlanAssociationProperties != null && message.hasOwnProperty("cloudSqlInstanceBackupPlanAssociationProperties")) {
+                                object.cloudSqlInstanceBackupPlanAssociationProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.toObject(message.cloudSqlInstanceBackupPlanAssociationProperties, options);
+                                if (options.oneofs)
+                                    object.resourceProperties = "cloudSqlInstanceBackupPlanAssociationProperties";
+                            }
+                            if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                object.backupPlanRevisionId = message.backupPlanRevisionId;
+                            if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                object.backupPlanRevisionName = message.backupPlanRevisionName;
                             return object;
                         };
     
@@ -8760,6 +10639,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} INACTIVE=4 INACTIVE value
+                         * @property {number} UPDATING=5 UPDATING value
                          */
                         BackupPlanAssociation.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8768,6 +10648,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "INACTIVE"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
                             return values;
                         })();
     
@@ -9958,6 +11839,577 @@
                         return ListBackupPlanAssociationsResponse;
                     })();
     
+                    v1.FetchBackupPlanAssociationsForResourceTypeRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchBackupPlanAssociationsForResourceTypeRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IFetchBackupPlanAssociationsForResourceTypeRequest
+                         * @property {string|null} [parent] FetchBackupPlanAssociationsForResourceTypeRequest parent
+                         * @property {string|null} [resourceType] FetchBackupPlanAssociationsForResourceTypeRequest resourceType
+                         * @property {number|null} [pageSize] FetchBackupPlanAssociationsForResourceTypeRequest pageSize
+                         * @property {string|null} [pageToken] FetchBackupPlanAssociationsForResourceTypeRequest pageToken
+                         * @property {string|null} [filter] FetchBackupPlanAssociationsForResourceTypeRequest filter
+                         * @property {string|null} [orderBy] FetchBackupPlanAssociationsForResourceTypeRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new FetchBackupPlanAssociationsForResourceTypeRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a FetchBackupPlanAssociationsForResourceTypeRequest.
+                         * @implements IFetchBackupPlanAssociationsForResourceTypeRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest=} [properties] Properties to set
+                         */
+                        function FetchBackupPlanAssociationsForResourceTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.parent = "";
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.resourceType = "";
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.pageToken = "";
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.filter = "";
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new FetchBackupPlanAssociationsForResourceTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest} FetchBackupPlanAssociationsForResourceTypeRequest instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.create = function create(properties) {
+                            return new FetchBackupPlanAssociationsForResourceTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchBackupPlanAssociationsForResourceTypeRequest message. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest} message FetchBackupPlanAssociationsForResourceTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceType);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchBackupPlanAssociationsForResourceTypeRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeRequest} message FetchBackupPlanAssociationsForResourceTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchBackupPlanAssociationsForResourceTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest} FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchBackupPlanAssociationsForResourceTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest} FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchBackupPlanAssociationsForResourceTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchBackupPlanAssociationsForResourceTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest} FetchBackupPlanAssociationsForResourceTypeRequest
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchBackupPlanAssociationsForResourceTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest} message FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.resourceType = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchBackupPlanAssociationsForResourceTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeRequest";
+                        };
+    
+                        return FetchBackupPlanAssociationsForResourceTypeRequest;
+                    })();
+    
+                    v1.FetchBackupPlanAssociationsForResourceTypeResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchBackupPlanAssociationsForResourceTypeResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IFetchBackupPlanAssociationsForResourceTypeResponse
+                         * @property {Array.<google.cloud.backupdr.v1.IBackupPlanAssociation>|null} [backupPlanAssociations] FetchBackupPlanAssociationsForResourceTypeResponse backupPlanAssociations
+                         * @property {string|null} [nextPageToken] FetchBackupPlanAssociationsForResourceTypeResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchBackupPlanAssociationsForResourceTypeResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a FetchBackupPlanAssociationsForResourceTypeResponse.
+                         * @implements IFetchBackupPlanAssociationsForResourceTypeResponse
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeResponse=} [properties] Properties to set
+                         */
+                        function FetchBackupPlanAssociationsForResourceTypeResponse(properties) {
+                            this.backupPlanAssociations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeResponse backupPlanAssociations.
+                         * @member {Array.<google.cloud.backupdr.v1.IBackupPlanAssociation>} backupPlanAssociations
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.prototype.backupPlanAssociations = $util.emptyArray;
+    
+                        /**
+                         * FetchBackupPlanAssociationsForResourceTypeResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new FetchBackupPlanAssociationsForResourceTypeResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeResponse=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} FetchBackupPlanAssociationsForResourceTypeResponse instance
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.create = function create(properties) {
+                            return new FetchBackupPlanAssociationsForResourceTypeResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchBackupPlanAssociationsForResourceTypeResponse message. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeResponse} message FetchBackupPlanAssociationsForResourceTypeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPlanAssociations != null && message.backupPlanAssociations.length)
+                                for (var i = 0; i < message.backupPlanAssociations.length; ++i)
+                                    $root.google.cloud.backupdr.v1.BackupPlanAssociation.encode(message.backupPlanAssociations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchBackupPlanAssociationsForResourceTypeResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchBackupPlanAssociationsForResourceTypeResponse} message FetchBackupPlanAssociationsForResourceTypeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchBackupPlanAssociationsForResourceTypeResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupPlanAssociations && message.backupPlanAssociations.length))
+                                            message.backupPlanAssociations = [];
+                                        message.backupPlanAssociations.push($root.google.cloud.backupdr.v1.BackupPlanAssociation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchBackupPlanAssociationsForResourceTypeResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchBackupPlanAssociationsForResourceTypeResponse message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupPlanAssociations != null && message.hasOwnProperty("backupPlanAssociations")) {
+                                if (!Array.isArray(message.backupPlanAssociations))
+                                    return "backupPlanAssociations: array expected";
+                                for (var i = 0; i < message.backupPlanAssociations.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.BackupPlanAssociation.verify(message.backupPlanAssociations[i]);
+                                    if (error)
+                                        return "backupPlanAssociations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchBackupPlanAssociationsForResourceTypeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} FetchBackupPlanAssociationsForResourceTypeResponse
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse();
+                            if (object.backupPlanAssociations) {
+                                if (!Array.isArray(object.backupPlanAssociations))
+                                    throw TypeError(".google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse.backupPlanAssociations: array expected");
+                                message.backupPlanAssociations = [];
+                                for (var i = 0; i < object.backupPlanAssociations.length; ++i) {
+                                    if (typeof object.backupPlanAssociations[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse.backupPlanAssociations: object expected");
+                                    message.backupPlanAssociations[i] = $root.google.cloud.backupdr.v1.BackupPlanAssociation.fromObject(object.backupPlanAssociations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchBackupPlanAssociationsForResourceTypeResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse} message FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupPlanAssociations = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backupPlanAssociations && message.backupPlanAssociations.length) {
+                                object.backupPlanAssociations = [];
+                                for (var j = 0; j < message.backupPlanAssociations.length; ++j)
+                                    object.backupPlanAssociations[j] = $root.google.cloud.backupdr.v1.BackupPlanAssociation.toObject(message.backupPlanAssociations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchBackupPlanAssociationsForResourceTypeResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchBackupPlanAssociationsForResourceTypeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.FetchBackupPlanAssociationsForResourceTypeResponse";
+                        };
+    
+                        return FetchBackupPlanAssociationsForResourceTypeResponse;
+                    })();
+    
                     v1.GetBackupPlanAssociationRequest = (function() {
     
                         /**
@@ -10392,6 +12844,268 @@
                         return DeleteBackupPlanAssociationRequest;
                     })();
     
+                    v1.UpdateBackupPlanAssociationRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBackupPlanAssociationRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IUpdateBackupPlanAssociationRequest
+                         * @property {google.cloud.backupdr.v1.IBackupPlanAssociation|null} [backupPlanAssociation] UpdateBackupPlanAssociationRequest backupPlanAssociation
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBackupPlanAssociationRequest updateMask
+                         * @property {string|null} [requestId] UpdateBackupPlanAssociationRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBackupPlanAssociationRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an UpdateBackupPlanAssociationRequest.
+                         * @implements IUpdateBackupPlanAssociationRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest=} [properties] Properties to set
+                         */
+                        function UpdateBackupPlanAssociationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBackupPlanAssociationRequest backupPlanAssociation.
+                         * @member {google.cloud.backupdr.v1.IBackupPlanAssociation|null|undefined} backupPlanAssociation
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanAssociationRequest.prototype.backupPlanAssociation = null;
+    
+                        /**
+                         * UpdateBackupPlanAssociationRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanAssociationRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateBackupPlanAssociationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @instance
+                         */
+                        UpdateBackupPlanAssociationRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateBackupPlanAssociationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest} UpdateBackupPlanAssociationRequest instance
+                         */
+                        UpdateBackupPlanAssociationRequest.create = function create(properties) {
+                            return new UpdateBackupPlanAssociationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPlanAssociationRequest message. Does not implicitly {@link google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest} message UpdateBackupPlanAssociationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPlanAssociationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPlanAssociation != null && Object.hasOwnProperty.call(message, "backupPlanAssociation"))
+                                $root.google.cloud.backupdr.v1.BackupPlanAssociation.encode(message.backupPlanAssociation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPlanAssociationRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IUpdateBackupPlanAssociationRequest} message UpdateBackupPlanAssociationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPlanAssociationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPlanAssociationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest} UpdateBackupPlanAssociationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPlanAssociationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.backupPlanAssociation = $root.google.cloud.backupdr.v1.BackupPlanAssociation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPlanAssociationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest} UpdateBackupPlanAssociationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPlanAssociationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBackupPlanAssociationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBackupPlanAssociationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupPlanAssociation != null && message.hasOwnProperty("backupPlanAssociation")) {
+                                var error = $root.google.cloud.backupdr.v1.BackupPlanAssociation.verify(message.backupPlanAssociation);
+                                if (error)
+                                    return "backupPlanAssociation." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBackupPlanAssociationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest} UpdateBackupPlanAssociationRequest
+                         */
+                        UpdateBackupPlanAssociationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest();
+                            if (object.backupPlanAssociation != null) {
+                                if (typeof object.backupPlanAssociation !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest.backupPlanAssociation: object expected");
+                                message.backupPlanAssociation = $root.google.cloud.backupdr.v1.BackupPlanAssociation.fromObject(object.backupPlanAssociation);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBackupPlanAssociationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest} message UpdateBackupPlanAssociationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBackupPlanAssociationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.backupPlanAssociation = null;
+                                object.updateMask = null;
+                                object.requestId = "";
+                            }
+                            if (message.backupPlanAssociation != null && message.hasOwnProperty("backupPlanAssociation"))
+                                object.backupPlanAssociation = $root.google.cloud.backupdr.v1.BackupPlanAssociation.toObject(message.backupPlanAssociation, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBackupPlanAssociationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBackupPlanAssociationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBackupPlanAssociationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBackupPlanAssociationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.UpdateBackupPlanAssociationRequest";
+                        };
+    
+                        return UpdateBackupPlanAssociationRequest;
+                    })();
+    
                     v1.TriggerBackupRequest = (function() {
     
                         /**
@@ -10642,6 +13356,1296 @@
                         };
     
                         return TriggerBackupRequest;
+                    })();
+    
+                    v1.CloudSqlInstanceDataSourceProperties = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlInstanceDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface ICloudSqlInstanceDataSourceProperties
+                         * @property {string|null} [name] CloudSqlInstanceDataSourceProperties name
+                         * @property {string|null} [databaseInstalledVersion] CloudSqlInstanceDataSourceProperties databaseInstalledVersion
+                         * @property {google.protobuf.ITimestamp|null} [instanceCreateTime] CloudSqlInstanceDataSourceProperties instanceCreateTime
+                         * @property {string|null} [instanceTier] CloudSqlInstanceDataSourceProperties instanceTier
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlInstanceDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a CloudSqlInstanceDataSourceProperties.
+                         * @implements ICloudSqlInstanceDataSourceProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties=} [properties] Properties to set
+                         */
+                        function CloudSqlInstanceDataSourceProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlInstanceDataSourceProperties name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceProperties.prototype.name = "";
+    
+                        /**
+                         * CloudSqlInstanceDataSourceProperties databaseInstalledVersion.
+                         * @member {string} databaseInstalledVersion
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceProperties.prototype.databaseInstalledVersion = "";
+    
+                        /**
+                         * CloudSqlInstanceDataSourceProperties instanceCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} instanceCreateTime
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceProperties.prototype.instanceCreateTime = null;
+    
+                        /**
+                         * CloudSqlInstanceDataSourceProperties instanceTier.
+                         * @member {string} instanceTier
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceProperties.prototype.instanceTier = "";
+    
+                        /**
+                         * Creates a new CloudSqlInstanceDataSourceProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties} CloudSqlInstanceDataSourceProperties instance
+                         */
+                        CloudSqlInstanceDataSourceProperties.create = function create(properties) {
+                            return new CloudSqlInstanceDataSourceProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceDataSourceProperties message. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties} message CloudSqlInstanceDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceDataSourceProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.databaseInstalledVersion != null && Object.hasOwnProperty.call(message, "databaseInstalledVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.databaseInstalledVersion);
+                            if (message.instanceCreateTime != null && Object.hasOwnProperty.call(message, "instanceCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.instanceCreateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.instanceTier != null && Object.hasOwnProperty.call(message, "instanceTier"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.instanceTier);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceDataSourceProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties} message CloudSqlInstanceDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceDataSourceProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceDataSourceProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties} CloudSqlInstanceDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceDataSourceProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.databaseInstalledVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instanceCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.instanceTier = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceDataSourceProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties} CloudSqlInstanceDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceDataSourceProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlInstanceDataSourceProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlInstanceDataSourceProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                if (!$util.isString(message.databaseInstalledVersion))
+                                    return "databaseInstalledVersion: string expected";
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.instanceCreateTime);
+                                if (error)
+                                    return "instanceCreateTime." + error;
+                            }
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                if (!$util.isString(message.instanceTier))
+                                    return "instanceTier: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlInstanceDataSourceProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties} CloudSqlInstanceDataSourceProperties
+                         */
+                        CloudSqlInstanceDataSourceProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.databaseInstalledVersion != null)
+                                message.databaseInstalledVersion = String(object.databaseInstalledVersion);
+                            if (object.instanceCreateTime != null) {
+                                if (typeof object.instanceCreateTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.instanceCreateTime: object expected");
+                                message.instanceCreateTime = $root.google.protobuf.Timestamp.fromObject(object.instanceCreateTime);
+                            }
+                            if (object.instanceTier != null)
+                                message.instanceTier = String(object.instanceTier);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlInstanceDataSourceProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties} message CloudSqlInstanceDataSourceProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlInstanceDataSourceProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.databaseInstalledVersion = "";
+                                object.instanceCreateTime = null;
+                                object.instanceTier = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                object.databaseInstalledVersion = message.databaseInstalledVersion;
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime"))
+                                object.instanceCreateTime = $root.google.protobuf.Timestamp.toObject(message.instanceCreateTime, options);
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                object.instanceTier = message.instanceTier;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlInstanceDataSourceProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlInstanceDataSourceProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlInstanceDataSourceProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlInstanceDataSourceProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties";
+                        };
+    
+                        return CloudSqlInstanceDataSourceProperties;
+                    })();
+    
+                    v1.CloudSqlInstanceBackupProperties = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlInstanceBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface ICloudSqlInstanceBackupProperties
+                         * @property {string|null} [databaseInstalledVersion] CloudSqlInstanceBackupProperties databaseInstalledVersion
+                         * @property {boolean|null} [finalBackup] CloudSqlInstanceBackupProperties finalBackup
+                         * @property {string|null} [sourceInstance] CloudSqlInstanceBackupProperties sourceInstance
+                         * @property {string|null} [instanceTier] CloudSqlInstanceBackupProperties instanceTier
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlInstanceBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a CloudSqlInstanceBackupProperties.
+                         * @implements ICloudSqlInstanceBackupProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties=} [properties] Properties to set
+                         */
+                        function CloudSqlInstanceBackupProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlInstanceBackupProperties databaseInstalledVersion.
+                         * @member {string} databaseInstalledVersion
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceBackupProperties.prototype.databaseInstalledVersion = "";
+    
+                        /**
+                         * CloudSqlInstanceBackupProperties finalBackup.
+                         * @member {boolean} finalBackup
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceBackupProperties.prototype.finalBackup = false;
+    
+                        /**
+                         * CloudSqlInstanceBackupProperties sourceInstance.
+                         * @member {string} sourceInstance
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceBackupProperties.prototype.sourceInstance = "";
+    
+                        /**
+                         * CloudSqlInstanceBackupProperties instanceTier.
+                         * @member {string} instanceTier
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceBackupProperties.prototype.instanceTier = "";
+    
+                        /**
+                         * Creates a new CloudSqlInstanceBackupProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties} CloudSqlInstanceBackupProperties instance
+                         */
+                        CloudSqlInstanceBackupProperties.create = function create(properties) {
+                            return new CloudSqlInstanceBackupProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceBackupProperties message. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties} message CloudSqlInstanceBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceBackupProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databaseInstalledVersion != null && Object.hasOwnProperty.call(message, "databaseInstalledVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.databaseInstalledVersion);
+                            if (message.finalBackup != null && Object.hasOwnProperty.call(message, "finalBackup"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.finalBackup);
+                            if (message.sourceInstance != null && Object.hasOwnProperty.call(message, "sourceInstance"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceInstance);
+                            if (message.instanceTier != null && Object.hasOwnProperty.call(message, "instanceTier"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.instanceTier);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceBackupProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties} message CloudSqlInstanceBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceBackupProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceBackupProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties} CloudSqlInstanceBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceBackupProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.databaseInstalledVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.finalBackup = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sourceInstance = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.instanceTier = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceBackupProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties} CloudSqlInstanceBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceBackupProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlInstanceBackupProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlInstanceBackupProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                if (!$util.isString(message.databaseInstalledVersion))
+                                    return "databaseInstalledVersion: string expected";
+                            if (message.finalBackup != null && message.hasOwnProperty("finalBackup"))
+                                if (typeof message.finalBackup !== "boolean")
+                                    return "finalBackup: boolean expected";
+                            if (message.sourceInstance != null && message.hasOwnProperty("sourceInstance"))
+                                if (!$util.isString(message.sourceInstance))
+                                    return "sourceInstance: string expected";
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                if (!$util.isString(message.instanceTier))
+                                    return "instanceTier: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlInstanceBackupProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties} CloudSqlInstanceBackupProperties
+                         */
+                        CloudSqlInstanceBackupProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties();
+                            if (object.databaseInstalledVersion != null)
+                                message.databaseInstalledVersion = String(object.databaseInstalledVersion);
+                            if (object.finalBackup != null)
+                                message.finalBackup = Boolean(object.finalBackup);
+                            if (object.sourceInstance != null)
+                                message.sourceInstance = String(object.sourceInstance);
+                            if (object.instanceTier != null)
+                                message.instanceTier = String(object.instanceTier);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlInstanceBackupProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties} message CloudSqlInstanceBackupProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlInstanceBackupProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.databaseInstalledVersion = "";
+                                object.finalBackup = false;
+                                object.sourceInstance = "";
+                                object.instanceTier = "";
+                            }
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                object.databaseInstalledVersion = message.databaseInstalledVersion;
+                            if (message.finalBackup != null && message.hasOwnProperty("finalBackup"))
+                                object.finalBackup = message.finalBackup;
+                            if (message.sourceInstance != null && message.hasOwnProperty("sourceInstance"))
+                                object.sourceInstance = message.sourceInstance;
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                object.instanceTier = message.instanceTier;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlInstanceBackupProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlInstanceBackupProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlInstanceBackupProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlInstanceBackupProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties";
+                        };
+    
+                        return CloudSqlInstanceBackupProperties;
+                    })();
+    
+                    v1.CloudSqlInstanceDataSourceReferenceProperties = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlInstanceDataSourceReferenceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface ICloudSqlInstanceDataSourceReferenceProperties
+                         * @property {string|null} [name] CloudSqlInstanceDataSourceReferenceProperties name
+                         * @property {string|null} [databaseInstalledVersion] CloudSqlInstanceDataSourceReferenceProperties databaseInstalledVersion
+                         * @property {google.protobuf.ITimestamp|null} [instanceCreateTime] CloudSqlInstanceDataSourceReferenceProperties instanceCreateTime
+                         * @property {string|null} [instanceTier] CloudSqlInstanceDataSourceReferenceProperties instanceTier
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlInstanceDataSourceReferenceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a CloudSqlInstanceDataSourceReferenceProperties.
+                         * @implements ICloudSqlInstanceDataSourceReferenceProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties=} [properties] Properties to set
+                         */
+                        function CloudSqlInstanceDataSourceReferenceProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlInstanceDataSourceReferenceProperties name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.prototype.name = "";
+    
+                        /**
+                         * CloudSqlInstanceDataSourceReferenceProperties databaseInstalledVersion.
+                         * @member {string} databaseInstalledVersion
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.prototype.databaseInstalledVersion = "";
+    
+                        /**
+                         * CloudSqlInstanceDataSourceReferenceProperties instanceCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} instanceCreateTime
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.prototype.instanceCreateTime = null;
+    
+                        /**
+                         * CloudSqlInstanceDataSourceReferenceProperties instanceTier.
+                         * @member {string} instanceTier
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.prototype.instanceTier = "";
+    
+                        /**
+                         * Creates a new CloudSqlInstanceDataSourceReferenceProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties} CloudSqlInstanceDataSourceReferenceProperties instance
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.create = function create(properties) {
+                            return new CloudSqlInstanceDataSourceReferenceProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceDataSourceReferenceProperties message. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties} message CloudSqlInstanceDataSourceReferenceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.databaseInstalledVersion != null && Object.hasOwnProperty.call(message, "databaseInstalledVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.databaseInstalledVersion);
+                            if (message.instanceCreateTime != null && Object.hasOwnProperty.call(message, "instanceCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.instanceCreateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.instanceTier != null && Object.hasOwnProperty.call(message, "instanceTier"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.instanceTier);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceDataSourceReferenceProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties} message CloudSqlInstanceDataSourceReferenceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceDataSourceReferenceProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties} CloudSqlInstanceDataSourceReferenceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.databaseInstalledVersion = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instanceCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.instanceTier = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceDataSourceReferenceProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties} CloudSqlInstanceDataSourceReferenceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlInstanceDataSourceReferenceProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                if (!$util.isString(message.databaseInstalledVersion))
+                                    return "databaseInstalledVersion: string expected";
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.instanceCreateTime);
+                                if (error)
+                                    return "instanceCreateTime." + error;
+                            }
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                if (!$util.isString(message.instanceTier))
+                                    return "instanceTier: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlInstanceDataSourceReferenceProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties} CloudSqlInstanceDataSourceReferenceProperties
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.databaseInstalledVersion != null)
+                                message.databaseInstalledVersion = String(object.databaseInstalledVersion);
+                            if (object.instanceCreateTime != null) {
+                                if (typeof object.instanceCreateTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.instanceCreateTime: object expected");
+                                message.instanceCreateTime = $root.google.protobuf.Timestamp.fromObject(object.instanceCreateTime);
+                            }
+                            if (object.instanceTier != null)
+                                message.instanceTier = String(object.instanceTier);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlInstanceDataSourceReferenceProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties} message CloudSqlInstanceDataSourceReferenceProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.databaseInstalledVersion = "";
+                                object.instanceCreateTime = null;
+                                object.instanceTier = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.databaseInstalledVersion != null && message.hasOwnProperty("databaseInstalledVersion"))
+                                object.databaseInstalledVersion = message.databaseInstalledVersion;
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime"))
+                                object.instanceCreateTime = $root.google.protobuf.Timestamp.toObject(message.instanceCreateTime, options);
+                            if (message.instanceTier != null && message.hasOwnProperty("instanceTier"))
+                                object.instanceTier = message.instanceTier;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlInstanceDataSourceReferenceProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlInstanceDataSourceReferenceProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlInstanceDataSourceReferenceProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties";
+                        };
+    
+                        return CloudSqlInstanceDataSourceReferenceProperties;
+                    })();
+    
+                    v1.CloudSqlInstanceInitializationConfig = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlInstanceInitializationConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface ICloudSqlInstanceInitializationConfig
+                         * @property {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.Edition|null} [edition] CloudSqlInstanceInitializationConfig edition
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlInstanceInitializationConfig.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a CloudSqlInstanceInitializationConfig.
+                         * @implements ICloudSqlInstanceInitializationConfig
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig=} [properties] Properties to set
+                         */
+                        function CloudSqlInstanceInitializationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlInstanceInitializationConfig edition.
+                         * @member {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.Edition} edition
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @instance
+                         */
+                        CloudSqlInstanceInitializationConfig.prototype.edition = 0;
+    
+                        /**
+                         * Creates a new CloudSqlInstanceInitializationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig} CloudSqlInstanceInitializationConfig instance
+                         */
+                        CloudSqlInstanceInitializationConfig.create = function create(properties) {
+                            return new CloudSqlInstanceInitializationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceInitializationConfig message. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig} message CloudSqlInstanceInitializationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceInitializationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.edition);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceInitializationConfig message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceInitializationConfig} message CloudSqlInstanceInitializationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceInitializationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceInitializationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig} CloudSqlInstanceInitializationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceInitializationConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.edition = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceInitializationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig} CloudSqlInstanceInitializationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceInitializationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlInstanceInitializationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlInstanceInitializationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.edition != null && message.hasOwnProperty("edition"))
+                                switch (message.edition) {
+                                default:
+                                    return "edition: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlInstanceInitializationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig} CloudSqlInstanceInitializationConfig
+                         */
+                        CloudSqlInstanceInitializationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig();
+                            switch (object.edition) {
+                            default:
+                                if (typeof object.edition === "number") {
+                                    message.edition = object.edition;
+                                    break;
+                                }
+                                break;
+                            case "EDITION_UNSPECIFIED":
+                            case 0:
+                                message.edition = 0;
+                                break;
+                            case "ENTERPRISE":
+                            case 1:
+                                message.edition = 1;
+                                break;
+                            case "ENTERPRISE_PLUS":
+                            case 2:
+                                message.edition = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlInstanceInitializationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig} message CloudSqlInstanceInitializationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlInstanceInitializationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.edition = options.enums === String ? "EDITION_UNSPECIFIED" : 0;
+                            if (message.edition != null && message.hasOwnProperty("edition"))
+                                object.edition = options.enums === String ? $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.Edition[message.edition] === undefined ? message.edition : $root.google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.Edition[message.edition] : message.edition;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlInstanceInitializationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlInstanceInitializationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlInstanceInitializationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlInstanceInitializationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig";
+                        };
+    
+                        /**
+                         * Edition enum.
+                         * @name google.cloud.backupdr.v1.CloudSqlInstanceInitializationConfig.Edition
+                         * @enum {number}
+                         * @property {number} EDITION_UNSPECIFIED=0 EDITION_UNSPECIFIED value
+                         * @property {number} ENTERPRISE=1 ENTERPRISE value
+                         * @property {number} ENTERPRISE_PLUS=2 ENTERPRISE_PLUS value
+                         */
+                        CloudSqlInstanceInitializationConfig.Edition = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EDITION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENTERPRISE"] = 1;
+                            values[valuesById[2] = "ENTERPRISE_PLUS"] = 2;
+                            return values;
+                        })();
+    
+                        return CloudSqlInstanceInitializationConfig;
+                    })();
+    
+                    v1.CloudSqlInstanceBackupPlanAssociationProperties = (function() {
+    
+                        /**
+                         * Properties of a CloudSqlInstanceBackupPlanAssociationProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface ICloudSqlInstanceBackupPlanAssociationProperties
+                         * @property {google.protobuf.ITimestamp|null} [instanceCreateTime] CloudSqlInstanceBackupPlanAssociationProperties instanceCreateTime
+                         */
+    
+                        /**
+                         * Constructs a new CloudSqlInstanceBackupPlanAssociationProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a CloudSqlInstanceBackupPlanAssociationProperties.
+                         * @implements ICloudSqlInstanceBackupPlanAssociationProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties=} [properties] Properties to set
+                         */
+                        function CloudSqlInstanceBackupPlanAssociationProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CloudSqlInstanceBackupPlanAssociationProperties instanceCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} instanceCreateTime
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @instance
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.prototype.instanceCreateTime = null;
+    
+                        /**
+                         * Creates a new CloudSqlInstanceBackupPlanAssociationProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties} CloudSqlInstanceBackupPlanAssociationProperties instance
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.create = function create(properties) {
+                            return new CloudSqlInstanceBackupPlanAssociationProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceBackupPlanAssociationProperties message. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties} message CloudSqlInstanceBackupPlanAssociationProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceCreateTime != null && Object.hasOwnProperty.call(message, "instanceCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.instanceCreateTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CloudSqlInstanceBackupPlanAssociationProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.ICloudSqlInstanceBackupPlanAssociationProperties} message CloudSqlInstanceBackupPlanAssociationProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceBackupPlanAssociationProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties} CloudSqlInstanceBackupPlanAssociationProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CloudSqlInstanceBackupPlanAssociationProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties} CloudSqlInstanceBackupPlanAssociationProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CloudSqlInstanceBackupPlanAssociationProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.instanceCreateTime);
+                                if (error)
+                                    return "instanceCreateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CloudSqlInstanceBackupPlanAssociationProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties} CloudSqlInstanceBackupPlanAssociationProperties
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties();
+                            if (object.instanceCreateTime != null) {
+                                if (typeof object.instanceCreateTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties.instanceCreateTime: object expected");
+                                message.instanceCreateTime = $root.google.protobuf.Timestamp.fromObject(object.instanceCreateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CloudSqlInstanceBackupPlanAssociationProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties} message CloudSqlInstanceBackupPlanAssociationProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.instanceCreateTime = null;
+                            if (message.instanceCreateTime != null && message.hasOwnProperty("instanceCreateTime"))
+                                object.instanceCreateTime = $root.google.protobuf.Timestamp.toObject(message.instanceCreateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CloudSqlInstanceBackupPlanAssociationProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CloudSqlInstanceBackupPlanAssociationProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CloudSqlInstanceBackupPlanAssociationProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.CloudSqlInstanceBackupPlanAssociationProperties";
+                        };
+    
+                        return CloudSqlInstanceBackupPlanAssociationProperties;
                     })();
     
                     v1.BackupVault = (function() {
@@ -11149,6 +15153,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
@@ -11261,6 +15266,10 @@
                             case "ERROR":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
                                 break;
                             }
                             if (object.effectiveTime != null) {
@@ -11466,6 +15475,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} ERROR=4 ERROR value
+                         * @property {number} UPDATING=5 UPDATING value
                          */
                         BackupVault.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11474,6 +15484,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "ERROR"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
                             return values;
                         })();
     
@@ -11518,6 +15529,7 @@
                          * @property {google.cloud.backupdr.v1.IBackupConfigInfo|null} [backupConfigInfo] DataSource backupConfigInfo
                          * @property {google.cloud.backupdr.v1.IDataSourceGcpResource|null} [dataSourceGcpResource] DataSource dataSourceGcpResource
                          * @property {google.cloud.backupdr.v1.IDataSourceBackupApplianceApplication|null} [dataSourceBackupApplianceApplication] DataSource dataSourceBackupApplianceApplication
+                         * @property {boolean|null} [backupBlockedByVaultAccessRestriction] DataSource backupBlockedByVaultAccessRestriction
                          */
     
                         /**
@@ -11632,6 +15644,14 @@
                          */
                         DataSource.prototype.dataSourceBackupApplianceApplication = null;
     
+                        /**
+                         * DataSource backupBlockedByVaultAccessRestriction.
+                         * @member {boolean} backupBlockedByVaultAccessRestriction
+                         * @memberof google.cloud.backupdr.v1.DataSource
+                         * @instance
+                         */
+                        DataSource.prototype.backupBlockedByVaultAccessRestriction = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11725,6 +15745,8 @@
                                 $root.google.cloud.backupdr.v1.DataSourceGcpResource.encode(message.dataSourceGcpResource, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.dataSourceBackupApplianceApplication != null && Object.hasOwnProperty.call(message, "dataSourceBackupApplianceApplication"))
                                 $root.google.cloud.backupdr.v1.DataSourceBackupApplianceApplication.encode(message.dataSourceBackupApplianceApplication, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.backupBlockedByVaultAccessRestriction != null && Object.hasOwnProperty.call(message, "backupBlockedByVaultAccessRestriction"))
+                                writer.uint32(/* id 28, wireType 0 =*/224).bool(message.backupBlockedByVaultAccessRestriction);
                             return writer;
                         };
     
@@ -11826,6 +15848,10 @@
                                     }
                                 case 27: {
                                         message.dataSourceBackupApplianceApplication = $root.google.cloud.backupdr.v1.DataSourceBackupApplianceApplication.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 28: {
+                                        message.backupBlockedByVaultAccessRestriction = reader.bool();
                                         break;
                                     }
                                 default:
@@ -11949,6 +15975,9 @@
                                         return "dataSourceBackupApplianceApplication." + error;
                                 }
                             }
+                            if (message.backupBlockedByVaultAccessRestriction != null && message.hasOwnProperty("backupBlockedByVaultAccessRestriction"))
+                                if (typeof message.backupBlockedByVaultAccessRestriction !== "boolean")
+                                    return "backupBlockedByVaultAccessRestriction: boolean expected";
                             return null;
                         };
     
@@ -12066,6 +16095,8 @@
                                     throw TypeError(".google.cloud.backupdr.v1.DataSource.dataSourceBackupApplianceApplication: object expected");
                                 message.dataSourceBackupApplianceApplication = $root.google.cloud.backupdr.v1.DataSourceBackupApplianceApplication.fromObject(object.dataSourceBackupApplianceApplication);
                             }
+                            if (object.backupBlockedByVaultAccessRestriction != null)
+                                message.backupBlockedByVaultAccessRestriction = Boolean(object.backupBlockedByVaultAccessRestriction);
                             return message;
                         };
     
@@ -12089,6 +16120,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.configState = options.enums === String ? "BACKUP_CONFIG_STATE_UNSPECIFIED" : 0;
                                 object.backupConfigInfo = null;
+                                object.backupBlockedByVaultAccessRestriction = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12145,6 +16177,8 @@
                                 if (options.oneofs)
                                     object.sourceResource = "dataSourceBackupApplianceApplication";
                             }
+                            if (message.backupBlockedByVaultAccessRestriction != null && message.hasOwnProperty("backupBlockedByVaultAccessRestriction"))
+                                object.backupBlockedByVaultAccessRestriction = message.backupBlockedByVaultAccessRestriction;
                             return object;
                         };
     
@@ -12606,6 +16640,8 @@
                          * @property {string|null} [backupPlanDescription] GcpBackupConfig backupPlanDescription
                          * @property {string|null} [backupPlanAssociation] GcpBackupConfig backupPlanAssociation
                          * @property {Array.<string>|null} [backupPlanRules] GcpBackupConfig backupPlanRules
+                         * @property {string|null} [backupPlanRevisionName] GcpBackupConfig backupPlanRevisionName
+                         * @property {string|null} [backupPlanRevisionId] GcpBackupConfig backupPlanRevisionId
                          */
     
                         /**
@@ -12657,6 +16693,22 @@
                         GcpBackupConfig.prototype.backupPlanRules = $util.emptyArray;
     
                         /**
+                         * GcpBackupConfig backupPlanRevisionName.
+                         * @member {string} backupPlanRevisionName
+                         * @memberof google.cloud.backupdr.v1.GcpBackupConfig
+                         * @instance
+                         */
+                        GcpBackupConfig.prototype.backupPlanRevisionName = "";
+    
+                        /**
+                         * GcpBackupConfig backupPlanRevisionId.
+                         * @member {string} backupPlanRevisionId
+                         * @memberof google.cloud.backupdr.v1.GcpBackupConfig
+                         * @instance
+                         */
+                        GcpBackupConfig.prototype.backupPlanRevisionId = "";
+    
+                        /**
                          * Creates a new GcpBackupConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.GcpBackupConfig
@@ -12689,6 +16741,10 @@
                             if (message.backupPlanRules != null && message.backupPlanRules.length)
                                 for (var i = 0; i < message.backupPlanRules.length; ++i)
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.backupPlanRules[i]);
+                            if (message.backupPlanRevisionName != null && Object.hasOwnProperty.call(message, "backupPlanRevisionName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.backupPlanRevisionName);
+                            if (message.backupPlanRevisionId != null && Object.hasOwnProperty.call(message, "backupPlanRevisionId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.backupPlanRevisionId);
                             return writer;
                         };
     
@@ -12743,6 +16799,14 @@
                                         message.backupPlanRules.push(reader.string());
                                         break;
                                     }
+                                case 5: {
+                                        message.backupPlanRevisionName = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.backupPlanRevisionId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12794,6 +16858,12 @@
                                     if (!$util.isString(message.backupPlanRules[i]))
                                         return "backupPlanRules: string[] expected";
                             }
+                            if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                if (!$util.isString(message.backupPlanRevisionName))
+                                    return "backupPlanRevisionName: string expected";
+                            if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                if (!$util.isString(message.backupPlanRevisionId))
+                                    return "backupPlanRevisionId: string expected";
                             return null;
                         };
     
@@ -12822,6 +16892,10 @@
                                 for (var i = 0; i < object.backupPlanRules.length; ++i)
                                     message.backupPlanRules[i] = String(object.backupPlanRules[i]);
                             }
+                            if (object.backupPlanRevisionName != null)
+                                message.backupPlanRevisionName = String(object.backupPlanRevisionName);
+                            if (object.backupPlanRevisionId != null)
+                                message.backupPlanRevisionId = String(object.backupPlanRevisionId);
                             return message;
                         };
     
@@ -12844,6 +16918,8 @@
                                 object.backupPlan = "";
                                 object.backupPlanDescription = "";
                                 object.backupPlanAssociation = "";
+                                object.backupPlanRevisionName = "";
+                                object.backupPlanRevisionId = "";
                             }
                             if (message.backupPlan != null && message.hasOwnProperty("backupPlan"))
                                 object.backupPlan = message.backupPlan;
@@ -12856,6 +16932,10 @@
                                 for (var j = 0; j < message.backupPlanRules.length; ++j)
                                     object.backupPlanRules[j] = message.backupPlanRules[j];
                             }
+                            if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                object.backupPlanRevisionName = message.backupPlanRevisionName;
+                            if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                object.backupPlanRevisionId = message.backupPlanRevisionId;
                             return object;
                         };
     
@@ -13270,6 +17350,8 @@
                          * @property {string|null} [location] DataSourceGcpResource location
                          * @property {string|null} [type] DataSourceGcpResource type
                          * @property {google.cloud.backupdr.v1.IComputeInstanceDataSourceProperties|null} [computeInstanceDatasourceProperties] DataSourceGcpResource computeInstanceDatasourceProperties
+                         * @property {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties|null} [cloudSqlInstanceDatasourceProperties] DataSourceGcpResource cloudSqlInstanceDatasourceProperties
+                         * @property {google.cloud.backupdr.v1.IDiskDataSourceProperties|null} [diskDatasourceProperties] DataSourceGcpResource diskDatasourceProperties
                          */
     
                         /**
@@ -13319,17 +17401,33 @@
                          */
                         DataSourceGcpResource.prototype.computeInstanceDatasourceProperties = null;
     
+                        /**
+                         * DataSourceGcpResource cloudSqlInstanceDatasourceProperties.
+                         * @member {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties|null|undefined} cloudSqlInstanceDatasourceProperties
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
+                         * @instance
+                         */
+                        DataSourceGcpResource.prototype.cloudSqlInstanceDatasourceProperties = null;
+    
+                        /**
+                         * DataSourceGcpResource diskDatasourceProperties.
+                         * @member {google.cloud.backupdr.v1.IDiskDataSourceProperties|null|undefined} diskDatasourceProperties
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
+                         * @instance
+                         */
+                        DataSourceGcpResource.prototype.diskDatasourceProperties = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DataSourceGcpResource gcpResourceProperties.
-                         * @member {"computeInstanceDatasourceProperties"|undefined} gcpResourceProperties
+                         * @member {"computeInstanceDatasourceProperties"|"cloudSqlInstanceDatasourceProperties"|"diskDatasourceProperties"|undefined} gcpResourceProperties
                          * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
                          * @instance
                          */
                         Object.defineProperty(DataSourceGcpResource.prototype, "gcpResourceProperties", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceDatasourceProperties"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceDatasourceProperties", "cloudSqlInstanceDatasourceProperties", "diskDatasourceProperties"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13365,6 +17463,10 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
                             if (message.computeInstanceDatasourceProperties != null && Object.hasOwnProperty.call(message, "computeInstanceDatasourceProperties"))
                                 $root.google.cloud.backupdr.v1.ComputeInstanceDataSourceProperties.encode(message.computeInstanceDatasourceProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.cloudSqlInstanceDatasourceProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceDatasourceProperties"))
+                                $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.encode(message.cloudSqlInstanceDatasourceProperties, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.diskDatasourceProperties != null && Object.hasOwnProperty.call(message, "diskDatasourceProperties"))
+                                $root.google.cloud.backupdr.v1.DiskDataSourceProperties.encode(message.diskDatasourceProperties, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -13415,6 +17517,14 @@
                                     }
                                 case 4: {
                                         message.computeInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.ComputeInstanceDataSourceProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.diskDatasourceProperties = $root.google.cloud.backupdr.v1.DiskDataSourceProperties.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -13470,6 +17580,26 @@
                                         return "computeInstanceDatasourceProperties." + error;
                                 }
                             }
+                            if (message.cloudSqlInstanceDatasourceProperties != null && message.hasOwnProperty("cloudSqlInstanceDatasourceProperties")) {
+                                if (properties.gcpResourceProperties === 1)
+                                    return "gcpResourceProperties: multiple values";
+                                properties.gcpResourceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.verify(message.cloudSqlInstanceDatasourceProperties);
+                                    if (error)
+                                        return "cloudSqlInstanceDatasourceProperties." + error;
+                                }
+                            }
+                            if (message.diskDatasourceProperties != null && message.hasOwnProperty("diskDatasourceProperties")) {
+                                if (properties.gcpResourceProperties === 1)
+                                    return "gcpResourceProperties: multiple values";
+                                properties.gcpResourceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.DiskDataSourceProperties.verify(message.diskDatasourceProperties);
+                                    if (error)
+                                        return "diskDatasourceProperties." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -13495,6 +17625,16 @@
                                 if (typeof object.computeInstanceDatasourceProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResource.computeInstanceDatasourceProperties: object expected");
                                 message.computeInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.ComputeInstanceDataSourceProperties.fromObject(object.computeInstanceDatasourceProperties);
+                            }
+                            if (object.cloudSqlInstanceDatasourceProperties != null) {
+                                if (typeof object.cloudSqlInstanceDatasourceProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResource.cloudSqlInstanceDatasourceProperties: object expected");
+                                message.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.fromObject(object.cloudSqlInstanceDatasourceProperties);
+                            }
+                            if (object.diskDatasourceProperties != null) {
+                                if (typeof object.diskDatasourceProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResource.diskDatasourceProperties: object expected");
+                                message.diskDatasourceProperties = $root.google.cloud.backupdr.v1.DiskDataSourceProperties.fromObject(object.diskDatasourceProperties);
                             }
                             return message;
                         };
@@ -13527,6 +17667,16 @@
                                 object.computeInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.ComputeInstanceDataSourceProperties.toObject(message.computeInstanceDatasourceProperties, options);
                                 if (options.oneofs)
                                     object.gcpResourceProperties = "computeInstanceDatasourceProperties";
+                            }
+                            if (message.cloudSqlInstanceDatasourceProperties != null && message.hasOwnProperty("cloudSqlInstanceDatasourceProperties")) {
+                                object.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.toObject(message.cloudSqlInstanceDatasourceProperties, options);
+                                if (options.oneofs)
+                                    object.gcpResourceProperties = "cloudSqlInstanceDatasourceProperties";
+                            }
+                            if (message.diskDatasourceProperties != null && message.hasOwnProperty("diskDatasourceProperties")) {
+                                object.diskDatasourceProperties = $root.google.cloud.backupdr.v1.DiskDataSourceProperties.toObject(message.diskDatasourceProperties, options);
+                                if (options.oneofs)
+                                    object.gcpResourceProperties = "diskDatasourceProperties";
                             }
                             return object;
                         };
@@ -14839,10 +18989,14 @@
                          * @property {Array.<google.cloud.backupdr.v1.IBackupLock>|null} [serviceLocks] Backup serviceLocks
                          * @property {Array.<google.cloud.backupdr.v1.IBackupLock>|null} [backupApplianceLocks] Backup backupApplianceLocks
                          * @property {google.cloud.backupdr.v1.IComputeInstanceBackupProperties|null} [computeInstanceBackupProperties] Backup computeInstanceBackupProperties
+                         * @property {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties|null} [cloudSqlInstanceBackupProperties] Backup cloudSqlInstanceBackupProperties
                          * @property {google.cloud.backupdr.v1.IBackupApplianceBackupProperties|null} [backupApplianceBackupProperties] Backup backupApplianceBackupProperties
+                         * @property {google.cloud.backupdr.v1.IDiskBackupProperties|null} [diskBackupProperties] Backup diskBackupProperties
                          * @property {google.cloud.backupdr.v1.Backup.BackupType|null} [backupType] Backup backupType
                          * @property {google.cloud.backupdr.v1.Backup.IGCPBackupPlanInfo|null} [gcpBackupPlanInfo] Backup gcpBackupPlanInfo
                          * @property {number|Long|null} [resourceSizeBytes] Backup resourceSizeBytes
+                         * @property {boolean|null} [satisfiesPzs] Backup satisfiesPzs
+                         * @property {boolean|null} [satisfiesPzi] Backup satisfiesPzi
                          */
     
                         /**
@@ -14968,12 +19122,28 @@
                         Backup.prototype.computeInstanceBackupProperties = null;
     
                         /**
+                         * Backup cloudSqlInstanceBackupProperties.
+                         * @member {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties|null|undefined} cloudSqlInstanceBackupProperties
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.cloudSqlInstanceBackupProperties = null;
+    
+                        /**
                          * Backup backupApplianceBackupProperties.
                          * @member {google.cloud.backupdr.v1.IBackupApplianceBackupProperties|null|undefined} backupApplianceBackupProperties
                          * @memberof google.cloud.backupdr.v1.Backup
                          * @instance
                          */
                         Backup.prototype.backupApplianceBackupProperties = null;
+    
+                        /**
+                         * Backup diskBackupProperties.
+                         * @member {google.cloud.backupdr.v1.IDiskBackupProperties|null|undefined} diskBackupProperties
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.diskBackupProperties = null;
     
                         /**
                          * Backup backupType.
@@ -14998,6 +19168,22 @@
                          * @instance
                          */
                         Backup.prototype.resourceSizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Backup satisfiesPzs.
+                         * @member {boolean|null|undefined} satisfiesPzs
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzs = null;
+    
+                        /**
+                         * Backup satisfiesPzi.
+                         * @member {boolean|null|undefined} satisfiesPzi
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.satisfiesPzi = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -15046,12 +19232,12 @@
     
                         /**
                          * Backup backupProperties.
-                         * @member {"computeInstanceBackupProperties"|"backupApplianceBackupProperties"|undefined} backupProperties
+                         * @member {"computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"diskBackupProperties"|undefined} backupProperties
                          * @memberof google.cloud.backupdr.v1.Backup
                          * @instance
                          */
                         Object.defineProperty(Backup.prototype, "backupProperties", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceBackupProperties", "backupApplianceBackupProperties"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceBackupProperties", "cloudSqlInstanceBackupProperties", "backupApplianceBackupProperties", "diskBackupProperties"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -15063,6 +19249,18 @@
                          */
                         Object.defineProperty(Backup.prototype, "planInfo", {
                             get: $util.oneOfGetter($oneOfFields = ["gcpBackupPlanInfo"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Backup.prototype, "_satisfiesPzs", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Backup.prototype, "_satisfiesPzi", {
+                            get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -15127,6 +19325,14 @@
                                 $root.google.cloud.backupdr.v1.Backup.GCPBackupPlanInfo.encode(message.gcpBackupPlanInfo, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.resourceSizeBytes != null && Object.hasOwnProperty.call(message, "resourceSizeBytes"))
                                 writer.uint32(/* id 23, wireType 0 =*/184).int64(message.resourceSizeBytes);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.satisfiesPzs);
+                            if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                writer.uint32(/* id 25, wireType 0 =*/200).bool(message.satisfiesPzi);
+                            if (message.cloudSqlInstanceBackupProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceBackupProperties"))
+                                $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.encode(message.cloudSqlInstanceBackupProperties, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.diskBackupProperties != null && Object.hasOwnProperty.call(message, "diskBackupProperties"))
+                                $root.google.cloud.backupdr.v1.DiskBackupProperties.encode(message.diskBackupProperties, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -15238,8 +19444,16 @@
                                         message.computeInstanceBackupProperties = $root.google.cloud.backupdr.v1.ComputeInstanceBackupProperties.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 26: {
+                                        message.cloudSqlInstanceBackupProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 21: {
                                         message.backupApplianceBackupProperties = $root.google.cloud.backupdr.v1.BackupApplianceBackupProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 28: {
+                                        message.diskBackupProperties = $root.google.cloud.backupdr.v1.DiskBackupProperties.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 20: {
@@ -15252,6 +19466,14 @@
                                     }
                                 case 23: {
                                         message.resourceSizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 25: {
+                                        message.satisfiesPzi = reader.bool();
                                         break;
                                     }
                                 default:
@@ -15360,6 +19582,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.serviceLocks != null && message.hasOwnProperty("serviceLocks")) {
@@ -15388,6 +19611,16 @@
                                         return "computeInstanceBackupProperties." + error;
                                 }
                             }
+                            if (message.cloudSqlInstanceBackupProperties != null && message.hasOwnProperty("cloudSqlInstanceBackupProperties")) {
+                                if (properties.backupProperties === 1)
+                                    return "backupProperties: multiple values";
+                                properties.backupProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.verify(message.cloudSqlInstanceBackupProperties);
+                                    if (error)
+                                        return "cloudSqlInstanceBackupProperties." + error;
+                                }
+                            }
                             if (message.backupApplianceBackupProperties != null && message.hasOwnProperty("backupApplianceBackupProperties")) {
                                 if (properties.backupProperties === 1)
                                     return "backupProperties: multiple values";
@@ -15398,6 +19631,16 @@
                                         return "backupApplianceBackupProperties." + error;
                                 }
                             }
+                            if (message.diskBackupProperties != null && message.hasOwnProperty("diskBackupProperties")) {
+                                if (properties.backupProperties === 1)
+                                    return "backupProperties: multiple values";
+                                properties.backupProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.DiskBackupProperties.verify(message.diskBackupProperties);
+                                    if (error)
+                                        return "diskBackupProperties." + error;
+                                }
+                            }
                             if (message.backupType != null && message.hasOwnProperty("backupType"))
                                 switch (message.backupType) {
                                 default:
@@ -15405,6 +19648,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.gcpBackupPlanInfo != null && message.hasOwnProperty("gcpBackupPlanInfo")) {
@@ -15418,6 +19662,16 @@
                             if (message.resourceSizeBytes != null && message.hasOwnProperty("resourceSizeBytes"))
                                 if (!$util.isInteger(message.resourceSizeBytes) && !(message.resourceSizeBytes && $util.isInteger(message.resourceSizeBytes.low) && $util.isInteger(message.resourceSizeBytes.high)))
                                     return "resourceSizeBytes: integer|Long expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                properties._satisfiesPzs = 1;
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                properties._satisfiesPzi = 1;
+                                if (typeof message.satisfiesPzi !== "boolean")
+                                    return "satisfiesPzi: boolean expected";
+                            }
                             return null;
                         };
     
@@ -15498,6 +19752,10 @@
                             case 4:
                                 message.state = 4;
                                 break;
+                            case "UPLOADING":
+                            case 5:
+                                message.state = 5;
+                                break;
                             }
                             if (object.serviceLocks) {
                                 if (!Array.isArray(object.serviceLocks))
@@ -15524,10 +19782,20 @@
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.computeInstanceBackupProperties: object expected");
                                 message.computeInstanceBackupProperties = $root.google.cloud.backupdr.v1.ComputeInstanceBackupProperties.fromObject(object.computeInstanceBackupProperties);
                             }
+                            if (object.cloudSqlInstanceBackupProperties != null) {
+                                if (typeof object.cloudSqlInstanceBackupProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.Backup.cloudSqlInstanceBackupProperties: object expected");
+                                message.cloudSqlInstanceBackupProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.fromObject(object.cloudSqlInstanceBackupProperties);
+                            }
                             if (object.backupApplianceBackupProperties != null) {
                                 if (typeof object.backupApplianceBackupProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.backupApplianceBackupProperties: object expected");
                                 message.backupApplianceBackupProperties = $root.google.cloud.backupdr.v1.BackupApplianceBackupProperties.fromObject(object.backupApplianceBackupProperties);
+                            }
+                            if (object.diskBackupProperties != null) {
+                                if (typeof object.diskBackupProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.Backup.diskBackupProperties: object expected");
+                                message.diskBackupProperties = $root.google.cloud.backupdr.v1.DiskBackupProperties.fromObject(object.diskBackupProperties);
                             }
                             switch (object.backupType) {
                             default:
@@ -15548,6 +19816,10 @@
                             case 2:
                                 message.backupType = 2;
                                 break;
+                            case "ON_DEMAND_OPERATIONAL":
+                            case 3:
+                                message.backupType = 3;
+                                break;
                             }
                             if (object.gcpBackupPlanInfo != null) {
                                 if (typeof object.gcpBackupPlanInfo !== "object")
@@ -15563,6 +19835,10 @@
                                     message.resourceSizeBytes = object.resourceSizeBytes;
                                 else if (typeof object.resourceSizeBytes === "object")
                                     message.resourceSizeBytes = new $util.LongBits(object.resourceSizeBytes.low >>> 0, object.resourceSizeBytes.high >>> 0).toNumber();
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.satisfiesPzi != null)
+                                message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             return message;
                         };
     
@@ -15672,6 +19948,26 @@
                                     object.resourceSizeBytes = options.longs === String ? String(message.resourceSizeBytes) : message.resourceSizeBytes;
                                 else
                                     object.resourceSizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.resourceSizeBytes) : options.longs === Number ? new $util.LongBits(message.resourceSizeBytes.low >>> 0, message.resourceSizeBytes.high >>> 0).toNumber() : message.resourceSizeBytes;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs")) {
+                                object.satisfiesPzs = message.satisfiesPzs;
+                                if (options.oneofs)
+                                    object._satisfiesPzs = "satisfiesPzs";
+                            }
+                            if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi")) {
+                                object.satisfiesPzi = message.satisfiesPzi;
+                                if (options.oneofs)
+                                    object._satisfiesPzi = "satisfiesPzi";
+                            }
+                            if (message.cloudSqlInstanceBackupProperties != null && message.hasOwnProperty("cloudSqlInstanceBackupProperties")) {
+                                object.cloudSqlInstanceBackupProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.toObject(message.cloudSqlInstanceBackupProperties, options);
+                                if (options.oneofs)
+                                    object.backupProperties = "cloudSqlInstanceBackupProperties";
+                            }
+                            if (message.diskBackupProperties != null && message.hasOwnProperty("diskBackupProperties")) {
+                                object.diskBackupProperties = $root.google.cloud.backupdr.v1.DiskBackupProperties.toObject(message.diskBackupProperties, options);
+                                if (options.oneofs)
+                                    object.backupProperties = "diskBackupProperties";
+                            }
                             return object;
                         };
     
@@ -15710,6 +20006,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} ERROR=4 ERROR value
+                         * @property {number} UPLOADING=5 UPLOADING value
                          */
                         Backup.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -15718,6 +20015,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "ERROR"] = 4;
+                            values[valuesById[5] = "UPLOADING"] = 5;
                             return values;
                         })();
     
@@ -15728,12 +20026,14 @@
                          * @property {number} BACKUP_TYPE_UNSPECIFIED=0 BACKUP_TYPE_UNSPECIFIED value
                          * @property {number} SCHEDULED=1 SCHEDULED value
                          * @property {number} ON_DEMAND=2 ON_DEMAND value
+                         * @property {number} ON_DEMAND_OPERATIONAL=3 ON_DEMAND_OPERATIONAL value
                          */
                         Backup.BackupType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "BACKUP_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "SCHEDULED"] = 1;
                             values[valuesById[2] = "ON_DEMAND"] = 2;
+                            values[valuesById[3] = "ON_DEMAND_OPERATIONAL"] = 3;
                             return values;
                         })();
     
@@ -15745,6 +20045,8 @@
                              * @interface IGCPBackupPlanInfo
                              * @property {string|null} [backupPlan] GCPBackupPlanInfo backupPlan
                              * @property {string|null} [backupPlanRuleId] GCPBackupPlanInfo backupPlanRuleId
+                             * @property {string|null} [backupPlanRevisionName] GCPBackupPlanInfo backupPlanRevisionName
+                             * @property {string|null} [backupPlanRevisionId] GCPBackupPlanInfo backupPlanRevisionId
                              */
     
                             /**
@@ -15779,6 +20081,22 @@
                             GCPBackupPlanInfo.prototype.backupPlanRuleId = "";
     
                             /**
+                             * GCPBackupPlanInfo backupPlanRevisionName.
+                             * @member {string} backupPlanRevisionName
+                             * @memberof google.cloud.backupdr.v1.Backup.GCPBackupPlanInfo
+                             * @instance
+                             */
+                            GCPBackupPlanInfo.prototype.backupPlanRevisionName = "";
+    
+                            /**
+                             * GCPBackupPlanInfo backupPlanRevisionId.
+                             * @member {string} backupPlanRevisionId
+                             * @memberof google.cloud.backupdr.v1.Backup.GCPBackupPlanInfo
+                             * @instance
+                             */
+                            GCPBackupPlanInfo.prototype.backupPlanRevisionId = "";
+    
+                            /**
                              * Creates a new GCPBackupPlanInfo instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.backupdr.v1.Backup.GCPBackupPlanInfo
@@ -15806,6 +20124,10 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.backupPlan);
                                 if (message.backupPlanRuleId != null && Object.hasOwnProperty.call(message, "backupPlanRuleId"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupPlanRuleId);
+                                if (message.backupPlanRevisionName != null && Object.hasOwnProperty.call(message, "backupPlanRevisionName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.backupPlanRevisionName);
+                                if (message.backupPlanRevisionId != null && Object.hasOwnProperty.call(message, "backupPlanRevisionId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.backupPlanRevisionId);
                                 return writer;
                             };
     
@@ -15850,6 +20172,14 @@
                                             message.backupPlanRuleId = reader.string();
                                             break;
                                         }
+                                    case 3: {
+                                            message.backupPlanRevisionName = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.backupPlanRevisionId = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -15891,6 +20221,12 @@
                                 if (message.backupPlanRuleId != null && message.hasOwnProperty("backupPlanRuleId"))
                                     if (!$util.isString(message.backupPlanRuleId))
                                         return "backupPlanRuleId: string expected";
+                                if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                    if (!$util.isString(message.backupPlanRevisionName))
+                                        return "backupPlanRevisionName: string expected";
+                                if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                    if (!$util.isString(message.backupPlanRevisionId))
+                                        return "backupPlanRevisionId: string expected";
                                 return null;
                             };
     
@@ -15910,6 +20246,10 @@
                                     message.backupPlan = String(object.backupPlan);
                                 if (object.backupPlanRuleId != null)
                                     message.backupPlanRuleId = String(object.backupPlanRuleId);
+                                if (object.backupPlanRevisionName != null)
+                                    message.backupPlanRevisionName = String(object.backupPlanRevisionName);
+                                if (object.backupPlanRevisionId != null)
+                                    message.backupPlanRevisionId = String(object.backupPlanRevisionId);
                                 return message;
                             };
     
@@ -15929,11 +20269,17 @@
                                 if (options.defaults) {
                                     object.backupPlan = "";
                                     object.backupPlanRuleId = "";
+                                    object.backupPlanRevisionName = "";
+                                    object.backupPlanRevisionId = "";
                                 }
                                 if (message.backupPlan != null && message.hasOwnProperty("backupPlan"))
                                     object.backupPlan = message.backupPlan;
                                 if (message.backupPlanRuleId != null && message.hasOwnProperty("backupPlanRuleId"))
                                     object.backupPlanRuleId = message.backupPlanRuleId;
+                                if (message.backupPlanRevisionName != null && message.hasOwnProperty("backupPlanRevisionName"))
+                                    object.backupPlanRevisionName = message.backupPlanRevisionName;
+                                if (message.backupPlanRevisionId != null && message.hasOwnProperty("backupPlanRevisionId"))
+                                    object.backupPlanRevisionId = message.backupPlanRevisionId;
                                 return object;
                             };
     
@@ -17759,6 +22105,7 @@
                          * @property {string|null} [requestId] UpdateBackupVaultRequest requestId
                          * @property {boolean|null} [validateOnly] UpdateBackupVaultRequest validateOnly
                          * @property {boolean|null} [force] UpdateBackupVaultRequest force
+                         * @property {boolean|null} [forceUpdateAccessRestriction] UpdateBackupVaultRequest forceUpdateAccessRestriction
                          */
     
                         /**
@@ -17817,6 +22164,14 @@
                         UpdateBackupVaultRequest.prototype.force = false;
     
                         /**
+                         * UpdateBackupVaultRequest forceUpdateAccessRestriction.
+                         * @member {boolean} forceUpdateAccessRestriction
+                         * @memberof google.cloud.backupdr.v1.UpdateBackupVaultRequest
+                         * @instance
+                         */
+                        UpdateBackupVaultRequest.prototype.forceUpdateAccessRestriction = false;
+    
+                        /**
                          * Creates a new UpdateBackupVaultRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.backupdr.v1.UpdateBackupVaultRequest
@@ -17850,6 +22205,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.validateOnly);
                             if (message.force != null && Object.hasOwnProperty.call(message, "force"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.force);
+                            if (message.forceUpdateAccessRestriction != null && Object.hasOwnProperty.call(message, "forceUpdateAccessRestriction"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.forceUpdateAccessRestriction);
                             return writer;
                         };
     
@@ -17906,6 +22263,10 @@
                                         message.force = reader.bool();
                                         break;
                                     }
+                                case 6: {
+                                        message.forceUpdateAccessRestriction = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17960,6 +22321,9 @@
                             if (message.force != null && message.hasOwnProperty("force"))
                                 if (typeof message.force !== "boolean")
                                     return "force: boolean expected";
+                            if (message.forceUpdateAccessRestriction != null && message.hasOwnProperty("forceUpdateAccessRestriction"))
+                                if (typeof message.forceUpdateAccessRestriction !== "boolean")
+                                    return "forceUpdateAccessRestriction: boolean expected";
                             return null;
                         };
     
@@ -17991,6 +22355,8 @@
                                 message.validateOnly = Boolean(object.validateOnly);
                             if (object.force != null)
                                 message.force = Boolean(object.force);
+                            if (object.forceUpdateAccessRestriction != null)
+                                message.forceUpdateAccessRestriction = Boolean(object.forceUpdateAccessRestriction);
                             return message;
                         };
     
@@ -18013,6 +22379,7 @@
                                 object.requestId = "";
                                 object.validateOnly = false;
                                 object.force = false;
+                                object.forceUpdateAccessRestriction = false;
                             }
                             if (message.updateMask != null && message.hasOwnProperty("updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
@@ -18024,6 +22391,8 @@
                                 object.validateOnly = message.validateOnly;
                             if (message.force != null && message.hasOwnProperty("force"))
                                 object.force = message.force;
+                            if (message.forceUpdateAccessRestriction != null && message.hasOwnProperty("forceUpdateAccessRestriction"))
+                                object.forceUpdateAccessRestriction = message.forceUpdateAccessRestriction;
                             return object;
                         };
     
@@ -20866,7 +25235,10 @@
                          * @property {string|null} [name] RestoreBackupRequest name
                          * @property {string|null} [requestId] RestoreBackupRequest requestId
                          * @property {google.cloud.backupdr.v1.IComputeInstanceTargetEnvironment|null} [computeInstanceTargetEnvironment] RestoreBackupRequest computeInstanceTargetEnvironment
+                         * @property {google.cloud.backupdr.v1.IDiskTargetEnvironment|null} [diskTargetEnvironment] RestoreBackupRequest diskTargetEnvironment
+                         * @property {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment|null} [regionDiskTargetEnvironment] RestoreBackupRequest regionDiskTargetEnvironment
                          * @property {google.cloud.backupdr.v1.IComputeInstanceRestoreProperties|null} [computeInstanceRestoreProperties] RestoreBackupRequest computeInstanceRestoreProperties
+                         * @property {google.cloud.backupdr.v1.IDiskRestoreProperties|null} [diskRestoreProperties] RestoreBackupRequest diskRestoreProperties
                          */
     
                         /**
@@ -20909,6 +25281,22 @@
                         RestoreBackupRequest.prototype.computeInstanceTargetEnvironment = null;
     
                         /**
+                         * RestoreBackupRequest diskTargetEnvironment.
+                         * @member {google.cloud.backupdr.v1.IDiskTargetEnvironment|null|undefined} diskTargetEnvironment
+                         * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
+                         * @instance
+                         */
+                        RestoreBackupRequest.prototype.diskTargetEnvironment = null;
+    
+                        /**
+                         * RestoreBackupRequest regionDiskTargetEnvironment.
+                         * @member {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment|null|undefined} regionDiskTargetEnvironment
+                         * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
+                         * @instance
+                         */
+                        RestoreBackupRequest.prototype.regionDiskTargetEnvironment = null;
+    
+                        /**
                          * RestoreBackupRequest computeInstanceRestoreProperties.
                          * @member {google.cloud.backupdr.v1.IComputeInstanceRestoreProperties|null|undefined} computeInstanceRestoreProperties
                          * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
@@ -20916,28 +25304,36 @@
                          */
                         RestoreBackupRequest.prototype.computeInstanceRestoreProperties = null;
     
+                        /**
+                         * RestoreBackupRequest diskRestoreProperties.
+                         * @member {google.cloud.backupdr.v1.IDiskRestoreProperties|null|undefined} diskRestoreProperties
+                         * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
+                         * @instance
+                         */
+                        RestoreBackupRequest.prototype.diskRestoreProperties = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * RestoreBackupRequest targetEnvironment.
-                         * @member {"computeInstanceTargetEnvironment"|undefined} targetEnvironment
+                         * @member {"computeInstanceTargetEnvironment"|"diskTargetEnvironment"|"regionDiskTargetEnvironment"|undefined} targetEnvironment
                          * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
                          * @instance
                          */
                         Object.defineProperty(RestoreBackupRequest.prototype, "targetEnvironment", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceTargetEnvironment"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceTargetEnvironment", "diskTargetEnvironment", "regionDiskTargetEnvironment"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
                         /**
                          * RestoreBackupRequest instanceProperties.
-                         * @member {"computeInstanceRestoreProperties"|undefined} instanceProperties
+                         * @member {"computeInstanceRestoreProperties"|"diskRestoreProperties"|undefined} instanceProperties
                          * @memberof google.cloud.backupdr.v1.RestoreBackupRequest
                          * @instance
                          */
                         Object.defineProperty(RestoreBackupRequest.prototype, "instanceProperties", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceRestoreProperties"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceRestoreProperties", "diskRestoreProperties"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20973,6 +25369,12 @@
                                 $root.google.cloud.backupdr.v1.ComputeInstanceTargetEnvironment.encode(message.computeInstanceTargetEnvironment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.computeInstanceRestoreProperties != null && Object.hasOwnProperty.call(message, "computeInstanceRestoreProperties"))
                                 $root.google.cloud.backupdr.v1.ComputeInstanceRestoreProperties.encode(message.computeInstanceRestoreProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.diskTargetEnvironment != null && Object.hasOwnProperty.call(message, "diskTargetEnvironment"))
+                                $root.google.cloud.backupdr.v1.DiskTargetEnvironment.encode(message.diskTargetEnvironment, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.regionDiskTargetEnvironment != null && Object.hasOwnProperty.call(message, "regionDiskTargetEnvironment"))
+                                $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.encode(message.regionDiskTargetEnvironment, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.diskRestoreProperties != null && Object.hasOwnProperty.call(message, "diskRestoreProperties"))
+                                $root.google.cloud.backupdr.v1.DiskRestoreProperties.encode(message.diskRestoreProperties, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -21021,8 +25423,20 @@
                                         message.computeInstanceTargetEnvironment = $root.google.cloud.backupdr.v1.ComputeInstanceTargetEnvironment.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 5: {
+                                        message.diskTargetEnvironment = $root.google.cloud.backupdr.v1.DiskTargetEnvironment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.regionDiskTargetEnvironment = $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.computeInstanceRestoreProperties = $root.google.cloud.backupdr.v1.ComputeInstanceRestoreProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -21075,12 +25489,42 @@
                                         return "computeInstanceTargetEnvironment." + error;
                                 }
                             }
+                            if (message.diskTargetEnvironment != null && message.hasOwnProperty("diskTargetEnvironment")) {
+                                if (properties.targetEnvironment === 1)
+                                    return "targetEnvironment: multiple values";
+                                properties.targetEnvironment = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.DiskTargetEnvironment.verify(message.diskTargetEnvironment);
+                                    if (error)
+                                        return "diskTargetEnvironment." + error;
+                                }
+                            }
+                            if (message.regionDiskTargetEnvironment != null && message.hasOwnProperty("regionDiskTargetEnvironment")) {
+                                if (properties.targetEnvironment === 1)
+                                    return "targetEnvironment: multiple values";
+                                properties.targetEnvironment = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.verify(message.regionDiskTargetEnvironment);
+                                    if (error)
+                                        return "regionDiskTargetEnvironment." + error;
+                                }
+                            }
                             if (message.computeInstanceRestoreProperties != null && message.hasOwnProperty("computeInstanceRestoreProperties")) {
                                 properties.instanceProperties = 1;
                                 {
                                     var error = $root.google.cloud.backupdr.v1.ComputeInstanceRestoreProperties.verify(message.computeInstanceRestoreProperties);
                                     if (error)
                                         return "computeInstanceRestoreProperties." + error;
+                                }
+                            }
+                            if (message.diskRestoreProperties != null && message.hasOwnProperty("diskRestoreProperties")) {
+                                if (properties.instanceProperties === 1)
+                                    return "instanceProperties: multiple values";
+                                properties.instanceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.DiskRestoreProperties.verify(message.diskRestoreProperties);
+                                    if (error)
+                                        return "diskRestoreProperties." + error;
                                 }
                             }
                             return null;
@@ -21107,10 +25551,25 @@
                                     throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.computeInstanceTargetEnvironment: object expected");
                                 message.computeInstanceTargetEnvironment = $root.google.cloud.backupdr.v1.ComputeInstanceTargetEnvironment.fromObject(object.computeInstanceTargetEnvironment);
                             }
+                            if (object.diskTargetEnvironment != null) {
+                                if (typeof object.diskTargetEnvironment !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.diskTargetEnvironment: object expected");
+                                message.diskTargetEnvironment = $root.google.cloud.backupdr.v1.DiskTargetEnvironment.fromObject(object.diskTargetEnvironment);
+                            }
+                            if (object.regionDiskTargetEnvironment != null) {
+                                if (typeof object.regionDiskTargetEnvironment !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.regionDiskTargetEnvironment: object expected");
+                                message.regionDiskTargetEnvironment = $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.fromObject(object.regionDiskTargetEnvironment);
+                            }
                             if (object.computeInstanceRestoreProperties != null) {
                                 if (typeof object.computeInstanceRestoreProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.computeInstanceRestoreProperties: object expected");
                                 message.computeInstanceRestoreProperties = $root.google.cloud.backupdr.v1.ComputeInstanceRestoreProperties.fromObject(object.computeInstanceRestoreProperties);
+                            }
+                            if (object.diskRestoreProperties != null) {
+                                if (typeof object.diskRestoreProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.RestoreBackupRequest.diskRestoreProperties: object expected");
+                                message.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.fromObject(object.diskRestoreProperties);
                             }
                             return message;
                         };
@@ -21145,6 +25604,21 @@
                                 object.computeInstanceRestoreProperties = $root.google.cloud.backupdr.v1.ComputeInstanceRestoreProperties.toObject(message.computeInstanceRestoreProperties, options);
                                 if (options.oneofs)
                                     object.instanceProperties = "computeInstanceRestoreProperties";
+                            }
+                            if (message.diskTargetEnvironment != null && message.hasOwnProperty("diskTargetEnvironment")) {
+                                object.diskTargetEnvironment = $root.google.cloud.backupdr.v1.DiskTargetEnvironment.toObject(message.diskTargetEnvironment, options);
+                                if (options.oneofs)
+                                    object.targetEnvironment = "diskTargetEnvironment";
+                            }
+                            if (message.regionDiskTargetEnvironment != null && message.hasOwnProperty("regionDiskTargetEnvironment")) {
+                                object.regionDiskTargetEnvironment = $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment.toObject(message.regionDiskTargetEnvironment, options);
+                                if (options.oneofs)
+                                    object.targetEnvironment = "regionDiskTargetEnvironment";
+                            }
+                            if (message.diskRestoreProperties != null && message.hasOwnProperty("diskRestoreProperties")) {
+                                object.diskRestoreProperties = $root.google.cloud.backupdr.v1.DiskRestoreProperties.toObject(message.diskRestoreProperties, options);
+                                if (options.oneofs)
+                                    object.instanceProperties = "diskRestoreProperties";
                             }
                             return object;
                         };
@@ -22250,6 +26724,2331 @@
                         };
     
                         return BackupApplianceBackupProperties;
+                    })();
+    
+                    v1.DiskTargetEnvironment = (function() {
+    
+                        /**
+                         * Properties of a DiskTargetEnvironment.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDiskTargetEnvironment
+                         * @property {string|null} [project] DiskTargetEnvironment project
+                         * @property {string|null} [zone] DiskTargetEnvironment zone
+                         */
+    
+                        /**
+                         * Constructs a new DiskTargetEnvironment.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DiskTargetEnvironment.
+                         * @implements IDiskTargetEnvironment
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDiskTargetEnvironment=} [properties] Properties to set
+                         */
+                        function DiskTargetEnvironment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DiskTargetEnvironment project.
+                         * @member {string} project
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @instance
+                         */
+                        DiskTargetEnvironment.prototype.project = "";
+    
+                        /**
+                         * DiskTargetEnvironment zone.
+                         * @member {string} zone
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @instance
+                         */
+                        DiskTargetEnvironment.prototype.zone = "";
+    
+                        /**
+                         * Creates a new DiskTargetEnvironment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskTargetEnvironment=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DiskTargetEnvironment} DiskTargetEnvironment instance
+                         */
+                        DiskTargetEnvironment.create = function create(properties) {
+                            return new DiskTargetEnvironment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DiskTargetEnvironment message. Does not implicitly {@link google.cloud.backupdr.v1.DiskTargetEnvironment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskTargetEnvironment} message DiskTargetEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskTargetEnvironment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.zone);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DiskTargetEnvironment message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DiskTargetEnvironment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskTargetEnvironment} message DiskTargetEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskTargetEnvironment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DiskTargetEnvironment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DiskTargetEnvironment} DiskTargetEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskTargetEnvironment.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DiskTargetEnvironment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DiskTargetEnvironment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DiskTargetEnvironment} DiskTargetEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskTargetEnvironment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DiskTargetEnvironment message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DiskTargetEnvironment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DiskTargetEnvironment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DiskTargetEnvironment} DiskTargetEnvironment
+                         */
+                        DiskTargetEnvironment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DiskTargetEnvironment)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DiskTargetEnvironment();
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DiskTargetEnvironment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DiskTargetEnvironment} message DiskTargetEnvironment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DiskTargetEnvironment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.project = "";
+                                object.zone = "";
+                            }
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DiskTargetEnvironment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DiskTargetEnvironment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DiskTargetEnvironment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DiskTargetEnvironment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DiskTargetEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DiskTargetEnvironment";
+                        };
+    
+                        return DiskTargetEnvironment;
+                    })();
+    
+                    v1.RegionDiskTargetEnvironment = (function() {
+    
+                        /**
+                         * Properties of a RegionDiskTargetEnvironment.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IRegionDiskTargetEnvironment
+                         * @property {string|null} [project] RegionDiskTargetEnvironment project
+                         * @property {string|null} [region] RegionDiskTargetEnvironment region
+                         * @property {Array.<string>|null} [replicaZones] RegionDiskTargetEnvironment replicaZones
+                         */
+    
+                        /**
+                         * Constructs a new RegionDiskTargetEnvironment.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a RegionDiskTargetEnvironment.
+                         * @implements IRegionDiskTargetEnvironment
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment=} [properties] Properties to set
+                         */
+                        function RegionDiskTargetEnvironment(properties) {
+                            this.replicaZones = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegionDiskTargetEnvironment project.
+                         * @member {string} project
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @instance
+                         */
+                        RegionDiskTargetEnvironment.prototype.project = "";
+    
+                        /**
+                         * RegionDiskTargetEnvironment region.
+                         * @member {string} region
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @instance
+                         */
+                        RegionDiskTargetEnvironment.prototype.region = "";
+    
+                        /**
+                         * RegionDiskTargetEnvironment replicaZones.
+                         * @member {Array.<string>} replicaZones
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @instance
+                         */
+                        RegionDiskTargetEnvironment.prototype.replicaZones = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RegionDiskTargetEnvironment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.RegionDiskTargetEnvironment} RegionDiskTargetEnvironment instance
+                         */
+                        RegionDiskTargetEnvironment.create = function create(properties) {
+                            return new RegionDiskTargetEnvironment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegionDiskTargetEnvironment message. Does not implicitly {@link google.cloud.backupdr.v1.RegionDiskTargetEnvironment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment} message RegionDiskTargetEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegionDiskTargetEnvironment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                            if (message.replicaZones != null && message.replicaZones.length)
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.replicaZones[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegionDiskTargetEnvironment message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.RegionDiskTargetEnvironment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IRegionDiskTargetEnvironment} message RegionDiskTargetEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegionDiskTargetEnvironment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegionDiskTargetEnvironment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.RegionDiskTargetEnvironment} RegionDiskTargetEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegionDiskTargetEnvironment.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.replicaZones && message.replicaZones.length))
+                                            message.replicaZones = [];
+                                        message.replicaZones.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegionDiskTargetEnvironment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.RegionDiskTargetEnvironment} RegionDiskTargetEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegionDiskTargetEnvironment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegionDiskTargetEnvironment message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegionDiskTargetEnvironment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.replicaZones != null && message.hasOwnProperty("replicaZones")) {
+                                if (!Array.isArray(message.replicaZones))
+                                    return "replicaZones: array expected";
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    if (!$util.isString(message.replicaZones[i]))
+                                        return "replicaZones: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegionDiskTargetEnvironment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.RegionDiskTargetEnvironment} RegionDiskTargetEnvironment
+                         */
+                        RegionDiskTargetEnvironment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.RegionDiskTargetEnvironment();
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.replicaZones) {
+                                if (!Array.isArray(object.replicaZones))
+                                    throw TypeError(".google.cloud.backupdr.v1.RegionDiskTargetEnvironment.replicaZones: array expected");
+                                message.replicaZones = [];
+                                for (var i = 0; i < object.replicaZones.length; ++i)
+                                    message.replicaZones[i] = String(object.replicaZones[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegionDiskTargetEnvironment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {google.cloud.backupdr.v1.RegionDiskTargetEnvironment} message RegionDiskTargetEnvironment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegionDiskTargetEnvironment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.replicaZones = [];
+                            if (options.defaults) {
+                                object.project = "";
+                                object.region = "";
+                            }
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.replicaZones && message.replicaZones.length) {
+                                object.replicaZones = [];
+                                for (var j = 0; j < message.replicaZones.length; ++j)
+                                    object.replicaZones[j] = message.replicaZones[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegionDiskTargetEnvironment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegionDiskTargetEnvironment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RegionDiskTargetEnvironment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.RegionDiskTargetEnvironment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RegionDiskTargetEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.RegionDiskTargetEnvironment";
+                        };
+    
+                        return RegionDiskTargetEnvironment;
+                    })();
+    
+                    v1.DiskRestoreProperties = (function() {
+    
+                        /**
+                         * Properties of a DiskRestoreProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDiskRestoreProperties
+                         * @property {string|null} [name] DiskRestoreProperties name
+                         * @property {string|null} [description] DiskRestoreProperties description
+                         * @property {number|Long|null} [sizeGb] DiskRestoreProperties sizeGb
+                         * @property {Array.<string>|null} [licenses] DiskRestoreProperties licenses
+                         * @property {Array.<google.cloud.backupdr.v1.IGuestOsFeature>|null} [guestOsFeature] DiskRestoreProperties guestOsFeature
+                         * @property {google.cloud.backupdr.v1.ICustomerEncryptionKey|null} [diskEncryptionKey] DiskRestoreProperties diskEncryptionKey
+                         * @property {number|Long|null} [physicalBlockSizeBytes] DiskRestoreProperties physicalBlockSizeBytes
+                         * @property {number|Long|null} [provisionedIops] DiskRestoreProperties provisionedIops
+                         * @property {number|Long|null} [provisionedThroughput] DiskRestoreProperties provisionedThroughput
+                         * @property {boolean|null} [enableConfidentialCompute] DiskRestoreProperties enableConfidentialCompute
+                         * @property {string|null} [storagePool] DiskRestoreProperties storagePool
+                         * @property {google.cloud.backupdr.v1.DiskRestoreProperties.AccessMode|null} [accessMode] DiskRestoreProperties accessMode
+                         * @property {google.cloud.backupdr.v1.DiskRestoreProperties.Architecture|null} [architecture] DiskRestoreProperties architecture
+                         * @property {Array.<string>|null} [resourcePolicy] DiskRestoreProperties resourcePolicy
+                         * @property {string|null} [type] DiskRestoreProperties type
+                         * @property {Object.<string,string>|null} [labels] DiskRestoreProperties labels
+                         * @property {Object.<string,string>|null} [resourceManagerTags] DiskRestoreProperties resourceManagerTags
+                         */
+    
+                        /**
+                         * Constructs a new DiskRestoreProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DiskRestoreProperties.
+                         * @implements IDiskRestoreProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDiskRestoreProperties=} [properties] Properties to set
+                         */
+                        function DiskRestoreProperties(properties) {
+                            this.licenses = [];
+                            this.guestOsFeature = [];
+                            this.resourcePolicy = [];
+                            this.labels = {};
+                            this.resourceManagerTags = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DiskRestoreProperties name.
+                         * @member {string|null|undefined} name
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.name = null;
+    
+                        /**
+                         * DiskRestoreProperties description.
+                         * @member {string|null|undefined} description
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.description = null;
+    
+                        /**
+                         * DiskRestoreProperties sizeGb.
+                         * @member {number|Long|null|undefined} sizeGb
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.sizeGb = null;
+    
+                        /**
+                         * DiskRestoreProperties licenses.
+                         * @member {Array.<string>} licenses
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.licenses = $util.emptyArray;
+    
+                        /**
+                         * DiskRestoreProperties guestOsFeature.
+                         * @member {Array.<google.cloud.backupdr.v1.IGuestOsFeature>} guestOsFeature
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.guestOsFeature = $util.emptyArray;
+    
+                        /**
+                         * DiskRestoreProperties diskEncryptionKey.
+                         * @member {google.cloud.backupdr.v1.ICustomerEncryptionKey|null|undefined} diskEncryptionKey
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.diskEncryptionKey = null;
+    
+                        /**
+                         * DiskRestoreProperties physicalBlockSizeBytes.
+                         * @member {number|Long|null|undefined} physicalBlockSizeBytes
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.physicalBlockSizeBytes = null;
+    
+                        /**
+                         * DiskRestoreProperties provisionedIops.
+                         * @member {number|Long|null|undefined} provisionedIops
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.provisionedIops = null;
+    
+                        /**
+                         * DiskRestoreProperties provisionedThroughput.
+                         * @member {number|Long|null|undefined} provisionedThroughput
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.provisionedThroughput = null;
+    
+                        /**
+                         * DiskRestoreProperties enableConfidentialCompute.
+                         * @member {boolean|null|undefined} enableConfidentialCompute
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.enableConfidentialCompute = null;
+    
+                        /**
+                         * DiskRestoreProperties storagePool.
+                         * @member {string|null|undefined} storagePool
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.storagePool = null;
+    
+                        /**
+                         * DiskRestoreProperties accessMode.
+                         * @member {google.cloud.backupdr.v1.DiskRestoreProperties.AccessMode|null|undefined} accessMode
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.accessMode = null;
+    
+                        /**
+                         * DiskRestoreProperties architecture.
+                         * @member {google.cloud.backupdr.v1.DiskRestoreProperties.Architecture|null|undefined} architecture
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.architecture = null;
+    
+                        /**
+                         * DiskRestoreProperties resourcePolicy.
+                         * @member {Array.<string>} resourcePolicy
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.resourcePolicy = $util.emptyArray;
+    
+                        /**
+                         * DiskRestoreProperties type.
+                         * @member {string|null|undefined} type
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.type = null;
+    
+                        /**
+                         * DiskRestoreProperties labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * DiskRestoreProperties resourceManagerTags.
+                         * @member {Object.<string,string>} resourceManagerTags
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         */
+                        DiskRestoreProperties.prototype.resourceManagerTags = $util.emptyObject;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_name", {
+                            get: $util.oneOfGetter($oneOfFields = ["name"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_description", {
+                            get: $util.oneOfGetter($oneOfFields = ["description"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_sizeGb", {
+                            get: $util.oneOfGetter($oneOfFields = ["sizeGb"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_diskEncryptionKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["diskEncryptionKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_physicalBlockSizeBytes", {
+                            get: $util.oneOfGetter($oneOfFields = ["physicalBlockSizeBytes"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_provisionedIops", {
+                            get: $util.oneOfGetter($oneOfFields = ["provisionedIops"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_provisionedThroughput", {
+                            get: $util.oneOfGetter($oneOfFields = ["provisionedThroughput"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_enableConfidentialCompute", {
+                            get: $util.oneOfGetter($oneOfFields = ["enableConfidentialCompute"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_storagePool", {
+                            get: $util.oneOfGetter($oneOfFields = ["storagePool"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_accessMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["accessMode"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_architecture", {
+                            get: $util.oneOfGetter($oneOfFields = ["architecture"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskRestoreProperties.prototype, "_type", {
+                            get: $util.oneOfGetter($oneOfFields = ["type"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DiskRestoreProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskRestoreProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DiskRestoreProperties} DiskRestoreProperties instance
+                         */
+                        DiskRestoreProperties.create = function create(properties) {
+                            return new DiskRestoreProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DiskRestoreProperties message. Does not implicitly {@link google.cloud.backupdr.v1.DiskRestoreProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskRestoreProperties} message DiskRestoreProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskRestoreProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.sizeGb != null && Object.hasOwnProperty.call(message, "sizeGb"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.sizeGb);
+                            if (message.licenses != null && message.licenses.length)
+                                for (var i = 0; i < message.licenses.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.licenses[i]);
+                            if (message.guestOsFeature != null && message.guestOsFeature.length)
+                                for (var i = 0; i < message.guestOsFeature.length; ++i)
+                                    $root.google.cloud.backupdr.v1.GuestOsFeature.encode(message.guestOsFeature[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.diskEncryptionKey != null && Object.hasOwnProperty.call(message, "diskEncryptionKey"))
+                                $root.google.cloud.backupdr.v1.CustomerEncryptionKey.encode(message.diskEncryptionKey, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.physicalBlockSizeBytes != null && Object.hasOwnProperty.call(message, "physicalBlockSizeBytes"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.physicalBlockSizeBytes);
+                            if (message.provisionedIops != null && Object.hasOwnProperty.call(message, "provisionedIops"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.provisionedIops);
+                            if (message.provisionedThroughput != null && Object.hasOwnProperty.call(message, "provisionedThroughput"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.provisionedThroughput);
+                            if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableConfidentialCompute);
+                            if (message.storagePool != null && Object.hasOwnProperty.call(message, "storagePool"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.storagePool);
+                            if (message.accessMode != null && Object.hasOwnProperty.call(message, "accessMode"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.accessMode);
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.architecture);
+                            if (message.resourcePolicy != null && message.resourcePolicy.length)
+                                for (var i = 0; i < message.resourcePolicy.length; ++i)
+                                    writer.uint32(/* id 15, wireType 2 =*/122).string(message.resourcePolicy[i]);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.type);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.resourceManagerTags != null && Object.hasOwnProperty.call(message, "resourceManagerTags"))
+                                for (var keys = Object.keys(message.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 18, wireType 2 =*/146).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.resourceManagerTags[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DiskRestoreProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DiskRestoreProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskRestoreProperties} message DiskRestoreProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskRestoreProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DiskRestoreProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DiskRestoreProperties} DiskRestoreProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskRestoreProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DiskRestoreProperties(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.licenses && message.licenses.length))
+                                            message.licenses = [];
+                                        message.licenses.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.guestOsFeature && message.guestOsFeature.length))
+                                            message.guestOsFeature = [];
+                                        message.guestOsFeature.push($root.google.cloud.backupdr.v1.GuestOsFeature.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        message.diskEncryptionKey = $root.google.cloud.backupdr.v1.CustomerEncryptionKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.physicalBlockSizeBytes = reader.int64();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.provisionedIops = reader.int64();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.provisionedThroughput = reader.int64();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.enableConfidentialCompute = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.storagePool = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.accessMode = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.architecture = reader.int32();
+                                        break;
+                                    }
+                                case 15: {
+                                        if (!(message.resourcePolicy && message.resourcePolicy.length))
+                                            message.resourcePolicy = [];
+                                        message.resourcePolicy.push(reader.string());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 18: {
+                                        if (message.resourceManagerTags === $util.emptyObject)
+                                            message.resourceManagerTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.resourceManagerTags[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DiskRestoreProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DiskRestoreProperties} DiskRestoreProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskRestoreProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DiskRestoreProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DiskRestoreProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                properties._name = 1;
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                properties._description = 1;
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            }
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb")) {
+                                properties._sizeGb = 1;
+                                if (!$util.isInteger(message.sizeGb) && !(message.sizeGb && $util.isInteger(message.sizeGb.low) && $util.isInteger(message.sizeGb.high)))
+                                    return "sizeGb: integer|Long expected";
+                            }
+                            if (message.licenses != null && message.hasOwnProperty("licenses")) {
+                                if (!Array.isArray(message.licenses))
+                                    return "licenses: array expected";
+                                for (var i = 0; i < message.licenses.length; ++i)
+                                    if (!$util.isString(message.licenses[i]))
+                                        return "licenses: string[] expected";
+                            }
+                            if (message.guestOsFeature != null && message.hasOwnProperty("guestOsFeature")) {
+                                if (!Array.isArray(message.guestOsFeature))
+                                    return "guestOsFeature: array expected";
+                                for (var i = 0; i < message.guestOsFeature.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.GuestOsFeature.verify(message.guestOsFeature[i]);
+                                    if (error)
+                                        return "guestOsFeature." + error;
+                                }
+                            }
+                            if (message.diskEncryptionKey != null && message.hasOwnProperty("diskEncryptionKey")) {
+                                properties._diskEncryptionKey = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CustomerEncryptionKey.verify(message.diskEncryptionKey);
+                                    if (error)
+                                        return "diskEncryptionKey." + error;
+                                }
+                            }
+                            if (message.physicalBlockSizeBytes != null && message.hasOwnProperty("physicalBlockSizeBytes")) {
+                                properties._physicalBlockSizeBytes = 1;
+                                if (!$util.isInteger(message.physicalBlockSizeBytes) && !(message.physicalBlockSizeBytes && $util.isInteger(message.physicalBlockSizeBytes.low) && $util.isInteger(message.physicalBlockSizeBytes.high)))
+                                    return "physicalBlockSizeBytes: integer|Long expected";
+                            }
+                            if (message.provisionedIops != null && message.hasOwnProperty("provisionedIops")) {
+                                properties._provisionedIops = 1;
+                                if (!$util.isInteger(message.provisionedIops) && !(message.provisionedIops && $util.isInteger(message.provisionedIops.low) && $util.isInteger(message.provisionedIops.high)))
+                                    return "provisionedIops: integer|Long expected";
+                            }
+                            if (message.provisionedThroughput != null && message.hasOwnProperty("provisionedThroughput")) {
+                                properties._provisionedThroughput = 1;
+                                if (!$util.isInteger(message.provisionedThroughput) && !(message.provisionedThroughput && $util.isInteger(message.provisionedThroughput.low) && $util.isInteger(message.provisionedThroughput.high)))
+                                    return "provisionedThroughput: integer|Long expected";
+                            }
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute")) {
+                                properties._enableConfidentialCompute = 1;
+                                if (typeof message.enableConfidentialCompute !== "boolean")
+                                    return "enableConfidentialCompute: boolean expected";
+                            }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool")) {
+                                properties._storagePool = 1;
+                                if (!$util.isString(message.storagePool))
+                                    return "storagePool: string expected";
+                            }
+                            if (message.accessMode != null && message.hasOwnProperty("accessMode")) {
+                                properties._accessMode = 1;
+                                switch (message.accessMode) {
+                                default:
+                                    return "accessMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.architecture != null && message.hasOwnProperty("architecture")) {
+                                properties._architecture = 1;
+                                switch (message.architecture) {
+                                default:
+                                    return "architecture: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.resourcePolicy != null && message.hasOwnProperty("resourcePolicy")) {
+                                if (!Array.isArray(message.resourcePolicy))
+                                    return "resourcePolicy: array expected";
+                                for (var i = 0; i < message.resourcePolicy.length; ++i)
+                                    if (!$util.isString(message.resourcePolicy[i]))
+                                        return "resourcePolicy: string[] expected";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                properties._type = 1;
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.resourceManagerTags != null && message.hasOwnProperty("resourceManagerTags")) {
+                                if (!$util.isObject(message.resourceManagerTags))
+                                    return "resourceManagerTags: object expected";
+                                var key = Object.keys(message.resourceManagerTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.resourceManagerTags[key[i]]))
+                                        return "resourceManagerTags: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DiskRestoreProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DiskRestoreProperties} DiskRestoreProperties
+                         */
+                        DiskRestoreProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DiskRestoreProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DiskRestoreProperties();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.sizeGb != null)
+                                if ($util.Long)
+                                    (message.sizeGb = $util.Long.fromValue(object.sizeGb)).unsigned = false;
+                                else if (typeof object.sizeGb === "string")
+                                    message.sizeGb = parseInt(object.sizeGb, 10);
+                                else if (typeof object.sizeGb === "number")
+                                    message.sizeGb = object.sizeGb;
+                                else if (typeof object.sizeGb === "object")
+                                    message.sizeGb = new $util.LongBits(object.sizeGb.low >>> 0, object.sizeGb.high >>> 0).toNumber();
+                            if (object.licenses) {
+                                if (!Array.isArray(object.licenses))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.licenses: array expected");
+                                message.licenses = [];
+                                for (var i = 0; i < object.licenses.length; ++i)
+                                    message.licenses[i] = String(object.licenses[i]);
+                            }
+                            if (object.guestOsFeature) {
+                                if (!Array.isArray(object.guestOsFeature))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.guestOsFeature: array expected");
+                                message.guestOsFeature = [];
+                                for (var i = 0; i < object.guestOsFeature.length; ++i) {
+                                    if (typeof object.guestOsFeature[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.guestOsFeature: object expected");
+                                    message.guestOsFeature[i] = $root.google.cloud.backupdr.v1.GuestOsFeature.fromObject(object.guestOsFeature[i]);
+                                }
+                            }
+                            if (object.diskEncryptionKey != null) {
+                                if (typeof object.diskEncryptionKey !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.diskEncryptionKey: object expected");
+                                message.diskEncryptionKey = $root.google.cloud.backupdr.v1.CustomerEncryptionKey.fromObject(object.diskEncryptionKey);
+                            }
+                            if (object.physicalBlockSizeBytes != null)
+                                if ($util.Long)
+                                    (message.physicalBlockSizeBytes = $util.Long.fromValue(object.physicalBlockSizeBytes)).unsigned = false;
+                                else if (typeof object.physicalBlockSizeBytes === "string")
+                                    message.physicalBlockSizeBytes = parseInt(object.physicalBlockSizeBytes, 10);
+                                else if (typeof object.physicalBlockSizeBytes === "number")
+                                    message.physicalBlockSizeBytes = object.physicalBlockSizeBytes;
+                                else if (typeof object.physicalBlockSizeBytes === "object")
+                                    message.physicalBlockSizeBytes = new $util.LongBits(object.physicalBlockSizeBytes.low >>> 0, object.physicalBlockSizeBytes.high >>> 0).toNumber();
+                            if (object.provisionedIops != null)
+                                if ($util.Long)
+                                    (message.provisionedIops = $util.Long.fromValue(object.provisionedIops)).unsigned = false;
+                                else if (typeof object.provisionedIops === "string")
+                                    message.provisionedIops = parseInt(object.provisionedIops, 10);
+                                else if (typeof object.provisionedIops === "number")
+                                    message.provisionedIops = object.provisionedIops;
+                                else if (typeof object.provisionedIops === "object")
+                                    message.provisionedIops = new $util.LongBits(object.provisionedIops.low >>> 0, object.provisionedIops.high >>> 0).toNumber();
+                            if (object.provisionedThroughput != null)
+                                if ($util.Long)
+                                    (message.provisionedThroughput = $util.Long.fromValue(object.provisionedThroughput)).unsigned = false;
+                                else if (typeof object.provisionedThroughput === "string")
+                                    message.provisionedThroughput = parseInt(object.provisionedThroughput, 10);
+                                else if (typeof object.provisionedThroughput === "number")
+                                    message.provisionedThroughput = object.provisionedThroughput;
+                                else if (typeof object.provisionedThroughput === "object")
+                                    message.provisionedThroughput = new $util.LongBits(object.provisionedThroughput.low >>> 0, object.provisionedThroughput.high >>> 0).toNumber();
+                            if (object.enableConfidentialCompute != null)
+                                message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                            if (object.storagePool != null)
+                                message.storagePool = String(object.storagePool);
+                            switch (object.accessMode) {
+                            default:
+                                if (typeof object.accessMode === "number") {
+                                    message.accessMode = object.accessMode;
+                                    break;
+                                }
+                                break;
+                            case "READ_WRITE_SINGLE":
+                            case 0:
+                                message.accessMode = 0;
+                                break;
+                            case "READ_WRITE_MANY":
+                            case 1:
+                                message.accessMode = 1;
+                                break;
+                            case "READ_ONLY_MANY":
+                            case 2:
+                                message.accessMode = 2;
+                                break;
+                            }
+                            switch (object.architecture) {
+                            default:
+                                if (typeof object.architecture === "number") {
+                                    message.architecture = object.architecture;
+                                    break;
+                                }
+                                break;
+                            case "ARCHITECTURE_UNSPECIFIED":
+                            case 0:
+                                message.architecture = 0;
+                                break;
+                            case "X86_64":
+                            case 1:
+                                message.architecture = 1;
+                                break;
+                            case "ARM64":
+                            case 2:
+                                message.architecture = 2;
+                                break;
+                            }
+                            if (object.resourcePolicy) {
+                                if (!Array.isArray(object.resourcePolicy))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.resourcePolicy: array expected");
+                                message.resourcePolicy = [];
+                                for (var i = 0; i < object.resourcePolicy.length; ++i)
+                                    message.resourcePolicy[i] = String(object.resourcePolicy[i]);
+                            }
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.resourceManagerTags) {
+                                if (typeof object.resourceManagerTags !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskRestoreProperties.resourceManagerTags: object expected");
+                                message.resourceManagerTags = {};
+                                for (var keys = Object.keys(object.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    message.resourceManagerTags[keys[i]] = String(object.resourceManagerTags[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DiskRestoreProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DiskRestoreProperties} message DiskRestoreProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DiskRestoreProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.licenses = [];
+                                object.guestOsFeature = [];
+                                object.resourcePolicy = [];
+                            }
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.resourceManagerTags = {};
+                            }
+                            if (message.name != null && message.hasOwnProperty("name")) {
+                                object.name = message.name;
+                                if (options.oneofs)
+                                    object._name = "name";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                object.description = message.description;
+                                if (options.oneofs)
+                                    object._description = "description";
+                            }
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb")) {
+                                if (typeof message.sizeGb === "number")
+                                    object.sizeGb = options.longs === String ? String(message.sizeGb) : message.sizeGb;
+                                else
+                                    object.sizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.sizeGb) : options.longs === Number ? new $util.LongBits(message.sizeGb.low >>> 0, message.sizeGb.high >>> 0).toNumber() : message.sizeGb;
+                                if (options.oneofs)
+                                    object._sizeGb = "sizeGb";
+                            }
+                            if (message.licenses && message.licenses.length) {
+                                object.licenses = [];
+                                for (var j = 0; j < message.licenses.length; ++j)
+                                    object.licenses[j] = message.licenses[j];
+                            }
+                            if (message.guestOsFeature && message.guestOsFeature.length) {
+                                object.guestOsFeature = [];
+                                for (var j = 0; j < message.guestOsFeature.length; ++j)
+                                    object.guestOsFeature[j] = $root.google.cloud.backupdr.v1.GuestOsFeature.toObject(message.guestOsFeature[j], options);
+                            }
+                            if (message.diskEncryptionKey != null && message.hasOwnProperty("diskEncryptionKey")) {
+                                object.diskEncryptionKey = $root.google.cloud.backupdr.v1.CustomerEncryptionKey.toObject(message.diskEncryptionKey, options);
+                                if (options.oneofs)
+                                    object._diskEncryptionKey = "diskEncryptionKey";
+                            }
+                            if (message.physicalBlockSizeBytes != null && message.hasOwnProperty("physicalBlockSizeBytes")) {
+                                if (typeof message.physicalBlockSizeBytes === "number")
+                                    object.physicalBlockSizeBytes = options.longs === String ? String(message.physicalBlockSizeBytes) : message.physicalBlockSizeBytes;
+                                else
+                                    object.physicalBlockSizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.physicalBlockSizeBytes) : options.longs === Number ? new $util.LongBits(message.physicalBlockSizeBytes.low >>> 0, message.physicalBlockSizeBytes.high >>> 0).toNumber() : message.physicalBlockSizeBytes;
+                                if (options.oneofs)
+                                    object._physicalBlockSizeBytes = "physicalBlockSizeBytes";
+                            }
+                            if (message.provisionedIops != null && message.hasOwnProperty("provisionedIops")) {
+                                if (typeof message.provisionedIops === "number")
+                                    object.provisionedIops = options.longs === String ? String(message.provisionedIops) : message.provisionedIops;
+                                else
+                                    object.provisionedIops = options.longs === String ? $util.Long.prototype.toString.call(message.provisionedIops) : options.longs === Number ? new $util.LongBits(message.provisionedIops.low >>> 0, message.provisionedIops.high >>> 0).toNumber() : message.provisionedIops;
+                                if (options.oneofs)
+                                    object._provisionedIops = "provisionedIops";
+                            }
+                            if (message.provisionedThroughput != null && message.hasOwnProperty("provisionedThroughput")) {
+                                if (typeof message.provisionedThroughput === "number")
+                                    object.provisionedThroughput = options.longs === String ? String(message.provisionedThroughput) : message.provisionedThroughput;
+                                else
+                                    object.provisionedThroughput = options.longs === String ? $util.Long.prototype.toString.call(message.provisionedThroughput) : options.longs === Number ? new $util.LongBits(message.provisionedThroughput.low >>> 0, message.provisionedThroughput.high >>> 0).toNumber() : message.provisionedThroughput;
+                                if (options.oneofs)
+                                    object._provisionedThroughput = "provisionedThroughput";
+                            }
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute")) {
+                                object.enableConfidentialCompute = message.enableConfidentialCompute;
+                                if (options.oneofs)
+                                    object._enableConfidentialCompute = "enableConfidentialCompute";
+                            }
+                            if (message.storagePool != null && message.hasOwnProperty("storagePool")) {
+                                object.storagePool = message.storagePool;
+                                if (options.oneofs)
+                                    object._storagePool = "storagePool";
+                            }
+                            if (message.accessMode != null && message.hasOwnProperty("accessMode")) {
+                                object.accessMode = options.enums === String ? $root.google.cloud.backupdr.v1.DiskRestoreProperties.AccessMode[message.accessMode] === undefined ? message.accessMode : $root.google.cloud.backupdr.v1.DiskRestoreProperties.AccessMode[message.accessMode] : message.accessMode;
+                                if (options.oneofs)
+                                    object._accessMode = "accessMode";
+                            }
+                            if (message.architecture != null && message.hasOwnProperty("architecture")) {
+                                object.architecture = options.enums === String ? $root.google.cloud.backupdr.v1.DiskRestoreProperties.Architecture[message.architecture] === undefined ? message.architecture : $root.google.cloud.backupdr.v1.DiskRestoreProperties.Architecture[message.architecture] : message.architecture;
+                                if (options.oneofs)
+                                    object._architecture = "architecture";
+                            }
+                            if (message.resourcePolicy && message.resourcePolicy.length) {
+                                object.resourcePolicy = [];
+                                for (var j = 0; j < message.resourcePolicy.length; ++j)
+                                    object.resourcePolicy[j] = message.resourcePolicy[j];
+                            }
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                object.type = message.type;
+                                if (options.oneofs)
+                                    object._type = "type";
+                            }
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.resourceManagerTags && (keys2 = Object.keys(message.resourceManagerTags)).length) {
+                                object.resourceManagerTags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.resourceManagerTags[keys2[j]] = message.resourceManagerTags[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DiskRestoreProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DiskRestoreProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DiskRestoreProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DiskRestoreProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DiskRestoreProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DiskRestoreProperties";
+                        };
+    
+                        /**
+                         * AccessMode enum.
+                         * @name google.cloud.backupdr.v1.DiskRestoreProperties.AccessMode
+                         * @enum {number}
+                         * @property {number} READ_WRITE_SINGLE=0 READ_WRITE_SINGLE value
+                         * @property {number} READ_WRITE_MANY=1 READ_WRITE_MANY value
+                         * @property {number} READ_ONLY_MANY=2 READ_ONLY_MANY value
+                         */
+                        DiskRestoreProperties.AccessMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "READ_WRITE_SINGLE"] = 0;
+                            values[valuesById[1] = "READ_WRITE_MANY"] = 1;
+                            values[valuesById[2] = "READ_ONLY_MANY"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Architecture enum.
+                         * @name google.cloud.backupdr.v1.DiskRestoreProperties.Architecture
+                         * @enum {number}
+                         * @property {number} ARCHITECTURE_UNSPECIFIED=0 ARCHITECTURE_UNSPECIFIED value
+                         * @property {number} X86_64=1 X86_64 value
+                         * @property {number} ARM64=2 ARM64 value
+                         */
+                        DiskRestoreProperties.Architecture = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ARCHITECTURE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "X86_64"] = 1;
+                            values[valuesById[2] = "ARM64"] = 2;
+                            return values;
+                        })();
+    
+                        return DiskRestoreProperties;
+                    })();
+    
+                    v1.DiskBackupProperties = (function() {
+    
+                        /**
+                         * Properties of a DiskBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDiskBackupProperties
+                         * @property {string|null} [description] DiskBackupProperties description
+                         * @property {Array.<string>|null} [licenses] DiskBackupProperties licenses
+                         * @property {Array.<google.cloud.backupdr.v1.IGuestOsFeature>|null} [guestOsFeature] DiskBackupProperties guestOsFeature
+                         * @property {google.cloud.backupdr.v1.DiskBackupProperties.Architecture|null} [architecture] DiskBackupProperties architecture
+                         * @property {string|null} [type] DiskBackupProperties type
+                         * @property {number|Long|null} [sizeGb] DiskBackupProperties sizeGb
+                         * @property {string|null} [region] DiskBackupProperties region
+                         * @property {string|null} [zone] DiskBackupProperties zone
+                         * @property {Array.<string>|null} [replicaZones] DiskBackupProperties replicaZones
+                         * @property {string|null} [sourceDisk] DiskBackupProperties sourceDisk
+                         */
+    
+                        /**
+                         * Constructs a new DiskBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DiskBackupProperties.
+                         * @implements IDiskBackupProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDiskBackupProperties=} [properties] Properties to set
+                         */
+                        function DiskBackupProperties(properties) {
+                            this.licenses = [];
+                            this.guestOsFeature = [];
+                            this.replicaZones = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DiskBackupProperties description.
+                         * @member {string|null|undefined} description
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.description = null;
+    
+                        /**
+                         * DiskBackupProperties licenses.
+                         * @member {Array.<string>} licenses
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.licenses = $util.emptyArray;
+    
+                        /**
+                         * DiskBackupProperties guestOsFeature.
+                         * @member {Array.<google.cloud.backupdr.v1.IGuestOsFeature>} guestOsFeature
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.guestOsFeature = $util.emptyArray;
+    
+                        /**
+                         * DiskBackupProperties architecture.
+                         * @member {google.cloud.backupdr.v1.DiskBackupProperties.Architecture|null|undefined} architecture
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.architecture = null;
+    
+                        /**
+                         * DiskBackupProperties type.
+                         * @member {string|null|undefined} type
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.type = null;
+    
+                        /**
+                         * DiskBackupProperties sizeGb.
+                         * @member {number|Long|null|undefined} sizeGb
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.sizeGb = null;
+    
+                        /**
+                         * DiskBackupProperties region.
+                         * @member {string|null|undefined} region
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.region = null;
+    
+                        /**
+                         * DiskBackupProperties zone.
+                         * @member {string|null|undefined} zone
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.zone = null;
+    
+                        /**
+                         * DiskBackupProperties replicaZones.
+                         * @member {Array.<string>} replicaZones
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.replicaZones = $util.emptyArray;
+    
+                        /**
+                         * DiskBackupProperties sourceDisk.
+                         * @member {string|null|undefined} sourceDisk
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         */
+                        DiskBackupProperties.prototype.sourceDisk = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_description", {
+                            get: $util.oneOfGetter($oneOfFields = ["description"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_architecture", {
+                            get: $util.oneOfGetter($oneOfFields = ["architecture"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_type", {
+                            get: $util.oneOfGetter($oneOfFields = ["type"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_sizeGb", {
+                            get: $util.oneOfGetter($oneOfFields = ["sizeGb"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_region", {
+                            get: $util.oneOfGetter($oneOfFields = ["region"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_zone", {
+                            get: $util.oneOfGetter($oneOfFields = ["zone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DiskBackupProperties.prototype, "_sourceDisk", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceDisk"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DiskBackupProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskBackupProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DiskBackupProperties} DiskBackupProperties instance
+                         */
+                        DiskBackupProperties.create = function create(properties) {
+                            return new DiskBackupProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DiskBackupProperties message. Does not implicitly {@link google.cloud.backupdr.v1.DiskBackupProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskBackupProperties} message DiskBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskBackupProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                            if (message.licenses != null && message.licenses.length)
+                                for (var i = 0; i < message.licenses.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.licenses[i]);
+                            if (message.guestOsFeature != null && message.guestOsFeature.length)
+                                for (var i = 0; i < message.guestOsFeature.length; ++i)
+                                    $root.google.cloud.backupdr.v1.GuestOsFeature.encode(message.guestOsFeature[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.architecture != null && Object.hasOwnProperty.call(message, "architecture"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.architecture);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.type);
+                            if (message.sizeGb != null && Object.hasOwnProperty.call(message, "sizeGb"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.sizeGb);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.region);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.zone);
+                            if (message.replicaZones != null && message.replicaZones.length)
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.replicaZones[i]);
+                            if (message.sourceDisk != null && Object.hasOwnProperty.call(message, "sourceDisk"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.sourceDisk);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DiskBackupProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DiskBackupProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskBackupProperties} message DiskBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskBackupProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DiskBackupProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DiskBackupProperties} DiskBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskBackupProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DiskBackupProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.licenses && message.licenses.length))
+                                            message.licenses = [];
+                                        message.licenses.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.guestOsFeature && message.guestOsFeature.length))
+                                            message.guestOsFeature = [];
+                                        message.guestOsFeature.push($root.google.cloud.backupdr.v1.GuestOsFeature.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.architecture = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sizeGb = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.zone = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.replicaZones && message.replicaZones.length))
+                                            message.replicaZones = [];
+                                        message.replicaZones.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.sourceDisk = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DiskBackupProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DiskBackupProperties} DiskBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskBackupProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DiskBackupProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DiskBackupProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                properties._description = 1;
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            }
+                            if (message.licenses != null && message.hasOwnProperty("licenses")) {
+                                if (!Array.isArray(message.licenses))
+                                    return "licenses: array expected";
+                                for (var i = 0; i < message.licenses.length; ++i)
+                                    if (!$util.isString(message.licenses[i]))
+                                        return "licenses: string[] expected";
+                            }
+                            if (message.guestOsFeature != null && message.hasOwnProperty("guestOsFeature")) {
+                                if (!Array.isArray(message.guestOsFeature))
+                                    return "guestOsFeature: array expected";
+                                for (var i = 0; i < message.guestOsFeature.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.GuestOsFeature.verify(message.guestOsFeature[i]);
+                                    if (error)
+                                        return "guestOsFeature." + error;
+                                }
+                            }
+                            if (message.architecture != null && message.hasOwnProperty("architecture")) {
+                                properties._architecture = 1;
+                                switch (message.architecture) {
+                                default:
+                                    return "architecture: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                properties._type = 1;
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            }
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb")) {
+                                properties._sizeGb = 1;
+                                if (!$util.isInteger(message.sizeGb) && !(message.sizeGb && $util.isInteger(message.sizeGb.low) && $util.isInteger(message.sizeGb.high)))
+                                    return "sizeGb: integer|Long expected";
+                            }
+                            if (message.region != null && message.hasOwnProperty("region")) {
+                                properties._region = 1;
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                properties._zone = 1;
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
+                            }
+                            if (message.replicaZones != null && message.hasOwnProperty("replicaZones")) {
+                                if (!Array.isArray(message.replicaZones))
+                                    return "replicaZones: array expected";
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    if (!$util.isString(message.replicaZones[i]))
+                                        return "replicaZones: string[] expected";
+                            }
+                            if (message.sourceDisk != null && message.hasOwnProperty("sourceDisk")) {
+                                properties._sourceDisk = 1;
+                                if (!$util.isString(message.sourceDisk))
+                                    return "sourceDisk: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DiskBackupProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DiskBackupProperties} DiskBackupProperties
+                         */
+                        DiskBackupProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DiskBackupProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DiskBackupProperties();
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.licenses) {
+                                if (!Array.isArray(object.licenses))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskBackupProperties.licenses: array expected");
+                                message.licenses = [];
+                                for (var i = 0; i < object.licenses.length; ++i)
+                                    message.licenses[i] = String(object.licenses[i]);
+                            }
+                            if (object.guestOsFeature) {
+                                if (!Array.isArray(object.guestOsFeature))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskBackupProperties.guestOsFeature: array expected");
+                                message.guestOsFeature = [];
+                                for (var i = 0; i < object.guestOsFeature.length; ++i) {
+                                    if (typeof object.guestOsFeature[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.DiskBackupProperties.guestOsFeature: object expected");
+                                    message.guestOsFeature[i] = $root.google.cloud.backupdr.v1.GuestOsFeature.fromObject(object.guestOsFeature[i]);
+                                }
+                            }
+                            switch (object.architecture) {
+                            default:
+                                if (typeof object.architecture === "number") {
+                                    message.architecture = object.architecture;
+                                    break;
+                                }
+                                break;
+                            case "ARCHITECTURE_UNSPECIFIED":
+                            case 0:
+                                message.architecture = 0;
+                                break;
+                            case "X86_64":
+                            case 1:
+                                message.architecture = 1;
+                                break;
+                            case "ARM64":
+                            case 2:
+                                message.architecture = 2;
+                                break;
+                            }
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.sizeGb != null)
+                                if ($util.Long)
+                                    (message.sizeGb = $util.Long.fromValue(object.sizeGb)).unsigned = false;
+                                else if (typeof object.sizeGb === "string")
+                                    message.sizeGb = parseInt(object.sizeGb, 10);
+                                else if (typeof object.sizeGb === "number")
+                                    message.sizeGb = object.sizeGb;
+                                else if (typeof object.sizeGb === "object")
+                                    message.sizeGb = new $util.LongBits(object.sizeGb.low >>> 0, object.sizeGb.high >>> 0).toNumber();
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
+                            if (object.replicaZones) {
+                                if (!Array.isArray(object.replicaZones))
+                                    throw TypeError(".google.cloud.backupdr.v1.DiskBackupProperties.replicaZones: array expected");
+                                message.replicaZones = [];
+                                for (var i = 0; i < object.replicaZones.length; ++i)
+                                    message.replicaZones[i] = String(object.replicaZones[i]);
+                            }
+                            if (object.sourceDisk != null)
+                                message.sourceDisk = String(object.sourceDisk);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DiskBackupProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DiskBackupProperties} message DiskBackupProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DiskBackupProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.licenses = [];
+                                object.guestOsFeature = [];
+                                object.replicaZones = [];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                object.description = message.description;
+                                if (options.oneofs)
+                                    object._description = "description";
+                            }
+                            if (message.licenses && message.licenses.length) {
+                                object.licenses = [];
+                                for (var j = 0; j < message.licenses.length; ++j)
+                                    object.licenses[j] = message.licenses[j];
+                            }
+                            if (message.guestOsFeature && message.guestOsFeature.length) {
+                                object.guestOsFeature = [];
+                                for (var j = 0; j < message.guestOsFeature.length; ++j)
+                                    object.guestOsFeature[j] = $root.google.cloud.backupdr.v1.GuestOsFeature.toObject(message.guestOsFeature[j], options);
+                            }
+                            if (message.architecture != null && message.hasOwnProperty("architecture")) {
+                                object.architecture = options.enums === String ? $root.google.cloud.backupdr.v1.DiskBackupProperties.Architecture[message.architecture] === undefined ? message.architecture : $root.google.cloud.backupdr.v1.DiskBackupProperties.Architecture[message.architecture] : message.architecture;
+                                if (options.oneofs)
+                                    object._architecture = "architecture";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                object.type = message.type;
+                                if (options.oneofs)
+                                    object._type = "type";
+                            }
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb")) {
+                                if (typeof message.sizeGb === "number")
+                                    object.sizeGb = options.longs === String ? String(message.sizeGb) : message.sizeGb;
+                                else
+                                    object.sizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.sizeGb) : options.longs === Number ? new $util.LongBits(message.sizeGb.low >>> 0, message.sizeGb.high >>> 0).toNumber() : message.sizeGb;
+                                if (options.oneofs)
+                                    object._sizeGb = "sizeGb";
+                            }
+                            if (message.region != null && message.hasOwnProperty("region")) {
+                                object.region = message.region;
+                                if (options.oneofs)
+                                    object._region = "region";
+                            }
+                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                                object.zone = message.zone;
+                                if (options.oneofs)
+                                    object._zone = "zone";
+                            }
+                            if (message.replicaZones && message.replicaZones.length) {
+                                object.replicaZones = [];
+                                for (var j = 0; j < message.replicaZones.length; ++j)
+                                    object.replicaZones[j] = message.replicaZones[j];
+                            }
+                            if (message.sourceDisk != null && message.hasOwnProperty("sourceDisk")) {
+                                object.sourceDisk = message.sourceDisk;
+                                if (options.oneofs)
+                                    object._sourceDisk = "sourceDisk";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DiskBackupProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DiskBackupProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DiskBackupProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DiskBackupProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DiskBackupProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DiskBackupProperties";
+                        };
+    
+                        /**
+                         * Architecture enum.
+                         * @name google.cloud.backupdr.v1.DiskBackupProperties.Architecture
+                         * @enum {number}
+                         * @property {number} ARCHITECTURE_UNSPECIFIED=0 ARCHITECTURE_UNSPECIFIED value
+                         * @property {number} X86_64=1 X86_64 value
+                         * @property {number} ARM64=2 ARM64 value
+                         */
+                        DiskBackupProperties.Architecture = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ARCHITECTURE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "X86_64"] = 1;
+                            values[valuesById[2] = "ARM64"] = 2;
+                            return values;
+                        })();
+    
+                        return DiskBackupProperties;
+                    })();
+    
+                    v1.DiskDataSourceProperties = (function() {
+    
+                        /**
+                         * Properties of a DiskDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDiskDataSourceProperties
+                         * @property {string|null} [name] DiskDataSourceProperties name
+                         * @property {string|null} [description] DiskDataSourceProperties description
+                         * @property {string|null} [type] DiskDataSourceProperties type
+                         * @property {number|Long|null} [sizeGb] DiskDataSourceProperties sizeGb
+                         */
+    
+                        /**
+                         * Constructs a new DiskDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DiskDataSourceProperties.
+                         * @implements IDiskDataSourceProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDiskDataSourceProperties=} [properties] Properties to set
+                         */
+                        function DiskDataSourceProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DiskDataSourceProperties name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @instance
+                         */
+                        DiskDataSourceProperties.prototype.name = "";
+    
+                        /**
+                         * DiskDataSourceProperties description.
+                         * @member {string} description
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @instance
+                         */
+                        DiskDataSourceProperties.prototype.description = "";
+    
+                        /**
+                         * DiskDataSourceProperties type.
+                         * @member {string} type
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @instance
+                         */
+                        DiskDataSourceProperties.prototype.type = "";
+    
+                        /**
+                         * DiskDataSourceProperties sizeGb.
+                         * @member {number|Long} sizeGb
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @instance
+                         */
+                        DiskDataSourceProperties.prototype.sizeGb = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new DiskDataSourceProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskDataSourceProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DiskDataSourceProperties} DiskDataSourceProperties instance
+                         */
+                        DiskDataSourceProperties.create = function create(properties) {
+                            return new DiskDataSourceProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DiskDataSourceProperties message. Does not implicitly {@link google.cloud.backupdr.v1.DiskDataSourceProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskDataSourceProperties} message DiskDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskDataSourceProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                            if (message.sizeGb != null && Object.hasOwnProperty.call(message, "sizeGb"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.sizeGb);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DiskDataSourceProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DiskDataSourceProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDiskDataSourceProperties} message DiskDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DiskDataSourceProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DiskDataSourceProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DiskDataSourceProperties} DiskDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskDataSourceProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DiskDataSourceProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sizeGb = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DiskDataSourceProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DiskDataSourceProperties} DiskDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DiskDataSourceProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DiskDataSourceProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DiskDataSourceProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb"))
+                                if (!$util.isInteger(message.sizeGb) && !(message.sizeGb && $util.isInteger(message.sizeGb.low) && $util.isInteger(message.sizeGb.high)))
+                                    return "sizeGb: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DiskDataSourceProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DiskDataSourceProperties} DiskDataSourceProperties
+                         */
+                        DiskDataSourceProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DiskDataSourceProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DiskDataSourceProperties();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.sizeGb != null)
+                                if ($util.Long)
+                                    (message.sizeGb = $util.Long.fromValue(object.sizeGb)).unsigned = false;
+                                else if (typeof object.sizeGb === "string")
+                                    message.sizeGb = parseInt(object.sizeGb, 10);
+                                else if (typeof object.sizeGb === "number")
+                                    message.sizeGb = object.sizeGb;
+                                else if (typeof object.sizeGb === "object")
+                                    message.sizeGb = new $util.LongBits(object.sizeGb.low >>> 0, object.sizeGb.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DiskDataSourceProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DiskDataSourceProperties} message DiskDataSourceProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DiskDataSourceProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.type = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeGb = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeGb = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.sizeGb != null && message.hasOwnProperty("sizeGb"))
+                                if (typeof message.sizeGb === "number")
+                                    object.sizeGb = options.longs === String ? String(message.sizeGb) : message.sizeGb;
+                                else
+                                    object.sizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.sizeGb) : options.longs === Number ? new $util.LongBits(message.sizeGb.low >>> 0, message.sizeGb.high >>> 0).toNumber() : message.sizeGb;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DiskDataSourceProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DiskDataSourceProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DiskDataSourceProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DiskDataSourceProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DiskDataSourceProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DiskDataSourceProperties";
+                        };
+    
+                        return DiskDataSourceProperties;
                     })();
     
                     v1.ComputeInstanceBackupProperties = (function() {
@@ -32269,6 +39068,1747 @@
                         return values;
                     })();
     
+                    v1.DataSourceReference = (function() {
+    
+                        /**
+                         * Properties of a DataSourceReference.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDataSourceReference
+                         * @property {string|null} [name] DataSourceReference name
+                         * @property {string|null} [dataSource] DataSourceReference dataSource
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DataSourceReference createTime
+                         * @property {google.cloud.backupdr.v1.BackupConfigState|null} [dataSourceBackupConfigState] DataSourceReference dataSourceBackupConfigState
+                         * @property {number|Long|null} [dataSourceBackupCount] DataSourceReference dataSourceBackupCount
+                         * @property {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo|null} [dataSourceBackupConfigInfo] DataSourceReference dataSourceBackupConfigInfo
+                         * @property {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo|null} [dataSourceGcpResourceInfo] DataSourceReference dataSourceGcpResourceInfo
+                         */
+    
+                        /**
+                         * Constructs a new DataSourceReference.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DataSourceReference.
+                         * @implements IDataSourceReference
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDataSourceReference=} [properties] Properties to set
+                         */
+                        function DataSourceReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataSourceReference name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.name = "";
+    
+                        /**
+                         * DataSourceReference dataSource.
+                         * @member {string} dataSource
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.dataSource = "";
+    
+                        /**
+                         * DataSourceReference createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.createTime = null;
+    
+                        /**
+                         * DataSourceReference dataSourceBackupConfigState.
+                         * @member {google.cloud.backupdr.v1.BackupConfigState} dataSourceBackupConfigState
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.dataSourceBackupConfigState = 0;
+    
+                        /**
+                         * DataSourceReference dataSourceBackupCount.
+                         * @member {number|Long} dataSourceBackupCount
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.dataSourceBackupCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DataSourceReference dataSourceBackupConfigInfo.
+                         * @member {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo|null|undefined} dataSourceBackupConfigInfo
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.dataSourceBackupConfigInfo = null;
+    
+                        /**
+                         * DataSourceReference dataSourceGcpResourceInfo.
+                         * @member {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo|null|undefined} dataSourceGcpResourceInfo
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         */
+                        DataSourceReference.prototype.dataSourceGcpResourceInfo = null;
+    
+                        /**
+                         * Creates a new DataSourceReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceReference=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DataSourceReference} DataSourceReference instance
+                         */
+                        DataSourceReference.create = function create(properties) {
+                            return new DataSourceReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceReference message. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceReference} message DataSourceReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataSource);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dataSourceBackupConfigState != null && Object.hasOwnProperty.call(message, "dataSourceBackupConfigState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.dataSourceBackupConfigState);
+                            if (message.dataSourceBackupCount != null && Object.hasOwnProperty.call(message, "dataSourceBackupCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.dataSourceBackupCount);
+                            if (message.dataSourceBackupConfigInfo != null && Object.hasOwnProperty.call(message, "dataSourceBackupConfigInfo"))
+                                $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo.encode(message.dataSourceBackupConfigInfo, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.dataSourceGcpResourceInfo != null && Object.hasOwnProperty.call(message, "dataSourceGcpResourceInfo"))
+                                $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo.encode(message.dataSourceGcpResourceInfo, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceReference message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceReference} message DataSourceReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DataSourceReference} DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceReference.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DataSourceReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataSource = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.dataSourceBackupConfigState = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dataSourceBackupCount = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.dataSourceBackupConfigInfo = $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.dataSourceGcpResourceInfo = $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DataSourceReference} DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataSourceReference message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataSourceReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                if (!$util.isString(message.dataSource))
+                                    return "dataSource: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.dataSourceBackupConfigState != null && message.hasOwnProperty("dataSourceBackupConfigState"))
+                                switch (message.dataSourceBackupConfigState) {
+                                default:
+                                    return "dataSourceBackupConfigState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.dataSourceBackupCount != null && message.hasOwnProperty("dataSourceBackupCount"))
+                                if (!$util.isInteger(message.dataSourceBackupCount) && !(message.dataSourceBackupCount && $util.isInteger(message.dataSourceBackupCount.low) && $util.isInteger(message.dataSourceBackupCount.high)))
+                                    return "dataSourceBackupCount: integer|Long expected";
+                            if (message.dataSourceBackupConfigInfo != null && message.hasOwnProperty("dataSourceBackupConfigInfo")) {
+                                var error = $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo.verify(message.dataSourceBackupConfigInfo);
+                                if (error)
+                                    return "dataSourceBackupConfigInfo." + error;
+                            }
+                            if (message.dataSourceGcpResourceInfo != null && message.hasOwnProperty("dataSourceGcpResourceInfo")) {
+                                var error = $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo.verify(message.dataSourceGcpResourceInfo);
+                                if (error)
+                                    return "dataSourceGcpResourceInfo." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataSourceReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DataSourceReference} DataSourceReference
+                         */
+                        DataSourceReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DataSourceReference)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DataSourceReference();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dataSource != null)
+                                message.dataSource = String(object.dataSource);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceReference.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            switch (object.dataSourceBackupConfigState) {
+                            default:
+                                if (typeof object.dataSourceBackupConfigState === "number") {
+                                    message.dataSourceBackupConfigState = object.dataSourceBackupConfigState;
+                                    break;
+                                }
+                                break;
+                            case "BACKUP_CONFIG_STATE_UNSPECIFIED":
+                            case 0:
+                                message.dataSourceBackupConfigState = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.dataSourceBackupConfigState = 1;
+                                break;
+                            case "PASSIVE":
+                            case 2:
+                                message.dataSourceBackupConfigState = 2;
+                                break;
+                            }
+                            if (object.dataSourceBackupCount != null)
+                                if ($util.Long)
+                                    (message.dataSourceBackupCount = $util.Long.fromValue(object.dataSourceBackupCount)).unsigned = false;
+                                else if (typeof object.dataSourceBackupCount === "string")
+                                    message.dataSourceBackupCount = parseInt(object.dataSourceBackupCount, 10);
+                                else if (typeof object.dataSourceBackupCount === "number")
+                                    message.dataSourceBackupCount = object.dataSourceBackupCount;
+                                else if (typeof object.dataSourceBackupCount === "object")
+                                    message.dataSourceBackupCount = new $util.LongBits(object.dataSourceBackupCount.low >>> 0, object.dataSourceBackupCount.high >>> 0).toNumber();
+                            if (object.dataSourceBackupConfigInfo != null) {
+                                if (typeof object.dataSourceBackupConfigInfo !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceReference.dataSourceBackupConfigInfo: object expected");
+                                message.dataSourceBackupConfigInfo = $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo.fromObject(object.dataSourceBackupConfigInfo);
+                            }
+                            if (object.dataSourceGcpResourceInfo != null) {
+                                if (typeof object.dataSourceGcpResourceInfo !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceReference.dataSourceGcpResourceInfo: object expected");
+                                message.dataSourceGcpResourceInfo = $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo.fromObject(object.dataSourceGcpResourceInfo);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataSourceReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DataSourceReference} message DataSourceReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataSourceReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.dataSource = "";
+                                object.createTime = null;
+                                object.dataSourceBackupConfigState = options.enums === String ? "BACKUP_CONFIG_STATE_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.dataSourceBackupCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.dataSourceBackupCount = options.longs === String ? "0" : 0;
+                                object.dataSourceBackupConfigInfo = null;
+                                object.dataSourceGcpResourceInfo = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                object.dataSource = message.dataSource;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.dataSourceBackupConfigState != null && message.hasOwnProperty("dataSourceBackupConfigState"))
+                                object.dataSourceBackupConfigState = options.enums === String ? $root.google.cloud.backupdr.v1.BackupConfigState[message.dataSourceBackupConfigState] === undefined ? message.dataSourceBackupConfigState : $root.google.cloud.backupdr.v1.BackupConfigState[message.dataSourceBackupConfigState] : message.dataSourceBackupConfigState;
+                            if (message.dataSourceBackupCount != null && message.hasOwnProperty("dataSourceBackupCount"))
+                                if (typeof message.dataSourceBackupCount === "number")
+                                    object.dataSourceBackupCount = options.longs === String ? String(message.dataSourceBackupCount) : message.dataSourceBackupCount;
+                                else
+                                    object.dataSourceBackupCount = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceBackupCount) : options.longs === Number ? new $util.LongBits(message.dataSourceBackupCount.low >>> 0, message.dataSourceBackupCount.high >>> 0).toNumber() : message.dataSourceBackupCount;
+                            if (message.dataSourceBackupConfigInfo != null && message.hasOwnProperty("dataSourceBackupConfigInfo"))
+                                object.dataSourceBackupConfigInfo = $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo.toObject(message.dataSourceBackupConfigInfo, options);
+                            if (message.dataSourceGcpResourceInfo != null && message.hasOwnProperty("dataSourceGcpResourceInfo"))
+                                object.dataSourceGcpResourceInfo = $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo.toObject(message.dataSourceGcpResourceInfo, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataSourceReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataSourceReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataSourceReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DataSourceReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataSourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DataSourceReference";
+                        };
+    
+                        return DataSourceReference;
+                    })();
+    
+                    v1.DataSourceBackupConfigInfo = (function() {
+    
+                        /**
+                         * Properties of a DataSourceBackupConfigInfo.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDataSourceBackupConfigInfo
+                         * @property {google.cloud.backupdr.v1.BackupConfigInfo.LastBackupState|null} [lastBackupState] DataSourceBackupConfigInfo lastBackupState
+                         * @property {google.protobuf.ITimestamp|null} [lastSuccessfulBackupConsistencyTime] DataSourceBackupConfigInfo lastSuccessfulBackupConsistencyTime
+                         */
+    
+                        /**
+                         * Constructs a new DataSourceBackupConfigInfo.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DataSourceBackupConfigInfo.
+                         * @implements IDataSourceBackupConfigInfo
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo=} [properties] Properties to set
+                         */
+                        function DataSourceBackupConfigInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataSourceBackupConfigInfo lastBackupState.
+                         * @member {google.cloud.backupdr.v1.BackupConfigInfo.LastBackupState} lastBackupState
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @instance
+                         */
+                        DataSourceBackupConfigInfo.prototype.lastBackupState = 0;
+    
+                        /**
+                         * DataSourceBackupConfigInfo lastSuccessfulBackupConsistencyTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastSuccessfulBackupConsistencyTime
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @instance
+                         */
+                        DataSourceBackupConfigInfo.prototype.lastSuccessfulBackupConsistencyTime = null;
+    
+                        /**
+                         * Creates a new DataSourceBackupConfigInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DataSourceBackupConfigInfo} DataSourceBackupConfigInfo instance
+                         */
+                        DataSourceBackupConfigInfo.create = function create(properties) {
+                            return new DataSourceBackupConfigInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceBackupConfigInfo message. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceBackupConfigInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo} message DataSourceBackupConfigInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceBackupConfigInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lastBackupState != null && Object.hasOwnProperty.call(message, "lastBackupState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.lastBackupState);
+                            if (message.lastSuccessfulBackupConsistencyTime != null && Object.hasOwnProperty.call(message, "lastSuccessfulBackupConsistencyTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastSuccessfulBackupConsistencyTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceBackupConfigInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceBackupConfigInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceBackupConfigInfo} message DataSourceBackupConfigInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceBackupConfigInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataSourceBackupConfigInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DataSourceBackupConfigInfo} DataSourceBackupConfigInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceBackupConfigInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.lastBackupState = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lastSuccessfulBackupConsistencyTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataSourceBackupConfigInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DataSourceBackupConfigInfo} DataSourceBackupConfigInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceBackupConfigInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataSourceBackupConfigInfo message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataSourceBackupConfigInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.lastBackupState != null && message.hasOwnProperty("lastBackupState"))
+                                switch (message.lastBackupState) {
+                                default:
+                                    return "lastBackupState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.lastSuccessfulBackupConsistencyTime != null && message.hasOwnProperty("lastSuccessfulBackupConsistencyTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastSuccessfulBackupConsistencyTime);
+                                if (error)
+                                    return "lastSuccessfulBackupConsistencyTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataSourceBackupConfigInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DataSourceBackupConfigInfo} DataSourceBackupConfigInfo
+                         */
+                        DataSourceBackupConfigInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DataSourceBackupConfigInfo();
+                            switch (object.lastBackupState) {
+                            default:
+                                if (typeof object.lastBackupState === "number") {
+                                    message.lastBackupState = object.lastBackupState;
+                                    break;
+                                }
+                                break;
+                            case "LAST_BACKUP_STATE_UNSPECIFIED":
+                            case 0:
+                                message.lastBackupState = 0;
+                                break;
+                            case "FIRST_BACKUP_PENDING":
+                            case 1:
+                                message.lastBackupState = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.lastBackupState = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.lastBackupState = 3;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 4:
+                                message.lastBackupState = 4;
+                                break;
+                            }
+                            if (object.lastSuccessfulBackupConsistencyTime != null) {
+                                if (typeof object.lastSuccessfulBackupConsistencyTime !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceBackupConfigInfo.lastSuccessfulBackupConsistencyTime: object expected");
+                                message.lastSuccessfulBackupConsistencyTime = $root.google.protobuf.Timestamp.fromObject(object.lastSuccessfulBackupConsistencyTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataSourceBackupConfigInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DataSourceBackupConfigInfo} message DataSourceBackupConfigInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataSourceBackupConfigInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.lastBackupState = options.enums === String ? "LAST_BACKUP_STATE_UNSPECIFIED" : 0;
+                                object.lastSuccessfulBackupConsistencyTime = null;
+                            }
+                            if (message.lastBackupState != null && message.hasOwnProperty("lastBackupState"))
+                                object.lastBackupState = options.enums === String ? $root.google.cloud.backupdr.v1.BackupConfigInfo.LastBackupState[message.lastBackupState] === undefined ? message.lastBackupState : $root.google.cloud.backupdr.v1.BackupConfigInfo.LastBackupState[message.lastBackupState] : message.lastBackupState;
+                            if (message.lastSuccessfulBackupConsistencyTime != null && message.hasOwnProperty("lastSuccessfulBackupConsistencyTime"))
+                                object.lastSuccessfulBackupConsistencyTime = $root.google.protobuf.Timestamp.toObject(message.lastSuccessfulBackupConsistencyTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataSourceBackupConfigInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataSourceBackupConfigInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataSourceBackupConfigInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DataSourceBackupConfigInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataSourceBackupConfigInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DataSourceBackupConfigInfo";
+                        };
+    
+                        return DataSourceBackupConfigInfo;
+                    })();
+    
+                    v1.DataSourceGcpResourceInfo = (function() {
+    
+                        /**
+                         * Properties of a DataSourceGcpResourceInfo.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IDataSourceGcpResourceInfo
+                         * @property {string|null} [gcpResourcename] DataSourceGcpResourceInfo gcpResourcename
+                         * @property {string|null} [type] DataSourceGcpResourceInfo type
+                         * @property {string|null} [location] DataSourceGcpResourceInfo location
+                         * @property {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties|null} [cloudSqlInstanceProperties] DataSourceGcpResourceInfo cloudSqlInstanceProperties
+                         */
+    
+                        /**
+                         * Constructs a new DataSourceGcpResourceInfo.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a DataSourceGcpResourceInfo.
+                         * @implements IDataSourceGcpResourceInfo
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo=} [properties] Properties to set
+                         */
+                        function DataSourceGcpResourceInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataSourceGcpResourceInfo gcpResourcename.
+                         * @member {string} gcpResourcename
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         */
+                        DataSourceGcpResourceInfo.prototype.gcpResourcename = "";
+    
+                        /**
+                         * DataSourceGcpResourceInfo type.
+                         * @member {string} type
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         */
+                        DataSourceGcpResourceInfo.prototype.type = "";
+    
+                        /**
+                         * DataSourceGcpResourceInfo location.
+                         * @member {string} location
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         */
+                        DataSourceGcpResourceInfo.prototype.location = "";
+    
+                        /**
+                         * DataSourceGcpResourceInfo cloudSqlInstanceProperties.
+                         * @member {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceReferenceProperties|null|undefined} cloudSqlInstanceProperties
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         */
+                        DataSourceGcpResourceInfo.prototype.cloudSqlInstanceProperties = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DataSourceGcpResourceInfo resourceProperties.
+                         * @member {"cloudSqlInstanceProperties"|undefined} resourceProperties
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         */
+                        Object.defineProperty(DataSourceGcpResourceInfo.prototype, "resourceProperties", {
+                            get: $util.oneOfGetter($oneOfFields = ["cloudSqlInstanceProperties"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DataSourceGcpResourceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.DataSourceGcpResourceInfo} DataSourceGcpResourceInfo instance
+                         */
+                        DataSourceGcpResourceInfo.create = function create(properties) {
+                            return new DataSourceGcpResourceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceGcpResourceInfo message. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceGcpResourceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo} message DataSourceGcpResourceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceGcpResourceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcpResourcename != null && Object.hasOwnProperty.call(message, "gcpResourcename"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcpResourcename);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.location);
+                            if (message.cloudSqlInstanceProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceProperties"))
+                                $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.encode(message.cloudSqlInstanceProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataSourceGcpResourceInfo message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.DataSourceGcpResourceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IDataSourceGcpResourceInfo} message DataSourceGcpResourceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataSourceGcpResourceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataSourceGcpResourceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.DataSourceGcpResourceInfo} DataSourceGcpResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceGcpResourceInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.gcpResourcename = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cloudSqlInstanceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataSourceGcpResourceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.DataSourceGcpResourceInfo} DataSourceGcpResourceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataSourceGcpResourceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataSourceGcpResourceInfo message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataSourceGcpResourceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcpResourcename != null && message.hasOwnProperty("gcpResourcename"))
+                                if (!$util.isString(message.gcpResourcename))
+                                    return "gcpResourcename: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.cloudSqlInstanceProperties != null && message.hasOwnProperty("cloudSqlInstanceProperties")) {
+                                properties.resourceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.verify(message.cloudSqlInstanceProperties);
+                                    if (error)
+                                        return "cloudSqlInstanceProperties." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataSourceGcpResourceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.DataSourceGcpResourceInfo} DataSourceGcpResourceInfo
+                         */
+                        DataSourceGcpResourceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.DataSourceGcpResourceInfo();
+                            if (object.gcpResourcename != null)
+                                message.gcpResourcename = String(object.gcpResourcename);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.cloudSqlInstanceProperties != null) {
+                                if (typeof object.cloudSqlInstanceProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResourceInfo.cloudSqlInstanceProperties: object expected");
+                                message.cloudSqlInstanceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.fromObject(object.cloudSqlInstanceProperties);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataSourceGcpResourceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {google.cloud.backupdr.v1.DataSourceGcpResourceInfo} message DataSourceGcpResourceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataSourceGcpResourceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.gcpResourcename = "";
+                                object.type = "";
+                                object.location = "";
+                            }
+                            if (message.gcpResourcename != null && message.hasOwnProperty("gcpResourcename"))
+                                object.gcpResourcename = message.gcpResourcename;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.cloudSqlInstanceProperties != null && message.hasOwnProperty("cloudSqlInstanceProperties")) {
+                                object.cloudSqlInstanceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceReferenceProperties.toObject(message.cloudSqlInstanceProperties, options);
+                                if (options.oneofs)
+                                    object.resourceProperties = "cloudSqlInstanceProperties";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataSourceGcpResourceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataSourceGcpResourceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataSourceGcpResourceInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResourceInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataSourceGcpResourceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.DataSourceGcpResourceInfo";
+                        };
+    
+                        return DataSourceGcpResourceInfo;
+                    })();
+    
+                    v1.GetDataSourceReferenceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDataSourceReferenceRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IGetDataSourceReferenceRequest
+                         * @property {string|null} [name] GetDataSourceReferenceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDataSourceReferenceRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a GetDataSourceReferenceRequest.
+                         * @implements IGetDataSourceReferenceRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest=} [properties] Properties to set
+                         */
+                        function GetDataSourceReferenceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDataSourceReferenceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @instance
+                         */
+                        GetDataSourceReferenceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDataSourceReferenceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.GetDataSourceReferenceRequest} GetDataSourceReferenceRequest instance
+                         */
+                        GetDataSourceReferenceRequest.create = function create(properties) {
+                            return new GetDataSourceReferenceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataSourceReferenceRequest message. Does not implicitly {@link google.cloud.backupdr.v1.GetDataSourceReferenceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest} message GetDataSourceReferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataSourceReferenceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDataSourceReferenceRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.GetDataSourceReferenceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IGetDataSourceReferenceRequest} message GetDataSourceReferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDataSourceReferenceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDataSourceReferenceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.GetDataSourceReferenceRequest} GetDataSourceReferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataSourceReferenceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.GetDataSourceReferenceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDataSourceReferenceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.GetDataSourceReferenceRequest} GetDataSourceReferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDataSourceReferenceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDataSourceReferenceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDataSourceReferenceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDataSourceReferenceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.GetDataSourceReferenceRequest} GetDataSourceReferenceRequest
+                         */
+                        GetDataSourceReferenceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.GetDataSourceReferenceRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.GetDataSourceReferenceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDataSourceReferenceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.GetDataSourceReferenceRequest} message GetDataSourceReferenceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDataSourceReferenceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDataSourceReferenceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDataSourceReferenceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDataSourceReferenceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.GetDataSourceReferenceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDataSourceReferenceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.GetDataSourceReferenceRequest";
+                        };
+    
+                        return GetDataSourceReferenceRequest;
+                    })();
+    
+                    v1.FetchDataSourceReferencesForResourceTypeRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchDataSourceReferencesForResourceTypeRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IFetchDataSourceReferencesForResourceTypeRequest
+                         * @property {string|null} [parent] FetchDataSourceReferencesForResourceTypeRequest parent
+                         * @property {string|null} [resourceType] FetchDataSourceReferencesForResourceTypeRequest resourceType
+                         * @property {number|null} [pageSize] FetchDataSourceReferencesForResourceTypeRequest pageSize
+                         * @property {string|null} [pageToken] FetchDataSourceReferencesForResourceTypeRequest pageToken
+                         * @property {string|null} [filter] FetchDataSourceReferencesForResourceTypeRequest filter
+                         * @property {string|null} [orderBy] FetchDataSourceReferencesForResourceTypeRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new FetchDataSourceReferencesForResourceTypeRequest.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a FetchDataSourceReferencesForResourceTypeRequest.
+                         * @implements IFetchDataSourceReferencesForResourceTypeRequest
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest=} [properties] Properties to set
+                         */
+                        function FetchDataSourceReferencesForResourceTypeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.parent = "";
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.resourceType = "";
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.pageToken = "";
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.filter = "";
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new FetchDataSourceReferencesForResourceTypeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest} FetchDataSourceReferencesForResourceTypeRequest instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.create = function create(properties) {
+                            return new FetchDataSourceReferencesForResourceTypeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDataSourceReferencesForResourceTypeRequest message. Does not implicitly {@link google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest} message FetchDataSourceReferencesForResourceTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceType);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDataSourceReferencesForResourceTypeRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeRequest} message FetchDataSourceReferencesForResourceTypeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchDataSourceReferencesForResourceTypeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest} FetchDataSourceReferencesForResourceTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchDataSourceReferencesForResourceTypeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest} FetchDataSourceReferencesForResourceTypeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchDataSourceReferencesForResourceTypeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchDataSourceReferencesForResourceTypeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest} FetchDataSourceReferencesForResourceTypeRequest
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchDataSourceReferencesForResourceTypeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest} message FetchDataSourceReferencesForResourceTypeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.resourceType = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchDataSourceReferencesForResourceTypeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchDataSourceReferencesForResourceTypeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchDataSourceReferencesForResourceTypeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest";
+                        };
+    
+                        return FetchDataSourceReferencesForResourceTypeRequest;
+                    })();
+    
+                    v1.FetchDataSourceReferencesForResourceTypeResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchDataSourceReferencesForResourceTypeResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IFetchDataSourceReferencesForResourceTypeResponse
+                         * @property {Array.<google.cloud.backupdr.v1.IDataSourceReference>|null} [dataSourceReferences] FetchDataSourceReferencesForResourceTypeResponse dataSourceReferences
+                         * @property {string|null} [nextPageToken] FetchDataSourceReferencesForResourceTypeResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchDataSourceReferencesForResourceTypeResponse.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents a FetchDataSourceReferencesForResourceTypeResponse.
+                         * @implements IFetchDataSourceReferencesForResourceTypeResponse
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeResponse=} [properties] Properties to set
+                         */
+                        function FetchDataSourceReferencesForResourceTypeResponse(properties) {
+                            this.dataSourceReferences = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeResponse dataSourceReferences.
+                         * @member {Array.<google.cloud.backupdr.v1.IDataSourceReference>} dataSourceReferences
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.prototype.dataSourceReferences = $util.emptyArray;
+    
+                        /**
+                         * FetchDataSourceReferencesForResourceTypeResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new FetchDataSourceReferencesForResourceTypeResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeResponse=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} FetchDataSourceReferencesForResourceTypeResponse instance
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.create = function create(properties) {
+                            return new FetchDataSourceReferencesForResourceTypeResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDataSourceReferencesForResourceTypeResponse message. Does not implicitly {@link google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeResponse} message FetchDataSourceReferencesForResourceTypeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataSourceReferences != null && message.dataSourceReferences.length)
+                                for (var i = 0; i < message.dataSourceReferences.length; ++i)
+                                    $root.google.cloud.backupdr.v1.DataSourceReference.encode(message.dataSourceReferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDataSourceReferencesForResourceTypeResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IFetchDataSourceReferencesForResourceTypeResponse} message FetchDataSourceReferencesForResourceTypeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchDataSourceReferencesForResourceTypeResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} FetchDataSourceReferencesForResourceTypeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataSourceReferences && message.dataSourceReferences.length))
+                                            message.dataSourceReferences = [];
+                                        message.dataSourceReferences.push($root.google.cloud.backupdr.v1.DataSourceReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchDataSourceReferencesForResourceTypeResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} FetchDataSourceReferencesForResourceTypeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchDataSourceReferencesForResourceTypeResponse message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataSourceReferences != null && message.hasOwnProperty("dataSourceReferences")) {
+                                if (!Array.isArray(message.dataSourceReferences))
+                                    return "dataSourceReferences: array expected";
+                                for (var i = 0; i < message.dataSourceReferences.length; ++i) {
+                                    var error = $root.google.cloud.backupdr.v1.DataSourceReference.verify(message.dataSourceReferences[i]);
+                                    if (error)
+                                        return "dataSourceReferences." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchDataSourceReferencesForResourceTypeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} FetchDataSourceReferencesForResourceTypeResponse
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse();
+                            if (object.dataSourceReferences) {
+                                if (!Array.isArray(object.dataSourceReferences))
+                                    throw TypeError(".google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse.dataSourceReferences: array expected");
+                                message.dataSourceReferences = [];
+                                for (var i = 0; i < object.dataSourceReferences.length; ++i) {
+                                    if (typeof object.dataSourceReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse.dataSourceReferences: object expected");
+                                    message.dataSourceReferences[i] = $root.google.cloud.backupdr.v1.DataSourceReference.fromObject(object.dataSourceReferences[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchDataSourceReferencesForResourceTypeResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse} message FetchDataSourceReferencesForResourceTypeResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataSourceReferences = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.dataSourceReferences && message.dataSourceReferences.length) {
+                                object.dataSourceReferences = [];
+                                for (var j = 0; j < message.dataSourceReferences.length; ++j)
+                                    object.dataSourceReferences[j] = $root.google.cloud.backupdr.v1.DataSourceReference.toObject(message.dataSourceReferences[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchDataSourceReferencesForResourceTypeResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchDataSourceReferencesForResourceTypeResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchDataSourceReferencesForResourceTypeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse";
+                        };
+    
+                        return FetchDataSourceReferencesForResourceTypeResponse;
+                    })();
+    
                     return v1;
                 })();
     
@@ -33264,6 +41804,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -33299,6 +41840,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -33330,6 +41879,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -33379,6 +41930,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -33432,6 +41987,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -33474,6 +42034,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -33492,8 +42057,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -33501,6 +42068,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -35323,6 +43892,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -35347,6 +43917,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -35374,6 +43952,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -35412,6 +43992,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -35454,6 +44038,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -35474,6 +44063,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -35490,10 +44084,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -35522,6 +44120,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -36399,6 +45249,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -36410,6 +45261,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -36423,6 +45275,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -36450,6 +45310,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -36480,7 +45343,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -36488,6 +45351,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -36530,6 +45416,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -36550,6 +45444,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -36566,10 +45467,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -37208,6 +46117,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -37269,6 +46423,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -37280,6 +46435,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -37293,6 +46449,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -37320,6 +46484,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -37358,6 +46525,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -37406,6 +46579,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -37449,6 +46631,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -37465,10 +46657,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -37519,6 +46718,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -38452,6 +47856,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -38466,6 +47871,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -38490,6 +47896,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -38512,6 +47919,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -38561,6 +47969,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -38683,6 +48099,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -38753,6 +48172,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -38857,6 +48282,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -38911,6 +48343,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -38962,6 +48395,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -39025,6 +48465,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -39091,6 +48535,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -39147,6 +48592,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -39195,6 +48645,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -39301,6 +48752,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -39352,6 +48811,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -39442,6 +48903,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -39557,6 +49022,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -39656,6 +49130,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -39685,6 +49179,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -39730,6 +49225,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -41774,6 +51271,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -41835,6 +51333,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -41871,6 +51377,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -41931,6 +51439,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -42001,6 +51513,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -42050,6 +51571,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -42074,6 +51615,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -42094,6 +51636,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -44412,6 +53956,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
@@ -44534,6 +54079,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -44615,6 +54168,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -44716,6 +54271,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -44856,6 +54415,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -45050,6 +54614,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -45152,6 +54721,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -45185,6 +54755,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -45459,6 +55031,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -45499,6 +55072,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -45597,6 +55174,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -46191,6 +56250,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -46235,6 +56295,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -46272,6 +56340,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -46321,6 +56391,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -46375,6 +56449,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -46408,6 +56487,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -46440,6 +56524,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -46447,6 +56532,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -47914,6 +58001,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -47980,6 +58069,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -48015,6 +58120,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -48073,6 +58182,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -48163,6 +58280,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -48304,6 +58441,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -48327,6 +58512,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -48340,6 +58527,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -48465,6 +58656,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -48651,6 +59055,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -48668,6 +59073,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -48715,6 +59121,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -48767,6 +59177,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -48876,7 +59290,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -48903,12 +59318,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -48934,10 +59357,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -48978,8 +59403,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -49022,6 +59451,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -49034,10 +59464,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -49064,6 +59499,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -49106,10 +59545,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -49128,13 +59572,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -50349,6 +60796,22 @@
                 return GeneratedCodeInfo;
             })();
     
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -50590,6 +61053,227 @@
                 };
     
                 return Duration;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             protobuf.Timestamp = (function() {
@@ -51071,227 +61755,6 @@
                 };
     
                 return Any;
-            })();
-    
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
             })();
     
             protobuf.Empty = (function() {

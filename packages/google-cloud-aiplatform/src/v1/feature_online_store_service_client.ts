@@ -19,7 +19,7 @@
 /* global window */
 import type * as gax from 'google-gax';
 import type {Callback, CallOptions, Descriptors, ClientOptions, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -353,6 +353,12 @@ export class FeatureOnlineStoreServiceClient {
       ),
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      featureViewDirectWrite: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.aiplatform.v1.FeatureOnlineStoreService', gapicConfig as gax.ClientConfig,
@@ -396,11 +402,18 @@ export class FeatureOnlineStoreServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const featureOnlineStoreServiceStubMethods =
-        ['fetchFeatureValues', 'searchNearestEntities'];
+        ['fetchFeatureValues', 'searchNearestEntities', 'featureViewDirectWrite'];
     for (const methodName of featureOnlineStoreServiceStubMethods) {
       const callPromise = this.featureOnlineStoreServiceStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
+            }
             return Promise.reject('The client has already been closed.');
           }
           const func = stub[methodName];
@@ -411,6 +424,7 @@ export class FeatureOnlineStoreServiceClient {
         });
 
       const descriptor =
+        this.descriptors.stream[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
@@ -702,6 +716,30 @@ export class FeatureOnlineStoreServiceClient {
         }
         throw error;
       });
+  }
+
+/**
+ * Bidirectional streaming RPC to directly write to feature values in a
+ * feature view. Requests may not have a one-to-one mapping to responses and
+ * responses may be returned out-of-order to reduce latency.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest|FeatureViewDirectWriteRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse|FeatureViewDirectWriteResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/feature_online_store_service.feature_view_direct_write.js</caption>
+ * region_tag:aiplatform_v1_generated_FeatureOnlineStoreService_FeatureViewDirectWrite_async
+ */
+  featureViewDirectWrite(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize().catch(err => {throw err});
+    this._log.info('featureViewDirectWrite stream %j', options);
+    return this.innerApiCalls.featureViewDirectWrite(null, options);
   }
 
 /**

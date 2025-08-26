@@ -429,9 +429,9 @@ export class GlobalOrganizationOperationsClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.operation
- *   Name of the Operations resource to return, or its unique numeric identifier.
+ *   Name of the Operations resource to return. Parent is derived from this field.
  * @param {string} request.parentId
- *   Parent ID for this request.
+ *   Parent ID for this request. Not used. Parent is derived from resource_id.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

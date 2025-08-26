@@ -48,6 +48,14 @@ function main(parent) {
    *  call.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. The standard list filter.
+   *  Supported fields:
+   *     * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+   *     the timestamp is in RFC 3339 format)
+   *  More detail in AIP-160 (https://google.aip.dev/160).
+   */
+  // const filter = 'abc123'
 
   // Imports the Aiplatform library
   const {SessionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

@@ -39,6 +39,12 @@ function main(parent) {
    */
   // const directContentsSource = {}
   /**
+   *  Defines a direct source of memories that should be uploaded to Memory
+   *  Bank. This is similar to `CreateMemory`, but it allows for consolidation
+   *  between these new memories and existing memories for the same scope.
+   */
+  // const directMemoriesSource = {}
+  /**
    *  Required. The resource name of the ReasoningEngine to generate memories
    *  for. Format:
    *  `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`

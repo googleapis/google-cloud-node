@@ -6729,6 +6729,11 @@
                     },
                     "AllocationResourceStatus": {
                       "oneofs": {
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_reservationBlockCount": {
                           "oneof": [
                             "reservationBlockCount"
@@ -6746,6 +6751,13 @@
                         }
                       },
                       "fields": {
+                        "healthInfo": {
+                          "type": "AllocationResourceStatusHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "reservationBlockCount": {
                           "type": "int32",
                           "id": 161835754,
@@ -6765,6 +6777,58 @@
                           "id": 196231151,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AllocationResourceStatusHealthInfo": {
+                      "oneofs": {
+                        "_degradedBlockCount": {
+                          "oneof": [
+                            "degradedBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyBlockCount": {
+                          "oneof": [
+                            "healthyBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedBlockCount": {
+                          "type": "int32",
+                          "id": 514082636,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyBlockCount": {
+                          "type": "int32",
+                          "id": 223625019,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -8840,6 +8904,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -8925,6 +8994,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "BackendBucketParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -9231,6 +9307,15 @@
                         }
                       }
                     },
+                    "BackendBucketParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
+                        }
+                      }
+                    },
                     "BackendBucketUsedBy": {
                       "oneofs": {
                         "_reference": {
@@ -9428,6 +9513,11 @@
                             "outlierDetection"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_port": {
                           "oneof": [
                             "port"
@@ -9486,6 +9576,11 @@
                         "_timeoutSec": {
                           "oneof": [
                             "timeoutSec"
+                          ]
+                        },
+                        "_tlsSettings": {
+                          "oneof": [
+                            "tlsSettings"
                           ]
                         }
                       },
@@ -9714,6 +9809,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "params": {
+                          "type": "BackendServiceParams",
+                          "id": 78313862,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "port": {
                           "type": "int32",
                           "id": 3446913,
@@ -9799,6 +9901,13 @@
                         "timeoutSec": {
                           "type": "int32",
                           "id": 79994995,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tlsSettings": {
+                          "type": "BackendServiceTlsSettings",
+                          "id": 81794791,
                           "options": {
                             "proto3_optional": true
                           }
@@ -10801,6 +10910,15 @@
                         }
                       }
                     },
+                    "BackendServiceParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
+                        }
+                      }
+                    },
                     "BackendServiceReference": {
                       "oneofs": {
                         "_backendService": {
@@ -10813,6 +10931,71 @@
                         "backendService": {
                           "type": "string",
                           "id": 306946058,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "BackendServiceTlsSettings": {
+                      "oneofs": {
+                        "_authenticationConfig": {
+                          "oneof": [
+                            "authenticationConfig"
+                          ]
+                        },
+                        "_sni": {
+                          "oneof": [
+                            "sni"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "authenticationConfig": {
+                          "type": "string",
+                          "id": 408053481,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sni": {
+                          "type": "string",
+                          "id": 114030,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subjectAltNames": {
+                          "rule": "repeated",
+                          "type": "BackendServiceTlsSettingsSubjectAltName",
+                          "id": 330029535
+                        }
+                      }
+                    },
+                    "BackendServiceTlsSettingsSubjectAltName": {
+                      "oneofs": {
+                        "_dnsName": {
+                          "oneof": [
+                            "dnsName"
+                          ]
+                        },
+                        "_uniformResourceIdentifier": {
+                          "oneof": [
+                            "uniformResourceIdentifier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dnsName": {
+                          "type": "string",
+                          "id": 411992033,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "uniformResourceIdentifier": {
+                          "type": "string",
+                          "id": 491409007,
                           "options": {
                             "proto3_optional": true
                           }
@@ -24354,6 +24537,13 @@
                       }
                     },
                     "GetReservationBlockRequest": {
+                      "oneofs": {
+                        "_view": {
+                          "oneof": [
+                            "view"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -24376,11 +24566,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "view": {
+                          "type": "string",
+                          "id": 3619493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "UNDEFINED_VIEW": 0,
+                            "BASIC": 62970894,
+                            "BLOCK_VIEW_UNSPECIFIED": 275070479,
+                            "FULL": 2169487
                           }
                         }
                       }
@@ -25554,6 +25761,16 @@
                     },
                     "GroupMaintenanceInfo": {
                       "oneofs": {
+                        "_instanceMaintenanceOngoingCount": {
+                          "oneof": [
+                            "instanceMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_instanceMaintenancePendingCount": {
+                          "oneof": [
+                            "instanceMaintenancePendingCount"
+                          ]
+                        },
                         "_maintenanceOngoingCount": {
                           "oneof": [
                             "maintenanceOngoingCount"
@@ -25569,6 +25786,16 @@
                             "schedulingType"
                           ]
                         },
+                        "_subblockInfraMaintenanceOngoingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_subblockInfraMaintenancePendingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenancePendingCount"
+                          ]
+                        },
                         "_upcomingGroupMaintenance": {
                           "oneof": [
                             "upcomingGroupMaintenance"
@@ -25576,6 +25803,20 @@
                         }
                       },
                       "fields": {
+                        "instanceMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 137611253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 76612881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "maintenanceOngoingCount": {
                           "type": "int32",
                           "id": 219781919,
@@ -25593,6 +25834,20 @@
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 366161790,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 305163418,
                           "options": {
                             "proto3_optional": true
                           }
@@ -36260,9 +36515,19 @@
                     },
                     "Interconnect": {
                       "oneofs": {
+                        "_aaiEnabled": {
+                          "oneof": [
+                            "aaiEnabled"
+                          ]
+                        },
                         "_adminEnabled": {
                           "oneof": [
                             "adminEnabled"
+                          ]
+                        },
+                        "_applicationAwareInterconnect": {
+                          "oneof": [
+                            "applicationAwareInterconnect"
                           ]
                         },
                         "_creationTimestamp": {
@@ -36382,9 +36647,23 @@
                         }
                       },
                       "fields": {
+                        "aaiEnabled": {
+                          "type": "bool",
+                          "id": 388780363,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "adminEnabled": {
                           "type": "bool",
                           "id": 445675089,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "applicationAwareInterconnect": {
+                          "type": "InterconnectApplicationAwareInterconnect",
+                          "id": 429095966,
                           "options": {
                             "proto3_optional": true
                           }
@@ -36628,6 +36907,108 @@
                           }
                         }
                       }
+                    },
+                    "InterconnectApplicationAwareInterconnect": {
+                      "oneofs": {
+                        "_bandwidthPercentagePolicy": {
+                          "oneof": [
+                            "bandwidthPercentagePolicy"
+                          ]
+                        },
+                        "_profileDescription": {
+                          "oneof": [
+                            "profileDescription"
+                          ]
+                        },
+                        "_strictPriorityPolicy": {
+                          "oneof": [
+                            "strictPriorityPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bandwidthPercentagePolicy": {
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy",
+                          "id": 187018857,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "profileDescription": {
+                          "type": "string",
+                          "id": 262813286,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shapeAveragePercentages": {
+                          "rule": "repeated",
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentage",
+                          "id": 259857497
+                        },
+                        "strictPriorityPolicy": {
+                          "type": "InterconnectApplicationAwareInterconnectStrictPriorityPolicy",
+                          "id": 145083063,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectBandwidthPercentage": {
+                      "oneofs": {
+                        "_percentage": {
+                          "oneof": [
+                            "percentage"
+                          ]
+                        },
+                        "_trafficClass": {
+                          "oneof": [
+                            "trafficClass"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "percentage": {
+                          "type": "uint32",
+                          "id": 151909018,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficClass": {
+                          "type": "string",
+                          "id": 198180022,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TrafficClass": {
+                          "values": {
+                            "UNDEFINED_TRAFFIC_CLASS": 0,
+                            "TC1": 82850,
+                            "TC2": 82851,
+                            "TC3": 82852,
+                            "TC4": 82853,
+                            "TC5": 82854,
+                            "TC6": 82855
+                          }
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy": {
+                      "fields": {
+                        "bandwidthPercentages": {
+                          "rule": "repeated",
+                          "type": "InterconnectApplicationAwareInterconnectBandwidthPercentage",
+                          "id": 233373323
+                        }
+                      }
+                    },
+                    "InterconnectApplicationAwareInterconnectStrictPriorityPolicy": {
+                      "fields": {}
                     },
                     "InterconnectAttachment": {
                       "oneofs": {
@@ -50286,6 +50667,11 @@
                           "oneof": [
                             "returnPartialSuccess"
                           ]
+                        },
+                        "_serviceProject": {
+                          "oneof": [
+                            "serviceProject"
+                          ]
                         }
                       },
                       "fields": {
@@ -50327,6 +50713,13 @@
                         "returnPartialSuccess": {
                           "type": "bool",
                           "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProject": {
+                          "type": "string",
+                          "id": 530592655,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54327,6 +54720,11 @@
                             "autoCreateRoutes"
                           ]
                         },
+                        "_connectionStatus": {
+                          "oneof": [
+                            "connectionStatus"
+                          ]
+                        },
                         "_exchangeSubnetRoutes": {
                           "oneof": [
                             "exchangeSubnetRoutes"
@@ -54381,12 +54779,24 @@
                           "oneof": [
                             "stateDetails"
                           ]
+                        },
+                        "_updateStrategy": {
+                          "oneof": [
+                            "updateStrategy"
+                          ]
                         }
                       },
                       "fields": {
                         "autoCreateRoutes": {
                           "type": "bool",
                           "id": 57454941,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "connectionStatus": {
+                          "type": "NetworkPeeringConnectionStatus",
+                          "id": 525629555,
                           "options": {
                             "proto3_optional": true
                           }
@@ -54467,6 +54877,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "updateStrategy": {
+                          "type": "string",
+                          "id": 6123049,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -54482,6 +54899,191 @@
                             "UNDEFINED_STATE": 0,
                             "ACTIVE": 314733318,
                             "INACTIVE": 270421099
+                          }
+                        },
+                        "UpdateStrategy": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STRATEGY": 0,
+                            "CONSENSUS": 203373655,
+                            "INDEPENDENT": 127011674,
+                            "UNSPECIFIED": 526786327
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatus": {
+                      "oneofs": {
+                        "_consensusState": {
+                          "oneof": [
+                            "consensusState"
+                          ]
+                        },
+                        "_trafficConfiguration": {
+                          "oneof": [
+                            "trafficConfiguration"
+                          ]
+                        },
+                        "_updateStrategy": {
+                          "oneof": [
+                            "updateStrategy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "consensusState": {
+                          "type": "NetworkPeeringConnectionStatusConsensusState",
+                          "id": 379772617,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficConfiguration": {
+                          "type": "NetworkPeeringConnectionStatusTrafficConfiguration",
+                          "id": 133016116,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateStrategy": {
+                          "type": "string",
+                          "id": 6123049,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UpdateStrategy": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STRATEGY": 0,
+                            "CONSENSUS": 203373655,
+                            "INDEPENDENT": 127011674,
+                            "UNSPECIFIED": 526786327
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatusConsensusState": {
+                      "oneofs": {
+                        "_deleteStatus": {
+                          "oneof": [
+                            "deleteStatus"
+                          ]
+                        },
+                        "_updateStatus": {
+                          "oneof": [
+                            "updateStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "deleteStatus": {
+                          "type": "string",
+                          "id": 483434758,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateStatus": {
+                          "type": "string",
+                          "id": 265998376,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DeleteStatus": {
+                          "values": {
+                            "UNDEFINED_DELETE_STATUS": 0,
+                            "DELETE_ACKNOWLEDGED": 325293916,
+                            "DELETE_STATUS_UNSPECIFIED": 395396446,
+                            "LOCAL_DELETE_REQUESTED": 227335214,
+                            "PEER_DELETE_REQUESTED": 197847799
+                          }
+                        },
+                        "UpdateStatus": {
+                          "values": {
+                            "UNDEFINED_UPDATE_STATUS": 0,
+                            "IN_SYNC": 2273653,
+                            "PENDING_LOCAL_ACKNOWLEDMENT": 229926592,
+                            "PENDING_PEER_ACKNOWLEDGEMENT": 420185797,
+                            "UPDATE_STATUS_UNSPECIFIED": 120836480
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPeeringConnectionStatusTrafficConfiguration": {
+                      "oneofs": {
+                        "_exportCustomRoutesToPeer": {
+                          "oneof": [
+                            "exportCustomRoutesToPeer"
+                          ]
+                        },
+                        "_exportSubnetRoutesWithPublicIpToPeer": {
+                          "oneof": [
+                            "exportSubnetRoutesWithPublicIpToPeer"
+                          ]
+                        },
+                        "_importCustomRoutesFromPeer": {
+                          "oneof": [
+                            "importCustomRoutesFromPeer"
+                          ]
+                        },
+                        "_importSubnetRoutesWithPublicIpFromPeer": {
+                          "oneof": [
+                            "importSubnetRoutesWithPublicIpFromPeer"
+                          ]
+                        },
+                        "_stackType": {
+                          "oneof": [
+                            "stackType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exportCustomRoutesToPeer": {
+                          "type": "bool",
+                          "id": 286428404,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "exportSubnetRoutesWithPublicIpToPeer": {
+                          "type": "bool",
+                          "id": 8358601,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "importCustomRoutesFromPeer": {
+                          "type": "bool",
+                          "id": 398584470,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "importSubnetRoutesWithPublicIpFromPeer": {
+                          "type": "bool",
+                          "id": 234712361,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "stackType": {
+                          "type": "string",
+                          "id": 425908881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StackType": {
+                          "values": {
+                            "UNDEFINED_STACK_TYPE": 0,
+                            "IPV4_IPV6": 22197249,
+                            "IPV4_ONLY": 22373798
                           }
                         }
                       }
@@ -55543,6 +56145,24 @@
                       }
                     },
                     "NetworksRemovePeeringRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworksRequestRemovePeeringRequest": {
                       "oneofs": {
                         "_name": {
                           "oneof": [
@@ -61616,6 +62236,54 @@
                         }
                       }
                     },
+                    "PerformMaintenanceReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "Policy": {
                       "oneofs": {
                         "_etag": {
@@ -65660,8 +66328,53 @@
                         }
                       }
                     },
+                    "RequestRemovePeeringNetworkRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "network": {
+                          "type": "string",
+                          "id": 232872494,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networksRequestRemovePeeringRequestResource": {
+                          "type": "NetworksRequestRemovePeeringRequest",
+                          "id": 150860366,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Reservation": {
                       "oneofs": {
+                        "_advancedDeploymentControl": {
+                          "oneof": [
+                            "advancedDeploymentControl"
+                          ]
+                        },
                         "_aggregateReservation": {
                           "oneof": [
                             "aggregateReservation"
@@ -65732,6 +66445,11 @@
                             "satisfiesPzs"
                           ]
                         },
+                        "_schedulingType": {
+                          "oneof": [
+                            "schedulingType"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -65764,6 +66482,13 @@
                         }
                       },
                       "fields": {
+                        "advancedDeploymentControl": {
+                          "type": "ReservationAdvancedDeploymentControl",
+                          "id": 410618144,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "aggregateReservation": {
                           "type": "AllocationAggregateReservation",
                           "id": 291567948,
@@ -65872,6 +66597,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "schedulingType": {
+                          "type": "string",
+                          "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
@@ -65923,6 +66655,14 @@
                             "DEPLOYMENT_TYPE_UNSPECIFIED": 234847180
                           }
                         },
+                        "SchedulingType": {
+                          "values": {
+                            "UNDEFINED_SCHEDULING_TYPE": 0,
+                            "GROUPED": 474540862,
+                            "GROUP_MAINTENANCE_TYPE_UNSPECIFIED": 447183678,
+                            "INDEPENDENT": 127011674
+                          }
+                        },
                         "Status": {
                           "values": {
                             "UNDEFINED_STATUS": 0,
@@ -65931,6 +66671,34 @@
                             "INVALID": 530283991,
                             "READY": 77848963,
                             "UPDATING": 494614342
+                          }
+                        }
+                      }
+                    },
+                    "ReservationAdvancedDeploymentControl": {
+                      "oneofs": {
+                        "_reservationOperationalMode": {
+                          "oneof": [
+                            "reservationOperationalMode"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "reservationOperationalMode": {
+                          "type": "string",
+                          "id": 499978755,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReservationOperationalMode": {
+                          "values": {
+                            "UNDEFINED_RESERVATION_OPERATIONAL_MODE": 0,
+                            "ALL_CAPACITY": 500029880,
+                            "HIGHLY_AVAILABLE_CAPACITY": 110861600,
+                            "RESERVATION_OPERATIONAL_MODE_UNSPECIFIED": 194296603
                           }
                         }
                       }
@@ -66069,6 +66837,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -66141,6 +66914,13 @@
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthInfo": {
+                          "type": "ReservationBlockHealthInfo",
+                          "id": 235287729,
                           "options": {
                             "proto3_optional": true
                           }
@@ -66242,6 +67022,58 @@
                         }
                       }
                     },
+                    "ReservationBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedSubBlockCount": {
+                          "oneof": [
+                            "degradedSubBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthySubBlockCount": {
+                          "oneof": [
+                            "healthySubBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedSubBlockCount": {
+                          "type": "int32",
+                          "id": 458044493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthySubBlockCount": {
+                          "type": "int32",
+                          "id": 5348540,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
+                          }
+                        }
+                      }
+                    },
                     "ReservationBlockPhysicalTopology": {
                       "oneofs": {
                         "_block": {
@@ -66266,6 +67098,83 @@
                         "cluster": {
                           "type": "string",
                           "id": 335221242,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "ReservationBlockPhysicalTopologyInstance",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstance": {
+                      "oneofs": {
+                        "_instanceId": {
+                          "oneof": [
+                            "instanceId"
+                          ]
+                        },
+                        "_physicalHostTopology": {
+                          "oneof": [
+                            "physicalHostTopology"
+                          ]
+                        },
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceId": {
+                          "type": "uint64",
+                          "id": 45488389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "physicalHostTopology": {
+                          "type": "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology",
+                          "id": 390842814,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectId": {
+                          "type": "uint64",
+                          "id": 177513473,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology": {
+                      "oneofs": {
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
                           "options": {
                             "proto3_optional": true
                           }
@@ -66444,6 +67353,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -66467,6 +67381,11 @@
                         "_physicalTopology": {
                           "oneof": [
                             "physicalTopology"
+                          ]
+                        },
+                        "_reservationSubBlockMaintenance": {
+                          "oneof": [
+                            "reservationSubBlockMaintenance"
                           ]
                         },
                         "_selfLink": {
@@ -66505,6 +67424,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "healthInfo": {
+                          "type": "ReservationSubBlockHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "id": {
                           "type": "uint64",
                           "id": 3355,
@@ -66536,6 +67462,13 @@
                         "physicalTopology": {
                           "type": "ReservationSubBlockPhysicalTopology",
                           "id": 279778519,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlockMaintenance": {
+                          "type": "GroupMaintenanceInfo",
+                          "id": 377005551,
                           "options": {
                             "proto3_optional": true
                           }
@@ -66577,6 +67510,82 @@
                             "DELETING": 528602024,
                             "INVALID": 530283991,
                             "READY": 77848963
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedHostCount": {
+                          "oneof": [
+                            "degradedHostCount"
+                          ]
+                        },
+                        "_degradedInfraCount": {
+                          "oneof": [
+                            "degradedInfraCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyHostCount": {
+                          "oneof": [
+                            "healthyHostCount"
+                          ]
+                        },
+                        "_healthyInfraCount": {
+                          "oneof": [
+                            "healthyInfraCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedHostCount": {
+                          "type": "int32",
+                          "id": 535025001,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "degradedInfraCount": {
+                          "type": "int32",
+                          "id": 138638927,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyHostCount": {
+                          "type": "int32",
+                          "id": 40739738,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyInfraCount": {
+                          "type": "int32",
+                          "id": 385052222,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -73567,6 +74576,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 86866735
                         },
                         "name": {
                           "type": "string",
@@ -86283,6 +87297,11 @@
                             "latestWindowStartTime"
                           ]
                         },
+                        "_maintenanceOnShutdown": {
+                          "oneof": [
+                            "maintenanceOnShutdown"
+                          ]
+                        },
                         "_maintenanceStatus": {
                           "oneof": [
                             "maintenanceStatus"
@@ -86319,6 +87338,18 @@
                             "proto3_optional": true
                           }
                         },
+                        "maintenanceOnShutdown": {
+                          "type": "bool",
+                          "id": 231055754,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maintenanceReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 140283267
+                        },
                         "maintenanceStatus": {
                           "type": "string",
                           "id": 81645214,
@@ -86349,6 +87380,24 @@
                         }
                       },
                       "nested": {
+                        "MaintenanceReasons": {
+                          "values": {
+                            "UNDEFINED_MAINTENANCE_REASONS": 0,
+                            "FAILURE_DISK": 8573778,
+                            "FAILURE_GPU": 467876919,
+                            "FAILURE_GPU_TEMPERATURE": 24926540,
+                            "FAILURE_GPU_XID": 51956587,
+                            "FAILURE_INFRA": 270541467,
+                            "FAILURE_INTERFACE": 390068356,
+                            "FAILURE_MEMORY": 440132982,
+                            "FAILURE_NETWORK": 42811449,
+                            "FAILURE_NVLINK": 484426295,
+                            "INFRASTRUCTURE_RELOCATION": 359845636,
+                            "MAINTENANCE_REASON_UNKNOWN": 50570235,
+                            "PLANNED_NETWORK_UPDATE": 135494677,
+                            "PLANNED_UPDATE": 161733572
+                          }
+                        },
                         "MaintenanceStatus": {
                           "values": {
                             "UNDEFINED_MAINTENANCE_STATUS": 0,
@@ -86360,6 +87409,7 @@
                         "Type": {
                           "values": {
                             "UNDEFINED_TYPE": 0,
+                            "MULTIPLE": 362714640,
                             "SCHEDULED": 478400653,
                             "UNKNOWN_TYPE": 490705455,
                             "UNSCHEDULED": 450077204
@@ -98981,6 +100031,30 @@
                             }
                           ]
                         },
+                        "RequestRemovePeering": {
+                          "requestType": "RequestRemovePeeringNetworkRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "networks_request_remove_peering_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/networks/{network}/requestRemovePeering",
+                            "(google.api.method_signature)": "project,network,networks_request_remove_peering_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "networks_request_remove_peering_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/networks/{network}/requestRemovePeering"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,network,networks_request_remove_peering_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
                         "SwitchToCustomMode": {
                           "requestType": "SwitchToCustomModeNetworkRequest",
                           "responseType": "Operation",
@@ -104292,7 +105366,7 @@
                     "ReservationSubBlocks": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "Get": {
@@ -104328,6 +105402,28 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name"
+                            }
+                          ]
+                        },
+                        "PerformMaintenance": {
+                          "requestType": "PerformMaintenanceReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         }
@@ -115797,6 +116893,11 @@
                     },
                     "AllocationResourceStatus": {
                       "oneofs": {
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_reservationBlockCount": {
                           "oneof": [
                             "reservationBlockCount"
@@ -115814,6 +116915,13 @@
                         }
                       },
                       "fields": {
+                        "healthInfo": {
+                          "type": "AllocationResourceStatusHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "reservationBlockCount": {
                           "type": "int32",
                           "id": 161835754,
@@ -115833,6 +116941,58 @@
                           "id": 196231151,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AllocationResourceStatusHealthInfo": {
+                      "oneofs": {
+                        "_degradedBlockCount": {
+                          "oneof": [
+                            "degradedBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyBlockCount": {
+                          "oneof": [
+                            "healthyBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedBlockCount": {
+                          "type": "int32",
+                          "id": 514082636,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyBlockCount": {
+                          "type": "int32",
+                          "id": 223625019,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -136770,6 +137930,13 @@
                       }
                     },
                     "GetReservationBlockRequest": {
+                      "oneofs": {
+                        "_view": {
+                          "oneof": [
+                            "view"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -136792,11 +137959,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "view": {
+                          "type": "string",
+                          "id": 3619493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "zone": {
                           "type": "string",
                           "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "View": {
+                          "values": {
+                            "UNDEFINED_VIEW": 0,
+                            "BASIC": 62970894,
+                            "BLOCK_VIEW_UNSPECIFIED": 275070479,
+                            "FULL": 2169487
                           }
                         }
                       }
@@ -138045,6 +139229,16 @@
                     },
                     "GroupMaintenanceInfo": {
                       "oneofs": {
+                        "_instanceMaintenanceOngoingCount": {
+                          "oneof": [
+                            "instanceMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_instanceMaintenancePendingCount": {
+                          "oneof": [
+                            "instanceMaintenancePendingCount"
+                          ]
+                        },
                         "_maintenanceOngoingCount": {
                           "oneof": [
                             "maintenanceOngoingCount"
@@ -138060,6 +139254,16 @@
                             "schedulingType"
                           ]
                         },
+                        "_subblockInfraMaintenanceOngoingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenanceOngoingCount"
+                          ]
+                        },
+                        "_subblockInfraMaintenancePendingCount": {
+                          "oneof": [
+                            "subblockInfraMaintenancePendingCount"
+                          ]
+                        },
                         "_upcomingGroupMaintenance": {
                           "oneof": [
                             "upcomingGroupMaintenance"
@@ -138067,6 +139271,20 @@
                         }
                       },
                       "fields": {
+                        "instanceMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 137611253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 76612881,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "maintenanceOngoingCount": {
                           "type": "int32",
                           "id": 219781919,
@@ -138084,6 +139302,20 @@
                         "schedulingType": {
                           "type": "string",
                           "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenanceOngoingCount": {
+                          "type": "int32",
+                          "id": 366161790,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subblockInfraMaintenancePendingCount": {
+                          "type": "int32",
+                          "id": 305163418,
                           "options": {
                             "proto3_optional": true
                           }
@@ -177541,6 +178773,54 @@
                         }
                       }
                     },
+                    "PerformMaintenanceReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "Policy": {
                       "oneofs": {
                         "_etag": {
@@ -182428,6 +183708,11 @@
                             "satisfiesPzs"
                           ]
                         },
+                        "_schedulingType": {
+                          "oneof": [
+                            "schedulingType"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -182575,6 +183860,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "schedulingType": {
+                          "type": "string",
+                          "id": 199835397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
@@ -182633,6 +183925,14 @@
                             "CALENDAR": 67431230,
                             "DEFAULT": 115302945,
                             "RESERVATION_MODE_UNSPECIFIED": 233810606
+                          }
+                        },
+                        "SchedulingType": {
+                          "values": {
+                            "UNDEFINED_SCHEDULING_TYPE": 0,
+                            "GROUPED": 474540862,
+                            "GROUP_MAINTENANCE_TYPE_UNSPECIFIED": 447183678,
+                            "INDEPENDENT": 127011674
                           }
                         },
                         "Status": {
@@ -182783,6 +184083,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -182855,6 +184160,13 @@
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthInfo": {
+                          "type": "ReservationBlockHealthInfo",
+                          "id": 235287729,
                           "options": {
                             "proto3_optional": true
                           }
@@ -182956,6 +184268,58 @@
                         }
                       }
                     },
+                    "ReservationBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedSubBlockCount": {
+                          "oneof": [
+                            "degradedSubBlockCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthySubBlockCount": {
+                          "oneof": [
+                            "healthySubBlockCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedSubBlockCount": {
+                          "type": "int32",
+                          "id": 458044493,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthySubBlockCount": {
+                          "type": "int32",
+                          "id": 5348540,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
+                          }
+                        }
+                      }
+                    },
                     "ReservationBlockPhysicalTopology": {
                       "oneofs": {
                         "_block": {
@@ -182980,6 +184344,83 @@
                         "cluster": {
                           "type": "string",
                           "id": 335221242,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "ReservationBlockPhysicalTopologyInstance",
+                          "id": 29097598
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstance": {
+                      "oneofs": {
+                        "_instanceId": {
+                          "oneof": [
+                            "instanceId"
+                          ]
+                        },
+                        "_physicalHostTopology": {
+                          "oneof": [
+                            "physicalHostTopology"
+                          ]
+                        },
+                        "_projectId": {
+                          "oneof": [
+                            "projectId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instanceId": {
+                          "type": "uint64",
+                          "id": 45488389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "physicalHostTopology": {
+                          "type": "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology",
+                          "id": 390842814,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "projectId": {
+                          "type": "uint64",
+                          "id": 177513473,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationBlockPhysicalTopologyInstancePhysicalHostTopology": {
+                      "oneofs": {
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_subBlock": {
+                          "oneof": [
+                            "subBlock"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "host": {
+                          "type": "string",
+                          "id": 3208616,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "subBlock": {
+                          "type": "string",
+                          "id": 478033358,
                           "options": {
                             "proto3_optional": true
                           }
@@ -183158,6 +184599,11 @@
                             "creationTimestamp"
                           ]
                         },
+                        "_healthInfo": {
+                          "oneof": [
+                            "healthInfo"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -183181,6 +184627,11 @@
                         "_physicalTopology": {
                           "oneof": [
                             "physicalTopology"
+                          ]
+                        },
+                        "_reservationSubBlockMaintenance": {
+                          "oneof": [
+                            "reservationSubBlockMaintenance"
                           ]
                         },
                         "_selfLink": {
@@ -183219,6 +184670,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "healthInfo": {
+                          "type": "ReservationSubBlockHealthInfo",
+                          "id": 235287729,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "id": {
                           "type": "uint64",
                           "id": 3355,
@@ -183250,6 +184708,13 @@
                         "physicalTopology": {
                           "type": "ReservationSubBlockPhysicalTopology",
                           "id": 279778519,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlockMaintenance": {
+                          "type": "GroupMaintenanceInfo",
+                          "id": 377005551,
                           "options": {
                             "proto3_optional": true
                           }
@@ -183291,6 +184756,82 @@
                             "DELETING": 528602024,
                             "INVALID": 530283991,
                             "READY": 77848963
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlockHealthInfo": {
+                      "oneofs": {
+                        "_degradedHostCount": {
+                          "oneof": [
+                            "degradedHostCount"
+                          ]
+                        },
+                        "_degradedInfraCount": {
+                          "oneof": [
+                            "degradedInfraCount"
+                          ]
+                        },
+                        "_healthStatus": {
+                          "oneof": [
+                            "healthStatus"
+                          ]
+                        },
+                        "_healthyHostCount": {
+                          "oneof": [
+                            "healthyHostCount"
+                          ]
+                        },
+                        "_healthyInfraCount": {
+                          "oneof": [
+                            "healthyInfraCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "degradedHostCount": {
+                          "type": "int32",
+                          "id": 535025001,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "degradedInfraCount": {
+                          "type": "int32",
+                          "id": 138638927,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthStatus": {
+                          "type": "string",
+                          "id": 380545845,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyHostCount": {
+                          "type": "int32",
+                          "id": 40739738,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthyInfraCount": {
+                          "type": "int32",
+                          "id": 385052222,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthStatus": {
+                          "values": {
+                            "UNDEFINED_HEALTH_STATUS": 0,
+                            "DEGRADED": 396890926,
+                            "HEALTHY": 439801213,
+                            "HEALTH_STATUS_UNSPECIFIED": 482246925
                           }
                         }
                       }
@@ -205748,6 +207289,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "maintenanceReasons": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 140283267
+                        },
                         "maintenanceStatus": {
                           "type": "string",
                           "id": 81645214,
@@ -205778,6 +207324,22 @@
                         }
                       },
                       "nested": {
+                        "MaintenanceReasons": {
+                          "values": {
+                            "UNDEFINED_MAINTENANCE_REASONS": 0,
+                            "FAILURE_DISK": 8573778,
+                            "FAILURE_GPU": 467876919,
+                            "FAILURE_GPU_TEMPERATURE": 24926540,
+                            "FAILURE_GPU_XID": 51956587,
+                            "FAILURE_INFRA": 270541467,
+                            "FAILURE_INTERFACE": 390068356,
+                            "FAILURE_MEMORY": 440132982,
+                            "FAILURE_NETWORK": 42811449,
+                            "FAILURE_NVLINK": 484426295,
+                            "INFRASTRUCTURE_RELOCATION": 359845636,
+                            "MAINTENANCE_REASON_UNKNOWN": 50570235
+                          }
+                        },
                         "MaintenanceStatus": {
                           "values": {
                             "UNDEFINED_MAINTENANCE_STATUS": 0,
@@ -226827,7 +228389,7 @@
                     "ReservationSubBlocks": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "Get": {
@@ -226863,6 +228425,28 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name"
+                            }
+                          ]
+                        },
+                        "PerformMaintenance": {
+                          "requestType": "PerformMaintenanceReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/performMaintenance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
                         }
@@ -233059,8 +234643,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -233184,6 +234767,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -233324,6 +234911,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -233381,6 +234990,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -233440,6 +235054,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -233574,12 +235201,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -233617,6 +235251,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -233706,6 +235345,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -233931,6 +235574,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -234145,6 +235792,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -234280,7 +235928,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -234307,6 +235956,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -234375,6 +236028,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -234464,6 +236137,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -234607,6 +236284,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -234617,6 +236295,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -234627,6 +236306,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -234637,6 +236317,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -234647,7 +236328,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -234657,27 +236339,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -234722,7 +236415,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -234736,6 +236435,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -234764,11 +236490,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -234781,6 +236522,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -234864,6 +236611,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {

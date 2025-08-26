@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/os-config-v4.2.0...os-config-v4.3.0) (2025-08-12)
+
+
+### Features
+
+* [osconfig] Add highest_upgradable_cve_severity field to Vulnerability report ([#6588](https://github.com/googleapis/google-cloud-node/issues/6588)) ([ebdb880](https://github.com/googleapis/google-cloud-node/commit/ebdb88097ad08834b188e624078db97534f82e11))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/os-config-v4.1.0...os-config-v4.2.0) (2025-07-09)
 
 

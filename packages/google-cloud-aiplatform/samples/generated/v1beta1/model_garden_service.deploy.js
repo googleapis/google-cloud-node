@@ -41,6 +41,10 @@ function main(destination) {
    */
   // const huggingFaceModelId = 'abc123'
   /**
+   *  The custom model to deploy from a Google Cloud Storage URI.
+   */
+  // const customModel = {}
+  /**
    *  Required. The resource name of the Location to deploy the model in.
    *  Format: `projects/{project}/locations/{location}`
    */

@@ -491,6 +491,114 @@ describe('v1.SecureSourceManagerClient', () => {
         });
     });
 
+    describe('getHook', () => {
+        it('invokes getHook without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.Hook()
+            );
+            client.innerApiCalls.getHook = stubSimpleCall(expectedResponse);
+            const [response] = await client.getHook(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHook without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.Hook()
+            );
+            client.innerApiCalls.getHook = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getHook(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IHook|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHook with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getHook = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getHook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getHook with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getHook(request), expectedError);
+        });
+    });
+
     describe('getIamPolicyRepo', () => {
         it('invokes getIamPolicyRepo without error', async () => {
             const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
@@ -920,6 +1028,546 @@ describe('v1.SecureSourceManagerClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getBranchRule(request), expectedError);
+        });
+    });
+
+    describe('getPullRequest', () => {
+        it('invokes getPullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.PullRequest()
+            );
+            client.innerApiCalls.getPullRequest = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPullRequest(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.PullRequest()
+            );
+            client.innerApiCalls.getPullRequest = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPullRequest(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IPullRequest|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequest with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPullRequest = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequest with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPullRequest(request), expectedError);
+        });
+    });
+
+    describe('fetchBlob', () => {
+        it('invokes fetchBlob without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchBlobRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobResponse()
+            );
+            client.innerApiCalls.fetchBlob = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchBlob(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBlob without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchBlobRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobResponse()
+            );
+            client.innerApiCalls.fetchBlob = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchBlob(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBlob with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchBlobRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchBlob = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchBlob(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBlob as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBlob with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchBlobRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchBlobRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.fetchBlob(request), expectedError);
+        });
+    });
+
+    describe('getIssue', () => {
+        it('invokes getIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.Issue()
+            );
+            client.innerApiCalls.getIssue = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIssue(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.Issue()
+            );
+            client.innerApiCalls.getIssue = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIssue(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IIssue|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssue with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIssue = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssue with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIssue(request), expectedError);
+        });
+    });
+
+    describe('getPullRequestComment', () => {
+        it('invokes getPullRequestComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.PullRequestComment()
+            );
+            client.innerApiCalls.getPullRequestComment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getPullRequestComment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequestComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.PullRequestComment()
+            );
+            client.innerApiCalls.getPullRequestComment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getPullRequestComment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IPullRequestComment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequestComment with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getPullRequestComment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getPullRequestComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getPullRequestComment with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getPullRequestComment(request), expectedError);
+        });
+    });
+
+    describe('getIssueComment', () => {
+        it('invokes getIssueComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.IssueComment()
+            );
+            client.innerApiCalls.getIssueComment = stubSimpleCall(expectedResponse);
+            const [response] = await client.getIssueComment(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssueComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.IssueComment()
+            );
+            client.innerApiCalls.getIssueComment = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getIssueComment(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IIssueComment|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssueComment with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getIssueComment = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getIssueComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getIssueComment with closed client', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.GetIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.GetIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getIssueComment(request), expectedError);
         });
     });
 
@@ -1385,6 +2033,164 @@ describe('v1.SecureSourceManagerClient', () => {
         });
     });
 
+    describe('updateRepository', () => {
+        it('invokes updateRepository without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest()
+            );
+            request.repository ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest', ['repository', 'name']);
+            request.repository.name = defaultValue1;
+            const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRepository = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateRepository(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRepository without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest()
+            );
+            request.repository ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest', ['repository', 'name']);
+            request.repository.name = defaultValue1;
+            const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateRepository = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateRepository(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRepository with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest()
+            );
+            request.repository ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest', ['repository', 'name']);
+            request.repository.name = defaultValue1;
+            const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRepository = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateRepository(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateRepository with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest()
+            );
+            request.repository ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateRepositoryRequest', ['repository', 'name']);
+            request.repository.name = defaultValue1;
+            const expectedHeaderRequestParams = `repository.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateRepository = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateRepository(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateRepository as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateRepositoryProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateRepositoryProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateRepositoryProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateRepositoryProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('deleteRepository', () => {
         it('invokes deleteRepository without error', async () => {
             const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
@@ -1534,6 +2340,472 @@ describe('v1.SecureSourceManagerClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkDeleteRepositoryProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createHook', () => {
+        it('invokes createHook without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateHookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHook = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createHook(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHook without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateHookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createHook = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createHook(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHook with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateHookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHook = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createHook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createHook with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateHookRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createHook = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createHook(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateHookProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateHookProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateHookProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateHookProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateHook', () => {
+        it('invokes updateHook without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateHookRequest()
+            );
+            request.hook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateHookRequest', ['hook', 'name']);
+            request.hook.name = defaultValue1;
+            const expectedHeaderRequestParams = `hook.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHook = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateHook(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHook without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateHookRequest()
+            );
+            request.hook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateHookRequest', ['hook', 'name']);
+            request.hook.name = defaultValue1;
+            const expectedHeaderRequestParams = `hook.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateHook = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateHook(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHook with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateHookRequest()
+            );
+            request.hook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateHookRequest', ['hook', 'name']);
+            request.hook.name = defaultValue1;
+            const expectedHeaderRequestParams = `hook.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHook = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateHook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateHook with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateHookRequest()
+            );
+            request.hook ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateHookRequest', ['hook', 'name']);
+            request.hook.name = defaultValue1;
+            const expectedHeaderRequestParams = `hook.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateHook = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateHook(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateHookProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateHookProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateHookProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateHookProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteHook', () => {
+        it('invokes deleteHook without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHook = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteHook(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHook without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteHook = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteHook(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHook with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHook = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteHook(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteHook with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteHookRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteHookRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteHook = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteHook(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteHook as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteHookProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteHookProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteHookProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteHookProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -2000,6 +3272,2948 @@ describe('v1.SecureSourceManagerClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkDeleteBranchRuleProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createPullRequest', () => {
+        it('invokes createPullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPullRequest = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createPullRequest(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPullRequest = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPullRequest(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequest with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPullRequest = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createPullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequest with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPullRequest = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createPullRequest(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreatePullRequestProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreatePullRequestProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreatePullRequestProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreatePullRequestProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updatePullRequest', () => {
+        it('invokes updatePullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest()
+            );
+            request.pullRequest ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest', ['pullRequest', 'name']);
+            request.pullRequest.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePullRequest = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updatePullRequest(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest()
+            );
+            request.pullRequest ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest', ['pullRequest', 'name']);
+            request.pullRequest.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePullRequest = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePullRequest(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequest with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest()
+            );
+            request.pullRequest ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest', ['pullRequest', 'name']);
+            request.pullRequest.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePullRequest = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updatePullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequest with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest()
+            );
+            request.pullRequest ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestRequest', ['pullRequest', 'name']);
+            request.pullRequest.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePullRequest = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updatePullRequest(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdatePullRequestProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdatePullRequestProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdatePullRequestProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdatePullRequestProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('mergePullRequest', () => {
+        it('invokes mergePullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.MergePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.MergePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.mergePullRequest = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.mergePullRequest(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergePullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.MergePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.MergePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.mergePullRequest = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.mergePullRequest(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergePullRequest with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.MergePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.MergePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.mergePullRequest = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.mergePullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes mergePullRequest with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.MergePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.MergePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.mergePullRequest = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.mergePullRequest(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.mergePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkMergePullRequestProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkMergePullRequestProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkMergePullRequestProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkMergePullRequestProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('openPullRequest', () => {
+        it('invokes openPullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.openPullRequest = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.openPullRequest(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openPullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.openPullRequest = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.openPullRequest(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openPullRequest with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.openPullRequest = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.openPullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openPullRequest with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenPullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenPullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.openPullRequest = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.openPullRequest(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openPullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOpenPullRequestProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkOpenPullRequestProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkOpenPullRequestProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkOpenPullRequestProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('closePullRequest', () => {
+        it('invokes closePullRequest without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ClosePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ClosePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.closePullRequest = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.closePullRequest(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closePullRequest without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ClosePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ClosePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.closePullRequest = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.closePullRequest(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closePullRequest with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ClosePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ClosePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.closePullRequest = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.closePullRequest(request), expectedError);
+            const actualRequest = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closePullRequest with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ClosePullRequestRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ClosePullRequestRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.closePullRequest = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.closePullRequest(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closePullRequest as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkClosePullRequestProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkClosePullRequestProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkClosePullRequestProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkClosePullRequestProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createIssue', () => {
+        it('invokes createIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createIssue = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createIssue(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createIssue = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createIssue(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssue with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createIssue = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssue with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createIssue = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createIssue(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateIssueProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateIssueProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateIssueProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateIssueProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateIssue', () => {
+        it('invokes updateIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueRequest()
+            );
+            request.issue ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueRequest', ['issue', 'name']);
+            request.issue.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateIssue = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateIssue(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueRequest()
+            );
+            request.issue ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueRequest', ['issue', 'name']);
+            request.issue.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateIssue = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateIssue(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssue with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueRequest()
+            );
+            request.issue ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueRequest', ['issue', 'name']);
+            request.issue.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateIssue = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssue with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueRequest()
+            );
+            request.issue ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueRequest', ['issue', 'name']);
+            request.issue.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateIssue = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateIssue(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateIssueProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateIssueProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateIssueProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateIssueProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteIssue', () => {
+        it('invokes deleteIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteIssue = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteIssue(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteIssue = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteIssue(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssue with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteIssue = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssue with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteIssue = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteIssue(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteIssueProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteIssueProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteIssueProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteIssueProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('openIssue', () => {
+        it('invokes openIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.openIssue = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.openIssue(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.openIssue = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.openIssue(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openIssue with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.openIssue = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.openIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes openIssue with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.OpenIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.OpenIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.openIssue = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.openIssue(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.openIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOpenIssueProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkOpenIssueProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkOpenIssueProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkOpenIssueProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('closeIssue', () => {
+        it('invokes closeIssue without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CloseIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CloseIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.closeIssue = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.closeIssue(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closeIssue without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CloseIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CloseIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.closeIssue = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.closeIssue(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closeIssue with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CloseIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CloseIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.closeIssue = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.closeIssue(request), expectedError);
+            const actualRequest = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes closeIssue with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CloseIssueRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CloseIssueRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.closeIssue = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.closeIssue(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.closeIssue as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCloseIssueProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCloseIssueProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCloseIssueProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCloseIssueProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createPullRequestComment', () => {
+        it('invokes createPullRequestComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPullRequestComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createPullRequestComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequestComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createPullRequestComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createPullRequestComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequestComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPullRequestComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createPullRequestComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createPullRequestComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createPullRequestComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createPullRequestComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createPullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreatePullRequestCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreatePullRequestCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreatePullRequestCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreatePullRequestCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updatePullRequestComment', () => {
+        it('invokes updatePullRequestComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest()
+            );
+            request.pullRequestComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest', ['pullRequestComment', 'name']);
+            request.pullRequestComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request_comment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePullRequestComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updatePullRequestComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequestComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest()
+            );
+            request.pullRequestComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest', ['pullRequestComment', 'name']);
+            request.pullRequestComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request_comment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updatePullRequestComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updatePullRequestComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequestComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest()
+            );
+            request.pullRequestComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest', ['pullRequestComment', 'name']);
+            request.pullRequestComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request_comment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePullRequestComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updatePullRequestComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updatePullRequestComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest()
+            );
+            request.pullRequestComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest', ['pullRequestComment', 'name']);
+            request.pullRequestComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `pull_request_comment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updatePullRequestComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updatePullRequestComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updatePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdatePullRequestCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdatePullRequestCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdatePullRequestCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdatePullRequestCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deletePullRequestComment', () => {
+        it('invokes deletePullRequestComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePullRequestComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deletePullRequestComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePullRequestComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deletePullRequestComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deletePullRequestComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePullRequestComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePullRequestComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deletePullRequestComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deletePullRequestComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deletePullRequestComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deletePullRequestComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deletePullRequestComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeletePullRequestCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeletePullRequestCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeletePullRequestCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeletePullRequestCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('batchCreatePullRequestComments', () => {
+        it('invokes batchCreatePullRequestComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchCreatePullRequestComments = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.batchCreatePullRequestComments(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePullRequestComments without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.batchCreatePullRequestComments = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreatePullRequestComments(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePullRequestComments with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreatePullRequestComments = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.batchCreatePullRequestComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreatePullRequestComments with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreatePullRequestComments = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.batchCreatePullRequestComments(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreatePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkBatchCreatePullRequestCommentsProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkBatchCreatePullRequestCommentsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkBatchCreatePullRequestCommentsProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkBatchCreatePullRequestCommentsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('resolvePullRequestComments', () => {
+        it('invokes resolvePullRequestComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resolvePullRequestComments = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.resolvePullRequestComments(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resolvePullRequestComments without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.resolvePullRequestComments = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.resolvePullRequestComments(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resolvePullRequestComments with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resolvePullRequestComments = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.resolvePullRequestComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes resolvePullRequestComments with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.resolvePullRequestComments = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.resolvePullRequestComments(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.resolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkResolvePullRequestCommentsProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkResolvePullRequestCommentsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkResolvePullRequestCommentsProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkResolvePullRequestCommentsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('unresolvePullRequestComments', () => {
+        it('invokes unresolvePullRequestComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.unresolvePullRequestComments = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.unresolvePullRequestComments(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes unresolvePullRequestComments without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.unresolvePullRequestComments = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.unresolvePullRequestComments(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes unresolvePullRequestComments with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.unresolvePullRequestComments = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.unresolvePullRequestComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes unresolvePullRequestComments with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.unresolvePullRequestComments = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.unresolvePullRequestComments(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.unresolvePullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUnresolvePullRequestCommentsProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUnresolvePullRequestCommentsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUnresolvePullRequestCommentsProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUnresolvePullRequestCommentsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createIssueComment', () => {
+        it('invokes createIssueComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createIssueComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createIssueComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssueComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createIssueComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createIssueComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssueComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createIssueComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createIssueComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createIssueComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.CreateIssueCommentRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createIssueComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createIssueComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateIssueCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateIssueCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateIssueCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateIssueCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateIssueComment', () => {
+        it('invokes updateIssueComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest()
+            );
+            request.issueComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest', ['issueComment', 'name']);
+            request.issueComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue_comment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateIssueComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateIssueComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssueComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest()
+            );
+            request.issueComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest', ['issueComment', 'name']);
+            request.issueComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue_comment.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateIssueComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateIssueComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssueComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest()
+            );
+            request.issueComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest', ['issueComment', 'name']);
+            request.issueComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue_comment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateIssueComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateIssueComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateIssueComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest()
+            );
+            request.issueComment ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest', ['issueComment', 'name']);
+            request.issueComment.name = defaultValue1;
+            const expectedHeaderRequestParams = `issue_comment.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateIssueComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateIssueComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateIssueCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateIssueCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateIssueCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateIssueCommentProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteIssueComment', () => {
+        it('invokes deleteIssueComment without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteIssueComment = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteIssueComment(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssueComment without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteIssueComment = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteIssueComment(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssueComment with call error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteIssueComment = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteIssueComment(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteIssueComment with LRO error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteIssueComment = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteIssueComment(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteIssueComment as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteIssueCommentProgress without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteIssueCommentProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteIssueCommentProgress with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteIssueCommentProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
@@ -2495,6 +6709,251 @@ describe('v1.SecureSourceManagerClient', () => {
         });
     });
 
+    describe('listHooks', () => {
+        it('invokes listHooks without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+            ];
+            client.innerApiCalls.listHooks = stubSimpleCall(expectedResponse);
+            const [response] = await client.listHooks(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHooks without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+            ];
+            client.innerApiCalls.listHooks = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listHooks(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IHook[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHooks with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listHooks = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listHooks(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listHooks as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listHooksStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+            ];
+            client.descriptors.page.listHooks.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listHooksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.Hook[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.Hook) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listHooks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHooks, request));
+            assert(
+                (client.descriptors.page.listHooks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listHooksStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHooks.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listHooksStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.Hook[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.Hook) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listHooks.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listHooks, request));
+            assert(
+                (client.descriptors.page.listHooks.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listHooks without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Hook()),
+            ];
+            client.descriptors.page.listHooks.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IHook[] = [];
+            const iterable = client.listHooksAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHooks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHooks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listHooks with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListHooksRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListHooksRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listHooks.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listHooksAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IHook[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listHooks.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listHooks.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('listBranchRules', () => {
         it('invokes listBranchRules without error', async () => {
             const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
@@ -2733,6 +7192,1476 @@ describe('v1.SecureSourceManagerClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPullRequests', () => {
+        it('invokes listPullRequests without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+            ];
+            client.innerApiCalls.listPullRequests = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPullRequests(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequests without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+            ];
+            client.innerApiCalls.listPullRequests = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPullRequests(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IPullRequest[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequests with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPullRequests = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPullRequests(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequests as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestsStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+            ];
+            client.descriptors.page.listPullRequests.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPullRequestsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.PullRequest[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.PullRequest) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPullRequests.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequests, request));
+            assert(
+                (client.descriptors.page.listPullRequests.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPullRequestsStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequests.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPullRequestsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.PullRequest[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.PullRequest) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPullRequests.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequests, request));
+            assert(
+                (client.descriptors.page.listPullRequests.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPullRequests without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequest()),
+            ];
+            client.descriptors.page.listPullRequests.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IPullRequest[] = [];
+            const iterable = client.listPullRequestsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPullRequests with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequests.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPullRequestsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IPullRequest[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequests.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPullRequestFileDiffs', () => {
+        it('invokes listPullRequestFileDiffs without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+            ];
+            client.innerApiCalls.listPullRequestFileDiffs = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPullRequestFileDiffs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestFileDiffs without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+            ];
+            client.innerApiCalls.listPullRequestFileDiffs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPullRequestFileDiffs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IFileDiff[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestFileDiffs with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPullRequestFileDiffs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPullRequestFileDiffs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestFileDiffs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestFileDiffsStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+            ];
+            client.descriptors.page.listPullRequestFileDiffs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPullRequestFileDiffsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.FileDiff[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.FileDiff) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPullRequestFileDiffs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequestFileDiffs, request));
+            assert(
+                (client.descriptors.page.listPullRequestFileDiffs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPullRequestFileDiffsStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequestFileDiffs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPullRequestFileDiffsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.FileDiff[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.FileDiff) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPullRequestFileDiffs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequestFileDiffs, request));
+            assert(
+                (client.descriptors.page.listPullRequestFileDiffs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPullRequestFileDiffs without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.FileDiff()),
+            ];
+            client.descriptors.page.listPullRequestFileDiffs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IFileDiff[] = [];
+            const iterable = client.listPullRequestFileDiffsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequestFileDiffs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequestFileDiffs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPullRequestFileDiffs with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequestFileDiffs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPullRequestFileDiffsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IFileDiff[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequestFileDiffs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequestFileDiffs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('fetchTree', () => {
+        it('invokes fetchTree without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+            ];
+            client.innerApiCalls.fetchTree = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchTree(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchTree without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+            ];
+            client.innerApiCalls.fetchTree = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchTree(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.ITreeEntry[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchTree with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchTree = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchTree(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchTree as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchTreeStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+            ];
+            client.descriptors.page.fetchTree.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.fetchTreeStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.TreeEntry[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.TreeEntry) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.fetchTree.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchTree, request));
+            assert(
+                (client.descriptors.page.fetchTree.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes fetchTreeStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchTree.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.fetchTreeStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.TreeEntry[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.TreeEntry) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.fetchTree.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchTree, request));
+            assert(
+                (client.descriptors.page.fetchTree.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with fetchTree without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.TreeEntry()),
+            ];
+            client.descriptors.page.fetchTree.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.ITreeEntry[] = [];
+            const iterable = client.fetchTreeAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with fetchTree with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.FetchTreeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.FetchTreeRequest', ['repository']);
+            request.repository = defaultValue1;
+            const expectedHeaderRequestParams = `repository=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchTree.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.fetchTreeAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.ITreeEntry[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchTree.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listIssues', () => {
+        it('invokes listIssues without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+            ];
+            client.innerApiCalls.listIssues = stubSimpleCall(expectedResponse);
+            const [response] = await client.listIssues(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssues without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+            ];
+            client.innerApiCalls.listIssues = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listIssues(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IIssue[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssues with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listIssues = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listIssues(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssues as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssuesStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+            ];
+            client.descriptors.page.listIssues.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listIssuesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.Issue[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.Issue) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listIssues.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIssues, request));
+            assert(
+                (client.descriptors.page.listIssues.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listIssuesStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIssues.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listIssuesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.Issue[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.Issue) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listIssues.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIssues, request));
+            assert(
+                (client.descriptors.page.listIssues.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listIssues without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.Issue()),
+            ];
+            client.descriptors.page.listIssues.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IIssue[] = [];
+            const iterable = client.listIssuesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIssues.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIssues.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listIssues with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssuesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssuesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIssues.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listIssuesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IIssue[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIssues.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIssues.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPullRequestComments', () => {
+        it('invokes listPullRequestComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+            ];
+            client.innerApiCalls.listPullRequestComments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPullRequestComments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestComments without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+            ];
+            client.innerApiCalls.listPullRequestComments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPullRequestComments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IPullRequestComment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestComments with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPullRequestComments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPullRequestComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPullRequestComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPullRequestCommentsStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+            ];
+            client.descriptors.page.listPullRequestComments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPullRequestCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.PullRequestComment[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.PullRequestComment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPullRequestComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequestComments, request));
+            assert(
+                (client.descriptors.page.listPullRequestComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPullRequestCommentsStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequestComments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPullRequestCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.PullRequestComment[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.PullRequestComment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPullRequestComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPullRequestComments, request));
+            assert(
+                (client.descriptors.page.listPullRequestComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPullRequestComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.PullRequestComment()),
+            ];
+            client.descriptors.page.listPullRequestComments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IPullRequestComment[] = [];
+            const iterable = client.listPullRequestCommentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequestComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequestComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPullRequestComments with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPullRequestComments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPullRequestCommentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IPullRequestComment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPullRequestComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPullRequestComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listIssueComments', () => {
+        it('invokes listIssueComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+            ];
+            client.innerApiCalls.listIssueComments = stubSimpleCall(expectedResponse);
+            const [response] = await client.listIssueComments(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssueComments without error using callback', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+            ];
+            client.innerApiCalls.listIssueComments = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listIssueComments(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.securesourcemanager.v1.IIssueComment[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssueComments with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listIssueComments = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listIssueComments(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listIssueComments as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listIssueCommentsStream without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+            ];
+            client.descriptors.page.listIssueComments.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listIssueCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IssueComment[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.IssueComment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listIssueComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIssueComments, request));
+            assert(
+                (client.descriptors.page.listIssueComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listIssueCommentsStream with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIssueComments.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listIssueCommentsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IssueComment[] = [];
+                stream.on('data', (response: protos.google.cloud.securesourcemanager.v1.IssueComment) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listIssueComments.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listIssueComments, request));
+            assert(
+                (client.descriptors.page.listIssueComments.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listIssueComments without error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+              generateSampleMessage(new protos.google.cloud.securesourcemanager.v1.IssueComment()),
+            ];
+            client.descriptors.page.listIssueComments.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.securesourcemanager.v1.IIssueComment[] = [];
+            const iterable = client.listIssueCommentsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listIssueComments with error', async () => {
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.securesourcemanager.v1.ListIssueCommentsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listIssueComments.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listIssueCommentsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.securesourcemanager.v1.IIssueComment[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listIssueComments.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -3547,6 +9476,60 @@ describe('v1.SecureSourceManagerClient', () => {
             });
         });
 
+        describe('hook', async () => {
+            const fakePath = "/rendered/path/hook";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+                hook: "hookValue",
+            };
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.hookPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.hookPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('hookPath', () => {
+                const result = client.hookPath("projectValue", "locationValue", "repositoryValue", "hookValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.hookPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromHookName', () => {
+                const result = client.matchProjectFromHookName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.hookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromHookName', () => {
+                const result = client.matchLocationFromHookName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.hookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromHookName', () => {
+                const result = client.matchRepositoryFromHookName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.hookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchHookFromHookName', () => {
+                const result = client.matchHookFromHookName(fakePath);
+                assert.strictEqual(result, "hookValue");
+                assert((client.pathTemplates.hookPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('instance', async () => {
             const fakePath = "/rendered/path/instance";
             const expectedParameters = {
@@ -3589,6 +9572,122 @@ describe('v1.SecureSourceManagerClient', () => {
                 const result = client.matchInstanceFromInstanceName(fakePath);
                 assert.strictEqual(result, "instanceValue");
                 assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('issue', async () => {
+            const fakePath = "/rendered/path/issue";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+                issue: "issueValue",
+            };
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.issuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.issuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('issuePath', () => {
+                const result = client.issuePath("projectValue", "locationValue", "repositoryValue", "issueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.issuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromIssueName', () => {
+                const result = client.matchProjectFromIssueName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.issuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromIssueName', () => {
+                const result = client.matchLocationFromIssueName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.issuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromIssueName', () => {
+                const result = client.matchRepositoryFromIssueName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.issuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIssueFromIssueName', () => {
+                const result = client.matchIssueFromIssueName(fakePath);
+                assert.strictEqual(result, "issueValue");
+                assert((client.pathTemplates.issuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('issueComment', async () => {
+            const fakePath = "/rendered/path/issueComment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+                issue: "issueValue",
+                comment: "commentValue",
+            };
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.issueCommentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.issueCommentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('issueCommentPath', () => {
+                const result = client.issueCommentPath("projectValue", "locationValue", "repositoryValue", "issueValue", "commentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.issueCommentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromIssueCommentName', () => {
+                const result = client.matchProjectFromIssueCommentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.issueCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromIssueCommentName', () => {
+                const result = client.matchLocationFromIssueCommentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.issueCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromIssueCommentName', () => {
+                const result = client.matchRepositoryFromIssueCommentName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.issueCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchIssueFromIssueCommentName', () => {
+                const result = client.matchIssueFromIssueCommentName(fakePath);
+                assert.strictEqual(result, "issueValue");
+                assert((client.pathTemplates.issueCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCommentFromIssueCommentName', () => {
+                const result = client.matchCommentFromIssueCommentName(fakePath);
+                assert.strictEqual(result, "commentValue");
+                assert((client.pathTemplates.issueCommentPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -3657,6 +9756,122 @@ describe('v1.SecureSourceManagerClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pullRequest', async () => {
+            const fakePath = "/rendered/path/pullRequest";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+                pull_request: "pullRequestValue",
+            };
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pullRequestPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pullRequestPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pullRequestPath', () => {
+                const result = client.pullRequestPath("projectValue", "locationValue", "repositoryValue", "pullRequestValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pullRequestPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPullRequestName', () => {
+                const result = client.matchProjectFromPullRequestName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pullRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPullRequestName', () => {
+                const result = client.matchLocationFromPullRequestName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pullRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromPullRequestName', () => {
+                const result = client.matchRepositoryFromPullRequestName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.pullRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPullRequestFromPullRequestName', () => {
+                const result = client.matchPullRequestFromPullRequestName(fakePath);
+                assert.strictEqual(result, "pullRequestValue");
+                assert((client.pathTemplates.pullRequestPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('pullRequestComment', async () => {
+            const fakePath = "/rendered/path/pullRequestComment";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                repository: "repositoryValue",
+                pull_request: "pullRequestValue",
+                comment: "commentValue",
+            };
+            const client = new securesourcemanagerModule.v1.SecureSourceManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.pullRequestCommentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.pullRequestCommentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('pullRequestCommentPath', () => {
+                const result = client.pullRequestCommentPath("projectValue", "locationValue", "repositoryValue", "pullRequestValue", "commentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromPullRequestCommentName', () => {
+                const result = client.matchProjectFromPullRequestCommentName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromPullRequestCommentName', () => {
+                const result = client.matchLocationFromPullRequestCommentName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRepositoryFromPullRequestCommentName', () => {
+                const result = client.matchRepositoryFromPullRequestCommentName(fakePath);
+                assert.strictEqual(result, "repositoryValue");
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchPullRequestFromPullRequestCommentName', () => {
+                const result = client.matchPullRequestFromPullRequestCommentName(fakePath);
+                assert.strictEqual(result, "pullRequestValue");
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCommentFromPullRequestCommentName', () => {
+                const result = client.matchCommentFromPullRequestCommentName(fakePath);
+                assert.strictEqual(result, "commentValue");
+                assert((client.pathTemplates.pullRequestCommentPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

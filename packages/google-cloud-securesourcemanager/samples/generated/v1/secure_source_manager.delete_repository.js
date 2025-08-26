@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. Name of the repository to delete.
    *  The format is
-   *  projects/{project_number}/locations/{location_id}/repositories/{repository_id}.
+   *  `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
    */
   // const name = 'abc123'
   /**

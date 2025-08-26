@@ -414,6 +414,150 @@ describe('v1.ReservationSubBlocksClient', () => {
         });
     });
 
+    describe('performMaintenance', () => {
+        it('invokes performMaintenance without error', async () => {
+            const client = new reservationsubblocksModule.v1.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.performMaintenance = stubSimpleCall(expectedResponse);
+            const [response] = await client.performMaintenance(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes performMaintenance without error using callback', async () => {
+            const client = new reservationsubblocksModule.v1.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1.Operation()
+            );
+            client.innerApiCalls.performMaintenance = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.performMaintenance(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes performMaintenance with error', async () => {
+            const client = new reservationsubblocksModule.v1.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.performMaintenance = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.performMaintenance(request), expectedError);
+            const actualRequest = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.performMaintenance as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes performMaintenance with closed client', async () => {
+            const client = new reservationsubblocksModule.v1.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1.PerformMaintenanceReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.performMaintenance(request), expectedError);
+        });
+    });
+
     describe('list', () => {
         it('invokes list without error', async () => {
             const client = new reservationsubblocksModule.v1.ReservationSubBlocksClient({

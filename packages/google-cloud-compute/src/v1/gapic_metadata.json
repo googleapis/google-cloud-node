@@ -4577,6 +4577,11 @@
                 "removePeering"
               ]
             },
+            "RequestRemovePeering": {
+              "methods": [
+                "requestRemovePeering"
+              ]
+            },
             "SwitchToCustomMode": {
               "methods": [
                 "switchToCustomMode"
@@ -4639,6 +4644,11 @@
             "RemovePeering": {
               "methods": [
                 "removePeering"
+              ]
+            },
+            "RequestRemovePeering": {
+              "methods": [
+                "requestRemovePeering"
               ]
             },
             "SwitchToCustomMode": {
@@ -7817,6 +7827,11 @@
                 "get"
               ]
             },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -7832,6 +7847,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "List": {

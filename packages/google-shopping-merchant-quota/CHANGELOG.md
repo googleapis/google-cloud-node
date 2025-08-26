@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.7.0...quota-v0.8.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.6.0...quota-v0.7.0) (2025-08-12)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250729 ([#1085](https://github.com/googleapis/google-cloud-node/issues/1085)) ([#6579](https://github.com/googleapis/google-cloud-node/issues/6579)) ([0cbf8ac](https://github.com/googleapis/google-cloud-node/commit/0cbf8ac3e6697d92428f21010beb1c776e5e86fd))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.5.0...quota-v0.6.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add quota API for v1 ([#6559](https://github.com/googleapis/google-cloud-node/issues/6559)) ([741b41b](https://github.com/googleapis/google-cloud-node/commit/741b41bdeb78e63021a239aa53df21a845eff5e1))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/quota-v0.4.0...quota-v0.5.0) (2025-07-09)
 
 

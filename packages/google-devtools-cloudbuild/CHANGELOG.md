@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.2.0...cloudbuild-v5.3.0) (2025-08-21)
+
+
+### Features
+
+* [cloudbuild] Add option to enable nested virtualization if available ([#6603](https://github.com/googleapis/google-cloud-node/issues/6603)) ([d6ee97b](https://github.com/googleapis/google-cloud-node/commit/d6ee97b10f310e91b403bafdb65b6e4ebabc2cfe))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.1.0...cloudbuild-v5.2.0) (2025-07-09)
 
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.4.0...accounts-v3.0.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.3.0...accounts-v2.4.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add accounts API client libraries for v1 ([#6573](https://github.com/googleapis/google-cloud-node/issues/6573)) ([3cdfa47](https://github.com/googleapis/google-cloud-node/commit/3cdfa4762673343395c4d27879d5244d522b7fc5))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.2.0...accounts-v2.3.0) (2025-07-09)
 
 

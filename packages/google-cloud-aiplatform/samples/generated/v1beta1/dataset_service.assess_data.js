@@ -46,16 +46,6 @@ function main(name) {
    */
   // const batchPredictionResourceUsageAssessmentConfig = {}
   /**
-   *  Optional. Config for assembling templates with a Gemini API structure to
-   *  assess assembled data.
-   */
-  // const geminiTemplateConfig = {}
-  /**
-   *  Optional. The column name in the underlying table that contains already
-   *  fully assembled requests.
-   */
-  // const requestColumnName = 'abc123'
-  /**
    *  Required. The name of the Dataset resource. Used only for MULTIMODAL
    *  datasets. Format:
    *  `projects/{project}/locations/{location}/datasets/{dataset}`

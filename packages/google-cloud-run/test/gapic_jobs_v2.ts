@@ -2297,5 +2297,51 @@ describe('v2.JobsClient', () => {
                     .getCall(-1).calledWith(fakePath));
             });
         });
+
+        describe('workerPool', async () => {
+            const fakePath = "/rendered/path/workerPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                worker_pool: "workerPoolValue",
+            };
+            const client = new jobsModule.v2.JobsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.workerPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.workerPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('workerPoolPath', () => {
+                const result = client.workerPoolPath("projectValue", "locationValue", "workerPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromWorkerPoolName', () => {
+                const result = client.matchProjectFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromWorkerPoolName', () => {
+                const result = client.matchLocationFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWorkerPoolFromWorkerPoolName', () => {
+                const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
+                assert.strictEqual(result, "workerPoolValue");
+                assert((client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
 });

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-admin",
-        "version": "8.3.0",
+        "version": "9.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -4564,90 +4564,6 @@
             }
         },
         {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_async",
-            "title": "AnalyticsAdminService setAutomatedGa4ConfigurationOptOut Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the opt out status for the automated GA4 setup process for a UA property. Note: this has no effect on GA4 property.",
-            "canonical": true,
-            "file": "analytics_admin_service.set_automated_ga4_configuration_opt_out.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetAutomatedGa4ConfigurationOptOut",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOut",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "opt_out",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "SetAutomatedGa4ConfigurationOptOut",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOut",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchAutomatedGa4ConfigurationOptOut_async",
-            "title": "AnalyticsAdminService fetchAutomatedGa4ConfigurationOptOut Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches the opt out status for the automated GA4 setup process for a UA property. Note: this has no effect on GA4 property.",
-            "canonical": true,
-            "file": "analytics_admin_service.fetch_automated_ga4_configuration_opt_out.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchAutomatedGa4ConfigurationOptOut",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOut",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "FetchAutomatedGa4ConfigurationOptOut",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOut",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateBigQueryLink_async",
             "title": "AnalyticsAdminService createBigQueryLink Sample",
             "origin": "API_DEFINITION",
@@ -4940,174 +4856,6 @@
                 "method": {
                     "shortName": "UpdateEnhancedMeasurementSettings",
                     "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEnhancedMeasurementSettings",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateConnectedSiteTag_async",
-            "title": "AnalyticsAdminService createConnectedSiteTag Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a connected site tag for a Universal Analytics property. You can create a maximum of 20 connected site tags per property. Note: This API cannot be used on GA4 properties.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_connected_site_tag.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnectedSiteTag",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTag",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connected_site_tag",
-                        "type": ".google.analytics.admin.v1alpha.ConnectedSiteTag"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateConnectedSiteTag",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTag",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteConnectedSiteTag_async",
-            "title": "AnalyticsAdminService deleteConnectedSiteTag Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a connected site tag for a Universal Analytics property. Note: this has no effect on GA4 properties.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_connected_site_tag.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnectedSiteTag",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTag",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "tag_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnectedSiteTag",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTag",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListConnectedSiteTags_async",
-            "title": "AnalyticsAdminService listConnectedSiteTags Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the connected site tags for a Universal Analytics property. A maximum of 20 connected site tags will be returned. Note: this has no effect on GA4 property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_connected_site_tags.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectedSiteTags",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTags",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListConnectedSiteTags",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTags",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchConnectedGa4Property_async",
-            "title": "AnalyticsAdminService fetchConnectedGa4Property Sample",
-            "origin": "API_DEFINITION",
-            "description": " Given a specified UA property, looks up the GA4 property connected to it. Note: this cannot be used with GA4 properties.",
-            "canonical": true,
-            "file": "analytics_admin_service.fetch_connected_ga4_property.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchConnectedGa4Property",
-                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchConnectedGa4Property",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "FetchConnectedGa4Property",
-                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchConnectedGa4Property",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
@@ -6778,7 +6526,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -6827,7 +6575,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSubpropertySyncConfigs_async",
             "title": "AnalyticsAdminService listSubpropertySyncConfigs Sample",
             "origin": "API_DEFINITION",
-            "description": " List all Subproperty Sync Configs on a property.",
+            "description": " List all `SubpropertySyncConfig` resources for a property.",
             "canonical": true,
             "file": "analytics_admin_service.list_subproperty_sync_configs.js",
             "language": "JAVASCRIPT",
@@ -6875,7 +6623,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSubpropertySyncConfig_async",
             "title": "AnalyticsAdminService updateSubpropertySyncConfig Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a Subproperty Sync Config.",
+            "description": " Updates a `SubpropertySyncConfig`.",
             "canonical": true,
             "file": "analytics_admin_service.update_subproperty_sync_config.js",
             "language": "JAVASCRIPT",
@@ -6919,7 +6667,7 @@
             "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSubpropertySyncConfig_async",
             "title": "AnalyticsAdminService getSubpropertySyncConfig Sample",
             "origin": "API_DEFINITION",
-            "description": " Lookup for a single Subproperty Sync Config.",
+            "description": " Lookup for a single `SubpropertySyncConfig`.",
             "canonical": true,
             "file": "analytics_admin_service.get_subproperty_sync_config.js",
             "language": "JAVASCRIPT",
@@ -6948,6 +6696,46 @@
                 "method": {
                     "shortName": "GetSubpropertySyncConfig",
                     "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertySyncConfig",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetReportingIdentitySettings_async",
+            "title": "AnalyticsAdminService getReportingIdentitySettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the singleton data retention settings for this property.",
+            "canonical": true,
+            "file": "analytics_admin_service.get_reporting_identity_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetReportingIdentitySettings",
+                "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1alpha.ReportingIdentitySettings",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetReportingIdentitySettings",
+                    "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettings",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1alpha.AnalyticsAdminService"

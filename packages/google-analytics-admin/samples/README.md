@@ -116,6 +116,7 @@
   * [Analytics_admin_service.get_measurement_protocol_secret](#analytics_admin_service.get_measurement_protocol_secret)
   * [Analytics_admin_service.get_property](#analytics_admin_service.get_property)
   * [Analytics_admin_service.get_reporting_data_annotation](#analytics_admin_service.get_reporting_data_annotation)
+  * [Analytics_admin_service.get_reporting_identity_settings](#analytics_admin_service.get_reporting_identity_settings)
   * [Analytics_admin_service.get_rollup_property_source_link](#analytics_admin_service.get_rollup_property_source_link)
   * [Analytics_admin_service.get_s_k_ad_network_conversion_value_schema](#analytics_admin_service.get_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.get_search_ads360_link](#analytics_admin_service.get_search_ads360_link)
@@ -2027,6 +2028,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_data_annotation.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.get_reporting_identity_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_identity_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_identity_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_reporting_identity_settings.js`
 
 
 -----

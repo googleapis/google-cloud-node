@@ -74,18 +74,18 @@ function main(address) {
    *  purposes. Must be a URL and filename safe base64 string with at most 36
    *  ASCII characters in length. Otherwise an INVALID_ARGUMENT error is
    *  returned.
-   *  The session begins when the user starts typing a query, and concludes when
-   *  they select a place and a call to Place Details or Address Validation is
-   *  made. Each session can have multiple autocomplete queries, followed by one
-   *  Place Details or Address Validation request. The credentials used for each
-   *  request within a session must belong to the same Google Cloud Console
+   *  The session begins when the user makes an Autocomplete query, and concludes
+   *  when they select a place and a call to Place Details or Address Validation
+   *  is made. Each session can have multiple Autocomplete queries, followed by
+   *  one Place Details or Address Validation request. The credentials used for
+   *  each request within a session must belong to the same Google Cloud Console
    *  project. Once a session has concluded, the token is no longer valid; your
-   *  app must generate a fresh token for each session. If the `session_token`
+   *  app must generate a fresh token for each session. If the `sessionToken`
    *  parameter is omitted, or if you reuse a session token, the session is
    *  charged as if no session token was provided (each request is billed
    *  separately).
    *  Note: Address Validation can only be used in sessions with the
-   *  Autocomplete (New) API, not the old Autocomplete API. See
+   *  Autocomplete (New) API, not the Autocomplete API. See
    *  https://developers.google.com/maps/documentation/places/web-service/session-pricing
    *  for more details.
    */

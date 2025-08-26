@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/issueresolution-v0.2.0...issueresolution-v0.3.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/issueresolution-v0.1.0...issueresolution-v0.2.0) (2025-08-07)
+
+
+### Features
+
+* [merchantapi] add issueresolution API client libraries for v1 ([#6568](https://github.com/googleapis/google-cloud-node/issues/6568)) ([2e570f2](https://github.com/googleapis/google-cloud-node/commit/2e570f25797f2a30fc0d3092688ce02f5d0a701d))
+
 ## 0.1.0 (2025-07-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.5.0...privilegedaccessmanager-v0.6.0) (2025-08-04)
+
+
+### Features
+
+* [privilegedaccessmanager] Introducing new Grant states for Withdrawal operation ([#6550](https://github.com/googleapis/google-cloud-node/issues/6550)) ([445f9a3](https://github.com/googleapis/google-cloud-node/commit/445f9a3370e3849d4b4b6e50c48706cdff10ee67))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.4.0...privilegedaccessmanager-v0.5.0) (2025-07-09)
 
 

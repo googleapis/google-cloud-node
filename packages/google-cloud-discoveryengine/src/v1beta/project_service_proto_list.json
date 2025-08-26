@@ -37,6 +37,7 @@
   "../../protos/google/cloud/discoveryengine/v1beta/serving_config.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/serving_config_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/session.proto",
+  "../../protos/google/cloud/discoveryengine/v1beta/session_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/site_search_engine.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/site_search_engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/user_event.proto",

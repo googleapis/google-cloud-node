@@ -8,6 +8,2090 @@
               "nested": {
                 "products": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.Products.V1",
+                        "go_package": "cloud.google.com/go/shopping/merchant/products/apiv1/productspb;productspb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ProductsProto",
+                        "java_package": "com.google.shopping.merchant.products.v1",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Products\\V1",
+                        "ruby_package": "Google::Shopping::Merchant::Products::V1",
+                        "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
+                        "(google.api.resource_definition).pattern": "accounts/{account}"
+                      },
+                      "nested": {
+                        "ProductInputsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "InsertProductInput": {
+                              "requestType": "InsertProductInputRequest",
+                              "responseType": "ProductInput",
+                              "options": {
+                                "(google.api.http).post": "/products/v1/{parent=accounts/*}/productInputs:insert",
+                                "(google.api.http).body": "product_input"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/products/v1/{parent=accounts/*}/productInputs:insert",
+                                    "body": "product_input"
+                                  }
+                                }
+                              ]
+                            },
+                            "UpdateProductInput": {
+                              "requestType": "UpdateProductInputRequest",
+                              "responseType": "ProductInput",
+                              "options": {
+                                "(google.api.http).patch": "/products/v1/{product_input.name=accounts/*/productInputs/*}",
+                                "(google.api.http).body": "product_input",
+                                "(google.api.method_signature)": "product_input,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/products/v1/{product_input.name=accounts/*/productInputs/*}",
+                                    "body": "product_input"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "product_input,update_mask"
+                                }
+                              ]
+                            },
+                            "DeleteProductInput": {
+                              "requestType": "DeleteProductInputRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).delete": "/products/v1/{name=accounts/*/productInputs/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/products/v1/{name=accounts/*/productInputs/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ProductInput": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/ProductInput",
+                            "(google.api.resource).pattern": "accounts/{account}/productInputs/{productinput}",
+                            "(google.api.resource).plural": "productInputs",
+                            "(google.api.resource).singular": "productInput"
+                          },
+                          "oneofs": {
+                            "_versionNumber": {
+                              "oneof": [
+                                "versionNumber"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "product": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "legacyLocal": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "contentLanguage": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "feedLabel": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "versionNumber": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "proto3_optional": true
+                              }
+                            },
+                            "productAttributes": {
+                              "type": "ProductAttributes",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customAttributes": {
+                              "rule": "repeated",
+                              "type": "google.shopping.type.CustomAttribute",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "InsertProductInputRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/Product"
+                              }
+                            },
+                            "productInput": {
+                              "type": "ProductInput",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dataSource": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateProductInputRequest": {
+                          "fields": {
+                            "productInput": {
+                              "type": "ProductInput",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataSource": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteProductInputRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/ProductInput"
+                              }
+                            },
+                            "dataSource": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "SubscriptionPeriod": {
+                          "values": {
+                            "SUBSCRIPTION_PERIOD_UNSPECIFIED": 0,
+                            "MONTH": 1,
+                            "YEAR": 2
+                          }
+                        },
+                        "AgeGroup": {
+                          "values": {
+                            "AGE_GROUP_UNSPECIFIED": 0,
+                            "ADULT": 1,
+                            "KIDS": 2,
+                            "TODDLER": 3,
+                            "INFANT": 4,
+                            "NEWBORN": 5
+                          }
+                        },
+                        "Availability": {
+                          "values": {
+                            "AVAILABILITY_UNSPECIFIED": 0,
+                            "IN_STOCK": 1,
+                            "OUT_OF_STOCK": 2,
+                            "PREORDER": 3,
+                            "LIMITED_AVAILABILITY": 4,
+                            "BACKORDER": 5
+                          }
+                        },
+                        "Condition": {
+                          "values": {
+                            "CONDITION_UNSPECIFIED": 0,
+                            "NEW": 1,
+                            "USED": 2,
+                            "REFURBISHED": 3
+                          }
+                        },
+                        "Gender": {
+                          "values": {
+                            "GENDER_UNSPECIFIED": 0,
+                            "MALE": 1,
+                            "FEMALE": 2,
+                            "UNISEX": 3
+                          }
+                        },
+                        "CreditType": {
+                          "values": {
+                            "CREDIT_TYPE_UNSPECIFIED": 0,
+                            "FINANCE": 1,
+                            "LEASE": 2
+                          }
+                        },
+                        "SizeSystem": {
+                          "values": {
+                            "SIZE_SYSTEM_UNSPECIFIED": 0,
+                            "AU": 1,
+                            "BR": 2,
+                            "CN": 3,
+                            "DE": 4,
+                            "EU": 5,
+                            "FR": 6,
+                            "IT": 7,
+                            "JP": 8,
+                            "MEX": 9,
+                            "UK": 10,
+                            "US": 11
+                          }
+                        },
+                        "SizeType": {
+                          "values": {
+                            "SIZE_TYPE_UNSPECIFIED": 0,
+                            "REGULAR": 1,
+                            "PETITE": 2,
+                            "MATERNITY": 3,
+                            "BIG": 4,
+                            "TALL": 5,
+                            "PLUS": 6
+                          }
+                        },
+                        "EnergyEfficiencyClass": {
+                          "values": {
+                            "ENERGY_EFFICIENCY_CLASS_UNSPECIFIED": 0,
+                            "APPP": 1,
+                            "APP": 2,
+                            "AP": 3,
+                            "A": 4,
+                            "B": 5,
+                            "C": 6,
+                            "D": 7,
+                            "E": 8,
+                            "F": 9,
+                            "G": 10
+                          }
+                        },
+                        "PickupMethod": {
+                          "values": {
+                            "PICKUP_METHOD_UNSPECIFIED": 0,
+                            "NOT_SUPPORTED": 1,
+                            "BUY": 2,
+                            "RESERVE": 3,
+                            "SHIP_TO_STORE": 4
+                          }
+                        },
+                        "PickupSla": {
+                          "values": {
+                            "PICKUP_SLA_UNSPECIFIED": 0,
+                            "SAME_DAY": 1,
+                            "NEXT_DAY": 2,
+                            "TWO_DAY": 3,
+                            "THREE_DAY": 4,
+                            "FOUR_DAY": 5,
+                            "FIVE_DAY": 6,
+                            "SIX_DAY": 7,
+                            "MULTI_WEEK": 8
+                          }
+                        },
+                        "Pause": {
+                          "values": {
+                            "PAUSE_UNSPECIFIED": 0,
+                            "ADS": 1,
+                            "ALL": 2
+                          }
+                        },
+                        "CertificationAuthority": {
+                          "values": {
+                            "CERTIFICATION_AUTHORITY_UNSPECIFIED": 0,
+                            "ADEME": 1,
+                            "BMWK": 2,
+                            "EPA": 3,
+                            "EC": 4
+                          }
+                        },
+                        "CertificationName": {
+                          "values": {
+                            "CERTIFICATION_NAME_UNSPECIFIED": 0,
+                            "ENERGY_STAR": 1,
+                            "ENERGY_STAR_MOST_EFFICIENT": 2,
+                            "EPREL": 3,
+                            "EU_ECOLABEL": 4,
+                            "VEHICLE_ENERGY_EFFICIENCY": 5,
+                            "VEHICLE_ENERGY_EFFICIENCY_DISCHARGED_BATTERY": 6
+                          }
+                        },
+                        "DigitalSourceType": {
+                          "values": {
+                            "DIGITAL_SOURCE_TYPE_UNSPECIFIED": 0,
+                            "TRAINED_ALGORITHMIC_MEDIA": 1,
+                            "DEFAULT": 2
+                          }
+                        },
+                        "ProductAttributes": {
+                          "oneofs": {
+                            "_identifierExists": {
+                              "oneof": [
+                                "identifierExists"
+                              ]
+                            },
+                            "_isBundle": {
+                              "oneof": [
+                                "isBundle"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            },
+                            "_description": {
+                              "oneof": [
+                                "description"
+                              ]
+                            },
+                            "_link": {
+                              "oneof": [
+                                "link"
+                              ]
+                            },
+                            "_mobileLink": {
+                              "oneof": [
+                                "mobileLink"
+                              ]
+                            },
+                            "_canonicalLink": {
+                              "oneof": [
+                                "canonicalLink"
+                              ]
+                            },
+                            "_imageLink": {
+                              "oneof": [
+                                "imageLink"
+                              ]
+                            },
+                            "_adult": {
+                              "oneof": [
+                                "adult"
+                              ]
+                            },
+                            "_ageGroup": {
+                              "oneof": [
+                                "ageGroup"
+                              ]
+                            },
+                            "_availability": {
+                              "oneof": [
+                                "availability"
+                              ]
+                            },
+                            "_brand": {
+                              "oneof": [
+                                "brand"
+                              ]
+                            },
+                            "_color": {
+                              "oneof": [
+                                "color"
+                              ]
+                            },
+                            "_condition": {
+                              "oneof": [
+                                "condition"
+                              ]
+                            },
+                            "_gender": {
+                              "oneof": [
+                                "gender"
+                              ]
+                            },
+                            "_googleProductCategory": {
+                              "oneof": [
+                                "googleProductCategory"
+                              ]
+                            },
+                            "_itemGroupId": {
+                              "oneof": [
+                                "itemGroupId"
+                              ]
+                            },
+                            "_material": {
+                              "oneof": [
+                                "material"
+                              ]
+                            },
+                            "_mpn": {
+                              "oneof": [
+                                "mpn"
+                              ]
+                            },
+                            "_pattern": {
+                              "oneof": [
+                                "pattern"
+                              ]
+                            },
+                            "_sellOnGoogleQuantity": {
+                              "oneof": [
+                                "sellOnGoogleQuantity"
+                              ]
+                            },
+                            "_maxHandlingTime": {
+                              "oneof": [
+                                "maxHandlingTime"
+                              ]
+                            },
+                            "_minHandlingTime": {
+                              "oneof": [
+                                "minHandlingTime"
+                              ]
+                            },
+                            "_shippingLabel": {
+                              "oneof": [
+                                "shippingLabel"
+                              ]
+                            },
+                            "_transitTimeLabel": {
+                              "oneof": [
+                                "transitTimeLabel"
+                              ]
+                            },
+                            "_size": {
+                              "oneof": [
+                                "size"
+                              ]
+                            },
+                            "_sizeSystem": {
+                              "oneof": [
+                                "sizeSystem"
+                              ]
+                            },
+                            "_energyEfficiencyClass": {
+                              "oneof": [
+                                "energyEfficiencyClass"
+                              ]
+                            },
+                            "_minEnergyEfficiencyClass": {
+                              "oneof": [
+                                "minEnergyEfficiencyClass"
+                              ]
+                            },
+                            "_maxEnergyEfficiencyClass": {
+                              "oneof": [
+                                "maxEnergyEfficiencyClass"
+                              ]
+                            },
+                            "_multipack": {
+                              "oneof": [
+                                "multipack"
+                              ]
+                            },
+                            "_adsGrouping": {
+                              "oneof": [
+                                "adsGrouping"
+                              ]
+                            },
+                            "_adsRedirect": {
+                              "oneof": [
+                                "adsRedirect"
+                              ]
+                            },
+                            "_displayAdsId": {
+                              "oneof": [
+                                "displayAdsId"
+                              ]
+                            },
+                            "_displayAdsTitle": {
+                              "oneof": [
+                                "displayAdsTitle"
+                              ]
+                            },
+                            "_displayAdsLink": {
+                              "oneof": [
+                                "displayAdsLink"
+                              ]
+                            },
+                            "_displayAdsValue": {
+                              "oneof": [
+                                "displayAdsValue"
+                              ]
+                            },
+                            "_pickupMethod": {
+                              "oneof": [
+                                "pickupMethod"
+                              ]
+                            },
+                            "_pickupSla": {
+                              "oneof": [
+                                "pickupSla"
+                              ]
+                            },
+                            "_linkTemplate": {
+                              "oneof": [
+                                "linkTemplate"
+                              ]
+                            },
+                            "_mobileLinkTemplate": {
+                              "oneof": [
+                                "mobileLinkTemplate"
+                              ]
+                            },
+                            "_customLabel_0": {
+                              "oneof": [
+                                "customLabel_0"
+                              ]
+                            },
+                            "_customLabel_1": {
+                              "oneof": [
+                                "customLabel_1"
+                              ]
+                            },
+                            "_customLabel_2": {
+                              "oneof": [
+                                "customLabel_2"
+                              ]
+                            },
+                            "_customLabel_3": {
+                              "oneof": [
+                                "customLabel_3"
+                              ]
+                            },
+                            "_customLabel_4": {
+                              "oneof": [
+                                "customLabel_4"
+                              ]
+                            },
+                            "_externalSellerId": {
+                              "oneof": [
+                                "externalSellerId"
+                              ]
+                            },
+                            "_pause": {
+                              "oneof": [
+                                "pause"
+                              ]
+                            },
+                            "_virtualModelLink": {
+                              "oneof": [
+                                "virtualModelLink"
+                              ]
+                            },
+                            "_structuredTitle": {
+                              "oneof": [
+                                "structuredTitle"
+                              ]
+                            },
+                            "_structuredDescription": {
+                              "oneof": [
+                                "structuredDescription"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "identifierExists": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "isBundle": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "link": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "mobileLink": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "canonicalLink": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "imageLink": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "additionalImageLinks": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 12
+                            },
+                            "expirationDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 16
+                            },
+                            "disclosureDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 79
+                            },
+                            "adult": {
+                              "type": "bool",
+                              "id": 17,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "ageGroup": {
+                              "type": "AgeGroup",
+                              "id": 18,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "availability": {
+                              "type": "Availability",
+                              "id": 19,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "availabilityDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 20
+                            },
+                            "brand": {
+                              "type": "string",
+                              "id": 21,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "color": {
+                              "type": "string",
+                              "id": 22,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "condition": {
+                              "type": "Condition",
+                              "id": 23,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "gender": {
+                              "type": "Gender",
+                              "id": 24,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "googleProductCategory": {
+                              "type": "string",
+                              "id": 25,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "gtins": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 140
+                            },
+                            "itemGroupId": {
+                              "type": "string",
+                              "id": 27,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "material": {
+                              "type": "string",
+                              "id": 28,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "mpn": {
+                              "type": "string",
+                              "id": 29,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "pattern": {
+                              "type": "string",
+                              "id": 30,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 31
+                            },
+                            "maximumRetailPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 139
+                            },
+                            "installment": {
+                              "type": "ProductInstallment",
+                              "id": 32
+                            },
+                            "subscriptionCost": {
+                              "type": "SubscriptionCost",
+                              "id": 33
+                            },
+                            "loyaltyPoints": {
+                              "type": "LoyaltyPoints",
+                              "id": 34
+                            },
+                            "loyaltyPrograms": {
+                              "rule": "repeated",
+                              "type": "LoyaltyProgram",
+                              "id": 136
+                            },
+                            "productTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 35
+                            },
+                            "salePrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 36
+                            },
+                            "salePriceEffectiveDate": {
+                              "type": "google.type.Interval",
+                              "id": 37
+                            },
+                            "sellOnGoogleQuantity": {
+                              "type": "int64",
+                              "id": 38,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "productHeight": {
+                              "type": "ProductDimension",
+                              "id": 119
+                            },
+                            "productLength": {
+                              "type": "ProductDimension",
+                              "id": 120
+                            },
+                            "productWidth": {
+                              "type": "ProductDimension",
+                              "id": 121
+                            },
+                            "productWeight": {
+                              "type": "ProductWeight",
+                              "id": 122
+                            },
+                            "shipping": {
+                              "rule": "repeated",
+                              "type": "Shipping",
+                              "id": 39
+                            },
+                            "freeShippingThreshold": {
+                              "rule": "repeated",
+                              "type": "FreeShippingThreshold",
+                              "id": 135
+                            },
+                            "shippingWeight": {
+                              "type": "ShippingWeight",
+                              "id": 40
+                            },
+                            "shippingLength": {
+                              "type": "ShippingDimension",
+                              "id": 41
+                            },
+                            "shippingWidth": {
+                              "type": "ShippingDimension",
+                              "id": 42
+                            },
+                            "shippingHeight": {
+                              "type": "ShippingDimension",
+                              "id": 43
+                            },
+                            "maxHandlingTime": {
+                              "type": "int64",
+                              "id": 44,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "minHandlingTime": {
+                              "type": "int64",
+                              "id": 45,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "shippingLabel": {
+                              "type": "string",
+                              "id": 46,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "transitTimeLabel": {
+                              "type": "string",
+                              "id": 47,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "size": {
+                              "type": "string",
+                              "id": 48,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "sizeSystem": {
+                              "type": "SizeSystem",
+                              "id": 49,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "sizeTypes": {
+                              "rule": "repeated",
+                              "type": "SizeType",
+                              "id": 50
+                            },
+                            "energyEfficiencyClass": {
+                              "type": "EnergyEfficiencyClass",
+                              "id": 53,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "minEnergyEfficiencyClass": {
+                              "type": "EnergyEfficiencyClass",
+                              "id": 54,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxEnergyEfficiencyClass": {
+                              "type": "EnergyEfficiencyClass",
+                              "id": 55,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "unitPricingMeasure": {
+                              "type": "UnitPricingMeasure",
+                              "id": 56
+                            },
+                            "unitPricingBaseMeasure": {
+                              "type": "UnitPricingBaseMeasure",
+                              "id": 57
+                            },
+                            "multipack": {
+                              "type": "int64",
+                              "id": 58,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "adsGrouping": {
+                              "type": "string",
+                              "id": 59,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "adsLabels": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 60
+                            },
+                            "adsRedirect": {
+                              "type": "string",
+                              "id": 61,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "costOfGoodsSold": {
+                              "type": "google.shopping.type.Price",
+                              "id": 62
+                            },
+                            "productDetails": {
+                              "rule": "repeated",
+                              "type": "ProductDetail",
+                              "id": 63
+                            },
+                            "productHighlights": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 64
+                            },
+                            "displayAdsId": {
+                              "type": "string",
+                              "id": 65,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "displayAdsSimilarIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 66
+                            },
+                            "displayAdsTitle": {
+                              "type": "string",
+                              "id": 67,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "displayAdsLink": {
+                              "type": "string",
+                              "id": 68,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "displayAdsValue": {
+                              "type": "double",
+                              "id": 69,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "promotionIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 70
+                            },
+                            "pickupMethod": {
+                              "type": "PickupMethod",
+                              "id": 80,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "pickupSla": {
+                              "type": "PickupSla",
+                              "id": 81,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "linkTemplate": {
+                              "type": "string",
+                              "id": 82,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "mobileLinkTemplate": {
+                              "type": "string",
+                              "id": 83,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel_0": {
+                              "type": "string",
+                              "id": 71,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel_1": {
+                              "type": "string",
+                              "id": 72,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel_2": {
+                              "type": "string",
+                              "id": 73,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel_3": {
+                              "type": "string",
+                              "id": 74,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "customLabel_4": {
+                              "type": "string",
+                              "id": 75,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "includedDestinations": {
+                              "rule": "repeated",
+                              "type": "google.shopping.type.Destination.DestinationEnum",
+                              "id": 76
+                            },
+                            "excludedDestinations": {
+                              "rule": "repeated",
+                              "type": "google.shopping.type.Destination.DestinationEnum",
+                              "id": 77
+                            },
+                            "shoppingAdsExcludedCountries": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 78
+                            },
+                            "externalSellerId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "pause": {
+                              "type": "Pause",
+                              "id": 13,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "lifestyleImageLinks": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 14
+                            },
+                            "cloudExportAdditionalProperties": {
+                              "rule": "repeated",
+                              "type": "CloudExportAdditionalProperties",
+                              "id": 84
+                            },
+                            "virtualModelLink": {
+                              "type": "string",
+                              "id": 130,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "certifications": {
+                              "rule": "repeated",
+                              "type": "ProductCertification",
+                              "id": 123
+                            },
+                            "structuredTitle": {
+                              "type": "StructuredTitle",
+                              "id": 132,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "structuredDescription": {
+                              "type": "StructuredDescription",
+                              "id": 133,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "autoPricingMinPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 124
+                            },
+                            "sustainabilityIncentives": {
+                              "rule": "repeated",
+                              "type": "ProductSustainabilityIncentive",
+                              "id": 138
+                            }
+                          }
+                        },
+                        "ShippingWeight": {
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ShippingDimension": {
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "UnitPricingBaseMeasure": {
+                          "fields": {
+                            "value": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "UnitPricingMeasure": {
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SubscriptionCost": {
+                          "fields": {
+                            "period": {
+                              "type": "SubscriptionPeriod",
+                              "id": 1
+                            },
+                            "periodLength": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "amount": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProductInstallment": {
+                          "oneofs": {
+                            "_downpayment": {
+                              "oneof": [
+                                "downpayment"
+                              ]
+                            },
+                            "_creditType": {
+                              "oneof": [
+                                "creditType"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "months": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "amount": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2
+                            },
+                            "downpayment": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "creditType": {
+                              "type": "CreditType",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "LoyaltyPoints": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "pointsValue": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "ratio": {
+                              "type": "double",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "LoyaltyProgram": {
+                          "oneofs": {
+                            "_programLabel": {
+                              "oneof": [
+                                "programLabel"
+                              ]
+                            },
+                            "_tierLabel": {
+                              "oneof": [
+                                "tierLabel"
+                              ]
+                            },
+                            "_price": {
+                              "oneof": [
+                                "price"
+                              ]
+                            },
+                            "_cashbackForFutureUse": {
+                              "oneof": [
+                                "cashbackForFutureUse"
+                              ]
+                            },
+                            "_loyaltyPoints": {
+                              "oneof": [
+                                "loyaltyPoints"
+                              ]
+                            },
+                            "_memberPriceEffectiveDate": {
+                              "oneof": [
+                                "memberPriceEffectiveDate"
+                              ]
+                            },
+                            "_shippingLabel": {
+                              "oneof": [
+                                "shippingLabel"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "programLabel": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "tierLabel": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cashbackForFutureUse": {
+                              "type": "google.shopping.type.Price",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "loyaltyPoints": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "memberPriceEffectiveDate": {
+                              "type": "google.type.Interval",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "shippingLabel": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "Shipping": {
+                          "oneofs": {
+                            "_minHandlingTime": {
+                              "oneof": [
+                                "minHandlingTime"
+                              ]
+                            },
+                            "_maxHandlingTime": {
+                              "oneof": [
+                                "maxHandlingTime"
+                              ]
+                            },
+                            "_minTransitTime": {
+                              "oneof": [
+                                "minTransitTime"
+                              ]
+                            },
+                            "_maxTransitTime": {
+                              "oneof": [
+                                "maxTransitTime"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 1
+                            },
+                            "country": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "region": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "service": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "locationId": {
+                              "type": "int64",
+                              "id": 5
+                            },
+                            "locationGroupName": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "postalCode": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "minHandlingTime": {
+                              "type": "int64",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxHandlingTime": {
+                              "type": "int64",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "minTransitTime": {
+                              "type": "int64",
+                              "id": 10,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxTransitTime": {
+                              "type": "int64",
+                              "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "FreeShippingThreshold": {
+                          "oneofs": {
+                            "_country": {
+                              "oneof": [
+                                "country"
+                              ]
+                            },
+                            "_priceThreshold": {
+                              "oneof": [
+                                "priceThreshold"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "country": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "priceThreshold": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductDetail": {
+                          "fields": {
+                            "sectionName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "attributeName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "attributeValue": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProductCertification": {
+                          "oneofs": {
+                            "_certificationAuthority": {
+                              "oneof": [
+                                "certificationAuthority"
+                              ]
+                            },
+                            "_certificationName": {
+                              "oneof": [
+                                "certificationName"
+                              ]
+                            },
+                            "_certificationCode": {
+                              "oneof": [
+                                "certificationCode"
+                              ]
+                            },
+                            "_certificationValue": {
+                              "oneof": [
+                                "certificationValue"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "certificationAuthority": {
+                              "type": "CertificationAuthority",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "certificationName": {
+                              "type": "CertificationName",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "certificationCode": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "certificationValue": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "StructuredTitle": {
+                          "oneofs": {
+                            "_digitalSourceType": {
+                              "oneof": [
+                                "digitalSourceType"
+                              ]
+                            },
+                            "_content": {
+                              "oneof": [
+                                "content"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "digitalSourceType": {
+                              "type": "DigitalSourceType",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "content": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "StructuredDescription": {
+                          "oneofs": {
+                            "_digitalSourceType": {
+                              "oneof": [
+                                "digitalSourceType"
+                              ]
+                            },
+                            "_content": {
+                              "oneof": [
+                                "content"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "digitalSourceType": {
+                              "type": "DigitalSourceType",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "content": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductDimension": {
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ProductWeight": {
+                          "fields": {
+                            "value": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ProductStatus": {
+                          "fields": {
+                            "destinationStatuses": {
+                              "rule": "repeated",
+                              "type": "DestinationStatus",
+                              "id": 3
+                            },
+                            "itemLevelIssues": {
+                              "rule": "repeated",
+                              "type": "ItemLevelIssue",
+                              "id": 4
+                            },
+                            "creationDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            },
+                            "lastUpdateDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 6
+                            },
+                            "googleExpirationDate": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "DestinationStatus": {
+                              "fields": {
+                                "reportingContext": {
+                                  "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                                  "id": 1
+                                },
+                                "approvedCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "pendingCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "disapprovedCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "ItemLevelIssue": {
+                              "fields": {
+                                "code": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "severity": {
+                                  "type": "Severity",
+                                  "id": 2
+                                },
+                                "resolution": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "attribute": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "reportingContext": {
+                                  "type": "google.shopping.type.ReportingContext.ReportingContextEnum",
+                                  "id": 5
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "detail": {
+                                  "type": "string",
+                                  "id": 7
+                                },
+                                "documentation": {
+                                  "type": "string",
+                                  "id": 8
+                                },
+                                "applicableCountries": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 9
+                                }
+                              },
+                              "nested": {
+                                "Severity": {
+                                  "values": {
+                                    "SEVERITY_UNSPECIFIED": 0,
+                                    "NOT_IMPACTED": 1,
+                                    "DEMOTED": 2,
+                                    "DISAPPROVED": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "CloudExportAdditionalProperties": {
+                          "oneofs": {
+                            "_propertyName": {
+                              "oneof": [
+                                "propertyName"
+                              ]
+                            },
+                            "_boolValue": {
+                              "oneof": [
+                                "boolValue"
+                              ]
+                            },
+                            "_minValue": {
+                              "oneof": [
+                                "minValue"
+                              ]
+                            },
+                            "_maxValue": {
+                              "oneof": [
+                                "maxValue"
+                              ]
+                            },
+                            "_unitCode": {
+                              "oneof": [
+                                "unitCode"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "propertyName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "textValue": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "boolValue": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "intValue": {
+                              "rule": "repeated",
+                              "type": "int64",
+                              "id": 4
+                            },
+                            "floatValue": {
+                              "rule": "repeated",
+                              "type": "float",
+                              "id": 5
+                            },
+                            "minValue": {
+                              "type": "float",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "maxValue": {
+                              "type": "float",
+                              "id": 7,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "unitCode": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductSustainabilityIncentive": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "amount",
+                                "percentage"
+                              ]
+                            },
+                            "_type": {
+                              "oneof": [
+                                "type"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "amount": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2
+                            },
+                            "percentage": {
+                              "type": "double",
+                              "id": 3
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "EV_TAX_CREDIT": 1,
+                                "EV_PRICE_DISCOUNT": 2
+                              }
+                            }
+                          }
+                        },
+                        "AutomatedDiscounts": {
+                          "fields": {
+                            "priorPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 1
+                            },
+                            "priorPriceProgressive": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2
+                            },
+                            "gadPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProductsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetProduct": {
+                              "requestType": "GetProductRequest",
+                              "responseType": "Product",
+                              "options": {
+                                "(google.api.http).get": "/products/v1/{name=accounts/*/products/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/products/v1/{name=accounts/*/products/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListProducts": {
+                              "requestType": "ListProductsRequest",
+                              "responseType": "ListProductsResponse",
+                              "options": {
+                                "(google.api.http).get": "/products/v1/{parent=accounts/*}/products",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/products/v1/{parent=accounts/*}/products"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "Product": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/Product",
+                            "(google.api.resource).pattern": "accounts/{account}/products/{product}"
+                          },
+                          "oneofs": {
+                            "_versionNumber": {
+                              "oneof": [
+                                "versionNumber"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "legacyLocal": {
+                              "type": "bool",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "offerId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "contentLanguage": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "feedLabel": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dataSource": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "versionNumber": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "productAttributes": {
+                              "type": "ProductAttributes",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "customAttributes": {
+                              "rule": "repeated",
+                              "type": "google.shopping.type.CustomAttribute",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "productStatus": {
+                              "type": "ProductStatus",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "automatedDiscounts": {
+                              "type": "AutomatedDiscounts",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "GetProductRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Product"
+                              }
+                            }
+                          }
+                        },
+                        "ListProductsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/Product"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListProductsResponse": {
+                          "fields": {
+                            "products": {
+                              "rule": "repeated",
+                              "type": "Product",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta": {
                       "options": {
                         "go_package": "cloud.google.com/go/shopping/merchant/products/apiv1beta/productspb;productspb",
@@ -2181,8 +4265,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -2306,6 +4389,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -2446,6 +4533,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -2503,6 +4612,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -2562,6 +4676,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -2696,12 +4823,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -2739,6 +4873,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2828,6 +4967,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -3053,6 +5196,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -3267,6 +5414,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -3402,7 +5550,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -3429,6 +5578,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3497,6 +5650,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -3586,6 +5759,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3729,6 +5906,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -3739,6 +5917,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -3749,6 +5928,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -3759,6 +5939,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -3769,7 +5950,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -3779,27 +5961,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -3844,7 +6037,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -3858,6 +6057,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -3886,11 +6112,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -3903,6 +6144,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -3986,6 +6233,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {

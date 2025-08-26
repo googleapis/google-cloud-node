@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.1.0...support-v2.2.0) (2025-08-12)
+
+
+### Features
+
+* [cloudsupport] A new message `GetAttachmentRequest` and `GetComment` is added ([#6587](https://github.com/googleapis/google-cloud-node/issues/6587)) ([470fa86](https://github.com/googleapis/google-cloud-node/commit/470fa86edc902a058b2c0a7abeea4754dca4ae07))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.0.1...support-v2.1.0) (2025-07-09)
 
 
