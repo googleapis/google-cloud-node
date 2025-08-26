@@ -112,6 +112,7 @@ export async function extractClients(currentPath: string) {
 export async function generateIndexTs(
   currentLibrary: string,
   defaultVersion?: string,
+  isEsm?: boolean,
 ) {
   // Get all the versions
   const versions = await extractVersions(currentLibrary);
@@ -132,7 +133,7 @@ export async function generateIndexTs(
   );
 
   // Render index.ts
-  const variables = {versions, defaultClientAndVersions};
+  const variables = {versions, defaultClientAndVersions, isEsm: isEsm || false};
 
   // Create a new Nunjucks environment configured to load from the templateDirectory
   // This is necessary due to occurring in a Bazel environment or locally
@@ -141,7 +142,7 @@ export async function generateIndexTs(
     {autoescape: false}, // Disable autoescaping for code generation
   );
 
-  const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables); // <-- RENDER BY FILENAME
+  const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables);
 
   const outputPath = path.join(currentLibrary, SRC_PATH, INDEX_PATH);
   console.log(

@@ -118,6 +118,38 @@ describe('generate index.ts', () => {
     );
   });
 
+  it('should generate an index file as ESM if true', async () => {
+    // Even though the library combination should delete the current library,
+    // this allows us to ensure that our output is expected.
+    try {
+      await fs.rm(
+        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+      );
+    } catch (err) {
+      console.log(`Could not delete ${LIB_POST_COMBINATION}/src/index.ts file`);
+    }
+    await generateIndexTs(
+      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
+      'v1',
+      true,
+    );
+
+    // Confirm index.ts was generated
+    assert.ok(
+      await fs.stat(
+        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+      ),
+    );
+    const contents = await fs.readFile(
+      path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src', 'index.ts'),
+      'utf8',
+    );
+    // Confirm all versions were generated
+    assert.match(contents, /index.js/);
+    // Confirm default version is exported
+    assert.match(contents, /..\/..\/protos\/protos.js/);
+  });
+
   it('should guess the default version if not provided', async () => {
     // Even though the library combination should delete the current library,
     // this allows us to ensure that our output is expected.

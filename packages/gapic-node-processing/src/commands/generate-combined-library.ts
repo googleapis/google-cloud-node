@@ -19,6 +19,7 @@ export interface CliArgs {
   'source-path': string;
   'default-version'?: string;
   'destination-path'?: string;
+  'is-esm'?: boolean;
 }
 /**
  * Command module for bootstrapping a library.
@@ -44,6 +45,10 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
         describe:
           'what is the default version of the library (default is highest)',
         type: 'string',
+      })
+      .option('is-esm', {
+        describe: 'is the library an ESM library',
+        type: 'boolean',
       });
   },
 
@@ -72,6 +77,10 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       }
     }
     console.log(`Generating index.ts in ${destinationPath}`);
-    await generateIndexTs(destinationPath, argv['default-version']);
+    await generateIndexTs(
+      destinationPath,
+      argv['default-version'],
+      argv['is-esm'],
+    );
   },
 };

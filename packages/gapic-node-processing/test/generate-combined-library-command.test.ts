@@ -35,7 +35,7 @@ describe('tests running build trigger', () => {
     generateIndexTsStub.restore();
   });
 
-  it('it should generate a full library with only a single library argument', async () => {
+  it('should generate a full library with only a single library argument', async () => {
     await generateCombinedLibraries.handler({
       'source-path': path.join(
         TEST_FIXTURES_PATH,
@@ -56,17 +56,18 @@ describe('tests running build trigger', () => {
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
         undefined,
+        undefined,
       ),
     );
   });
 
-  it('it should generate a full library at a different destination path if provided', async () => {
+  it('should generate a full library at a different destination path if provided', async () => {
     await generateCombinedLibraries.handler({
       'source-path': path.join(
         TEST_FIXTURES_PATH,
         'google-cloud-speech-nodejs',
       ),
-    sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
       'destination-path': 'different-path',
       destinationPath: 'different-path',
       _: [],
@@ -80,7 +81,11 @@ describe('tests running build trigger', () => {
       ),
     );
     assert.ok(
-      generateIndexTsStub.calledOnceWithExactly('different-path', undefined),
+      generateIndexTsStub.calledOnceWithExactly(
+        'different-path',
+        undefined,
+        undefined,
+      ),
     );
   });
 
@@ -107,6 +112,7 @@ describe('tests running build trigger', () => {
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
         'v1',
+        undefined,
       ),
     );
   });
@@ -122,10 +128,7 @@ describe('tests running build trigger', () => {
           TEST_FIXTURES_PATH,
           'google-cloud-speech-nodejs',
         ),
-        sourcePath: path.join(
-          TEST_FIXTURES_PATH,
-          'google-cloud-speech-nodejs',
-        ),
+        sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
         _: [],
         $0: 'foo',
       }),
@@ -170,5 +173,33 @@ describe('tests running build trigger', () => {
       ),
     );
     assert.ok(generateIndexTsStub.notCalled);
+  });
+
+  it('it should generate a full library with isEsm', async () => {
+    await generateCombinedLibraries.handler({
+      'source-path': path.join(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs'
+      ),
+      sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'is-esm': true,
+      isEsm: true,
+      _: [],
+      $0: 'foo',
+    });
+
+    assert.ok(
+      combineLibrariesStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')
+      )
+    );
+    assert.ok(
+      generateIndexTsStub.calledOnceWithExactly(
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+        undefined,
+        true
+      )
+    );
   });
 });

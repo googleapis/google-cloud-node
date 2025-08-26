@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-{% for version in versions %}import * as {{ version }} from './{{ version}}';{{ "\n" }}{% endfor %}
+{% for version in versions %}import * as {{ version }} from './{{ version }}{% if isEsm %}/index.js{% endif %}';{{ "
+" }}{% endfor %}
 {% for client in defaultClientAndVersions.clients %}const {{ client }} = {{ defaultClientAndVersions.version }}.{{ client }};
 type {{ client }} = {{ defaultClientAndVersions.version }}.{{ client }};{{ "\n" }}{% endfor %}
 export {{ "{" }}{{ versions|join(', ')}}, {{ defaultClientAndVersions.clients|join(', ')}}{{ "}" }};
 export default {{ "{" }}{{ versions|join(', ')}}, {{ defaultClientAndVersions.clients|join(', ')}}{{ "}" }};
-import * as protos from '../protos/protos';
+import * as protos from '{% if isEsm %}../../protos/protos.js{% else %}../protos/protos{% endif %}';
 export {protos};
