@@ -61661,6 +61661,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "evaluateDatasetResponse": {
+                          "type": "EvaluateDatasetResponse",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "error": {
                           "type": "google.rpc.Status",
                           "id": 4,

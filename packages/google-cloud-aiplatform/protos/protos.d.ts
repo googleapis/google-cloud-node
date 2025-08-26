@@ -230523,6 +230523,9 @@ export namespace google {
                     /** EvaluateDatasetRun checkpointId */
                     checkpointId?: (string|null);
 
+                    /** EvaluateDatasetRun evaluateDatasetResponse */
+                    evaluateDatasetResponse?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetResponse|null);
+
                     /** EvaluateDatasetRun error */
                     error?: (google.rpc.IStatus|null);
                 }
@@ -230541,6 +230544,9 @@ export namespace google {
 
                     /** EvaluateDatasetRun checkpointId. */
                     public checkpointId: string;
+
+                    /** EvaluateDatasetRun evaluateDatasetResponse. */
+                    public evaluateDatasetResponse?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetResponse|null);
 
                     /** EvaluateDatasetRun error. */
                     public error?: (google.rpc.IStatus|null);
