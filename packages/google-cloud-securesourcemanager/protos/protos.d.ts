@@ -145,6 +145,20 @@ export namespace google {
                     public createRepository(request: google.cloud.securesourcemanager.v1.ICreateRepositoryRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateRepository.
+                     * @param request UpdateRepositoryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateRepository(request: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepositoryCallback): void;
+
+                    /**
+                     * Calls UpdateRepository.
+                     * @param request UpdateRepositoryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRepository(request: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteRepository.
                      * @param request DeleteRepositoryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -157,6 +171,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteRepository(request: google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListHooks.
+                     * @param request ListHooksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListHooksResponse
+                     */
+                    public listHooks(request: google.cloud.securesourcemanager.v1.IListHooksRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooksCallback): void;
+
+                    /**
+                     * Calls ListHooks.
+                     * @param request ListHooksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listHooks(request: google.cloud.securesourcemanager.v1.IListHooksRequest): Promise<google.cloud.securesourcemanager.v1.ListHooksResponse>;
+
+                    /**
+                     * Calls GetHook.
+                     * @param request GetHookRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Hook
+                     */
+                    public getHook(request: google.cloud.securesourcemanager.v1.IGetHookRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetHookCallback): void;
+
+                    /**
+                     * Calls GetHook.
+                     * @param request GetHookRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getHook(request: google.cloud.securesourcemanager.v1.IGetHookRequest): Promise<google.cloud.securesourcemanager.v1.Hook>;
+
+                    /**
+                     * Calls CreateHook.
+                     * @param request CreateHookRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createHook(request: google.cloud.securesourcemanager.v1.ICreateHookRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHookCallback): void;
+
+                    /**
+                     * Calls CreateHook.
+                     * @param request CreateHookRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createHook(request: google.cloud.securesourcemanager.v1.ICreateHookRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateHook.
+                     * @param request UpdateHookRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateHook(request: google.cloud.securesourcemanager.v1.IUpdateHookRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHookCallback): void;
+
+                    /**
+                     * Calls UpdateHook.
+                     * @param request UpdateHookRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateHook(request: google.cloud.securesourcemanager.v1.IUpdateHookRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteHook.
+                     * @param request DeleteHookRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteHook(request: google.cloud.securesourcemanager.v1.IDeleteHookRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHookCallback): void;
+
+                    /**
+                     * Calls DeleteHook.
+                     * @param request DeleteHookRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteHook(request: google.cloud.securesourcemanager.v1.IDeleteHookRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls GetIamPolicyRepo.
@@ -269,6 +353,426 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteBranchRule(request: google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreatePullRequest.
+                     * @param request CreatePullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPullRequest(request: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestCallback): void;
+
+                    /**
+                     * Calls CreatePullRequest.
+                     * @param request CreatePullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPullRequest(request: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetPullRequest.
+                     * @param request GetPullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequest
+                     */
+                    public getPullRequest(request: google.cloud.securesourcemanager.v1.IGetPullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestCallback): void;
+
+                    /**
+                     * Calls GetPullRequest.
+                     * @param request GetPullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPullRequest(request: google.cloud.securesourcemanager.v1.IGetPullRequestRequest): Promise<google.cloud.securesourcemanager.v1.PullRequest>;
+
+                    /**
+                     * Calls ListPullRequests.
+                     * @param request ListPullRequestsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPullRequestsResponse
+                     */
+                    public listPullRequests(request: google.cloud.securesourcemanager.v1.IListPullRequestsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestsCallback): void;
+
+                    /**
+                     * Calls ListPullRequests.
+                     * @param request ListPullRequestsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPullRequests(request: google.cloud.securesourcemanager.v1.IListPullRequestsRequest): Promise<google.cloud.securesourcemanager.v1.ListPullRequestsResponse>;
+
+                    /**
+                     * Calls UpdatePullRequest.
+                     * @param request UpdatePullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updatePullRequest(request: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestCallback): void;
+
+                    /**
+                     * Calls UpdatePullRequest.
+                     * @param request UpdatePullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePullRequest(request: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls MergePullRequest.
+                     * @param request MergePullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public mergePullRequest(request: google.cloud.securesourcemanager.v1.IMergePullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequestCallback): void;
+
+                    /**
+                     * Calls MergePullRequest.
+                     * @param request MergePullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public mergePullRequest(request: google.cloud.securesourcemanager.v1.IMergePullRequestRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls OpenPullRequest.
+                     * @param request OpenPullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public openPullRequest(request: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequestCallback): void;
+
+                    /**
+                     * Calls OpenPullRequest.
+                     * @param request OpenPullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public openPullRequest(request: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ClosePullRequest.
+                     * @param request ClosePullRequestRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public closePullRequest(request: google.cloud.securesourcemanager.v1.IClosePullRequestRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequestCallback): void;
+
+                    /**
+                     * Calls ClosePullRequest.
+                     * @param request ClosePullRequestRequest message or plain object
+                     * @returns Promise
+                     */
+                    public closePullRequest(request: google.cloud.securesourcemanager.v1.IClosePullRequestRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListPullRequestFileDiffs.
+                     * @param request ListPullRequestFileDiffsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPullRequestFileDiffsResponse
+                     */
+                    public listPullRequestFileDiffs(request: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffsCallback): void;
+
+                    /**
+                     * Calls ListPullRequestFileDiffs.
+                     * @param request ListPullRequestFileDiffsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPullRequestFileDiffs(request: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest): Promise<google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse>;
+
+                    /**
+                     * Calls FetchTree.
+                     * @param request FetchTreeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchTreeResponse
+                     */
+                    public fetchTree(request: google.cloud.securesourcemanager.v1.IFetchTreeRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTreeCallback): void;
+
+                    /**
+                     * Calls FetchTree.
+                     * @param request FetchTreeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchTree(request: google.cloud.securesourcemanager.v1.IFetchTreeRequest): Promise<google.cloud.securesourcemanager.v1.FetchTreeResponse>;
+
+                    /**
+                     * Calls FetchBlob.
+                     * @param request FetchBlobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchBlobResponse
+                     */
+                    public fetchBlob(request: google.cloud.securesourcemanager.v1.IFetchBlobRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlobCallback): void;
+
+                    /**
+                     * Calls FetchBlob.
+                     * @param request FetchBlobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchBlob(request: google.cloud.securesourcemanager.v1.IFetchBlobRequest): Promise<google.cloud.securesourcemanager.v1.FetchBlobResponse>;
+
+                    /**
+                     * Calls CreateIssue.
+                     * @param request CreateIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createIssue(request: google.cloud.securesourcemanager.v1.ICreateIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueCallback): void;
+
+                    /**
+                     * Calls CreateIssue.
+                     * @param request CreateIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIssue(request: google.cloud.securesourcemanager.v1.ICreateIssueRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetIssue.
+                     * @param request GetIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Issue
+                     */
+                    public getIssue(request: google.cloud.securesourcemanager.v1.IGetIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueCallback): void;
+
+                    /**
+                     * Calls GetIssue.
+                     * @param request GetIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIssue(request: google.cloud.securesourcemanager.v1.IGetIssueRequest): Promise<google.cloud.securesourcemanager.v1.Issue>;
+
+                    /**
+                     * Calls ListIssues.
+                     * @param request ListIssuesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIssuesResponse
+                     */
+                    public listIssues(request: google.cloud.securesourcemanager.v1.IListIssuesRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssuesCallback): void;
+
+                    /**
+                     * Calls ListIssues.
+                     * @param request ListIssuesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIssues(request: google.cloud.securesourcemanager.v1.IListIssuesRequest): Promise<google.cloud.securesourcemanager.v1.ListIssuesResponse>;
+
+                    /**
+                     * Calls UpdateIssue.
+                     * @param request UpdateIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIssue(request: google.cloud.securesourcemanager.v1.IUpdateIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueCallback): void;
+
+                    /**
+                     * Calls UpdateIssue.
+                     * @param request UpdateIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIssue(request: google.cloud.securesourcemanager.v1.IUpdateIssueRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteIssue.
+                     * @param request DeleteIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteIssue(request: google.cloud.securesourcemanager.v1.IDeleteIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueCallback): void;
+
+                    /**
+                     * Calls DeleteIssue.
+                     * @param request DeleteIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIssue(request: google.cloud.securesourcemanager.v1.IDeleteIssueRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls OpenIssue.
+                     * @param request OpenIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public openIssue(request: google.cloud.securesourcemanager.v1.IOpenIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssueCallback): void;
+
+                    /**
+                     * Calls OpenIssue.
+                     * @param request OpenIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public openIssue(request: google.cloud.securesourcemanager.v1.IOpenIssueRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CloseIssue.
+                     * @param request CloseIssueRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public closeIssue(request: google.cloud.securesourcemanager.v1.ICloseIssueRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssueCallback): void;
+
+                    /**
+                     * Calls CloseIssue.
+                     * @param request CloseIssueRequest message or plain object
+                     * @returns Promise
+                     */
+                    public closeIssue(request: google.cloud.securesourcemanager.v1.ICloseIssueRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetPullRequestComment.
+                     * @param request GetPullRequestCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PullRequestComment
+                     */
+                    public getPullRequestComment(request: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestCommentCallback): void;
+
+                    /**
+                     * Calls GetPullRequestComment.
+                     * @param request GetPullRequestCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPullRequestComment(request: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest): Promise<google.cloud.securesourcemanager.v1.PullRequestComment>;
+
+                    /**
+                     * Calls ListPullRequestComments.
+                     * @param request ListPullRequestCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPullRequestCommentsResponse
+                     */
+                    public listPullRequestComments(request: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestCommentsCallback): void;
+
+                    /**
+                     * Calls ListPullRequestComments.
+                     * @param request ListPullRequestCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPullRequestComments(request: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest): Promise<google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse>;
+
+                    /**
+                     * Calls CreatePullRequestComment.
+                     * @param request CreatePullRequestCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createPullRequestComment(request: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestCommentCallback): void;
+
+                    /**
+                     * Calls CreatePullRequestComment.
+                     * @param request CreatePullRequestCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPullRequestComment(request: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdatePullRequestComment.
+                     * @param request UpdatePullRequestCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updatePullRequestComment(request: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestCommentCallback): void;
+
+                    /**
+                     * Calls UpdatePullRequestComment.
+                     * @param request UpdatePullRequestCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePullRequestComment(request: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeletePullRequestComment.
+                     * @param request DeletePullRequestCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deletePullRequestComment(request: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestCommentCallback): void;
+
+                    /**
+                     * Calls DeletePullRequestComment.
+                     * @param request DeletePullRequestCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePullRequestComment(request: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls BatchCreatePullRequestComments.
+                     * @param request BatchCreatePullRequestCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchCreatePullRequestComments(request: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestCommentsCallback): void;
+
+                    /**
+                     * Calls BatchCreatePullRequestComments.
+                     * @param request BatchCreatePullRequestCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchCreatePullRequestComments(request: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ResolvePullRequestComments.
+                     * @param request ResolvePullRequestCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public resolvePullRequestComments(request: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestCommentsCallback): void;
+
+                    /**
+                     * Calls ResolvePullRequestComments.
+                     * @param request ResolvePullRequestCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resolvePullRequestComments(request: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UnresolvePullRequestComments.
+                     * @param request UnresolvePullRequestCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public unresolvePullRequestComments(request: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestCommentsCallback): void;
+
+                    /**
+                     * Calls UnresolvePullRequestComments.
+                     * @param request UnresolvePullRequestCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public unresolvePullRequestComments(request: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateIssueComment.
+                     * @param request CreateIssueCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createIssueComment(request: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueCommentCallback): void;
+
+                    /**
+                     * Calls CreateIssueComment.
+                     * @param request CreateIssueCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createIssueComment(request: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetIssueComment.
+                     * @param request GetIssueCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IssueComment
+                     */
+                    public getIssueComment(request: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueCommentCallback): void;
+
+                    /**
+                     * Calls GetIssueComment.
+                     * @param request GetIssueCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIssueComment(request: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest): Promise<google.cloud.securesourcemanager.v1.IssueComment>;
+
+                    /**
+                     * Calls ListIssueComments.
+                     * @param request ListIssueCommentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListIssueCommentsResponse
+                     */
+                    public listIssueComments(request: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueCommentsCallback): void;
+
+                    /**
+                     * Calls ListIssueComments.
+                     * @param request ListIssueCommentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listIssueComments(request: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest): Promise<google.cloud.securesourcemanager.v1.ListIssueCommentsResponse>;
+
+                    /**
+                     * Calls UpdateIssueComment.
+                     * @param request UpdateIssueCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateIssueComment(request: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueCommentCallback): void;
+
+                    /**
+                     * Calls UpdateIssueComment.
+                     * @param request UpdateIssueCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateIssueComment(request: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteIssueComment.
+                     * @param request DeleteIssueCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteIssueComment(request: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest, callback: google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueCommentCallback): void;
+
+                    /**
+                     * Calls DeleteIssueComment.
+                     * @param request DeleteIssueCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteIssueComment(request: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace SecureSourceManager {
@@ -323,11 +827,53 @@ export namespace google {
                     type CreateRepositoryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateRepository}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateRepositoryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteRepository}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type DeleteRepositoryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listHooks}.
+                     * @param error Error, if any
+                     * @param [response] ListHooksResponse
+                     */
+                    type ListHooksCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListHooksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getHook}.
+                     * @param error Error, if any
+                     * @param [response] Hook
+                     */
+                    type GetHookCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.Hook) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createHook}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateHookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateHook}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateHookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteHook}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteHookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getIamPolicyRepo}.
@@ -384,6 +930,216 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteBranchRuleCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePullRequestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] PullRequest
+                     */
+                    type GetPullRequestCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.PullRequest) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listPullRequests}.
+                     * @param error Error, if any
+                     * @param [response] ListPullRequestsResponse
+                     */
+                    type ListPullRequestsCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListPullRequestsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updatePullRequest}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdatePullRequestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|mergePullRequest}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type MergePullRequestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|openPullRequest}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type OpenPullRequestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|closePullRequest}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ClosePullRequestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listPullRequestFileDiffs}.
+                     * @param error Error, if any
+                     * @param [response] ListPullRequestFileDiffsResponse
+                     */
+                    type ListPullRequestFileDiffsCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|fetchTree}.
+                     * @param error Error, if any
+                     * @param [response] FetchTreeResponse
+                     */
+                    type FetchTreeCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.FetchTreeResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|fetchBlob}.
+                     * @param error Error, if any
+                     * @param [response] FetchBlobResponse
+                     */
+                    type FetchBlobCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.FetchBlobResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createIssue}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateIssueCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getIssue}.
+                     * @param error Error, if any
+                     * @param [response] Issue
+                     */
+                    type GetIssueCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.Issue) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listIssues}.
+                     * @param error Error, if any
+                     * @param [response] ListIssuesResponse
+                     */
+                    type ListIssuesCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListIssuesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateIssue}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIssueCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteIssue}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteIssueCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|openIssue}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type OpenIssueCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|closeIssue}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CloseIssueCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getPullRequestComment}.
+                     * @param error Error, if any
+                     * @param [response] PullRequestComment
+                     */
+                    type GetPullRequestCommentCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.PullRequestComment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listPullRequestComments}.
+                     * @param error Error, if any
+                     * @param [response] ListPullRequestCommentsResponse
+                     */
+                    type ListPullRequestCommentsCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createPullRequestComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreatePullRequestCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updatePullRequestComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdatePullRequestCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deletePullRequestComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeletePullRequestCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|batchCreatePullRequestComments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchCreatePullRequestCommentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|resolvePullRequestComments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ResolvePullRequestCommentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|unresolvePullRequestComments}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UnresolvePullRequestCommentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|createIssueComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateIssueCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|getIssueComment}.
+                     * @param error Error, if any
+                     * @param [response] IssueComment
+                     */
+                    type GetIssueCommentCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.IssueComment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|listIssueComments}.
+                     * @param error Error, if any
+                     * @param [response] ListIssueCommentsResponse
+                     */
+                    type ListIssueCommentsCallback = (error: (Error|null), response?: google.cloud.securesourcemanager.v1.ListIssueCommentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|updateIssueComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateIssueCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.securesourcemanager.v1.SecureSourceManager|deleteIssueComment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteIssueCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an Instance. */
@@ -415,6 +1171,9 @@ export namespace google {
 
                     /** Instance hostConfig */
                     hostConfig?: (google.cloud.securesourcemanager.v1.Instance.IHostConfig|null);
+
+                    /** Instance workforceIdentityFederationConfig */
+                    workforceIdentityFederationConfig?: (google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -452,6 +1211,9 @@ export namespace google {
 
                     /** Instance hostConfig. */
                     public hostConfig?: (google.cloud.securesourcemanager.v1.Instance.IHostConfig|null);
+
+                    /** Instance workforceIdentityFederationConfig. */
+                    public workforceIdentityFederationConfig?: (google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -780,6 +1542,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PrivateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a WorkforceIdentityFederationConfig. */
+                    interface IWorkforceIdentityFederationConfig {
+
+                        /** WorkforceIdentityFederationConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a WorkforceIdentityFederationConfig. */
+                    class WorkforceIdentityFederationConfig implements IWorkforceIdentityFederationConfig {
+
+                        /**
+                         * Constructs a new WorkforceIdentityFederationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig);
+
+                        /** WorkforceIdentityFederationConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new WorkforceIdentityFederationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WorkforceIdentityFederationConfig instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig): google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig;
+
+                        /**
+                         * Encodes the specified WorkforceIdentityFederationConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig.verify|verify} messages.
+                         * @param message WorkforceIdentityFederationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WorkforceIdentityFederationConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig.verify|verify} messages.
+                         * @param message WorkforceIdentityFederationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Instance.IWorkforceIdentityFederationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WorkforceIdentityFederationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WorkforceIdentityFederationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig;
+
+                        /**
+                         * Decodes a WorkforceIdentityFederationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WorkforceIdentityFederationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig;
+
+                        /**
+                         * Verifies a WorkforceIdentityFederationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WorkforceIdentityFederationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WorkforceIdentityFederationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig;
+
+                        /**
+                         * Creates a plain object from a WorkforceIdentityFederationConfig message. Also converts values to other types if specified.
+                         * @param message WorkforceIdentityFederationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.Instance.WorkforceIdentityFederationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WorkforceIdentityFederationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WorkforceIdentityFederationConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -1159,6 +2018,258 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a Hook. */
+                interface IHook {
+
+                    /** Hook name */
+                    name?: (string|null);
+
+                    /** Hook targetUri */
+                    targetUri?: (string|null);
+
+                    /** Hook disabled */
+                    disabled?: (boolean|null);
+
+                    /** Hook events */
+                    events?: (google.cloud.securesourcemanager.v1.Hook.HookEventType[]|null);
+
+                    /** Hook createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hook updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hook uid */
+                    uid?: (string|null);
+
+                    /** Hook pushOption */
+                    pushOption?: (google.cloud.securesourcemanager.v1.Hook.IPushOption|null);
+
+                    /** Hook sensitiveQueryString */
+                    sensitiveQueryString?: (string|null);
+                }
+
+                /** Represents a Hook. */
+                class Hook implements IHook {
+
+                    /**
+                     * Constructs a new Hook.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IHook);
+
+                    /** Hook name. */
+                    public name: string;
+
+                    /** Hook targetUri. */
+                    public targetUri: string;
+
+                    /** Hook disabled. */
+                    public disabled: boolean;
+
+                    /** Hook events. */
+                    public events: google.cloud.securesourcemanager.v1.Hook.HookEventType[];
+
+                    /** Hook createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hook updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hook uid. */
+                    public uid: string;
+
+                    /** Hook pushOption. */
+                    public pushOption?: (google.cloud.securesourcemanager.v1.Hook.IPushOption|null);
+
+                    /** Hook sensitiveQueryString. */
+                    public sensitiveQueryString: string;
+
+                    /**
+                     * Creates a new Hook instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Hook instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IHook): google.cloud.securesourcemanager.v1.Hook;
+
+                    /**
+                     * Encodes the specified Hook message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Hook.verify|verify} messages.
+                     * @param message Hook message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IHook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Hook message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Hook.verify|verify} messages.
+                     * @param message Hook message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IHook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Hook message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Hook
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Hook;
+
+                    /**
+                     * Decodes a Hook message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Hook
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Hook;
+
+                    /**
+                     * Verifies a Hook message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Hook message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Hook
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Hook;
+
+                    /**
+                     * Creates a plain object from a Hook message. Also converts values to other types if specified.
+                     * @param message Hook
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.Hook, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Hook to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Hook
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Hook {
+
+                    /** HookEventType enum. */
+                    enum HookEventType {
+                        UNSPECIFIED = 0,
+                        PUSH = 1,
+                        PULL_REQUEST = 2
+                    }
+
+                    /** Properties of a PushOption. */
+                    interface IPushOption {
+
+                        /** PushOption branchFilter */
+                        branchFilter?: (string|null);
+                    }
+
+                    /** Represents a PushOption. */
+                    class PushOption implements IPushOption {
+
+                        /**
+                         * Constructs a new PushOption.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.Hook.IPushOption);
+
+                        /** PushOption branchFilter. */
+                        public branchFilter: string;
+
+                        /**
+                         * Creates a new PushOption instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PushOption instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.Hook.IPushOption): google.cloud.securesourcemanager.v1.Hook.PushOption;
+
+                        /**
+                         * Encodes the specified PushOption message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Hook.PushOption.verify|verify} messages.
+                         * @param message PushOption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.Hook.IPushOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PushOption message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Hook.PushOption.verify|verify} messages.
+                         * @param message PushOption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Hook.IPushOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PushOption message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PushOption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Hook.PushOption;
+
+                        /**
+                         * Decodes a PushOption message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PushOption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Hook.PushOption;
+
+                        /**
+                         * Verifies a PushOption message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PushOption message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PushOption
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Hook.PushOption;
+
+                        /**
+                         * Creates a plain object from a PushOption message. Also converts values to other types if specified.
+                         * @param message PushOption
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.Hook.PushOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PushOption to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PushOption
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a BranchRule. */
                 interface IBranchRule {
 
@@ -1433,6 +2544,1235 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Check
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a PullRequest. */
+                interface IPullRequest {
+
+                    /** PullRequest name */
+                    name?: (string|null);
+
+                    /** PullRequest title */
+                    title?: (string|null);
+
+                    /** PullRequest body */
+                    body?: (string|null);
+
+                    /** PullRequest base */
+                    base?: (google.cloud.securesourcemanager.v1.PullRequest.IBranch|null);
+
+                    /** PullRequest head */
+                    head?: (google.cloud.securesourcemanager.v1.PullRequest.IBranch|null);
+
+                    /** PullRequest state */
+                    state?: (google.cloud.securesourcemanager.v1.PullRequest.State|keyof typeof google.cloud.securesourcemanager.v1.PullRequest.State|null);
+
+                    /** PullRequest createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest closeTime */
+                    closeTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PullRequest. */
+                class PullRequest implements IPullRequest {
+
+                    /**
+                     * Constructs a new PullRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IPullRequest);
+
+                    /** PullRequest name. */
+                    public name: string;
+
+                    /** PullRequest title. */
+                    public title: string;
+
+                    /** PullRequest body. */
+                    public body: string;
+
+                    /** PullRequest base. */
+                    public base?: (google.cloud.securesourcemanager.v1.PullRequest.IBranch|null);
+
+                    /** PullRequest head. */
+                    public head?: (google.cloud.securesourcemanager.v1.PullRequest.IBranch|null);
+
+                    /** PullRequest state. */
+                    public state: (google.cloud.securesourcemanager.v1.PullRequest.State|keyof typeof google.cloud.securesourcemanager.v1.PullRequest.State);
+
+                    /** PullRequest createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequest closeTime. */
+                    public closeTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PullRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IPullRequest): google.cloud.securesourcemanager.v1.PullRequest;
+
+                    /**
+                     * Encodes the specified PullRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequest.verify|verify} messages.
+                     * @param message PullRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IPullRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequest.verify|verify} messages.
+                     * @param message PullRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IPullRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequest;
+
+                    /**
+                     * Decodes a PullRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequest;
+
+                    /**
+                     * Verifies a PullRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequest;
+
+                    /**
+                     * Creates a plain object from a PullRequest message. Also converts values to other types if specified.
+                     * @param message PullRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.PullRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PullRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PullRequest {
+
+                    /** Properties of a Branch. */
+                    interface IBranch {
+
+                        /** Branch ref */
+                        ref?: (string|null);
+
+                        /** Branch sha */
+                        sha?: (string|null);
+                    }
+
+                    /** Represents a Branch. */
+                    class Branch implements IBranch {
+
+                        /**
+                         * Constructs a new Branch.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.PullRequest.IBranch);
+
+                        /** Branch ref. */
+                        public ref: string;
+
+                        /** Branch sha. */
+                        public sha: string;
+
+                        /**
+                         * Creates a new Branch instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Branch instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.PullRequest.IBranch): google.cloud.securesourcemanager.v1.PullRequest.Branch;
+
+                        /**
+                         * Encodes the specified Branch message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequest.Branch.verify|verify} messages.
+                         * @param message Branch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.PullRequest.IBranch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Branch message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequest.Branch.verify|verify} messages.
+                         * @param message Branch message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.PullRequest.IBranch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Branch message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Branch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequest.Branch;
+
+                        /**
+                         * Decodes a Branch message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Branch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequest.Branch;
+
+                        /**
+                         * Verifies a Branch message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Branch message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Branch
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequest.Branch;
+
+                        /**
+                         * Creates a plain object from a Branch message. Also converts values to other types if specified.
+                         * @param message Branch
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.PullRequest.Branch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Branch to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Branch
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OPEN = 1,
+                        CLOSED = 2,
+                        MERGED = 3
+                    }
+                }
+
+                /** Properties of a FileDiff. */
+                interface IFileDiff {
+
+                    /** FileDiff name */
+                    name?: (string|null);
+
+                    /** FileDiff action */
+                    action?: (google.cloud.securesourcemanager.v1.FileDiff.Action|keyof typeof google.cloud.securesourcemanager.v1.FileDiff.Action|null);
+
+                    /** FileDiff sha */
+                    sha?: (string|null);
+
+                    /** FileDiff patch */
+                    patch?: (string|null);
+                }
+
+                /** Represents a FileDiff. */
+                class FileDiff implements IFileDiff {
+
+                    /**
+                     * Constructs a new FileDiff.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFileDiff);
+
+                    /** FileDiff name. */
+                    public name: string;
+
+                    /** FileDiff action. */
+                    public action: (google.cloud.securesourcemanager.v1.FileDiff.Action|keyof typeof google.cloud.securesourcemanager.v1.FileDiff.Action);
+
+                    /** FileDiff sha. */
+                    public sha: string;
+
+                    /** FileDiff patch. */
+                    public patch: string;
+
+                    /**
+                     * Creates a new FileDiff instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileDiff instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFileDiff): google.cloud.securesourcemanager.v1.FileDiff;
+
+                    /**
+                     * Encodes the specified FileDiff message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FileDiff.verify|verify} messages.
+                     * @param message FileDiff message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFileDiff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileDiff message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FileDiff.verify|verify} messages.
+                     * @param message FileDiff message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFileDiff, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileDiff message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileDiff
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FileDiff;
+
+                    /**
+                     * Decodes a FileDiff message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileDiff
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FileDiff;
+
+                    /**
+                     * Verifies a FileDiff message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileDiff message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileDiff
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FileDiff;
+
+                    /**
+                     * Creates a plain object from a FileDiff message. Also converts values to other types if specified.
+                     * @param message FileDiff
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FileDiff, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileDiff to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileDiff
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FileDiff {
+
+                    /** Action enum. */
+                    enum Action {
+                        ACTION_UNSPECIFIED = 0,
+                        ADDED = 1,
+                        MODIFIED = 2,
+                        DELETED = 3
+                    }
+                }
+
+                /** Properties of an Issue. */
+                interface IIssue {
+
+                    /** Issue name */
+                    name?: (string|null);
+
+                    /** Issue title */
+                    title?: (string|null);
+
+                    /** Issue body */
+                    body?: (string|null);
+
+                    /** Issue state */
+                    state?: (google.cloud.securesourcemanager.v1.Issue.State|keyof typeof google.cloud.securesourcemanager.v1.Issue.State|null);
+
+                    /** Issue createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue closeTime */
+                    closeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an Issue. */
+                class Issue implements IIssue {
+
+                    /**
+                     * Constructs a new Issue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IIssue);
+
+                    /** Issue name. */
+                    public name: string;
+
+                    /** Issue title. */
+                    public title: string;
+
+                    /** Issue body. */
+                    public body: string;
+
+                    /** Issue state. */
+                    public state: (google.cloud.securesourcemanager.v1.Issue.State|keyof typeof google.cloud.securesourcemanager.v1.Issue.State);
+
+                    /** Issue createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue closeTime. */
+                    public closeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Issue etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new Issue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Issue instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IIssue): google.cloud.securesourcemanager.v1.Issue;
+
+                    /**
+                     * Encodes the specified Issue message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Issue.verify|verify} messages.
+                     * @param message Issue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Issue message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Issue.verify|verify} messages.
+                     * @param message Issue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Issue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Issue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Issue;
+
+                    /**
+                     * Decodes an Issue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Issue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Issue;
+
+                    /**
+                     * Verifies an Issue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Issue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Issue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Issue;
+
+                    /**
+                     * Creates a plain object from an Issue message. Also converts values to other types if specified.
+                     * @param message Issue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.Issue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Issue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Issue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Issue {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OPEN = 1,
+                        CLOSED = 2
+                    }
+                }
+
+                /** Properties of an IssueComment. */
+                interface IIssueComment {
+
+                    /** IssueComment name */
+                    name?: (string|null);
+
+                    /** IssueComment body */
+                    body?: (string|null);
+
+                    /** IssueComment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IssueComment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an IssueComment. */
+                class IssueComment implements IIssueComment {
+
+                    /**
+                     * Constructs a new IssueComment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IIssueComment);
+
+                    /** IssueComment name. */
+                    public name: string;
+
+                    /** IssueComment body. */
+                    public body: string;
+
+                    /** IssueComment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** IssueComment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new IssueComment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IssueComment instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IIssueComment): google.cloud.securesourcemanager.v1.IssueComment;
+
+                    /**
+                     * Encodes the specified IssueComment message. Does not implicitly {@link google.cloud.securesourcemanager.v1.IssueComment.verify|verify} messages.
+                     * @param message IssueComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IIssueComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IssueComment message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.IssueComment.verify|verify} messages.
+                     * @param message IssueComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IIssueComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IssueComment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IssueComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.IssueComment;
+
+                    /**
+                     * Decodes an IssueComment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IssueComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.IssueComment;
+
+                    /**
+                     * Verifies an IssueComment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IssueComment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IssueComment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.IssueComment;
+
+                    /**
+                     * Creates a plain object from an IssueComment message. Also converts values to other types if specified.
+                     * @param message IssueComment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.IssueComment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IssueComment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IssueComment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PullRequestComment. */
+                interface IPullRequestComment {
+
+                    /** PullRequestComment name */
+                    name?: (string|null);
+
+                    /** PullRequestComment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment review */
+                    review?: (google.cloud.securesourcemanager.v1.PullRequestComment.IReview|null);
+
+                    /** PullRequestComment comment */
+                    comment?: (google.cloud.securesourcemanager.v1.PullRequestComment.IComment|null);
+
+                    /** PullRequestComment code */
+                    code?: (google.cloud.securesourcemanager.v1.PullRequestComment.ICode|null);
+                }
+
+                /** Represents a PullRequestComment. */
+                class PullRequestComment implements IPullRequestComment {
+
+                    /**
+                     * Constructs a new PullRequestComment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IPullRequestComment);
+
+                    /** PullRequestComment name. */
+                    public name: string;
+
+                    /** PullRequestComment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PullRequestComment review. */
+                    public review?: (google.cloud.securesourcemanager.v1.PullRequestComment.IReview|null);
+
+                    /** PullRequestComment comment. */
+                    public comment?: (google.cloud.securesourcemanager.v1.PullRequestComment.IComment|null);
+
+                    /** PullRequestComment code. */
+                    public code?: (google.cloud.securesourcemanager.v1.PullRequestComment.ICode|null);
+
+                    /** PullRequestComment commentDetail. */
+                    public commentDetail?: ("review"|"comment"|"code");
+
+                    /**
+                     * Creates a new PullRequestComment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PullRequestComment instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IPullRequestComment): google.cloud.securesourcemanager.v1.PullRequestComment;
+
+                    /**
+                     * Encodes the specified PullRequestComment message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.verify|verify} messages.
+                     * @param message PullRequestComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IPullRequestComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PullRequestComment message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.verify|verify} messages.
+                     * @param message PullRequestComment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IPullRequestComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PullRequestComment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PullRequestComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequestComment;
+
+                    /**
+                     * Decodes a PullRequestComment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PullRequestComment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequestComment;
+
+                    /**
+                     * Verifies a PullRequestComment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PullRequestComment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PullRequestComment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequestComment;
+
+                    /**
+                     * Creates a plain object from a PullRequestComment message. Also converts values to other types if specified.
+                     * @param message PullRequestComment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.PullRequestComment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PullRequestComment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PullRequestComment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PullRequestComment {
+
+                    /** Properties of a Review. */
+                    interface IReview {
+
+                        /** Review actionType */
+                        actionType?: (google.cloud.securesourcemanager.v1.PullRequestComment.Review.ActionType|keyof typeof google.cloud.securesourcemanager.v1.PullRequestComment.Review.ActionType|null);
+
+                        /** Review body */
+                        body?: (string|null);
+
+                        /** Review effectiveCommitSha */
+                        effectiveCommitSha?: (string|null);
+                    }
+
+                    /** Represents a Review. */
+                    class Review implements IReview {
+
+                        /**
+                         * Constructs a new Review.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IReview);
+
+                        /** Review actionType. */
+                        public actionType: (google.cloud.securesourcemanager.v1.PullRequestComment.Review.ActionType|keyof typeof google.cloud.securesourcemanager.v1.PullRequestComment.Review.ActionType);
+
+                        /** Review body. */
+                        public body: string;
+
+                        /** Review effectiveCommitSha. */
+                        public effectiveCommitSha: string;
+
+                        /**
+                         * Creates a new Review instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Review instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IReview): google.cloud.securesourcemanager.v1.PullRequestComment.Review;
+
+                        /**
+                         * Encodes the specified Review message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Review.verify|verify} messages.
+                         * @param message Review message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.PullRequestComment.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Review message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Review.verify|verify} messages.
+                         * @param message Review message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.PullRequestComment.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Review message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequestComment.Review;
+
+                        /**
+                         * Decodes a Review message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Review
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequestComment.Review;
+
+                        /**
+                         * Verifies a Review message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Review
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequestComment.Review;
+
+                        /**
+                         * Creates a plain object from a Review message. Also converts values to other types if specified.
+                         * @param message Review
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.PullRequestComment.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Review to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Review
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Review {
+
+                        /** ActionType enum. */
+                        enum ActionType {
+                            ACTION_TYPE_UNSPECIFIED = 0,
+                            COMMENT = 1,
+                            CHANGE_REQUESTED = 2,
+                            APPROVED = 3
+                        }
+                    }
+
+                    /** Properties of a Comment. */
+                    interface IComment {
+
+                        /** Comment body */
+                        body?: (string|null);
+                    }
+
+                    /** Represents a Comment. */
+                    class Comment implements IComment {
+
+                        /**
+                         * Constructs a new Comment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IComment);
+
+                        /** Comment body. */
+                        public body: string;
+
+                        /**
+                         * Creates a new Comment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Comment instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IComment): google.cloud.securesourcemanager.v1.PullRequestComment.Comment;
+
+                        /**
+                         * Encodes the specified Comment message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Comment.verify|verify} messages.
+                         * @param message Comment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.PullRequestComment.IComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Comment message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Comment.verify|verify} messages.
+                         * @param message Comment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.PullRequestComment.IComment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Comment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Comment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequestComment.Comment;
+
+                        /**
+                         * Decodes a Comment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Comment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequestComment.Comment;
+
+                        /**
+                         * Verifies a Comment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Comment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Comment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequestComment.Comment;
+
+                        /**
+                         * Creates a plain object from a Comment message. Also converts values to other types if specified.
+                         * @param message Comment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.PullRequestComment.Comment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Comment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Comment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Code. */
+                    interface ICode {
+
+                        /** Code body */
+                        body?: (string|null);
+
+                        /** Code reply */
+                        reply?: (string|null);
+
+                        /** Code position */
+                        position?: (google.cloud.securesourcemanager.v1.PullRequestComment.IPosition|null);
+
+                        /** Code effectiveRootComment */
+                        effectiveRootComment?: (string|null);
+
+                        /** Code resolved */
+                        resolved?: (boolean|null);
+
+                        /** Code effectiveCommitSha */
+                        effectiveCommitSha?: (string|null);
+                    }
+
+                    /** Represents a Code. */
+                    class Code implements ICode {
+
+                        /**
+                         * Constructs a new Code.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.ICode);
+
+                        /** Code body. */
+                        public body: string;
+
+                        /** Code reply. */
+                        public reply: string;
+
+                        /** Code position. */
+                        public position?: (google.cloud.securesourcemanager.v1.PullRequestComment.IPosition|null);
+
+                        /** Code effectiveRootComment. */
+                        public effectiveRootComment: string;
+
+                        /** Code resolved. */
+                        public resolved: boolean;
+
+                        /** Code effectiveCommitSha. */
+                        public effectiveCommitSha: string;
+
+                        /**
+                         * Creates a new Code instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Code instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.ICode): google.cloud.securesourcemanager.v1.PullRequestComment.Code;
+
+                        /**
+                         * Encodes the specified Code message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Code.verify|verify} messages.
+                         * @param message Code message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.PullRequestComment.ICode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Code message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Code.verify|verify} messages.
+                         * @param message Code message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.PullRequestComment.ICode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Code message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Code
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequestComment.Code;
+
+                        /**
+                         * Decodes a Code message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Code
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequestComment.Code;
+
+                        /**
+                         * Verifies a Code message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Code message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Code
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequestComment.Code;
+
+                        /**
+                         * Creates a plain object from a Code message. Also converts values to other types if specified.
+                         * @param message Code
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.PullRequestComment.Code, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Code to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Code
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Position. */
+                    interface IPosition {
+
+                        /** Position path */
+                        path?: (string|null);
+
+                        /** Position line */
+                        line?: (number|Long|string|null);
+                    }
+
+                    /** Represents a Position. */
+                    class Position implements IPosition {
+
+                        /**
+                         * Constructs a new Position.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IPosition);
+
+                        /** Position path. */
+                        public path: string;
+
+                        /** Position line. */
+                        public line: (number|Long|string);
+
+                        /**
+                         * Creates a new Position instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Position instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.PullRequestComment.IPosition): google.cloud.securesourcemanager.v1.PullRequestComment.Position;
+
+                        /**
+                         * Encodes the specified Position message. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Position.verify|verify} messages.
+                         * @param message Position message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.PullRequestComment.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.PullRequestComment.Position.verify|verify} messages.
+                         * @param message Position message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.PullRequestComment.IPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Position message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Position
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.PullRequestComment.Position;
+
+                        /**
+                         * Decodes a Position message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Position
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.PullRequestComment.Position;
+
+                        /**
+                         * Verifies a Position message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Position
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.PullRequestComment.Position;
+
+                        /**
+                         * Creates a plain object from a Position message. Also converts values to other types if specified.
+                         * @param message Position
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.PullRequestComment.Position, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Position to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Position
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -2548,6 +4888,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateRepositoryRequest. */
+                interface IUpdateRepositoryRequest {
+
+                    /** UpdateRepositoryRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRepositoryRequest repository */
+                    repository?: (google.cloud.securesourcemanager.v1.IRepository|null);
+
+                    /** UpdateRepositoryRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateRepositoryRequest. */
+                class UpdateRepositoryRequest implements IUpdateRepositoryRequest {
+
+                    /**
+                     * Constructs a new UpdateRepositoryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest);
+
+                    /** UpdateRepositoryRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateRepositoryRequest repository. */
+                    public repository?: (google.cloud.securesourcemanager.v1.IRepository|null);
+
+                    /** UpdateRepositoryRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateRepositoryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRepositoryRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest): google.cloud.securesourcemanager.v1.UpdateRepositoryRequest;
+
+                    /**
+                     * Encodes the specified UpdateRepositoryRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateRepositoryRequest.verify|verify} messages.
+                     * @param message UpdateRepositoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRepositoryRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateRepositoryRequest.verify|verify} messages.
+                     * @param message UpdateRepositoryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRepositoryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRepositoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdateRepositoryRequest;
+
+                    /**
+                     * Decodes an UpdateRepositoryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRepositoryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdateRepositoryRequest;
+
+                    /**
+                     * Verifies an UpdateRepositoryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRepositoryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRepositoryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdateRepositoryRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRepositoryRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRepositoryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdateRepositoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRepositoryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRepositoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteRepositoryRequest. */
                 interface IDeleteRepositoryRequest {
 
@@ -2645,6 +5094,624 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteRepositoryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListHooksRequest. */
+                interface IListHooksRequest {
+
+                    /** ListHooksRequest parent */
+                    parent?: (string|null);
+
+                    /** ListHooksRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListHooksRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListHooksRequest. */
+                class ListHooksRequest implements IListHooksRequest {
+
+                    /**
+                     * Constructs a new ListHooksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListHooksRequest);
+
+                    /** ListHooksRequest parent. */
+                    public parent: string;
+
+                    /** ListHooksRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListHooksRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListHooksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHooksRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListHooksRequest): google.cloud.securesourcemanager.v1.ListHooksRequest;
+
+                    /**
+                     * Encodes the specified ListHooksRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListHooksRequest.verify|verify} messages.
+                     * @param message ListHooksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListHooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHooksRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListHooksRequest.verify|verify} messages.
+                     * @param message ListHooksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListHooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHooksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHooksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListHooksRequest;
+
+                    /**
+                     * Decodes a ListHooksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHooksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListHooksRequest;
+
+                    /**
+                     * Verifies a ListHooksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHooksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHooksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListHooksRequest;
+
+                    /**
+                     * Creates a plain object from a ListHooksRequest message. Also converts values to other types if specified.
+                     * @param message ListHooksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListHooksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHooksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHooksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListHooksResponse. */
+                interface IListHooksResponse {
+
+                    /** ListHooksResponse hooks */
+                    hooks?: (google.cloud.securesourcemanager.v1.IHook[]|null);
+
+                    /** ListHooksResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListHooksResponse. */
+                class ListHooksResponse implements IListHooksResponse {
+
+                    /**
+                     * Constructs a new ListHooksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListHooksResponse);
+
+                    /** ListHooksResponse hooks. */
+                    public hooks: google.cloud.securesourcemanager.v1.IHook[];
+
+                    /** ListHooksResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListHooksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHooksResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListHooksResponse): google.cloud.securesourcemanager.v1.ListHooksResponse;
+
+                    /**
+                     * Encodes the specified ListHooksResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListHooksResponse.verify|verify} messages.
+                     * @param message ListHooksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListHooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHooksResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListHooksResponse.verify|verify} messages.
+                     * @param message ListHooksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListHooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHooksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHooksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListHooksResponse;
+
+                    /**
+                     * Decodes a ListHooksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHooksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListHooksResponse;
+
+                    /**
+                     * Verifies a ListHooksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHooksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHooksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListHooksResponse;
+
+                    /**
+                     * Creates a plain object from a ListHooksResponse message. Also converts values to other types if specified.
+                     * @param message ListHooksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListHooksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHooksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListHooksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetHookRequest. */
+                interface IGetHookRequest {
+
+                    /** GetHookRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetHookRequest. */
+                class GetHookRequest implements IGetHookRequest {
+
+                    /**
+                     * Constructs a new GetHookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetHookRequest);
+
+                    /** GetHookRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetHookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetHookRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetHookRequest): google.cloud.securesourcemanager.v1.GetHookRequest;
+
+                    /**
+                     * Encodes the specified GetHookRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetHookRequest.verify|verify} messages.
+                     * @param message GetHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetHookRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetHookRequest.verify|verify} messages.
+                     * @param message GetHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetHookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetHookRequest;
+
+                    /**
+                     * Decodes a GetHookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetHookRequest;
+
+                    /**
+                     * Verifies a GetHookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetHookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetHookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetHookRequest;
+
+                    /**
+                     * Creates a plain object from a GetHookRequest message. Also converts values to other types if specified.
+                     * @param message GetHookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetHookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetHookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetHookRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateHookRequest. */
+                interface ICreateHookRequest {
+
+                    /** CreateHookRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateHookRequest hook */
+                    hook?: (google.cloud.securesourcemanager.v1.IHook|null);
+
+                    /** CreateHookRequest hookId */
+                    hookId?: (string|null);
+                }
+
+                /** Represents a CreateHookRequest. */
+                class CreateHookRequest implements ICreateHookRequest {
+
+                    /**
+                     * Constructs a new CreateHookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreateHookRequest);
+
+                    /** CreateHookRequest parent. */
+                    public parent: string;
+
+                    /** CreateHookRequest hook. */
+                    public hook?: (google.cloud.securesourcemanager.v1.IHook|null);
+
+                    /** CreateHookRequest hookId. */
+                    public hookId: string;
+
+                    /**
+                     * Creates a new CreateHookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateHookRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreateHookRequest): google.cloud.securesourcemanager.v1.CreateHookRequest;
+
+                    /**
+                     * Encodes the specified CreateHookRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateHookRequest.verify|verify} messages.
+                     * @param message CreateHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreateHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateHookRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateHookRequest.verify|verify} messages.
+                     * @param message CreateHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreateHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateHookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreateHookRequest;
+
+                    /**
+                     * Decodes a CreateHookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreateHookRequest;
+
+                    /**
+                     * Verifies a CreateHookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateHookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateHookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreateHookRequest;
+
+                    /**
+                     * Creates a plain object from a CreateHookRequest message. Also converts values to other types if specified.
+                     * @param message CreateHookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreateHookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateHookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateHookRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateHookRequest. */
+                interface IUpdateHookRequest {
+
+                    /** UpdateHookRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHookRequest hook */
+                    hook?: (google.cloud.securesourcemanager.v1.IHook|null);
+                }
+
+                /** Represents an UpdateHookRequest. */
+                class UpdateHookRequest implements IUpdateHookRequest {
+
+                    /**
+                     * Constructs a new UpdateHookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdateHookRequest);
+
+                    /** UpdateHookRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHookRequest hook. */
+                    public hook?: (google.cloud.securesourcemanager.v1.IHook|null);
+
+                    /**
+                     * Creates a new UpdateHookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateHookRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdateHookRequest): google.cloud.securesourcemanager.v1.UpdateHookRequest;
+
+                    /**
+                     * Encodes the specified UpdateHookRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateHookRequest.verify|verify} messages.
+                     * @param message UpdateHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdateHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateHookRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateHookRequest.verify|verify} messages.
+                     * @param message UpdateHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdateHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateHookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdateHookRequest;
+
+                    /**
+                     * Decodes an UpdateHookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdateHookRequest;
+
+                    /**
+                     * Verifies an UpdateHookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateHookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateHookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdateHookRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateHookRequest message. Also converts values to other types if specified.
+                     * @param message UpdateHookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdateHookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateHookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateHookRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteHookRequest. */
+                interface IDeleteHookRequest {
+
+                    /** DeleteHookRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteHookRequest. */
+                class DeleteHookRequest implements IDeleteHookRequest {
+
+                    /**
+                     * Constructs a new DeleteHookRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IDeleteHookRequest);
+
+                    /** DeleteHookRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteHookRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteHookRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IDeleteHookRequest): google.cloud.securesourcemanager.v1.DeleteHookRequest;
+
+                    /**
+                     * Encodes the specified DeleteHookRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteHookRequest.verify|verify} messages.
+                     * @param message DeleteHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IDeleteHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteHookRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteHookRequest.verify|verify} messages.
+                     * @param message DeleteHookRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IDeleteHookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteHookRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.DeleteHookRequest;
+
+                    /**
+                     * Decodes a DeleteHookRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteHookRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.DeleteHookRequest;
+
+                    /**
+                     * Verifies a DeleteHookRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteHookRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteHookRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.DeleteHookRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteHookRequest message. Also converts values to other types if specified.
+                     * @param message DeleteHookRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.DeleteHookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteHookRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteHookRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3280,6 +6347,4252 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a CreatePullRequestRequest. */
+                interface ICreatePullRequestRequest {
+
+                    /** CreatePullRequestRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePullRequestRequest pullRequest */
+                    pullRequest?: (google.cloud.securesourcemanager.v1.IPullRequest|null);
+                }
+
+                /** Represents a CreatePullRequestRequest. */
+                class CreatePullRequestRequest implements ICreatePullRequestRequest {
+
+                    /**
+                     * Constructs a new CreatePullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest);
+
+                    /** CreatePullRequestRequest parent. */
+                    public parent: string;
+
+                    /** CreatePullRequestRequest pullRequest. */
+                    public pullRequest?: (google.cloud.securesourcemanager.v1.IPullRequest|null);
+
+                    /**
+                     * Creates a new CreatePullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest): google.cloud.securesourcemanager.v1.CreatePullRequestRequest;
+
+                    /**
+                     * Encodes the specified CreatePullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreatePullRequestRequest.verify|verify} messages.
+                     * @param message CreatePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreatePullRequestRequest.verify|verify} messages.
+                     * @param message CreatePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreatePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreatePullRequestRequest;
+
+                    /**
+                     * Decodes a CreatePullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreatePullRequestRequest;
+
+                    /**
+                     * Verifies a CreatePullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreatePullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePullRequestRequest message. Also converts values to other types if specified.
+                     * @param message CreatePullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreatePullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPullRequestRequest. */
+                interface IGetPullRequestRequest {
+
+                    /** GetPullRequestRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPullRequestRequest. */
+                class GetPullRequestRequest implements IGetPullRequestRequest {
+
+                    /**
+                     * Constructs a new GetPullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetPullRequestRequest);
+
+                    /** GetPullRequestRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetPullRequestRequest): google.cloud.securesourcemanager.v1.GetPullRequestRequest;
+
+                    /**
+                     * Encodes the specified GetPullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetPullRequestRequest.verify|verify} messages.
+                     * @param message GetPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetPullRequestRequest.verify|verify} messages.
+                     * @param message GetPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetPullRequestRequest;
+
+                    /**
+                     * Decodes a GetPullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetPullRequestRequest;
+
+                    /**
+                     * Verifies a GetPullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetPullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a GetPullRequestRequest message. Also converts values to other types if specified.
+                     * @param message GetPullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetPullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestsRequest. */
+                interface IListPullRequestsRequest {
+
+                    /** ListPullRequestsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPullRequestsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPullRequestsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestsRequest. */
+                class ListPullRequestsRequest implements IListPullRequestsRequest {
+
+                    /**
+                     * Constructs a new ListPullRequestsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestsRequest);
+
+                    /** ListPullRequestsRequest parent. */
+                    public parent: string;
+
+                    /** ListPullRequestsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPullRequestsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestsRequest): google.cloud.securesourcemanager.v1.ListPullRequestsRequest;
+
+                    /**
+                     * Encodes the specified ListPullRequestsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestsRequest.verify|verify} messages.
+                     * @param message ListPullRequestsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestsRequest.verify|verify} messages.
+                     * @param message ListPullRequestsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestsRequest;
+
+                    /**
+                     * Decodes a ListPullRequestsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestsRequest;
+
+                    /**
+                     * Verifies a ListPullRequestsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestsRequest message. Also converts values to other types if specified.
+                     * @param message ListPullRequestsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestsResponse. */
+                interface IListPullRequestsResponse {
+
+                    /** ListPullRequestsResponse pullRequests */
+                    pullRequests?: (google.cloud.securesourcemanager.v1.IPullRequest[]|null);
+
+                    /** ListPullRequestsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestsResponse. */
+                class ListPullRequestsResponse implements IListPullRequestsResponse {
+
+                    /**
+                     * Constructs a new ListPullRequestsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestsResponse);
+
+                    /** ListPullRequestsResponse pullRequests. */
+                    public pullRequests: google.cloud.securesourcemanager.v1.IPullRequest[];
+
+                    /** ListPullRequestsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestsResponse): google.cloud.securesourcemanager.v1.ListPullRequestsResponse;
+
+                    /**
+                     * Encodes the specified ListPullRequestsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestsResponse.verify|verify} messages.
+                     * @param message ListPullRequestsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestsResponse.verify|verify} messages.
+                     * @param message ListPullRequestsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestsResponse;
+
+                    /**
+                     * Decodes a ListPullRequestsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestsResponse;
+
+                    /**
+                     * Verifies a ListPullRequestsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestsResponse message. Also converts values to other types if specified.
+                     * @param message ListPullRequestsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePullRequestRequest. */
+                interface IUpdatePullRequestRequest {
+
+                    /** UpdatePullRequestRequest pullRequest */
+                    pullRequest?: (google.cloud.securesourcemanager.v1.IPullRequest|null);
+
+                    /** UpdatePullRequestRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePullRequestRequest. */
+                class UpdatePullRequestRequest implements IUpdatePullRequestRequest {
+
+                    /**
+                     * Constructs a new UpdatePullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest);
+
+                    /** UpdatePullRequestRequest pullRequest. */
+                    public pullRequest?: (google.cloud.securesourcemanager.v1.IPullRequest|null);
+
+                    /** UpdatePullRequestRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest): google.cloud.securesourcemanager.v1.UpdatePullRequestRequest;
+
+                    /**
+                     * Encodes the specified UpdatePullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdatePullRequestRequest.verify|verify} messages.
+                     * @param message UpdatePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdatePullRequestRequest.verify|verify} messages.
+                     * @param message UpdatePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdatePullRequestRequest;
+
+                    /**
+                     * Decodes an UpdatePullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdatePullRequestRequest;
+
+                    /**
+                     * Verifies an UpdatePullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdatePullRequestRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePullRequestRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdatePullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MergePullRequestRequest. */
+                interface IMergePullRequestRequest {
+
+                    /** MergePullRequestRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a MergePullRequestRequest. */
+                class MergePullRequestRequest implements IMergePullRequestRequest {
+
+                    /**
+                     * Constructs a new MergePullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IMergePullRequestRequest);
+
+                    /** MergePullRequestRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new MergePullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MergePullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IMergePullRequestRequest): google.cloud.securesourcemanager.v1.MergePullRequestRequest;
+
+                    /**
+                     * Encodes the specified MergePullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.MergePullRequestRequest.verify|verify} messages.
+                     * @param message MergePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IMergePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MergePullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.MergePullRequestRequest.verify|verify} messages.
+                     * @param message MergePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IMergePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MergePullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MergePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.MergePullRequestRequest;
+
+                    /**
+                     * Decodes a MergePullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MergePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.MergePullRequestRequest;
+
+                    /**
+                     * Verifies a MergePullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MergePullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MergePullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.MergePullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a MergePullRequestRequest message. Also converts values to other types if specified.
+                     * @param message MergePullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.MergePullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MergePullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MergePullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OpenPullRequestRequest. */
+                interface IOpenPullRequestRequest {
+
+                    /** OpenPullRequestRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an OpenPullRequestRequest. */
+                class OpenPullRequestRequest implements IOpenPullRequestRequest {
+
+                    /**
+                     * Constructs a new OpenPullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest);
+
+                    /** OpenPullRequestRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new OpenPullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OpenPullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest): google.cloud.securesourcemanager.v1.OpenPullRequestRequest;
+
+                    /**
+                     * Encodes the specified OpenPullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.OpenPullRequestRequest.verify|verify} messages.
+                     * @param message OpenPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OpenPullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.OpenPullRequestRequest.verify|verify} messages.
+                     * @param message OpenPullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IOpenPullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OpenPullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OpenPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.OpenPullRequestRequest;
+
+                    /**
+                     * Decodes an OpenPullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OpenPullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.OpenPullRequestRequest;
+
+                    /**
+                     * Verifies an OpenPullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OpenPullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OpenPullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.OpenPullRequestRequest;
+
+                    /**
+                     * Creates a plain object from an OpenPullRequestRequest message. Also converts values to other types if specified.
+                     * @param message OpenPullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.OpenPullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OpenPullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OpenPullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ClosePullRequestRequest. */
+                interface IClosePullRequestRequest {
+
+                    /** ClosePullRequestRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ClosePullRequestRequest. */
+                class ClosePullRequestRequest implements IClosePullRequestRequest {
+
+                    /**
+                     * Constructs a new ClosePullRequestRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IClosePullRequestRequest);
+
+                    /** ClosePullRequestRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ClosePullRequestRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClosePullRequestRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IClosePullRequestRequest): google.cloud.securesourcemanager.v1.ClosePullRequestRequest;
+
+                    /**
+                     * Encodes the specified ClosePullRequestRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ClosePullRequestRequest.verify|verify} messages.
+                     * @param message ClosePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IClosePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClosePullRequestRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ClosePullRequestRequest.verify|verify} messages.
+                     * @param message ClosePullRequestRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IClosePullRequestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClosePullRequestRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClosePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ClosePullRequestRequest;
+
+                    /**
+                     * Decodes a ClosePullRequestRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClosePullRequestRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ClosePullRequestRequest;
+
+                    /**
+                     * Verifies a ClosePullRequestRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClosePullRequestRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClosePullRequestRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ClosePullRequestRequest;
+
+                    /**
+                     * Creates a plain object from a ClosePullRequestRequest message. Also converts values to other types if specified.
+                     * @param message ClosePullRequestRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ClosePullRequestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClosePullRequestRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClosePullRequestRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestFileDiffsRequest. */
+                interface IListPullRequestFileDiffsRequest {
+
+                    /** ListPullRequestFileDiffsRequest name */
+                    name?: (string|null);
+
+                    /** ListPullRequestFileDiffsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPullRequestFileDiffsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestFileDiffsRequest. */
+                class ListPullRequestFileDiffsRequest implements IListPullRequestFileDiffsRequest {
+
+                    /**
+                     * Constructs a new ListPullRequestFileDiffsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest);
+
+                    /** ListPullRequestFileDiffsRequest name. */
+                    public name: string;
+
+                    /** ListPullRequestFileDiffsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPullRequestFileDiffsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestFileDiffsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestFileDiffsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest;
+
+                    /**
+                     * Encodes the specified ListPullRequestFileDiffsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest.verify|verify} messages.
+                     * @param message ListPullRequestFileDiffsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestFileDiffsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest.verify|verify} messages.
+                     * @param message ListPullRequestFileDiffsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestFileDiffsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestFileDiffsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest;
+
+                    /**
+                     * Decodes a ListPullRequestFileDiffsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestFileDiffsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest;
+
+                    /**
+                     * Verifies a ListPullRequestFileDiffsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestFileDiffsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestFileDiffsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestFileDiffsRequest message. Also converts values to other types if specified.
+                     * @param message ListPullRequestFileDiffsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestFileDiffsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestFileDiffsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestFileDiffsResponse. */
+                interface IListPullRequestFileDiffsResponse {
+
+                    /** ListPullRequestFileDiffsResponse fileDiffs */
+                    fileDiffs?: (google.cloud.securesourcemanager.v1.IFileDiff[]|null);
+
+                    /** ListPullRequestFileDiffsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestFileDiffsResponse. */
+                class ListPullRequestFileDiffsResponse implements IListPullRequestFileDiffsResponse {
+
+                    /**
+                     * Constructs a new ListPullRequestFileDiffsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse);
+
+                    /** ListPullRequestFileDiffsResponse fileDiffs. */
+                    public fileDiffs: google.cloud.securesourcemanager.v1.IFileDiff[];
+
+                    /** ListPullRequestFileDiffsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestFileDiffsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestFileDiffsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse;
+
+                    /**
+                     * Encodes the specified ListPullRequestFileDiffsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse.verify|verify} messages.
+                     * @param message ListPullRequestFileDiffsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestFileDiffsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse.verify|verify} messages.
+                     * @param message ListPullRequestFileDiffsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestFileDiffsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestFileDiffsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse;
+
+                    /**
+                     * Decodes a ListPullRequestFileDiffsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestFileDiffsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse;
+
+                    /**
+                     * Verifies a ListPullRequestFileDiffsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestFileDiffsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestFileDiffsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestFileDiffsResponse message. Also converts values to other types if specified.
+                     * @param message ListPullRequestFileDiffsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestFileDiffsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestFileDiffsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateIssueRequest. */
+                interface ICreateIssueRequest {
+
+                    /** CreateIssueRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateIssueRequest issue */
+                    issue?: (google.cloud.securesourcemanager.v1.IIssue|null);
+                }
+
+                /** Represents a CreateIssueRequest. */
+                class CreateIssueRequest implements ICreateIssueRequest {
+
+                    /**
+                     * Constructs a new CreateIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreateIssueRequest);
+
+                    /** CreateIssueRequest parent. */
+                    public parent: string;
+
+                    /** CreateIssueRequest issue. */
+                    public issue?: (google.cloud.securesourcemanager.v1.IIssue|null);
+
+                    /**
+                     * Creates a new CreateIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreateIssueRequest): google.cloud.securesourcemanager.v1.CreateIssueRequest;
+
+                    /**
+                     * Encodes the specified CreateIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateIssueRequest.verify|verify} messages.
+                     * @param message CreateIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreateIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateIssueRequest.verify|verify} messages.
+                     * @param message CreateIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreateIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreateIssueRequest;
+
+                    /**
+                     * Decodes a CreateIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreateIssueRequest;
+
+                    /**
+                     * Verifies a CreateIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreateIssueRequest;
+
+                    /**
+                     * Creates a plain object from a CreateIssueRequest message. Also converts values to other types if specified.
+                     * @param message CreateIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreateIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIssueRequest. */
+                interface IGetIssueRequest {
+
+                    /** GetIssueRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIssueRequest. */
+                class GetIssueRequest implements IGetIssueRequest {
+
+                    /**
+                     * Constructs a new GetIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetIssueRequest);
+
+                    /** GetIssueRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetIssueRequest): google.cloud.securesourcemanager.v1.GetIssueRequest;
+
+                    /**
+                     * Encodes the specified GetIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetIssueRequest.verify|verify} messages.
+                     * @param message GetIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetIssueRequest.verify|verify} messages.
+                     * @param message GetIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetIssueRequest;
+
+                    /**
+                     * Decodes a GetIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetIssueRequest;
+
+                    /**
+                     * Verifies a GetIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetIssueRequest;
+
+                    /**
+                     * Creates a plain object from a GetIssueRequest message. Also converts values to other types if specified.
+                     * @param message GetIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIssuesRequest. */
+                interface IListIssuesRequest {
+
+                    /** ListIssuesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListIssuesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIssuesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListIssuesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListIssuesRequest. */
+                class ListIssuesRequest implements IListIssuesRequest {
+
+                    /**
+                     * Constructs a new ListIssuesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListIssuesRequest);
+
+                    /** ListIssuesRequest parent. */
+                    public parent: string;
+
+                    /** ListIssuesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIssuesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListIssuesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListIssuesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIssuesRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListIssuesRequest): google.cloud.securesourcemanager.v1.ListIssuesRequest;
+
+                    /**
+                     * Encodes the specified ListIssuesRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssuesRequest.verify|verify} messages.
+                     * @param message ListIssuesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIssuesRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssuesRequest.verify|verify} messages.
+                     * @param message ListIssuesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListIssuesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIssuesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIssuesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListIssuesRequest;
+
+                    /**
+                     * Decodes a ListIssuesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIssuesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListIssuesRequest;
+
+                    /**
+                     * Verifies a ListIssuesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIssuesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIssuesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListIssuesRequest;
+
+                    /**
+                     * Creates a plain object from a ListIssuesRequest message. Also converts values to other types if specified.
+                     * @param message ListIssuesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListIssuesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIssuesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIssuesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIssuesResponse. */
+                interface IListIssuesResponse {
+
+                    /** ListIssuesResponse issues */
+                    issues?: (google.cloud.securesourcemanager.v1.IIssue[]|null);
+
+                    /** ListIssuesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIssuesResponse. */
+                class ListIssuesResponse implements IListIssuesResponse {
+
+                    /**
+                     * Constructs a new ListIssuesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListIssuesResponse);
+
+                    /** ListIssuesResponse issues. */
+                    public issues: google.cloud.securesourcemanager.v1.IIssue[];
+
+                    /** ListIssuesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIssuesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIssuesResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListIssuesResponse): google.cloud.securesourcemanager.v1.ListIssuesResponse;
+
+                    /**
+                     * Encodes the specified ListIssuesResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssuesResponse.verify|verify} messages.
+                     * @param message ListIssuesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIssuesResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssuesResponse.verify|verify} messages.
+                     * @param message ListIssuesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListIssuesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIssuesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIssuesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListIssuesResponse;
+
+                    /**
+                     * Decodes a ListIssuesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIssuesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListIssuesResponse;
+
+                    /**
+                     * Verifies a ListIssuesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIssuesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIssuesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListIssuesResponse;
+
+                    /**
+                     * Creates a plain object from a ListIssuesResponse message. Also converts values to other types if specified.
+                     * @param message ListIssuesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListIssuesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIssuesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIssuesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateIssueRequest. */
+                interface IUpdateIssueRequest {
+
+                    /** UpdateIssueRequest issue */
+                    issue?: (google.cloud.securesourcemanager.v1.IIssue|null);
+
+                    /** UpdateIssueRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateIssueRequest. */
+                class UpdateIssueRequest implements IUpdateIssueRequest {
+
+                    /**
+                     * Constructs a new UpdateIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdateIssueRequest);
+
+                    /** UpdateIssueRequest issue. */
+                    public issue?: (google.cloud.securesourcemanager.v1.IIssue|null);
+
+                    /** UpdateIssueRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdateIssueRequest): google.cloud.securesourcemanager.v1.UpdateIssueRequest;
+
+                    /**
+                     * Encodes the specified UpdateIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateIssueRequest.verify|verify} messages.
+                     * @param message UpdateIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdateIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateIssueRequest.verify|verify} messages.
+                     * @param message UpdateIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdateIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdateIssueRequest;
+
+                    /**
+                     * Decodes an UpdateIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdateIssueRequest;
+
+                    /**
+                     * Verifies an UpdateIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdateIssueRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIssueRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdateIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteIssueRequest. */
+                interface IDeleteIssueRequest {
+
+                    /** DeleteIssueRequest name */
+                    name?: (string|null);
+
+                    /** DeleteIssueRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteIssueRequest. */
+                class DeleteIssueRequest implements IDeleteIssueRequest {
+
+                    /**
+                     * Constructs a new DeleteIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IDeleteIssueRequest);
+
+                    /** DeleteIssueRequest name. */
+                    public name: string;
+
+                    /** DeleteIssueRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IDeleteIssueRequest): google.cloud.securesourcemanager.v1.DeleteIssueRequest;
+
+                    /**
+                     * Encodes the specified DeleteIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteIssueRequest.verify|verify} messages.
+                     * @param message DeleteIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IDeleteIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteIssueRequest.verify|verify} messages.
+                     * @param message DeleteIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IDeleteIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.DeleteIssueRequest;
+
+                    /**
+                     * Decodes a DeleteIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.DeleteIssueRequest;
+
+                    /**
+                     * Verifies a DeleteIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.DeleteIssueRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteIssueRequest message. Also converts values to other types if specified.
+                     * @param message DeleteIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.DeleteIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloseIssueRequest. */
+                interface ICloseIssueRequest {
+
+                    /** CloseIssueRequest name */
+                    name?: (string|null);
+
+                    /** CloseIssueRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a CloseIssueRequest. */
+                class CloseIssueRequest implements ICloseIssueRequest {
+
+                    /**
+                     * Constructs a new CloseIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICloseIssueRequest);
+
+                    /** CloseIssueRequest name. */
+                    public name: string;
+
+                    /** CloseIssueRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new CloseIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloseIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICloseIssueRequest): google.cloud.securesourcemanager.v1.CloseIssueRequest;
+
+                    /**
+                     * Encodes the specified CloseIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CloseIssueRequest.verify|verify} messages.
+                     * @param message CloseIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICloseIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloseIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CloseIssueRequest.verify|verify} messages.
+                     * @param message CloseIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICloseIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloseIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloseIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CloseIssueRequest;
+
+                    /**
+                     * Decodes a CloseIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloseIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CloseIssueRequest;
+
+                    /**
+                     * Verifies a CloseIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloseIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloseIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CloseIssueRequest;
+
+                    /**
+                     * Creates a plain object from a CloseIssueRequest message. Also converts values to other types if specified.
+                     * @param message CloseIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CloseIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloseIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloseIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OpenIssueRequest. */
+                interface IOpenIssueRequest {
+
+                    /** OpenIssueRequest name */
+                    name?: (string|null);
+
+                    /** OpenIssueRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an OpenIssueRequest. */
+                class OpenIssueRequest implements IOpenIssueRequest {
+
+                    /**
+                     * Constructs a new OpenIssueRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IOpenIssueRequest);
+
+                    /** OpenIssueRequest name. */
+                    public name: string;
+
+                    /** OpenIssueRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new OpenIssueRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OpenIssueRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IOpenIssueRequest): google.cloud.securesourcemanager.v1.OpenIssueRequest;
+
+                    /**
+                     * Encodes the specified OpenIssueRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.OpenIssueRequest.verify|verify} messages.
+                     * @param message OpenIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IOpenIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OpenIssueRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.OpenIssueRequest.verify|verify} messages.
+                     * @param message OpenIssueRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IOpenIssueRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OpenIssueRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OpenIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.OpenIssueRequest;
+
+                    /**
+                     * Decodes an OpenIssueRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OpenIssueRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.OpenIssueRequest;
+
+                    /**
+                     * Verifies an OpenIssueRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OpenIssueRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OpenIssueRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.OpenIssueRequest;
+
+                    /**
+                     * Creates a plain object from an OpenIssueRequest message. Also converts values to other types if specified.
+                     * @param message OpenIssueRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.OpenIssueRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OpenIssueRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OpenIssueRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TreeEntry. */
+                interface ITreeEntry {
+
+                    /** TreeEntry type */
+                    type?: (google.cloud.securesourcemanager.v1.TreeEntry.ObjectType|keyof typeof google.cloud.securesourcemanager.v1.TreeEntry.ObjectType|null);
+
+                    /** TreeEntry sha */
+                    sha?: (string|null);
+
+                    /** TreeEntry path */
+                    path?: (string|null);
+
+                    /** TreeEntry mode */
+                    mode?: (string|null);
+
+                    /** TreeEntry size */
+                    size?: (number|Long|string|null);
+                }
+
+                /** Represents a TreeEntry. */
+                class TreeEntry implements ITreeEntry {
+
+                    /**
+                     * Constructs a new TreeEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ITreeEntry);
+
+                    /** TreeEntry type. */
+                    public type: (google.cloud.securesourcemanager.v1.TreeEntry.ObjectType|keyof typeof google.cloud.securesourcemanager.v1.TreeEntry.ObjectType);
+
+                    /** TreeEntry sha. */
+                    public sha: string;
+
+                    /** TreeEntry path. */
+                    public path: string;
+
+                    /** TreeEntry mode. */
+                    public mode: string;
+
+                    /** TreeEntry size. */
+                    public size: (number|Long|string);
+
+                    /**
+                     * Creates a new TreeEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TreeEntry instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ITreeEntry): google.cloud.securesourcemanager.v1.TreeEntry;
+
+                    /**
+                     * Encodes the specified TreeEntry message. Does not implicitly {@link google.cloud.securesourcemanager.v1.TreeEntry.verify|verify} messages.
+                     * @param message TreeEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ITreeEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TreeEntry message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.TreeEntry.verify|verify} messages.
+                     * @param message TreeEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ITreeEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TreeEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TreeEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.TreeEntry;
+
+                    /**
+                     * Decodes a TreeEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TreeEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.TreeEntry;
+
+                    /**
+                     * Verifies a TreeEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TreeEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TreeEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.TreeEntry;
+
+                    /**
+                     * Creates a plain object from a TreeEntry message. Also converts values to other types if specified.
+                     * @param message TreeEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.TreeEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TreeEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TreeEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TreeEntry {
+
+                    /** ObjectType enum. */
+                    enum ObjectType {
+                        OBJECT_TYPE_UNSPECIFIED = 0,
+                        TREE = 1,
+                        BLOB = 2,
+                        COMMIT = 3
+                    }
+                }
+
+                /** Properties of a FetchTreeRequest. */
+                interface IFetchTreeRequest {
+
+                    /** FetchTreeRequest repository */
+                    repository?: (string|null);
+
+                    /** FetchTreeRequest ref */
+                    ref?: (string|null);
+
+                    /** FetchTreeRequest recursive */
+                    recursive?: (boolean|null);
+
+                    /** FetchTreeRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchTreeRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchTreeRequest. */
+                class FetchTreeRequest implements IFetchTreeRequest {
+
+                    /**
+                     * Constructs a new FetchTreeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchTreeRequest);
+
+                    /** FetchTreeRequest repository. */
+                    public repository: string;
+
+                    /** FetchTreeRequest ref. */
+                    public ref: string;
+
+                    /** FetchTreeRequest recursive. */
+                    public recursive: boolean;
+
+                    /** FetchTreeRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchTreeRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchTreeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchTreeRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchTreeRequest): google.cloud.securesourcemanager.v1.FetchTreeRequest;
+
+                    /**
+                     * Encodes the specified FetchTreeRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchTreeRequest.verify|verify} messages.
+                     * @param message FetchTreeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchTreeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchTreeRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchTreeRequest.verify|verify} messages.
+                     * @param message FetchTreeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchTreeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchTreeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchTreeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchTreeRequest;
+
+                    /**
+                     * Decodes a FetchTreeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchTreeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchTreeRequest;
+
+                    /**
+                     * Verifies a FetchTreeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchTreeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchTreeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchTreeRequest;
+
+                    /**
+                     * Creates a plain object from a FetchTreeRequest message. Also converts values to other types if specified.
+                     * @param message FetchTreeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchTreeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchTreeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchTreeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchTreeResponse. */
+                interface IFetchTreeResponse {
+
+                    /** FetchTreeResponse treeEntries */
+                    treeEntries?: (google.cloud.securesourcemanager.v1.ITreeEntry[]|null);
+
+                    /** FetchTreeResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchTreeResponse. */
+                class FetchTreeResponse implements IFetchTreeResponse {
+
+                    /**
+                     * Constructs a new FetchTreeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchTreeResponse);
+
+                    /** FetchTreeResponse treeEntries. */
+                    public treeEntries: google.cloud.securesourcemanager.v1.ITreeEntry[];
+
+                    /** FetchTreeResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchTreeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchTreeResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchTreeResponse): google.cloud.securesourcemanager.v1.FetchTreeResponse;
+
+                    /**
+                     * Encodes the specified FetchTreeResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchTreeResponse.verify|verify} messages.
+                     * @param message FetchTreeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchTreeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchTreeResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchTreeResponse.verify|verify} messages.
+                     * @param message FetchTreeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchTreeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchTreeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchTreeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchTreeResponse;
+
+                    /**
+                     * Decodes a FetchTreeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchTreeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchTreeResponse;
+
+                    /**
+                     * Verifies a FetchTreeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchTreeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchTreeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchTreeResponse;
+
+                    /**
+                     * Creates a plain object from a FetchTreeResponse message. Also converts values to other types if specified.
+                     * @param message FetchTreeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchTreeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchTreeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchTreeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchBlobRequest. */
+                interface IFetchBlobRequest {
+
+                    /** FetchBlobRequest repository */
+                    repository?: (string|null);
+
+                    /** FetchBlobRequest sha */
+                    sha?: (string|null);
+                }
+
+                /** Represents a FetchBlobRequest. */
+                class FetchBlobRequest implements IFetchBlobRequest {
+
+                    /**
+                     * Constructs a new FetchBlobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchBlobRequest);
+
+                    /** FetchBlobRequest repository. */
+                    public repository: string;
+
+                    /** FetchBlobRequest sha. */
+                    public sha: string;
+
+                    /**
+                     * Creates a new FetchBlobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchBlobRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchBlobRequest): google.cloud.securesourcemanager.v1.FetchBlobRequest;
+
+                    /**
+                     * Encodes the specified FetchBlobRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchBlobRequest.verify|verify} messages.
+                     * @param message FetchBlobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchBlobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchBlobRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchBlobRequest.verify|verify} messages.
+                     * @param message FetchBlobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchBlobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchBlobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchBlobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchBlobRequest;
+
+                    /**
+                     * Decodes a FetchBlobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchBlobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchBlobRequest;
+
+                    /**
+                     * Verifies a FetchBlobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchBlobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchBlobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchBlobRequest;
+
+                    /**
+                     * Creates a plain object from a FetchBlobRequest message. Also converts values to other types if specified.
+                     * @param message FetchBlobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchBlobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchBlobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchBlobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchBlobResponse. */
+                interface IFetchBlobResponse {
+
+                    /** FetchBlobResponse sha */
+                    sha?: (string|null);
+
+                    /** FetchBlobResponse content */
+                    content?: (string|null);
+                }
+
+                /** Represents a FetchBlobResponse. */
+                class FetchBlobResponse implements IFetchBlobResponse {
+
+                    /**
+                     * Constructs a new FetchBlobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IFetchBlobResponse);
+
+                    /** FetchBlobResponse sha. */
+                    public sha: string;
+
+                    /** FetchBlobResponse content. */
+                    public content: string;
+
+                    /**
+                     * Creates a new FetchBlobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchBlobResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IFetchBlobResponse): google.cloud.securesourcemanager.v1.FetchBlobResponse;
+
+                    /**
+                     * Encodes the specified FetchBlobResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchBlobResponse.verify|verify} messages.
+                     * @param message FetchBlobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IFetchBlobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchBlobResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.FetchBlobResponse.verify|verify} messages.
+                     * @param message FetchBlobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IFetchBlobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchBlobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchBlobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.FetchBlobResponse;
+
+                    /**
+                     * Decodes a FetchBlobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchBlobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.FetchBlobResponse;
+
+                    /**
+                     * Verifies a FetchBlobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchBlobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchBlobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.FetchBlobResponse;
+
+                    /**
+                     * Creates a plain object from a FetchBlobResponse message. Also converts values to other types if specified.
+                     * @param message FetchBlobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.FetchBlobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchBlobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchBlobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestCommentsRequest. */
+                interface IListPullRequestCommentsRequest {
+
+                    /** ListPullRequestCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPullRequestCommentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPullRequestCommentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestCommentsRequest. */
+                class ListPullRequestCommentsRequest implements IListPullRequestCommentsRequest {
+
+                    /**
+                     * Constructs a new ListPullRequestCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest);
+
+                    /** ListPullRequestCommentsRequest parent. */
+                    public parent: string;
+
+                    /** ListPullRequestCommentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPullRequestCommentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest): google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest;
+
+                    /**
+                     * Encodes the specified ListPullRequestCommentsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest.verify|verify} messages.
+                     * @param message ListPullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest.verify|verify} messages.
+                     * @param message ListPullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest;
+
+                    /**
+                     * Decodes a ListPullRequestCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest;
+
+                    /**
+                     * Verifies a ListPullRequestCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestCommentsRequest message. Also converts values to other types if specified.
+                     * @param message ListPullRequestCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPullRequestCommentsResponse. */
+                interface IListPullRequestCommentsResponse {
+
+                    /** ListPullRequestCommentsResponse pullRequestComments */
+                    pullRequestComments?: (google.cloud.securesourcemanager.v1.IPullRequestComment[]|null);
+
+                    /** ListPullRequestCommentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPullRequestCommentsResponse. */
+                class ListPullRequestCommentsResponse implements IListPullRequestCommentsResponse {
+
+                    /**
+                     * Constructs a new ListPullRequestCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse);
+
+                    /** ListPullRequestCommentsResponse pullRequestComments. */
+                    public pullRequestComments: google.cloud.securesourcemanager.v1.IPullRequestComment[];
+
+                    /** ListPullRequestCommentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPullRequestCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPullRequestCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse): google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse;
+
+                    /**
+                     * Encodes the specified ListPullRequestCommentsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse.verify|verify} messages.
+                     * @param message ListPullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPullRequestCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse.verify|verify} messages.
+                     * @param message ListPullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPullRequestCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse;
+
+                    /**
+                     * Decodes a ListPullRequestCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse;
+
+                    /**
+                     * Verifies a ListPullRequestCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPullRequestCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPullRequestCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListPullRequestCommentsResponse message. Also converts values to other types if specified.
+                     * @param message ListPullRequestCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPullRequestCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPullRequestCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePullRequestCommentRequest. */
+                interface ICreatePullRequestCommentRequest {
+
+                    /** CreatePullRequestCommentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePullRequestCommentRequest pullRequestComment */
+                    pullRequestComment?: (google.cloud.securesourcemanager.v1.IPullRequestComment|null);
+                }
+
+                /** Represents a CreatePullRequestCommentRequest. */
+                class CreatePullRequestCommentRequest implements ICreatePullRequestCommentRequest {
+
+                    /**
+                     * Constructs a new CreatePullRequestCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest);
+
+                    /** CreatePullRequestCommentRequest parent. */
+                    public parent: string;
+
+                    /** CreatePullRequestCommentRequest pullRequestComment. */
+                    public pullRequestComment?: (google.cloud.securesourcemanager.v1.IPullRequestComment|null);
+
+                    /**
+                     * Creates a new CreatePullRequestCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePullRequestCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest): google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest;
+
+                    /**
+                     * Encodes the specified CreatePullRequestCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest.verify|verify} messages.
+                     * @param message CreatePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePullRequestCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest.verify|verify} messages.
+                     * @param message CreatePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePullRequestCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest;
+
+                    /**
+                     * Decodes a CreatePullRequestCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest;
+
+                    /**
+                     * Verifies a CreatePullRequestCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePullRequestCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePullRequestCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePullRequestCommentRequest message. Also converts values to other types if specified.
+                     * @param message CreatePullRequestCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreatePullRequestCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePullRequestCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePullRequestCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreatePullRequestCommentsRequest. */
+                interface IBatchCreatePullRequestCommentsRequest {
+
+                    /** BatchCreatePullRequestCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchCreatePullRequestCommentsRequest requests */
+                    requests?: (google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest[]|null);
+                }
+
+                /** Represents a BatchCreatePullRequestCommentsRequest. */
+                class BatchCreatePullRequestCommentsRequest implements IBatchCreatePullRequestCommentsRequest {
+
+                    /**
+                     * Constructs a new BatchCreatePullRequestCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest);
+
+                    /** BatchCreatePullRequestCommentsRequest parent. */
+                    public parent: string;
+
+                    /** BatchCreatePullRequestCommentsRequest requests. */
+                    public requests: google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest[];
+
+                    /**
+                     * Creates a new BatchCreatePullRequestCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreatePullRequestCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest;
+
+                    /**
+                     * Encodes the specified BatchCreatePullRequestCommentsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message BatchCreatePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreatePullRequestCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message BatchCreatePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreatePullRequestCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreatePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest;
+
+                    /**
+                     * Decodes a BatchCreatePullRequestCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreatePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest;
+
+                    /**
+                     * Verifies a BatchCreatePullRequestCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreatePullRequestCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreatePullRequestCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest;
+
+                    /**
+                     * Creates a plain object from a BatchCreatePullRequestCommentsRequest message. Also converts values to other types if specified.
+                     * @param message BatchCreatePullRequestCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreatePullRequestCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreatePullRequestCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchCreatePullRequestCommentsResponse. */
+                interface IBatchCreatePullRequestCommentsResponse {
+
+                    /** BatchCreatePullRequestCommentsResponse pullRequestComments */
+                    pullRequestComments?: (google.cloud.securesourcemanager.v1.IPullRequestComment[]|null);
+                }
+
+                /** Represents a BatchCreatePullRequestCommentsResponse. */
+                class BatchCreatePullRequestCommentsResponse implements IBatchCreatePullRequestCommentsResponse {
+
+                    /**
+                     * Constructs a new BatchCreatePullRequestCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse);
+
+                    /** BatchCreatePullRequestCommentsResponse pullRequestComments. */
+                    public pullRequestComments: google.cloud.securesourcemanager.v1.IPullRequestComment[];
+
+                    /**
+                     * Creates a new BatchCreatePullRequestCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchCreatePullRequestCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse;
+
+                    /**
+                     * Encodes the specified BatchCreatePullRequestCommentsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message BatchCreatePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchCreatePullRequestCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message BatchCreatePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchCreatePullRequestCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchCreatePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse;
+
+                    /**
+                     * Decodes a BatchCreatePullRequestCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchCreatePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse;
+
+                    /**
+                     * Verifies a BatchCreatePullRequestCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchCreatePullRequestCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchCreatePullRequestCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse;
+
+                    /**
+                     * Creates a plain object from a BatchCreatePullRequestCommentsResponse message. Also converts values to other types if specified.
+                     * @param message BatchCreatePullRequestCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchCreatePullRequestCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchCreatePullRequestCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePullRequestCommentRequest. */
+                interface IUpdatePullRequestCommentRequest {
+
+                    /** UpdatePullRequestCommentRequest pullRequestComment */
+                    pullRequestComment?: (google.cloud.securesourcemanager.v1.IPullRequestComment|null);
+
+                    /** UpdatePullRequestCommentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePullRequestCommentRequest. */
+                class UpdatePullRequestCommentRequest implements IUpdatePullRequestCommentRequest {
+
+                    /**
+                     * Constructs a new UpdatePullRequestCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest);
+
+                    /** UpdatePullRequestCommentRequest pullRequestComment. */
+                    public pullRequestComment?: (google.cloud.securesourcemanager.v1.IPullRequestComment|null);
+
+                    /** UpdatePullRequestCommentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePullRequestCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePullRequestCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest): google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest;
+
+                    /**
+                     * Encodes the specified UpdatePullRequestCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest.verify|verify} messages.
+                     * @param message UpdatePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePullRequestCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest.verify|verify} messages.
+                     * @param message UpdatePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePullRequestCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest;
+
+                    /**
+                     * Decodes an UpdatePullRequestCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest;
+
+                    /**
+                     * Verifies an UpdatePullRequestCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePullRequestCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePullRequestCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePullRequestCommentRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePullRequestCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdatePullRequestCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePullRequestCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePullRequestCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePullRequestCommentRequest. */
+                interface IDeletePullRequestCommentRequest {
+
+                    /** DeletePullRequestCommentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeletePullRequestCommentRequest. */
+                class DeletePullRequestCommentRequest implements IDeletePullRequestCommentRequest {
+
+                    /**
+                     * Constructs a new DeletePullRequestCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest);
+
+                    /** DeletePullRequestCommentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeletePullRequestCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePullRequestCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest): google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest;
+
+                    /**
+                     * Encodes the specified DeletePullRequestCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest.verify|verify} messages.
+                     * @param message DeletePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePullRequestCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest.verify|verify} messages.
+                     * @param message DeletePullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePullRequestCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest;
+
+                    /**
+                     * Decodes a DeletePullRequestCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest;
+
+                    /**
+                     * Verifies a DeletePullRequestCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePullRequestCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePullRequestCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePullRequestCommentRequest message. Also converts values to other types if specified.
+                     * @param message DeletePullRequestCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.DeletePullRequestCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePullRequestCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePullRequestCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPullRequestCommentRequest. */
+                interface IGetPullRequestCommentRequest {
+
+                    /** GetPullRequestCommentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPullRequestCommentRequest. */
+                class GetPullRequestCommentRequest implements IGetPullRequestCommentRequest {
+
+                    /**
+                     * Constructs a new GetPullRequestCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest);
+
+                    /** GetPullRequestCommentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPullRequestCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPullRequestCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest): google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest;
+
+                    /**
+                     * Encodes the specified GetPullRequestCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest.verify|verify} messages.
+                     * @param message GetPullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPullRequestCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest.verify|verify} messages.
+                     * @param message GetPullRequestCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPullRequestCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest;
+
+                    /**
+                     * Decodes a GetPullRequestCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPullRequestCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest;
+
+                    /**
+                     * Verifies a GetPullRequestCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPullRequestCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPullRequestCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest;
+
+                    /**
+                     * Creates a plain object from a GetPullRequestCommentRequest message. Also converts values to other types if specified.
+                     * @param message GetPullRequestCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetPullRequestCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPullRequestCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPullRequestCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResolvePullRequestCommentsRequest. */
+                interface IResolvePullRequestCommentsRequest {
+
+                    /** ResolvePullRequestCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ResolvePullRequestCommentsRequest names */
+                    names?: (string[]|null);
+
+                    /** ResolvePullRequestCommentsRequest autoFill */
+                    autoFill?: (boolean|null);
+                }
+
+                /** Represents a ResolvePullRequestCommentsRequest. */
+                class ResolvePullRequestCommentsRequest implements IResolvePullRequestCommentsRequest {
+
+                    /**
+                     * Constructs a new ResolvePullRequestCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest);
+
+                    /** ResolvePullRequestCommentsRequest parent. */
+                    public parent: string;
+
+                    /** ResolvePullRequestCommentsRequest names. */
+                    public names: string[];
+
+                    /** ResolvePullRequestCommentsRequest autoFill. */
+                    public autoFill: boolean;
+
+                    /**
+                     * Creates a new ResolvePullRequestCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolvePullRequestCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest;
+
+                    /**
+                     * Encodes the specified ResolvePullRequestCommentsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message ResolvePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolvePullRequestCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message ResolvePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolvePullRequestCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolvePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest;
+
+                    /**
+                     * Decodes a ResolvePullRequestCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolvePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest;
+
+                    /**
+                     * Verifies a ResolvePullRequestCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolvePullRequestCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolvePullRequestCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest;
+
+                    /**
+                     * Creates a plain object from a ResolvePullRequestCommentsRequest message. Also converts values to other types if specified.
+                     * @param message ResolvePullRequestCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolvePullRequestCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResolvePullRequestCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResolvePullRequestCommentsResponse. */
+                interface IResolvePullRequestCommentsResponse {
+
+                    /** ResolvePullRequestCommentsResponse pullRequestComments */
+                    pullRequestComments?: (google.cloud.securesourcemanager.v1.IPullRequestComment[]|null);
+                }
+
+                /** Represents a ResolvePullRequestCommentsResponse. */
+                class ResolvePullRequestCommentsResponse implements IResolvePullRequestCommentsResponse {
+
+                    /**
+                     * Constructs a new ResolvePullRequestCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse);
+
+                    /** ResolvePullRequestCommentsResponse pullRequestComments. */
+                    public pullRequestComments: google.cloud.securesourcemanager.v1.IPullRequestComment[];
+
+                    /**
+                     * Creates a new ResolvePullRequestCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolvePullRequestCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse;
+
+                    /**
+                     * Encodes the specified ResolvePullRequestCommentsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message ResolvePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolvePullRequestCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message ResolvePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolvePullRequestCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolvePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse;
+
+                    /**
+                     * Decodes a ResolvePullRequestCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolvePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse;
+
+                    /**
+                     * Verifies a ResolvePullRequestCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolvePullRequestCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolvePullRequestCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse;
+
+                    /**
+                     * Creates a plain object from a ResolvePullRequestCommentsResponse message. Also converts values to other types if specified.
+                     * @param message ResolvePullRequestCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolvePullRequestCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResolvePullRequestCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UnresolvePullRequestCommentsRequest. */
+                interface IUnresolvePullRequestCommentsRequest {
+
+                    /** UnresolvePullRequestCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** UnresolvePullRequestCommentsRequest names */
+                    names?: (string[]|null);
+
+                    /** UnresolvePullRequestCommentsRequest autoFill */
+                    autoFill?: (boolean|null);
+                }
+
+                /** Represents an UnresolvePullRequestCommentsRequest. */
+                class UnresolvePullRequestCommentsRequest implements IUnresolvePullRequestCommentsRequest {
+
+                    /**
+                     * Constructs a new UnresolvePullRequestCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest);
+
+                    /** UnresolvePullRequestCommentsRequest parent. */
+                    public parent: string;
+
+                    /** UnresolvePullRequestCommentsRequest names. */
+                    public names: string[];
+
+                    /** UnresolvePullRequestCommentsRequest autoFill. */
+                    public autoFill: boolean;
+
+                    /**
+                     * Creates a new UnresolvePullRequestCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnresolvePullRequestCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest;
+
+                    /**
+                     * Encodes the specified UnresolvePullRequestCommentsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message UnresolvePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnresolvePullRequestCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest.verify|verify} messages.
+                     * @param message UnresolvePullRequestCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnresolvePullRequestCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnresolvePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest;
+
+                    /**
+                     * Decodes an UnresolvePullRequestCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnresolvePullRequestCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest;
+
+                    /**
+                     * Verifies an UnresolvePullRequestCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnresolvePullRequestCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnresolvePullRequestCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest;
+
+                    /**
+                     * Creates a plain object from an UnresolvePullRequestCommentsRequest message. Also converts values to other types if specified.
+                     * @param message UnresolvePullRequestCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnresolvePullRequestCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UnresolvePullRequestCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UnresolvePullRequestCommentsResponse. */
+                interface IUnresolvePullRequestCommentsResponse {
+
+                    /** UnresolvePullRequestCommentsResponse pullRequestComments */
+                    pullRequestComments?: (google.cloud.securesourcemanager.v1.IPullRequestComment[]|null);
+                }
+
+                /** Represents an UnresolvePullRequestCommentsResponse. */
+                class UnresolvePullRequestCommentsResponse implements IUnresolvePullRequestCommentsResponse {
+
+                    /**
+                     * Constructs a new UnresolvePullRequestCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse);
+
+                    /** UnresolvePullRequestCommentsResponse pullRequestComments. */
+                    public pullRequestComments: google.cloud.securesourcemanager.v1.IPullRequestComment[];
+
+                    /**
+                     * Creates a new UnresolvePullRequestCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UnresolvePullRequestCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse;
+
+                    /**
+                     * Encodes the specified UnresolvePullRequestCommentsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message UnresolvePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UnresolvePullRequestCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse.verify|verify} messages.
+                     * @param message UnresolvePullRequestCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UnresolvePullRequestCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UnresolvePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse;
+
+                    /**
+                     * Decodes an UnresolvePullRequestCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UnresolvePullRequestCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse;
+
+                    /**
+                     * Verifies an UnresolvePullRequestCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UnresolvePullRequestCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UnresolvePullRequestCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse;
+
+                    /**
+                     * Creates a plain object from an UnresolvePullRequestCommentsResponse message. Also converts values to other types if specified.
+                     * @param message UnresolvePullRequestCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UnresolvePullRequestCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UnresolvePullRequestCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateIssueCommentRequest. */
+                interface ICreateIssueCommentRequest {
+
+                    /** CreateIssueCommentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateIssueCommentRequest issueComment */
+                    issueComment?: (google.cloud.securesourcemanager.v1.IIssueComment|null);
+                }
+
+                /** Represents a CreateIssueCommentRequest. */
+                class CreateIssueCommentRequest implements ICreateIssueCommentRequest {
+
+                    /**
+                     * Constructs a new CreateIssueCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest);
+
+                    /** CreateIssueCommentRequest parent. */
+                    public parent: string;
+
+                    /** CreateIssueCommentRequest issueComment. */
+                    public issueComment?: (google.cloud.securesourcemanager.v1.IIssueComment|null);
+
+                    /**
+                     * Creates a new CreateIssueCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateIssueCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest): google.cloud.securesourcemanager.v1.CreateIssueCommentRequest;
+
+                    /**
+                     * Encodes the specified CreateIssueCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateIssueCommentRequest.verify|verify} messages.
+                     * @param message CreateIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateIssueCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.CreateIssueCommentRequest.verify|verify} messages.
+                     * @param message CreateIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateIssueCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.CreateIssueCommentRequest;
+
+                    /**
+                     * Decodes a CreateIssueCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.CreateIssueCommentRequest;
+
+                    /**
+                     * Verifies a CreateIssueCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateIssueCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateIssueCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.CreateIssueCommentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateIssueCommentRequest message. Also converts values to other types if specified.
+                     * @param message CreateIssueCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.CreateIssueCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateIssueCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateIssueCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIssueCommentRequest. */
+                interface IGetIssueCommentRequest {
+
+                    /** GetIssueCommentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIssueCommentRequest. */
+                class GetIssueCommentRequest implements IGetIssueCommentRequest {
+
+                    /**
+                     * Constructs a new GetIssueCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest);
+
+                    /** GetIssueCommentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIssueCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIssueCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest): google.cloud.securesourcemanager.v1.GetIssueCommentRequest;
+
+                    /**
+                     * Encodes the specified GetIssueCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetIssueCommentRequest.verify|verify} messages.
+                     * @param message GetIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIssueCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.GetIssueCommentRequest.verify|verify} messages.
+                     * @param message GetIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IGetIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIssueCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.GetIssueCommentRequest;
+
+                    /**
+                     * Decodes a GetIssueCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.GetIssueCommentRequest;
+
+                    /**
+                     * Verifies a GetIssueCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIssueCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIssueCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.GetIssueCommentRequest;
+
+                    /**
+                     * Creates a plain object from a GetIssueCommentRequest message. Also converts values to other types if specified.
+                     * @param message GetIssueCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.GetIssueCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIssueCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIssueCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIssueCommentsRequest. */
+                interface IListIssueCommentsRequest {
+
+                    /** ListIssueCommentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListIssueCommentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListIssueCommentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListIssueCommentsRequest. */
+                class ListIssueCommentsRequest implements IListIssueCommentsRequest {
+
+                    /**
+                     * Constructs a new ListIssueCommentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest);
+
+                    /** ListIssueCommentsRequest parent. */
+                    public parent: string;
+
+                    /** ListIssueCommentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListIssueCommentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListIssueCommentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIssueCommentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest): google.cloud.securesourcemanager.v1.ListIssueCommentsRequest;
+
+                    /**
+                     * Encodes the specified ListIssueCommentsRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssueCommentsRequest.verify|verify} messages.
+                     * @param message ListIssueCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIssueCommentsRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssueCommentsRequest.verify|verify} messages.
+                     * @param message ListIssueCommentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListIssueCommentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIssueCommentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIssueCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListIssueCommentsRequest;
+
+                    /**
+                     * Decodes a ListIssueCommentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIssueCommentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListIssueCommentsRequest;
+
+                    /**
+                     * Verifies a ListIssueCommentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIssueCommentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIssueCommentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListIssueCommentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListIssueCommentsRequest message. Also converts values to other types if specified.
+                     * @param message ListIssueCommentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListIssueCommentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIssueCommentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIssueCommentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListIssueCommentsResponse. */
+                interface IListIssueCommentsResponse {
+
+                    /** ListIssueCommentsResponse issueComments */
+                    issueComments?: (google.cloud.securesourcemanager.v1.IIssueComment[]|null);
+
+                    /** ListIssueCommentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListIssueCommentsResponse. */
+                class ListIssueCommentsResponse implements IListIssueCommentsResponse {
+
+                    /**
+                     * Constructs a new ListIssueCommentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IListIssueCommentsResponse);
+
+                    /** ListIssueCommentsResponse issueComments. */
+                    public issueComments: google.cloud.securesourcemanager.v1.IIssueComment[];
+
+                    /** ListIssueCommentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListIssueCommentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListIssueCommentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IListIssueCommentsResponse): google.cloud.securesourcemanager.v1.ListIssueCommentsResponse;
+
+                    /**
+                     * Encodes the specified ListIssueCommentsResponse message. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssueCommentsResponse.verify|verify} messages.
+                     * @param message ListIssueCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IListIssueCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListIssueCommentsResponse message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.ListIssueCommentsResponse.verify|verify} messages.
+                     * @param message ListIssueCommentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IListIssueCommentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListIssueCommentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListIssueCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.ListIssueCommentsResponse;
+
+                    /**
+                     * Decodes a ListIssueCommentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListIssueCommentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.ListIssueCommentsResponse;
+
+                    /**
+                     * Verifies a ListIssueCommentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListIssueCommentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListIssueCommentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.ListIssueCommentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListIssueCommentsResponse message. Also converts values to other types if specified.
+                     * @param message ListIssueCommentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.ListIssueCommentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListIssueCommentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListIssueCommentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateIssueCommentRequest. */
+                interface IUpdateIssueCommentRequest {
+
+                    /** UpdateIssueCommentRequest issueComment */
+                    issueComment?: (google.cloud.securesourcemanager.v1.IIssueComment|null);
+
+                    /** UpdateIssueCommentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateIssueCommentRequest. */
+                class UpdateIssueCommentRequest implements IUpdateIssueCommentRequest {
+
+                    /**
+                     * Constructs a new UpdateIssueCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest);
+
+                    /** UpdateIssueCommentRequest issueComment. */
+                    public issueComment?: (google.cloud.securesourcemanager.v1.IIssueComment|null);
+
+                    /** UpdateIssueCommentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateIssueCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateIssueCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest): google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest;
+
+                    /**
+                     * Encodes the specified UpdateIssueCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest.verify|verify} messages.
+                     * @param message UpdateIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateIssueCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest.verify|verify} messages.
+                     * @param message UpdateIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateIssueCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest;
+
+                    /**
+                     * Decodes an UpdateIssueCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest;
+
+                    /**
+                     * Verifies an UpdateIssueCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateIssueCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateIssueCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateIssueCommentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateIssueCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.UpdateIssueCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateIssueCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateIssueCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteIssueCommentRequest. */
+                interface IDeleteIssueCommentRequest {
+
+                    /** DeleteIssueCommentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteIssueCommentRequest. */
+                class DeleteIssueCommentRequest implements IDeleteIssueCommentRequest {
+
+                    /**
+                     * Constructs a new DeleteIssueCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest);
+
+                    /** DeleteIssueCommentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteIssueCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteIssueCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest): google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest;
+
+                    /**
+                     * Encodes the specified DeleteIssueCommentRequest message. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest.verify|verify} messages.
+                     * @param message DeleteIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteIssueCommentRequest message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest.verify|verify} messages.
+                     * @param message DeleteIssueCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteIssueCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest;
+
+                    /**
+                     * Decodes a DeleteIssueCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteIssueCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest;
+
+                    /**
+                     * Verifies a DeleteIssueCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteIssueCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteIssueCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteIssueCommentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteIssueCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securesourcemanager.v1.DeleteIssueCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteIssueCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteIssueCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -3655,6 +10968,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -3671,6 +10987,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -4372,6 +11691,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -4385,6 +11707,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -4462,6 +11787,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -4790,6 +12227,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -4803,6 +12243,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -5126,6 +12569,109 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
+        }
+
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -5509,6 +13055,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -5538,6 +13085,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -5587,6 +13137,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -5722,6 +13275,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -5762,6 +13318,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -6610,6 +14169,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -6635,6 +14197,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -7570,6 +15135,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -7624,6 +15192,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7840,6 +15411,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -8083,6 +15769,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -8104,6 +15793,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8697,6 +16389,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -8725,6 +16423,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -8848,6 +16552,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -8967,8 +16781,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -8983,8 +16800,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -9515,6 +17335,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

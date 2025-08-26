@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.2.0...dialogflow-cx-v5.3.0) (2025-07-17)
+
+
+### Features
+
+* [dialogflow-cx] Add support for generator settings on fulfillment ([#6466](https://github.com/googleapis/google-cloud-node/issues/6466)) ([02a74ee](https://github.com/googleapis/google-cloud-node/commit/02a74ee2eaa244dbb70b33b94e7884878a1457e2))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.1.0...dialogflow-cx-v5.2.0) (2025-07-09)
 
 

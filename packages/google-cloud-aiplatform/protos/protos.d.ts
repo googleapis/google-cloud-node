@@ -41,6 +41,7 @@ export namespace google {
                     NVIDIA_H100_MEGA_80GB = 14,
                     NVIDIA_H200_141GB = 15,
                     NVIDIA_B200 = 16,
+                    NVIDIA_GB200 = 17,
                     TPU_V2 = 6,
                     TPU_V3 = 7,
                     TPU_V4_POD = 10,
@@ -11326,16 +11327,16 @@ export namespace google {
                     public codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
                     /** Part thought. */
-                    public thought?: (boolean|null);
+                    public thought: boolean;
 
                     /** Part thoughtSignature. */
-                    public thoughtSignature?: (Uint8Array|Buffer|string|null);
+                    public thoughtSignature: (Uint8Array|Buffer|string);
 
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
 
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult"|"thought"|"thoughtSignature");
+                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
 
                     /** Part metadata. */
                     public metadata?: "videoMetadata";
@@ -13005,7 +13006,8 @@ export namespace google {
                         BLOCKLIST = 6,
                         PROHIBITED_CONTENT = 7,
                         SPII = 8,
-                        MALFORMED_FUNCTION_CALL = 9
+                        MALFORMED_FUNCTION_CALL = 9,
+                        MODEL_ARMOR = 10
                     }
                 }
 
@@ -13654,6 +13656,9 @@ export namespace google {
 
                     /** GroundingChunk retrievedContext */
                     retrievedContext?: (google.cloud.aiplatform.v1.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps */
+                    maps?: (google.cloud.aiplatform.v1.GroundingChunk.IMaps|null);
                 }
 
                 /** Represents a GroundingChunk. */
@@ -13671,8 +13676,11 @@ export namespace google {
                     /** GroundingChunk retrievedContext. */
                     public retrievedContext?: (google.cloud.aiplatform.v1.GroundingChunk.IRetrievedContext|null);
 
+                    /** GroundingChunk maps. */
+                    public maps?: (google.cloud.aiplatform.v1.GroundingChunk.IMaps|null);
+
                     /** GroundingChunk chunkType. */
-                    public chunkType?: ("web"|"retrievedContext");
+                    public chunkType?: ("web"|"retrievedContext"|"maps");
 
                     /**
                      * Creates a new GroundingChunk instance using the specified properties.
@@ -13871,6 +13879,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -13893,6 +13904,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
@@ -13969,6 +13983,121 @@ export namespace google {
 
                         /**
                          * Gets the default type url for RetrievedContext
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Maps. */
+                    interface IMaps {
+
+                        /** Maps uri */
+                        uri?: (string|null);
+
+                        /** Maps title */
+                        title?: (string|null);
+
+                        /** Maps text */
+                        text?: (string|null);
+
+                        /** Maps placeId */
+                        placeId?: (string|null);
+                    }
+
+                    /** Represents a Maps. */
+                    class Maps implements IMaps {
+
+                        /**
+                         * Constructs a new Maps.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.GroundingChunk.IMaps);
+
+                        /** Maps uri. */
+                        public uri?: (string|null);
+
+                        /** Maps title. */
+                        public title?: (string|null);
+
+                        /** Maps text. */
+                        public text?: (string|null);
+
+                        /** Maps placeId. */
+                        public placeId?: (string|null);
+
+                        /**
+                         * Creates a new Maps instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Maps instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.GroundingChunk.IMaps): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Encodes the specified Maps message. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Verifies a Maps message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Maps
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GroundingChunk.Maps;
+
+                        /**
+                         * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                         * @param message Maps
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.GroundingChunk.Maps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Maps to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Maps
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -14102,6 +14231,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata */
                     retrievalMetadata?: (google.cloud.aiplatform.v1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -14127,6 +14259,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata. */
                     public retrievalMetadata?: (google.cloud.aiplatform.v1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -14400,6 +14535,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RetrievalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModelArmorConfig. */
+                interface IModelArmorConfig {
+
+                    /** ModelArmorConfig promptTemplateName */
+                    promptTemplateName?: (string|null);
+
+                    /** ModelArmorConfig responseTemplateName */
+                    responseTemplateName?: (string|null);
+                }
+
+                /** Represents a ModelArmorConfig. */
+                class ModelArmorConfig implements IModelArmorConfig {
+
+                    /**
+                     * Constructs a new ModelArmorConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IModelArmorConfig);
+
+                    /** ModelArmorConfig promptTemplateName. */
+                    public promptTemplateName: string;
+
+                    /** ModelArmorConfig responseTemplateName. */
+                    public responseTemplateName: string;
+
+                    /**
+                     * Creates a new ModelArmorConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModelArmorConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IModelArmorConfig): google.cloud.aiplatform.v1.ModelArmorConfig;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message. Does not implicitly {@link google.cloud.aiplatform.v1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ModelArmorConfig;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ModelArmorConfig;
+
+                    /**
+                     * Verifies a ModelArmorConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModelArmorConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModelArmorConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ModelArmorConfig;
+
+                    /**
+                     * Creates a plain object from a ModelArmorConfig message. Also converts values to other types if specified.
+                     * @param message ModelArmorConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.ModelArmorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModelArmorConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModelArmorConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14776,6 +15014,9 @@ export namespace google {
                     /** Tool googleSearchRetrieval */
                     googleSearchRetrieval?: (google.cloud.aiplatform.v1.IGoogleSearchRetrieval|null);
 
+                    /** Tool googleMaps */
+                    googleMaps?: (google.cloud.aiplatform.v1.IGoogleMaps|null);
+
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
 
@@ -14809,6 +15050,9 @@ export namespace google {
 
                     /** Tool googleSearchRetrieval. */
                     public googleSearchRetrieval?: (google.cloud.aiplatform.v1.IGoogleSearchRetrieval|null);
+
+                    /** Tool googleMaps. */
+                    public googleMaps?: (google.cloud.aiplatform.v1.IGoogleMaps|null);
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1.IEnterpriseWebSearch|null);
@@ -14904,6 +15148,9 @@ export namespace google {
 
                     /** Properties of a GoogleSearch. */
                     interface IGoogleSearch {
+
+                        /** GoogleSearch excludeDomains */
+                        excludeDomains?: (string[]|null);
                     }
 
                     /** Represents a GoogleSearch. */
@@ -14914,6 +15161,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.aiplatform.v1.Tool.IGoogleSearch);
+
+                        /** GoogleSearch excludeDomains. */
+                        public excludeDomains: string[];
 
                         /**
                          * Creates a new GoogleSearch instance using the specified properties.
@@ -16498,8 +16748,102 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GoogleMaps. */
+                interface IGoogleMaps {
+                }
+
+                /** Represents a GoogleMaps. */
+                class GoogleMaps implements IGoogleMaps {
+
+                    /**
+                     * Constructs a new GoogleMaps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGoogleMaps);
+
+                    /**
+                     * Creates a new GoogleMaps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleMaps instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGoogleMaps): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Encodes the specified GoogleMaps message. Does not implicitly {@link google.cloud.aiplatform.v1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Verifies a GoogleMaps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleMaps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GoogleMaps;
+
+                    /**
+                     * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                     * @param message GoogleMaps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GoogleMaps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleMaps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleMaps
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an EnterpriseWebSearch. */
                 interface IEnterpriseWebSearch {
+
+                    /** EnterpriseWebSearch excludeDomains */
+                    excludeDomains?: (string[]|null);
                 }
 
                 /** Represents an EnterpriseWebSearch. */
@@ -16510,6 +16854,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.IEnterpriseWebSearch);
+
+                    /** EnterpriseWebSearch excludeDomains. */
+                    public excludeDomains: string[];
 
                     /**
                      * Creates a new EnterpriseWebSearch instance using the specified properties.
@@ -31030,6 +31377,19 @@ export namespace google {
                     }
                 }
 
+                /** DeploymentStage enum. */
+                enum DeploymentStage {
+                    DEPLOYMENT_STAGE_UNSPECIFIED = 0,
+                    STARTING_DEPLOYMENT = 5,
+                    PREPARING_MODEL = 6,
+                    CREATING_SERVING_CLUSTER = 7,
+                    ADDING_NODES_TO_CLUSTER = 8,
+                    GETTING_CONTAINER_IMAGE = 9,
+                    STARTING_MODEL_SERVER = 3,
+                    FINISHING_UP = 4,
+                    DEPLOYMENT_TERMINATED = 10
+                }
+
                 /** Represents an EndpointService */
                 class EndpointService extends $protobuf.rpc.Service {
 
@@ -31357,6 +31717,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1.DeploymentStage|null);
                 }
 
                 /** Represents a CreateEndpointOperationMetadata. */
@@ -31370,6 +31733,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1.DeploymentStage);
 
                     /**
                      * Creates a new CreateEndpointOperationMetadata instance using the specified properties.
@@ -32381,6 +32747,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1.DeploymentStage|null);
                 }
 
                 /** Represents a DeployModelOperationMetadata. */
@@ -32394,6 +32763,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1.DeploymentStage);
 
                     /**
                      * Creates a new DeployModelOperationMetadata instance using the specified properties.
@@ -51325,6 +51697,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public searchNearestEntities(request: google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest): Promise<google.cloud.aiplatform.v1.SearchNearestEntitiesResponse>;
+
+                    /**
+                     * Calls FeatureViewDirectWrite.
+                     * @param request FeatureViewDirectWriteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeatureViewDirectWriteResponse
+                     */
+                    public featureViewDirectWrite(request: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, callback: google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWriteCallback): void;
+
+                    /**
+                     * Calls FeatureViewDirectWrite.
+                     * @param request FeatureViewDirectWriteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public featureViewDirectWrite(request: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest): Promise<google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse>;
                 }
 
                 namespace FeatureOnlineStoreService {
@@ -51342,6 +51728,13 @@ export namespace google {
                      * @param [response] SearchNearestEntitiesResponse
                      */
                     type SearchNearestEntitiesCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.SearchNearestEntitiesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.FeatureOnlineStoreService|featureViewDirectWrite}.
+                     * @param error Error, if any
+                     * @param [response] FeatureViewDirectWriteResponse
+                     */
+                    type FeatureViewDirectWriteCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => void;
                 }
 
                 /** FeatureViewDataFormat enum. */
@@ -52986,6 +53379,533 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FeatureViewDirectWriteRequest. */
+                interface IFeatureViewDirectWriteRequest {
+
+                    /** FeatureViewDirectWriteRequest featureView */
+                    featureView?: (string|null);
+
+                    /** FeatureViewDirectWriteRequest dataKeyAndFeatureValues */
+                    dataKeyAndFeatureValues?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues[]|null);
+                }
+
+                /** Represents a FeatureViewDirectWriteRequest. */
+                class FeatureViewDirectWriteRequest implements IFeatureViewDirectWriteRequest {
+
+                    /**
+                     * Constructs a new FeatureViewDirectWriteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest);
+
+                    /** FeatureViewDirectWriteRequest featureView. */
+                    public featureView: string;
+
+                    /** FeatureViewDirectWriteRequest dataKeyAndFeatureValues. */
+                    public dataKeyAndFeatureValues: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues[];
+
+                    /**
+                     * Creates a new FeatureViewDirectWriteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeatureViewDirectWriteRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeatureViewDirectWriteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeatureViewDirectWriteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Verifies a FeatureViewDirectWriteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeatureViewDirectWriteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeatureViewDirectWriteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest;
+
+                    /**
+                     * Creates a plain object from a FeatureViewDirectWriteRequest message. Also converts values to other types if specified.
+                     * @param message FeatureViewDirectWriteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeatureViewDirectWriteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeatureViewDirectWriteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FeatureViewDirectWriteRequest {
+
+                    /** Properties of a DataKeyAndFeatureValues. */
+                    interface IDataKeyAndFeatureValues {
+
+                        /** DataKeyAndFeatureValues dataKey */
+                        dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** DataKeyAndFeatureValues features */
+                        features?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature[]|null);
+                    }
+
+                    /** Represents a DataKeyAndFeatureValues. */
+                    class DataKeyAndFeatureValues implements IDataKeyAndFeatureValues {
+
+                        /**
+                         * Constructs a new DataKeyAndFeatureValues.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues);
+
+                        /** DataKeyAndFeatureValues dataKey. */
+                        public dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** DataKeyAndFeatureValues features. */
+                        public features: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature[];
+
+                        /**
+                         * Creates a new DataKeyAndFeatureValues instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataKeyAndFeatureValues instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Encodes the specified DataKeyAndFeatureValues message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.verify|verify} messages.
+                         * @param message DataKeyAndFeatureValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataKeyAndFeatureValues message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.verify|verify} messages.
+                         * @param message DataKeyAndFeatureValues message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.IDataKeyAndFeatureValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataKeyAndFeatureValues message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataKeyAndFeatureValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Decodes a DataKeyAndFeatureValues message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataKeyAndFeatureValues
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Verifies a DataKeyAndFeatureValues message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataKeyAndFeatureValues message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataKeyAndFeatureValues
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues;
+
+                        /**
+                         * Creates a plain object from a DataKeyAndFeatureValues message. Also converts values to other types if specified.
+                         * @param message DataKeyAndFeatureValues
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataKeyAndFeatureValues to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataKeyAndFeatureValues
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DataKeyAndFeatureValues {
+
+                        /** Properties of a Feature. */
+                        interface IFeature {
+
+                            /** Feature value */
+                            value?: (google.cloud.aiplatform.v1.IFeatureValue|null);
+
+                            /** Feature name */
+                            name?: (string|null);
+                        }
+
+                        /** Represents a Feature. */
+                        class Feature implements IFeature {
+
+                            /**
+                             * Constructs a new Feature.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature);
+
+                            /** Feature value. */
+                            public value?: (google.cloud.aiplatform.v1.IFeatureValue|null);
+
+                            /** Feature name. */
+                            public name: string;
+
+                            /** Feature dataOneof. */
+                            public dataOneof?: "value";
+
+                            /**
+                             * Creates a new Feature instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Feature instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Encodes the specified Feature message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.verify|verify} messages.
+                             * @param message Feature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Feature message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.verify|verify} messages.
+                             * @param message Feature message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Feature message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Feature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Decodes a Feature message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Feature
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Verifies a Feature message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Feature message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Feature
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature;
+
+                            /**
+                             * Creates a plain object from a Feature message. Also converts values to other types if specified.
+                             * @param message Feature
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Feature to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Feature
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a FeatureViewDirectWriteResponse. */
+                interface IFeatureViewDirectWriteResponse {
+
+                    /** FeatureViewDirectWriteResponse status */
+                    status?: (google.rpc.IStatus|null);
+
+                    /** FeatureViewDirectWriteResponse writeResponses */
+                    writeResponses?: (google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse[]|null);
+                }
+
+                /** Represents a FeatureViewDirectWriteResponse. */
+                class FeatureViewDirectWriteResponse implements IFeatureViewDirectWriteResponse {
+
+                    /**
+                     * Constructs a new FeatureViewDirectWriteResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse);
+
+                    /** FeatureViewDirectWriteResponse status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /** FeatureViewDirectWriteResponse writeResponses. */
+                    public writeResponses: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse[];
+
+                    /**
+                     * Creates a new FeatureViewDirectWriteResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeatureViewDirectWriteResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeatureViewDirectWriteResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.verify|verify} messages.
+                     * @param message FeatureViewDirectWriteResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFeatureViewDirectWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeatureViewDirectWriteResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Decodes a FeatureViewDirectWriteResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeatureViewDirectWriteResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Verifies a FeatureViewDirectWriteResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeatureViewDirectWriteResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeatureViewDirectWriteResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse;
+
+                    /**
+                     * Creates a plain object from a FeatureViewDirectWriteResponse message. Also converts values to other types if specified.
+                     * @param message FeatureViewDirectWriteResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeatureViewDirectWriteResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeatureViewDirectWriteResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FeatureViewDirectWriteResponse {
+
+                    /** Properties of a WriteResponse. */
+                    interface IWriteResponse {
+
+                        /** WriteResponse dataKey */
+                        dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** WriteResponse onlineStoreWriteTime */
+                        onlineStoreWriteTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a WriteResponse. */
+                    class WriteResponse implements IWriteResponse {
+
+                        /**
+                         * Constructs a new WriteResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse);
+
+                        /** WriteResponse dataKey. */
+                        public dataKey?: (google.cloud.aiplatform.v1.IFeatureViewDataKey|null);
+
+                        /** WriteResponse onlineStoreWriteTime. */
+                        public onlineStoreWriteTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new WriteResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WriteResponse instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Encodes the specified WriteResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse.verify|verify} messages.
+                         * @param message WriteResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WriteResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse.verify|verify} messages.
+                         * @param message WriteResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.IWriteResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WriteResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WriteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Decodes a WriteResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WriteResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Verifies a WriteResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WriteResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WriteResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse;
+
+                        /**
+                         * Creates a plain object from a WriteResponse message. Also converts values to other types if specified.
+                         * @param message WriteResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse.WriteResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WriteResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WriteResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents a FeaturestoreOnlineServingService */
@@ -69012,6 +69932,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag */
                     crowdingTag?: (google.cloud.aiplatform.v1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata */
+                    embeddingMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an IndexDatapoint. */
@@ -69040,6 +69963,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag. */
                     public crowdingTag?: (google.cloud.aiplatform.v1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata. */
+                    public embeddingMetadata?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new IndexDatapoint instance using the specified properties.
@@ -69895,6 +70821,9 @@ export namespace google {
                     /** DeployedIndex enableAccessLogging */
                     enableAccessLogging?: (boolean|null);
 
+                    /** DeployedIndex enableDatapointUpsertLogging */
+                    enableDatapointUpsertLogging?: (boolean|null);
+
                     /** DeployedIndex deployedIndexAuthConfig */
                     deployedIndexAuthConfig?: (google.cloud.aiplatform.v1.IDeployedIndexAuthConfig|null);
 
@@ -69943,6 +70872,9 @@ export namespace google {
 
                     /** DeployedIndex enableAccessLogging. */
                     public enableAccessLogging: boolean;
+
+                    /** DeployedIndex enableDatapointUpsertLogging. */
+                    public enableDatapointUpsertLogging: boolean;
 
                     /** DeployedIndex deployedIndexAuthConfig. */
                     public deployedIndexAuthConfig?: (google.cloud.aiplatform.v1.IDeployedIndexAuthConfig|null);
@@ -85696,6 +86628,9 @@ export namespace google {
                     /** GenerateContentRequest safetySettings */
                     safetySettings?: (google.cloud.aiplatform.v1.ISafetySetting[]|null);
 
+                    /** GenerateContentRequest modelArmorConfig */
+                    modelArmorConfig?: (google.cloud.aiplatform.v1.IModelArmorConfig|null);
+
                     /** GenerateContentRequest generationConfig */
                     generationConfig?: (google.cloud.aiplatform.v1.IGenerationConfig|null);
                 }
@@ -85732,6 +86667,9 @@ export namespace google {
 
                     /** GenerateContentRequest safetySettings. */
                     public safetySettings: google.cloud.aiplatform.v1.ISafetySetting[];
+
+                    /** GenerateContentRequest modelArmorConfig. */
+                    public modelArmorConfig?: (google.cloud.aiplatform.v1.IModelArmorConfig|null);
 
                     /** GenerateContentRequest generationConfig. */
                     public generationConfig?: (google.cloud.aiplatform.v1.IGenerationConfig|null);
@@ -86060,7 +86998,8 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2,
                             BLOCKLIST = 3,
-                            PROHIBITED_CONTENT = 4
+                            PROHIBITED_CONTENT = 4,
+                            MODEL_ARMOR = 5
                         }
                     }
 
@@ -96775,6 +97714,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec */
                         containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId */
+                        modelUserId?: (string|null);
                     }
 
                     /** Represents a ModelConfig. */
@@ -96800,6 +97742,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec. */
                         public containerSpec?: (google.cloud.aiplatform.v1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId. */
+                        public modelUserId: string;
 
                         /**
                          * Creates a new ModelConfig instance using the specified properties.
@@ -96887,6 +97832,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled */
                         dedicatedEndpointEnabled?: (boolean|null);
+
+                        /** EndpointConfig dedicatedEndpointDisabled */
+                        dedicatedEndpointDisabled?: (boolean|null);
+
+                        /** EndpointConfig endpointUserId */
+                        endpointUserId?: (string|null);
                     }
 
                     /** Represents an EndpointConfig. */
@@ -96903,6 +97854,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled. */
                         public dedicatedEndpointEnabled: boolean;
+
+                        /** EndpointConfig dedicatedEndpointDisabled. */
+                        public dedicatedEndpointDisabled: boolean;
+
+                        /** EndpointConfig endpointUserId. */
+                        public endpointUserId: string;
 
                         /**
                          * Creates a new EndpointConfig instance using the specified properties.
@@ -114842,6 +115799,9 @@ export namespace google {
                 /** Properties of a ReasoningEngineSpec. */
                 interface IReasoningEngineSpec {
 
+                    /** ReasoningEngineSpec serviceAccount */
+                    serviceAccount?: (string|null);
+
                     /** ReasoningEngineSpec packageSpec */
                     packageSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IPackageSpec|null);
 
@@ -114863,6 +115823,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.IReasoningEngineSpec);
+
+                    /** ReasoningEngineSpec serviceAccount. */
+                    public serviceAccount?: (string|null);
 
                     /** ReasoningEngineSpec packageSpec. */
                     public packageSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.IPackageSpec|null);
@@ -115079,6 +116042,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv */
                         secretEnv?: (google.cloud.aiplatform.v1.ISecretEnvVar[]|null);
+
+                        /** DeploymentSpec pscInterfaceConfig */
+                        pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances */
+                        minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances */
+                        maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits */
+                        resourceLimits?: ({ [k: string]: string }|null);
+
+                        /** DeploymentSpec containerConcurrency */
+                        containerConcurrency?: (number|null);
                     }
 
                     /** Represents a DeploymentSpec. */
@@ -115095,6 +116073,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv. */
                         public secretEnv: google.cloud.aiplatform.v1.ISecretEnvVar[];
+
+                        /** DeploymentSpec pscInterfaceConfig. */
+                        public pscInterfaceConfig?: (google.cloud.aiplatform.v1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances. */
+                        public minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances. */
+                        public maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits. */
+                        public resourceLimits: { [k: string]: string };
+
+                        /** DeploymentSpec containerConcurrency. */
+                        public containerConcurrency?: (number|null);
 
                         /**
                          * Creates a new DeploymentSpec instance using the specified properties.
@@ -115198,6 +116191,9 @@ export namespace google {
 
                     /** ReasoningEngine etag */
                     etag?: (string|null);
+
+                    /** ReasoningEngine encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -115229,6 +116225,9 @@ export namespace google {
 
                     /** ReasoningEngine etag. */
                     public etag: string;
+
+                    /** ReasoningEngine encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
@@ -139182,6 +140181,7 @@ export namespace google {
                     NVIDIA_H100_MEGA_80GB = 14,
                     NVIDIA_H200_141GB = 15,
                     NVIDIA_B200 = 16,
+                    NVIDIA_GB200 = 17,
                     TPU_V2 = 6,
                     TPU_V3 = 7,
                     TPU_V4_POD = 10,
@@ -145865,6 +146865,9 @@ export namespace google {
                     /** MachineSpec acceleratorCount */
                     acceleratorCount?: (number|null);
 
+                    /** MachineSpec gpuPartitionSize */
+                    gpuPartitionSize?: (string|null);
+
                     /** MachineSpec tpuTopology */
                     tpuTopology?: (string|null);
 
@@ -145892,6 +146895,9 @@ export namespace google {
 
                     /** MachineSpec acceleratorCount. */
                     public acceleratorCount: number;
+
+                    /** MachineSpec gpuPartitionSize. */
+                    public gpuPartitionSize: string;
 
                     /** MachineSpec tpuTopology. */
                     public tpuTopology: string;
@@ -146227,6 +147233,12 @@ export namespace google {
 
                     /** BatchDedicatedResources maxReplicaCount */
                     maxReplicaCount?: (number|null);
+
+                    /** BatchDedicatedResources flexStart */
+                    flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** BatchDedicatedResources spot */
+                    spot?: (boolean|null);
                 }
 
                 /** Represents a BatchDedicatedResources. */
@@ -146246,6 +147258,12 @@ export namespace google {
 
                     /** BatchDedicatedResources maxReplicaCount. */
                     public maxReplicaCount: number;
+
+                    /** BatchDedicatedResources flexStart. */
+                    public flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** BatchDedicatedResources spot. */
+                    public spot: boolean;
 
                     /**
                      * Creates a new BatchDedicatedResources instance using the specified properties.
@@ -146745,6 +147763,9 @@ export namespace google {
 
                     /** AutoscalingMetricSpec target */
                     target?: (number|null);
+
+                    /** AutoscalingMetricSpec monitoredResourceLabels */
+                    monitoredResourceLabels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an AutoscalingMetricSpec. */
@@ -146761,6 +147782,9 @@ export namespace google {
 
                     /** AutoscalingMetricSpec target. */
                     public target: number;
+
+                    /** AutoscalingMetricSpec monitoredResourceLabels. */
+                    public monitoredResourceLabels: { [k: string]: string };
 
                     /**
                      * Creates a new AutoscalingMetricSpec instance using the specified properties.
@@ -154968,7 +155992,8 @@ export namespace google {
                         BLOCKLIST = 6,
                         PROHIBITED_CONTENT = 7,
                         SPII = 8,
-                        MALFORMED_FUNCTION_CALL = 9
+                        MALFORMED_FUNCTION_CALL = 9,
+                        MODEL_ARMOR = 10
                     }
                 }
 
@@ -155617,6 +156642,9 @@ export namespace google {
 
                     /** GroundingChunk retrievedContext */
                     retrievedContext?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IRetrievedContext|null);
+
+                    /** GroundingChunk maps */
+                    maps?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps|null);
                 }
 
                 /** Represents a GroundingChunk. */
@@ -155634,8 +156662,11 @@ export namespace google {
                     /** GroundingChunk retrievedContext. */
                     public retrievedContext?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IRetrievedContext|null);
 
+                    /** GroundingChunk maps. */
+                    public maps?: (google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps|null);
+
                     /** GroundingChunk chunkType. */
-                    public chunkType?: ("web"|"retrievedContext");
+                    public chunkType?: ("web"|"retrievedContext"|"maps");
 
                     /**
                      * Creates a new GroundingChunk instance using the specified properties.
@@ -155834,6 +156865,9 @@ export namespace google {
 
                         /** RetrievedContext text */
                         text?: (string|null);
+
+                        /** RetrievedContext documentName */
+                        documentName?: (string|null);
                     }
 
                     /** Represents a RetrievedContext. */
@@ -155856,6 +156890,9 @@ export namespace google {
 
                         /** RetrievedContext text. */
                         public text?: (string|null);
+
+                        /** RetrievedContext documentName. */
+                        public documentName?: (string|null);
 
                         /** RetrievedContext contextDetails. */
                         public contextDetails?: "ragChunk";
@@ -155932,6 +156969,121 @@ export namespace google {
 
                         /**
                          * Gets the default type url for RetrievedContext
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Maps. */
+                    interface IMaps {
+
+                        /** Maps uri */
+                        uri?: (string|null);
+
+                        /** Maps title */
+                        title?: (string|null);
+
+                        /** Maps text */
+                        text?: (string|null);
+
+                        /** Maps placeId */
+                        placeId?: (string|null);
+                    }
+
+                    /** Represents a Maps. */
+                    class Maps implements IMaps {
+
+                        /**
+                         * Constructs a new Maps.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps);
+
+                        /** Maps uri. */
+                        public uri?: (string|null);
+
+                        /** Maps title. */
+                        public title?: (string|null);
+
+                        /** Maps text. */
+                        public text?: (string|null);
+
+                        /** Maps placeId. */
+                        public placeId?: (string|null);
+
+                        /**
+                         * Creates a new Maps instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Maps instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Encodes the specified Maps message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.verify|verify} messages.
+                         * @param message Maps message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GroundingChunk.IMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Decodes a Maps message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Maps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Verifies a Maps message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Maps
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps;
+
+                        /**
+                         * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                         * @param message Maps
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Maps to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Maps
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -156068,6 +157220,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata */
                     retrievalMetadata?: (google.cloud.aiplatform.v1beta1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken */
+                    googleMapsWidgetContextToken?: (string|null);
                 }
 
                 /** Represents a GroundingMetadata. */
@@ -156096,6 +157251,9 @@ export namespace google {
 
                     /** GroundingMetadata retrievalMetadata. */
                     public retrievalMetadata?: (google.cloud.aiplatform.v1beta1.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata googleMapsWidgetContextToken. */
+                    public googleMapsWidgetContextToken?: (string|null);
 
                     /**
                      * Creates a new GroundingMetadata instance using the specified properties.
@@ -156369,6 +157527,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RetrievalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModelArmorConfig. */
+                interface IModelArmorConfig {
+
+                    /** ModelArmorConfig promptTemplateName */
+                    promptTemplateName?: (string|null);
+
+                    /** ModelArmorConfig responseTemplateName */
+                    responseTemplateName?: (string|null);
+                }
+
+                /** Represents a ModelArmorConfig. */
+                class ModelArmorConfig implements IModelArmorConfig {
+
+                    /**
+                     * Constructs a new ModelArmorConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IModelArmorConfig);
+
+                    /** ModelArmorConfig promptTemplateName. */
+                    public promptTemplateName: string;
+
+                    /** ModelArmorConfig responseTemplateName. */
+                    public responseTemplateName: string;
+
+                    /**
+                     * Creates a new ModelArmorConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModelArmorConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IModelArmorConfig): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModelArmorConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ModelArmorConfig.verify|verify} messages.
+                     * @param message ModelArmorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IModelArmorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Decodes a ModelArmorConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModelArmorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Verifies a ModelArmorConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModelArmorConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModelArmorConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ModelArmorConfig;
+
+                    /**
+                     * Creates a plain object from a ModelArmorConfig message. Also converts values to other types if specified.
+                     * @param message ModelArmorConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ModelArmorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModelArmorConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModelArmorConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -156745,6 +158006,9 @@ export namespace google {
                     /** Tool googleSearchRetrieval */
                     googleSearchRetrieval?: (google.cloud.aiplatform.v1beta1.IGoogleSearchRetrieval|null);
 
+                    /** Tool googleMaps */
+                    googleMaps?: (google.cloud.aiplatform.v1beta1.IGoogleMaps|null);
+
                     /** Tool enterpriseWebSearch */
                     enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
 
@@ -156778,6 +158042,9 @@ export namespace google {
 
                     /** Tool googleSearchRetrieval. */
                     public googleSearchRetrieval?: (google.cloud.aiplatform.v1beta1.IGoogleSearchRetrieval|null);
+
+                    /** Tool googleMaps. */
+                    public googleMaps?: (google.cloud.aiplatform.v1beta1.IGoogleMaps|null);
 
                     /** Tool enterpriseWebSearch. */
                     public enterpriseWebSearch?: (google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch|null);
@@ -156873,6 +158140,9 @@ export namespace google {
 
                     /** Properties of a GoogleSearch. */
                     interface IGoogleSearch {
+
+                        /** GoogleSearch excludeDomains */
+                        excludeDomains?: (string[]|null);
                     }
 
                     /** Represents a GoogleSearch. */
@@ -156883,6 +158153,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.aiplatform.v1beta1.Tool.IGoogleSearch);
+
+                        /** GoogleSearch excludeDomains. */
+                        public excludeDomains: string[];
 
                         /**
                          * Creates a new GoogleSearch instance using the specified properties.
@@ -158733,8 +160006,102 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GoogleMaps. */
+                interface IGoogleMaps {
+                }
+
+                /** Represents a GoogleMaps. */
+                class GoogleMaps implements IGoogleMaps {
+
+                    /**
+                     * Constructs a new GoogleMaps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGoogleMaps);
+
+                    /**
+                     * Creates a new GoogleMaps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleMaps instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGoogleMaps): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Encodes the specified GoogleMaps message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GoogleMaps.verify|verify} messages.
+                     * @param message GoogleMaps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGoogleMaps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleMaps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Verifies a GoogleMaps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleMaps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GoogleMaps;
+
+                    /**
+                     * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                     * @param message GoogleMaps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GoogleMaps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleMaps to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleMaps
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an EnterpriseWebSearch. */
                 interface IEnterpriseWebSearch {
+
+                    /** EnterpriseWebSearch excludeDomains */
+                    excludeDomains?: (string[]|null);
                 }
 
                 /** Represents an EnterpriseWebSearch. */
@@ -158745,6 +160112,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IEnterpriseWebSearch);
+
+                    /** EnterpriseWebSearch excludeDomains. */
+                    public excludeDomains: string[];
 
                     /**
                      * Creates a new EnterpriseWebSearch instance using the specified properties.
@@ -171309,12 +172679,6 @@ export namespace google {
                     /** AssessDataRequest batchPredictionResourceUsageAssessmentConfig */
                     batchPredictionResourceUsageAssessmentConfig?: (google.cloud.aiplatform.v1beta1.AssessDataRequest.IBatchPredictionResourceUsageAssessmentConfig|null);
 
-                    /** AssessDataRequest geminiTemplateConfig */
-                    geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssessDataRequest requestColumnName */
-                    requestColumnName?: (string|null);
-
                     /** AssessDataRequest name */
                     name?: (string|null);
 
@@ -171343,12 +172707,6 @@ export namespace google {
                     /** AssessDataRequest batchPredictionResourceUsageAssessmentConfig. */
                     public batchPredictionResourceUsageAssessmentConfig?: (google.cloud.aiplatform.v1beta1.AssessDataRequest.IBatchPredictionResourceUsageAssessmentConfig|null);
 
-                    /** AssessDataRequest geminiTemplateConfig. */
-                    public geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssessDataRequest requestColumnName. */
-                    public requestColumnName?: (string|null);
-
                     /** AssessDataRequest name. */
                     public name: string;
 
@@ -171357,9 +172715,6 @@ export namespace google {
 
                     /** AssessDataRequest assessmentConfig. */
                     public assessmentConfig?: ("tuningValidationAssessmentConfig"|"tuningResourceUsageAssessmentConfig"|"batchPredictionValidationAssessmentConfig"|"batchPredictionResourceUsageAssessmentConfig");
-
-                    /** AssessDataRequest readConfig. */
-                    public readConfig?: ("geminiTemplateConfig"|"requestColumnName");
 
                     /**
                      * Creates a new AssessDataRequest instance using the specified properties.
@@ -172815,12 +174170,6 @@ export namespace google {
                 /** Properties of an AssembleDataRequest. */
                 interface IAssembleDataRequest {
 
-                    /** AssembleDataRequest geminiTemplateConfig */
-                    geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssembleDataRequest requestColumnName */
-                    requestColumnName?: (string|null);
-
                     /** AssembleDataRequest name */
                     name?: (string|null);
 
@@ -172837,20 +174186,11 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IAssembleDataRequest);
 
-                    /** AssembleDataRequest geminiTemplateConfig. */
-                    public geminiTemplateConfig?: (google.cloud.aiplatform.v1beta1.IGeminiTemplateConfig|null);
-
-                    /** AssembleDataRequest requestColumnName. */
-                    public requestColumnName?: (string|null);
-
                     /** AssembleDataRequest name. */
                     public name: string;
 
                     /** AssembleDataRequest geminiRequestReadConfig. */
                     public geminiRequestReadConfig?: (google.cloud.aiplatform.v1beta1.IGeminiRequestReadConfig|null);
-
-                    /** AssembleDataRequest readConfig. */
-                    public readConfig?: ("geminiTemplateConfig"|"requestColumnName");
 
                     /**
                      * Creates a new AssembleDataRequest instance using the specified properties.
@@ -176630,6 +177970,19 @@ export namespace google {
                     }
                 }
 
+                /** DeploymentStage enum. */
+                enum DeploymentStage {
+                    DEPLOYMENT_STAGE_UNSPECIFIED = 0,
+                    STARTING_DEPLOYMENT = 5,
+                    PREPARING_MODEL = 6,
+                    CREATING_SERVING_CLUSTER = 7,
+                    ADDING_NODES_TO_CLUSTER = 8,
+                    GETTING_CONTAINER_IMAGE = 9,
+                    STARTING_MODEL_SERVER = 3,
+                    FINISHING_UP = 4,
+                    DEPLOYMENT_TERMINATED = 10
+                }
+
                 /** Represents an EndpointService */
                 class EndpointService extends $protobuf.rpc.Service {
 
@@ -176999,6 +178352,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage|null);
                 }
 
                 /** Represents a CreateEndpointOperationMetadata. */
@@ -177012,6 +178368,9 @@ export namespace google {
 
                     /** CreateEndpointOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** CreateEndpointOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage);
 
                     /**
                      * Creates a new CreateEndpointOperationMetadata instance using the specified properties.
@@ -178017,6 +179376,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata */
                     genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage */
+                    deploymentStage?: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage|null);
                 }
 
                 /** Represents a DeployModelOperationMetadata. */
@@ -178030,6 +179392,9 @@ export namespace google {
 
                     /** DeployModelOperationMetadata genericMetadata. */
                     public genericMetadata?: (google.cloud.aiplatform.v1beta1.IGenericOperationMetadata|null);
+
+                    /** DeployModelOperationMetadata deploymentStage. */
+                    public deploymentStage: (google.cloud.aiplatform.v1beta1.DeploymentStage|keyof typeof google.cloud.aiplatform.v1beta1.DeploymentStage);
 
                     /**
                      * Creates a new DeployModelOperationMetadata instance using the specified properties.
@@ -212518,6 +213883,9 @@ export namespace google {
                         /** Properties of a Feature. */
                         interface IFeature {
 
+                            /** Feature value */
+                            value?: (google.cloud.aiplatform.v1beta1.IFeatureValue|null);
+
                             /** Feature valueAndTimestamp */
                             valueAndTimestamp?: (google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.IFeatureValueAndTimestamp|null);
 
@@ -212534,6 +213902,9 @@ export namespace google {
                              */
                             constructor(properties?: google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.IFeature);
 
+                            /** Feature value. */
+                            public value?: (google.cloud.aiplatform.v1beta1.IFeatureValue|null);
+
                             /** Feature valueAndTimestamp. */
                             public valueAndTimestamp?: (google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature.IFeatureValueAndTimestamp|null);
 
@@ -212541,7 +213912,7 @@ export namespace google {
                             public name: string;
 
                             /** Feature dataOneof. */
-                            public dataOneof?: "valueAndTimestamp";
+                            public dataOneof?: ("value"|"valueAndTimestamp");
 
                             /**
                              * Creates a new Feature instance using the specified properties.
@@ -226030,6 +227401,9 @@ export namespace google {
                     /** TuningJob partnerModelTuningSpec */
                     partnerModelTuningSpec?: (google.cloud.aiplatform.v1beta1.IPartnerModelTuningSpec|null);
 
+                    /** TuningJob veoTuningSpec */
+                    veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
+
                     /** TuningJob name */
                     name?: (string|null);
 
@@ -226038,6 +227412,9 @@ export namespace google {
 
                     /** TuningJob description */
                     description?: (string|null);
+
+                    /** TuningJob customBaseModel */
+                    customBaseModel?: (string|null);
 
                     /** TuningJob state */
                     state?: (google.cloud.aiplatform.v1beta1.JobState|keyof typeof google.cloud.aiplatform.v1beta1.JobState|null);
@@ -226077,6 +227454,12 @@ export namespace google {
 
                     /** TuningJob serviceAccount */
                     serviceAccount?: (string|null);
+
+                    /** TuningJob outputUri */
+                    outputUri?: (string|null);
+
+                    /** TuningJob evaluateDatasetRuns */
+                    evaluateDatasetRuns?: (google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[]|null);
                 }
 
                 /** Represents a TuningJob. */
@@ -226100,6 +227483,9 @@ export namespace google {
                     /** TuningJob partnerModelTuningSpec. */
                     public partnerModelTuningSpec?: (google.cloud.aiplatform.v1beta1.IPartnerModelTuningSpec|null);
 
+                    /** TuningJob veoTuningSpec. */
+                    public veoTuningSpec?: (google.cloud.aiplatform.v1beta1.IVeoTuningSpec|null);
+
                     /** TuningJob name. */
                     public name: string;
 
@@ -226108,6 +227494,9 @@ export namespace google {
 
                     /** TuningJob description. */
                     public description: string;
+
+                    /** TuningJob customBaseModel. */
+                    public customBaseModel: string;
 
                     /** TuningJob state. */
                     public state: (google.cloud.aiplatform.v1beta1.JobState|keyof typeof google.cloud.aiplatform.v1beta1.JobState);
@@ -226148,11 +227537,17 @@ export namespace google {
                     /** TuningJob serviceAccount. */
                     public serviceAccount: string;
 
+                    /** TuningJob outputUri. */
+                    public outputUri: string;
+
+                    /** TuningJob evaluateDatasetRuns. */
+                    public evaluateDatasetRuns: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun[];
+
                     /** TuningJob sourceModel. */
                     public sourceModel?: "baseModel";
 
                     /** TuningJob tuningSpec. */
-                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec");
+                    public tuningSpec?: ("supervisedTuningSpec"|"distillationSpec"|"partnerModelTuningSpec"|"veoTuningSpec");
 
                     /**
                      * Creates a new TuningJob instance using the specified properties.
@@ -227363,8 +228758,14 @@ export namespace google {
                     /** SupervisedHyperParameters learningRateMultiplier */
                     learningRateMultiplier?: (number|null);
 
+                    /** SupervisedHyperParameters learningRate */
+                    learningRate?: (number|null);
+
                     /** SupervisedHyperParameters adapterSize */
                     adapterSize?: (google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|null);
+
+                    /** SupervisedHyperParameters batchSize */
+                    batchSize?: (number|Long|string|null);
                 }
 
                 /** Represents a SupervisedHyperParameters. */
@@ -227382,8 +228783,14 @@ export namespace google {
                     /** SupervisedHyperParameters learningRateMultiplier. */
                     public learningRateMultiplier: number;
 
+                    /** SupervisedHyperParameters learningRate. */
+                    public learningRate: number;
+
                     /** SupervisedHyperParameters adapterSize. */
                     public adapterSize: (google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedHyperParameters.AdapterSize);
+
+                    /** SupervisedHyperParameters batchSize. */
+                    public batchSize: (number|Long|string);
 
                     /**
                      * Creates a new SupervisedHyperParameters instance using the specified properties.
@@ -227491,6 +228898,12 @@ export namespace google {
 
                     /** SupervisedTuningSpec exportLastCheckpointOnly */
                     exportLastCheckpointOnly?: (boolean|null);
+
+                    /** SupervisedTuningSpec evaluationConfig */
+                    evaluationConfig?: (google.cloud.aiplatform.v1beta1.IEvaluationConfig|null);
+
+                    /** SupervisedTuningSpec tuningMode */
+                    tuningMode?: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|null);
                 }
 
                 /** Represents a SupervisedTuningSpec. */
@@ -227513,6 +228926,12 @@ export namespace google {
 
                     /** SupervisedTuningSpec exportLastCheckpointOnly. */
                     public exportLastCheckpointOnly: boolean;
+
+                    /** SupervisedTuningSpec evaluationConfig. */
+                    public evaluationConfig?: (google.cloud.aiplatform.v1beta1.IEvaluationConfig|null);
+
+                    /** SupervisedTuningSpec tuningMode. */
+                    public tuningMode: (google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode|keyof typeof google.cloud.aiplatform.v1beta1.SupervisedTuningSpec.TuningMode);
 
                     /**
                      * Creates a new SupervisedTuningSpec instance using the specified properties.
@@ -227590,6 +229009,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SupervisedTuningSpec {
+
+                    /** TuningMode enum. */
+                    enum TuningMode {
+                        TUNING_MODE_UNSPECIFIED = 0,
+                        TUNING_MODE_FULL = 1,
+                        TUNING_MODE_PEFT_ADAPTER = 2
+                    }
                 }
 
                 /** Properties of a DistillationSpec. */
@@ -228052,6 +229481,452 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TunedModelRef
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VeoHyperParameters. */
+                interface IVeoHyperParameters {
+
+                    /** VeoHyperParameters epochCount */
+                    epochCount?: (number|Long|string|null);
+
+                    /** VeoHyperParameters learningRateMultiplier */
+                    learningRateMultiplier?: (number|null);
+
+                    /** VeoHyperParameters tuningTask */
+                    tuningTask?: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|null);
+                }
+
+                /** Represents a VeoHyperParameters. */
+                class VeoHyperParameters implements IVeoHyperParameters {
+
+                    /**
+                     * Constructs a new VeoHyperParameters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IVeoHyperParameters);
+
+                    /** VeoHyperParameters epochCount. */
+                    public epochCount: (number|Long|string);
+
+                    /** VeoHyperParameters learningRateMultiplier. */
+                    public learningRateMultiplier: number;
+
+                    /** VeoHyperParameters tuningTask. */
+                    public tuningTask: (google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask|keyof typeof google.cloud.aiplatform.v1beta1.VeoHyperParameters.TuningTask);
+
+                    /**
+                     * Creates a new VeoHyperParameters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VeoHyperParameters instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IVeoHyperParameters): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Encodes the specified VeoHyperParameters message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoHyperParameters.verify|verify} messages.
+                     * @param message VeoHyperParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IVeoHyperParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VeoHyperParameters message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoHyperParameters.verify|verify} messages.
+                     * @param message VeoHyperParameters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IVeoHyperParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VeoHyperParameters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VeoHyperParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Decodes a VeoHyperParameters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VeoHyperParameters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Verifies a VeoHyperParameters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VeoHyperParameters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VeoHyperParameters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.VeoHyperParameters;
+
+                    /**
+                     * Creates a plain object from a VeoHyperParameters message. Also converts values to other types if specified.
+                     * @param message VeoHyperParameters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.VeoHyperParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VeoHyperParameters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VeoHyperParameters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VeoHyperParameters {
+
+                    /** TuningTask enum. */
+                    enum TuningTask {
+                        TUNING_TASK_UNSPECIFIED = 0,
+                        TUNING_TASK_I2V = 1,
+                        TUNING_TASK_T2V = 2
+                    }
+                }
+
+                /** Properties of a VeoTuningSpec. */
+                interface IVeoTuningSpec {
+
+                    /** VeoTuningSpec trainingDatasetUri */
+                    trainingDatasetUri?: (string|null);
+
+                    /** VeoTuningSpec validationDatasetUri */
+                    validationDatasetUri?: (string|null);
+
+                    /** VeoTuningSpec hyperParameters */
+                    hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+                }
+
+                /** Represents a VeoTuningSpec. */
+                class VeoTuningSpec implements IVeoTuningSpec {
+
+                    /**
+                     * Constructs a new VeoTuningSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IVeoTuningSpec);
+
+                    /** VeoTuningSpec trainingDatasetUri. */
+                    public trainingDatasetUri: string;
+
+                    /** VeoTuningSpec validationDatasetUri. */
+                    public validationDatasetUri: string;
+
+                    /** VeoTuningSpec hyperParameters. */
+                    public hyperParameters?: (google.cloud.aiplatform.v1beta1.IVeoHyperParameters|null);
+
+                    /**
+                     * Creates a new VeoTuningSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VeoTuningSpec instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IVeoTuningSpec): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Encodes the specified VeoTuningSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoTuningSpec.verify|verify} messages.
+                     * @param message VeoTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IVeoTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VeoTuningSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.VeoTuningSpec.verify|verify} messages.
+                     * @param message VeoTuningSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IVeoTuningSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VeoTuningSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VeoTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Decodes a VeoTuningSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VeoTuningSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Verifies a VeoTuningSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VeoTuningSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VeoTuningSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.VeoTuningSpec;
+
+                    /**
+                     * Creates a plain object from a VeoTuningSpec message. Also converts values to other types if specified.
+                     * @param message VeoTuningSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.VeoTuningSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VeoTuningSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VeoTuningSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluationConfig. */
+                interface IEvaluationConfig {
+
+                    /** EvaluationConfig metrics */
+                    metrics?: (google.cloud.aiplatform.v1beta1.IMetric[]|null);
+
+                    /** EvaluationConfig outputConfig */
+                    outputConfig?: (google.cloud.aiplatform.v1beta1.IOutputConfig|null);
+
+                    /** EvaluationConfig autoraterConfig */
+                    autoraterConfig?: (google.cloud.aiplatform.v1beta1.IAutoraterConfig|null);
+                }
+
+                /** Represents an EvaluationConfig. */
+                class EvaluationConfig implements IEvaluationConfig {
+
+                    /**
+                     * Constructs a new EvaluationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IEvaluationConfig);
+
+                    /** EvaluationConfig metrics. */
+                    public metrics: google.cloud.aiplatform.v1beta1.IMetric[];
+
+                    /** EvaluationConfig outputConfig. */
+                    public outputConfig?: (google.cloud.aiplatform.v1beta1.IOutputConfig|null);
+
+                    /** EvaluationConfig autoraterConfig. */
+                    public autoraterConfig?: (google.cloud.aiplatform.v1beta1.IAutoraterConfig|null);
+
+                    /**
+                     * Creates a new EvaluationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluationConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IEvaluationConfig): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluationConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluationConfig.verify|verify} messages.
+                     * @param message EvaluationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IEvaluationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Decodes an EvaluationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Verifies an EvaluationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.EvaluationConfig;
+
+                    /**
+                     * Creates a plain object from an EvaluationConfig message. Also converts values to other types if specified.
+                     * @param message EvaluationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.EvaluationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluateDatasetRun. */
+                interface IEvaluateDatasetRun {
+
+                    /** EvaluateDatasetRun operationName */
+                    operationName?: (string|null);
+
+                    /** EvaluateDatasetRun checkpointId */
+                    checkpointId?: (string|null);
+
+                    /** EvaluateDatasetRun error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an EvaluateDatasetRun. */
+                class EvaluateDatasetRun implements IEvaluateDatasetRun {
+
+                    /**
+                     * Constructs a new EvaluateDatasetRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun);
+
+                    /** EvaluateDatasetRun operationName. */
+                    public operationName: string;
+
+                    /** EvaluateDatasetRun checkpointId. */
+                    public checkpointId: string;
+
+                    /** EvaluateDatasetRun error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new EvaluateDatasetRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluateDatasetRun instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Encodes the specified EvaluateDatasetRun message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluateDatasetRun.verify|verify} messages.
+                     * @param message EvaluateDatasetRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluateDatasetRun message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.EvaluateDatasetRun.verify|verify} messages.
+                     * @param message EvaluateDatasetRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IEvaluateDatasetRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluateDatasetRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluateDatasetRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Decodes an EvaluateDatasetRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluateDatasetRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Verifies an EvaluateDatasetRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluateDatasetRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluateDatasetRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.EvaluateDatasetRun;
+
+                    /**
+                     * Creates a plain object from an EvaluateDatasetRun message. Also converts values to other types if specified.
+                     * @param message EvaluateDatasetRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.EvaluateDatasetRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluateDatasetRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluateDatasetRun
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -231491,6 +233366,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag */
                     crowdingTag?: (google.cloud.aiplatform.v1beta1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata */
+                    embeddingMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an IndexDatapoint. */
@@ -231519,6 +233397,9 @@ export namespace google {
 
                     /** IndexDatapoint crowdingTag. */
                     public crowdingTag?: (google.cloud.aiplatform.v1beta1.IndexDatapoint.ICrowdingTag|null);
+
+                    /** IndexDatapoint embeddingMetadata. */
+                    public embeddingMetadata?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new IndexDatapoint instance using the specified properties.
@@ -232374,6 +234255,9 @@ export namespace google {
                     /** DeployedIndex enableAccessLogging */
                     enableAccessLogging?: (boolean|null);
 
+                    /** DeployedIndex enableDatapointUpsertLogging */
+                    enableDatapointUpsertLogging?: (boolean|null);
+
                     /** DeployedIndex deployedIndexAuthConfig */
                     deployedIndexAuthConfig?: (google.cloud.aiplatform.v1beta1.IDeployedIndexAuthConfig|null);
 
@@ -232422,6 +234306,9 @@ export namespace google {
 
                     /** DeployedIndex enableAccessLogging. */
                     public enableAccessLogging: boolean;
+
+                    /** DeployedIndex enableDatapointUpsertLogging. */
+                    public enableDatapointUpsertLogging: boolean;
 
                     /** DeployedIndex deployedIndexAuthConfig. */
                     public deployedIndexAuthConfig?: (google.cloud.aiplatform.v1beta1.IDeployedIndexAuthConfig|null);
@@ -245250,6 +247137,12 @@ export namespace google {
                 /** Properties of a Memory. */
                 interface IMemory {
 
+                    /** Memory expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
                     /** Memory name */
                     name?: (string|null);
 
@@ -245281,6 +247174,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IMemory);
 
+                    /** Memory expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Memory ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
                     /** Memory name. */
                     public name: string;
 
@@ -245301,6 +247200,9 @@ export namespace google {
 
                     /** Memory scope. */
                     public scope: { [k: string]: string };
+
+                    /** Memory expiration. */
+                    public expiration?: ("expireTime"|"ttl");
 
                     /**
                      * Creates a new Memory instance using the specified properties.
@@ -246469,6 +248371,9 @@ export namespace google {
                     /** GenerateMemoriesRequest directContentsSource */
                     directContentsSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectContentsSource|null);
 
+                    /** GenerateMemoriesRequest directMemoriesSource */
+                    directMemoriesSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource|null);
+
                     /** GenerateMemoriesRequest parent */
                     parent?: (string|null);
 
@@ -246494,6 +248399,9 @@ export namespace google {
                     /** GenerateMemoriesRequest directContentsSource. */
                     public directContentsSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectContentsSource|null);
 
+                    /** GenerateMemoriesRequest directMemoriesSource. */
+                    public directMemoriesSource?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource|null);
+
                     /** GenerateMemoriesRequest parent. */
                     public parent: string;
 
@@ -246504,7 +248412,7 @@ export namespace google {
                     public scope: { [k: string]: string };
 
                     /** GenerateMemoriesRequest source. */
-                    public source?: ("vertexSessionSource"|"directContentsSource");
+                    public source?: ("vertexSessionSource"|"directContentsSource"|"directMemoriesSource");
 
                     /**
                      * Creates a new GenerateMemoriesRequest instance using the specified properties.
@@ -246885,6 +248793,203 @@ export namespace google {
 
                             /**
                              * Gets the default type url for Event
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DirectMemoriesSource. */
+                    interface IDirectMemoriesSource {
+
+                        /** DirectMemoriesSource directMemories */
+                        directMemories?: (google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory[]|null);
+                    }
+
+                    /** Represents a DirectMemoriesSource. */
+                    class DirectMemoriesSource implements IDirectMemoriesSource {
+
+                        /**
+                         * Constructs a new DirectMemoriesSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource);
+
+                        /** DirectMemoriesSource directMemories. */
+                        public directMemories: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory[];
+
+                        /**
+                         * Creates a new DirectMemoriesSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DirectMemoriesSource instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Encodes the specified DirectMemoriesSource message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.verify|verify} messages.
+                         * @param message DirectMemoriesSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DirectMemoriesSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.verify|verify} messages.
+                         * @param message DirectMemoriesSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.IDirectMemoriesSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DirectMemoriesSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DirectMemoriesSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Decodes a DirectMemoriesSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DirectMemoriesSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Verifies a DirectMemoriesSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DirectMemoriesSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DirectMemoriesSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource;
+
+                        /**
+                         * Creates a plain object from a DirectMemoriesSource message. Also converts values to other types if specified.
+                         * @param message DirectMemoriesSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DirectMemoriesSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DirectMemoriesSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DirectMemoriesSource {
+
+                        /** Properties of a DirectMemory. */
+                        interface IDirectMemory {
+
+                            /** DirectMemory fact */
+                            fact?: (string|null);
+                        }
+
+                        /** Represents a DirectMemory. */
+                        class DirectMemory implements IDirectMemory {
+
+                            /**
+                             * Constructs a new DirectMemory.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory);
+
+                            /** DirectMemory fact. */
+                            public fact: string;
+
+                            /**
+                             * Creates a new DirectMemory instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DirectMemory instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Encodes the specified DirectMemory message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory.verify|verify} messages.
+                             * @param message DirectMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DirectMemory message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory.verify|verify} messages.
+                             * @param message DirectMemory message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.IDirectMemory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DirectMemory message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DirectMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Decodes a DirectMemory message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DirectMemory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Verifies a DirectMemory message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DirectMemory message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DirectMemory
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory;
+
+                            /**
+                             * Creates a plain object from a DirectMemory message. Also converts values to other types if specified.
+                             * @param message DirectMemory
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateMemoriesRequest.DirectMemoriesSource.DirectMemory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DirectMemory to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DirectMemory
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -257689,6 +259794,9 @@ export namespace google {
                     /** DeployRequest huggingFaceModelId */
                     huggingFaceModelId?: (string|null);
 
+                    /** DeployRequest customModel */
+                    customModel?: (google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel|null);
+
                     /** DeployRequest destination */
                     destination?: (string|null);
 
@@ -257717,6 +259825,9 @@ export namespace google {
                     /** DeployRequest huggingFaceModelId. */
                     public huggingFaceModelId?: (string|null);
 
+                    /** DeployRequest customModel. */
+                    public customModel?: (google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel|null);
+
                     /** DeployRequest destination. */
                     public destination: string;
 
@@ -257730,7 +259841,7 @@ export namespace google {
                     public deployConfig?: (google.cloud.aiplatform.v1beta1.DeployRequest.IDeployConfig|null);
 
                     /** DeployRequest artifacts. */
-                    public artifacts?: ("publisherModelName"|"huggingFaceModelId");
+                    public artifacts?: ("publisherModelName"|"huggingFaceModelId"|"customModel");
 
                     /**
                      * Creates a new DeployRequest instance using the specified properties.
@@ -257812,6 +259923,106 @@ export namespace google {
 
                 namespace DeployRequest {
 
+                    /** Properties of a CustomModel. */
+                    interface ICustomModel {
+
+                        /** CustomModel gcsUri */
+                        gcsUri?: (string|null);
+                    }
+
+                    /** Represents a CustomModel. */
+                    class CustomModel implements ICustomModel {
+
+                        /**
+                         * Constructs a new CustomModel.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel);
+
+                        /** CustomModel gcsUri. */
+                        public gcsUri?: (string|null);
+
+                        /** CustomModel modelSource. */
+                        public modelSource?: "gcsUri";
+
+                        /**
+                         * Creates a new CustomModel instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomModel instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel): google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel;
+
+                        /**
+                         * Encodes the specified CustomModel message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel.verify|verify} messages.
+                         * @param message CustomModel message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomModel message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel.verify|verify} messages.
+                         * @param message CustomModel message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.DeployRequest.ICustomModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomModel message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomModel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel;
+
+                        /**
+                         * Decodes a CustomModel message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomModel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel;
+
+                        /**
+                         * Verifies a CustomModel message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomModel message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomModel
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel;
+
+                        /**
+                         * Creates a plain object from a CustomModel message. Also converts values to other types if specified.
+                         * @param message CustomModel
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.DeployRequest.CustomModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomModel to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomModel
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a ModelConfig. */
                     interface IModelConfig {
 
@@ -257829,6 +260040,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec */
                         containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId */
+                        modelUserId?: (string|null);
                     }
 
                     /** Represents a ModelConfig. */
@@ -257854,6 +260068,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec. */
                         public containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId. */
+                        public modelUserId: string;
 
                         /**
                          * Creates a new ModelConfig instance using the specified properties.
@@ -257941,6 +260158,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled */
                         dedicatedEndpointEnabled?: (boolean|null);
+
+                        /** EndpointConfig dedicatedEndpointDisabled */
+                        dedicatedEndpointDisabled?: (boolean|null);
+
+                        /** EndpointConfig endpointUserId */
+                        endpointUserId?: (string|null);
                     }
 
                     /** Represents an EndpointConfig. */
@@ -257957,6 +260180,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled. */
                         public dedicatedEndpointEnabled: boolean;
+
+                        /** EndpointConfig dedicatedEndpointDisabled. */
+                        public dedicatedEndpointDisabled: boolean;
+
+                        /** EndpointConfig endpointUserId. */
+                        public endpointUserId: string;
 
                         /**
                          * Creates a new EndpointConfig instance using the specified properties.
@@ -267244,6 +269473,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listModelEvaluationSlices(request: google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest): Promise<google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse>;
+
+                    /**
+                     * Calls RecommendSpec.
+                     * @param request RecommendSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RecommendSpecResponse
+                     */
+                    public recommendSpec(request: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, callback: google.cloud.aiplatform.v1beta1.ModelService.RecommendSpecCallback): void;
+
+                    /**
+                     * Calls RecommendSpec.
+                     * @param request RecommendSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public recommendSpec(request: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest): Promise<google.cloud.aiplatform.v1beta1.RecommendSpecResponse>;
                 }
 
                 namespace ModelService {
@@ -267380,6 +269623,13 @@ export namespace google {
                      * @param [response] ListModelEvaluationSlicesResponse
                      */
                     type ListModelEvaluationSlicesCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.ModelService|recommendSpec}.
+                     * @param error Error, if any
+                     * @param [response] RecommendSpecResponse
+                     */
+                    type RecommendSpecCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse) => void;
                 }
 
                 /** Properties of an UploadModelRequest. */
@@ -271248,6 +273498,455 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RecommendSpecRequest. */
+                interface IRecommendSpecRequest {
+
+                    /** RecommendSpecRequest parent */
+                    parent?: (string|null);
+
+                    /** RecommendSpecRequest gcsUri */
+                    gcsUri?: (string|null);
+
+                    /** RecommendSpecRequest checkMachineAvailability */
+                    checkMachineAvailability?: (boolean|null);
+
+                    /** RecommendSpecRequest checkUserQuota */
+                    checkUserQuota?: (boolean|null);
+                }
+
+                /** Represents a RecommendSpecRequest. */
+                class RecommendSpecRequest implements IRecommendSpecRequest {
+
+                    /**
+                     * Constructs a new RecommendSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest);
+
+                    /** RecommendSpecRequest parent. */
+                    public parent: string;
+
+                    /** RecommendSpecRequest gcsUri. */
+                    public gcsUri: string;
+
+                    /** RecommendSpecRequest checkMachineAvailability. */
+                    public checkMachineAvailability: boolean;
+
+                    /** RecommendSpecRequest checkUserQuota. */
+                    public checkUserQuota: boolean;
+
+                    /**
+                     * Creates a new RecommendSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecommendSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Encodes the specified RecommendSpecRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecRequest.verify|verify} messages.
+                     * @param message RecommendSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecommendSpecRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecRequest.verify|verify} messages.
+                     * @param message RecommendSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IRecommendSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecommendSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecommendSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Decodes a RecommendSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecommendSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Verifies a RecommendSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecommendSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecommendSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecRequest;
+
+                    /**
+                     * Creates a plain object from a RecommendSpecRequest message. Also converts values to other types if specified.
+                     * @param message RecommendSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecommendSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecommendSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RecommendSpecResponse. */
+                interface IRecommendSpecResponse {
+
+                    /** RecommendSpecResponse baseModel */
+                    baseModel?: (string|null);
+
+                    /** RecommendSpecResponse recommendations */
+                    recommendations?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation[]|null);
+
+                    /** RecommendSpecResponse specs */
+                    specs?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec[]|null);
+                }
+
+                /** Represents a RecommendSpecResponse. */
+                class RecommendSpecResponse implements IRecommendSpecResponse {
+
+                    /**
+                     * Constructs a new RecommendSpecResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse);
+
+                    /** RecommendSpecResponse baseModel. */
+                    public baseModel: string;
+
+                    /** RecommendSpecResponse recommendations. */
+                    public recommendations: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation[];
+
+                    /** RecommendSpecResponse specs. */
+                    public specs: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec[];
+
+                    /**
+                     * Creates a new RecommendSpecResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecommendSpecResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Encodes the specified RecommendSpecResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.verify|verify} messages.
+                     * @param message RecommendSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecommendSpecResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.verify|verify} messages.
+                     * @param message RecommendSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IRecommendSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecommendSpecResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecommendSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Decodes a RecommendSpecResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecommendSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Verifies a RecommendSpecResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecommendSpecResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecommendSpecResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse;
+
+                    /**
+                     * Creates a plain object from a RecommendSpecResponse message. Also converts values to other types if specified.
+                     * @param message RecommendSpecResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecommendSpecResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecommendSpecResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RecommendSpecResponse {
+
+                    /** Properties of a MachineAndModelContainerSpec. */
+                    interface IMachineAndModelContainerSpec {
+
+                        /** MachineAndModelContainerSpec machineSpec */
+                        machineSpec?: (google.cloud.aiplatform.v1beta1.IMachineSpec|null);
+
+                        /** MachineAndModelContainerSpec containerSpec */
+                        containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+                    }
+
+                    /** Represents a MachineAndModelContainerSpec. */
+                    class MachineAndModelContainerSpec implements IMachineAndModelContainerSpec {
+
+                        /**
+                         * Constructs a new MachineAndModelContainerSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec);
+
+                        /** MachineAndModelContainerSpec machineSpec. */
+                        public machineSpec?: (google.cloud.aiplatform.v1beta1.IMachineSpec|null);
+
+                        /** MachineAndModelContainerSpec containerSpec. */
+                        public containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /**
+                         * Creates a new MachineAndModelContainerSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MachineAndModelContainerSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Encodes the specified MachineAndModelContainerSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec.verify|verify} messages.
+                         * @param message MachineAndModelContainerSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MachineAndModelContainerSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec.verify|verify} messages.
+                         * @param message MachineAndModelContainerSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MachineAndModelContainerSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MachineAndModelContainerSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Decodes a MachineAndModelContainerSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MachineAndModelContainerSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Verifies a MachineAndModelContainerSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MachineAndModelContainerSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MachineAndModelContainerSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec;
+
+                        /**
+                         * Creates a plain object from a MachineAndModelContainerSpec message. Also converts values to other types if specified.
+                         * @param message MachineAndModelContainerSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.MachineAndModelContainerSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MachineAndModelContainerSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MachineAndModelContainerSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Recommendation. */
+                    interface IRecommendation {
+
+                        /** Recommendation region */
+                        region?: (string|null);
+
+                        /** Recommendation spec */
+                        spec?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec|null);
+
+                        /** Recommendation userQuotaState */
+                        userQuotaState?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|keyof typeof google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|null);
+                    }
+
+                    /** Represents a Recommendation. */
+                    class Recommendation implements IRecommendation {
+
+                        /**
+                         * Constructs a new Recommendation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation);
+
+                        /** Recommendation region. */
+                        public region: string;
+
+                        /** Recommendation spec. */
+                        public spec?: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IMachineAndModelContainerSpec|null);
+
+                        /** Recommendation userQuotaState. */
+                        public userQuotaState: (google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState|keyof typeof google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.QuotaState);
+
+                        /**
+                         * Creates a new Recommendation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Recommendation instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Encodes the specified Recommendation message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.verify|verify} messages.
+                         * @param message Recommendation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Recommendation message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation.verify|verify} messages.
+                         * @param message Recommendation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.IRecommendation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Recommendation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Recommendation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Decodes a Recommendation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Recommendation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Verifies a Recommendation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Recommendation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Recommendation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation;
+
+                        /**
+                         * Creates a plain object from a Recommendation message. Also converts values to other types if specified.
+                         * @param message Recommendation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RecommendSpecResponse.Recommendation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Recommendation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Recommendation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Recommendation {
+
+                        /** QuotaState enum. */
+                        enum QuotaState {
+                            QUOTA_STATE_UNSPECIFIED = 0,
+                            QUOTA_STATE_USER_HAS_QUOTA = 1,
+                            QUOTA_STATE_NO_USER_QUOTA = 2
+                        }
+                    }
                 }
 
                 /** Properties of a NetworkSpec. */
@@ -286610,6 +289309,9 @@ export namespace google {
                     /** GenerateContentRequest safetySettings */
                     safetySettings?: (google.cloud.aiplatform.v1beta1.ISafetySetting[]|null);
 
+                    /** GenerateContentRequest modelArmorConfig */
+                    modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
+
                     /** GenerateContentRequest generationConfig */
                     generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
                 }
@@ -286646,6 +289348,9 @@ export namespace google {
 
                     /** GenerateContentRequest safetySettings. */
                     public safetySettings: google.cloud.aiplatform.v1beta1.ISafetySetting[];
+
+                    /** GenerateContentRequest modelArmorConfig. */
+                    public modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
 
                     /** GenerateContentRequest generationConfig. */
                     public generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
@@ -286974,7 +289679,8 @@ export namespace google {
                             SAFETY = 1,
                             OTHER = 2,
                             BLOCKLIST = 3,
-                            PROHIBITED_CONTENT = 4
+                            PROHIBITED_CONTENT = 4,
+                            MODEL_ARMOR = 5
                         }
                     }
 
@@ -287524,6 +290230,9 @@ export namespace google {
                 /** Properties of a ReasoningEngineSpec. */
                 interface IReasoningEngineSpec {
 
+                    /** ReasoningEngineSpec serviceAccount */
+                    serviceAccount?: (string|null);
+
                     /** ReasoningEngineSpec packageSpec */
                     packageSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IPackageSpec|null);
 
@@ -287545,6 +290254,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.IReasoningEngineSpec);
+
+                    /** ReasoningEngineSpec serviceAccount. */
+                    public serviceAccount?: (string|null);
 
                     /** ReasoningEngineSpec packageSpec. */
                     public packageSpec?: (google.cloud.aiplatform.v1beta1.ReasoningEngineSpec.IPackageSpec|null);
@@ -287761,6 +290473,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv */
                         secretEnv?: (google.cloud.aiplatform.v1beta1.ISecretEnvVar[]|null);
+
+                        /** DeploymentSpec pscInterfaceConfig */
+                        pscInterfaceConfig?: (google.cloud.aiplatform.v1beta1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances */
+                        minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances */
+                        maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits */
+                        resourceLimits?: ({ [k: string]: string }|null);
+
+                        /** DeploymentSpec containerConcurrency */
+                        containerConcurrency?: (number|null);
                     }
 
                     /** Represents a DeploymentSpec. */
@@ -287777,6 +290504,21 @@ export namespace google {
 
                         /** DeploymentSpec secretEnv. */
                         public secretEnv: google.cloud.aiplatform.v1beta1.ISecretEnvVar[];
+
+                        /** DeploymentSpec pscInterfaceConfig. */
+                        public pscInterfaceConfig?: (google.cloud.aiplatform.v1beta1.IPscInterfaceConfig|null);
+
+                        /** DeploymentSpec minInstances. */
+                        public minInstances?: (number|null);
+
+                        /** DeploymentSpec maxInstances. */
+                        public maxInstances?: (number|null);
+
+                        /** DeploymentSpec resourceLimits. */
+                        public resourceLimits: { [k: string]: string };
+
+                        /** DeploymentSpec containerConcurrency. */
+                        public containerConcurrency?: (number|null);
 
                         /**
                          * Creates a new DeploymentSpec instance using the specified properties.
@@ -287883,6 +290625,9 @@ export namespace google {
 
                     /** ReasoningEngine contextSpec */
                     contextSpec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineContextSpec|null);
+
+                    /** ReasoningEngine encryptionSpec */
+                    encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -287917,6 +290662,9 @@ export namespace google {
 
                     /** ReasoningEngine contextSpec. */
                     public contextSpec?: (google.cloud.aiplatform.v1beta1.IReasoningEngineContextSpec|null);
+
+                    /** ReasoningEngine encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.aiplatform.v1beta1.IEncryptionSpec|null);
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
@@ -288103,6 +290851,9 @@ export namespace google {
 
                         /** MemoryBankConfig similaritySearchConfig */
                         similaritySearchConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ISimilaritySearchConfig|null);
+
+                        /** MemoryBankConfig ttlConfig */
+                        ttlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig|null);
                     }
 
                     /** Represents a MemoryBankConfig. */
@@ -288119,6 +290870,9 @@ export namespace google {
 
                         /** MemoryBankConfig similaritySearchConfig. */
                         public similaritySearchConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ISimilaritySearchConfig|null);
+
+                        /** MemoryBankConfig ttlConfig. */
+                        public ttlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig|null);
 
                         /**
                          * Creates a new MemoryBankConfig instance using the specified properties.
@@ -288199,6 +290953,224 @@ export namespace google {
                     }
 
                     namespace MemoryBankConfig {
+
+                        /** Properties of a TtlConfig. */
+                        interface ITtlConfig {
+
+                            /** TtlConfig defaultTtl */
+                            defaultTtl?: (google.protobuf.IDuration|null);
+
+                            /** TtlConfig granularTtlConfig */
+                            granularTtlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig|null);
+                        }
+
+                        /** Represents a TtlConfig. */
+                        class TtlConfig implements ITtlConfig {
+
+                            /**
+                             * Constructs a new TtlConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig);
+
+                            /** TtlConfig defaultTtl. */
+                            public defaultTtl?: (google.protobuf.IDuration|null);
+
+                            /** TtlConfig granularTtlConfig. */
+                            public granularTtlConfig?: (google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig|null);
+
+                            /** TtlConfig ttl. */
+                            public ttl?: ("defaultTtl"|"granularTtlConfig");
+
+                            /**
+                             * Creates a new TtlConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TtlConfig instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Encodes the specified TtlConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.verify|verify} messages.
+                             * @param message TtlConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TtlConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.verify|verify} messages.
+                             * @param message TtlConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.ITtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TtlConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TtlConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Decodes a TtlConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TtlConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Verifies a TtlConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TtlConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TtlConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig;
+
+                            /**
+                             * Creates a plain object from a TtlConfig message. Also converts values to other types if specified.
+                             * @param message TtlConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TtlConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TtlConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TtlConfig {
+
+                            /** Properties of a GranularTtlConfig. */
+                            interface IGranularTtlConfig {
+
+                                /** GranularTtlConfig createTtl */
+                                createTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateCreatedTtl */
+                                generateCreatedTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateUpdatedTtl */
+                                generateUpdatedTtl?: (google.protobuf.IDuration|null);
+                            }
+
+                            /** Represents a GranularTtlConfig. */
+                            class GranularTtlConfig implements IGranularTtlConfig {
+
+                                /**
+                                 * Constructs a new GranularTtlConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig);
+
+                                /** GranularTtlConfig createTtl. */
+                                public createTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateCreatedTtl. */
+                                public generateCreatedTtl?: (google.protobuf.IDuration|null);
+
+                                /** GranularTtlConfig generateUpdatedTtl. */
+                                public generateUpdatedTtl?: (google.protobuf.IDuration|null);
+
+                                /**
+                                 * Creates a new GranularTtlConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GranularTtlConfig instance
+                                 */
+                                public static create(properties?: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Encodes the specified GranularTtlConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig.verify|verify} messages.
+                                 * @param message GranularTtlConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GranularTtlConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig.verify|verify} messages.
+                                 * @param message GranularTtlConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.IGranularTtlConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GranularTtlConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GranularTtlConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Decodes a GranularTtlConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GranularTtlConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Verifies a GranularTtlConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GranularTtlConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GranularTtlConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig;
+
+                                /**
+                                 * Creates a plain object from a GranularTtlConfig message. Also converts values to other types if specified.
+                                 * @param message GranularTtlConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.aiplatform.v1beta1.ReasoningEngineContextSpec.MemoryBankConfig.TtlConfig.GranularTtlConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GranularTtlConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GranularTtlConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
 
                         /** Properties of a GenerationConfig. */
                         interface IGenerationConfig {
@@ -301983,6 +304955,12 @@ export namespace google {
                 /** Properties of a Session. */
                 interface ISession {
 
+                    /** Session expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
                     /** Session name */
                     name?: (string|null);
 
@@ -302011,6 +304989,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1beta1.ISession);
 
+                    /** Session expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
                     /** Session name. */
                     public name: string;
 
@@ -302028,6 +305012,9 @@ export namespace google {
 
                     /** Session userId. */
                     public userId: string;
+
+                    /** Session expiration. */
+                    public expiration?: ("expireTime"|"ttl");
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -302272,6 +305259,9 @@ export namespace google {
 
                     /** EventMetadata branch */
                     branch?: (string|null);
+
+                    /** EventMetadata customMetadata */
+                    customMetadata?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents an EventMetadata. */
@@ -302300,6 +305290,9 @@ export namespace google {
 
                     /** EventMetadata branch. */
                     public branch: string;
+
+                    /** EventMetadata customMetadata. */
+                    public customMetadata?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new EventMetadata instance using the specified properties.
@@ -303415,6 +306408,9 @@ export namespace google {
 
                     /** ListEventsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListEventsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListEventsRequest. */
@@ -303434,6 +306430,9 @@ export namespace google {
 
                     /** ListEventsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListEventsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListEventsRequest instance using the specified properties.
@@ -313377,6 +316376,9 @@ export namespace google {
 
                     /** DeleteRagFileRequest name */
                     name?: (string|null);
+
+                    /** DeleteRagFileRequest forceDelete */
+                    forceDelete?: (boolean|null);
                 }
 
                 /** Represents a DeleteRagFileRequest. */
@@ -313390,6 +316392,9 @@ export namespace google {
 
                     /** DeleteRagFileRequest name. */
                     public name: string;
+
+                    /** DeleteRagFileRequest forceDelete. */
+                    public forceDelete: boolean;
 
                     /**
                      * Creates a new DeleteRagFileRequest instance using the specified properties.
@@ -319268,6 +322273,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -319284,6 +322292,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -319985,6 +322996,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -319998,6 +323012,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -320075,6 +323092,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -320403,6 +323532,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -320416,6 +323548,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -320741,6 +323876,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -320966,6 +324204,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -320995,6 +324234,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -321044,6 +324286,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -321179,6 +324424,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -321219,6 +324467,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -322067,6 +325318,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -322092,6 +325346,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -323027,6 +326284,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -323081,6 +326341,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -323297,6 +326560,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -323540,6 +326918,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -323561,6 +326942,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -324154,6 +327538,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -324182,6 +327572,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -324305,6 +327701,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -324424,8 +327930,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -324440,8 +327949,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -324972,6 +328484,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Struct. */

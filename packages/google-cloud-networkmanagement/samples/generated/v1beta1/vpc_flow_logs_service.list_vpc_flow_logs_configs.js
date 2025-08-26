@@ -29,8 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the VpcFlowLogsConfig:
-   *      `projects/{project_id}/locations/global`
+   *  Required. The parent resource of the VpcFlowLogsConfig,
+   *  in one of the following formats:
+   *  - For project-level resourcs: `projects/{project_id}/locations/global`
+   *  - For organization-level resources:
+   *  `organizations/{organization_id}/locations/global`
    */
   // const parent = 'abc123'
   /**

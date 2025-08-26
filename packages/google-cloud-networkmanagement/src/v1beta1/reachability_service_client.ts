@@ -197,10 +197,13 @@ export class ReachabilityServiceClient {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/connectivityTests/{test}'
       ),
+      organizationLocationVpcFlowLogsConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      vpcFlowLogsConfigPathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationVpcFlowLogsConfigsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
       ),
     };
@@ -223,7 +226,13 @@ export class ReachabilityServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta1/{name=projects/*/locations/global/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta1/{name=projects/*/locations/global/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta1/{name=projects/*/locations/global}/operations',}];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1beta1/{name=organizations/*/locations/*}',}],
+      },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta1/{name=projects/*}/locations',additional_bindings: [{get: '/v1beta1/{name=organizations/*}/locations',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1beta1/{name=organizations/*/locations/global/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{delete: '/v1beta1/{name=organizations/*/locations/global/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{get: '/v1beta1/{name=organizations/*/locations/global/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta1/{name=projects/*/locations/global}/operations',additional_bindings: [{get: '/v1beta1/{name=organizations/*/locations/global}/operations',}],
+      }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createConnectivityTestResponse = protoFilesRoot.lookup(
@@ -1724,6 +1733,55 @@ export class ReachabilityServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationVpcFlowLogsConfigs resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} vpc_flow_logs_config
+   * @returns {string} Resource name string.
+   */
+  organizationLocationVpcFlowLogsConfigsPath(organization:string,location:string,vpcFlowLogsConfig:string) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render({
+      organization: organization,
+      location: location,
+      vpc_flow_logs_config: vpcFlowLogsConfig,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationVpcFlowLogsConfigs resource.
+   *
+   * @param {string} organizationLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationVpcFlowLogsConfigs resource.
+   *
+   * @param {string} organizationLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).location;
+  }
+
+  /**
+   * Parse the vpc_flow_logs_config from OrganizationLocationVpcFlowLogsConfigs resource.
+   *
+   * @param {string} organizationLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing organization_location_vpcFlowLogsConfigs resource.
+   * @returns {string} A string representing the vpc_flow_logs_config.
+   */
+  matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName(organizationLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match(organizationLocationVpcFlowLogsConfigsName).vpc_flow_logs_config;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -1747,15 +1805,15 @@ export class ReachabilityServiceClient {
   }
 
   /**
-   * Return a fully-qualified vpcFlowLogsConfig resource name string.
+   * Return a fully-qualified projectLocationVpcFlowLogsConfigs resource name string.
    *
    * @param {string} project
    * @param {string} location
    * @param {string} vpc_flow_logs_config
    * @returns {string} Resource name string.
    */
-  vpcFlowLogsConfigPath(project:string,location:string,vpcFlowLogsConfig:string) {
-    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.render({
+  projectLocationVpcFlowLogsConfigsPath(project:string,location:string,vpcFlowLogsConfig:string) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render({
       project: project,
       location: location,
       vpc_flow_logs_config: vpcFlowLogsConfig,
@@ -1763,36 +1821,36 @@ export class ReachabilityServiceClient {
   }
 
   /**
-   * Parse the project from VpcFlowLogsConfig resource.
+   * Parse the project from ProjectLocationVpcFlowLogsConfigs resource.
    *
-   * @param {string} vpcFlowLogsConfigName
-   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @param {string} projectLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
-    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(vpcFlowLogsConfigName).project;
+  matchProjectFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).project;
   }
 
   /**
-   * Parse the location from VpcFlowLogsConfig resource.
+   * Parse the location from ProjectLocationVpcFlowLogsConfigs resource.
    *
-   * @param {string} vpcFlowLogsConfigName
-   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @param {string} projectLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
-    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(vpcFlowLogsConfigName).location;
+  matchLocationFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).location;
   }
 
   /**
-   * Parse the vpc_flow_logs_config from VpcFlowLogsConfig resource.
+   * Parse the vpc_flow_logs_config from ProjectLocationVpcFlowLogsConfigs resource.
    *
-   * @param {string} vpcFlowLogsConfigName
-   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @param {string} projectLocationVpcFlowLogsConfigsName
+   *   A fully-qualified path representing project_location_vpcFlowLogsConfigs resource.
    * @returns {string} A string representing the vpc_flow_logs_config.
    */
-  matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
-    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(vpcFlowLogsConfigName).vpc_flow_logs_config;
+  matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName(projectLocationVpcFlowLogsConfigsName: string) {
+    return this.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match(projectLocationVpcFlowLogsConfigsName).vpc_flow_logs_config;
   }
 
   /**

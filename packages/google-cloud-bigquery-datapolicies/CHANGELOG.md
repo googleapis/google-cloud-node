@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.2.0...bigquery-datapolicies-v2.3.0) (2025-07-22)
+
+
+### Features
+
+* [bigquery-datapolicies] Add client libraries for V2 Data Policy api ([#6503](https://github.com/googleapis/google-cloud-node/issues/6503)) ([67792d8](https://github.com/googleapis/google-cloud-node/commit/67792d85893a9f5ae5de70998c012bf92c789313))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.1.0...bigquery-datapolicies-v2.2.0) (2025-07-17)
+
+
+### Features
+
+* [bigquery-datapolicies] Release v2beta1 version containing Data Policy on Column ([#6480](https://github.com/googleapis/google-cloud-node/issues/6480)) ([e30eb7c](https://github.com/googleapis/google-cloud-node/commit/e30eb7c9ca1a668d02aa46e7197ac21414e8250f))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v2.0.1...bigquery-datapolicies-v2.1.0) (2025-07-09)
 
 

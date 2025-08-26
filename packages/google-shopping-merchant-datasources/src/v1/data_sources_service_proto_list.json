@@ -1,0 +1,7 @@
+[
+  "../../protos/google/shopping/merchant/datasources/v1/datasources.proto",
+  "../../protos/google/shopping/merchant/datasources/v1/datasourcetypes.proto",
+  "../../protos/google/shopping/merchant/datasources/v1/fileinputs.proto",
+  "../../protos/google/shopping/merchant/datasources/v1/fileuploads.proto",
+  "../../protos/google/shopping/type/types.proto"
+]

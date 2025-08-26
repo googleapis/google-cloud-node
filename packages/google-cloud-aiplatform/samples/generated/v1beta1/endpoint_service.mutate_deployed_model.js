@@ -43,6 +43,8 @@ function main(endpoint, deployedModel, updateMask) {
    *  * `max_replica_count` in either
    *  DedicatedResources google.cloud.aiplatform.v1beta1.DedicatedResources  or
    *  AutomaticResources google.cloud.aiplatform.v1beta1.AutomaticResources 
+   *  * `required_replica_count` in
+   *  DedicatedResources google.cloud.aiplatform.v1beta1.DedicatedResources 
    *  * autoscaling_metric_specs google.cloud.aiplatform.v1beta1.DedicatedResources.autoscaling_metric_specs 
    *  * `disable_container_logging` (v1 only)
    *  * `enable_container_logging` (v1beta1 only)

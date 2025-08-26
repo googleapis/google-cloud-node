@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.4.0...reviews-v0.5.0) (2025-07-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* [merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview` ([#6533](https://github.com/googleapis/google-cloud-node/issues/6533))
+
+### Bug Fixes
+
+* [merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview` ([#6533](https://github.com/googleapis/google-cloud-node/issues/6533)) ([0413b68](https://github.com/googleapis/google-cloud-node/commit/0413b68d2220637f007679641d3c6a55df0bfc68))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.3.0...reviews-v0.4.0) (2025-07-09)
 
 

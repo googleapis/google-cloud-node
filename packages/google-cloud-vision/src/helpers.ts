@@ -17,7 +17,6 @@
 // ** All changes to this file may be overwritten. **
 
 import * as fs from 'fs';
-import * as is from 'is';
 import {promisify} from '@google-cloud/promisify';
 import * as gax from 'google-gax';
 import * as protoTypes from '../protos/protos';
@@ -91,7 +90,7 @@ interface VisionClient {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const _requestToObject = (request: any) => {
-  if (is.string(request)) {
+  if ((typeof request === 'string')) {
     // Is this a URL or a local file?
     // Guess based on what the string looks like, and build the full
     // request object in the correct format.
@@ -122,7 +121,7 @@ const _coerceRequest = (
 ) => {
   // At this point, request must be an object with an `image` key; if not,
   // it is an error. If there is no image, throw an exception.
-  if (!is.object(request) || is.undefined(request.image)) {
+  if ((typeof request !== 'object') || !(request.image)) {
     return callback(new Error('No image present.'));
   }
   // If this is a buffer, read it and send the object
@@ -183,7 +182,7 @@ const _createSingleFeatureMethod = (
     // If a callback was provided and options were skipped, normalize
     // the argument names.
     let callOptions: gax.CallOptions | undefined;
-    if (is.undefined(callback) && is.function(callOptionsOrCallback)) {
+    if (!callback && (typeof callOptionsOrCallback === 'function')) {
       callback = callOptionsOrCallback as gax.Callback<
         protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
         {},
@@ -296,7 +295,7 @@ export function call(apiVersion: string) {
     // If a callback was provided and options were skipped, normalize
     // the argument names.
     let callOptions: gax.CallOptions | undefined;
-    if (is.undefined(callback) && is.function(callOptionsOrCallback)) {
+    if (!callback && (typeof callOptionsOrCallback === 'function')) {
       callback = callOptionsOrCallback as gax.Callback<
         protoTypes.google.cloud.vision.v1.IAnnotateImageResponse,
         {},

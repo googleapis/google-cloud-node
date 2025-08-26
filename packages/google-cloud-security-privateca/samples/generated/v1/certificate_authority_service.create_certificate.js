@@ -39,8 +39,9 @@ function main(parent, certificate) {
    *  Optional. It must be unique within a location and match the regular
    *  expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
    *  CertificateAuthority google.cloud.security.privateca.v1.CertificateAuthority 
-   *  in the Enterprise CertificateAuthority.Tier , but is optional and its
-   *  value is ignored otherwise.
+   *  in the Enterprise
+   *  CertificateAuthority.tier google.cloud.security.privateca.v1.CertificateAuthority.tier,
+   *  but is optional and its value is ignored otherwise.
    */
   // const certificateId = 'abc123'
   /**

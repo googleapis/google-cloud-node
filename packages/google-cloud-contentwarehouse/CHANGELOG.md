@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.1.0...contentwarehouse-v2.2.0) (2025-08-21)
+
+
+### Features
+
+* [contentwarehouse] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability) ([#6608](https://github.com/googleapis/google-cloud-node/issues/6608)) ([dab8cb9](https://github.com/googleapis/google-cloud-node/commit/dab8cb9a0b0b9629a899c95c2699c276c23a2c93))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.0.1...contentwarehouse-v2.1.0) (2025-07-09)
 
 

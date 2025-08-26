@@ -41,6 +41,11 @@ function main(project, reservation, reservationBlock, zone) {
    */
   // const reservationBlock = 'abc123'
   /**
+   *  View of the Block.
+   *  Check the View enum for the list of possible values.
+   */
+  // const view = 'abc123'
+  /**
    *  Name of the zone for this request. Zone name should conform to RFC1035.
    */
   // const zone = 'abc123'

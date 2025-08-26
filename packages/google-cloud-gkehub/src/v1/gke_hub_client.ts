@@ -890,8 +890,8 @@ export class GkeHubClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent (project and location) where the Feature will be created.
- *   Specified in the format `projects/* /locations/*`.
+ *   Required. The parent (project and location) where the Feature will be
+ *   created. Specified in the format `projects/* /locations/*`.
  * @param {string} request.featureId
  *   The ID of the feature to create.
  * @param {google.cloud.gkehub.v1.Feature} request.resource
@@ -1819,8 +1819,8 @@ export class GkeHubClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be listed.
- *   Specified in the format `projects/* /locations/*`.
+ *   Required. The parent (project and location) where the Features will be
+ *   listed. Specified in the format `projects/* /locations/*`.
  * @param {number} request.pageSize
  *   When requesting a 'page' of resources, `page_size` specifies number of
  *   resources to return. If unspecified or set to 0, all resources will
@@ -1942,8 +1942,8 @@ export class GkeHubClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be listed.
- *   Specified in the format `projects/* /locations/*`.
+ *   Required. The parent (project and location) where the Features will be
+ *   listed. Specified in the format `projects/* /locations/*`.
  * @param {number} request.pageSize
  *   When requesting a 'page' of resources, `page_size` specifies number of
  *   resources to return. If unspecified or set to 0, all resources will
@@ -2014,8 +2014,8 @@ export class GkeHubClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be listed.
- *   Specified in the format `projects/* /locations/*`.
+ *   Required. The parent (project and location) where the Features will be
+ *   listed. Specified in the format `projects/* /locations/*`.
  * @param {number} request.pageSize
  *   When requesting a 'page' of resources, `page_size` specifies number of
  *   resources to return. If unspecified or set to 0, all resources will

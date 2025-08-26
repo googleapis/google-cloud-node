@@ -222,11 +222,11 @@ export class RecommendationServiceClient {
       projectLocationCollectionDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
       ),
-      projectLocationCollectionDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
-      ),
       projectLocationCollectionDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionDataStoreSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
       ),
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
@@ -246,11 +246,11 @@ export class RecommendationServiceClient {
       projectLocationCollectionEngineServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
       ),
-      projectLocationCollectionEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
-      ),
       projectLocationCollectionEngineSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionEngineSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
       ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
@@ -279,11 +279,11 @@ export class RecommendationServiceClient {
       projectLocationDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
       ),
-      projectLocationDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
-      ),
       projectLocationDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationDataStoreSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
       ),
       projectLocationDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
@@ -1610,81 +1610,6 @@ export class RecommendationServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionDataStoreSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @param {string} data_store
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationCollectionDataStoreSessionPath(project:string,location:string,collection:string,dataStore:string,session:string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      data_store: dataStore,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).location;
-  }
-
-  /**
-   * Parse the collection from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).collection;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).data_store;
-  }
-
-  /**
-   * Parse the session from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSessionAnswer resource name string.
    *
    * @param {string} project
@@ -1770,6 +1695,81 @@ export class RecommendationServiceClient {
    */
   matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
     return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSessionsPath(project:string,location:string,collection:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).data_store;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).session;
   }
 
   /**
@@ -2210,81 +2210,6 @@ export class RecommendationServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionEngineSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @param {string} engine
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationCollectionEngineSessionPath(project:string,location:string,collection:string,engine:string,session:string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      engine: engine,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).location;
-  }
-
-  /**
-   * Parse the collection from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).collection;
-  }
-
-  /**
-   * Parse the engine from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the engine.
-   */
-  matchEngineFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).engine;
-  }
-
-  /**
-   * Parse the session from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationCollectionEngineSessionAnswer resource name string.
    *
    * @param {string} project
@@ -2370,6 +2295,81 @@ export class RecommendationServiceClient {
    */
   matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
     return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineSessionsPath(project:string,location:string,collection:string,engine:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).session;
   }
 
   /**
@@ -2944,68 +2944,6 @@ export class RecommendationServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationDataStoreSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} data_store
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationDataStoreSessionPath(project:string,location:string,dataStore:string,session:string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render({
-      project: project,
-      location: location,
-      data_store: dataStore,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).location;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).data_store;
-  }
-
-  /**
-   * Parse the session from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationDataStoreSessionAnswer resource name string.
    *
    * @param {string} project
@@ -3078,6 +3016,68 @@ export class RecommendationServiceClient {
    */
   matchAnswerFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
     return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSessionsPath(project:string,location:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).data_store;
+  }
+
+  /**
+   * Parse the session from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).session;
   }
 
   /**

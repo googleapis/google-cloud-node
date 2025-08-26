@@ -33,5 +33,6 @@ export {SchemaServiceClient} from './schema_service_client';
 export {SearchServiceClient} from './search_service_client';
 export {SearchTuningServiceClient} from './search_tuning_service_client';
 export {ServingConfigServiceClient} from './serving_config_service_client';
+export {SessionServiceClient} from './session_service_client';
 export {SiteSearchEngineServiceClient} from './site_search_engine_service_client';
 export {UserEventServiceClient} from './user_event_service_client';

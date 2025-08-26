@@ -487,6 +487,74 @@
         }
       }
     },
+    "InternalRangeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InternalRangeServiceClient",
+          "rpcs": {
+            "GetInternalRange": {
+              "methods": [
+                "getInternalRange"
+              ]
+            },
+            "CreateInternalRange": {
+              "methods": [
+                "createInternalRange"
+              ]
+            },
+            "UpdateInternalRange": {
+              "methods": [
+                "updateInternalRange"
+              ]
+            },
+            "DeleteInternalRange": {
+              "methods": [
+                "deleteInternalRange"
+              ]
+            },
+            "ListInternalRanges": {
+              "methods": [
+                "listInternalRanges",
+                "listInternalRangesStream",
+                "listInternalRangesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InternalRangeServiceClient",
+          "rpcs": {
+            "GetInternalRange": {
+              "methods": [
+                "getInternalRange"
+              ]
+            },
+            "CreateInternalRange": {
+              "methods": [
+                "createInternalRange"
+              ]
+            },
+            "UpdateInternalRange": {
+              "methods": [
+                "updateInternalRange"
+              ]
+            },
+            "DeleteInternalRange": {
+              "methods": [
+                "deleteInternalRange"
+              ]
+            },
+            "ListInternalRanges": {
+              "methods": [
+                "listInternalRanges",
+                "listInternalRangesStream",
+                "listInternalRangesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PolicyBasedRoutingService": {
       "clients": {
         "grpc": {

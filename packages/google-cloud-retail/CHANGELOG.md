@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.1.0...retail-v4.2.0) (2025-07-28)
+
+
+### Features
+
+* [retail] add experiment_id in the SearchRequest proto ([#6519](https://github.com/googleapis/google-cloud-node/issues/6519)) ([6ab93f6](https://github.com/googleapis/google-cloud-node/commit/6ab93f6acc75210bffe3455ecbf1b4dbcb57cc7e))
+* [retail] add new fields in conversational search public SDK ([#6537](https://github.com/googleapis/google-cloud-node/issues/6537)) ([ec9102c](https://github.com/googleapis/google-cloud-node/commit/ec9102c5b3417b8d461e8ee9bca271c62a95ccf7))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.0.1...retail-v4.1.0) (2025-07-09)
 
 

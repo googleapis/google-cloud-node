@@ -20,6 +20,3294 @@ export namespace google {
     /** Namespace cloud. */
     namespace cloud {
 
+        /** Namespace orgpolicy. */
+        namespace orgpolicy {
+
+            /** Namespace v2. */
+            namespace v2 {
+
+                /** Properties of a Constraint. */
+                interface IConstraint {
+
+                    /** Constraint name */
+                    name?: (string|null);
+
+                    /** Constraint displayName */
+                    displayName?: (string|null);
+
+                    /** Constraint description */
+                    description?: (string|null);
+
+                    /** Constraint constraintDefault */
+                    constraintDefault?: (google.cloud.orgpolicy.v2.Constraint.ConstraintDefault|keyof typeof google.cloud.orgpolicy.v2.Constraint.ConstraintDefault|null);
+
+                    /** Constraint listConstraint */
+                    listConstraint?: (google.cloud.orgpolicy.v2.Constraint.IListConstraint|null);
+
+                    /** Constraint booleanConstraint */
+                    booleanConstraint?: (google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null);
+
+                    /** Constraint supportsDryRun */
+                    supportsDryRun?: (boolean|null);
+
+                    /** Constraint equivalentConstraint */
+                    equivalentConstraint?: (string|null);
+
+                    /** Constraint supportsSimulation */
+                    supportsSimulation?: (boolean|null);
+                }
+
+                /** Represents a Constraint. */
+                class Constraint implements IConstraint {
+
+                    /**
+                     * Constructs a new Constraint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IConstraint);
+
+                    /** Constraint name. */
+                    public name: string;
+
+                    /** Constraint displayName. */
+                    public displayName: string;
+
+                    /** Constraint description. */
+                    public description: string;
+
+                    /** Constraint constraintDefault. */
+                    public constraintDefault: (google.cloud.orgpolicy.v2.Constraint.ConstraintDefault|keyof typeof google.cloud.orgpolicy.v2.Constraint.ConstraintDefault);
+
+                    /** Constraint listConstraint. */
+                    public listConstraint?: (google.cloud.orgpolicy.v2.Constraint.IListConstraint|null);
+
+                    /** Constraint booleanConstraint. */
+                    public booleanConstraint?: (google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint|null);
+
+                    /** Constraint supportsDryRun. */
+                    public supportsDryRun: boolean;
+
+                    /** Constraint equivalentConstraint. */
+                    public equivalentConstraint: string;
+
+                    /** Constraint supportsSimulation. */
+                    public supportsSimulation: boolean;
+
+                    /** Constraint constraintType. */
+                    public constraintType?: ("listConstraint"|"booleanConstraint");
+
+                    /**
+                     * Creates a new Constraint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Constraint instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IConstraint): google.cloud.orgpolicy.v2.Constraint;
+
+                    /**
+                     * Encodes the specified Constraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.verify|verify} messages.
+                     * @param message Constraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Constraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.verify|verify} messages.
+                     * @param message Constraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Constraint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Constraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint;
+
+                    /**
+                     * Decodes a Constraint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Constraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint;
+
+                    /**
+                     * Verifies a Constraint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Constraint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Constraint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint;
+
+                    /**
+                     * Creates a plain object from a Constraint message. Also converts values to other types if specified.
+                     * @param message Constraint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.Constraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Constraint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Constraint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Constraint {
+
+                    /** ConstraintDefault enum. */
+                    enum ConstraintDefault {
+                        CONSTRAINT_DEFAULT_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+
+                    /** Properties of a ListConstraint. */
+                    interface IListConstraint {
+
+                        /** ListConstraint supportsIn */
+                        supportsIn?: (boolean|null);
+
+                        /** ListConstraint supportsUnder */
+                        supportsUnder?: (boolean|null);
+                    }
+
+                    /** Represents a ListConstraint. */
+                    class ListConstraint implements IListConstraint {
+
+                        /**
+                         * Constructs a new ListConstraint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v2.Constraint.IListConstraint);
+
+                        /** ListConstraint supportsIn. */
+                        public supportsIn: boolean;
+
+                        /** ListConstraint supportsUnder. */
+                        public supportsUnder: boolean;
+
+                        /**
+                         * Creates a new ListConstraint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListConstraint instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v2.Constraint.IListConstraint): google.cloud.orgpolicy.v2.Constraint.ListConstraint;
+
+                        /**
+                         * Encodes the specified ListConstraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.ListConstraint.verify|verify} messages.
+                         * @param message ListConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v2.Constraint.IListConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListConstraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.ListConstraint.verify|verify} messages.
+                         * @param message ListConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.IListConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListConstraint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.ListConstraint;
+
+                        /**
+                         * Decodes a ListConstraint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.ListConstraint;
+
+                        /**
+                         * Verifies a ListConstraint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListConstraint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListConstraint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.ListConstraint;
+
+                        /**
+                         * Creates a plain object from a ListConstraint message. Also converts values to other types if specified.
+                         * @param message ListConstraint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v2.Constraint.ListConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListConstraint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListConstraint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomConstraintDefinition. */
+                    interface ICustomConstraintDefinition {
+
+                        /** CustomConstraintDefinition resourceTypes */
+                        resourceTypes?: (string[]|null);
+
+                        /** CustomConstraintDefinition methodTypes */
+                        methodTypes?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[]|null);
+
+                        /** CustomConstraintDefinition condition */
+                        condition?: (string|null);
+
+                        /** CustomConstraintDefinition actionType */
+                        actionType?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|null);
+
+                        /** CustomConstraintDefinition parameters */
+                        parameters?: ({ [k: string]: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter }|null);
+                    }
+
+                    /** Represents a CustomConstraintDefinition. */
+                    class CustomConstraintDefinition implements ICustomConstraintDefinition {
+
+                        /**
+                         * Constructs a new CustomConstraintDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition);
+
+                        /** CustomConstraintDefinition resourceTypes. */
+                        public resourceTypes: string[];
+
+                        /** CustomConstraintDefinition methodTypes. */
+                        public methodTypes: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.MethodType[];
+
+                        /** CustomConstraintDefinition condition. */
+                        public condition: string;
+
+                        /** CustomConstraintDefinition actionType. */
+                        public actionType: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.ActionType);
+
+                        /** CustomConstraintDefinition parameters. */
+                        public parameters: { [k: string]: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter };
+
+                        /**
+                         * Creates a new CustomConstraintDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomConstraintDefinition instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Encodes the specified CustomConstraintDefinition message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                         * @param message CustomConstraintDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomConstraintDefinition message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.verify|verify} messages.
+                         * @param message CustomConstraintDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomConstraintDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomConstraintDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Decodes a CustomConstraintDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomConstraintDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Verifies a CustomConstraintDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomConstraintDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomConstraintDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition;
+
+                        /**
+                         * Creates a plain object from a CustomConstraintDefinition message. Also converts values to other types if specified.
+                         * @param message CustomConstraintDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomConstraintDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomConstraintDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CustomConstraintDefinition {
+
+                        /** MethodType enum. */
+                        enum MethodType {
+                            METHOD_TYPE_UNSPECIFIED = 0,
+                            CREATE = 1,
+                            UPDATE = 2,
+                            DELETE = 3,
+                            REMOVE_GRANT = 4,
+                            GOVERN_TAGS = 5
+                        }
+
+                        /** ActionType enum. */
+                        enum ActionType {
+                            ACTION_TYPE_UNSPECIFIED = 0,
+                            ALLOW = 1,
+                            DENY = 2
+                        }
+
+                        /** Properties of a Parameter. */
+                        interface IParameter {
+
+                            /** Parameter type */
+                            type?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null);
+
+                            /** Parameter defaultValue */
+                            defaultValue?: (google.protobuf.IValue|null);
+
+                            /** Parameter validValuesExpr */
+                            validValuesExpr?: (string|null);
+
+                            /** Parameter metadata */
+                            metadata?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null);
+
+                            /** Parameter item */
+                            item?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|null);
+                        }
+
+                        /** Represents a Parameter. */
+                        class Parameter implements IParameter {
+
+                            /**
+                             * Constructs a new Parameter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter);
+
+                            /** Parameter type. */
+                            public type: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type);
+
+                            /** Parameter defaultValue. */
+                            public defaultValue?: (google.protobuf.IValue|null);
+
+                            /** Parameter validValuesExpr. */
+                            public validValuesExpr: string;
+
+                            /** Parameter metadata. */
+                            public metadata?: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata|null);
+
+                            /** Parameter item. */
+                            public item: (google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type|keyof typeof google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Type);
+
+                            /**
+                             * Creates a new Parameter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Parameter instance
+                             */
+                            public static create(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Encodes the specified Parameter message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                             * @param message Parameter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Parameter message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.verify|verify} messages.
+                             * @param message Parameter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.IParameter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Decodes a Parameter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Parameter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Verifies a Parameter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Parameter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Parameter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter;
+
+                            /**
+                             * Creates a plain object from a Parameter message. Also converts values to other types if specified.
+                             * @param message Parameter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Parameter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Parameter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Parameter {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                LIST = 1,
+                                STRING = 2,
+                                BOOLEAN = 3
+                            }
+
+                            /** Properties of a Metadata. */
+                            interface IMetadata {
+
+                                /** Metadata description */
+                                description?: (string|null);
+                            }
+
+                            /** Represents a Metadata. */
+                            class Metadata implements IMetadata {
+
+                                /**
+                                 * Constructs a new Metadata.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata);
+
+                                /** Metadata description. */
+                                public description: string;
+
+                                /**
+                                 * Creates a new Metadata instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Metadata instance
+                                 */
+                                public static create(properties?: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Encodes the specified Metadata message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                 * @param message Metadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Metadata message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata.verify|verify} messages.
+                                 * @param message Metadata message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Metadata message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Metadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Metadata
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Verifies a Metadata message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Metadata
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata;
+
+                                /**
+                                 * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                                 * @param message Metadata
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Metadata to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Metadata
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
+                    /** Properties of a BooleanConstraint. */
+                    interface IBooleanConstraint {
+
+                        /** BooleanConstraint customConstraintDefinition */
+                        customConstraintDefinition?: (google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null);
+                    }
+
+                    /** Represents a BooleanConstraint. */
+                    class BooleanConstraint implements IBooleanConstraint {
+
+                        /**
+                         * Constructs a new BooleanConstraint.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint);
+
+                        /** BooleanConstraint customConstraintDefinition. */
+                        public customConstraintDefinition?: (google.cloud.orgpolicy.v2.Constraint.ICustomConstraintDefinition|null);
+
+                        /**
+                         * Creates a new BooleanConstraint instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BooleanConstraint instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint): google.cloud.orgpolicy.v2.Constraint.BooleanConstraint;
+
+                        /**
+                         * Encodes the specified BooleanConstraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.verify|verify} messages.
+                         * @param message BooleanConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BooleanConstraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Constraint.BooleanConstraint.verify|verify} messages.
+                         * @param message BooleanConstraint message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v2.Constraint.IBooleanConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BooleanConstraint message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BooleanConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Constraint.BooleanConstraint;
+
+                        /**
+                         * Decodes a BooleanConstraint message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BooleanConstraint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Constraint.BooleanConstraint;
+
+                        /**
+                         * Verifies a BooleanConstraint message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BooleanConstraint message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BooleanConstraint
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Constraint.BooleanConstraint;
+
+                        /**
+                         * Creates a plain object from a BooleanConstraint message. Also converts values to other types if specified.
+                         * @param message BooleanConstraint
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v2.Constraint.BooleanConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BooleanConstraint to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BooleanConstraint
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a CustomConstraint. */
+                interface ICustomConstraint {
+
+                    /** CustomConstraint name */
+                    name?: (string|null);
+
+                    /** CustomConstraint resourceTypes */
+                    resourceTypes?: (string[]|null);
+
+                    /** CustomConstraint methodTypes */
+                    methodTypes?: (google.cloud.orgpolicy.v2.CustomConstraint.MethodType[]|null);
+
+                    /** CustomConstraint condition */
+                    condition?: (string|null);
+
+                    /** CustomConstraint actionType */
+                    actionType?: (google.cloud.orgpolicy.v2.CustomConstraint.ActionType|keyof typeof google.cloud.orgpolicy.v2.CustomConstraint.ActionType|null);
+
+                    /** CustomConstraint displayName */
+                    displayName?: (string|null);
+
+                    /** CustomConstraint description */
+                    description?: (string|null);
+
+                    /** CustomConstraint updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CustomConstraint. */
+                class CustomConstraint implements ICustomConstraint {
+
+                    /**
+                     * Constructs a new CustomConstraint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.ICustomConstraint);
+
+                    /** CustomConstraint name. */
+                    public name: string;
+
+                    /** CustomConstraint resourceTypes. */
+                    public resourceTypes: string[];
+
+                    /** CustomConstraint methodTypes. */
+                    public methodTypes: google.cloud.orgpolicy.v2.CustomConstraint.MethodType[];
+
+                    /** CustomConstraint condition. */
+                    public condition: string;
+
+                    /** CustomConstraint actionType. */
+                    public actionType: (google.cloud.orgpolicy.v2.CustomConstraint.ActionType|keyof typeof google.cloud.orgpolicy.v2.CustomConstraint.ActionType);
+
+                    /** CustomConstraint displayName. */
+                    public displayName: string;
+
+                    /** CustomConstraint description. */
+                    public description: string;
+
+                    /** CustomConstraint updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CustomConstraint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomConstraint instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.ICustomConstraint): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Encodes the specified CustomConstraint message. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                     * @param message CustomConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomConstraint message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CustomConstraint.verify|verify} messages.
+                     * @param message CustomConstraint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.ICustomConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomConstraint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Decodes a CustomConstraint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomConstraint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Verifies a CustomConstraint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomConstraint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomConstraint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.CustomConstraint;
+
+                    /**
+                     * Creates a plain object from a CustomConstraint message. Also converts values to other types if specified.
+                     * @param message CustomConstraint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.CustomConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomConstraint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomConstraint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CustomConstraint {
+
+                    /** MethodType enum. */
+                    enum MethodType {
+                        METHOD_TYPE_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        UPDATE = 2,
+                        DELETE = 3,
+                        REMOVE_GRANT = 4,
+                        GOVERN_TAGS = 5
+                    }
+
+                    /** ActionType enum. */
+                    enum ActionType {
+                        ACTION_TYPE_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+                }
+
+                /** Represents an OrgPolicy */
+                class OrgPolicy extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new OrgPolicy service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new OrgPolicy service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrgPolicy;
+
+                    /**
+                     * Calls ListConstraints.
+                     * @param request ListConstraintsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConstraintsResponse
+                     */
+                    public listConstraints(request: google.cloud.orgpolicy.v2.IListConstraintsRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.ListConstraintsCallback): void;
+
+                    /**
+                     * Calls ListConstraints.
+                     * @param request ListConstraintsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConstraints(request: google.cloud.orgpolicy.v2.IListConstraintsRequest): Promise<google.cloud.orgpolicy.v2.ListConstraintsResponse>;
+
+                    /**
+                     * Calls ListPolicies.
+                     * @param request ListPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPoliciesResponse
+                     */
+                    public listPolicies(request: google.cloud.orgpolicy.v2.IListPoliciesRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.ListPoliciesCallback): void;
+
+                    /**
+                     * Calls ListPolicies.
+                     * @param request ListPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPolicies(request: google.cloud.orgpolicy.v2.IListPoliciesRequest): Promise<google.cloud.orgpolicy.v2.ListPoliciesResponse>;
+
+                    /**
+                     * Calls GetPolicy.
+                     * @param request GetPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getPolicy(request: google.cloud.orgpolicy.v2.IGetPolicyRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.GetPolicyCallback): void;
+
+                    /**
+                     * Calls GetPolicy.
+                     * @param request GetPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPolicy(request: google.cloud.orgpolicy.v2.IGetPolicyRequest): Promise<google.cloud.orgpolicy.v2.Policy>;
+
+                    /**
+                     * Calls GetEffectivePolicy.
+                     * @param request GetEffectivePolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getEffectivePolicy(request: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.GetEffectivePolicyCallback): void;
+
+                    /**
+                     * Calls GetEffectivePolicy.
+                     * @param request GetEffectivePolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEffectivePolicy(request: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest): Promise<google.cloud.orgpolicy.v2.Policy>;
+
+                    /**
+                     * Calls CreatePolicy.
+                     * @param request CreatePolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public createPolicy(request: google.cloud.orgpolicy.v2.ICreatePolicyRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicyCallback): void;
+
+                    /**
+                     * Calls CreatePolicy.
+                     * @param request CreatePolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createPolicy(request: google.cloud.orgpolicy.v2.ICreatePolicyRequest): Promise<google.cloud.orgpolicy.v2.Policy>;
+
+                    /**
+                     * Calls UpdatePolicy.
+                     * @param request UpdatePolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public updatePolicy(request: google.cloud.orgpolicy.v2.IUpdatePolicyRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.UpdatePolicyCallback): void;
+
+                    /**
+                     * Calls UpdatePolicy.
+                     * @param request UpdatePolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePolicy(request: google.cloud.orgpolicy.v2.IUpdatePolicyRequest): Promise<google.cloud.orgpolicy.v2.Policy>;
+
+                    /**
+                     * Calls DeletePolicy.
+                     * @param request DeletePolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deletePolicy(request: google.cloud.orgpolicy.v2.IDeletePolicyRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.DeletePolicyCallback): void;
+
+                    /**
+                     * Calls DeletePolicy.
+                     * @param request DeletePolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deletePolicy(request: google.cloud.orgpolicy.v2.IDeletePolicyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateCustomConstraint.
+                     * @param request CreateCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public createCustomConstraint(request: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraintCallback): void;
+
+                    /**
+                     * Calls CreateCustomConstraint.
+                     * @param request CreateCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCustomConstraint(request: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls UpdateCustomConstraint.
+                     * @param request UpdateCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public updateCustomConstraint(request: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraintCallback): void;
+
+                    /**
+                     * Calls UpdateCustomConstraint.
+                     * @param request UpdateCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCustomConstraint(request: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls GetCustomConstraint.
+                     * @param request GetCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CustomConstraint
+                     */
+                    public getCustomConstraint(request: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraintCallback): void;
+
+                    /**
+                     * Calls GetCustomConstraint.
+                     * @param request GetCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCustomConstraint(request: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest): Promise<google.cloud.orgpolicy.v2.CustomConstraint>;
+
+                    /**
+                     * Calls ListCustomConstraints.
+                     * @param request ListCustomConstraintsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCustomConstraintsResponse
+                     */
+                    public listCustomConstraints(request: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraintsCallback): void;
+
+                    /**
+                     * Calls ListCustomConstraints.
+                     * @param request ListCustomConstraintsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCustomConstraints(request: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest): Promise<google.cloud.orgpolicy.v2.ListCustomConstraintsResponse>;
+
+                    /**
+                     * Calls DeleteCustomConstraint.
+                     * @param request DeleteCustomConstraintRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCustomConstraint(request: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, callback: google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraintCallback): void;
+
+                    /**
+                     * Calls DeleteCustomConstraint.
+                     * @param request DeleteCustomConstraintRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCustomConstraint(request: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace OrgPolicy {
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|listConstraints}.
+                     * @param error Error, if any
+                     * @param [response] ListConstraintsResponse
+                     */
+                    type ListConstraintsCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.ListConstraintsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|listPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListPoliciesResponse
+                     */
+                    type ListPoliciesCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.ListPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|getPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetPolicyCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|getEffectivePolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetEffectivePolicyCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|createPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type CreatePolicyCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|updatePolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type UpdatePolicyCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|deletePolicy}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeletePolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|createCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type CreateCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|updateCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type UpdateCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|getCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] CustomConstraint
+                     */
+                    type GetCustomConstraintCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.CustomConstraint) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|listCustomConstraints}.
+                     * @param error Error, if any
+                     * @param [response] ListCustomConstraintsResponse
+                     */
+                    type ListCustomConstraintsCallback = (error: (Error|null), response?: google.cloud.orgpolicy.v2.ListCustomConstraintsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.orgpolicy.v2.OrgPolicy|deleteCustomConstraint}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCustomConstraintCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a Policy. */
+                interface IPolicy {
+
+                    /** Policy name */
+                    name?: (string|null);
+
+                    /** Policy spec */
+                    spec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy alternate */
+                    alternate?: (google.cloud.orgpolicy.v2.IAlternatePolicySpec|null);
+
+                    /** Policy dryRunSpec */
+                    dryRunSpec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a Policy. */
+                class Policy implements IPolicy {
+
+                    /**
+                     * Constructs a new Policy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IPolicy);
+
+                    /** Policy name. */
+                    public name: string;
+
+                    /** Policy spec. */
+                    public spec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy alternate. */
+                    public alternate?: (google.cloud.orgpolicy.v2.IAlternatePolicySpec|null);
+
+                    /** Policy dryRunSpec. */
+                    public dryRunSpec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /** Policy etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new Policy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Policy instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IPolicy): google.cloud.orgpolicy.v2.Policy;
+
+                    /**
+                     * Encodes the specified Policy message. Does not implicitly {@link google.cloud.orgpolicy.v2.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.Policy.verify|verify} messages.
+                     * @param message Policy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.Policy;
+
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.Policy;
+
+                    /**
+                     * Verifies a Policy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Policy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.Policy;
+
+                    /**
+                     * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                     * @param message Policy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.Policy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Policy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Policy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlternatePolicySpec. */
+                interface IAlternatePolicySpec {
+
+                    /** AlternatePolicySpec launch */
+                    launch?: (string|null);
+
+                    /** AlternatePolicySpec spec */
+                    spec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+                }
+
+                /** Represents an AlternatePolicySpec. */
+                class AlternatePolicySpec implements IAlternatePolicySpec {
+
+                    /**
+                     * Constructs a new AlternatePolicySpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IAlternatePolicySpec);
+
+                    /** AlternatePolicySpec launch. */
+                    public launch: string;
+
+                    /** AlternatePolicySpec spec. */
+                    public spec?: (google.cloud.orgpolicy.v2.IPolicySpec|null);
+
+                    /**
+                     * Creates a new AlternatePolicySpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlternatePolicySpec instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IAlternatePolicySpec): google.cloud.orgpolicy.v2.AlternatePolicySpec;
+
+                    /**
+                     * Encodes the specified AlternatePolicySpec message. Does not implicitly {@link google.cloud.orgpolicy.v2.AlternatePolicySpec.verify|verify} messages.
+                     * @param message AlternatePolicySpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IAlternatePolicySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlternatePolicySpec message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.AlternatePolicySpec.verify|verify} messages.
+                     * @param message AlternatePolicySpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IAlternatePolicySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlternatePolicySpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlternatePolicySpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.AlternatePolicySpec;
+
+                    /**
+                     * Decodes an AlternatePolicySpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlternatePolicySpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.AlternatePolicySpec;
+
+                    /**
+                     * Verifies an AlternatePolicySpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlternatePolicySpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlternatePolicySpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.AlternatePolicySpec;
+
+                    /**
+                     * Creates a plain object from an AlternatePolicySpec message. Also converts values to other types if specified.
+                     * @param message AlternatePolicySpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.AlternatePolicySpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlternatePolicySpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlternatePolicySpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolicySpec. */
+                interface IPolicySpec {
+
+                    /** PolicySpec etag */
+                    etag?: (string|null);
+
+                    /** PolicySpec updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicySpec rules */
+                    rules?: (google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule[]|null);
+
+                    /** PolicySpec inheritFromParent */
+                    inheritFromParent?: (boolean|null);
+
+                    /** PolicySpec reset */
+                    reset?: (boolean|null);
+                }
+
+                /** Represents a PolicySpec. */
+                class PolicySpec implements IPolicySpec {
+
+                    /**
+                     * Constructs a new PolicySpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IPolicySpec);
+
+                    /** PolicySpec etag. */
+                    public etag: string;
+
+                    /** PolicySpec updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PolicySpec rules. */
+                    public rules: google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule[];
+
+                    /** PolicySpec inheritFromParent. */
+                    public inheritFromParent: boolean;
+
+                    /** PolicySpec reset. */
+                    public reset: boolean;
+
+                    /**
+                     * Creates a new PolicySpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicySpec instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IPolicySpec): google.cloud.orgpolicy.v2.PolicySpec;
+
+                    /**
+                     * Encodes the specified PolicySpec message. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.verify|verify} messages.
+                     * @param message PolicySpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IPolicySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicySpec message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.verify|verify} messages.
+                     * @param message PolicySpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IPolicySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicySpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicySpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.PolicySpec;
+
+                    /**
+                     * Decodes a PolicySpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicySpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.PolicySpec;
+
+                    /**
+                     * Verifies a PolicySpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicySpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicySpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.PolicySpec;
+
+                    /**
+                     * Creates a plain object from a PolicySpec message. Also converts values to other types if specified.
+                     * @param message PolicySpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.PolicySpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicySpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicySpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PolicySpec {
+
+                    /** Properties of a PolicyRule. */
+                    interface IPolicyRule {
+
+                        /** PolicyRule values */
+                        values?: (google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues|null);
+
+                        /** PolicyRule allowAll */
+                        allowAll?: (boolean|null);
+
+                        /** PolicyRule denyAll */
+                        denyAll?: (boolean|null);
+
+                        /** PolicyRule enforce */
+                        enforce?: (boolean|null);
+
+                        /** PolicyRule condition */
+                        condition?: (google.type.IExpr|null);
+
+                        /** PolicyRule parameters */
+                        parameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a PolicyRule. */
+                    class PolicyRule implements IPolicyRule {
+
+                        /**
+                         * Constructs a new PolicyRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule);
+
+                        /** PolicyRule values. */
+                        public values?: (google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues|null);
+
+                        /** PolicyRule allowAll. */
+                        public allowAll?: (boolean|null);
+
+                        /** PolicyRule denyAll. */
+                        public denyAll?: (boolean|null);
+
+                        /** PolicyRule enforce. */
+                        public enforce?: (boolean|null);
+
+                        /** PolicyRule condition. */
+                        public condition?: (google.type.IExpr|null);
+
+                        /** PolicyRule parameters. */
+                        public parameters?: (google.protobuf.IStruct|null);
+
+                        /** PolicyRule kind. */
+                        public kind?: ("values"|"allowAll"|"denyAll"|"enforce");
+
+                        /**
+                         * Creates a new PolicyRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PolicyRule instance
+                         */
+                        public static create(properties?: google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule;
+
+                        /**
+                         * Encodes the specified PolicyRule message. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.verify|verify} messages.
+                         * @param message PolicyRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PolicyRule message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.verify|verify} messages.
+                         * @param message PolicyRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.orgpolicy.v2.PolicySpec.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PolicyRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PolicyRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule;
+
+                        /**
+                         * Decodes a PolicyRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PolicyRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule;
+
+                        /**
+                         * Verifies a PolicyRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PolicyRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PolicyRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule;
+
+                        /**
+                         * Creates a plain object from a PolicyRule message. Also converts values to other types if specified.
+                         * @param message PolicyRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PolicyRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PolicyRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PolicyRule {
+
+                        /** Properties of a StringValues. */
+                        interface IStringValues {
+
+                            /** StringValues allowedValues */
+                            allowedValues?: (string[]|null);
+
+                            /** StringValues deniedValues */
+                            deniedValues?: (string[]|null);
+                        }
+
+                        /** Represents a StringValues. */
+                        class StringValues implements IStringValues {
+
+                            /**
+                             * Constructs a new StringValues.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues);
+
+                            /** StringValues allowedValues. */
+                            public allowedValues: string[];
+
+                            /** StringValues deniedValues. */
+                            public deniedValues: string[];
+
+                            /**
+                             * Creates a new StringValues instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StringValues instance
+                             */
+                            public static create(properties?: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues;
+
+                            /**
+                             * Encodes the specified StringValues message. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues.verify|verify} messages.
+                             * @param message StringValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StringValues message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues.verify|verify} messages.
+                             * @param message StringValues message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.IStringValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StringValues message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StringValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues;
+
+                            /**
+                             * Decodes a StringValues message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StringValues
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues;
+
+                            /**
+                             * Verifies a StringValues message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StringValues message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StringValues
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues;
+
+                            /**
+                             * Creates a plain object from a StringValues message. Also converts values to other types if specified.
+                             * @param message StringValues
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orgpolicy.v2.PolicySpec.PolicyRule.StringValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StringValues to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StringValues
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a ListConstraintsRequest. */
+                interface IListConstraintsRequest {
+
+                    /** ListConstraintsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConstraintsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConstraintsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListConstraintsRequest. */
+                class ListConstraintsRequest implements IListConstraintsRequest {
+
+                    /**
+                     * Constructs a new ListConstraintsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListConstraintsRequest);
+
+                    /** ListConstraintsRequest parent. */
+                    public parent: string;
+
+                    /** ListConstraintsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConstraintsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListConstraintsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConstraintsRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListConstraintsRequest): google.cloud.orgpolicy.v2.ListConstraintsRequest;
+
+                    /**
+                     * Encodes the specified ListConstraintsRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListConstraintsRequest.verify|verify} messages.
+                     * @param message ListConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConstraintsRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListConstraintsRequest.verify|verify} messages.
+                     * @param message ListConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConstraintsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListConstraintsRequest;
+
+                    /**
+                     * Decodes a ListConstraintsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListConstraintsRequest;
+
+                    /**
+                     * Verifies a ListConstraintsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConstraintsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConstraintsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListConstraintsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConstraintsRequest message. Also converts values to other types if specified.
+                     * @param message ListConstraintsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListConstraintsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConstraintsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConstraintsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConstraintsResponse. */
+                interface IListConstraintsResponse {
+
+                    /** ListConstraintsResponse constraints */
+                    constraints?: (google.cloud.orgpolicy.v2.IConstraint[]|null);
+
+                    /** ListConstraintsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConstraintsResponse. */
+                class ListConstraintsResponse implements IListConstraintsResponse {
+
+                    /**
+                     * Constructs a new ListConstraintsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListConstraintsResponse);
+
+                    /** ListConstraintsResponse constraints. */
+                    public constraints: google.cloud.orgpolicy.v2.IConstraint[];
+
+                    /** ListConstraintsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConstraintsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConstraintsResponse instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListConstraintsResponse): google.cloud.orgpolicy.v2.ListConstraintsResponse;
+
+                    /**
+                     * Encodes the specified ListConstraintsResponse message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListConstraintsResponse.verify|verify} messages.
+                     * @param message ListConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConstraintsResponse message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListConstraintsResponse.verify|verify} messages.
+                     * @param message ListConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConstraintsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListConstraintsResponse;
+
+                    /**
+                     * Decodes a ListConstraintsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListConstraintsResponse;
+
+                    /**
+                     * Verifies a ListConstraintsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConstraintsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConstraintsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListConstraintsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConstraintsResponse message. Also converts values to other types if specified.
+                     * @param message ListConstraintsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListConstraintsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConstraintsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConstraintsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPoliciesRequest. */
+                interface IListPoliciesRequest {
+
+                    /** ListPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPoliciesRequest. */
+                class ListPoliciesRequest implements IListPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListPoliciesRequest);
+
+                    /** ListPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListPoliciesRequest): google.cloud.orgpolicy.v2.ListPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListPoliciesRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListPoliciesRequest.verify|verify} messages.
+                     * @param message ListPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListPoliciesRequest.verify|verify} messages.
+                     * @param message ListPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListPoliciesRequest;
+
+                    /**
+                     * Decodes a ListPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListPoliciesRequest;
+
+                    /**
+                     * Verifies a ListPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPoliciesResponse. */
+                interface IListPoliciesResponse {
+
+                    /** ListPoliciesResponse policies */
+                    policies?: (google.cloud.orgpolicy.v2.IPolicy[]|null);
+
+                    /** ListPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPoliciesResponse. */
+                class ListPoliciesResponse implements IListPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListPoliciesResponse);
+
+                    /** ListPoliciesResponse policies. */
+                    public policies: google.cloud.orgpolicy.v2.IPolicy[];
+
+                    /** ListPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListPoliciesResponse): google.cloud.orgpolicy.v2.ListPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListPoliciesResponse message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListPoliciesResponse.verify|verify} messages.
+                     * @param message ListPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListPoliciesResponse.verify|verify} messages.
+                     * @param message ListPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListPoliciesResponse;
+
+                    /**
+                     * Decodes a ListPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListPoliciesResponse;
+
+                    /**
+                     * Verifies a ListPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPolicyRequest. */
+                interface IGetPolicyRequest {
+
+                    /** GetPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPolicyRequest. */
+                class GetPolicyRequest implements IGetPolicyRequest {
+
+                    /**
+                     * Constructs a new GetPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IGetPolicyRequest);
+
+                    /** GetPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IGetPolicyRequest): google.cloud.orgpolicy.v2.GetPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetPolicyRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.GetPolicyRequest.verify|verify} messages.
+                     * @param message GetPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.GetPolicyRequest.verify|verify} messages.
+                     * @param message GetPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IGetPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.GetPolicyRequest;
+
+                    /**
+                     * Decodes a GetPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.GetPolicyRequest;
+
+                    /**
+                     * Verifies a GetPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.GetPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.GetPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEffectivePolicyRequest. */
+                interface IGetEffectivePolicyRequest {
+
+                    /** GetEffectivePolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEffectivePolicyRequest. */
+                class GetEffectivePolicyRequest implements IGetEffectivePolicyRequest {
+
+                    /**
+                     * Constructs a new GetEffectivePolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest);
+
+                    /** GetEffectivePolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEffectivePolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEffectivePolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest): google.cloud.orgpolicy.v2.GetEffectivePolicyRequest;
+
+                    /**
+                     * Encodes the specified GetEffectivePolicyRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.GetEffectivePolicyRequest.verify|verify} messages.
+                     * @param message GetEffectivePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEffectivePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.GetEffectivePolicyRequest.verify|verify} messages.
+                     * @param message GetEffectivePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEffectivePolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEffectivePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.GetEffectivePolicyRequest;
+
+                    /**
+                     * Decodes a GetEffectivePolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEffectivePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.GetEffectivePolicyRequest;
+
+                    /**
+                     * Verifies a GetEffectivePolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEffectivePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEffectivePolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.GetEffectivePolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetEffectivePolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetEffectivePolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.GetEffectivePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEffectivePolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEffectivePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreatePolicyRequest. */
+                interface ICreatePolicyRequest {
+
+                    /** CreatePolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreatePolicyRequest policy */
+                    policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+                }
+
+                /** Represents a CreatePolicyRequest. */
+                class CreatePolicyRequest implements ICreatePolicyRequest {
+
+                    /**
+                     * Constructs a new CreatePolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.ICreatePolicyRequest);
+
+                    /** CreatePolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreatePolicyRequest policy. */
+                    public policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+
+                    /**
+                     * Creates a new CreatePolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreatePolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.ICreatePolicyRequest): google.cloud.orgpolicy.v2.CreatePolicyRequest;
+
+                    /**
+                     * Encodes the specified CreatePolicyRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.CreatePolicyRequest.verify|verify} messages.
+                     * @param message CreatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.ICreatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreatePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CreatePolicyRequest.verify|verify} messages.
+                     * @param message CreatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.ICreatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreatePolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.CreatePolicyRequest;
+
+                    /**
+                     * Decodes a CreatePolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.CreatePolicyRequest;
+
+                    /**
+                     * Verifies a CreatePolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreatePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreatePolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.CreatePolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreatePolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreatePolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.CreatePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreatePolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreatePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePolicyRequest. */
+                interface IUpdatePolicyRequest {
+
+                    /** UpdatePolicyRequest policy */
+                    policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+
+                    /** UpdatePolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePolicyRequest. */
+                class UpdatePolicyRequest implements IUpdatePolicyRequest {
+
+                    /**
+                     * Constructs a new UpdatePolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IUpdatePolicyRequest);
+
+                    /** UpdatePolicyRequest policy. */
+                    public policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+
+                    /** UpdatePolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IUpdatePolicyRequest): google.cloud.orgpolicy.v2.UpdatePolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdatePolicyRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdatePolicyRequest.verify|verify} messages.
+                     * @param message UpdatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdatePolicyRequest.verify|verify} messages.
+                     * @param message UpdatePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IUpdatePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.UpdatePolicyRequest;
+
+                    /**
+                     * Decodes an UpdatePolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.UpdatePolicyRequest;
+
+                    /**
+                     * Verifies an UpdatePolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.UpdatePolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.UpdatePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeletePolicyRequest. */
+                interface IDeletePolicyRequest {
+
+                    /** DeletePolicyRequest name */
+                    name?: (string|null);
+
+                    /** DeletePolicyRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeletePolicyRequest. */
+                class DeletePolicyRequest implements IDeletePolicyRequest {
+
+                    /**
+                     * Constructs a new DeletePolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IDeletePolicyRequest);
+
+                    /** DeletePolicyRequest name. */
+                    public name: string;
+
+                    /** DeletePolicyRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeletePolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeletePolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IDeletePolicyRequest): google.cloud.orgpolicy.v2.DeletePolicyRequest;
+
+                    /**
+                     * Encodes the specified DeletePolicyRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.DeletePolicyRequest.verify|verify} messages.
+                     * @param message DeletePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IDeletePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeletePolicyRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.DeletePolicyRequest.verify|verify} messages.
+                     * @param message DeletePolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IDeletePolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeletePolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeletePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.DeletePolicyRequest;
+
+                    /**
+                     * Decodes a DeletePolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeletePolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.DeletePolicyRequest;
+
+                    /**
+                     * Verifies a DeletePolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeletePolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeletePolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.DeletePolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeletePolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeletePolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.DeletePolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeletePolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeletePolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCustomConstraintRequest. */
+                interface ICreateCustomConstraintRequest {
+
+                    /** CreateCustomConstraintRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCustomConstraintRequest customConstraint */
+                    customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+                }
+
+                /** Represents a CreateCustomConstraintRequest. */
+                class CreateCustomConstraintRequest implements ICreateCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new CreateCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest);
+
+                    /** CreateCustomConstraintRequest parent. */
+                    public parent: string;
+
+                    /** CreateCustomConstraintRequest customConstraint. */
+                    public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /**
+                     * Creates a new CreateCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified CreateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                     * @param message CreateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.CreateCustomConstraintRequest.verify|verify} messages.
+                     * @param message CreateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.ICreateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Decodes a CreateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Verifies a CreateCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.CreateCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message CreateCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.CreateCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCustomConstraintRequest. */
+                interface IGetCustomConstraintRequest {
+
+                    /** GetCustomConstraintRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCustomConstraintRequest. */
+                class GetCustomConstraintRequest implements IGetCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new GetCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest);
+
+                    /** GetCustomConstraintRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified GetCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                     * @param message GetCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.GetCustomConstraintRequest.verify|verify} messages.
+                     * @param message GetCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IGetCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Decodes a GetCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Verifies a GetCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.GetCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a GetCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message GetCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.GetCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomConstraintsRequest. */
+                interface IListCustomConstraintsRequest {
+
+                    /** ListCustomConstraintsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCustomConstraintsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCustomConstraintsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCustomConstraintsRequest. */
+                class ListCustomConstraintsRequest implements IListCustomConstraintsRequest {
+
+                    /**
+                     * Constructs a new ListCustomConstraintsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest);
+
+                    /** ListCustomConstraintsRequest parent. */
+                    public parent: string;
+
+                    /** ListCustomConstraintsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCustomConstraintsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListCustomConstraintsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomConstraintsRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                     * @param message ListCustomConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsRequest.verify|verify} messages.
+                     * @param message ListCustomConstraintsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListCustomConstraintsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Decodes a ListCustomConstraintsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomConstraintsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Verifies a ListCustomConstraintsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomConstraintsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomConstraintsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListCustomConstraintsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCustomConstraintsRequest message. Also converts values to other types if specified.
+                     * @param message ListCustomConstraintsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListCustomConstraintsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomConstraintsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomConstraintsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomConstraintsResponse. */
+                interface IListCustomConstraintsResponse {
+
+                    /** ListCustomConstraintsResponse customConstraints */
+                    customConstraints?: (google.cloud.orgpolicy.v2.ICustomConstraint[]|null);
+
+                    /** ListCustomConstraintsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCustomConstraintsResponse. */
+                class ListCustomConstraintsResponse implements IListCustomConstraintsResponse {
+
+                    /**
+                     * Constructs a new ListCustomConstraintsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse);
+
+                    /** ListCustomConstraintsResponse customConstraints. */
+                    public customConstraints: google.cloud.orgpolicy.v2.ICustomConstraint[];
+
+                    /** ListCustomConstraintsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCustomConstraintsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomConstraintsResponse instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsResponse message. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                     * @param message ListCustomConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomConstraintsResponse message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.ListCustomConstraintsResponse.verify|verify} messages.
+                     * @param message ListCustomConstraintsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IListCustomConstraintsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Decodes a ListCustomConstraintsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomConstraintsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Verifies a ListCustomConstraintsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomConstraintsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomConstraintsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.ListCustomConstraintsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCustomConstraintsResponse message. Also converts values to other types if specified.
+                     * @param message ListCustomConstraintsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.ListCustomConstraintsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomConstraintsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomConstraintsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCustomConstraintRequest. */
+                interface IUpdateCustomConstraintRequest {
+
+                    /** UpdateCustomConstraintRequest customConstraint */
+                    customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+                }
+
+                /** Represents an UpdateCustomConstraintRequest. */
+                class UpdateCustomConstraintRequest implements IUpdateCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new UpdateCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest);
+
+                    /** UpdateCustomConstraintRequest customConstraint. */
+                    public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /**
+                     * Creates a new UpdateCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified UpdateCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                     * @param message UpdateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest.verify|verify} messages.
+                     * @param message UpdateCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IUpdateCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Decodes an UpdateCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Verifies an UpdateCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.UpdateCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCustomConstraintRequest. */
+                interface IDeleteCustomConstraintRequest {
+
+                    /** DeleteCustomConstraintRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCustomConstraintRequest. */
+                class DeleteCustomConstraintRequest implements IDeleteCustomConstraintRequest {
+
+                    /**
+                     * Constructs a new DeleteCustomConstraintRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest);
+
+                    /** DeleteCustomConstraintRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCustomConstraintRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCustomConstraintRequest instance
+                     */
+                    public static create(properties?: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Encodes the specified DeleteCustomConstraintRequest message. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                     * @param message DeleteCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCustomConstraintRequest message, length delimited. Does not implicitly {@link google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest.verify|verify} messages.
+                     * @param message DeleteCustomConstraintRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.orgpolicy.v2.IDeleteCustomConstraintRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Decodes a DeleteCustomConstraintRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCustomConstraintRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Verifies a DeleteCustomConstraintRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCustomConstraintRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCustomConstraintRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCustomConstraintRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCustomConstraintRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.orgpolicy.v2.DeleteCustomConstraintRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCustomConstraintRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCustomConstraintRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+        }
+
         /** Namespace policysimulator. */
         namespace policysimulator {
 
@@ -526,6 +3814,1673 @@ export namespace google {
                         MEMBERSHIP_UNKNOWN_INFO_DENIED = 3,
                         MEMBERSHIP_UNKNOWN_UNSUPPORTED = 4
                     }
+                }
+
+                /** Represents an OrgPolicyViolationsPreviewService */
+                class OrgPolicyViolationsPreviewService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new OrgPolicyViolationsPreviewService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new OrgPolicyViolationsPreviewService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrgPolicyViolationsPreviewService;
+
+                    /**
+                     * Calls ListOrgPolicyViolationsPreviews.
+                     * @param request ListOrgPolicyViolationsPreviewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOrgPolicyViolationsPreviewsResponse
+                     */
+                    public listOrgPolicyViolationsPreviews(request: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest, callback: google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsPreviewsCallback): void;
+
+                    /**
+                     * Calls ListOrgPolicyViolationsPreviews.
+                     * @param request ListOrgPolicyViolationsPreviewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOrgPolicyViolationsPreviews(request: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest): Promise<google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse>;
+
+                    /**
+                     * Calls GetOrgPolicyViolationsPreview.
+                     * @param request GetOrgPolicyViolationsPreviewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OrgPolicyViolationsPreview
+                     */
+                    public getOrgPolicyViolationsPreview(request: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest, callback: google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.GetOrgPolicyViolationsPreviewCallback): void;
+
+                    /**
+                     * Calls GetOrgPolicyViolationsPreview.
+                     * @param request GetOrgPolicyViolationsPreviewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOrgPolicyViolationsPreview(request: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest): Promise<google.cloud.policysimulator.v1.OrgPolicyViolationsPreview>;
+
+                    /**
+                     * Calls CreateOrgPolicyViolationsPreview.
+                     * @param request CreateOrgPolicyViolationsPreviewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createOrgPolicyViolationsPreview(request: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest, callback: google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.CreateOrgPolicyViolationsPreviewCallback): void;
+
+                    /**
+                     * Calls CreateOrgPolicyViolationsPreview.
+                     * @param request CreateOrgPolicyViolationsPreviewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createOrgPolicyViolationsPreview(request: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListOrgPolicyViolations.
+                     * @param request ListOrgPolicyViolationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOrgPolicyViolationsResponse
+                     */
+                    public listOrgPolicyViolations(request: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest, callback: google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsCallback): void;
+
+                    /**
+                     * Calls ListOrgPolicyViolations.
+                     * @param request ListOrgPolicyViolationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOrgPolicyViolations(request: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest): Promise<google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse>;
+                }
+
+                namespace OrgPolicyViolationsPreviewService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService|listOrgPolicyViolationsPreviews}.
+                     * @param error Error, if any
+                     * @param [response] ListOrgPolicyViolationsPreviewsResponse
+                     */
+                    type ListOrgPolicyViolationsPreviewsCallback = (error: (Error|null), response?: google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService|getOrgPolicyViolationsPreview}.
+                     * @param error Error, if any
+                     * @param [response] OrgPolicyViolationsPreview
+                     */
+                    type GetOrgPolicyViolationsPreviewCallback = (error: (Error|null), response?: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService|createOrgPolicyViolationsPreview}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateOrgPolicyViolationsPreviewCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService|listOrgPolicyViolations}.
+                     * @param error Error, if any
+                     * @param [response] ListOrgPolicyViolationsResponse
+                     */
+                    type ListOrgPolicyViolationsCallback = (error: (Error|null), response?: google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse) => void;
+                }
+
+                /** PreviewState enum. */
+                enum PreviewState {
+                    PREVIEW_STATE_UNSPECIFIED = 0,
+                    PREVIEW_PENDING = 1,
+                    PREVIEW_RUNNING = 2,
+                    PREVIEW_SUCCEEDED = 3,
+                    PREVIEW_FAILED = 4
+                }
+
+                /** Properties of an OrgPolicyViolationsPreview. */
+                interface IOrgPolicyViolationsPreview {
+
+                    /** OrgPolicyViolationsPreview name */
+                    name?: (string|null);
+
+                    /** OrgPolicyViolationsPreview state */
+                    state?: (google.cloud.policysimulator.v1.PreviewState|keyof typeof google.cloud.policysimulator.v1.PreviewState|null);
+
+                    /** OrgPolicyViolationsPreview overlay */
+                    overlay?: (google.cloud.policysimulator.v1.IOrgPolicyOverlay|null);
+
+                    /** OrgPolicyViolationsPreview violationsCount */
+                    violationsCount?: (number|null);
+
+                    /** OrgPolicyViolationsPreview resourceCounts */
+                    resourceCounts?: (google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts|null);
+
+                    /** OrgPolicyViolationsPreview customConstraints */
+                    customConstraints?: (string[]|null);
+
+                    /** OrgPolicyViolationsPreview createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an OrgPolicyViolationsPreview. */
+                class OrgPolicyViolationsPreview implements IOrgPolicyViolationsPreview {
+
+                    /**
+                     * Constructs a new OrgPolicyViolationsPreview.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview);
+
+                    /** OrgPolicyViolationsPreview name. */
+                    public name: string;
+
+                    /** OrgPolicyViolationsPreview state. */
+                    public state: (google.cloud.policysimulator.v1.PreviewState|keyof typeof google.cloud.policysimulator.v1.PreviewState);
+
+                    /** OrgPolicyViolationsPreview overlay. */
+                    public overlay?: (google.cloud.policysimulator.v1.IOrgPolicyOverlay|null);
+
+                    /** OrgPolicyViolationsPreview violationsCount. */
+                    public violationsCount: number;
+
+                    /** OrgPolicyViolationsPreview resourceCounts. */
+                    public resourceCounts?: (google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts|null);
+
+                    /** OrgPolicyViolationsPreview customConstraints. */
+                    public customConstraints: string[];
+
+                    /** OrgPolicyViolationsPreview createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new OrgPolicyViolationsPreview instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrgPolicyViolationsPreview instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview;
+
+                    /**
+                     * Encodes the specified OrgPolicyViolationsPreview message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.verify|verify} messages.
+                     * @param message OrgPolicyViolationsPreview message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrgPolicyViolationsPreview message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.verify|verify} messages.
+                     * @param message OrgPolicyViolationsPreview message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrgPolicyViolationsPreview message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrgPolicyViolationsPreview
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview;
+
+                    /**
+                     * Decodes an OrgPolicyViolationsPreview message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrgPolicyViolationsPreview
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview;
+
+                    /**
+                     * Verifies an OrgPolicyViolationsPreview message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrgPolicyViolationsPreview message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrgPolicyViolationsPreview
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview;
+
+                    /**
+                     * Creates a plain object from an OrgPolicyViolationsPreview message. Also converts values to other types if specified.
+                     * @param message OrgPolicyViolationsPreview
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrgPolicyViolationsPreview to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OrgPolicyViolationsPreview
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OrgPolicyViolationsPreview {
+
+                    /** Properties of a ResourceCounts. */
+                    interface IResourceCounts {
+
+                        /** ResourceCounts scanned */
+                        scanned?: (number|null);
+
+                        /** ResourceCounts noncompliant */
+                        noncompliant?: (number|null);
+
+                        /** ResourceCounts compliant */
+                        compliant?: (number|null);
+
+                        /** ResourceCounts unenforced */
+                        unenforced?: (number|null);
+
+                        /** ResourceCounts errors */
+                        errors?: (number|null);
+                    }
+
+                    /** Represents a ResourceCounts. */
+                    class ResourceCounts implements IResourceCounts {
+
+                        /**
+                         * Constructs a new ResourceCounts.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts);
+
+                        /** ResourceCounts scanned. */
+                        public scanned: number;
+
+                        /** ResourceCounts noncompliant. */
+                        public noncompliant: number;
+
+                        /** ResourceCounts compliant. */
+                        public compliant: number;
+
+                        /** ResourceCounts unenforced. */
+                        public unenforced: number;
+
+                        /** ResourceCounts errors. */
+                        public errors: number;
+
+                        /**
+                         * Creates a new ResourceCounts instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResourceCounts instance
+                         */
+                        public static create(properties?: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts;
+
+                        /**
+                         * Encodes the specified ResourceCounts message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts.verify|verify} messages.
+                         * @param message ResourceCounts message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResourceCounts message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts.verify|verify} messages.
+                         * @param message ResourceCounts message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.IResourceCounts, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResourceCounts message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResourceCounts
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts;
+
+                        /**
+                         * Decodes a ResourceCounts message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResourceCounts
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts;
+
+                        /**
+                         * Verifies a ResourceCounts message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResourceCounts message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResourceCounts
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts;
+
+                        /**
+                         * Creates a plain object from a ResourceCounts message. Also converts values to other types if specified.
+                         * @param message ResourceCounts
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResourceCounts to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResourceCounts
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an OrgPolicyViolation. */
+                interface IOrgPolicyViolation {
+
+                    /** OrgPolicyViolation name */
+                    name?: (string|null);
+
+                    /** OrgPolicyViolation resource */
+                    resource?: (google.cloud.policysimulator.v1.IResourceContext|null);
+
+                    /** OrgPolicyViolation customConstraint */
+                    customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /** OrgPolicyViolation error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an OrgPolicyViolation. */
+                class OrgPolicyViolation implements IOrgPolicyViolation {
+
+                    /**
+                     * Constructs a new OrgPolicyViolation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IOrgPolicyViolation);
+
+                    /** OrgPolicyViolation name. */
+                    public name: string;
+
+                    /** OrgPolicyViolation resource. */
+                    public resource?: (google.cloud.policysimulator.v1.IResourceContext|null);
+
+                    /** OrgPolicyViolation customConstraint. */
+                    public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                    /** OrgPolicyViolation error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new OrgPolicyViolation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrgPolicyViolation instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IOrgPolicyViolation): google.cloud.policysimulator.v1.OrgPolicyViolation;
+
+                    /**
+                     * Encodes the specified OrgPolicyViolation message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolation.verify|verify} messages.
+                     * @param message OrgPolicyViolation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IOrgPolicyViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrgPolicyViolation message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyViolation.verify|verify} messages.
+                     * @param message OrgPolicyViolation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IOrgPolicyViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrgPolicyViolation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrgPolicyViolation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyViolation;
+
+                    /**
+                     * Decodes an OrgPolicyViolation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrgPolicyViolation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyViolation;
+
+                    /**
+                     * Verifies an OrgPolicyViolation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrgPolicyViolation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrgPolicyViolation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyViolation;
+
+                    /**
+                     * Creates a plain object from an OrgPolicyViolation message. Also converts values to other types if specified.
+                     * @param message OrgPolicyViolation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyViolation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrgPolicyViolation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OrgPolicyViolation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResourceContext. */
+                interface IResourceContext {
+
+                    /** ResourceContext resource */
+                    resource?: (string|null);
+
+                    /** ResourceContext assetType */
+                    assetType?: (string|null);
+
+                    /** ResourceContext ancestors */
+                    ancestors?: (string[]|null);
+                }
+
+                /** Represents a ResourceContext. */
+                class ResourceContext implements IResourceContext {
+
+                    /**
+                     * Constructs a new ResourceContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IResourceContext);
+
+                    /** ResourceContext resource. */
+                    public resource: string;
+
+                    /** ResourceContext assetType. */
+                    public assetType: string;
+
+                    /** ResourceContext ancestors. */
+                    public ancestors: string[];
+
+                    /**
+                     * Creates a new ResourceContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceContext instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IResourceContext): google.cloud.policysimulator.v1.ResourceContext;
+
+                    /**
+                     * Encodes the specified ResourceContext message. Does not implicitly {@link google.cloud.policysimulator.v1.ResourceContext.verify|verify} messages.
+                     * @param message ResourceContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IResourceContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceContext message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.ResourceContext.verify|verify} messages.
+                     * @param message ResourceContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IResourceContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.ResourceContext;
+
+                    /**
+                     * Decodes a ResourceContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.ResourceContext;
+
+                    /**
+                     * Verifies a ResourceContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.ResourceContext;
+
+                    /**
+                     * Creates a plain object from a ResourceContext message. Also converts values to other types if specified.
+                     * @param message ResourceContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.ResourceContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OrgPolicyOverlay. */
+                interface IOrgPolicyOverlay {
+
+                    /** OrgPolicyOverlay policies */
+                    policies?: (google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay[]|null);
+
+                    /** OrgPolicyOverlay customConstraints */
+                    customConstraints?: (google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay[]|null);
+                }
+
+                /** Represents an OrgPolicyOverlay. */
+                class OrgPolicyOverlay implements IOrgPolicyOverlay {
+
+                    /**
+                     * Constructs a new OrgPolicyOverlay.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IOrgPolicyOverlay);
+
+                    /** OrgPolicyOverlay policies. */
+                    public policies: google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay[];
+
+                    /** OrgPolicyOverlay customConstraints. */
+                    public customConstraints: google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay[];
+
+                    /**
+                     * Creates a new OrgPolicyOverlay instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrgPolicyOverlay instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IOrgPolicyOverlay): google.cloud.policysimulator.v1.OrgPolicyOverlay;
+
+                    /**
+                     * Encodes the specified OrgPolicyOverlay message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.verify|verify} messages.
+                     * @param message OrgPolicyOverlay message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IOrgPolicyOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrgPolicyOverlay message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.verify|verify} messages.
+                     * @param message OrgPolicyOverlay message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IOrgPolicyOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrgPolicyOverlay message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrgPolicyOverlay
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyOverlay;
+
+                    /**
+                     * Decodes an OrgPolicyOverlay message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrgPolicyOverlay
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyOverlay;
+
+                    /**
+                     * Verifies an OrgPolicyOverlay message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrgPolicyOverlay message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrgPolicyOverlay
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyOverlay;
+
+                    /**
+                     * Creates a plain object from an OrgPolicyOverlay message. Also converts values to other types if specified.
+                     * @param message OrgPolicyOverlay
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyOverlay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrgPolicyOverlay to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OrgPolicyOverlay
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OrgPolicyOverlay {
+
+                    /** Properties of a PolicyOverlay. */
+                    interface IPolicyOverlay {
+
+                        /** PolicyOverlay policyParent */
+                        policyParent?: (string|null);
+
+                        /** PolicyOverlay policy */
+                        policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+                    }
+
+                    /** Represents a PolicyOverlay. */
+                    class PolicyOverlay implements IPolicyOverlay {
+
+                        /**
+                         * Constructs a new PolicyOverlay.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay);
+
+                        /** PolicyOverlay policyParent. */
+                        public policyParent: string;
+
+                        /** PolicyOverlay policy. */
+                        public policy?: (google.cloud.orgpolicy.v2.IPolicy|null);
+
+                        /**
+                         * Creates a new PolicyOverlay instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PolicyOverlay instance
+                         */
+                        public static create(properties?: google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay): google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay;
+
+                        /**
+                         * Encodes the specified PolicyOverlay message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay.verify|verify} messages.
+                         * @param message PolicyOverlay message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PolicyOverlay message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay.verify|verify} messages.
+                         * @param message PolicyOverlay message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.IPolicyOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PolicyOverlay message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PolicyOverlay
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay;
+
+                        /**
+                         * Decodes a PolicyOverlay message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PolicyOverlay
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay;
+
+                        /**
+                         * Verifies a PolicyOverlay message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PolicyOverlay message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PolicyOverlay
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay;
+
+                        /**
+                         * Creates a plain object from a PolicyOverlay message. Also converts values to other types if specified.
+                         * @param message PolicyOverlay
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PolicyOverlay to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PolicyOverlay
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CustomConstraintOverlay. */
+                    interface ICustomConstraintOverlay {
+
+                        /** CustomConstraintOverlay customConstraintParent */
+                        customConstraintParent?: (string|null);
+
+                        /** CustomConstraintOverlay customConstraint */
+                        customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+                    }
+
+                    /** Represents a CustomConstraintOverlay. */
+                    class CustomConstraintOverlay implements ICustomConstraintOverlay {
+
+                        /**
+                         * Constructs a new CustomConstraintOverlay.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay);
+
+                        /** CustomConstraintOverlay customConstraintParent. */
+                        public customConstraintParent: string;
+
+                        /** CustomConstraintOverlay customConstraint. */
+                        public customConstraint?: (google.cloud.orgpolicy.v2.ICustomConstraint|null);
+
+                        /**
+                         * Creates a new CustomConstraintOverlay instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CustomConstraintOverlay instance
+                         */
+                        public static create(properties?: google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay): google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay;
+
+                        /**
+                         * Encodes the specified CustomConstraintOverlay message. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay.verify|verify} messages.
+                         * @param message CustomConstraintOverlay message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CustomConstraintOverlay message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay.verify|verify} messages.
+                         * @param message CustomConstraintOverlay message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.ICustomConstraintOverlay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CustomConstraintOverlay message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CustomConstraintOverlay
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay;
+
+                        /**
+                         * Decodes a CustomConstraintOverlay message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CustomConstraintOverlay
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay;
+
+                        /**
+                         * Verifies a CustomConstraintOverlay message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CustomConstraintOverlay message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CustomConstraintOverlay
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay;
+
+                        /**
+                         * Creates a plain object from a CustomConstraintOverlay message. Also converts values to other types if specified.
+                         * @param message CustomConstraintOverlay
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CustomConstraintOverlay to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CustomConstraintOverlay
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a CreateOrgPolicyViolationsPreviewOperationMetadata. */
+                interface ICreateOrgPolicyViolationsPreviewOperationMetadata {
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata requestTime */
+                    requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata state */
+                    state?: (google.cloud.policysimulator.v1.PreviewState|keyof typeof google.cloud.policysimulator.v1.PreviewState|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesFound */
+                    resourcesFound?: (number|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesScanned */
+                    resourcesScanned?: (number|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesPending */
+                    resourcesPending?: (number|null);
+                }
+
+                /** Represents a CreateOrgPolicyViolationsPreviewOperationMetadata. */
+                class CreateOrgPolicyViolationsPreviewOperationMetadata implements ICreateOrgPolicyViolationsPreviewOperationMetadata {
+
+                    /**
+                     * Constructs a new CreateOrgPolicyViolationsPreviewOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewOperationMetadata);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata requestTime. */
+                    public requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata state. */
+                    public state: (google.cloud.policysimulator.v1.PreviewState|keyof typeof google.cloud.policysimulator.v1.PreviewState);
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesFound. */
+                    public resourcesFound: number;
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesScanned. */
+                    public resourcesScanned: number;
+
+                    /** CreateOrgPolicyViolationsPreviewOperationMetadata resourcesPending. */
+                    public resourcesPending: number;
+
+                    /**
+                     * Creates a new CreateOrgPolicyViolationsPreviewOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOrgPolicyViolationsPreviewOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewOperationMetadata): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata;
+
+                    /**
+                     * Encodes the specified CreateOrgPolicyViolationsPreviewOperationMetadata message. Does not implicitly {@link google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata.verify|verify} messages.
+                     * @param message CreateOrgPolicyViolationsPreviewOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOrgPolicyViolationsPreviewOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata.verify|verify} messages.
+                     * @param message CreateOrgPolicyViolationsPreviewOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOrgPolicyViolationsPreviewOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOrgPolicyViolationsPreviewOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata;
+
+                    /**
+                     * Decodes a CreateOrgPolicyViolationsPreviewOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOrgPolicyViolationsPreviewOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata;
+
+                    /**
+                     * Verifies a CreateOrgPolicyViolationsPreviewOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOrgPolicyViolationsPreviewOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOrgPolicyViolationsPreviewOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateOrgPolicyViolationsPreviewOperationMetadata message. Also converts values to other types if specified.
+                     * @param message CreateOrgPolicyViolationsPreviewOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOrgPolicyViolationsPreviewOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOrgPolicyViolationsPreviewOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrgPolicyViolationsPreviewsRequest. */
+                interface IListOrgPolicyViolationsPreviewsRequest {
+
+                    /** ListOrgPolicyViolationsPreviewsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOrgPolicyViolationsPreviewsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOrgPolicyViolationsPreviewsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOrgPolicyViolationsPreviewsRequest. */
+                class ListOrgPolicyViolationsPreviewsRequest implements IListOrgPolicyViolationsPreviewsRequest {
+
+                    /**
+                     * Constructs a new ListOrgPolicyViolationsPreviewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest);
+
+                    /** ListOrgPolicyViolationsPreviewsRequest parent. */
+                    public parent: string;
+
+                    /** ListOrgPolicyViolationsPreviewsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOrgPolicyViolationsPreviewsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOrgPolicyViolationsPreviewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrgPolicyViolationsPreviewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsPreviewsRequest message. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsPreviewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsPreviewsRequest message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsPreviewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsPreviewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrgPolicyViolationsPreviewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsPreviewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrgPolicyViolationsPreviewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest;
+
+                    /**
+                     * Verifies a ListOrgPolicyViolationsPreviewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrgPolicyViolationsPreviewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrgPolicyViolationsPreviewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOrgPolicyViolationsPreviewsRequest message. Also converts values to other types if specified.
+                     * @param message ListOrgPolicyViolationsPreviewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrgPolicyViolationsPreviewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrgPolicyViolationsPreviewsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrgPolicyViolationsPreviewsResponse. */
+                interface IListOrgPolicyViolationsPreviewsResponse {
+
+                    /** ListOrgPolicyViolationsPreviewsResponse orgPolicyViolationsPreviews */
+                    orgPolicyViolationsPreviews?: (google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview[]|null);
+
+                    /** ListOrgPolicyViolationsPreviewsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOrgPolicyViolationsPreviewsResponse. */
+                class ListOrgPolicyViolationsPreviewsResponse implements IListOrgPolicyViolationsPreviewsResponse {
+
+                    /**
+                     * Constructs a new ListOrgPolicyViolationsPreviewsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsResponse);
+
+                    /** ListOrgPolicyViolationsPreviewsResponse orgPolicyViolationsPreviews. */
+                    public orgPolicyViolationsPreviews: google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview[];
+
+                    /** ListOrgPolicyViolationsPreviewsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOrgPolicyViolationsPreviewsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrgPolicyViolationsPreviewsResponse instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsResponse): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsPreviewsResponse message. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsPreviewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsPreviewsResponse message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsPreviewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsPreviewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsPreviewsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrgPolicyViolationsPreviewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsPreviewsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrgPolicyViolationsPreviewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse;
+
+                    /**
+                     * Verifies a ListOrgPolicyViolationsPreviewsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrgPolicyViolationsPreviewsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrgPolicyViolationsPreviewsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOrgPolicyViolationsPreviewsResponse message. Also converts values to other types if specified.
+                     * @param message ListOrgPolicyViolationsPreviewsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrgPolicyViolationsPreviewsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrgPolicyViolationsPreviewsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetOrgPolicyViolationsPreviewRequest. */
+                interface IGetOrgPolicyViolationsPreviewRequest {
+
+                    /** GetOrgPolicyViolationsPreviewRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOrgPolicyViolationsPreviewRequest. */
+                class GetOrgPolicyViolationsPreviewRequest implements IGetOrgPolicyViolationsPreviewRequest {
+
+                    /**
+                     * Constructs a new GetOrgPolicyViolationsPreviewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest);
+
+                    /** GetOrgPolicyViolationsPreviewRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOrgPolicyViolationsPreviewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOrgPolicyViolationsPreviewRequest instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest): google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Encodes the specified GetOrgPolicyViolationsPreviewRequest message. Does not implicitly {@link google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest.verify|verify} messages.
+                     * @param message GetOrgPolicyViolationsPreviewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOrgPolicyViolationsPreviewRequest message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest.verify|verify} messages.
+                     * @param message GetOrgPolicyViolationsPreviewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IGetOrgPolicyViolationsPreviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOrgPolicyViolationsPreviewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOrgPolicyViolationsPreviewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Decodes a GetOrgPolicyViolationsPreviewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOrgPolicyViolationsPreviewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Verifies a GetOrgPolicyViolationsPreviewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOrgPolicyViolationsPreviewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOrgPolicyViolationsPreviewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Creates a plain object from a GetOrgPolicyViolationsPreviewRequest message. Also converts values to other types if specified.
+                     * @param message GetOrgPolicyViolationsPreviewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.GetOrgPolicyViolationsPreviewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOrgPolicyViolationsPreviewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetOrgPolicyViolationsPreviewRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateOrgPolicyViolationsPreviewRequest. */
+                interface ICreateOrgPolicyViolationsPreviewRequest {
+
+                    /** CreateOrgPolicyViolationsPreviewRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateOrgPolicyViolationsPreviewRequest orgPolicyViolationsPreview */
+                    orgPolicyViolationsPreview?: (google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview|null);
+
+                    /** CreateOrgPolicyViolationsPreviewRequest orgPolicyViolationsPreviewId */
+                    orgPolicyViolationsPreviewId?: (string|null);
+                }
+
+                /** Represents a CreateOrgPolicyViolationsPreviewRequest. */
+                class CreateOrgPolicyViolationsPreviewRequest implements ICreateOrgPolicyViolationsPreviewRequest {
+
+                    /**
+                     * Constructs a new CreateOrgPolicyViolationsPreviewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest);
+
+                    /** CreateOrgPolicyViolationsPreviewRequest parent. */
+                    public parent: string;
+
+                    /** CreateOrgPolicyViolationsPreviewRequest orgPolicyViolationsPreview. */
+                    public orgPolicyViolationsPreview?: (google.cloud.policysimulator.v1.IOrgPolicyViolationsPreview|null);
+
+                    /** CreateOrgPolicyViolationsPreviewRequest orgPolicyViolationsPreviewId. */
+                    public orgPolicyViolationsPreviewId: string;
+
+                    /**
+                     * Creates a new CreateOrgPolicyViolationsPreviewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOrgPolicyViolationsPreviewRequest instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Encodes the specified CreateOrgPolicyViolationsPreviewRequest message. Does not implicitly {@link google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest.verify|verify} messages.
+                     * @param message CreateOrgPolicyViolationsPreviewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOrgPolicyViolationsPreviewRequest message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest.verify|verify} messages.
+                     * @param message CreateOrgPolicyViolationsPreviewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.ICreateOrgPolicyViolationsPreviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOrgPolicyViolationsPreviewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOrgPolicyViolationsPreviewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Decodes a CreateOrgPolicyViolationsPreviewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOrgPolicyViolationsPreviewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Verifies a CreateOrgPolicyViolationsPreviewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOrgPolicyViolationsPreviewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOrgPolicyViolationsPreviewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest;
+
+                    /**
+                     * Creates a plain object from a CreateOrgPolicyViolationsPreviewRequest message. Also converts values to other types if specified.
+                     * @param message CreateOrgPolicyViolationsPreviewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.CreateOrgPolicyViolationsPreviewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOrgPolicyViolationsPreviewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOrgPolicyViolationsPreviewRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrgPolicyViolationsRequest. */
+                interface IListOrgPolicyViolationsRequest {
+
+                    /** ListOrgPolicyViolationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOrgPolicyViolationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOrgPolicyViolationsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListOrgPolicyViolationsRequest. */
+                class ListOrgPolicyViolationsRequest implements IListOrgPolicyViolationsRequest {
+
+                    /**
+                     * Constructs a new ListOrgPolicyViolationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest);
+
+                    /** ListOrgPolicyViolationsRequest parent. */
+                    public parent: string;
+
+                    /** ListOrgPolicyViolationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOrgPolicyViolationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListOrgPolicyViolationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrgPolicyViolationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest): google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsRequest message. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsRequest message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrgPolicyViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrgPolicyViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest;
+
+                    /**
+                     * Verifies a ListOrgPolicyViolationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrgPolicyViolationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrgPolicyViolationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOrgPolicyViolationsRequest message. Also converts values to other types if specified.
+                     * @param message ListOrgPolicyViolationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.ListOrgPolicyViolationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrgPolicyViolationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrgPolicyViolationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOrgPolicyViolationsResponse. */
+                interface IListOrgPolicyViolationsResponse {
+
+                    /** ListOrgPolicyViolationsResponse orgPolicyViolations */
+                    orgPolicyViolations?: (google.cloud.policysimulator.v1.IOrgPolicyViolation[]|null);
+
+                    /** ListOrgPolicyViolationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListOrgPolicyViolationsResponse. */
+                class ListOrgPolicyViolationsResponse implements IListOrgPolicyViolationsResponse {
+
+                    /**
+                     * Constructs a new ListOrgPolicyViolationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsResponse);
+
+                    /** ListOrgPolicyViolationsResponse orgPolicyViolations. */
+                    public orgPolicyViolations: google.cloud.policysimulator.v1.IOrgPolicyViolation[];
+
+                    /** ListOrgPolicyViolationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListOrgPolicyViolationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOrgPolicyViolationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.policysimulator.v1.IListOrgPolicyViolationsResponse): google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsResponse message. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOrgPolicyViolationsResponse message, length delimited. Does not implicitly {@link google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse.verify|verify} messages.
+                     * @param message ListOrgPolicyViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.policysimulator.v1.IListOrgPolicyViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOrgPolicyViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse;
+
+                    /**
+                     * Decodes a ListOrgPolicyViolationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOrgPolicyViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse;
+
+                    /**
+                     * Verifies a ListOrgPolicyViolationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOrgPolicyViolationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOrgPolicyViolationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOrgPolicyViolationsResponse message. Also converts values to other types if specified.
+                     * @param message ListOrgPolicyViolationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOrgPolicyViolationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOrgPolicyViolationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a Simulator */
@@ -1968,6 +6923,258 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -2336,6 +7543,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -2352,6 +7562,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -3053,6 +8266,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -3066,6 +8282,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -3143,6 +8362,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -3471,6 +8802,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -3484,6 +8818,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -3809,6 +9146,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -3819,258 +9259,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -4177,6 +9365,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -4206,6 +9395,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -4255,6 +9447,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -4390,6 +9585,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -4430,6 +9628,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -5278,6 +10479,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -5303,6 +10507,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -6238,6 +11445,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6292,6 +11502,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6508,6 +11721,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -6751,6 +12079,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6772,6 +12103,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7365,6 +12699,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -7393,6 +12733,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -7516,6 +12862,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7635,8 +13091,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7651,8 +13110,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -8185,297 +13647,336 @@ export namespace google {
             }
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
-        /** Represents a Duration. */
-        class Duration implements IDuration {
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
 
             /**
-             * Constructs a new Duration.
+             * Constructs a new Struct.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IDuration);
+            constructor(properties?: google.protobuf.IStruct);
 
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
 
             /**
-             * Creates a new Duration instance using the specified properties.
+             * Creates a new Struct instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Duration instance
+             * @returns Struct instance
              */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
 
             /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer.
+             * Decodes a Struct message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Duration
+             * @returns Struct
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Duration
+             * @returns Struct
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
 
             /**
-             * Verifies a Duration message.
+             * Verifies a Struct message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Duration
+             * @returns Struct
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
 
             /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Duration to JSON.
+             * Converts this Struct to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Duration
+             * Gets the default type url for Struct
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Any. */
-        interface IAny {
+        /** Properties of a Value. */
+        interface IValue {
 
-            /** Any type_url */
-            type_url?: (string|null);
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
-            /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
         }
 
-        /** Represents an Any. */
-        class Any implements IAny {
+        /** Represents a Value. */
+        class Value implements IValue {
 
             /**
-             * Constructs a new Any.
+             * Constructs a new Value.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IAny);
+            constructor(properties?: google.protobuf.IValue);
 
-            /** Any type_url. */
-            public type_url: string;
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
-            /** Any value. */
-            public value: (Uint8Array|Buffer|string);
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
 
             /**
-             * Creates a new Any instance using the specified properties.
+             * Creates a new Value instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Any instance
+             * @returns Value instance
              */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
 
             /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Any message from the specified reader or buffer.
+             * Decodes a Value message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Any
+             * @returns Value
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
 
             /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * Decodes a Value message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Any
+             * @returns Value
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
 
             /**
-             * Verifies an Any message.
+             * Verifies a Value message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Any
+             * @returns Value
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
 
             /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Any to JSON.
+             * Converts this Value to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Any
+             * Gets the default type url for Value
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
         }
 
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
 
             /**
-             * Constructs a new Empty.
+             * Constructs a new ListValue.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IEmpty);
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
 
             /**
-             * Creates a new Empty instance using the specified properties.
+             * Creates a new ListValue instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Empty instance
+             * @returns ListValue instance
              */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
 
             /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes an Empty message from the specified reader or buffer.
+             * Decodes a ListValue message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Empty
+             * @returns ListValue
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
 
             /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Empty
+             * @returns ListValue
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
 
             /**
-             * Verifies an Empty message.
+             * Verifies a ListValue message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Empty
+             * @returns ListValue
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
 
             /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Empty to JSON.
+             * Converts this ListValue to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Empty
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -8579,6 +14080,400 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|Buffer|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|Buffer|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

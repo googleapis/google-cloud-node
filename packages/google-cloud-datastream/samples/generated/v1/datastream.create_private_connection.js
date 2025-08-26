@@ -58,6 +58,12 @@ function main(parent, privateConnectionId, privateConnection) {
    *  Optional. If set to true, will skip validations.
    */
   // const force = true
+  /**
+   *  Optional. When supplied with PSC Interface config, will get/create the
+   *  tenant project required for the customer to allow list and won't actually
+   *  create the private connection.
+   */
+  // const validateOnly = true
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

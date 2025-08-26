@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent) {
-  // [START secretmanager_v1_generated_SecretManagerService_ListSecrets_async]
+  // [START secretmanager_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -72,7 +72,7 @@ function main(parent) {
   }
 
   callListSecrets();
-  // [END secretmanager_v1_generated_SecretManagerService_ListSecrets_async]
+  // [END secretmanager_quickstart]
 }
 
 process.on('unhandledRejection', err => {

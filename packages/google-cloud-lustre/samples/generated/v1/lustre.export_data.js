@@ -29,15 +29,20 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Lustre path source.
+   *  The root directory path to the Managed Lustre file system. Must start
+   *  with `/`. Default is `/`.
    */
   // const lustrePath = {}
   /**
-   *  Cloud Storage destination.
+   *  The URI to a Cloud Storage bucket, or a path within a bucket, using
+   *  the format `gs://<bucket_name>/<optional_path_inside_bucket>/`. If a
+   *  path inside the bucket is specified, it must end with a forward slash
+   *  (`/`).
    */
   // const gcsPath = {}
   /**
-   *  Required. Name of the resource.
+   *  Required. The name of the Managed Lustre instance in the format
+   *  `projects/{project}/locations/{location}/instances/{instance}`.
    */
   // const name = 'abc123'
   /**

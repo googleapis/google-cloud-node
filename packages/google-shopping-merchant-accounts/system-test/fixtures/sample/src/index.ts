@@ -16,16 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccountIssueServiceClient, AccountsServiceClient, AccountTaxServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
+import {AccountIssueServiceClient, AccountsServiceClient, AutofeedSettingsServiceClient, AutomaticImprovementsServiceClient, BusinessIdentityServiceClient, BusinessInfoServiceClient, CheckoutSettingsServiceClient, EmailPreferencesServiceClient, GbpAccountsServiceClient, HomepageServiceClient, LfpProvidersServiceClient, OmnichannelSettingsServiceClient, OnlineReturnPolicyServiceClient, ProgramsServiceClient, RegionsServiceClient, ShippingSettingsServiceClient, TermsOfServiceAgreementStateServiceClient, TermsOfServiceServiceClient, UserServiceClient} from '@google-shopping/accounts';
 
 // check that the client class type name can be used
 function doStuffWithAccountIssueServiceClient(client: AccountIssueServiceClient) {
   client.close();
 }
 function doStuffWithAccountsServiceClient(client: AccountsServiceClient) {
-  client.close();
-}
-function doStuffWithAccountTaxServiceClient(client: AccountTaxServiceClient) {
   client.close();
 }
 function doStuffWithAutofeedSettingsServiceClient(client: AutofeedSettingsServiceClient) {
@@ -87,9 +84,6 @@ function main() {
   // check that the client instance can be created
   const accountsServiceClient = new AccountsServiceClient();
   doStuffWithAccountsServiceClient(accountsServiceClient);
-  // check that the client instance can be created
-  const accountTaxServiceClient = new AccountTaxServiceClient();
-  doStuffWithAccountTaxServiceClient(accountTaxServiceClient);
   // check that the client instance can be created
   const autofeedSettingsServiceClient = new AutofeedSettingsServiceClient();
   doStuffWithAutofeedSettingsServiceClient(autofeedSettingsServiceClient);

@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.8.0...lfp-v0.9.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.7.0...lfp-v0.8.0) (2025-08-12)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250729 ([#1085](https://github.com/googleapis/google-cloud-node/issues/1085)) ([#6579](https://github.com/googleapis/google-cloud-node/issues/6579)) ([0cbf8ac](https://github.com/googleapis/google-cloud-node/commit/0cbf8ac3e6697d92428f21010beb1c776e5e86fd))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.6.0...lfp-v0.7.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add lfp API for v1 ([#6558](https://github.com/googleapis/google-cloud-node/issues/6558)) ([dfa3722](https://github.com/googleapis/google-cloud-node/commit/dfa37220357f8294ec5e65073ccce4f6a25f62aa))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.5.0...lfp-v0.6.0) (2025-07-09)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.4.0...backupdr-v0.5.0) (2025-07-28)
+
+
+### Features
+
+* [backupdr] Add support for Cloud SQL backup and restore ([#6521](https://github.com/googleapis/google-cloud-node/issues/6521)) ([b592fd0](https://github.com/googleapis/google-cloud-node/commit/b592fd0ee3bc242732830a68d0041dc4680f0848))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.3.1...backupdr-v0.4.0) (2025-07-09)
 
 

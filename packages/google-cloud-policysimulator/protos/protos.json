@@ -4,18 +4,945 @@
       "nested": {
         "cloud": {
           "nested": {
+            "orgpolicy": {
+              "nested": {
+                "v2": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OrgPolicy.V2",
+                    "go_package": "cloud.google.com/go/orgpolicy/apiv2/orgpolicypb;orgpolicypb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "OrgPolicyProto",
+                    "java_package": "com.google.cloud.orgpolicy.v2",
+                    "php_namespace": "Google\\Cloud\\OrgPolicy\\V2",
+                    "ruby_package": "Google::Cloud::OrgPolicy::V2"
+                  },
+                  "nested": {
+                    "Constraint": {
+                      "options": {
+                        "(google.api.resource).type": "orgpolicy.googleapis.com/Constraint",
+                        "(google.api.resource).pattern": "organizations/{organization}/constraints/{constraint}"
+                      },
+                      "oneofs": {
+                        "constraintType": {
+                          "oneof": [
+                            "listConstraint",
+                            "booleanConstraint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "constraintDefault": {
+                          "type": "ConstraintDefault",
+                          "id": 4
+                        },
+                        "listConstraint": {
+                          "type": "ListConstraint",
+                          "id": 5
+                        },
+                        "booleanConstraint": {
+                          "type": "BooleanConstraint",
+                          "id": 6
+                        },
+                        "supportsDryRun": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "equivalentConstraint": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportsSimulation": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "ConstraintDefault": {
+                          "values": {
+                            "CONSTRAINT_DEFAULT_UNSPECIFIED": 0,
+                            "ALLOW": 1,
+                            "DENY": 2
+                          }
+                        },
+                        "ListConstraint": {
+                          "fields": {
+                            "supportsIn": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "supportsUnder": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "CustomConstraintDefinition": {
+                          "fields": {
+                            "resourceTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "methodTypes": {
+                              "rule": "repeated",
+                              "type": "MethodType",
+                              "id": 2
+                            },
+                            "condition": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "actionType": {
+                              "type": "ActionType",
+                              "id": 4
+                            },
+                            "parameters": {
+                              "keyType": "string",
+                              "type": "Parameter",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "MethodType": {
+                              "values": {
+                                "METHOD_TYPE_UNSPECIFIED": 0,
+                                "CREATE": 1,
+                                "UPDATE": 2,
+                                "DELETE": 3,
+                                "REMOVE_GRANT": 4,
+                                "GOVERN_TAGS": 5
+                              }
+                            },
+                            "ActionType": {
+                              "values": {
+                                "ACTION_TYPE_UNSPECIFIED": 0,
+                                "ALLOW": 1,
+                                "DENY": 2
+                              }
+                            },
+                            "Parameter": {
+                              "fields": {
+                                "type": {
+                                  "type": "Type",
+                                  "id": 1
+                                },
+                                "defaultValue": {
+                                  "type": "google.protobuf.Value",
+                                  "id": 2
+                                },
+                                "validValuesExpr": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "metadata": {
+                                  "type": "Metadata",
+                                  "id": 4
+                                },
+                                "item": {
+                                  "type": "Type",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "Type": {
+                                  "values": {
+                                    "TYPE_UNSPECIFIED": 0,
+                                    "LIST": 1,
+                                    "STRING": 2,
+                                    "BOOLEAN": 3
+                                  }
+                                },
+                                "Metadata": {
+                                  "fields": {
+                                    "description": {
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "BooleanConstraint": {
+                          "fields": {
+                            "customConstraintDefinition": {
+                              "type": "CustomConstraintDefinition",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CustomConstraint": {
+                      "options": {
+                        "(google.api.resource).type": "orgpolicy.googleapis.com/CustomConstraint",
+                        "(google.api.resource).pattern": "organizations/{organization}/customConstraints/{custom_constraint}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "resourceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "methodTypes": {
+                          "rule": "repeated",
+                          "type": "MethodType",
+                          "id": 3
+                        },
+                        "condition": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "actionType": {
+                          "type": "ActionType",
+                          "id": 5
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MethodType": {
+                          "values": {
+                            "METHOD_TYPE_UNSPECIFIED": 0,
+                            "CREATE": 1,
+                            "UPDATE": 2,
+                            "DELETE": 3,
+                            "REMOVE_GRANT": 4,
+                            "GOVERN_TAGS": 5
+                          }
+                        },
+                        "ActionType": {
+                          "values": {
+                            "ACTION_TYPE_UNSPECIFIED": 0,
+                            "ALLOW": 1,
+                            "DENY": 2
+                          }
+                        }
+                      }
+                    },
+                    "OrgPolicy": {
+                      "options": {
+                        "(google.api.default_host)": "orgpolicy.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListConstraints": {
+                          "requestType": "ListConstraintsRequest",
+                          "responseType": "ListConstraintsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*}/constraints",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*}/constraints",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/constraints",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=folders/*}/constraints"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*}/constraints"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListPolicies": {
+                          "requestType": "ListPoliciesRequest",
+                          "responseType": "ListPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*}/policies",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*}/policies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/policies",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=folders/*}/policies"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*}/policies"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetPolicy": {
+                          "requestType": "GetPolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/policies/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/policies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/policies/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=folders/*/policies/*}"
+                                  },
+                                  {
+                                    "get": "/v2/{name=organizations/*/policies/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetEffectivePolicy": {
+                          "requestType": "GetEffectivePolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/policies/*}:getEffectivePolicy",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/policies/*}:getEffectivePolicy",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/policies/*}:getEffectivePolicy",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{name=folders/*/policies/*}:getEffectivePolicy"
+                                  },
+                                  {
+                                    "get": "/v2/{name=organizations/*/policies/*}:getEffectivePolicy"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreatePolicy": {
+                          "requestType": "CreatePolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*}/policies",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*}/policies",
+                            "(google.api.http).additional_bindings.body": "policy",
+                            "(google.api.method_signature)": "parent,policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/policies",
+                                "body": "policy",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=folders/*}/policies",
+                                    "body": "policy"
+                                  },
+                                  {
+                                    "post": "/v2/{parent=organizations/*}/policies",
+                                    "body": "policy"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,policy"
+                            }
+                          ]
+                        },
+                        "UpdatePolicy": {
+                          "requestType": "UpdatePolicyRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{policy.name=projects/*/policies/*}",
+                            "(google.api.http).body": "policy",
+                            "(google.api.http).additional_bindings.patch": "/v2/{policy.name=organizations/*/policies/*}",
+                            "(google.api.http).additional_bindings.body": "policy",
+                            "(google.api.method_signature)": "policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{policy.name=projects/*/policies/*}",
+                                "body": "policy",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v2/{policy.name=folders/*/policies/*}",
+                                    "body": "policy"
+                                  },
+                                  {
+                                    "patch": "/v2/{policy.name=organizations/*/policies/*}",
+                                    "body": "policy"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "policy"
+                            }
+                          ]
+                        },
+                        "DeletePolicy": {
+                          "requestType": "DeletePolicyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=projects/*/policies/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/policies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=projects/*/policies/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v2/{name=folders/*/policies/*}"
+                                  },
+                                  {
+                                    "delete": "/v2/{name=organizations/*/policies/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCustomConstraint": {
+                          "requestType": "CreateCustomConstraintRequest",
+                          "responseType": "CustomConstraint",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=organizations/*}/customConstraints",
+                            "(google.api.http).body": "custom_constraint",
+                            "(google.api.method_signature)": "parent,custom_constraint"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=organizations/*}/customConstraints",
+                                "body": "custom_constraint"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_constraint"
+                            }
+                          ]
+                        },
+                        "UpdateCustomConstraint": {
+                          "requestType": "UpdateCustomConstraintRequest",
+                          "responseType": "CustomConstraint",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{custom_constraint.name=organizations/*/customConstraints/*}",
+                            "(google.api.http).body": "custom_constraint",
+                            "(google.api.method_signature)": "custom_constraint"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{custom_constraint.name=organizations/*/customConstraints/*}",
+                                "body": "custom_constraint"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "custom_constraint"
+                            }
+                          ]
+                        },
+                        "GetCustomConstraint": {
+                          "requestType": "GetCustomConstraintRequest",
+                          "responseType": "CustomConstraint",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=organizations/*/customConstraints/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/customConstraints/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListCustomConstraints": {
+                          "requestType": "ListCustomConstraintsRequest",
+                          "responseType": "ListCustomConstraintsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=organizations/*}/customConstraints",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=organizations/*}/customConstraints"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteCustomConstraint": {
+                          "requestType": "DeleteCustomConstraintRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=organizations/*/customConstraints/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=organizations/*/customConstraints/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Policy": {
+                      "options": {
+                        "(google.api.resource).type": "orgpolicy.googleapis.com/Policy",
+                        "(google.api.resource).pattern": "organizations/{organization}/policies/{policy}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "spec": {
+                          "type": "PolicySpec",
+                          "id": 2
+                        },
+                        "alternate": {
+                          "type": "AlternatePolicySpec",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "dryRunSpec": {
+                          "type": "PolicySpec",
+                          "id": 4
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AlternatePolicySpec": {
+                      "fields": {
+                        "launch": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "spec": {
+                          "type": "PolicySpec",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PolicySpec": {
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "PolicyRule",
+                          "id": 3
+                        },
+                        "inheritFromParent": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "reset": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "PolicyRule": {
+                          "oneofs": {
+                            "kind": {
+                              "oneof": [
+                                "values",
+                                "allowAll",
+                                "denyAll",
+                                "enforce"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "values": {
+                              "type": "StringValues",
+                              "id": 1
+                            },
+                            "allowAll": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "denyAll": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "enforce": {
+                              "type": "bool",
+                              "id": 4
+                            },
+                            "condition": {
+                              "type": "google.type.Expr",
+                              "id": 5
+                            },
+                            "parameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "StringValues": {
+                              "fields": {
+                                "allowedValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "deniedValues": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListConstraintsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "orgpolicy.googleapis.com/Constraint"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListConstraintsResponse": {
+                      "fields": {
+                        "constraints": {
+                          "rule": "repeated",
+                          "type": "Constraint",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "orgpolicy.googleapis.com/Policy"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListPoliciesResponse": {
+                      "fields": {
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "Policy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/Policy"
+                          }
+                        }
+                      }
+                    },
+                    "GetEffectivePolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/Policy"
+                          }
+                        }
+                      }
+                    },
+                    "CreatePolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "orgpolicy.googleapis.com/Policy"
+                          }
+                        },
+                        "policy": {
+                          "type": "Policy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePolicyRequest": {
+                      "fields": {
+                        "policy": {
+                          "type": "Policy",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeletePolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/Policy"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCustomConstraintRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "orgpolicy.googleapis.com/CustomConstraint"
+                          }
+                        },
+                        "customConstraint": {
+                          "type": "CustomConstraint",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetCustomConstraintRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/CustomConstraint"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomConstraintsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "orgpolicy.googleapis.com/CustomConstraint"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCustomConstraintsResponse": {
+                      "fields": {
+                        "customConstraints": {
+                          "rule": "repeated",
+                          "type": "CustomConstraint",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateCustomConstraintRequest": {
+                      "fields": {
+                        "customConstraint": {
+                          "type": "CustomConstraint",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCustomConstraintRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/CustomConstraint"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "policysimulator": {
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.PolicySimulator.V1",
                     "go_package": "cloud.google.com/go/policysimulator/apiv1/policysimulatorpb;policysimulatorpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "SimulatorProto",
                     "java_package": "com.google.cloud.policysimulator.v1",
                     "php_namespace": "Google\\Cloud\\PolicySimulator\\V1",
-                    "ruby_package": "Google::Cloud::PolicySimulator::V1"
+                    "ruby_package": "Google::Cloud::PolicySimulator::V1",
+                    "(google.api.resource_definition).type": "iam.googleapis.com/FolderLocation",
+                    "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
                   },
                   "nested": {
                     "AccessState": {
@@ -148,6 +1075,455 @@
                             "MEMBERSHIP_UNKNOWN_INFO_DENIED": 3,
                             "MEMBERSHIP_UNKNOWN_UNSUPPORTED": 4
                           }
+                        }
+                      }
+                    },
+                    "OrgPolicyViolationsPreviewService": {
+                      "options": {
+                        "(google.api.default_host)": "policysimulator.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListOrgPolicyViolationsPreviews": {
+                          "requestType": "ListOrgPolicyViolationsPreviewsRequest",
+                          "responseType": "ListOrgPolicyViolationsPreviewsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/orgPolicyViolationsPreviews",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*}/orgPolicyViolationsPreviews"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetOrgPolicyViolationsPreview": {
+                          "requestType": "GetOrgPolicyViolationsPreviewRequest",
+                          "responseType": "OrgPolicyViolationsPreview",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/orgPolicyViolationsPreviews/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/orgPolicyViolationsPreviews/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateOrgPolicyViolationsPreview": {
+                          "requestType": "CreateOrgPolicyViolationsPreviewRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/orgPolicyViolationsPreviews",
+                            "(google.api.http).body": "org_policy_violations_preview",
+                            "(google.api.method_signature)": "parent,org_policy_violations_preview,org_policy_violations_preview_id",
+                            "(google.longrunning.operation_info).response_type": "OrgPolicyViolationsPreview",
+                            "(google.longrunning.operation_info).metadata_type": "CreateOrgPolicyViolationsPreviewOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/locations/*}/orgPolicyViolationsPreviews",
+                                "body": "org_policy_violations_preview"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,org_policy_violations_preview,org_policy_violations_preview_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "OrgPolicyViolationsPreview",
+                                "metadata_type": "CreateOrgPolicyViolationsPreviewOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListOrgPolicyViolations": {
+                          "requestType": "ListOrgPolicyViolationsRequest",
+                          "responseType": "ListOrgPolicyViolationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*/orgPolicyViolationsPreviews/*}/orgPolicyViolations",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*/orgPolicyViolationsPreviews/*}/orgPolicyViolations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PreviewState": {
+                      "values": {
+                        "PREVIEW_STATE_UNSPECIFIED": 0,
+                        "PREVIEW_PENDING": 1,
+                        "PREVIEW_RUNNING": 2,
+                        "PREVIEW_SUCCEEDED": 3,
+                        "PREVIEW_FAILED": 4
+                      }
+                    },
+                    "OrgPolicyViolationsPreview": {
+                      "options": {
+                        "(google.api.resource).type": "policysimulator.googleapis.com/OrgPolicyViolationsPreview",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}",
+                        "(google.api.resource).plural": "orgPolicyViolationsPreviews",
+                        "(google.api.resource).singular": "orgPolicyViolationsPreview"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "PreviewState",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "overlay": {
+                          "type": "OrgPolicyOverlay",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "violationsCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceCounts": {
+                          "type": "ResourceCounts",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customConstraints": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "orgpolicy.googleapis.com/CustomConstraint"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ResourceCounts": {
+                          "fields": {
+                            "scanned": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "noncompliant": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "compliant": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "unenforced": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errors": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "OrgPolicyViolation": {
+                      "options": {
+                        "(google.api.resource).type": "policysimulator.googleapis.com/OrgPolicyViolation",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}/orgPolicyViolations/{org_policy_violation}",
+                        "(google.api.resource).plural": "orgPolicyViolations",
+                        "(google.api.resource).singular": "orgPolicyViolation"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resource": {
+                          "type": "ResourceContext",
+                          "id": 2
+                        },
+                        "customConstraint": {
+                          "type": "google.cloud.orgpolicy.v2.CustomConstraint",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ResourceContext": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "OrgPolicyOverlay": {
+                      "fields": {
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "PolicyOverlay",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customConstraints": {
+                          "rule": "repeated",
+                          "type": "CustomConstraintOverlay",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PolicyOverlay": {
+                          "fields": {
+                            "policyParent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "policy": {
+                              "type": "google.cloud.orgpolicy.v2.Policy",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "CustomConstraintOverlay": {
+                          "fields": {
+                            "customConstraintParent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customConstraint": {
+                              "type": "google.cloud.orgpolicy.v2.CustomConstraint",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CreateOrgPolicyViolationsPreviewOperationMetadata": {
+                      "fields": {
+                        "requestTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "PreviewState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourcesFound": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "resourcesScanned": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "resourcesPending": {
+                          "type": "int32",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListOrgPolicyViolationsPreviewsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "policysimulator.googleapis.com/OrgPolicyViolationsPreview"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListOrgPolicyViolationsPreviewsResponse": {
+                      "fields": {
+                        "orgPolicyViolationsPreviews": {
+                          "rule": "repeated",
+                          "type": "OrgPolicyViolationsPreview",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetOrgPolicyViolationsPreviewRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "policysimulator.googleapis.com/OrgPolicyViolationsPreview"
+                          }
+                        }
+                      }
+                    },
+                    "CreateOrgPolicyViolationsPreviewRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "policysimulator.googleapis.com/OrgPolicyViolationsPreview"
+                          }
+                        },
+                        "orgPolicyViolationsPreview": {
+                          "type": "OrgPolicyViolationsPreview",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "orgPolicyViolationsPreviewId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListOrgPolicyViolationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "policysimulator.googleapis.com/OrgPolicyViolation"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListOrgPolicyViolationsResponse": {
+                      "fields": {
+                        "orgPolicyViolations": {
+                          "rule": "repeated",
+                          "type": "OrgPolicyViolation",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -526,12 +1902,11 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -554,6 +1929,83 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             },
             "http": {
@@ -677,6 +2129,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -817,6 +2273,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -874,6 +2352,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -935,6 +2418,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -945,83 +2441,6 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
               }
             }
           }
@@ -1045,12 +2464,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -1088,6 +2514,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -1177,6 +2608,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -1402,6 +2837,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -1616,6 +3055,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -1751,7 +3191,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -1778,6 +3219,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1846,6 +3291,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -1935,6 +3400,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2078,6 +3547,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -2088,6 +3558,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -2098,6 +3569,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -2108,6 +3580,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -2118,7 +3591,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -2128,27 +3602,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -2193,7 +3678,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -2207,6 +3698,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -2235,11 +3753,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -2252,6 +3785,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -2337,6 +3876,89 @@
                 }
               }
             },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -2349,6 +3971,18 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -2357,21 +3991,6 @@
                 },
                 "value": {
                   "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Empty": {
-              "fields": {}
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
                   "id": 2
                 }
               }
@@ -2598,6 +4217,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

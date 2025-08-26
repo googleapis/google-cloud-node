@@ -974,6 +974,8 @@
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileRequest mysqlRdbms
                          * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileRequest postgresqlRdbms
                          * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerRdbms] DiscoverConnectionProfileRequest sqlServerRdbms
+                         * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceOrg] DiscoverConnectionProfileRequest salesforceOrg
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbCluster] DiscoverConnectionProfileRequest mongodbCluster
                          */
     
                         /**
@@ -1063,6 +1065,22 @@
                          */
                         DiscoverConnectionProfileRequest.prototype.sqlServerRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileRequest salesforceOrg.
+                         * @member {google.cloud.datastream.v1.ISalesforceOrg|null|undefined} salesforceOrg
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
+                         * @instance
+                         */
+                        DiscoverConnectionProfileRequest.prototype.salesforceOrg = null;
+    
+                        /**
+                         * DiscoverConnectionProfileRequest mongodbCluster.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbCluster
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
+                         * @instance
+                         */
+                        DiscoverConnectionProfileRequest.prototype.mongodbCluster = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1090,12 +1108,12 @@
     
                         /**
                          * DiscoverConnectionProfileRequest dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileRequest.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms", "salesforceOrg", "mongodbCluster"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1137,6 +1155,10 @@
                                 $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.sqlServerRdbms != null && Object.hasOwnProperty.call(message, "sqlServerRdbms"))
                                 $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerRdbms, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.salesforceOrg != null && Object.hasOwnProperty.call(message, "salesforceOrg"))
+                                $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceOrg, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbCluster != null && Object.hasOwnProperty.call(message, "mongodbCluster"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbCluster, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             if (message.connectionProfile != null && Object.hasOwnProperty.call(message, "connectionProfile"))
                                 $root.google.cloud.datastream.v1.ConnectionProfile.encode(message.connectionProfile, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.connectionProfileName != null && Object.hasOwnProperty.call(message, "connectionProfileName"))
@@ -1211,6 +1233,14 @@
                                     }
                                 case 103: {
                                         message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 104: {
+                                        message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1317,6 +1347,26 @@
                                         return "sqlServerRdbms." + error;
                                 }
                             }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SalesforceOrg.verify(message.salesforceOrg);
+                                    if (error)
+                                        return "salesforceOrg." + error;
+                                }
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbCluster);
+                                    if (error)
+                                        return "mongodbCluster." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1364,6 +1414,16 @@
                                 if (typeof object.sqlServerRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.sqlServerRdbms: object expected");
                                 message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.fromObject(object.sqlServerRdbms);
+                            }
+                            if (object.salesforceOrg != null) {
+                                if (typeof object.salesforceOrg !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.salesforceOrg: object expected");
+                                message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceOrg);
+                            }
+                            if (object.mongodbCluster != null) {
+                                if (typeof object.mongodbCluster !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.mongodbCluster: object expected");
+                                message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbCluster);
                             }
                             return message;
                         };
@@ -1414,6 +1474,16 @@
                                 object.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.toObject(message.sqlServerRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "sqlServerRdbms";
+                            }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                object.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceOrg, options);
+                                if (options.oneofs)
+                                    object.dataObject = "salesforceOrg";
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                object.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbCluster, options);
+                                if (options.oneofs)
+                                    object.dataObject = "mongodbCluster";
                             }
                             if (message.connectionProfile != null && message.hasOwnProperty("connectionProfile")) {
                                 object.connectionProfile = $root.google.cloud.datastream.v1.ConnectionProfile.toObject(message.connectionProfile, options);
@@ -1467,6 +1537,8 @@
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileResponse mysqlRdbms
                          * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileResponse postgresqlRdbms
                          * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerRdbms] DiscoverConnectionProfileResponse sqlServerRdbms
+                         * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceOrg] DiscoverConnectionProfileResponse salesforceOrg
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbCluster] DiscoverConnectionProfileResponse mongodbCluster
                          */
     
                         /**
@@ -1516,17 +1588,33 @@
                          */
                         DiscoverConnectionProfileResponse.prototype.sqlServerRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileResponse salesforceOrg.
+                         * @member {google.cloud.datastream.v1.ISalesforceOrg|null|undefined} salesforceOrg
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
+                         * @instance
+                         */
+                        DiscoverConnectionProfileResponse.prototype.salesforceOrg = null;
+    
+                        /**
+                         * DiscoverConnectionProfileResponse mongodbCluster.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbCluster
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
+                         * @instance
+                         */
+                        DiscoverConnectionProfileResponse.prototype.mongodbCluster = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DiscoverConnectionProfileResponse dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileResponse.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms", "salesforceOrg", "mongodbCluster"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1562,6 +1650,10 @@
                                 $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.sqlServerRdbms != null && Object.hasOwnProperty.call(message, "sqlServerRdbms"))
                                 $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerRdbms, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.salesforceOrg != null && Object.hasOwnProperty.call(message, "salesforceOrg"))
+                                $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceOrg, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbCluster != null && Object.hasOwnProperty.call(message, "mongodbCluster"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbCluster, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -1612,6 +1704,14 @@
                                     }
                                 case 103: {
                                         message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 104: {
+                                        message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1688,6 +1788,26 @@
                                         return "sqlServerRdbms." + error;
                                 }
                             }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SalesforceOrg.verify(message.salesforceOrg);
+                                    if (error)
+                                        return "salesforceOrg." + error;
+                                }
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbCluster);
+                                    if (error)
+                                        return "mongodbCluster." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1722,6 +1842,16 @@
                                 if (typeof object.sqlServerRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.sqlServerRdbms: object expected");
                                 message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.fromObject(object.sqlServerRdbms);
+                            }
+                            if (object.salesforceOrg != null) {
+                                if (typeof object.salesforceOrg !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.salesforceOrg: object expected");
+                                message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceOrg);
+                            }
+                            if (object.mongodbCluster != null) {
+                                if (typeof object.mongodbCluster !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.mongodbCluster: object expected");
+                                message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbCluster);
                             }
                             return message;
                         };
@@ -1758,6 +1888,16 @@
                                 object.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.toObject(message.sqlServerRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "sqlServerRdbms";
+                            }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                object.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceOrg, options);
+                                if (options.oneofs)
+                                    object.dataObject = "salesforceOrg";
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                object.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbCluster, options);
+                                if (options.oneofs)
+                                    object.dataObject = "mongodbCluster";
                             }
                             return object;
                         };
@@ -8021,6 +8161,7 @@
                          * @property {google.cloud.datastream.v1.IPrivateConnection|null} [privateConnection] CreatePrivateConnectionRequest privateConnection
                          * @property {string|null} [requestId] CreatePrivateConnectionRequest requestId
                          * @property {boolean|null} [force] CreatePrivateConnectionRequest force
+                         * @property {boolean|null} [validateOnly] CreatePrivateConnectionRequest validateOnly
                          */
     
                         /**
@@ -8079,6 +8220,14 @@
                         CreatePrivateConnectionRequest.prototype.force = false;
     
                         /**
+                         * CreatePrivateConnectionRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.validateOnly = false;
+    
+                        /**
                          * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
@@ -8112,6 +8261,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.force != null && Object.hasOwnProperty.call(message, "force"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.force);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.validateOnly);
                             return writer;
                         };
     
@@ -8168,6 +8319,10 @@
                                         message.force = reader.bool();
                                         break;
                                     }
+                                case 8: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8220,6 +8375,9 @@
                             if (message.force != null && message.hasOwnProperty("force"))
                                 if (typeof message.force !== "boolean")
                                     return "force: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
                             return null;
                         };
     
@@ -8248,6 +8406,8 @@
                                 message.requestId = String(object.requestId);
                             if (object.force != null)
                                 message.force = Boolean(object.force);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
                             return message;
                         };
     
@@ -8270,6 +8430,7 @@
                                 object.privateConnection = null;
                                 object.requestId = "";
                                 object.force = false;
+                                object.validateOnly = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -8281,6 +8442,8 @@
                                 object.requestId = message.requestId;
                             if (message.force != null && message.hasOwnProperty("force"))
                                 object.force = message.force;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
                             return object;
                         };
     
@@ -13338,6 +13501,1048 @@
                         return SalesforceProfile;
                     })();
     
+                    v1.MongodbProfile = (function() {
+    
+                        /**
+                         * Properties of a MongodbProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbProfile
+                         * @property {Array.<google.cloud.datastream.v1.IHostAddress>|null} [hostAddresses] MongodbProfile hostAddresses
+                         * @property {string|null} [replicaSet] MongodbProfile replicaSet
+                         * @property {string|null} [username] MongodbProfile username
+                         * @property {string|null} [password] MongodbProfile password
+                         * @property {string|null} [secretManagerStoredPassword] MongodbProfile secretManagerStoredPassword
+                         * @property {google.cloud.datastream.v1.IMongodbSslConfig|null} [sslConfig] MongodbProfile sslConfig
+                         * @property {google.cloud.datastream.v1.ISrvConnectionFormat|null} [srvConnectionFormat] MongodbProfile srvConnectionFormat
+                         * @property {google.cloud.datastream.v1.IStandardConnectionFormat|null} [standardConnectionFormat] MongodbProfile standardConnectionFormat
+                         */
+    
+                        /**
+                         * Constructs a new MongodbProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbProfile.
+                         * @implements IMongodbProfile
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbProfile=} [properties] Properties to set
+                         */
+                        function MongodbProfile(properties) {
+                            this.hostAddresses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbProfile hostAddresses.
+                         * @member {Array.<google.cloud.datastream.v1.IHostAddress>} hostAddresses
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.hostAddresses = $util.emptyArray;
+    
+                        /**
+                         * MongodbProfile replicaSet.
+                         * @member {string} replicaSet
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.replicaSet = "";
+    
+                        /**
+                         * MongodbProfile username.
+                         * @member {string} username
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.username = "";
+    
+                        /**
+                         * MongodbProfile password.
+                         * @member {string} password
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.password = "";
+    
+                        /**
+                         * MongodbProfile secretManagerStoredPassword.
+                         * @member {string} secretManagerStoredPassword
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.secretManagerStoredPassword = "";
+    
+                        /**
+                         * MongodbProfile sslConfig.
+                         * @member {google.cloud.datastream.v1.IMongodbSslConfig|null|undefined} sslConfig
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.sslConfig = null;
+    
+                        /**
+                         * MongodbProfile srvConnectionFormat.
+                         * @member {google.cloud.datastream.v1.ISrvConnectionFormat|null|undefined} srvConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.srvConnectionFormat = null;
+    
+                        /**
+                         * MongodbProfile standardConnectionFormat.
+                         * @member {google.cloud.datastream.v1.IStandardConnectionFormat|null|undefined} standardConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.standardConnectionFormat = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MongodbProfile mongodbConnectionFormat.
+                         * @member {"srvConnectionFormat"|"standardConnectionFormat"|undefined} mongodbConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        Object.defineProperty(MongodbProfile.prototype, "mongodbConnectionFormat", {
+                            get: $util.oneOfGetter($oneOfFields = ["srvConnectionFormat", "standardConnectionFormat"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MongodbProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile instance
+                         */
+                        MongodbProfile.create = function create(properties) {
+                            return new MongodbProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbProfile message. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile} message MongodbProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostAddresses != null && message.hostAddresses.length)
+                                for (var i = 0; i < message.hostAddresses.length; ++i)
+                                    $root.google.cloud.datastream.v1.HostAddress.encode(message.hostAddresses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.replicaSet != null && Object.hasOwnProperty.call(message, "replicaSet"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.replicaSet);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.username);
+                            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.password);
+                            if (message.secretManagerStoredPassword != null && Object.hasOwnProperty.call(message, "secretManagerStoredPassword"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.secretManagerStoredPassword);
+                            if (message.sslConfig != null && Object.hasOwnProperty.call(message, "sslConfig"))
+                                $root.google.cloud.datastream.v1.MongodbSslConfig.encode(message.sslConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.srvConnectionFormat != null && Object.hasOwnProperty.call(message, "srvConnectionFormat"))
+                                $root.google.cloud.datastream.v1.SrvConnectionFormat.encode(message.srvConnectionFormat, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.standardConnectionFormat != null && Object.hasOwnProperty.call(message, "standardConnectionFormat"))
+                                $root.google.cloud.datastream.v1.StandardConnectionFormat.encode(message.standardConnectionFormat, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile} message MongodbProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbProfile.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbProfile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.hostAddresses && message.hostAddresses.length))
+                                            message.hostAddresses = [];
+                                        message.hostAddresses.push($root.google.cloud.datastream.v1.HostAddress.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.replicaSet = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.password = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.secretManagerStoredPassword = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbProfile message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.hostAddresses != null && message.hasOwnProperty("hostAddresses")) {
+                                if (!Array.isArray(message.hostAddresses))
+                                    return "hostAddresses: array expected";
+                                for (var i = 0; i < message.hostAddresses.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.HostAddress.verify(message.hostAddresses[i]);
+                                    if (error)
+                                        return "hostAddresses." + error;
+                                }
+                            }
+                            if (message.replicaSet != null && message.hasOwnProperty("replicaSet"))
+                                if (!$util.isString(message.replicaSet))
+                                    return "replicaSet: string expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                if (!$util.isString(message.password))
+                                    return "password: string expected";
+                            if (message.secretManagerStoredPassword != null && message.hasOwnProperty("secretManagerStoredPassword"))
+                                if (!$util.isString(message.secretManagerStoredPassword))
+                                    return "secretManagerStoredPassword: string expected";
+                            if (message.sslConfig != null && message.hasOwnProperty("sslConfig")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbSslConfig.verify(message.sslConfig);
+                                if (error)
+                                    return "sslConfig." + error;
+                            }
+                            if (message.srvConnectionFormat != null && message.hasOwnProperty("srvConnectionFormat")) {
+                                properties.mongodbConnectionFormat = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SrvConnectionFormat.verify(message.srvConnectionFormat);
+                                    if (error)
+                                        return "srvConnectionFormat." + error;
+                                }
+                            }
+                            if (message.standardConnectionFormat != null && message.hasOwnProperty("standardConnectionFormat")) {
+                                if (properties.mongodbConnectionFormat === 1)
+                                    return "mongodbConnectionFormat: multiple values";
+                                properties.mongodbConnectionFormat = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.StandardConnectionFormat.verify(message.standardConnectionFormat);
+                                    if (error)
+                                        return "standardConnectionFormat." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         */
+                        MongodbProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbProfile)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbProfile();
+                            if (object.hostAddresses) {
+                                if (!Array.isArray(object.hostAddresses))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.hostAddresses: array expected");
+                                message.hostAddresses = [];
+                                for (var i = 0; i < object.hostAddresses.length; ++i) {
+                                    if (typeof object.hostAddresses[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbProfile.hostAddresses: object expected");
+                                    message.hostAddresses[i] = $root.google.cloud.datastream.v1.HostAddress.fromObject(object.hostAddresses[i]);
+                                }
+                            }
+                            if (object.replicaSet != null)
+                                message.replicaSet = String(object.replicaSet);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            if (object.password != null)
+                                message.password = String(object.password);
+                            if (object.secretManagerStoredPassword != null)
+                                message.secretManagerStoredPassword = String(object.secretManagerStoredPassword);
+                            if (object.sslConfig != null) {
+                                if (typeof object.sslConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.sslConfig: object expected");
+                                message.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.fromObject(object.sslConfig);
+                            }
+                            if (object.srvConnectionFormat != null) {
+                                if (typeof object.srvConnectionFormat !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.srvConnectionFormat: object expected");
+                                message.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.fromObject(object.srvConnectionFormat);
+                            }
+                            if (object.standardConnectionFormat != null) {
+                                if (typeof object.standardConnectionFormat !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.standardConnectionFormat: object expected");
+                                message.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.fromObject(object.standardConnectionFormat);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbProfile} message MongodbProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbProfile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hostAddresses = [];
+                            if (options.defaults) {
+                                object.replicaSet = "";
+                                object.username = "";
+                                object.password = "";
+                                object.secretManagerStoredPassword = "";
+                                object.sslConfig = null;
+                            }
+                            if (message.hostAddresses && message.hostAddresses.length) {
+                                object.hostAddresses = [];
+                                for (var j = 0; j < message.hostAddresses.length; ++j)
+                                    object.hostAddresses[j] = $root.google.cloud.datastream.v1.HostAddress.toObject(message.hostAddresses[j], options);
+                            }
+                            if (message.replicaSet != null && message.hasOwnProperty("replicaSet"))
+                                object.replicaSet = message.replicaSet;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                object.password = message.password;
+                            if (message.secretManagerStoredPassword != null && message.hasOwnProperty("secretManagerStoredPassword"))
+                                object.secretManagerStoredPassword = message.secretManagerStoredPassword;
+                            if (message.sslConfig != null && message.hasOwnProperty("sslConfig"))
+                                object.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.toObject(message.sslConfig, options);
+                            if (message.srvConnectionFormat != null && message.hasOwnProperty("srvConnectionFormat")) {
+                                object.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.toObject(message.srvConnectionFormat, options);
+                                if (options.oneofs)
+                                    object.mongodbConnectionFormat = "srvConnectionFormat";
+                            }
+                            if (message.standardConnectionFormat != null && message.hasOwnProperty("standardConnectionFormat")) {
+                                object.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.toObject(message.standardConnectionFormat, options);
+                                if (options.oneofs)
+                                    object.mongodbConnectionFormat = "standardConnectionFormat";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbProfile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbProfile";
+                        };
+    
+                        return MongodbProfile;
+                    })();
+    
+                    v1.HostAddress = (function() {
+    
+                        /**
+                         * Properties of a HostAddress.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IHostAddress
+                         * @property {string|null} [hostname] HostAddress hostname
+                         * @property {number|null} [port] HostAddress port
+                         */
+    
+                        /**
+                         * Constructs a new HostAddress.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a HostAddress.
+                         * @implements IHostAddress
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IHostAddress=} [properties] Properties to set
+                         */
+                        function HostAddress(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HostAddress hostname.
+                         * @member {string} hostname
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         */
+                        HostAddress.prototype.hostname = "";
+    
+                        /**
+                         * HostAddress port.
+                         * @member {number} port
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         */
+                        HostAddress.prototype.port = 0;
+    
+                        /**
+                         * Creates a new HostAddress instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress instance
+                         */
+                        HostAddress.create = function create(properties) {
+                            return new HostAddress(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HostAddress message. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress} message HostAddress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostAddress.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostname);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HostAddress message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress} message HostAddress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HostAddress message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostAddress.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.HostAddress();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostname = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HostAddress message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostAddress.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HostAddress message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HostAddress.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                if (!$util.isString(message.hostname))
+                                    return "hostname: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HostAddress message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         */
+                        HostAddress.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.HostAddress)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.HostAddress();
+                            if (object.hostname != null)
+                                message.hostname = String(object.hostname);
+                            if (object.port != null)
+                                message.port = object.port | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HostAddress message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.HostAddress} message HostAddress
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HostAddress.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostname = "";
+                                object.port = 0;
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                object.hostname = message.hostname;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HostAddress to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HostAddress.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HostAddress
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HostAddress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.HostAddress";
+                        };
+    
+                        return HostAddress;
+                    })();
+    
+                    v1.SrvConnectionFormat = (function() {
+    
+                        /**
+                         * Properties of a SrvConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface ISrvConnectionFormat
+                         */
+    
+                        /**
+                         * Constructs a new SrvConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a SrvConnectionFormat.
+                         * @implements ISrvConnectionFormat
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat=} [properties] Properties to set
+                         */
+                        function SrvConnectionFormat(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new SrvConnectionFormat instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat instance
+                         */
+                        SrvConnectionFormat.create = function create(properties) {
+                            return new SrvConnectionFormat(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SrvConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat} message SrvConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrvConnectionFormat.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SrvConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat} message SrvConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrvConnectionFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SrvConnectionFormat message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrvConnectionFormat.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SrvConnectionFormat();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SrvConnectionFormat message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrvConnectionFormat.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SrvConnectionFormat message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SrvConnectionFormat.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SrvConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         */
+                        SrvConnectionFormat.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.SrvConnectionFormat)
+                                return object;
+                            return new $root.google.cloud.datastream.v1.SrvConnectionFormat();
+                        };
+    
+                        /**
+                         * Creates a plain object from a SrvConnectionFormat message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.SrvConnectionFormat} message SrvConnectionFormat
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SrvConnectionFormat.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this SrvConnectionFormat to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SrvConnectionFormat.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SrvConnectionFormat
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SrvConnectionFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.SrvConnectionFormat";
+                        };
+    
+                        return SrvConnectionFormat;
+                    })();
+    
+                    v1.StandardConnectionFormat = (function() {
+    
+                        /**
+                         * Properties of a StandardConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IStandardConnectionFormat
+                         * @property {boolean|null} [directConnection] StandardConnectionFormat directConnection
+                         */
+    
+                        /**
+                         * Constructs a new StandardConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a StandardConnectionFormat.
+                         * @implements IStandardConnectionFormat
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat=} [properties] Properties to set
+                         */
+                        function StandardConnectionFormat(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StandardConnectionFormat directConnection.
+                         * @member {boolean} directConnection
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @instance
+                         */
+                        StandardConnectionFormat.prototype.directConnection = false;
+    
+                        /**
+                         * Creates a new StandardConnectionFormat instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat instance
+                         */
+                        StandardConnectionFormat.create = function create(properties) {
+                            return new StandardConnectionFormat(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StandardConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat} message StandardConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StandardConnectionFormat.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.directConnection != null && Object.hasOwnProperty.call(message, "directConnection"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.directConnection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StandardConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat} message StandardConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StandardConnectionFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StandardConnectionFormat message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StandardConnectionFormat.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StandardConnectionFormat();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.directConnection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StandardConnectionFormat message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StandardConnectionFormat.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StandardConnectionFormat message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StandardConnectionFormat.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.directConnection != null && message.hasOwnProperty("directConnection"))
+                                if (typeof message.directConnection !== "boolean")
+                                    return "directConnection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StandardConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         */
+                        StandardConnectionFormat.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.StandardConnectionFormat)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.StandardConnectionFormat();
+                            if (object.directConnection != null)
+                                message.directConnection = Boolean(object.directConnection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StandardConnectionFormat message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.StandardConnectionFormat} message StandardConnectionFormat
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StandardConnectionFormat.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.directConnection = false;
+                            if (message.directConnection != null && message.hasOwnProperty("directConnection"))
+                                object.directConnection = message.directConnection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StandardConnectionFormat to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StandardConnectionFormat.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StandardConnectionFormat
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StandardConnectionFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.StandardConnectionFormat";
+                        };
+    
+                        return StandardConnectionFormat;
+                    })();
+    
                     v1.GcsProfile = (function() {
     
                         /**
@@ -14473,6 +15678,211 @@
                         return VpcPeeringConfig;
                     })();
     
+                    v1.PscInterfaceConfig = (function() {
+    
+                        /**
+                         * Properties of a PscInterfaceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPscInterfaceConfig
+                         * @property {string|null} [networkAttachment] PscInterfaceConfig networkAttachment
+                         */
+    
+                        /**
+                         * Constructs a new PscInterfaceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PscInterfaceConfig.
+                         * @implements IPscInterfaceConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig=} [properties] Properties to set
+                         */
+                        function PscInterfaceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PscInterfaceConfig networkAttachment.
+                         * @member {string} networkAttachment
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @instance
+                         */
+                        PscInterfaceConfig.prototype.networkAttachment = "";
+    
+                        /**
+                         * Creates a new PscInterfaceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig instance
+                         */
+                        PscInterfaceConfig.create = function create(properties) {
+                            return new PscInterfaceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PscInterfaceConfig message. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig} message PscInterfaceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscInterfaceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PscInterfaceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig} message PscInterfaceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscInterfaceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PscInterfaceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscInterfaceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PscInterfaceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkAttachment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PscInterfaceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscInterfaceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PscInterfaceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PscInterfaceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                if (!$util.isString(message.networkAttachment))
+                                    return "networkAttachment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PscInterfaceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         */
+                        PscInterfaceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PscInterfaceConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PscInterfaceConfig();
+                            if (object.networkAttachment != null)
+                                message.networkAttachment = String(object.networkAttachment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PscInterfaceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.PscInterfaceConfig} message PscInterfaceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PscInterfaceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.networkAttachment = "";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                object.networkAttachment = message.networkAttachment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PscInterfaceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PscInterfaceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PscInterfaceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PscInterfaceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PscInterfaceConfig";
+                        };
+    
+                        return PscInterfaceConfig;
+                    })();
+    
                     v1.PrivateConnection = (function() {
     
                         /**
@@ -14489,6 +15899,7 @@
                          * @property {boolean|null} [satisfiesPzs] PrivateConnection satisfiesPzs
                          * @property {boolean|null} [satisfiesPzi] PrivateConnection satisfiesPzi
                          * @property {google.cloud.datastream.v1.IVpcPeeringConfig|null} [vpcPeeringConfig] PrivateConnection vpcPeeringConfig
+                         * @property {google.cloud.datastream.v1.IPscInterfaceConfig|null} [pscInterfaceConfig] PrivateConnection pscInterfaceConfig
                          */
     
                         /**
@@ -14587,6 +15998,14 @@
                          */
                         PrivateConnection.prototype.vpcPeeringConfig = null;
     
+                        /**
+                         * PrivateConnection pscInterfaceConfig.
+                         * @member {google.cloud.datastream.v1.IPscInterfaceConfig|null|undefined} pscInterfaceConfig
+                         * @memberof google.cloud.datastream.v1.PrivateConnection
+                         * @instance
+                         */
+                        PrivateConnection.prototype.pscInterfaceConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -14647,6 +16066,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.satisfiesPzi);
                             if (message.vpcPeeringConfig != null && Object.hasOwnProperty.call(message, "vpcPeeringConfig"))
                                 $root.google.cloud.datastream.v1.VpcPeeringConfig.encode(message.vpcPeeringConfig, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.pscInterfaceConfig != null && Object.hasOwnProperty.call(message, "pscInterfaceConfig"))
+                                $root.google.cloud.datastream.v1.PscInterfaceConfig.encode(message.pscInterfaceConfig, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             return writer;
                         };
     
@@ -14742,6 +16163,10 @@
                                         message.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 101: {
+                                        message.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -14834,6 +16259,11 @@
                                 if (error)
                                     return "vpcPeeringConfig." + error;
                             }
+                            if (message.pscInterfaceConfig != null && message.hasOwnProperty("pscInterfaceConfig")) {
+                                var error = $root.google.cloud.datastream.v1.PscInterfaceConfig.verify(message.pscInterfaceConfig);
+                                if (error)
+                                    return "pscInterfaceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -14916,6 +16346,11 @@
                                     throw TypeError(".google.cloud.datastream.v1.PrivateConnection.vpcPeeringConfig: object expected");
                                 message.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.fromObject(object.vpcPeeringConfig);
                             }
+                            if (object.pscInterfaceConfig != null) {
+                                if (typeof object.pscInterfaceConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.PrivateConnection.pscInterfaceConfig: object expected");
+                                message.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.fromObject(object.pscInterfaceConfig);
+                            }
                             return message;
                         };
     
@@ -14942,6 +16377,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.error = null;
                                 object.vpcPeeringConfig = null;
+                                object.pscInterfaceConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14973,6 +16409,8 @@
                             }
                             if (message.vpcPeeringConfig != null && message.hasOwnProperty("vpcPeeringConfig"))
                                 object.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.toObject(message.vpcPeeringConfig, options);
+                            if (message.pscInterfaceConfig != null && message.hasOwnProperty("pscInterfaceConfig"))
+                                object.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.toObject(message.pscInterfaceConfig, options);
                             return object;
                         };
     
@@ -15622,6 +17060,350 @@
                         return Route;
                     })();
     
+                    v1.MongodbSslConfig = (function() {
+    
+                        /**
+                         * Properties of a MongodbSslConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbSslConfig
+                         * @property {string|null} [clientKey] MongodbSslConfig clientKey
+                         * @property {boolean|null} [clientKeySet] MongodbSslConfig clientKeySet
+                         * @property {string|null} [clientCertificate] MongodbSslConfig clientCertificate
+                         * @property {boolean|null} [clientCertificateSet] MongodbSslConfig clientCertificateSet
+                         * @property {string|null} [caCertificate] MongodbSslConfig caCertificate
+                         * @property {boolean|null} [caCertificateSet] MongodbSslConfig caCertificateSet
+                         * @property {string|null} [secretManagerStoredClientKey] MongodbSslConfig secretManagerStoredClientKey
+                         */
+    
+                        /**
+                         * Constructs a new MongodbSslConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbSslConfig.
+                         * @implements IMongodbSslConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig=} [properties] Properties to set
+                         */
+                        function MongodbSslConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbSslConfig clientKey.
+                         * @member {string} clientKey
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientKey = "";
+    
+                        /**
+                         * MongodbSslConfig clientKeySet.
+                         * @member {boolean} clientKeySet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientKeySet = false;
+    
+                        /**
+                         * MongodbSslConfig clientCertificate.
+                         * @member {string} clientCertificate
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientCertificate = "";
+    
+                        /**
+                         * MongodbSslConfig clientCertificateSet.
+                         * @member {boolean} clientCertificateSet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientCertificateSet = false;
+    
+                        /**
+                         * MongodbSslConfig caCertificate.
+                         * @member {string} caCertificate
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.caCertificate = "";
+    
+                        /**
+                         * MongodbSslConfig caCertificateSet.
+                         * @member {boolean} caCertificateSet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.caCertificateSet = false;
+    
+                        /**
+                         * MongodbSslConfig secretManagerStoredClientKey.
+                         * @member {string} secretManagerStoredClientKey
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.secretManagerStoredClientKey = "";
+    
+                        /**
+                         * Creates a new MongodbSslConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig instance
+                         */
+                        MongodbSslConfig.create = function create(properties) {
+                            return new MongodbSslConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSslConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig} message MongodbSslConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSslConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientKey != null && Object.hasOwnProperty.call(message, "clientKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.clientKey);
+                            if (message.clientKeySet != null && Object.hasOwnProperty.call(message, "clientKeySet"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clientKeySet);
+                            if (message.clientCertificate != null && Object.hasOwnProperty.call(message, "clientCertificate"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clientCertificate);
+                            if (message.clientCertificateSet != null && Object.hasOwnProperty.call(message, "clientCertificateSet"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.clientCertificateSet);
+                            if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.caCertificate);
+                            if (message.caCertificateSet != null && Object.hasOwnProperty.call(message, "caCertificateSet"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.caCertificateSet);
+                            if (message.secretManagerStoredClientKey != null && Object.hasOwnProperty.call(message, "secretManagerStoredClientKey"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.secretManagerStoredClientKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSslConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig} message MongodbSslConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSslConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbSslConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSslConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbSslConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.clientKey = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clientKeySet = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clientCertificate = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clientCertificateSet = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.caCertificate = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.caCertificateSet = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.secretManagerStoredClientKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbSslConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSslConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbSslConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbSslConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientKey != null && message.hasOwnProperty("clientKey"))
+                                if (!$util.isString(message.clientKey))
+                                    return "clientKey: string expected";
+                            if (message.clientKeySet != null && message.hasOwnProperty("clientKeySet"))
+                                if (typeof message.clientKeySet !== "boolean")
+                                    return "clientKeySet: boolean expected";
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
+                                if (!$util.isString(message.clientCertificate))
+                                    return "clientCertificate: string expected";
+                            if (message.clientCertificateSet != null && message.hasOwnProperty("clientCertificateSet"))
+                                if (typeof message.clientCertificateSet !== "boolean")
+                                    return "clientCertificateSet: boolean expected";
+                            if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
+                                if (!$util.isString(message.caCertificate))
+                                    return "caCertificate: string expected";
+                            if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
+                                if (typeof message.caCertificateSet !== "boolean")
+                                    return "caCertificateSet: boolean expected";
+                            if (message.secretManagerStoredClientKey != null && message.hasOwnProperty("secretManagerStoredClientKey"))
+                                if (!$util.isString(message.secretManagerStoredClientKey))
+                                    return "secretManagerStoredClientKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbSslConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         */
+                        MongodbSslConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbSslConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbSslConfig();
+                            if (object.clientKey != null)
+                                message.clientKey = String(object.clientKey);
+                            if (object.clientKeySet != null)
+                                message.clientKeySet = Boolean(object.clientKeySet);
+                            if (object.clientCertificate != null)
+                                message.clientCertificate = String(object.clientCertificate);
+                            if (object.clientCertificateSet != null)
+                                message.clientCertificateSet = Boolean(object.clientCertificateSet);
+                            if (object.caCertificate != null)
+                                message.caCertificate = String(object.caCertificate);
+                            if (object.caCertificateSet != null)
+                                message.caCertificateSet = Boolean(object.caCertificateSet);
+                            if (object.secretManagerStoredClientKey != null)
+                                message.secretManagerStoredClientKey = String(object.secretManagerStoredClientKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbSslConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbSslConfig} message MongodbSslConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbSslConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.clientKey = "";
+                                object.clientKeySet = false;
+                                object.clientCertificate = "";
+                                object.clientCertificateSet = false;
+                                object.caCertificate = "";
+                                object.caCertificateSet = false;
+                                object.secretManagerStoredClientKey = "";
+                            }
+                            if (message.clientKey != null && message.hasOwnProperty("clientKey"))
+                                object.clientKey = message.clientKey;
+                            if (message.clientKeySet != null && message.hasOwnProperty("clientKeySet"))
+                                object.clientKeySet = message.clientKeySet;
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
+                                object.clientCertificate = message.clientCertificate;
+                            if (message.clientCertificateSet != null && message.hasOwnProperty("clientCertificateSet"))
+                                object.clientCertificateSet = message.clientCertificateSet;
+                            if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
+                                object.caCertificate = message.caCertificate;
+                            if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
+                                object.caCertificateSet = message.caCertificateSet;
+                            if (message.secretManagerStoredClientKey != null && message.hasOwnProperty("secretManagerStoredClientKey"))
+                                object.secretManagerStoredClientKey = message.secretManagerStoredClientKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbSslConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbSslConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbSslConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbSslConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbSslConfig";
+                        };
+    
+                        return MongodbSslConfig;
+                    })();
+    
                     v1.MysqlSslConfig = (function() {
     
                         /**
@@ -15951,6 +17733,7 @@
                          * @interface IOracleSslConfig
                          * @property {string|null} [caCertificate] OracleSslConfig caCertificate
                          * @property {boolean|null} [caCertificateSet] OracleSslConfig caCertificateSet
+                         * @property {string|null} [serverCertificateDistinguishedName] OracleSslConfig serverCertificateDistinguishedName
                          */
     
                         /**
@@ -15985,6 +17768,14 @@
                         OracleSslConfig.prototype.caCertificateSet = false;
     
                         /**
+                         * OracleSslConfig serverCertificateDistinguishedName.
+                         * @member {string} serverCertificateDistinguishedName
+                         * @memberof google.cloud.datastream.v1.OracleSslConfig
+                         * @instance
+                         */
+                        OracleSslConfig.prototype.serverCertificateDistinguishedName = "";
+    
+                        /**
                          * Creates a new OracleSslConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.OracleSslConfig
@@ -16012,6 +17803,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.caCertificate);
                             if (message.caCertificateSet != null && Object.hasOwnProperty.call(message, "caCertificateSet"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.caCertificateSet);
+                            if (message.serverCertificateDistinguishedName != null && Object.hasOwnProperty.call(message, "serverCertificateDistinguishedName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.serverCertificateDistinguishedName);
                             return writer;
                         };
     
@@ -16056,6 +17849,10 @@
                                         message.caCertificateSet = reader.bool();
                                         break;
                                     }
+                                case 3: {
+                                        message.serverCertificateDistinguishedName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -16097,6 +17894,9 @@
                             if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
                                 if (typeof message.caCertificateSet !== "boolean")
                                     return "caCertificateSet: boolean expected";
+                            if (message.serverCertificateDistinguishedName != null && message.hasOwnProperty("serverCertificateDistinguishedName"))
+                                if (!$util.isString(message.serverCertificateDistinguishedName))
+                                    return "serverCertificateDistinguishedName: string expected";
                             return null;
                         };
     
@@ -16116,6 +17916,8 @@
                                 message.caCertificate = String(object.caCertificate);
                             if (object.caCertificateSet != null)
                                 message.caCertificateSet = Boolean(object.caCertificateSet);
+                            if (object.serverCertificateDistinguishedName != null)
+                                message.serverCertificateDistinguishedName = String(object.serverCertificateDistinguishedName);
                             return message;
                         };
     
@@ -16135,11 +17937,14 @@
                             if (options.defaults) {
                                 object.caCertificate = "";
                                 object.caCertificateSet = false;
+                                object.serverCertificateDistinguishedName = "";
                             }
                             if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                 object.caCertificate = message.caCertificate;
                             if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
                                 object.caCertificateSet = message.caCertificateSet;
+                            if (message.serverCertificateDistinguishedName != null && message.hasOwnProperty("serverCertificateDistinguishedName"))
+                                object.serverCertificateDistinguishedName = message.serverCertificateDistinguishedName;
                             return object;
                         };
     
@@ -16440,6 +18245,7 @@
                              * @memberof google.cloud.datastream.v1.PostgresqlSslConfig
                              * @interface IServerVerification
                              * @property {string|null} [caCertificate] ServerVerification caCertificate
+                             * @property {string|null} [serverCertificateHostname] ServerVerification serverCertificateHostname
                              */
     
                             /**
@@ -16464,6 +18270,14 @@
                              * @instance
                              */
                             ServerVerification.prototype.caCertificate = "";
+    
+                            /**
+                             * ServerVerification serverCertificateHostname.
+                             * @member {string} serverCertificateHostname
+                             * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification
+                             * @instance
+                             */
+                            ServerVerification.prototype.serverCertificateHostname = "";
     
                             /**
                              * Creates a new ServerVerification instance using the specified properties.
@@ -16491,6 +18305,8 @@
                                     writer = $Writer.create();
                                 if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.caCertificate);
+                                if (message.serverCertificateHostname != null && Object.hasOwnProperty.call(message, "serverCertificateHostname"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serverCertificateHostname);
                                 return writer;
                             };
     
@@ -16531,6 +18347,10 @@
                                             message.caCertificate = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.serverCertificateHostname = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -16569,6 +18389,9 @@
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     if (!$util.isString(message.caCertificate))
                                         return "caCertificate: string expected";
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    if (!$util.isString(message.serverCertificateHostname))
+                                        return "serverCertificateHostname: string expected";
                                 return null;
                             };
     
@@ -16586,6 +18409,8 @@
                                 var message = new $root.google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification();
                                 if (object.caCertificate != null)
                                     message.caCertificate = String(object.caCertificate);
+                                if (object.serverCertificateHostname != null)
+                                    message.serverCertificateHostname = String(object.serverCertificateHostname);
                                 return message;
                             };
     
@@ -16602,10 +18427,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.caCertificate = "";
+                                    object.serverCertificateHostname = "";
+                                }
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     object.caCertificate = message.caCertificate;
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    object.serverCertificateHostname = message.serverCertificateHostname;
                                 return object;
                             };
     
@@ -16647,6 +18476,7 @@
                              * @property {string|null} [clientCertificate] ServerAndClientVerification clientCertificate
                              * @property {string|null} [clientKey] ServerAndClientVerification clientKey
                              * @property {string|null} [caCertificate] ServerAndClientVerification caCertificate
+                             * @property {string|null} [serverCertificateHostname] ServerAndClientVerification serverCertificateHostname
                              */
     
                             /**
@@ -16689,6 +18519,14 @@
                             ServerAndClientVerification.prototype.caCertificate = "";
     
                             /**
+                             * ServerAndClientVerification serverCertificateHostname.
+                             * @member {string} serverCertificateHostname
+                             * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification
+                             * @instance
+                             */
+                            ServerAndClientVerification.prototype.serverCertificateHostname = "";
+    
+                            /**
                              * Creates a new ServerAndClientVerification instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification
@@ -16718,6 +18556,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.clientKey);
                                 if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.caCertificate);
+                                if (message.serverCertificateHostname != null && Object.hasOwnProperty.call(message, "serverCertificateHostname"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.serverCertificateHostname);
                                 return writer;
                             };
     
@@ -16766,6 +18606,10 @@
                                             message.caCertificate = reader.string();
                                             break;
                                         }
+                                    case 5: {
+                                            message.serverCertificateHostname = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -16810,6 +18654,9 @@
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     if (!$util.isString(message.caCertificate))
                                         return "caCertificate: string expected";
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    if (!$util.isString(message.serverCertificateHostname))
+                                        return "serverCertificateHostname: string expected";
                                 return null;
                             };
     
@@ -16831,6 +18678,8 @@
                                     message.clientKey = String(object.clientKey);
                                 if (object.caCertificate != null)
                                     message.caCertificate = String(object.caCertificate);
+                                if (object.serverCertificateHostname != null)
+                                    message.serverCertificateHostname = String(object.serverCertificateHostname);
                                 return message;
                             };
     
@@ -16851,6 +18700,7 @@
                                     object.clientCertificate = "";
                                     object.clientKey = "";
                                     object.caCertificate = "";
+                                    object.serverCertificateHostname = "";
                                 }
                                 if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
                                     object.clientCertificate = message.clientCertificate;
@@ -16858,6 +18708,8 @@
                                     object.clientKey = message.clientKey;
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     object.caCertificate = message.caCertificate;
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    object.serverCertificateHostname = message.serverCertificateHostname;
                                 return object;
                             };
     
@@ -16913,6 +18765,7 @@
                          * @property {google.cloud.datastream.v1.IPostgresqlProfile|null} [postgresqlProfile] ConnectionProfile postgresqlProfile
                          * @property {google.cloud.datastream.v1.ISqlServerProfile|null} [sqlServerProfile] ConnectionProfile sqlServerProfile
                          * @property {google.cloud.datastream.v1.ISalesforceProfile|null} [salesforceProfile] ConnectionProfile salesforceProfile
+                         * @property {google.cloud.datastream.v1.IMongodbProfile|null} [mongodbProfile] ConnectionProfile mongodbProfile
                          * @property {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null} [staticServiceIpConnectivity] ConnectionProfile staticServiceIpConnectivity
                          * @property {google.cloud.datastream.v1.IForwardSshTunnelConnectivity|null} [forwardSshConnectivity] ConnectionProfile forwardSshConnectivity
                          * @property {google.cloud.datastream.v1.IPrivateConnectivity|null} [privateConnectivity] ConnectionProfile privateConnectivity
@@ -17047,6 +18900,14 @@
                         ConnectionProfile.prototype.salesforceProfile = null;
     
                         /**
+                         * ConnectionProfile mongodbProfile.
+                         * @member {google.cloud.datastream.v1.IMongodbProfile|null|undefined} mongodbProfile
+                         * @memberof google.cloud.datastream.v1.ConnectionProfile
+                         * @instance
+                         */
+                        ConnectionProfile.prototype.mongodbProfile = null;
+    
+                        /**
                          * ConnectionProfile staticServiceIpConnectivity.
                          * @member {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null|undefined} staticServiceIpConnectivity
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
@@ -17087,12 +18948,12 @@
     
                         /**
                          * ConnectionProfile profile.
-                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile"|undefined} profile
+                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile"|"mongodbProfile"|undefined} profile
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
                          * @instance
                          */
                         Object.defineProperty(ConnectionProfile.prototype, "profile", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile", "bigqueryProfile", "postgresqlProfile", "sqlServerProfile", "salesforceProfile"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile", "bigqueryProfile", "postgresqlProfile", "sqlServerProfile", "salesforceProfile", "mongodbProfile"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17160,6 +19021,8 @@
                                 $root.google.cloud.datastream.v1.SqlServerProfile.encode(message.sqlServerProfile, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             if (message.salesforceProfile != null && Object.hasOwnProperty.call(message, "salesforceProfile"))
                                 $root.google.cloud.datastream.v1.SalesforceProfile.encode(message.salesforceProfile, writer.uint32(/* id 107, wireType 2 =*/858).fork()).ldelim();
+                            if (message.mongodbProfile != null && Object.hasOwnProperty.call(message, "mongodbProfile"))
+                                $root.google.cloud.datastream.v1.MongodbProfile.encode(message.mongodbProfile, writer.uint32(/* id 108, wireType 2 =*/866).fork()).ldelim();
                             if (message.staticServiceIpConnectivity != null && Object.hasOwnProperty.call(message, "staticServiceIpConnectivity"))
                                 $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.encode(message.staticServiceIpConnectivity, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.forwardSshConnectivity != null && Object.hasOwnProperty.call(message, "forwardSshConnectivity"))
@@ -17275,6 +19138,10 @@
                                     }
                                 case 107: {
                                         message.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 108: {
+                                        message.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 200: {
@@ -17427,6 +19294,16 @@
                                         return "salesforceProfile." + error;
                                 }
                             }
+                            if (message.mongodbProfile != null && message.hasOwnProperty("mongodbProfile")) {
+                                if (properties.profile === 1)
+                                    return "profile: multiple values";
+                                properties.profile = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbProfile.verify(message.mongodbProfile);
+                                    if (error)
+                                        return "mongodbProfile." + error;
+                                }
+                            }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 properties.connectivity = 1;
                                 {
@@ -17530,6 +19407,11 @@
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.salesforceProfile: object expected");
                                 message.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.fromObject(object.salesforceProfile);
                             }
+                            if (object.mongodbProfile != null) {
+                                if (typeof object.mongodbProfile !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.mongodbProfile: object expected");
+                                message.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.fromObject(object.mongodbProfile);
+                            }
                             if (object.staticServiceIpConnectivity != null) {
                                 if (typeof object.staticServiceIpConnectivity !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.staticServiceIpConnectivity: object expected");
@@ -17627,6 +19509,11 @@
                                 object.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.toObject(message.salesforceProfile, options);
                                 if (options.oneofs)
                                     object.profile = "salesforceProfile";
+                            }
+                            if (message.mongodbProfile != null && message.hasOwnProperty("mongodbProfile")) {
+                                object.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.toObject(message.mongodbProfile, options);
+                                if (options.oneofs)
+                                    object.profile = "mongodbProfile";
                             }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 object.staticServiceIpConnectivity = $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.toObject(message.staticServiceIpConnectivity, options);
@@ -26488,6 +28375,1199 @@
                         return SalesforceField;
                     })();
     
+                    v1.MongodbSourceConfig = (function() {
+    
+                        /**
+                         * Properties of a MongodbSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbSourceConfig
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [includeObjects] MongodbSourceConfig includeObjects
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [excludeObjects] MongodbSourceConfig excludeObjects
+                         * @property {number|null} [maxConcurrentBackfillTasks] MongodbSourceConfig maxConcurrentBackfillTasks
+                         */
+    
+                        /**
+                         * Constructs a new MongodbSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbSourceConfig.
+                         * @implements IMongodbSourceConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig=} [properties] Properties to set
+                         */
+                        function MongodbSourceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbSourceConfig includeObjects.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} includeObjects
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.includeObjects = null;
+    
+                        /**
+                         * MongodbSourceConfig excludeObjects.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} excludeObjects
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.excludeObjects = null;
+    
+                        /**
+                         * MongodbSourceConfig maxConcurrentBackfillTasks.
+                         * @member {number} maxConcurrentBackfillTasks
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.maxConcurrentBackfillTasks = 0;
+    
+                        /**
+                         * Creates a new MongodbSourceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig instance
+                         */
+                        MongodbSourceConfig.create = function create(properties) {
+                            return new MongodbSourceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig} message MongodbSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSourceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeObjects != null && Object.hasOwnProperty.call(message, "includeObjects"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.includeObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.excludeObjects != null && Object.hasOwnProperty.call(message, "excludeObjects"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maxConcurrentBackfillTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentBackfillTasks"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentBackfillTasks);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig} message MongodbSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSourceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbSourceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSourceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbSourceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxConcurrentBackfillTasks = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbSourceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSourceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbSourceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbSourceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.includeObjects);
+                                if (error)
+                                    return "includeObjects." + error;
+                            }
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.excludeObjects);
+                                if (error)
+                                    return "excludeObjects." + error;
+                            }
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                if (!$util.isInteger(message.maxConcurrentBackfillTasks))
+                                    return "maxConcurrentBackfillTasks: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbSourceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         */
+                        MongodbSourceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbSourceConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbSourceConfig();
+                            if (object.includeObjects != null) {
+                                if (typeof object.includeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbSourceConfig.includeObjects: object expected");
+                                message.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.includeObjects);
+                            }
+                            if (object.excludeObjects != null) {
+                                if (typeof object.excludeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbSourceConfig.excludeObjects: object expected");
+                                message.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.excludeObjects);
+                            }
+                            if (object.maxConcurrentBackfillTasks != null)
+                                message.maxConcurrentBackfillTasks = object.maxConcurrentBackfillTasks | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbSourceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbSourceConfig} message MongodbSourceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbSourceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.includeObjects = null;
+                                object.excludeObjects = null;
+                                object.maxConcurrentBackfillTasks = 0;
+                            }
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
+                                object.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.includeObjects, options);
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects"))
+                                object.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.excludeObjects, options);
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                object.maxConcurrentBackfillTasks = message.maxConcurrentBackfillTasks;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbSourceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbSourceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbSourceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbSourceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbSourceConfig";
+                        };
+    
+                        return MongodbSourceConfig;
+                    })();
+    
+                    v1.MongodbCluster = (function() {
+    
+                        /**
+                         * Properties of a MongodbCluster.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbCluster
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbDatabase>|null} [databases] MongodbCluster databases
+                         */
+    
+                        /**
+                         * Constructs a new MongodbCluster.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbCluster.
+                         * @implements IMongodbCluster
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbCluster=} [properties] Properties to set
+                         */
+                        function MongodbCluster(properties) {
+                            this.databases = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbCluster databases.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbDatabase>} databases
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @instance
+                         */
+                        MongodbCluster.prototype.databases = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster instance
+                         */
+                        MongodbCluster.create = function create(properties) {
+                            return new MongodbCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCluster message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster} message MongodbCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databases != null && message.databases.length)
+                                for (var i = 0; i < message.databases.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbDatabase.encode(message.databases[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCluster message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster} message MongodbCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCluster.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.databases && message.databases.length))
+                                            message.databases = [];
+                                        message.databases.push($root.google.cloud.datastream.v1.MongodbDatabase.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbCluster message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databases != null && message.hasOwnProperty("databases")) {
+                                if (!Array.isArray(message.databases))
+                                    return "databases: array expected";
+                                for (var i = 0; i < message.databases.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbDatabase.verify(message.databases[i]);
+                                    if (error)
+                                        return "databases." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         */
+                        MongodbCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbCluster)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbCluster();
+                            if (object.databases) {
+                                if (!Array.isArray(object.databases))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbCluster.databases: array expected");
+                                message.databases = [];
+                                for (var i = 0; i < object.databases.length; ++i) {
+                                    if (typeof object.databases[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbCluster.databases: object expected");
+                                    message.databases[i] = $root.google.cloud.datastream.v1.MongodbDatabase.fromObject(object.databases[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbCluster} message MongodbCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.databases = [];
+                            if (message.databases && message.databases.length) {
+                                object.databases = [];
+                                for (var j = 0; j < message.databases.length; ++j)
+                                    object.databases[j] = $root.google.cloud.datastream.v1.MongodbDatabase.toObject(message.databases[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbCluster";
+                        };
+    
+                        return MongodbCluster;
+                    })();
+    
+                    v1.MongodbDatabase = (function() {
+    
+                        /**
+                         * Properties of a MongodbDatabase.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbDatabase
+                         * @property {string|null} [database] MongodbDatabase database
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbCollection>|null} [collections] MongodbDatabase collections
+                         */
+    
+                        /**
+                         * Constructs a new MongodbDatabase.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbDatabase.
+                         * @implements IMongodbDatabase
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase=} [properties] Properties to set
+                         */
+                        function MongodbDatabase(properties) {
+                            this.collections = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbDatabase database.
+                         * @member {string} database
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         */
+                        MongodbDatabase.prototype.database = "";
+    
+                        /**
+                         * MongodbDatabase collections.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbCollection>} collections
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         */
+                        MongodbDatabase.prototype.collections = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbDatabase instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase instance
+                         */
+                        MongodbDatabase.create = function create(properties) {
+                            return new MongodbDatabase(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbDatabase message. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase} message MongodbDatabase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbDatabase.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                            if (message.collections != null && message.collections.length)
+                                for (var i = 0; i < message.collections.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbCollection.encode(message.collections[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbDatabase message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase} message MongodbDatabase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbDatabase.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbDatabase message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbDatabase.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbDatabase();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.database = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.collections && message.collections.length))
+                                            message.collections = [];
+                                        message.collections.push($root.google.cloud.datastream.v1.MongodbCollection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbDatabase message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbDatabase.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbDatabase message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbDatabase.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                if (!$util.isString(message.database))
+                                    return "database: string expected";
+                            if (message.collections != null && message.hasOwnProperty("collections")) {
+                                if (!Array.isArray(message.collections))
+                                    return "collections: array expected";
+                                for (var i = 0; i < message.collections.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCollection.verify(message.collections[i]);
+                                    if (error)
+                                        return "collections." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbDatabase message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         */
+                        MongodbDatabase.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbDatabase)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbDatabase();
+                            if (object.database != null)
+                                message.database = String(object.database);
+                            if (object.collections) {
+                                if (!Array.isArray(object.collections))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbDatabase.collections: array expected");
+                                message.collections = [];
+                                for (var i = 0; i < object.collections.length; ++i) {
+                                    if (typeof object.collections[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbDatabase.collections: object expected");
+                                    message.collections[i] = $root.google.cloud.datastream.v1.MongodbCollection.fromObject(object.collections[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbDatabase message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbDatabase} message MongodbDatabase
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbDatabase.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.collections = [];
+                            if (options.defaults)
+                                object.database = "";
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                object.database = message.database;
+                            if (message.collections && message.collections.length) {
+                                object.collections = [];
+                                for (var j = 0; j < message.collections.length; ++j)
+                                    object.collections[j] = $root.google.cloud.datastream.v1.MongodbCollection.toObject(message.collections[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbDatabase to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbDatabase.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbDatabase
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbDatabase.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbDatabase";
+                        };
+    
+                        return MongodbDatabase;
+                    })();
+    
+                    v1.MongodbCollection = (function() {
+    
+                        /**
+                         * Properties of a MongodbCollection.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbCollection
+                         * @property {string|null} [collection] MongodbCollection collection
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbField>|null} [fields] MongodbCollection fields
+                         */
+    
+                        /**
+                         * Constructs a new MongodbCollection.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbCollection.
+                         * @implements IMongodbCollection
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbCollection=} [properties] Properties to set
+                         */
+                        function MongodbCollection(properties) {
+                            this.fields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbCollection collection.
+                         * @member {string} collection
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         */
+                        MongodbCollection.prototype.collection = "";
+    
+                        /**
+                         * MongodbCollection fields.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbField>} fields
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         */
+                        MongodbCollection.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbCollection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection instance
+                         */
+                        MongodbCollection.create = function create(properties) {
+                            return new MongodbCollection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCollection message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection} message MongodbCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCollection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.collection != null && Object.hasOwnProperty.call(message, "collection"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.collection);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbField.encode(message.fields[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCollection message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection} message MongodbCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCollection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbCollection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCollection.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbCollection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.collection = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.fields && message.fields.length))
+                                            message.fields = [];
+                                        message.fields.push($root.google.cloud.datastream.v1.MongodbField.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbCollection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCollection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbCollection message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbCollection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.collection != null && message.hasOwnProperty("collection"))
+                                if (!$util.isString(message.collection))
+                                    return "collection: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbField.verify(message.fields[i]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbCollection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         */
+                        MongodbCollection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbCollection)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbCollection();
+                            if (object.collection != null)
+                                message.collection = String(object.collection);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbCollection.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i) {
+                                    if (typeof object.fields[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbCollection.fields: object expected");
+                                    message.fields[i] = $root.google.cloud.datastream.v1.MongodbField.fromObject(object.fields[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbCollection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbCollection} message MongodbCollection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbCollection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fields = [];
+                            if (options.defaults)
+                                object.collection = "";
+                            if (message.collection != null && message.hasOwnProperty("collection"))
+                                object.collection = message.collection;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = $root.google.cloud.datastream.v1.MongodbField.toObject(message.fields[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbCollection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbCollection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbCollection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbCollection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbCollection";
+                        };
+    
+                        return MongodbCollection;
+                    })();
+    
+                    v1.MongodbField = (function() {
+    
+                        /**
+                         * Properties of a MongodbField.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbField
+                         * @property {string|null} [field] MongodbField field
+                         */
+    
+                        /**
+                         * Constructs a new MongodbField.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbField.
+                         * @implements IMongodbField
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbField=} [properties] Properties to set
+                         */
+                        function MongodbField(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbField field.
+                         * @member {string} field
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @instance
+                         */
+                        MongodbField.prototype.field = "";
+    
+                        /**
+                         * Creates a new MongodbField instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField instance
+                         */
+                        MongodbField.create = function create(properties) {
+                            return new MongodbField(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbField message. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField} message MongodbField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbField.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbField message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField} message MongodbField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbField.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbField message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbField.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbField();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.field = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbField message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbField.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbField message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbField.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                if (!$util.isString(message.field))
+                                    return "field: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbField message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         */
+                        MongodbField.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbField)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbField();
+                            if (object.field != null)
+                                message.field = String(object.field);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbField message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbField} message MongodbField
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbField.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.field = "";
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                object.field = message.field;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbField to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbField.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbField
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbField";
+                        };
+    
+                        return MongodbField;
+                    })();
+    
                     v1.SourceConfig = (function() {
     
                         /**
@@ -26500,6 +29580,7 @@
                          * @property {google.cloud.datastream.v1.IPostgresqlSourceConfig|null} [postgresqlSourceConfig] SourceConfig postgresqlSourceConfig
                          * @property {google.cloud.datastream.v1.ISqlServerSourceConfig|null} [sqlServerSourceConfig] SourceConfig sqlServerSourceConfig
                          * @property {google.cloud.datastream.v1.ISalesforceSourceConfig|null} [salesforceSourceConfig] SourceConfig salesforceSourceConfig
+                         * @property {google.cloud.datastream.v1.IMongodbSourceConfig|null} [mongodbSourceConfig] SourceConfig mongodbSourceConfig
                          */
     
                         /**
@@ -26565,17 +29646,25 @@
                          */
                         SourceConfig.prototype.salesforceSourceConfig = null;
     
+                        /**
+                         * SourceConfig mongodbSourceConfig.
+                         * @member {google.cloud.datastream.v1.IMongodbSourceConfig|null|undefined} mongodbSourceConfig
+                         * @memberof google.cloud.datastream.v1.SourceConfig
+                         * @instance
+                         */
+                        SourceConfig.prototype.mongodbSourceConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceConfig sourceStreamConfig.
-                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig"|undefined} sourceStreamConfig
+                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig"|"mongodbSourceConfig"|undefined} sourceStreamConfig
                          * @memberof google.cloud.datastream.v1.SourceConfig
                          * @instance
                          */
                         Object.defineProperty(SourceConfig.prototype, "sourceStreamConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig", "postgresqlSourceConfig", "sqlServerSourceConfig", "salesforceSourceConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig", "postgresqlSourceConfig", "sqlServerSourceConfig", "salesforceSourceConfig", "mongodbSourceConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26615,6 +29704,8 @@
                                 $root.google.cloud.datastream.v1.SqlServerSourceConfig.encode(message.sqlServerSourceConfig, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                             if (message.salesforceSourceConfig != null && Object.hasOwnProperty.call(message, "salesforceSourceConfig"))
                                 $root.google.cloud.datastream.v1.SalesforceSourceConfig.encode(message.salesforceSourceConfig, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbSourceConfig != null && Object.hasOwnProperty.call(message, "mongodbSourceConfig"))
+                                $root.google.cloud.datastream.v1.MongodbSourceConfig.encode(message.mongodbSourceConfig, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -26673,6 +29764,10 @@
                                     }
                                 case 104: {
                                         message.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -26762,6 +29857,16 @@
                                         return "salesforceSourceConfig." + error;
                                 }
                             }
+                            if (message.mongodbSourceConfig != null && message.hasOwnProperty("mongodbSourceConfig")) {
+                                if (properties.sourceStreamConfig === 1)
+                                    return "sourceStreamConfig: multiple values";
+                                properties.sourceStreamConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbSourceConfig.verify(message.mongodbSourceConfig);
+                                    if (error)
+                                        return "mongodbSourceConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -26803,6 +29908,11 @@
                                 if (typeof object.salesforceSourceConfig !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceConfig.salesforceSourceConfig: object expected");
                                 message.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.fromObject(object.salesforceSourceConfig);
+                            }
+                            if (object.mongodbSourceConfig != null) {
+                                if (typeof object.mongodbSourceConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceConfig.mongodbSourceConfig: object expected");
+                                message.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.fromObject(object.mongodbSourceConfig);
                             }
                             return message;
                         };
@@ -26848,6 +29958,11 @@
                                 object.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.toObject(message.salesforceSourceConfig, options);
                                 if (options.oneofs)
                                     object.sourceStreamConfig = "salesforceSourceConfig";
+                            }
+                            if (message.mongodbSourceConfig != null && message.hasOwnProperty("mongodbSourceConfig")) {
+                                object.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.toObject(message.mongodbSourceConfig, options);
+                                if (options.oneofs)
+                                    object.sourceStreamConfig = "mongodbSourceConfig";
                             }
                             return object;
                         };
@@ -28317,6 +31432,7 @@
                              * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
                              * @interface ISourceHierarchyDatasets
                              * @property {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null} [datasetTemplate] SourceHierarchyDatasets datasetTemplate
+                             * @property {string|null} [projectId] SourceHierarchyDatasets projectId
                              */
     
                             /**
@@ -28341,6 +31457,23 @@
                              * @instance
                              */
                             SourceHierarchyDatasets.prototype.datasetTemplate = null;
+    
+                            /**
+                             * SourceHierarchyDatasets projectId.
+                             * @member {string|null|undefined} projectId
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @instance
+                             */
+                            SourceHierarchyDatasets.prototype.projectId = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SourceHierarchyDatasets.prototype, "_projectId", {
+                                get: $util.oneOfGetter($oneOfFields = ["projectId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new SourceHierarchyDatasets instance using the specified properties.
@@ -28368,6 +31501,8 @@
                                     writer = $Writer.create();
                                 if (message.datasetTemplate != null && Object.hasOwnProperty.call(message, "datasetTemplate"))
                                     $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.encode(message.datasetTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
                                 return writer;
                             };
     
@@ -28408,6 +31543,10 @@
                                             message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 3: {
+                                            message.projectId = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -28443,10 +31582,16 @@
                             SourceHierarchyDatasets.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate")) {
                                     var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify(message.datasetTemplate);
                                     if (error)
                                         return "datasetTemplate." + error;
+                                }
+                                if (message.projectId != null && message.hasOwnProperty("projectId")) {
+                                    properties._projectId = 1;
+                                    if (!$util.isString(message.projectId))
+                                        return "projectId: string expected";
                                 }
                                 return null;
                             };
@@ -28468,6 +31613,8 @@
                                         throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.datasetTemplate: object expected");
                                     message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.fromObject(object.datasetTemplate);
                                 }
+                                if (object.projectId != null)
+                                    message.projectId = String(object.projectId);
                                 return message;
                             };
     
@@ -28488,6 +31635,11 @@
                                     object.datasetTemplate = null;
                                 if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate"))
                                     object.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.toObject(message.datasetTemplate, options);
+                                if (message.projectId != null && message.hasOwnProperty("projectId")) {
+                                    object.projectId = message.projectId;
+                                    if (options.oneofs)
+                                        object._projectId = "projectId";
+                                }
                                 return object;
                             };
     
@@ -30549,6 +33701,7 @@
                              * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlExcludedObjects] BackfillAllStrategy postgresqlExcludedObjects
                              * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerExcludedObjects] BackfillAllStrategy sqlServerExcludedObjects
                              * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceExcludedObjects] BackfillAllStrategy salesforceExcludedObjects
+                             * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbExcludedObjects] BackfillAllStrategy mongodbExcludedObjects
                              */
     
                             /**
@@ -30606,17 +33759,25 @@
                              */
                             BackfillAllStrategy.prototype.salesforceExcludedObjects = null;
     
+                            /**
+                             * BackfillAllStrategy mongodbExcludedObjects.
+                             * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbExcludedObjects
+                             * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
+                             * @instance
+                             */
+                            BackfillAllStrategy.prototype.mongodbExcludedObjects = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * BackfillAllStrategy excludedObjects.
-                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects"|undefined} excludedObjects
+                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects"|"mongodbExcludedObjects"|undefined} excludedObjects
                              * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
                              * @instance
                              */
                             Object.defineProperty(BackfillAllStrategy.prototype, "excludedObjects", {
-                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects", "postgresqlExcludedObjects", "sqlServerExcludedObjects", "salesforceExcludedObjects"]),
+                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects", "postgresqlExcludedObjects", "sqlServerExcludedObjects", "salesforceExcludedObjects", "mongodbExcludedObjects"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -30654,6 +33815,8 @@
                                     $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerExcludedObjects, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.salesforceExcludedObjects != null && Object.hasOwnProperty.call(message, "salesforceExcludedObjects"))
                                     $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceExcludedObjects, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.mongodbExcludedObjects != null && Object.hasOwnProperty.call(message, "mongodbExcludedObjects"))
+                                    $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbExcludedObjects, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -30708,6 +33871,10 @@
                                         }
                                     case 5: {
                                             message.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -30794,6 +33961,16 @@
                                             return "salesforceExcludedObjects." + error;
                                     }
                                 }
+                                if (message.mongodbExcludedObjects != null && message.hasOwnProperty("mongodbExcludedObjects")) {
+                                    if (properties.excludedObjects === 1)
+                                        return "excludedObjects: multiple values";
+                                    properties.excludedObjects = 1;
+                                    {
+                                        var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbExcludedObjects);
+                                        if (error)
+                                            return "mongodbExcludedObjects." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -30833,6 +34010,11 @@
                                     if (typeof object.salesforceExcludedObjects !== "object")
                                         throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.salesforceExcludedObjects: object expected");
                                     message.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceExcludedObjects);
+                                }
+                                if (object.mongodbExcludedObjects != null) {
+                                    if (typeof object.mongodbExcludedObjects !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.mongodbExcludedObjects: object expected");
+                                    message.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbExcludedObjects);
                                 }
                                 return message;
                             };
@@ -30874,6 +34056,11 @@
                                     object.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceExcludedObjects, options);
                                     if (options.oneofs)
                                         object.excludedObjects = "salesforceExcludedObjects";
+                                }
+                                if (message.mongodbExcludedObjects != null && message.hasOwnProperty("mongodbExcludedObjects")) {
+                                    object.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbExcludedObjects, options);
+                                    if (options.oneofs)
+                                        object.excludedObjects = "mongodbExcludedObjects";
                                 }
                                 return object;
                             };
@@ -31484,6 +34671,7 @@
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null} [postgresqlIdentifier] SourceObjectIdentifier postgresqlIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.ISqlServerObjectIdentifier|null} [sqlServerIdentifier] SourceObjectIdentifier sqlServerIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null} [salesforceIdentifier] SourceObjectIdentifier salesforceIdentifier
+                         * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null} [mongodbIdentifier] SourceObjectIdentifier mongodbIdentifier
                          */
     
                         /**
@@ -31541,17 +34729,25 @@
                          */
                         SourceObjectIdentifier.prototype.salesforceIdentifier = null;
     
+                        /**
+                         * SourceObjectIdentifier mongodbIdentifier.
+                         * @member {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null|undefined} mongodbIdentifier
+                         * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                         * @instance
+                         */
+                        SourceObjectIdentifier.prototype.mongodbIdentifier = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceObjectIdentifier sourceIdentifier.
-                         * @member {"oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier"|undefined} sourceIdentifier
+                         * @member {"oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier"|"mongodbIdentifier"|undefined} sourceIdentifier
                          * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
                          * @instance
                          */
                         Object.defineProperty(SourceObjectIdentifier.prototype, "sourceIdentifier", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier", "postgresqlIdentifier", "sqlServerIdentifier", "salesforceIdentifier"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier", "postgresqlIdentifier", "sqlServerIdentifier", "salesforceIdentifier", "mongodbIdentifier"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -31589,6 +34785,8 @@
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.SqlServerObjectIdentifier.encode(message.sqlServerIdentifier, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.salesforceIdentifier != null && Object.hasOwnProperty.call(message, "salesforceIdentifier"))
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.encode(message.salesforceIdentifier, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.mongodbIdentifier != null && Object.hasOwnProperty.call(message, "mongodbIdentifier"))
+                                $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.encode(message.mongodbIdentifier, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -31643,6 +34841,10 @@
                                     }
                                 case 5: {
                                         message.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31729,6 +34931,16 @@
                                         return "salesforceIdentifier." + error;
                                 }
                             }
+                            if (message.mongodbIdentifier != null && message.hasOwnProperty("mongodbIdentifier")) {
+                                if (properties.sourceIdentifier === 1)
+                                    return "sourceIdentifier: multiple values";
+                                properties.sourceIdentifier = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify(message.mongodbIdentifier);
+                                    if (error)
+                                        return "mongodbIdentifier." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -31768,6 +34980,11 @@
                                 if (typeof object.salesforceIdentifier !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.salesforceIdentifier: object expected");
                                 message.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.fromObject(object.salesforceIdentifier);
+                            }
+                            if (object.mongodbIdentifier != null) {
+                                if (typeof object.mongodbIdentifier !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.mongodbIdentifier: object expected");
+                                message.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.fromObject(object.mongodbIdentifier);
                             }
                             return message;
                         };
@@ -31809,6 +35026,11 @@
                                 object.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.toObject(message.salesforceIdentifier, options);
                                 if (options.oneofs)
                                     object.sourceIdentifier = "salesforceIdentifier";
+                            }
+                            if (message.mongodbIdentifier != null && message.hasOwnProperty("mongodbIdentifier")) {
+                                object.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.toObject(message.mongodbIdentifier, options);
+                                if (options.oneofs)
+                                    object.sourceIdentifier = "mongodbIdentifier";
                             }
                             return object;
                         };
@@ -32958,6 +36180,235 @@
                             };
     
                             return SalesforceObjectIdentifier;
+                        })();
+    
+                        SourceObjectIdentifier.MongodbObjectIdentifier = (function() {
+    
+                            /**
+                             * Properties of a MongodbObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @interface IMongodbObjectIdentifier
+                             * @property {string|null} [database] MongodbObjectIdentifier database
+                             * @property {string|null} [collection] MongodbObjectIdentifier collection
+                             */
+    
+                            /**
+                             * Constructs a new MongodbObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @classdesc Represents a MongodbObjectIdentifier.
+                             * @implements IMongodbObjectIdentifier
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier=} [properties] Properties to set
+                             */
+                            function MongodbObjectIdentifier(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MongodbObjectIdentifier database.
+                             * @member {string} database
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             */
+                            MongodbObjectIdentifier.prototype.database = "";
+    
+                            /**
+                             * MongodbObjectIdentifier collection.
+                             * @member {string} collection
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             */
+                            MongodbObjectIdentifier.prototype.collection = "";
+    
+                            /**
+                             * Creates a new MongodbObjectIdentifier instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier instance
+                             */
+                            MongodbObjectIdentifier.create = function create(properties) {
+                                return new MongodbObjectIdentifier(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MongodbObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier} message MongodbObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MongodbObjectIdentifier.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                                if (message.collection != null && Object.hasOwnProperty.call(message, "collection"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.collection);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MongodbObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier} message MongodbObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MongodbObjectIdentifier.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MongodbObjectIdentifier message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MongodbObjectIdentifier.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.database = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.collection = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MongodbObjectIdentifier message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MongodbObjectIdentifier.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MongodbObjectIdentifier message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MongodbObjectIdentifier.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    if (!$util.isString(message.database))
+                                        return "database: string expected";
+                                if (message.collection != null && message.hasOwnProperty("collection"))
+                                    if (!$util.isString(message.collection))
+                                        return "collection: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MongodbObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             */
+                            MongodbObjectIdentifier.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier)
+                                    return object;
+                                var message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier();
+                                if (object.database != null)
+                                    message.database = String(object.database);
+                                if (object.collection != null)
+                                    message.collection = String(object.collection);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MongodbObjectIdentifier message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} message MongodbObjectIdentifier
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MongodbObjectIdentifier.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.database = "";
+                                    object.collection = "";
+                                }
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    object.database = message.database;
+                                if (message.collection != null && message.hasOwnProperty("collection"))
+                                    object.collection = message.collection;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MongodbObjectIdentifier to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MongodbObjectIdentifier.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MongodbObjectIdentifier
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MongodbObjectIdentifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier";
+                            };
+    
+                            return MongodbObjectIdentifier;
                         })();
     
                         return SourceObjectIdentifier;
@@ -56330,6 +59781,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -56365,6 +59817,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -56396,6 +59856,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -56445,6 +59907,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -56498,6 +59964,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -56540,6 +60011,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -56558,8 +60034,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -56567,6 +60045,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -58389,6 +61869,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -58413,6 +61894,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -58440,6 +61929,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -58478,6 +61969,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -58520,6 +62015,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -58540,6 +62040,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -58556,10 +62061,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -58588,6 +62097,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -59465,6 +63226,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -59476,6 +63238,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -59489,6 +63252,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -59516,6 +63287,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -59546,7 +63320,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -59554,6 +63328,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -59596,6 +63393,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -59616,6 +63421,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -59632,10 +63444,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -60272,6 +64092,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
@@ -61259,6 +65324,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -61273,6 +65339,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -61297,6 +65364,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -61319,6 +65387,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -61368,6 +65437,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -61490,6 +65567,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -61560,6 +65640,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -61664,6 +65750,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -61718,6 +65811,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -61769,6 +65863,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -61832,6 +65933,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -61898,6 +66003,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -61954,6 +66060,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -62002,6 +66113,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -62108,6 +66220,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -62159,6 +66279,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -62249,6 +66371,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -62364,6 +66490,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -62463,6 +66598,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -62492,6 +66647,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -62537,6 +66693,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -64581,6 +68739,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -64642,6 +68801,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -64678,6 +68845,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -64738,6 +68907,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -64808,6 +68981,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -64857,6 +69039,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -64881,6 +69083,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -64901,6 +69104,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -67219,6 +71424,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -67340,6 +71546,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -67413,6 +71627,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -67512,6 +71728,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -67648,6 +71868,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -67837,6 +72062,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -67934,6 +72164,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -67966,6 +72197,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -68238,6 +72471,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -68278,6 +72512,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -68376,6 +72614,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -68970,6 +73690,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -69014,6 +73735,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -69051,6 +73780,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -69100,6 +73831,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -69154,6 +73889,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -69187,6 +73927,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -69219,6 +73964,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -69226,6 +73972,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -70693,6 +75441,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -70759,6 +75509,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -70794,6 +75560,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -70852,6 +75622,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -70942,6 +75720,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -71083,6 +75881,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -71106,6 +75952,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -71119,6 +75967,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -71244,6 +76096,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -71430,6 +76495,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -71447,6 +76513,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -71494,6 +76561,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -71546,6 +76617,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -71655,7 +76730,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -71682,12 +76758,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -71713,10 +76797,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -71757,8 +76843,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -71801,6 +76891,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -71813,10 +76904,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -71843,6 +76939,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -71885,10 +76985,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -71907,13 +77012,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -73126,6 +78234,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

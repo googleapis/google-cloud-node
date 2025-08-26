@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CmekConfigService',
-    filename: './cmek-config-service.js',
+    library: 'AssistantService',
+    filename: './assistant-service.js',
   },
   node: {
     child_process: 'empty',
