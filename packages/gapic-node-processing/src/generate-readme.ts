@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {removeRegexFromNestedProperty, traverseDirectory} from './combine-libraries';
+import {ensureDirectoryExists, removeRegexFromNestedProperty, traverseDirectory} from './combine-libraries';
 import * as nj from 'nunjucks';
 import {POST_PROCESSING_TEMPLATES_PATH} from './generate-index';
 
@@ -195,5 +195,6 @@ export async function readAndWriteToReadme(
   }
   contents = contents.replace(stringToReplace, replacementString);
   console.log(`Writing ${contents} to ${writeFilePath}`);
+  await ensureDirectoryExists(writeFilePath);
   await fs.writeFile(writeFilePath, contents);
 }

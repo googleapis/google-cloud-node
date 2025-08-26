@@ -1,5 +1,5 @@
 {
-  "packages/gapic-node-templating": "0.0.0",
+  "packages/gapic-node-processing": "0.0.0",
   "packages/google-ai-generativelanguage": "3.3.0",
   "packages/google-analytics-admin": "8.3.0",
   "packages/google-analytics-data": "5.2.0",

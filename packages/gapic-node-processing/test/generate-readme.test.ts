@@ -3,10 +3,7 @@ import * as assert from 'assert';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import {POST_PROCESSING_TEMPLATES_PATH} from '../src/generate-index';
-import {
-  LIB_POST_COMBINATION,
-  LIB_PRE_COMBINATION,
-} from './combine-libraries.test';
+import {LIB_POST_COMBINATION} from './combine-libraries.test';
 import {
   getSampleName,
   getSamplesMetadata,
@@ -15,7 +12,6 @@ import {
   readAndWriteToReadme,
 } from '../src/generate-readme';
 import * as nj from 'nunjucks';
-import {writeFile} from 'fs';
 
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures');
 const COMBINED_LIBRARY_PATH = path.resolve(

@@ -169,7 +169,7 @@ export async function generateFinalDirectoryPath(
  * @param {string} filePath The full path including the file name.
  * @returns {Promise<void>} A promise that resolves when all directories are created.
  */
-async function ensureDirectoryExists(filePath: string): Promise<void> {
+export async function ensureDirectoryExists(filePath: string): Promise<void> {
   const dirPath = path.dirname(filePath);
   try {
     await fs.mkdir(dirPath, {recursive: true});
