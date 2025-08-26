@@ -7462,7 +7462,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         },
@@ -7598,6 +7598,11 @@
                             "executableCode",
                             "codeExecutionResult"
                           ]
+                        },
+                        "metadata": {
+                          "oneof": [
+                            "videoMetadata"
+                          ]
                         }
                       },
                       "fields": {
@@ -7629,9 +7634,23 @@
                           "type": "CodeExecutionResult",
                           "id": 10
                         },
+                        "videoMetadata": {
+                          "type": "VideoMetadata",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "thought": {
                           "type": "bool",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7664,6 +7683,31 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VideoMetadata": {
+                      "fields": {
+                        "startOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fps": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -7752,13 +7796,31 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "urlContext": {
+                          "type": "UrlContext",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
                         "GoogleSearch": {
-                          "fields": {}
+                          "fields": {
+                            "timeRangeFilter": {
+                              "type": "google.type.Interval",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
+                    },
+                    "UrlContext": {
+                      "fields": {}
                     },
                     "GoogleSearchRetrieval": {
                       "fields": {
@@ -7849,9 +7911,19 @@
                             "parameters"
                           ]
                         },
+                        "_parametersJsonSchema": {
+                          "oneof": [
+                            "parametersJsonSchema"
+                          ]
+                        },
                         "_response": {
                           "oneof": [
                             "response"
+                          ]
+                        },
+                        "_responseJsonSchema": {
+                          "oneof": [
+                            "responseJsonSchema"
                           ]
                         }
                       },
@@ -7878,12 +7950,44 @@
                             "proto3_optional": true
                           }
                         },
+                        "parametersJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "response": {
                           "type": "Schema",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "behavior": {
+                          "type": "Behavior",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Behavior": {
+                          "values": {
+                            "UNSPECIFIED": 0,
+                            "BLOCKING": 1,
+                            "NON_BLOCKING": 2
                           }
                         }
                       }
@@ -7922,6 +8026,13 @@
                       }
                     },
                     "FunctionResponse": {
+                      "oneofs": {
+                        "_scheduling": {
+                          "oneof": [
+                            "scheduling"
+                          ]
+                        }
+                      },
                       "fields": {
                         "id": {
                           "type": "string",
@@ -7942,6 +8053,31 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "willContinue": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scheduling": {
+                          "type": "Scheduling",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Scheduling": {
+                          "values": {
+                            "SCHEDULING_UNSPECIFIED": 0,
+                            "SILENT": 1,
+                            "WHEN_IDLE": 2,
+                            "INTERRUPT": 3
                           }
                         }
                       }
@@ -8046,6 +8182,20 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "minProperties": {
+                          "type": "int64",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxProperties": {
+                          "type": "int64",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "minimum": {
                           "type": "double",
                           "id": 11,
@@ -8060,6 +8210,34 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "minLength": {
+                          "type": "int64",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxLength": {
+                          "type": "int64",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pattern": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "example": {
+                          "type": "google.protobuf.Value",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "anyOf": {
@@ -8569,7 +8747,7 @@
                       },
                       "fields": {
                         "videoMetadata": {
-                          "type": "VideoMetadata",
+                          "type": "VideoFileMetadata",
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
@@ -8682,7 +8860,7 @@
                         }
                       }
                     },
-                    "VideoMetadata": {
+                    "VideoFileMetadata": {
                       "fields": {
                         "videoDuration": {
                           "type": "google.protobuf.Duration",
@@ -9159,11 +9337,48 @@
                         }
                       }
                     },
+                    "SpeakerVoiceConfig": {
+                      "fields": {
+                        "speaker": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "voiceConfig": {
+                          "type": "VoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "SpeakerVoiceConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SpeechConfig": {
                       "fields": {
                         "voiceConfig": {
                           "type": "VoiceConfig",
                           "id": 1
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "languageCode": {
                           "type": "string",
@@ -9348,6 +9563,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "responseJsonSchema": {
+                          "type": "google.protobuf.Value",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "presencePenalty": {
                           "type": "float",
                           "id": 15,
@@ -9515,6 +9737,13 @@
                         "modelVersion": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "responseId": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -9695,6 +9924,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "urlContextMetadata": {
+                          "type": "UrlContextMetadata",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -9711,7 +9947,38 @@
                             "PROHIBITED_CONTENT": 8,
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10,
-                            "IMAGE_SAFETY": 11
+                            "IMAGE_SAFETY": 11,
+                            "UNEXPECTED_TOOL_CALL": 12
+                          }
+                        }
+                      }
+                    },
+                    "UrlContextMetadata": {
+                      "fields": {
+                        "urlMetadata": {
+                          "rule": "repeated",
+                          "type": "UrlMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UrlMetadata": {
+                      "fields": {
+                        "retrievedUrl": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "urlRetrievalStatus": {
+                          "type": "UrlRetrievalStatus",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "UrlRetrievalStatus": {
+                          "values": {
+                            "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
+                            "URL_RETRIEVAL_STATUS_SUCCESS": 1,
+                            "URL_RETRIEVAL_STATUS_ERROR": 2
                           }
                         }
                       }
@@ -10612,6 +10879,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "inputAudioTranscription": {
+                          "type": "AudioTranscriptionConfig",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "outputAudioTranscription": {
                           "type": "AudioTranscriptionConfig",
                           "id": 11,
@@ -10818,9 +11092,23 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "inputTranscription": {
+                          "type": "BidiGenerateContentTranscription",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "outputTranscription": {
                           "type": "BidiGenerateContentTranscription",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "urlContextMetadata": {
+                          "type": "UrlContextMetadata",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11380,6 +11668,10 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "thinking": {
+                          "type": "bool",
+                          "id": 15
                         }
                       }
                     },
@@ -13073,6 +13365,10 @@
                         "chunk": {
                           "type": "Chunk",
                           "id": 2
+                        },
+                        "document": {
+                          "type": "Document",
+                          "id": 3
                         }
                       }
                     },
@@ -18785,6 +19081,30 @@
                 },
                 "metadataType": {
                   "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
+            "java_multiple_files": true,
+            "java_outer_classname": "IntervalProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Interval": {
+              "fields": {
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 1
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
                   "id": 2
                 }
               }
