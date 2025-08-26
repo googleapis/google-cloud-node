@@ -44,6 +44,7 @@ function main(message, updateMask) {
    *  authentication (/chat/api/guides/auth/service-accounts).)
    *  - `accessory_widgets`  (Requires app
    *  authentication (/chat/api/guides/auth/service-accounts).)
+   *  - `quoted_message_metadata` (Only allows removal of the quoted message.)
    */
   // const updateMask = {}
   /**

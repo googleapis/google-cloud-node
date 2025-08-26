@@ -895,6 +895,8 @@ export class ChatServiceClient {
  *
  *   - `accessory_widgets`  (Requires [app
  *   authentication](/chat/api/guides/auth/service-accounts).)
+ *
+ *   - `quoted_message_metadata` (Only allows removal of the quoted message.)
  * @param {boolean} [request.allowMissing]
  *   Optional. If `true` and the message isn't found, a new message is created
  *   and `updateMask` is ignored. The specified message ID must be

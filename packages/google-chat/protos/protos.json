@@ -4405,7 +4405,7 @@
                       "type": "QuotedMessageMetadata",
                       "id": 39,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
                     "attachedGifs": {
@@ -4447,7 +4447,7 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Message"
                       }
                     },
@@ -4455,7 +4455,7 @@
                       "type": "google.protobuf.Timestamp",
                       "id": 2,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     }
                   }
