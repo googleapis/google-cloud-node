@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e5913a6b39805b6e7a5f397fe5ed6ac16766f130",
+          "message": "Add initial files for google.cloud.cloudsecuritycompliance.v1",
+          "issues": [
+            "6618"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "4488c868-7db1-48cc-bd73-9ea20a42a174",
+      "createTime": "2025-08-26T19:25:31.482Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6caf062a9899f410ff8421202c696fbf9b50f4e3",
           "message": "[video-transcoder] add support for automatically generating subtitle for input videos",
           "issues": [
@@ -61977,5 +61994,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-25T15:29:58.156Z"
+  "updateTime": "2025-08-26T19:25:31.482Z"
 }

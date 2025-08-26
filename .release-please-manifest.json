@@ -209,5 +209,6 @@
   "packages/google-cloud-managedkafka-schemaregistry": "0.1.0",
   "packages/google-cloud-licensemanager": "0.1.0",
   "packages/google-cloud-configdelivery": "0.1.0",
-  "packages/google-cloud-saasplatform-saasservicemgmt": "0.1.0"
+  "packages/google-cloud-saasplatform-saasservicemgmt": "0.1.0",
+  "packages/google-cloud-cloudsecuritycompliance": "0.1.0"
 }
