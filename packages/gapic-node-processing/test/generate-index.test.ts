@@ -27,7 +27,7 @@ import {
   LIB_POST_COMBINATION,
   LIB_PRE_COMBINATION,
 } from './combine-libraries.test';
-import { combineLibraries } from '../src/combine-libraries';
+import {combineLibraries} from '../src/combine-libraries';
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
 describe('generate index.ts', () => {
   beforeEach(async () => {
@@ -35,19 +35,17 @@ describe('generate index.ts', () => {
       path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
       path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
     );
-  })
+  });
 
-  afterEach( async() => {
+  afterEach(async () => {
     // Even though the library combination should delete the current library,
     // this allows us to ensure that our output is expected.
     try {
-      await fs.rm(
-        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
-      );
+      await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION));
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION}`);
     }
-  })
+  });
   it('should extract versions', async () => {
     const versions = await extractVersions(
       path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
@@ -108,7 +106,7 @@ describe('generate index.ts', () => {
     // Confirm all versions were generated
     assert.match(
       contents,
-      /export default {v1, v1p1beta1, v2, AdaptationClient, SpeechClient};/
+      /export default {v1, v1p1beta1, v2, AdaptationClient, SpeechClient};/,
     );
     // Confirm default version is exported
     assert.match(contents, /const AdaptationClient = v1.AdaptationClient;/);

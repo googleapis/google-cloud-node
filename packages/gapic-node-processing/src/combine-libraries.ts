@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Dirent } from "fs";
+import {Dirent} from 'fs';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
-
 
 /**
  * Recursively removes a regex pattern from a specified property in an array of objects.
@@ -25,7 +24,11 @@ const path = require('path');
  * @param property The nested property to modify (e.g., 'a.b.c').
  * @param stringToRemove The string to remove.
  */
-export function removeRegexFromNestedProperty(array: any[], property: string, stringToRemove: string): void {
+export function removeRegexFromNestedProperty(
+  array: any[],
+  property: string,
+  stringToRemove: string,
+): void {
   const propertyPath = property.split('.');
 
   array.forEach(item => {
@@ -44,7 +47,10 @@ export function removeRegexFromNestedProperty(array: any[], property: string, st
     const lastKey = propertyPath[propertyPath.length - 1];
     if (currentObject && typeof currentObject[lastKey] === 'string') {
       // Modify the string property by replacing the regex with an empty string
-      currentObject[lastKey] = currentObject[lastKey].replace(stringToRemove, '');
+      currentObject[lastKey] = currentObject[lastKey].replace(
+        stringToRemove,
+        '',
+      );
     }
   });
 }
@@ -56,14 +62,16 @@ export function removeRegexFromNestedProperty(array: any[], property: string, st
  * @param filePaths An array of objects, where each object has a 'filePath' property.
  * @returns A promise that resolves when all file contents have been read and added to the array.
  */
-async function readFilesContent(filePaths: { filePath: string }[]): Promise<void> {
-  const promises = filePaths.map(async (item) => {
+async function readFilesContent(
+  filePaths: {filePath: string}[],
+): Promise<void> {
+  const promises = filePaths.map(async item => {
     try {
       const content = await fs.readFile(item.filePath, 'utf-8');
-      Object.assign(item, { content });
+      Object.assign(item, {content});
     } catch (error) {
       console.error(`Failed to read file at ${item.filePath}:`, error);
-      Object.assign(item, { content: null });
+      Object.assign(item, {content: null});
     }
   });
 
@@ -118,22 +126,25 @@ export async function traverseDirectory(
  * @param {string} currentPath - The path to the root directory containing all library versions.
  * @returns {Promise<Array<{filePath: string; content: string}>>} A promise that resolves to an array of objects, each containing a unique file path and its content.
  */
-export async function generateFinalDirectoryPath(currentPath: string): Promise<Array<{ filePath: string; content: string; }>> {
+export async function generateFinalDirectoryPath(
+  currentPath: string,
+): Promise<Array<{filePath: string; content: string}>> {
   // Get a full list of all the file paths in all the libraries
   let fullPaths: {filePath: string}[] = [];
   let fullPathsAndContents: {filePath: string; content: string}[] = [];
   const directories = await fs.readdir(currentPath);
   for (const directory of directories) {
-    fullPaths = 
-      await traverseDirectory(
-        path.join(currentPath, directory),
-        []
-      );
+    fullPaths = await traverseDirectory(path.join(currentPath, directory), []);
     await readFilesContent(fullPaths);
-    removeRegexFromNestedProperty(fullPaths, 'filePath', path.join(currentPath, directory));
-    fullPathsAndContents = fullPathsAndContents.concat(fullPaths as {filePath: string; content: string}[]);
+    removeRegexFromNestedProperty(
+      fullPaths,
+      'filePath',
+      path.join(currentPath, directory),
+    );
+    fullPathsAndContents = fullPathsAndContents.concat(
+      fullPaths as {filePath: string; content: string}[],
+    );
   }
-  console.log(fullPathsAndContents);
 
   // Now we need to clean out duplicates
   const uniquePaths = new Set();
@@ -145,8 +156,11 @@ export async function generateFinalDirectoryPath(currentPath: string): Promise<A
       uniquefullPathAndContent.push(fullPathAndContent);
     }
   }
-  uniquefullPathAndContent.forEach(x => console.log(x))
-  return uniquefullPathAndContent as unknown as {filePath: string; content: string}[];
+  uniquefullPathAndContent.forEach(x => console.log(x));
+  return uniquefullPathAndContent as unknown as {
+    filePath: string;
+    content: string;
+  }[];
 }
 
 /**
@@ -187,8 +201,7 @@ export async function combineLibraries(
   console.log(
     `Generating all unique paths in all library versions from ${sourcePath} to ${destinationPath}`,
   );
-  const uniquefullPathAndContent =
-    await generateFinalDirectoryPath(sourcePath);
+  const uniquefullPathAndContent = await generateFinalDirectoryPath(sourcePath);
 
   console.log(
     `Creating new library in ${destinationPath} with ${uniquefullPathAndContent.length} items`,
@@ -204,7 +217,7 @@ export async function combineLibraries(
  * @returns {Promise<void>} A promise that resolves when all files are written.
  */
 export async function writeFilesToGivenLocation(
- dirToWrite: string,
+  dirToWrite: string,
   files: {filePath: string; content: string}[],
 ): Promise<void> {
   if (!dirToWrite) {

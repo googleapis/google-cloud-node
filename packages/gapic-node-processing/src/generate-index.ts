@@ -85,7 +85,9 @@ export async function extractClients(currentPath: string) {
     const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
     if (await fs.stat(indexFile)) {
       const clientsRegexMatch = [
-        ...(await fs.readFile(indexFile, 'utf8')).matchAll(CLIENT_EXTRACTION_REGEX),
+        ...(await fs.readFile(indexFile, 'utf8')).matchAll(
+          CLIENT_EXTRACTION_REGEX,
+        ),
       ];
       clientsAndVersions.push({
         version: directory,
@@ -149,90 +151,97 @@ export async function generateIndexTs(
   console.log(`Successfully wrote: ${outputPath}`);
 }
 interface VersionSpec {
-	  version: string; // Stores the "best" version found so far
-	  major: number;
-	  precedence: number;
-	  preReleaseQualifier: number; // For e.g., beta1 vs beta2
-	}
-	
-	// Comparison Logic:
-	// 1. Higher Precedence (Stable > Beta > Alpha)
-	// 2. Higher Major Version
-	// 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
-	// 4. If everything else is equal, the current one is just as good
-	
-	function isANewAHighestVersion(currentVersionSpec: VersionSpec, newVersionSpec: VersionSpec): boolean {
-	  // Current version has higher precedence (e.g., stable over beta)
-	  if (newVersionSpec.precedence > currentVersionSpec.precedence) {
-	    return true;
-	  }
-	  if (newVersionSpec.precedence === currentVersionSpec.precedence &&
-	    newVersionSpec.major > currentVersionSpec.major) {
-	    return true;
-	  }
-	  if (newVersionSpec.precedence === currentVersionSpec.precedence &&
-	          newVersionSpec.major === currentVersionSpec.major &&
-	          newVersionSpec.preReleaseQualifier > currentVersionSpec.preReleaseQualifier) {
-	    return true;
-	  }
-	  return false;
-	}
-	
-	// In case a default version isn't provided, this function should
-	// offer a default version
-	/**
-	 * Gets the highest version with precedence from a list of versions.
-	 * Precedence is defined as: stable > beta > alpha.
-	 * If two versions have the same precedence, the one with the higher major version is chosen.
-	 * If two versions have the same precedence and major version, the one with the higher pre-release qualifier is chosen (e.g., beta2 > beta1).
-	 *
-	 * @param {string[]} versions - An array of version strings.
-	 * @returns {string} The highest version with precedence.
-	 */
-	export function getHighestVersionWithPrecedence(versions: string[]) {
-	  if (!versions || versions.length === 0) {
-	    throw new Error('No versions found in library; cannot generate index.ts');
-	  }
-	
-	  // Define the precedence of pre-release types
-	  const precedence = {
-	    '': 3, // Stable (no suffix) is highest precedence
-	    beta: 2,
-	    alpha: 1,
-	  };
-	
-	  let currentVersionSpec: VersionSpec = {
-	    version: versions[0], // Stores the "best" version found so far
-	    major: -1,
-	    precedence: -1,
-	    preReleaseQualifier: -1, // For e.g., beta1 vs beta2
-	  };
-	
-	  for (const version of versions) {
-	    const match = version.match(/^v(\d+)(alpha|beta(\d*))?$/);
-	
-	    if (match) {
-	      const majorVersion = parseInt(match[1], 10);
-	      const preReleaseType = match[2]
-	        ? match[2].startsWith('beta')
-	          ? 'beta'
-	          : 'alpha'
-	        : '';
-	      const preReleaseQualifier = match[3] ? parseInt(match[3], 10) : 0; // For beta1, beta2 etc.
-	
-	      const currentPrecedence = precedence[preReleaseType];
-	      const newVersionSpec: VersionSpec = {
-	        version: version,
-	        major: majorVersion,
-	        precedence: currentPrecedence,
-	        preReleaseQualifier: preReleaseQualifier
-	      };
-	
-	      if (isANewAHighestVersion(currentVersionSpec, newVersionSpec)) {
-	        currentVersionSpec = newVersionSpec;
-	      }
-	    }
-	  }
-	
-	  return currentVersionSpec.version;
-	}
+  version: string; // Stores the "best" version found so far
+  major: number;
+  precedence: number;
+  preReleaseQualifier: number; // For e.g., beta1 vs beta2
+}
+
+// Comparison Logic:
+// 1. Higher Precedence (Stable > Beta > Alpha)
+// 2. Higher Major Version
+// 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
+// 4. If everything else is equal, the current one is just as good
+
+function isANewAHighestVersion(
+  currentVersionSpec: VersionSpec,
+  newVersionSpec: VersionSpec,
+): boolean {
+  // Current version has higher precedence (e.g., stable over beta)
+  if (newVersionSpec.precedence > currentVersionSpec.precedence) {
+    return true;
+  }
+  if (
+    newVersionSpec.precedence === currentVersionSpec.precedence &&
+    newVersionSpec.major > currentVersionSpec.major
+  ) {
+    return true;
+  }
+  if (
+    newVersionSpec.precedence === currentVersionSpec.precedence &&
+    newVersionSpec.major === currentVersionSpec.major &&
+    newVersionSpec.preReleaseQualifier > currentVersionSpec.preReleaseQualifier
+  ) {
+    return true;
+  }
+  return false;
+}
+
+// In case a default version isn't provided, this function should
+// offer a default version
+/**
+ * Gets the highest version with precedence from a list of versions.
+ * Precedence is defined as: stable > beta > alpha.
+ * If two versions have the same precedence, the one with the higher major version is chosen.
+ * If two versions have the same precedence and major version, the one with the higher pre-release qualifier is chosen (e.g., beta2 > beta1).
+ *
+ * @param {string[]} versions - An array of version strings.
+ * @returns {string} The highest version with precedence.
+ */
+export function getHighestVersionWithPrecedence(versions: string[]) {
+  if (!versions || versions.length === 0) {
+    throw new Error('No versions found in library; cannot generate index.ts');
+  }
+
+  // Define the precedence of pre-release types
+  const precedence = {
+    '': 3, // Stable (no suffix) is highest precedence
+    beta: 2,
+    alpha: 1,
+  };
+
+  let currentVersionSpec: VersionSpec = {
+    version: versions[0], // Stores the "best" version found so far
+    major: -1,
+    precedence: -1,
+    preReleaseQualifier: -1, // For e.g., beta1 vs beta2
+  };
+
+  for (const version of versions) {
+    const match = version.match(/^v(\d+)(alpha|beta(\d*))?$/);
+
+    if (match) {
+      const majorVersion = parseInt(match[1], 10);
+      const preReleaseType = match[2]
+        ? match[2].startsWith('beta')
+          ? 'beta'
+          : 'alpha'
+        : '';
+      const preReleaseQualifier = match[3] ? parseInt(match[3], 10) : 0; // For beta1, beta2 etc.
+
+      const currentPrecedence = precedence[preReleaseType];
+      const newVersionSpec: VersionSpec = {
+        version: version,
+        major: majorVersion,
+        precedence: currentPrecedence,
+        preReleaseQualifier: preReleaseQualifier,
+      };
+
+      if (isANewAHighestVersion(currentVersionSpec, newVersionSpec)) {
+        currentVersionSpec = newVersionSpec;
+      }
+    }
+  }
+
+  return currentVersionSpec.version;
+}

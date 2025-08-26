@@ -28,57 +28,59 @@ export interface CliArgs {
 
 const DEFAULT_REPLACEMENT_STRING_SAMPLES = '[//]: # "samples"';
 const DEFAULT_REPLACEMENT_STRING_RELEASE_LEVEL = '[//]: # "releaseLevel"';
-	
-	
-	function validateCliArgs(argv: CliArgs) {
-	  if (!argv['initial-generation'] && (!argv['string-to-replace'] || !argv['replacement-string'])) {
-	    throw new Error(
-	      'Post-initial generate readme was selected, but no string to replace/replacement was given',
-	    );
-	  }
-	  if (argv['initial-generation'] && !argv['release-level']) {
-	      console.log(
-	        'No release level was selected for initial generation; will generate with preview',
-	    );
-	  }
-	}
-	
-	function getReplacementStringSamples(argv: CliArgs) {
-	  let stringToReplaceForSampleTable = argv['replacement-string-samples'];
-    if (argv['initial-generation'] && !stringToReplaceForSampleTable) {
-	    console.log(
-	          `Initial readme generation was selected, but no string to replace the samples table was given. `+
-	          `Will use '[//]: # "samples"'`,
-	        );
-	    return DEFAULT_REPLACEMENT_STRING_SAMPLES;
-	  }
-	  return stringToReplaceForSampleTable;
-	
-	}
-	
-	function getReplacementStringReleaseLevel(argv: CliArgs) {
-	  let stringToReplaceForReleaseLevel = argv['replacement-string-release-level'];
-    if (argv['initial-generation'] && !stringToReplaceForReleaseLevel) {
-	    console.log(
-	          `Initial readme generation was selected, but no string to replace the release level was given. `+
-	          `Will use '[//]: # "releaseLevel"'`,
-	        );
-	    return DEFAULT_REPLACEMENT_STRING_RELEASE_LEVEL;
-	  }
-	  return stringToReplaceForReleaseLevel
-	}
-	
-	function generateArgsForInitialReadme(argv: CliArgs, writeDestination: string) {
-    const stringToReplaceForSampleTable = getReplacementStringSamples(argv);
-	  const stringToReplaceForReleaseLevel = getReplacementStringReleaseLevel(argv);
-	  return {
-	    currentLibrary: argv['source-path'],
-	    stringToReplaceForSampleTable: stringToReplaceForSampleTable!,
-	    stringToReplaceForReleaseLevel: stringToReplaceForReleaseLevel!,
-	    releaseLevel: argv['release-level'],
-	    writeLibrary: writeDestination,
-	  };
-	}
+
+function validateCliArgs(argv: CliArgs) {
+  if (
+    !argv['initial-generation'] &&
+    (!argv['string-to-replace'] || !argv['replacement-string'])
+  ) {
+    throw new Error(
+      'Post-initial generate readme was selected, but no string to replace/replacement was given',
+    );
+  }
+  if (argv['initial-generation'] && !argv['release-level']) {
+    console.log(
+      'No release level was selected for initial generation; will generate with preview',
+    );
+  }
+}
+
+function getReplacementStringSamples(argv: CliArgs) {
+  const stringToReplaceForSampleTable = argv['replacement-string-samples'];
+  if (argv['initial-generation'] && !stringToReplaceForSampleTable) {
+    console.log(
+      'Initial readme generation was selected, but no string to replace the samples table was given. ' +
+        'Will use \'[//]: # "samples"\'',
+    );
+    return DEFAULT_REPLACEMENT_STRING_SAMPLES;
+  }
+  return stringToReplaceForSampleTable;
+}
+
+function getReplacementStringReleaseLevel(argv: CliArgs) {
+  const stringToReplaceForReleaseLevel =
+    argv['replacement-string-release-level'];
+  if (argv['initial-generation'] && !stringToReplaceForReleaseLevel) {
+    console.log(
+      'Initial readme generation was selected, but no string to replace the release level was given. ' +
+        'Will use \'[//]: # "releaseLevel"\'',
+    );
+    return DEFAULT_REPLACEMENT_STRING_RELEASE_LEVEL;
+  }
+  return stringToReplaceForReleaseLevel;
+}
+
+function generateArgsForInitialReadme(argv: CliArgs, writeDestination: string) {
+  const stringToReplaceForSampleTable = getReplacementStringSamples(argv);
+  const stringToReplaceForReleaseLevel = getReplacementStringReleaseLevel(argv);
+  return {
+    currentLibrary: argv['source-path'],
+    stringToReplaceForSampleTable: stringToReplaceForSampleTable!,
+    stringToReplaceForReleaseLevel: stringToReplaceForReleaseLevel!,
+    releaseLevel: argv['release-level'],
+    writeLibrary: writeDestination,
+  };
+}
 
 /**
  * Command module for bootstrapping a library.
@@ -141,9 +143,9 @@ export const generateReadme: yargs.CommandModule<{}, CliArgs> = {
     const destinationPath = argv['destination-path'] || argv['source-path'];
     validateCliArgs(argv);
     if (argv['initial-generation']) {
-	    const args = generateArgsForInitialReadme(argv, destinationPath);
-	    console.log(`Generating initial readme with ${JSON.stringify(args)}`);
-	    await initialGenerateReadMe(args);
+      const args = generateArgsForInitialReadme(argv, destinationPath);
+      console.log(`Generating initial readme with ${JSON.stringify(args)}`);
+      await initialGenerateReadMe(args);
     } else {
       // validateCliArgs will confirm these strings exist
       await readAndWriteToReadme(
@@ -153,5 +155,5 @@ export const generateReadme: yargs.CommandModule<{}, CliArgs> = {
         destinationPath,
       );
     }
-  }
+  },
 };

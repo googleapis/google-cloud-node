@@ -197,4 +197,3 @@ export async function readAndWriteToReadme(
   console.log(`Writing ${contents} to ${writeFilePath}`);
   await fs.writeFile(writeFilePath, contents);
 }
-
