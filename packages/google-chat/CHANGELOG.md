@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.18.0...chat-v0.19.0) (2025-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* [chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#6619](https://github.com/googleapis/google-cloud-node/issues/6619))
+
+### Bug Fixes
+
+* [chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#6619](https://github.com/googleapis/google-cloud-node/issues/6619)) ([71b30db](https://github.com/googleapis/google-cloud-node/commit/71b30db34f8c83c1b2395270fd7ff8fb2621b669))
+
 ## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.17.0...chat-v0.18.0) (2025-08-04)
 
 

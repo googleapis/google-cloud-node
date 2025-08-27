@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.3.0...generativelanguage-v3.4.0) (2025-08-27)
+
+
+### Features
+
+* [generativelanguage] add support for thought_signature ([#6616](https://github.com/googleapis/google-cloud-node/issues/6616)) ([20de60f](https://github.com/googleapis/google-cloud-node/commit/20de60f347970414459bcd168425903f11851993))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v3.2.0...generativelanguage-v3.3.0) (2025-07-09)
 
 

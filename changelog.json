@@ -4,6 +4,58 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "71b30db34f8c83c1b2395270fd7ff8fb2621b669",
+          "message": "[chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata`",
+          "issues": [
+            "6619"
+          ],
+          "breakingChangeNote": "[chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#6619](https://github.com/googleapis/google-cloud-node/issues/6619))"
+        }
+      ],
+      "version": "0.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "32126146-b70a-43ea-b100-10df60ffd96c",
+      "createTime": "2025-08-27T20:58:49.633Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "66f10812282f69475c3fa923ddd7641e331bb7be",
+          "message": "[texttospeech] Support promptable voices by specifying a model name and a prompt",
+          "issues": [
+            "6617"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "5c52dfed-61af-4cac-aa00-595443422ad8",
+      "createTime": "2025-08-27T20:58:49.605Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "20de60f347970414459bcd168425903f11851993",
+          "message": "[generativelanguage] add support for thought_signature",
+          "issues": [
+            "6616"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "97111a52-3a1e-4b85-a6eb-1a285e8cc587",
+      "createTime": "2025-08-27T20:58:49.582Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "e5913a6b39805b6e7a5f397fe5ed6ac16766f130",
           "message": "Add initial files for google.cloud.cloudsecuritycompliance.v1",
@@ -61994,5 +62046,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-26T19:25:31.482Z"
+  "updateTime": "2025-08-27T20:58:49.633Z"
 }
