@@ -22,6 +22,10 @@ const SRC_PATH = 'src';
 const INDEX_PATH = 'index.ts';
 const TEMPLATE_FILE_NAME = 'index.ts.njk';
 
+export interface VersionsAndClients {
+  version: string
+  clients: string[]
+}
 export const POST_PROCESSING_TEMPLATES_PATH = path.resolve(
   __dirname,
   '../../templates/post-processing-templates',
@@ -80,7 +84,7 @@ export async function extractVersions(currentPath: string) {
  */
 export async function extractClients(currentPath: string) {
   const directories = await extractVersions(currentPath);
-  const clientsAndVersions: {version: string; clients: string[]}[] = [];
+  const clientsAndVersions: VersionsAndClients[] = [];
   for (const directory of directories) {
     const indexFile = path.join(currentPath, SRC_PATH, directory, INDEX_PATH);
     if (await fs.stat(indexFile)) {
@@ -108,6 +112,7 @@ export async function extractClients(currentPath: string) {
  *
  * @param {string} currentLibrary - The path to the library's root directory.
  * @param {string} [defaultVersion] - An optional version string to explicitly set as the default.
+ * @param {string} [isEsm] - An optional flag whether the library should be generated with ESM syntax
  */
 export async function generateIndexTs(
   currentLibrary: string,
@@ -133,7 +138,7 @@ export async function generateIndexTs(
   );
 
   // Render index.ts
-  const variables = {versions, defaultClientAndVersions, isEsm: isEsm || false};
+  const variables = {versions, defaultClientAndVersions, isEsm: isEsm ?? false};
 
   // Create a new Nunjucks environment configured to load from the templateDirectory
   // This is necessary due to occurring in a Bazel environment or locally
@@ -151,6 +156,7 @@ export async function generateIndexTs(
   await fs.writeFile(outputPath, compiledTemplate);
   console.log(`Successfully wrote: ${outputPath}`);
 }
+
 interface VersionSpec {
   version: string; // Stores the "best" version found so far
   major: number;
@@ -164,7 +170,7 @@ interface VersionSpec {
 // 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
 // 4. If everything else is equal, the current one is just as good
 
-function isANewAHighestVersion(
+function isNewAHighestVersion(
   currentVersionSpec: VersionSpec,
   newVersionSpec: VersionSpec,
 ): boolean {
@@ -238,7 +244,7 @@ export function getHighestVersionWithPrecedence(versions: string[]) {
         preReleaseQualifier: preReleaseQualifier,
       };
 
-      if (isANewAHighestVersion(currentVersionSpec, newVersionSpec)) {
+      if (isNewAHighestVersion(currentVersionSpec, newVersionSpec)) {
         currentVersionSpec = newVersionSpec;
       }
     }

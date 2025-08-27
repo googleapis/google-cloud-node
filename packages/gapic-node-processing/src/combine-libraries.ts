@@ -17,6 +17,14 @@ import {Dirent} from 'fs';
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
 
+export interface FilePaths {
+  filePath: string
+}
+
+export interface FilePathsAndContents {
+  filePath: string,
+  content: string
+}
 /**
  * Recursively removes a regex pattern from a specified property in an array of objects.
  *
@@ -63,7 +71,7 @@ export function removeRegexFromNestedProperty(
  * @returns A promise that resolves when all file contents have been read and added to the array.
  */
 async function readFilesContent(
-  filePaths: {filePath: string}[],
+  filePaths: FilePaths[],
 ): Promise<void> {
   const promises = filePaths.map(async item => {
     try {
@@ -128,7 +136,7 @@ export async function traverseDirectory(
  */
 export async function generateFinalDirectoryPath(
   currentPath: string,
-): Promise<Array<{filePath: string; content: string}>> {
+): Promise<Array<FilePathsAndContents>> {
   // Get a full list of all the file paths in all the libraries
   let fullPaths: {filePath: string}[] = [];
   let fullPathsAndContents: {filePath: string; content: string}[] = [];
@@ -142,12 +150,12 @@ export async function generateFinalDirectoryPath(
       path.join(currentPath, directory),
     );
     fullPathsAndContents = fullPathsAndContents.concat(
-      fullPaths as {filePath: string; content: string}[],
+      fullPaths as FilePathsAndContents[],
     );
   }
 
   // Now we need to clean out duplicates
-  const uniquePaths = new Set();
+  const uniquePaths = new Set<string>();
   const uniquefullPathAndContent = [];
 
   for (const fullPathAndContent of fullPathsAndContents) {
@@ -174,8 +182,8 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
   try {
     await fs.mkdir(dirPath, {recursive: true});
   } catch (error) {
+    // EEXIST means it already exists, which is fine
     if ((error as any).code !== 'EEXIST') {
-      // EEXIST means it already exists, which is fine
       console.error(`Error ensuring directory ${dirPath} exists:`, error);
       throw error;
     }

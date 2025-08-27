@@ -15,12 +15,14 @@
 import yargs = require('yargs');
 import {combineLibraries} from '../combine-libraries';
 import {generateIndexTs} from '../generate-index';
+
 export interface CliArgs {
   'source-path': string;
   'default-version'?: string;
   'destination-path'?: string;
   'is-esm'?: boolean;
 }
+
 /**
  * Command module for bootstrapping a library.
  *

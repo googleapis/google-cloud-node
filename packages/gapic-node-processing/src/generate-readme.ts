@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ensureDirectoryExists, removeRegexFromNestedProperty, traverseDirectory} from './combine-libraries';
+import {ensureDirectoryExists, traverseDirectory, FilePaths} from './combine-libraries';
 import * as nj from 'nunjucks';
 import {POST_PROCESSING_TEMPLATES_PATH} from './generate-index';
+import { CliArgsReadme } from './commands/generate-readme';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
@@ -31,6 +32,12 @@ export const RELEASE_LEVEL_PREVIEW = `This library is considered to be in **prev
 work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.`;
 
+interface SampleMetadata {
+  filePath: string,
+  content: string,
+  title: string
+}
+
 const DEFAULT_RELEASE_LEVEL = 'preview';
 
 /**
@@ -41,33 +48,36 @@ const DEFAULT_RELEASE_LEVEL = 'preview';
  * the file path, content, and title for each sample.
  *
  * @param {string} currentLibrary - The path to the library's root directory.
- * @returns {Promise<{filePath: string; content: string; title: string}[]>} A promise that resolves to an array of sample metadata objects.
+ * @returns {Promise<SampleMetadata[]>} A promise that resolves to an array of sample metadata objects.
  */
 export async function getSamplesMetadata(
   currentLibrary: string,
-): Promise<{filePath: string; content: string; title: string}[]> {
-  // Let's remove the main library from the samples paths
+): Promise<SampleMetadata[]> {
+  // Let's separate out the absolute path so that we
+  // can later remove it from the filePath (so that it
+  // is relative to the working directory). 
+  // For example for CURRENT LIBRARY: google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech
+  // we would produce stringToRemove: /Users/sofialeon/gcp/google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library
+  // which we then use to remove from the absolute filePath (so
+  // /google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js
+  // becomes just google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js (the relative path to the new directory)
   const stringToRemove = currentLibrary
     .split('/')
     .slice(0, currentLibrary.split('/').length - 1)
     .join('/');
-  let samples = await traverseDirectory(
+
+  const samples = await traverseDirectory(
     path.join(currentLibrary, SAMPLES_PATH),
     [], 
   );
-  removeRegexFromNestedProperty(samples, 'filePath', stringToRemove)
   samples.map(sample => {
-    // Here, the 'getSampleName' refers to the exported function
+    sample.filePath = sample.filePath.replace(stringToRemove, '').replace('-nodejs', '');
     Object.assign(sample, {title: getSampleName(sample)});
   });
-  // Remove 'nodejs' from the library title
-  removeRegexFromNestedProperty(samples, 'filePath', '-nodejs')
-  // Since we later assign the title property, it should exist
-  return samples as unknown as {
-    filePath: string;
-    content: string;
-    title: string;
-  }[];
+  console.log(samples)
+  // Since we later assign the title property, we can coerce it into
+  // this type
+  return samples as unknown as SampleMetadata[];
 }
 
 /**
@@ -77,7 +87,7 @@ export async function getSamplesMetadata(
  * stripping the file extension, API version, and replacing underscores with spaces.
  * If the path is not in the expected format, it logs an error and returns the original path.
  *
- * @param {{filePath: string; content: string}} sample - The sample object containing the file path.
+ * @param {FilePaths} sample - The sample object containing the file path.
  * @returns {string} The formatted name of the sample.
  */
 export function getSampleName(sample: {
@@ -103,8 +113,6 @@ export function getSampleName(sample: {
   return sampleName;
 }
 
-// We have two readme generations because the initial generation step
-// will be a little different than what's available during post-processing
 /**
  * Generates the initial README file for a library by compiling templates and replacing placeholders.
  *
@@ -112,7 +120,7 @@ export function getSampleName(sample: {
  * and injects it along with the appropriate release level message into the README.md
  * template.
  *
- * @param {{currentLibrary: string; stringToReplaceForSampleTable: string; stringToReplaceForReleaseLevel: string; writeLibrary: string; releaseLevel?: string;}} args - An object containing the arguments for the function.
+ * @param {CliArgsReadme} args - An object containing the arguments for the function.
  * @param {string} args.currentLibrary - The path to the library's root directory.
  * @param {string} args.stringToReplaceForSampleTable - The placeholder string to be replaced with the samples table.
  * @param {string} args.stringToReplaceForReleaseLevel - The placeholder string to be replaced with the release level message.

@@ -15,7 +15,7 @@
 import yargs = require('yargs');
 import {initialGenerateReadMe, readAndWriteToReadme} from '../generate-readme';
 
-export interface CliArgs {
+export interface CliArgsReadme {
   'source-path': string;
   'initial-generation'?: boolean;
   'destination-path'?: string;
@@ -29,7 +29,7 @@ export interface CliArgs {
 const DEFAULT_REPLACEMENT_STRING_SAMPLES = '[//]: # "samples"';
 const DEFAULT_REPLACEMENT_STRING_RELEASE_LEVEL = '[//]: # "releaseLevel"';
 
-function validateCliArgs(argv: CliArgs) {
+function validateCliArgs(argv: CliArgsReadme) {
   if (
     !argv['initial-generation'] &&
     (!argv['string-to-replace'] || !argv['replacement-string'])
@@ -45,7 +45,7 @@ function validateCliArgs(argv: CliArgs) {
   }
 }
 
-function getReplacementStringSamples(argv: CliArgs) {
+function getReplacementStringSamples(argv: CliArgsReadme) {
   const stringToReplaceForSampleTable = argv['replacement-string-samples'];
   if (argv['initial-generation'] && !stringToReplaceForSampleTable) {
     console.log(
@@ -57,7 +57,7 @@ function getReplacementStringSamples(argv: CliArgs) {
   return stringToReplaceForSampleTable;
 }
 
-function getReplacementStringReleaseLevel(argv: CliArgs) {
+function getReplacementStringReleaseLevel(argv: CliArgsReadme) {
   const stringToReplaceForReleaseLevel =
     argv['replacement-string-release-level'];
   if (argv['initial-generation'] && !stringToReplaceForReleaseLevel) {
@@ -70,7 +70,7 @@ function getReplacementStringReleaseLevel(argv: CliArgs) {
   return stringToReplaceForReleaseLevel;
 }
 
-function generateArgsForInitialReadme(argv: CliArgs, writeDestination: string) {
+function generateArgsForInitialReadme(argv: CliArgsReadme, writeDestination: string) {
   const stringToReplaceForSampleTable = getReplacementStringSamples(argv);
   const stringToReplaceForReleaseLevel = getReplacementStringReleaseLevel(argv);
   return {
@@ -87,7 +87,7 @@ function generateArgsForInitialReadme(argv: CliArgs, writeDestination: string) {
  *
  * This module defines a yargs command to generate a README.md
  */
-export const generateReadme: yargs.CommandModule<{}, CliArgs> = {
+export const generateReadme: yargs.CommandModule<{}, CliArgsReadme> = {
   command: 'generate-readme',
   describe: 'Combines the versions for a given API into a single library',
   builder(yargs) {
@@ -131,15 +131,15 @@ export const generateReadme: yargs.CommandModule<{}, CliArgs> = {
    * Yargs command handler for generating a combined library.
    *
    * @param {CliArgs} argv - The command line arguments
-   * @param {CliArgs} source-path: path in which a pre-combined library lives
-   * @param {CliArgs} destination-path: path where to copy over the library
-   * @param {CliArgs} initial-generation: path in which a pre-combined library lives; defaults to false
-   * @param {CliArgs} release-level: what is the release level of the library (default is preview)
-   * @param {CliArgs} string-to-replace: string to replace in the readme
-   * @param {CliArgs} replacement-string-samples: string to replace with the string-to-replace for the samples table in the readme (only used with initial generation)
-   * @param {CliArgs} replacement-string-release-level: string to replace with the string-to-replace for the releaseLevel in the readme (only used with initial generation)
+   * source-path: path in which a pre-combined library lives
+   * destination-path: path where to copy over the library
+   * initial-generation: path in which a pre-combined library lives; defaults to false
+   * release-level: what is the release level of the library (default is preview)
+   * string-to-replace: string to replace in the readme
+   * replacement-string-samples: string to replace with the string-to-replace for the samples table in the readme (only used with initial generation)
+   * replacement-string-release-level: string to replace with the string-to-replace for the releaseLevel in the readme (only used with initial generation)
    */
-  async handler(argv: CliArgs) {
+  async handler(argv: CliArgsReadme) {
     const destinationPath = argv['destination-path'] || argv['source-path'];
     validateCliArgs(argv);
     if (argv['initial-generation']) {

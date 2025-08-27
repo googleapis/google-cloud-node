@@ -69,7 +69,7 @@ describe('generate readme.ts', () => {
     assert.ok(samples.map(x => x.title).includes('undelete recognizer'));
 
     // Assert content exists
-    assert.ok(samples.map(x => x.content));
+    assert.ok(samples.map(x => x.content).length);
   });
 
   it('should NOT throw if the sample name is not in the correct format; just return the name', async () => {
