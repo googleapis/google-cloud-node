@@ -9028,6 +9028,9 @@ export namespace google {
 
                         /** WorkerConfig diskSizeGb */
                         diskSizeGb?: (number|Long|string|null);
+
+                        /** WorkerConfig enableNestedVirtualization */
+                        enableNestedVirtualization?: (boolean|null);
                     }
 
                     /** Represents a WorkerConfig. */
@@ -9044,6 +9047,9 @@ export namespace google {
 
                         /** WorkerConfig diskSizeGb. */
                         public diskSizeGb: (number|Long|string);
+
+                        /** WorkerConfig enableNestedVirtualization. */
+                        public enableNestedVirtualization?: (boolean|null);
 
                         /**
                          * Creates a new WorkerConfig instance using the specified properties.

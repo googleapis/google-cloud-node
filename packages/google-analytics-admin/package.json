@@ -1,6 +1,6 @@
 {
   "name": "@google-analytics/admin",
-  "version": "8.3.0",
+  "version": "9.0.0",
   "description": "Admin client for Node.js",
   "repository": {
     "type": "git",

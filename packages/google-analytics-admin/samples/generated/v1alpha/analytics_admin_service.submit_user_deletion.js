@@ -44,8 +44,16 @@ function main(name) {
    */
   // const appInstanceId = 'abc123'
   /**
-   *  The un-hashed, unencrypted, user-provided
-   *  data (https://support.google.com/analytics/answer/14077171).
+   *  User-provided
+   *  data (https://support.google.com/analytics/answer/14077171).  May contain
+   *  either one email address or one phone number.
+   *  Email addresses should be normalized as such:
+   *  * lowercase
+   *  * remove periods before @ for gmail.com/googlemail.com addresses
+   *  * remove all spaces
+   *  Phone numbers should be normalized as such:
+   *  * remove all non digit characters
+   *  * add + prefix
    */
   // const userProvidedData = 'abc123'
   /**

@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const OrderTrackingSignalsServiceClient = v1beta.OrderTrackingSignalsServiceClient;
-type OrderTrackingSignalsServiceClient = v1beta.OrderTrackingSignalsServiceClient;
+const OrderTrackingSignalsServiceClient = v1.OrderTrackingSignalsServiceClient;
+type OrderTrackingSignalsServiceClient = v1.OrderTrackingSignalsServiceClient;
 
 export {v1, v1beta, OrderTrackingSignalsServiceClient};
 export default {v1, v1beta, OrderTrackingSignalsServiceClient};

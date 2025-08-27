@@ -430,16 +430,6 @@
                 "deleteChannelGroup"
               ]
             },
-            "SetAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "setAutomatedGa4ConfigurationOptOut"
-              ]
-            },
-            "FetchAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "fetchAutomatedGa4ConfigurationOptOut"
-              ]
-            },
             "CreateBigQueryLink": {
               "methods": [
                 "createBigQueryLink"
@@ -468,26 +458,6 @@
             "UpdateEnhancedMeasurementSettings": {
               "methods": [
                 "updateEnhancedMeasurementSettings"
-              ]
-            },
-            "CreateConnectedSiteTag": {
-              "methods": [
-                "createConnectedSiteTag"
-              ]
-            },
-            "DeleteConnectedSiteTag": {
-              "methods": [
-                "deleteConnectedSiteTag"
-              ]
-            },
-            "ListConnectedSiteTags": {
-              "methods": [
-                "listConnectedSiteTags"
-              ]
-            },
-            "FetchConnectedGa4Property": {
-              "methods": [
-                "fetchConnectedGa4Property"
               ]
             },
             "GetAdSenseLink": {
@@ -658,6 +628,11 @@
             "GetSubpropertySyncConfig": {
               "methods": [
                 "getSubpropertySyncConfig"
+              ]
+            },
+            "GetReportingIdentitySettings": {
+              "methods": [
+                "getReportingIdentitySettings"
               ]
             },
             "ListAccounts": {
@@ -1288,16 +1263,6 @@
                 "deleteChannelGroup"
               ]
             },
-            "SetAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "setAutomatedGa4ConfigurationOptOut"
-              ]
-            },
-            "FetchAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "fetchAutomatedGa4ConfigurationOptOut"
-              ]
-            },
             "CreateBigQueryLink": {
               "methods": [
                 "createBigQueryLink"
@@ -1326,26 +1291,6 @@
             "UpdateEnhancedMeasurementSettings": {
               "methods": [
                 "updateEnhancedMeasurementSettings"
-              ]
-            },
-            "CreateConnectedSiteTag": {
-              "methods": [
-                "createConnectedSiteTag"
-              ]
-            },
-            "DeleteConnectedSiteTag": {
-              "methods": [
-                "deleteConnectedSiteTag"
-              ]
-            },
-            "ListConnectedSiteTags": {
-              "methods": [
-                "listConnectedSiteTags"
-              ]
-            },
-            "FetchConnectedGa4Property": {
-              "methods": [
-                "fetchConnectedGa4Property"
               ]
             },
             "GetAdSenseLink": {
@@ -1516,6 +1461,11 @@
             "GetSubpropertySyncConfig": {
               "methods": [
                 "getSubpropertySyncConfig"
+              ]
+            },
+            "GetReportingIdentitySettings": {
+              "methods": [
+                "getReportingIdentitySettings"
               ]
             },
             "ListAccounts": {

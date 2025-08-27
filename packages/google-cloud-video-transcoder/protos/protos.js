@@ -1786,6 +1786,7 @@
                              * @property {string|null} [key] Input key
                              * @property {string|null} [uri] Input uri
                              * @property {google.cloud.video.transcoder.v1.IPreprocessingConfig|null} [preprocessingConfig] Input preprocessingConfig
+                             * @property {google.cloud.video.transcoder.v1.IInputAttributes|null} [attributes] Input attributes
                              */
     
                             /**
@@ -1828,6 +1829,14 @@
                             Input.prototype.preprocessingConfig = null;
     
                             /**
+                             * Input attributes.
+                             * @member {google.cloud.video.transcoder.v1.IInputAttributes|null|undefined} attributes
+                             * @memberof google.cloud.video.transcoder.v1.Input
+                             * @instance
+                             */
+                            Input.prototype.attributes = null;
+    
+                            /**
                              * Creates a new Input instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.Input
@@ -1857,6 +1866,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
                                 if (message.preprocessingConfig != null && Object.hasOwnProperty.call(message, "preprocessingConfig"))
                                     $root.google.cloud.video.transcoder.v1.PreprocessingConfig.encode(message.preprocessingConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                    $root.google.cloud.video.transcoder.v1.InputAttributes.encode(message.attributes, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1905,6 +1916,10 @@
                                             message.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 4: {
+                                            message.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1951,6 +1966,11 @@
                                     if (error)
                                         return "preprocessingConfig." + error;
                                 }
+                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                    var error = $root.google.cloud.video.transcoder.v1.InputAttributes.verify(message.attributes);
+                                    if (error)
+                                        return "attributes." + error;
+                                }
                                 return null;
                             };
     
@@ -1975,6 +1995,11 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.Input.preprocessingConfig: object expected");
                                     message.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.fromObject(object.preprocessingConfig);
                                 }
+                                if (object.attributes != null) {
+                                    if (typeof object.attributes !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Input.attributes: object expected");
+                                    message.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.fromObject(object.attributes);
+                                }
                                 return message;
                             };
     
@@ -1995,6 +2020,7 @@
                                     object.key = "";
                                     object.uri = "";
                                     object.preprocessingConfig = null;
+                                    object.attributes = null;
                                 }
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     object.key = message.key;
@@ -2002,6 +2028,8 @@
                                     object.uri = message.uri;
                                 if (message.preprocessingConfig != null && message.hasOwnProperty("preprocessingConfig"))
                                     object.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.toObject(message.preprocessingConfig, options);
+                                if (message.attributes != null && message.hasOwnProperty("attributes"))
+                                    object.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.toObject(message.attributes, options);
                                 return object;
                             };
     
@@ -9453,6 +9481,554 @@
                             })();
     
                             return PreprocessingConfig;
+                        })();
+    
+                        v1.TrackDefinition = (function() {
+    
+                            /**
+                             * Properties of a TrackDefinition.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @interface ITrackDefinition
+                             * @property {number|null} [inputTrack] TrackDefinition inputTrack
+                             * @property {Array.<string>|null} [languages] TrackDefinition languages
+                             * @property {boolean|null} [detectLanguages] TrackDefinition detectLanguages
+                             * @property {Array.<string>|null} [detectedLanguages] TrackDefinition detectedLanguages
+                             */
+    
+                            /**
+                             * Constructs a new TrackDefinition.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @classdesc Represents a TrackDefinition.
+                             * @implements ITrackDefinition
+                             * @constructor
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition=} [properties] Properties to set
+                             */
+                            function TrackDefinition(properties) {
+                                this.languages = [];
+                                this.detectedLanguages = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TrackDefinition inputTrack.
+                             * @member {number|null|undefined} inputTrack
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.inputTrack = null;
+    
+                            /**
+                             * TrackDefinition languages.
+                             * @member {Array.<string>} languages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.languages = $util.emptyArray;
+    
+                            /**
+                             * TrackDefinition detectLanguages.
+                             * @member {boolean} detectLanguages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.detectLanguages = false;
+    
+                            /**
+                             * TrackDefinition detectedLanguages.
+                             * @member {Array.<string>} detectedLanguages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.detectedLanguages = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(TrackDefinition.prototype, "_inputTrack", {
+                                get: $util.oneOfGetter($oneOfFields = ["inputTrack"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TrackDefinition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition=} [properties] Properties to set
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition instance
+                             */
+                            TrackDefinition.create = function create(properties) {
+                                return new TrackDefinition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TrackDefinition message. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition} message TrackDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrackDefinition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.inputTrack != null && Object.hasOwnProperty.call(message, "inputTrack"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.inputTrack);
+                                if (message.languages != null && message.languages.length)
+                                    for (var i = 0; i < message.languages.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.languages[i]);
+                                if (message.detectLanguages != null && Object.hasOwnProperty.call(message, "detectLanguages"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.detectLanguages);
+                                if (message.detectedLanguages != null && message.detectedLanguages.length)
+                                    for (var i = 0; i < message.detectedLanguages.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.detectedLanguages[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TrackDefinition message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition} message TrackDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrackDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TrackDefinition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrackDefinition.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.TrackDefinition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.inputTrack = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.languages && message.languages.length))
+                                                message.languages = [];
+                                            message.languages.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.detectLanguages = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.detectedLanguages && message.detectedLanguages.length))
+                                                message.detectedLanguages = [];
+                                            message.detectedLanguages.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TrackDefinition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrackDefinition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TrackDefinition message.
+                             * @function verify
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TrackDefinition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.inputTrack != null && message.hasOwnProperty("inputTrack")) {
+                                    properties._inputTrack = 1;
+                                    if (!$util.isInteger(message.inputTrack))
+                                        return "inputTrack: integer expected";
+                                }
+                                if (message.languages != null && message.hasOwnProperty("languages")) {
+                                    if (!Array.isArray(message.languages))
+                                        return "languages: array expected";
+                                    for (var i = 0; i < message.languages.length; ++i)
+                                        if (!$util.isString(message.languages[i]))
+                                            return "languages: string[] expected";
+                                }
+                                if (message.detectLanguages != null && message.hasOwnProperty("detectLanguages"))
+                                    if (typeof message.detectLanguages !== "boolean")
+                                        return "detectLanguages: boolean expected";
+                                if (message.detectedLanguages != null && message.hasOwnProperty("detectedLanguages")) {
+                                    if (!Array.isArray(message.detectedLanguages))
+                                        return "detectedLanguages: array expected";
+                                    for (var i = 0; i < message.detectedLanguages.length; ++i)
+                                        if (!$util.isString(message.detectedLanguages[i]))
+                                            return "detectedLanguages: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TrackDefinition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             */
+                            TrackDefinition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.transcoder.v1.TrackDefinition)
+                                    return object;
+                                var message = new $root.google.cloud.video.transcoder.v1.TrackDefinition();
+                                if (object.inputTrack != null)
+                                    message.inputTrack = object.inputTrack | 0;
+                                if (object.languages) {
+                                    if (!Array.isArray(object.languages))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.TrackDefinition.languages: array expected");
+                                    message.languages = [];
+                                    for (var i = 0; i < object.languages.length; ++i)
+                                        message.languages[i] = String(object.languages[i]);
+                                }
+                                if (object.detectLanguages != null)
+                                    message.detectLanguages = Boolean(object.detectLanguages);
+                                if (object.detectedLanguages) {
+                                    if (!Array.isArray(object.detectedLanguages))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.TrackDefinition.detectedLanguages: array expected");
+                                    message.detectedLanguages = [];
+                                    for (var i = 0; i < object.detectedLanguages.length; ++i)
+                                        message.detectedLanguages[i] = String(object.detectedLanguages[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TrackDefinition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.TrackDefinition} message TrackDefinition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TrackDefinition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.languages = [];
+                                    object.detectedLanguages = [];
+                                }
+                                if (options.defaults)
+                                    object.detectLanguages = false;
+                                if (message.inputTrack != null && message.hasOwnProperty("inputTrack")) {
+                                    object.inputTrack = message.inputTrack;
+                                    if (options.oneofs)
+                                        object._inputTrack = "inputTrack";
+                                }
+                                if (message.languages && message.languages.length) {
+                                    object.languages = [];
+                                    for (var j = 0; j < message.languages.length; ++j)
+                                        object.languages[j] = message.languages[j];
+                                }
+                                if (message.detectLanguages != null && message.hasOwnProperty("detectLanguages"))
+                                    object.detectLanguages = message.detectLanguages;
+                                if (message.detectedLanguages && message.detectedLanguages.length) {
+                                    object.detectedLanguages = [];
+                                    for (var j = 0; j < message.detectedLanguages.length; ++j)
+                                        object.detectedLanguages[j] = message.detectedLanguages[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TrackDefinition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TrackDefinition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TrackDefinition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TrackDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.transcoder.v1.TrackDefinition";
+                            };
+    
+                            return TrackDefinition;
+                        })();
+    
+                        v1.InputAttributes = (function() {
+    
+                            /**
+                             * Properties of an InputAttributes.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @interface IInputAttributes
+                             * @property {Array.<google.cloud.video.transcoder.v1.ITrackDefinition>|null} [trackDefinitions] InputAttributes trackDefinitions
+                             */
+    
+                            /**
+                             * Constructs a new InputAttributes.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @classdesc Represents an InputAttributes.
+                             * @implements IInputAttributes
+                             * @constructor
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes=} [properties] Properties to set
+                             */
+                            function InputAttributes(properties) {
+                                this.trackDefinitions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputAttributes trackDefinitions.
+                             * @member {Array.<google.cloud.video.transcoder.v1.ITrackDefinition>} trackDefinitions
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @instance
+                             */
+                            InputAttributes.prototype.trackDefinitions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new InputAttributes instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes=} [properties] Properties to set
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes instance
+                             */
+                            InputAttributes.create = function create(properties) {
+                                return new InputAttributes(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputAttributes message. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes} message InputAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputAttributes.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.trackDefinitions != null && message.trackDefinitions.length)
+                                    for (var i = 0; i < message.trackDefinitions.length; ++i)
+                                        $root.google.cloud.video.transcoder.v1.TrackDefinition.encode(message.trackDefinitions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputAttributes message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes} message InputAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputAttributes message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputAttributes.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.InputAttributes();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.trackDefinitions && message.trackDefinitions.length))
+                                                message.trackDefinitions = [];
+                                            message.trackDefinitions.push($root.google.cloud.video.transcoder.v1.TrackDefinition.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputAttributes message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputAttributes.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputAttributes message.
+                             * @function verify
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputAttributes.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.trackDefinitions != null && message.hasOwnProperty("trackDefinitions")) {
+                                    if (!Array.isArray(message.trackDefinitions))
+                                        return "trackDefinitions: array expected";
+                                    for (var i = 0; i < message.trackDefinitions.length; ++i) {
+                                        var error = $root.google.cloud.video.transcoder.v1.TrackDefinition.verify(message.trackDefinitions[i]);
+                                        if (error)
+                                            return "trackDefinitions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputAttributes message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             */
+                            InputAttributes.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.transcoder.v1.InputAttributes)
+                                    return object;
+                                var message = new $root.google.cloud.video.transcoder.v1.InputAttributes();
+                                if (object.trackDefinitions) {
+                                    if (!Array.isArray(object.trackDefinitions))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.InputAttributes.trackDefinitions: array expected");
+                                    message.trackDefinitions = [];
+                                    for (var i = 0; i < object.trackDefinitions.length; ++i) {
+                                        if (typeof object.trackDefinitions[i] !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.InputAttributes.trackDefinitions: object expected");
+                                        message.trackDefinitions[i] = $root.google.cloud.video.transcoder.v1.TrackDefinition.fromObject(object.trackDefinitions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputAttributes message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.InputAttributes} message InputAttributes
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputAttributes.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.trackDefinitions = [];
+                                if (message.trackDefinitions && message.trackDefinitions.length) {
+                                    object.trackDefinitions = [];
+                                    for (var j = 0; j < message.trackDefinitions.length; ++j)
+                                        object.trackDefinitions[j] = $root.google.cloud.video.transcoder.v1.TrackDefinition.toObject(message.trackDefinitions[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputAttributes to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputAttributes.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InputAttributes
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InputAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.transcoder.v1.InputAttributes";
+                            };
+    
+                            return InputAttributes;
                         })();
     
                         v1.VideoStream = (function() {

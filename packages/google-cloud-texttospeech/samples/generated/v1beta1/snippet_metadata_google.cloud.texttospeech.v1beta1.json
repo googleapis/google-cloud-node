@@ -111,7 +111,7 @@
             "regionTag": "texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async",
             "title": "TextToSpeech streamingSynthesize Sample",
             "origin": "API_DEFINITION",
-            "description": " Performs bidirectional streaming speech synthesis: receive audio while sending text.",
+            "description": " Performs bidirectional streaming speech synthesis: receives audio while sending text.",
             "canonical": true,
             "file": "text_to_speech.streaming_synthesize.js",
             "language": "JAVASCRIPT",

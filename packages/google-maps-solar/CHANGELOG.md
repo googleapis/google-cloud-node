@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/solar-v0.4.0...solar-v0.5.0) (2025-08-21)
+
+
+### Features
+
+* [solar] Add `experiments` param to endpoints for access to pre-GA features ([#6605](https://github.com/googleapis/google-cloud-node/issues/6605)) ([c932e46](https://github.com/googleapis/google-cloud-node/commit/c932e46ea7dded17f830abc4a205e9c8f4f2d268))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/solar-v0.3.1...solar-v0.4.0) (2025-07-09)
 
 

@@ -2824,9 +2824,7 @@
                             "functionCall",
                             "functionResponse",
                             "executableCode",
-                            "codeExecutionResult",
-                            "thought",
-                            "thoughtSignature"
+                            "codeExecutionResult"
                           ]
                         },
                         "metadata": {
@@ -69628,6 +69626,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "modelUserId": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -69643,6 +69648,21 @@
                             "dedicatedEndpointEnabled": {
                               "type": "bool",
                               "id": 2,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dedicatedEndpointDisabled": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "endpointUserId": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

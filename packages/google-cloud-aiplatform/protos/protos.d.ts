@@ -11327,16 +11327,16 @@ export namespace google {
                     public codeExecutionResult?: (google.cloud.aiplatform.v1.ICodeExecutionResult|null);
 
                     /** Part thought. */
-                    public thought?: (boolean|null);
+                    public thought: boolean;
 
                     /** Part thoughtSignature. */
-                    public thoughtSignature?: (Uint8Array|Buffer|string|null);
+                    public thoughtSignature: (Uint8Array|Buffer|string);
 
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
 
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult"|"thought"|"thoughtSignature");
+                    public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
 
                     /** Part metadata. */
                     public metadata?: "videoMetadata";
@@ -260040,6 +260040,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec */
                         containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId */
+                        modelUserId?: (string|null);
                     }
 
                     /** Represents a ModelConfig. */
@@ -260065,6 +260068,9 @@ export namespace google {
 
                         /** ModelConfig containerSpec. */
                         public containerSpec?: (google.cloud.aiplatform.v1beta1.IModelContainerSpec|null);
+
+                        /** ModelConfig modelUserId. */
+                        public modelUserId: string;
 
                         /**
                          * Creates a new ModelConfig instance using the specified properties.
@@ -260152,6 +260158,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled */
                         dedicatedEndpointEnabled?: (boolean|null);
+
+                        /** EndpointConfig dedicatedEndpointDisabled */
+                        dedicatedEndpointDisabled?: (boolean|null);
+
+                        /** EndpointConfig endpointUserId */
+                        endpointUserId?: (string|null);
                     }
 
                     /** Represents an EndpointConfig. */
@@ -260168,6 +260180,12 @@ export namespace google {
 
                         /** EndpointConfig dedicatedEndpointEnabled. */
                         public dedicatedEndpointEnabled: boolean;
+
+                        /** EndpointConfig dedicatedEndpointDisabled. */
+                        public dedicatedEndpointDisabled: boolean;
+
+                        /** EndpointConfig endpointUserId. */
+                        public endpointUserId: string;
 
                         /**
                          * Creates a new EndpointConfig instance using the specified properties.

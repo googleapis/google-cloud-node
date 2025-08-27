@@ -48,6 +48,10 @@ function main(location) {
    *  imagery is returned if `required_quality` is set to `MEDIUM`.
    */
   // const exactQualityRequired = true
+  /**
+   *  Optional. Specifies the pre-GA features to enable.
+   */
+  // const experiments = [1,2,3,4]
 
   // Imports the Solar library
   const {SolarClient} = require('@googlemaps/solar').v1;

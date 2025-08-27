@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const ConversionSourcesServiceClient = v1beta.ConversionSourcesServiceClient;
-type ConversionSourcesServiceClient = v1beta.ConversionSourcesServiceClient;
+const ConversionSourcesServiceClient = v1.ConversionSourcesServiceClient;
+type ConversionSourcesServiceClient = v1.ConversionSourcesServiceClient;
 
 export {v1, v1beta, ConversionSourcesServiceClient};
 export default {v1, v1beta, ConversionSourcesServiceClient};

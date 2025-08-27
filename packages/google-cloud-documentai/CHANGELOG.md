@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.3.0...documentai-v9.4.0) (2025-08-21)
+
+
+### Features
+
+* [documentai] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability) ([#6607](https://github.com/googleapis/google-cloud-node/issues/6607)) ([6c132f3](https://github.com/googleapis/google-cloud-node/commit/6c132f36ebf611a13fd1c4e1b44920d4334a1a7b))
+
 ## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.2.0...documentai-v9.3.0) (2025-07-09)
 
 

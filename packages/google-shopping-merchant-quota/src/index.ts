@@ -19,8 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const QuotaServiceClient = v1beta.QuotaServiceClient;
-type QuotaServiceClient = v1beta.QuotaServiceClient;
+const QuotaServiceClient = v1.QuotaServiceClient;
+type QuotaServiceClient = v1.QuotaServiceClient;
 
 export {v1, v1beta, QuotaServiceClient};
 export default {v1, v1beta, QuotaServiceClient};
