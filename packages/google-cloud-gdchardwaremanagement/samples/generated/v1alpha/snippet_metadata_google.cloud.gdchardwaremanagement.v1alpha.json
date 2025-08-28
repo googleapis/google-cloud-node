@@ -304,6 +304,50 @@
             }
         },
         {
+            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CancelOrder_async",
+            "title": "GDCHardwareManagement cancelOrder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels an order.",
+            "canonical": true,
+            "file": "g_d_c_hardware_management.cancel_order.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelOrder",
+                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "GDCHardwareManagementClient",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+                },
+                "method": {
+                    "shortName": "CancelOrder",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
+                    "service": {
+                        "shortName": "GDCHardwareManagement",
+                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_async",
             "title": "GDCHardwareManagement listSites Sample",
             "origin": "API_DEFINITION",
@@ -1696,6 +1740,50 @@
                 "method": {
                     "shortName": "SignalZoneState",
                     "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
+                    "service": {
+                        "shortName": "GDCHardwareManagement",
+                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RequestOrderDateChange_async",
+            "title": "GDCHardwareManagement requestOrderDateChange Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the requested date change of a single Order.",
+            "canonical": true,
+            "file": "g_d_c_hardware_management.request_order_date_change.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RequestOrderDateChange",
+                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requested_date",
+                        "type": ".google.type.Date"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "GDCHardwareManagementClient",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+                },
+                "method": {
+                    "shortName": "RequestOrderDateChange",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
                     "service": {
                         "shortName": "GDCHardwareManagement",
                         "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
