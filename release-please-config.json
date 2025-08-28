@@ -212,8 +212,7 @@
     "packages/google-cloud-licensemanager": {},
     "packages/google-cloud-configdelivery": {},
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
-    "packages/google-cloud-cloudsecuritycompliance": {},
-    "packages/gapic-node-processing/templates/bootstrap-templates": {}
+    "packages/google-cloud-cloudsecuritycompliance": {}
   },
   "plugins": [
     {
