@@ -4,6 +4,57 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "5267f25145ef5605daa1bd1140c3320e5f3b5b66",
+          "message": "Create gapic-node-processing library",
+          "issues": [
+            "6604"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "{{distributionName}}",
+      "id": "daa5ef7d-9c6d-4008-92b7-bcb4a505c89f",
+      "createTime": "2025-08-28T18:40:33.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b92b2c7d56645f28aabd7771cba76d8fd506ec0a",
+          "message": "[gdchardwaremanagement] Added RequestOrderDateChange RPC - allows Customers to request date changes",
+          "issues": [
+            "6627"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "3ce56d19-c9f9-4071-bae8-4c5670d7f129",
+      "createTime": "2025-08-28T18:40:33.279Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5267f25145ef5605daa1bd1140c3320e5f3b5b66",
+          "message": "Create gapic-node-processing library",
+          "issues": [
+            "6604"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "5076d0bc-d098-4612-87d3-5efbd51c11a4",
+      "createTime": "2025-08-28T18:40:33.248Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "71b30db34f8c83c1b2395270fd7ff8fb2621b669",
           "message": "[chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata`",
@@ -62046,5 +62097,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-27T20:58:49.633Z"
+  "updateTime": "2025-08-28T18:40:33.301Z"
 }
