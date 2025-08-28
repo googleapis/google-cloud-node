@@ -300,7 +300,7 @@ export class RegionsServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const regionsServiceStubMethods =
-        ['getRegion', 'createRegion', 'updateRegion', 'deleteRegion', 'listRegions'];
+        ['getRegion', 'createRegion', 'batchCreateRegions', 'updateRegion', 'batchUpdateRegions', 'deleteRegion', 'batchDeleteRegions', 'listRegions'];
     for (const methodName of regionsServiceStubMethods) {
       const callPromise = this.regionsServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -600,6 +600,105 @@ export class RegionsServiceClient {
       });
   }
 /**
+ * Creates one or more regions in your Merchant Center account.
+ * Executing this method requires admin access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to create one or more regions for.
+ *   Format: `accounts/{account}`
+ * @param {number[]} request.requests
+ *   Required. The region(s) to create.
+ *   The maximum number of regions that can be created in a batch is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse|BatchCreateRegionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/regions_service.batch_create_regions.js</caption>
+ * region_tag:merchantapi_v1_generated_RegionsService_BatchCreateRegions_async
+ */
+  batchCreateRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|undefined, {}|undefined
+      ]>;
+  batchCreateRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchCreateRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchCreateRegions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateRegions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchCreateRegions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchCreateRegions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Updates a region definition in your Merchant Center account.
  * Executing this method requires admin access.
  *
@@ -699,6 +798,105 @@ export class RegionsServiceClient {
       });
   }
 /**
+ * Updates one or more regions in your Merchant Center account.
+ * Executing this method requires admin access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to update one or more regions for.
+ *   Format: `accounts/{account}`
+ * @param {number[]} request.requests
+ *   Required. The region(s) to update.
+ *   The maximum number of regions that can be updated in a batch is 100.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse|BatchUpdateRegionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/regions_service.batch_update_regions.js</caption>
+ * region_tag:merchantapi_v1_generated_RegionsService_BatchUpdateRegions_async
+ */
+  batchUpdateRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|undefined, {}|undefined
+      ]>;
+  batchUpdateRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest,
+      callback: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchUpdateRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+          protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchUpdateRegions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateRegions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchUpdateRegions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse,
+        protos.google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchUpdateRegions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Deletes a region definition from your Merchant Center account. Executing
  * this method requires admin access.
  *
@@ -785,6 +983,105 @@ export class RegionsServiceClient {
         {}|undefined
       ]) => {
         this._log.info('deleteRegion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes multiple regions by name from your Merchant Center account.
+ * Executing this method requires admin access.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The account to delete one or more regions from.
+ *   Format: `accounts/{account}`
+ * @param {number[]} request.requests
+ *   Required. The names of the regions to delete.
+ *   A maximum of 100 regions can be deleted in a batch.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/regions_service.batch_delete_regions.js</caption>
+ * region_tag:merchantapi_v1_generated_RegionsService_BatchDeleteRegions_async
+ */
+  batchDeleteRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|undefined, {}|undefined
+      ]>;
+  batchDeleteRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRegions(
+      request: protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchDeleteRegions(
+      request?: protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('batchDeleteRegions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteRegions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.batchDeleteRegions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('batchDeleteRegions response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

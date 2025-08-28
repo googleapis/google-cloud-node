@@ -34179,6 +34179,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchCreateRegions}.
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @typedef BatchCreateRegionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} [response] BatchCreateRegionsResponse
+                             */
+    
+                            /**
+                             * Calls BatchCreateRegions.
+                             * @function batchCreateRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest} request BatchCreateRegionsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegionsCallback} callback Node-style callback called with the error, if any, and BatchCreateRegionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionsService.prototype.batchCreateRegions = function batchCreateRegions(request, callback) {
+                                return this.rpcCall(batchCreateRegions, $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest, $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse, request, callback);
+                            }, "name", { value: "BatchCreateRegions" });
+    
+                            /**
+                             * Calls BatchCreateRegions.
+                             * @function batchCreateRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest} request BatchCreateRegionsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|updateRegion}.
                              * @memberof google.shopping.merchant.accounts.v1.RegionsService
                              * @typedef UpdateRegionCallback
@@ -34212,6 +34245,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchUpdateRegions}.
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @typedef BatchUpdateRegionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} [response] BatchUpdateRegionsResponse
+                             */
+    
+                            /**
+                             * Calls BatchUpdateRegions.
+                             * @function batchUpdateRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest} request BatchUpdateRegionsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegionsCallback} callback Node-style callback called with the error, if any, and BatchUpdateRegionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionsService.prototype.batchUpdateRegions = function batchUpdateRegions(request, callback) {
+                                return this.rpcCall(batchUpdateRegions, $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest, $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse, request, callback);
+                            }, "name", { value: "BatchUpdateRegions" });
+    
+                            /**
+                             * Calls BatchUpdateRegions.
+                             * @function batchUpdateRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest} request BatchUpdateRegionsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|deleteRegion}.
                              * @memberof google.shopping.merchant.accounts.v1.RegionsService
                              * @typedef DeleteRegionCallback
@@ -34240,6 +34306,39 @@
                              * @memberof google.shopping.merchant.accounts.v1.RegionsService
                              * @instance
                              * @param {google.shopping.merchant.accounts.v1.IDeleteRegionRequest} request DeleteRegionRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1.RegionsService|batchDeleteRegions}.
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @typedef BatchDeleteRegionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls BatchDeleteRegions.
+                             * @function batchDeleteRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest} request BatchDeleteRegionsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegionsCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionsService.prototype.batchDeleteRegions = function batchDeleteRegions(request, callback) {
+                                return this.rpcCall(batchDeleteRegions, $root.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "BatchDeleteRegions" });
+    
+                            /**
+                             * Calls BatchDeleteRegions.
+                             * @function batchDeleteRegions
+                             * @memberof google.shopping.merchant.accounts.v1.RegionsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest} request BatchDeleteRegionsRequest message or plain object
                              * @returns {Promise<google.protobuf.Empty>} Promise
                              * @variation 2
                              */
@@ -34742,6 +34841,482 @@
                             return CreateRegionRequest;
                         })();
     
+                        v1.BatchCreateRegionsRequest = (function() {
+    
+                            /**
+                             * Properties of a BatchCreateRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IBatchCreateRegionsRequest
+                             * @property {string|null} [parent] BatchCreateRegionsRequest parent
+                             * @property {Array.<google.shopping.merchant.accounts.v1.ICreateRegionRequest>|null} [requests] BatchCreateRegionsRequest requests
+                             */
+    
+                            /**
+                             * Constructs a new BatchCreateRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a BatchCreateRegionsRequest.
+                             * @implements IBatchCreateRegionsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest=} [properties] Properties to set
+                             */
+                            function BatchCreateRegionsRequest(properties) {
+                                this.requests = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BatchCreateRegionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @instance
+                             */
+                            BatchCreateRegionsRequest.prototype.parent = "";
+    
+                            /**
+                             * BatchCreateRegionsRequest requests.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.ICreateRegionRequest>} requests
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @instance
+                             */
+                            BatchCreateRegionsRequest.prototype.requests = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BatchCreateRegionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest} BatchCreateRegionsRequest instance
+                             */
+                            BatchCreateRegionsRequest.create = function create(properties) {
+                                return new BatchCreateRegionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BatchCreateRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest} message BatchCreateRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchCreateRegionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.requests != null && message.requests.length)
+                                    for (var i = 0; i < message.requests.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.CreateRegionRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BatchCreateRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsRequest} message BatchCreateRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchCreateRegionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BatchCreateRegionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest} BatchCreateRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchCreateRegionsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.requests && message.requests.length))
+                                                message.requests = [];
+                                            message.requests.push($root.google.shopping.merchant.accounts.v1.CreateRegionRequest.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BatchCreateRegionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest} BatchCreateRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchCreateRegionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BatchCreateRegionsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BatchCreateRegionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.requests != null && message.hasOwnProperty("requests")) {
+                                    if (!Array.isArray(message.requests))
+                                        return "requests: array expected";
+                                    for (var i = 0; i < message.requests.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.CreateRegionRequest.verify(message.requests[i]);
+                                        if (error)
+                                            return "requests." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BatchCreateRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest} BatchCreateRegionsRequest
+                             */
+                            BatchCreateRegionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.requests) {
+                                    if (!Array.isArray(object.requests))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.requests: array expected");
+                                    message.requests = [];
+                                    for (var i = 0; i < object.requests.length; ++i) {
+                                        if (typeof object.requests[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest.requests: object expected");
+                                        message.requests[i] = $root.google.shopping.merchant.accounts.v1.CreateRegionRequest.fromObject(object.requests[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BatchCreateRegionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest} message BatchCreateRegionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BatchCreateRegionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.requests = [];
+                                if (options.defaults)
+                                    object.parent = "";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.requests && message.requests.length) {
+                                    object.requests = [];
+                                    for (var j = 0; j < message.requests.length; ++j)
+                                        object.requests[j] = $root.google.shopping.merchant.accounts.v1.CreateRegionRequest.toObject(message.requests[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BatchCreateRegionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BatchCreateRegionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BatchCreateRegionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCreateRegionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.BatchCreateRegionsRequest";
+                            };
+    
+                            return BatchCreateRegionsRequest;
+                        })();
+    
+                        v1.BatchCreateRegionsResponse = (function() {
+    
+                            /**
+                             * Properties of a BatchCreateRegionsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IBatchCreateRegionsResponse
+                             * @property {Array.<google.shopping.merchant.accounts.v1.IRegion>|null} [regions] BatchCreateRegionsResponse regions
+                             */
+    
+                            /**
+                             * Constructs a new BatchCreateRegionsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a BatchCreateRegionsResponse.
+                             * @implements IBatchCreateRegionsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse=} [properties] Properties to set
+                             */
+                            function BatchCreateRegionsResponse(properties) {
+                                this.regions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BatchCreateRegionsResponse regions.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.IRegion>} regions
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @instance
+                             */
+                            BatchCreateRegionsResponse.prototype.regions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BatchCreateRegionsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} BatchCreateRegionsResponse instance
+                             */
+                            BatchCreateRegionsResponse.create = function create(properties) {
+                                return new BatchCreateRegionsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BatchCreateRegionsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse} message BatchCreateRegionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchCreateRegionsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.regions != null && message.regions.length)
+                                    for (var i = 0; i < message.regions.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.Region.encode(message.regions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BatchCreateRegionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchCreateRegionsResponse} message BatchCreateRegionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchCreateRegionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BatchCreateRegionsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} BatchCreateRegionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchCreateRegionsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.regions && message.regions.length))
+                                                message.regions = [];
+                                            message.regions.push($root.google.shopping.merchant.accounts.v1.Region.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BatchCreateRegionsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} BatchCreateRegionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchCreateRegionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BatchCreateRegionsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BatchCreateRegionsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.regions != null && message.hasOwnProperty("regions")) {
+                                    if (!Array.isArray(message.regions))
+                                        return "regions: array expected";
+                                    for (var i = 0; i < message.regions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.Region.verify(message.regions[i]);
+                                        if (error)
+                                            return "regions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BatchCreateRegionsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} BatchCreateRegionsResponse
+                             */
+                            BatchCreateRegionsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse();
+                                if (object.regions) {
+                                    if (!Array.isArray(object.regions))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.regions: array expected");
+                                    message.regions = [];
+                                    for (var i = 0; i < object.regions.length; ++i) {
+                                        if (typeof object.regions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse.regions: object expected");
+                                        message.regions[i] = $root.google.shopping.merchant.accounts.v1.Region.fromObject(object.regions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BatchCreateRegionsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse} message BatchCreateRegionsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BatchCreateRegionsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.regions = [];
+                                if (message.regions && message.regions.length) {
+                                    object.regions = [];
+                                    for (var j = 0; j < message.regions.length; ++j)
+                                        object.regions[j] = $root.google.shopping.merchant.accounts.v1.Region.toObject(message.regions[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BatchCreateRegionsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BatchCreateRegionsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BatchCreateRegionsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchCreateRegionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.BatchCreateRegionsResponse";
+                            };
+    
+                            return BatchCreateRegionsResponse;
+                        })();
+    
                         v1.UpdateRegionRequest = (function() {
     
                             /**
@@ -34981,6 +35556,482 @@
                             return UpdateRegionRequest;
                         })();
     
+                        v1.BatchUpdateRegionsRequest = (function() {
+    
+                            /**
+                             * Properties of a BatchUpdateRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IBatchUpdateRegionsRequest
+                             * @property {string|null} [parent] BatchUpdateRegionsRequest parent
+                             * @property {Array.<google.shopping.merchant.accounts.v1.IUpdateRegionRequest>|null} [requests] BatchUpdateRegionsRequest requests
+                             */
+    
+                            /**
+                             * Constructs a new BatchUpdateRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a BatchUpdateRegionsRequest.
+                             * @implements IBatchUpdateRegionsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest=} [properties] Properties to set
+                             */
+                            function BatchUpdateRegionsRequest(properties) {
+                                this.requests = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BatchUpdateRegionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @instance
+                             */
+                            BatchUpdateRegionsRequest.prototype.parent = "";
+    
+                            /**
+                             * BatchUpdateRegionsRequest requests.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.IUpdateRegionRequest>} requests
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @instance
+                             */
+                            BatchUpdateRegionsRequest.prototype.requests = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BatchUpdateRegionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest} BatchUpdateRegionsRequest instance
+                             */
+                            BatchUpdateRegionsRequest.create = function create(properties) {
+                                return new BatchUpdateRegionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BatchUpdateRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest} message BatchUpdateRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchUpdateRegionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.requests != null && message.requests.length)
+                                    for (var i = 0; i < message.requests.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.UpdateRegionRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BatchUpdateRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsRequest} message BatchUpdateRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchUpdateRegionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BatchUpdateRegionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest} BatchUpdateRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchUpdateRegionsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.requests && message.requests.length))
+                                                message.requests = [];
+                                            message.requests.push($root.google.shopping.merchant.accounts.v1.UpdateRegionRequest.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BatchUpdateRegionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest} BatchUpdateRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchUpdateRegionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BatchUpdateRegionsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BatchUpdateRegionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.requests != null && message.hasOwnProperty("requests")) {
+                                    if (!Array.isArray(message.requests))
+                                        return "requests: array expected";
+                                    for (var i = 0; i < message.requests.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.UpdateRegionRequest.verify(message.requests[i]);
+                                        if (error)
+                                            return "requests." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BatchUpdateRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest} BatchUpdateRegionsRequest
+                             */
+                            BatchUpdateRegionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.requests) {
+                                    if (!Array.isArray(object.requests))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.requests: array expected");
+                                    message.requests = [];
+                                    for (var i = 0; i < object.requests.length; ++i) {
+                                        if (typeof object.requests[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest.requests: object expected");
+                                        message.requests[i] = $root.google.shopping.merchant.accounts.v1.UpdateRegionRequest.fromObject(object.requests[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BatchUpdateRegionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest} message BatchUpdateRegionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BatchUpdateRegionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.requests = [];
+                                if (options.defaults)
+                                    object.parent = "";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.requests && message.requests.length) {
+                                    object.requests = [];
+                                    for (var j = 0; j < message.requests.length; ++j)
+                                        object.requests[j] = $root.google.shopping.merchant.accounts.v1.UpdateRegionRequest.toObject(message.requests[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BatchUpdateRegionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BatchUpdateRegionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BatchUpdateRegionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchUpdateRegionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.BatchUpdateRegionsRequest";
+                            };
+    
+                            return BatchUpdateRegionsRequest;
+                        })();
+    
+                        v1.BatchUpdateRegionsResponse = (function() {
+    
+                            /**
+                             * Properties of a BatchUpdateRegionsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IBatchUpdateRegionsResponse
+                             * @property {Array.<google.shopping.merchant.accounts.v1.IRegion>|null} [regions] BatchUpdateRegionsResponse regions
+                             */
+    
+                            /**
+                             * Constructs a new BatchUpdateRegionsResponse.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a BatchUpdateRegionsResponse.
+                             * @implements IBatchUpdateRegionsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse=} [properties] Properties to set
+                             */
+                            function BatchUpdateRegionsResponse(properties) {
+                                this.regions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BatchUpdateRegionsResponse regions.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.IRegion>} regions
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @instance
+                             */
+                            BatchUpdateRegionsResponse.prototype.regions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BatchUpdateRegionsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} BatchUpdateRegionsResponse instance
+                             */
+                            BatchUpdateRegionsResponse.create = function create(properties) {
+                                return new BatchUpdateRegionsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BatchUpdateRegionsResponse message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse} message BatchUpdateRegionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchUpdateRegionsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.regions != null && message.regions.length)
+                                    for (var i = 0; i < message.regions.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.Region.encode(message.regions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BatchUpdateRegionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchUpdateRegionsResponse} message BatchUpdateRegionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchUpdateRegionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BatchUpdateRegionsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} BatchUpdateRegionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchUpdateRegionsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.regions && message.regions.length))
+                                                message.regions = [];
+                                            message.regions.push($root.google.shopping.merchant.accounts.v1.Region.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BatchUpdateRegionsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} BatchUpdateRegionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchUpdateRegionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BatchUpdateRegionsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BatchUpdateRegionsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.regions != null && message.hasOwnProperty("regions")) {
+                                    if (!Array.isArray(message.regions))
+                                        return "regions: array expected";
+                                    for (var i = 0; i < message.regions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.Region.verify(message.regions[i]);
+                                        if (error)
+                                            return "regions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BatchUpdateRegionsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} BatchUpdateRegionsResponse
+                             */
+                            BatchUpdateRegionsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse();
+                                if (object.regions) {
+                                    if (!Array.isArray(object.regions))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.regions: array expected");
+                                    message.regions = [];
+                                    for (var i = 0; i < object.regions.length; ++i) {
+                                        if (typeof object.regions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse.regions: object expected");
+                                        message.regions[i] = $root.google.shopping.merchant.accounts.v1.Region.fromObject(object.regions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BatchUpdateRegionsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse} message BatchUpdateRegionsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BatchUpdateRegionsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.regions = [];
+                                if (message.regions && message.regions.length) {
+                                    object.regions = [];
+                                    for (var j = 0; j < message.regions.length; ++j)
+                                        object.regions[j] = $root.google.shopping.merchant.accounts.v1.Region.toObject(message.regions[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BatchUpdateRegionsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BatchUpdateRegionsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BatchUpdateRegionsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchUpdateRegionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.BatchUpdateRegionsResponse";
+                            };
+    
+                            return BatchUpdateRegionsResponse;
+                        })();
+    
                         v1.DeleteRegionRequest = (function() {
     
                             /**
@@ -35184,6 +36235,256 @@
                             };
     
                             return DeleteRegionRequest;
+                        })();
+    
+                        v1.BatchDeleteRegionsRequest = (function() {
+    
+                            /**
+                             * Properties of a BatchDeleteRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @interface IBatchDeleteRegionsRequest
+                             * @property {string|null} [parent] BatchDeleteRegionsRequest parent
+                             * @property {Array.<google.shopping.merchant.accounts.v1.IDeleteRegionRequest>|null} [requests] BatchDeleteRegionsRequest requests
+                             */
+    
+                            /**
+                             * Constructs a new BatchDeleteRegionsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1
+                             * @classdesc Represents a BatchDeleteRegionsRequest.
+                             * @implements IBatchDeleteRegionsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest=} [properties] Properties to set
+                             */
+                            function BatchDeleteRegionsRequest(properties) {
+                                this.requests = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BatchDeleteRegionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @instance
+                             */
+                            BatchDeleteRegionsRequest.prototype.parent = "";
+    
+                            /**
+                             * BatchDeleteRegionsRequest requests.
+                             * @member {Array.<google.shopping.merchant.accounts.v1.IDeleteRegionRequest>} requests
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @instance
+                             */
+                            BatchDeleteRegionsRequest.prototype.requests = $util.emptyArray;
+    
+                            /**
+                             * Creates a new BatchDeleteRegionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest} BatchDeleteRegionsRequest instance
+                             */
+                            BatchDeleteRegionsRequest.create = function create(properties) {
+                                return new BatchDeleteRegionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BatchDeleteRegionsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest} message BatchDeleteRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchDeleteRegionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.requests != null && message.requests.length)
+                                    for (var i = 0; i < message.requests.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1.DeleteRegionRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BatchDeleteRegionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.IBatchDeleteRegionsRequest} message BatchDeleteRegionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BatchDeleteRegionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BatchDeleteRegionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest} BatchDeleteRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchDeleteRegionsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.requests && message.requests.length))
+                                                message.requests = [];
+                                            message.requests.push($root.google.shopping.merchant.accounts.v1.DeleteRegionRequest.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BatchDeleteRegionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest} BatchDeleteRegionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BatchDeleteRegionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BatchDeleteRegionsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BatchDeleteRegionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.requests != null && message.hasOwnProperty("requests")) {
+                                    if (!Array.isArray(message.requests))
+                                        return "requests: array expected";
+                                    for (var i = 0; i < message.requests.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1.DeleteRegionRequest.verify(message.requests[i]);
+                                        if (error)
+                                            return "requests." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BatchDeleteRegionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest} BatchDeleteRegionsRequest
+                             */
+                            BatchDeleteRegionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.requests) {
+                                    if (!Array.isArray(object.requests))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.requests: array expected");
+                                    message.requests = [];
+                                    for (var i = 0; i < object.requests.length; ++i) {
+                                        if (typeof object.requests[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest.requests: object expected");
+                                        message.requests[i] = $root.google.shopping.merchant.accounts.v1.DeleteRegionRequest.fromObject(object.requests[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BatchDeleteRegionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest} message BatchDeleteRegionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BatchDeleteRegionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.requests = [];
+                                if (options.defaults)
+                                    object.parent = "";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.requests && message.requests.length) {
+                                    object.requests = [];
+                                    for (var j = 0; j < message.requests.length; ++j)
+                                        object.requests[j] = $root.google.shopping.merchant.accounts.v1.DeleteRegionRequest.toObject(message.requests[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BatchDeleteRegionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BatchDeleteRegionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BatchDeleteRegionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BatchDeleteRegionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1.BatchDeleteRegionsRequest";
+                            };
+    
+                            return BatchDeleteRegionsRequest;
                         })();
     
                         v1.ListRegionsRequest = (function() {

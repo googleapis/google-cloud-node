@@ -18,16 +18,19 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const accounts = require('@google-shopping/accounts');
+const accounts = require('@google-cloud/accounts');
 
 function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
+  const accountRelationshipsServiceClient = new accounts.AccountRelationshipsServiceClient();
+  const accountServicesServiceClient = new accounts.AccountServicesServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
   const autofeedSettingsServiceClient = new accounts.AutofeedSettingsServiceClient();
   const automaticImprovementsServiceClient = new accounts.AutomaticImprovementsServiceClient();
   const businessIdentityServiceClient = new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();
   const checkoutSettingsServiceClient = new accounts.CheckoutSettingsServiceClient();
+  const developerRegistrationServiceClient = new accounts.DeveloperRegistrationServiceClient();
   const emailPreferencesServiceClient = new accounts.EmailPreferencesServiceClient();
   const gbpAccountsServiceClient = new accounts.GbpAccountsServiceClient();
   const homepageServiceClient = new accounts.HomepageServiceClient();

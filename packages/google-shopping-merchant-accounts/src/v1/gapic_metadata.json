@@ -828,14 +828,29 @@
                 "createRegion"
               ]
             },
+            "BatchCreateRegions": {
+              "methods": [
+                "batchCreateRegions"
+              ]
+            },
             "UpdateRegion": {
               "methods": [
                 "updateRegion"
               ]
             },
+            "BatchUpdateRegions": {
+              "methods": [
+                "batchUpdateRegions"
+              ]
+            },
             "DeleteRegion": {
               "methods": [
                 "deleteRegion"
+              ]
+            },
+            "BatchDeleteRegions": {
+              "methods": [
+                "batchDeleteRegions"
               ]
             },
             "ListRegions": {
@@ -860,14 +875,29 @@
                 "createRegion"
               ]
             },
+            "BatchCreateRegions": {
+              "methods": [
+                "batchCreateRegions"
+              ]
+            },
             "UpdateRegion": {
               "methods": [
                 "updateRegion"
               ]
             },
+            "BatchUpdateRegions": {
+              "methods": [
+                "batchUpdateRegions"
+              ]
+            },
             "DeleteRegion": {
               "methods": [
                 "deleteRegion"
+              ]
+            },
+            "BatchDeleteRegions": {
+              "methods": [
+                "batchDeleteRegions"
               ]
             },
             "ListRegions": {
