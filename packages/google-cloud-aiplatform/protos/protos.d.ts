@@ -161203,7 +161203,8 @@ export namespace google {
                         MODE_UNSPECIFIED = 0,
                         AUTO = 1,
                         ANY = 2,
-                        NONE = 3
+                        NONE = 3,
+                        VALIDATED = 5
                     }
                 }
 
