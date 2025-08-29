@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "64d301886c7ed320ba1b03d850363e54bdd4657e",
+          "message": "Make sure we are not overwriting the README when generating it",
+          "issues": [
+            "6632"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "66ad5288-cefd-4782-b05c-8e5fce962039",
+      "createTime": "2025-08-29T19:37:36.045Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "b92b2c7d56645f28aabd7771cba76d8fd506ec0a",
           "message": "[gdchardwaremanagement] Added RequestOrderDateChange RPC - allows Customers to request date changes",
@@ -62080,5 +62097,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-08-28T21:41:16.387Z"
+  "updateTime": "2025-08-29T19:37:36.045Z"
 }
