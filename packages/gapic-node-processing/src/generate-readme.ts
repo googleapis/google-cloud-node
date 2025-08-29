@@ -168,8 +168,10 @@ export async function initialGenerateReadMe(args: {
     compiledTemplate,
     args.writeLibrary,
   );
+  // The first argument is the writeLibrary because we've already changed
+  // it once, and we want the changes to be cummulative
   await readAndWriteToReadme(
-    args.currentLibrary,
+    args.writeLibrary,
     args.stringToReplaceForReleaseLevel,
     releaseLevelMessage,
     args.writeLibrary,
